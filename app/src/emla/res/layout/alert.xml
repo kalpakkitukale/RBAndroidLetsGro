@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+        <import type="android.text.Html"/>
+
+        <variable
+            name="baseViewModel"
+            type="com.ramanbyte.base.BaseViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/progress_dialog_bg">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayoutFinishTest"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:padding="@dimen/dp_10">
+
+            <ImageView
+                android:id="@+id/imgAlertSuccessFail"
+                android:layout_width="@dimen/dp_35"
+                android:layout_height="@dimen/dp_35"
+                android:layout_marginTop="@dimen/dp_8"
+                android:background="@{baseViewModel.alertDialogResourceModelMutableLiveData.alertDrawableResourceSign}"
+                android:scaleType="fitXY"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@+id/imgAlert"
+                app:layout_constraintStart_toStartOf="@+id/imgAlert"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imgAlert"
+                android:layout_width="@dimen/dp_150"
+                android:layout_height="@dimen/dp_150"
+                android:background="@{baseViewModel.alertDialogResourceModelMutableLiveData.alertDrawableResource}"
+                android:scaleType="fitXY"
+                android:visibility="@{(baseViewModel.alertDialogResourceModelMutableLiveData.alertDrawableResource == null) ? View.GONE : View.VISIBLE}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imgAlertSuccessFail" />
+
+            <ScrollView
+                android:id="@+id/messageContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/imgAlert">
+
+                <TextView
+                    android:id="@+id/tvAlertMessage"
+                    style="@style/TextViewRegularBlackOnWhite"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingStart="@dimen/dp_10"
+                    android:paddingEnd="@dimen/dp_10"
+                    android:paddingBottom="@dimen/dp_10"
+                    android:text="@{Html.fromHtml(baseViewModel.alertDialogResourceModelMutableLiveData.message)}"
+                    android:textSize="@dimen/sp_14"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/imgAlert" />
+            </ScrollView>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnNo"
+                style="@style/CustomCapsuleButtonGradientBgWhiteText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_8"
+                android:layout_marginTop="@dimen/dp_8"
+                android:layout_marginEnd="@dimen/dp_8"
+                android:onClick="@{()->baseViewModel.alertDialogResourceModelMutableLiveData.negativeButtonClickFunctionality.invoke()}"
+                android:text="@{baseViewModel.alertDialogResourceModelMutableLiveData.negativeButtonText}"
+                android:textSize="@dimen/sp_12"
+                android:visibility="@{safeUnbox(baseViewModel.alertDialogResourceModelMutableLiveData.infoAlert) ? View.GONE : View.VISIBLE}"
+                app:layout_constraintEnd_toStartOf="@+id/btnYes"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/messageContainer" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnYes"
+                style="@style/CustomCapsuleButtonGradientBgWhiteText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_8"
+                android:layout_marginEnd="@dimen/dp_8"
+                android:onClick="@{()->baseViewModel.alertDialogResourceModelMutableLiveData.positiveButtonClickFunctionality.invoke()}"
+                android:text="@{baseViewModel.alertDialogResourceModelMutableLiveData.positiveButtonText}"
+                android:textSize="@dimen/sp_12"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintStart_toEndOf="@+id/btnNo"
+                app:layout_constraintTop_toTopOf="@+id/btnNo" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </RelativeLayout>
+</layout>

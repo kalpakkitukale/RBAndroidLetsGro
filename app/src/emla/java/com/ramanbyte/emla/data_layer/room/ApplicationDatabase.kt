@@ -1,4 +1,4 @@
-package com.ramanbyte.placement.data_layer.room
+package com.ramanbyte.emla.data_layer.room
 
 import android.content.Context
 import androidx.room.Database

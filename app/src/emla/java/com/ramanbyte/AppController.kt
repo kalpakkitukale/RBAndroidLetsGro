@@ -4,7 +4,7 @@ import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
 import com.google.gson.GsonBuilder
 import com.ramanbyte.emla.data_layer.network.init.NetworkConnectionInterceptor
-import com.ramanbyte.placement.data_layer.room.ApplicationDatabase
+import com.ramanbyte.emla.data_layer.room.ApplicationDatabase
 import com.ramanbyte.utilities.AppLog
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

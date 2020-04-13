@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.ramanbyte.base.BaseViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/linearLayout4"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="@dimen/dp_10"
+        android:visibility="@{viewModel.noInternetMutableLiveData}">
+        <!--  android:visibility="@{viewModel.noInternetMutableLiveData}"-->
+
+        <ImageView
+            android:id="@+id/ivNoInternet"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@id/tvNoInternetMsg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.6"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_no_internet" />
+        <!--ic_no_internet_connection-->
+
+        <TextView
+            android:id="@+id/tvNoInternetMsg"
+            style="@style/TextViewRegularBlackOnWhite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dp_22"
+            android:gravity="center"
+            android:textSize="@dimen/sp_16"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivNoInternet"
+            android:text="@{viewModel.visibilityMessageLiveData}"/>
+        <!-- android:text="@{viewModel.visibilityMessageLiveData}"-->
+
+        <Button
+            android:id="@+id/btnTryAgain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/gradient_button_capsule"
+            android:text="@string/tryAgain"
+            android:textAppearance="@style/AppTheme.Font.Medium"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/sp_12"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:onClick="@{()->viewModel.getNoInternetTryAgain.invoke()}"/>
+        <!--   android:onClick="@{()->viewModel.getNoInternetTryAgain.invoke()}"-->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

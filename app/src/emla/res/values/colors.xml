@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
-    <color name="colorTransparent">#00000000</color>
-    <color name="colorWhite">#ffffff</color>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
     <color name="colorBlack">#000000</color>
-    <color name="cardBackgroundColor">#FFFFFF</color>
+    <color name="colorLightGray">#d1d1d1</color>
+    <color name="colorDividerGrayOnWhiteBackground">#959595</color>
+    <color name="colorWhite">#ffffff</color>
+    <color name="colorTransparent">#E6ffffff</color>
+    <color name="transparent">#00000000</color>
+    <color name="colorTeal">#50bdc1</color>
+    <color name="colorTealTransparent">#9950bdc1</color>
+    <color name="textHintColor">#9391a4</color>
+    <color name="textColorGrayOnWhiteBackground">#6a6879</color>
+    <color name="textColorBackOnWhiteBackground">#605575</color>
+    <color name="textColorRegOnWhite">#e57373</color>
+    <color name="colorGrayTransparent">#a6aaaaaa</color>
+    <color name="approvalInTAT">#2281c2</color>
 </resources>
