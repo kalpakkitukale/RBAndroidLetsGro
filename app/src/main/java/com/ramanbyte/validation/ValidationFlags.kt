@@ -1,0 +1,16 @@
+package com.ramanbyte.validation
+
+enum class ValidationFlags {
+    FIELD_REQUIRED,
+    FIELD_MIN,
+    FIELD_MAX,
+    FIELD_EMAIL,
+    FIELD_MATCH,
+    FIELD_NOT_MATCH,
+    FIELD_PASSWORD,
+    FIELD_CONTAINS_SPACE,
+    FIELD_MATCH_IGNORE_CASE,
+    FIELD_SPINNER_SELECTION,
+    FIELD_DECIMAL,
+    FIELD_URL_LINK
+}

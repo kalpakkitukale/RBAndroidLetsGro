@@ -1,0 +1,42 @@
+{
+  "UserAgent": "MobileHub/1.0",
+  "Version": "1.0",
+  "CredentialsProvider": {
+    "CognitoIdentity": {
+      "Default": {
+        "PoolId": "ap-south-1:1175e181-7760-45b6-8e59-8398a05c2f3e",
+        "Region": "ap-south-1"
+      }
+    }
+  },
+  "IdentityManager": {
+    "Default": {}
+  },
+  "S3TransferUtility": {
+    "Default": {
+      "Bucket": "classroomplus-userfiles-mobilehub-200445379",
+      "Region": "ap-south-1"
+    }
+  },
+  "CredDaKey": {
+    "KeyDaAccess": "AKIAQWQNOCWV3GIT4FKT",
+    "KeyDaSecret": "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"
+  },
+  "PinpointAnalytics": {
+    "Default": {
+      "AppId": "c07a6551c9ce4f869eb7d5bf843528c2",
+      "Region": "us-east-1"
+    }
+  },
+  "PinpointTargeting": {
+    "Default": {
+      "Region": "us-east-1"
+    }
+  },
+  "UserFileManager": {
+    "Default": {
+      "Bucket": "classroomplus-userfiles-mobilehub-200445379",
+      "Region": "ap-south-1"
+    }
+  }
+}

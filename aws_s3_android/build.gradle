@@ -1,0 +1,57 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
+
+
+android {
+    compileSdkVersion 29
+
+    defaultConfig {
+        minSdkVersion 19
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    buildToolsVersion = '29.0.3'
+    tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+        kotlinOptions {
+            jvmTarget = "1.8"
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation 'androidx.core:core-ktx:1.2.0'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    //Firebase Job Dispatcher
+    api 'com.firebase:firebase-jobdispatcher:0.8.5'
+
+    api 'com.amazonaws:aws-android-sdk-core:2.16.1'
+    api 'com.amazonaws:aws-android-sdk-s3:2.16.1'
+    api 'com.amazonaws:aws-android-sdk-cognito:2.16.1'
+    api('com.amazonaws:aws-android-sdk-mobile-client:2.16.1@aar') { transitive = true }
+    api('com.amazonaws:aws-android-sdk-auth-userpools:2.16.1@aar') { transitive = true }
+    implementation 'androidx.work:work-runtime:2.3.0'
+    implementation 'androidx.work:work-runtime-ktx:2.3.0'
+}
+repositories {
+    mavenCentral()
+}

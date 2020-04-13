@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="dp_130">924.46dp</dimen>
+    <dimen name="dp_120">853.35dp</dimen>
+    <dimen name="dp_15">106.67dp</dimen>
+    <dimen name="dp_16">113.78dp</dimen>
+    <dimen name="dp_20">142.23dp</dimen>
+    <dimen name="dp_22">156.45dp</dimen>
+    <dimen name="dp_25">177.78dp</dimen>
+    <dimen name="dp_27">192.00dp</dimen>
+    <dimen name="dp_40">284.45dp</dimen>
+    <dimen name="dp_43">305.78dp</dimen>
+    <dimen name="dp_50">355.56dp</dimen>
+    <dimen name="dp_60">426.68dp</dimen>
+    <dimen name="dp_70">497.79dp</dimen>
+    <dimen name="dp_90">640.01dp</dimen>
+    <dimen name="dp_8">56.89dp</dimen>
+    <dimen name="dp_5">35.56dp</dimen>
+    <dimen name="dp_2">14.22dp</dimen>
+    <dimen name="dp_3">21.33dp</dimen>
+    <dimen name="dp_10">71.11dp</dimen>
+    <dimen name="dp_12">85.34dp</dimen>
+    <dimen name="dp_30">213.34dp</dimen>
+    <dimen name="dp_32">227.56dp</dimen>
+    <dimen name="dp_35">248.89dp</dimen>
+    <dimen name="dp_170">1208.91dp</dimen>
+    <dimen name="dp_176">1251.58dp</dimen>
+    <dimen name="dp_200">1422.25dp</dimen>
+    <dimen name="dp_250">1777.81dp</dimen>
+    <dimen name="dp_280">1991.15dp</dimen>
+    <dimen name="dp_300">2133.38dp</dimen>
+    <dimen name="dp_100">711.13dp</dimen>
+    <dimen name="dp_minus10">71.11dp</dimen>
+    <dimen name="dp_minus15">-106.67dp</dimen>
+    <dimen name="dp_150">1066.69dp</dimen>
+    <dimen name="dp_155">1102.24dp</dimen>
+    <dimen name="dp_160">1137.80dp</dimen>
+    <dimen name="nav_header_height">1208.91dp</dimen>
+    <dimen name="dp_400">2844.50dp</dimen>
+    <dimen name="dp_500">3555.63dp</dimen>
+    <dimen name="dp_80">568.90dp</dimen>
+    <dimen name="dp_37">263.12dp</dimen>
+    <dimen name="dp_180">1280.03dp</dimen>
+    <dimen name="dp_178">1265dp</dimen>
+
+
+
+
+    <dimen name="sp_1">7.11sp</dimen>
+    <dimen name="sp_2">14.22sp</dimen>
+    <dimen name="sp_3">21.33sp</dimen>
+    <dimen name="sp_4">28.44sp</dimen>
+    <dimen name="sp_6">42.67sp</dimen>
+    <dimen name="sp_7">49.78sp</dimen>
+    <dimen name="sp_8">56.89sp</dimen>
+    <dimen name="sp_9">64.00sp</dimen>
+    <dimen name="sp_10">71.11sp</dimen>
+    <dimen name="sp_11">78.22sp</dimen>
+    <dimen name="sp_12">85.33sp</dimen>
+    <dimen name="sp_14">99.55sp</dimen>
+    <dimen name="sp_16">113.77sp</dimen>
+    <dimen name="sp_18">128.00sp</dimen>
+    <dimen name="sp_20">142.22sp</dimen>
+    <dimen name="sp_22">156.44sp</dimen>
+    <dimen name="sp_24">170.66sp</dimen>
+    <dimen name="sp_28">199.10sp</dimen>
+    <dimen name="sp_38">270.21sp</dimen>
+    <dimen name="sp_40">284.43sp</dimen>
+    <dimen name="sp_45">319.99sp</dimen>
+</resources>

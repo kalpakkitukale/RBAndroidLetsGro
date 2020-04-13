@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?><!-- START xml_defaults -->
+<defaultsMap>
+
+    <entry>
+        <key>key_pagination_no_data</key>
+        <value>No available</value>
+    </entry>
+
+    <entry>
+        <key>key_internet_error</key>
+        <value>No Internet</value>
+    </entry>
+
+    <entry>
+        <key>key_something_wend_wrong_error</key>
+        <value>Something went wrong</value>
+    </entry>
+
+    <entry>
+        <key>key_searching_campus_loading_message</key>
+        <value>Please wait we are searching for your campus</value>
+    </entry>
+
+    <entry>
+        <key>key_campus_does_not_exist</key>
+        <value>Campus does not exist</value>
+    </entry>
+
+    <entry>
+        <key>key_deactivated_account_message</key>
+        <value>Your account has been deactivated. Contact your Admin </value>
+    </entry>
+
+    <entry>
+        <key>key_visit_later</key>
+        <value>Visit Later</value>
+    </entry>
+
+    <entry>
+        <key>key_phone_state_permission_description</key>
+        <value>Please provide phone state permission</value>
+    </entry>
+
+    <entry>
+        <key>key_first_time_login_force_password_change_message</key>
+        <value>Change your password</value>
+    </entry>
+
+    <entry>
+        <key>key_mark_attendance_in_progress</key>
+        <value>Attendance marked successfully! Upload in progress</value>
+    </entry>
+
+    <entry>
+        <key>key_mark_attendance_sync_later </key>
+        <value>Attendance marked successfully! Attendance will be uploaded when you are online</value>
+    </entry>
+
+
+</defaultsMap><!-- END xml_defaults -->
