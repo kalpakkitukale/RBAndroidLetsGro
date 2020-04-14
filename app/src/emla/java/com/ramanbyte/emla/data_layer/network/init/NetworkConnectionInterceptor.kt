@@ -44,7 +44,7 @@ class NetworkConnectionInterceptor(val context: Context) : Interceptor {
         }
     }
 
-    private fun isInternetAvailable() : Boolean{
+    fun isInternetAvailable() : Boolean{
         val isInternetAvailable: Boolean
 
         try {

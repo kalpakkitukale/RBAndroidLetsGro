@@ -2,6 +2,7 @@ package com.ramanbyte.emla.data_layer.network.api_layer
 
 import com.amazonaws.services.cognitoidentityprovider.model.ForgotPasswordRequest
 import com.ramanbyte.emla.models.CoursesModel
+import com.ramanbyte.emla.models.InstructionsModel
 import com.ramanbyte.emla.models.QuestionAndAnswerModel
 import com.ramanbyte.emla.models.UserModel
 import com.ramanbyte.emla.models.request.CoursesRequest
@@ -58,13 +59,13 @@ interface eMlaApiController {
     * summative test topicId = 0, courseid= something, QuiztypeId = 2
     * Formative test topicId = something, courseid= something, QuiztypeId = 3
     * */
-//    @GET("Question/GetInstructions/{topicId}/{courseid}/{QuiztypeId}")
-//    suspend fun getInstructions(
-//        @Path("topicId") topicId: Int, @Path("courseid") courseid: Int, @Path(
-//            "QuiztypeId"
-//        ) QuiztypeId: Int
-//    ): Response<InstructionsModel>
-//
+    @GET("Question/GetInstructions/{topicId}/{courseid}/{QuiztypeId}")
+    suspend fun getInstructions(
+        @Path("topicId") topicId: Int, @Path("courseid") courseid: Int, @Path(
+            "QuiztypeId"
+        ) QuiztypeId: Int
+    ): Response<InstructionsModel>
+
 //    @POST("Question/SubmitQuiz")
 //    suspend fun submitTest(@Body testSubmitModel: QuizmarksModel): Response<QuizResultModel>
 //

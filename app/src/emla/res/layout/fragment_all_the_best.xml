@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.fragments.AllTheBestFragment">
+
+    <data>
+
+        <variable
+            name="allTheBestViewModel"
+            type="com.ramanbyte.emla.view_model.ShowQuestionsViewModel" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/mainConstraintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".ui.fragments.AllTheBestFragment">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivAllTheBest"
+                android:layout_width="@dimen/dp_200"
+                android:layout_height="@dimen/dp_200"
+                android:src="@drawable/ic_all_the_best"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.42000002" />
+
+            <TextView
+                style="@style/TextViewBoldBlackOnWhite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_22"
+                android:text="@string/all_the_best"
+                android:textSize="@dimen/sp_18"
+                app:layout_constraintEnd_toEndOf="@+id/ivAllTheBest"
+                app:layout_constraintStart_toStartOf="@+id/ivAllTheBest"
+                app:layout_constraintTop_toBottomOf="@+id/ivAllTheBest" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </data>
+
+</layout>
