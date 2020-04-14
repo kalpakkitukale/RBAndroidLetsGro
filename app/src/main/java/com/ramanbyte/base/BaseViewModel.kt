@@ -9,8 +9,12 @@ import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
 import com.ramanbyte.BaseAppController
 import com.ramanbyte.R
+import com.ramanbyte.data_layer.CoroutineUtils
 import com.ramanbyte.data_layer.pagination.PaginationMessages
 import com.ramanbyte.data_layer.pagination.PaginationResponseHandler
+import com.ramanbyte.emla.data_layer.network.exception.ApiException
+import com.ramanbyte.emla.data_layer.network.exception.NoDataException
+import com.ramanbyte.emla.data_layer.network.exception.NoInternetException
 import com.ramanbyte.utilities.AlertDialog
 import com.ramanbyte.utilities.BindingUtils
 import com.ramanbyte.utilities.KEY_BLANK
@@ -180,8 +184,89 @@ abstract class BaseViewModel(
 
         }
     }
+    fun invokeApiCall(apiCallFunction: suspend () -> Unit) {
+        invokeApiCall(true, apiCallFunction = apiCallFunction)
+    }
 
+    fun invokeApiCall(showLoader: Boolean = true, apiCallFunction: suspend () -> Unit) {
+        CoroutineUtils.main {
 
+            try {
+
+                isLoaderShowingLiveData.postValue(showLoader)
+
+                apiCallFunction.invoke()
+
+                isLoaderShowingLiveData.postValue(false)
+
+            } catch (e: NoInternetException) {
+
+                setAlertDialogResourceModelMutableLiveData(
+                    e.message
+                        ?: BindingUtils.string(R.string.please_make_sure_you_are_connected_to_internet),
+                    BindingUtils.drawable(R.drawable.ic_no_internet),
+                    isInfoAlert = false,
+                    positiveButtonText = BindingUtils.string(R.string.tryAgain),
+                    positiveButtonClickFunctionality = {
+                        isAlertDialogShown.postValue(false)
+                        invokeApiCall(apiCallFunction)
+                    },
+                    negativeButtonText = BindingUtils.string(R.string.strCancel),
+                    negativeButtonClickFunctionality = {
+                        isAlertDialogShown.postValue(false)
+                    }
+                )
+                /*toggleLayoutVisibility(
+                    View.GONE,
+                    View.GONE,
+                    View.VISIBLE,
+                    BindingUtils.string(R.string.please_make_sure_you_are_connected_to_internet)
+                )*/
+                isAlertDialogShown.postValue(true)
+
+                isLoaderShowingLiveData.postValue(false)
+
+            } catch (e: ApiException) {
+                isLoaderShowingLiveData.postValue(false)
+                setAlertDialogResourceModelMutableLiveData(
+                    e.message
+                        ?: BindingUtils.string(R.string.some_thing_went_wrong),
+                    BindingUtils.drawable(R.drawable.ic_something_went_wrong),
+                    isInfoAlert = false,
+                    positiveButtonText = BindingUtils.string(R.string.tryAgain),
+                    positiveButtonClickFunctionality = {
+                        isAlertDialogShown.postValue(false)
+                        invokeApiCall(apiCallFunction)
+                    },
+                    negativeButtonText = BindingUtils.string(R.string.strCancel),
+                    negativeButtonClickFunctionality = {
+                        isAlertDialogShown.postValue(false)
+                    }
+                )
+                /*toggleLayoutVisibility(
+                    View.GONE,
+                    View.GONE,
+                    View.GONE,
+                    BindingUtils.string(R.string.some_thing_went_wrong),
+                    View.VISIBLE
+                )*/
+                isAlertDialogShown.postValue(true)
+            } catch (e: NoDataException) {
+                isLoaderShowingLiveData.postValue(false)
+                toggleLayoutVisibility(
+                    View.GONE,
+                    View.VISIBLE,
+                    View.GONE,
+                    BindingUtils.string(R.string.no_data),
+                    View.GONE
+                )
+                //noDataFunction.invoke()
+            } catch (e : java.lang.reflect.UndeclaredThrowableException){
+
+            }
+
+        }
+    }
     /*
     * Pagination Response Handler
     * */

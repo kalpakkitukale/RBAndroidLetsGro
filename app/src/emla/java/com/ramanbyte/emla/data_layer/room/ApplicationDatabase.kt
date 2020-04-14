@@ -5,22 +5,25 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import com.ramanbyte.emla.data_layer.room.dao.UserDao
 import com.ramanbyte.emla.data_layer.room.data_converter.JsonConverter
+import com.ramanbyte.emla.data_layer.room.entities.UserEntity
 
 /**
  * @AddedBy Vinay Kumbhar <vinay.k@ramanbyte.com>
- * @since 27/02/2020
+ * @since 14/04/2020
  */
 
 
-/*@Database(
-    entities = [LogInResponseModel::class] ,
-    version = 1
-)*/
-@TypeConverters(JsonConverter::class)
+@Database(
+    entities = [UserEntity::class],
+    version = 1,
+    exportSchema = true
+)
 abstract class ApplicationDatabase : RoomDatabase() {
 
     /**Room database DAOs*/
+    abstract fun getUserDao(): UserDao
 
     companion object {
 
