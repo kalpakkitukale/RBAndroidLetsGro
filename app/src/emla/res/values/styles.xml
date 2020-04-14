@@ -1,17 +1,194 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item><!--
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>-->
     </style>
 
-    <style name="ToolBarStyle" parent="Theme.AppCompat">
-        <item name="android:textColorPrimary">@android:color/white</item>
-        <item name="android:textColorSecondary">@android:color/white</item>
-        <item name="actionMenuTextColor">@android:color/white</item>
+    <!--toolbar style -->
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <!--<style name="AppTheme.AppBarOverlay" parent="Theme.Design.NoActionBar" />-->
+
+    <!-- START Font Style-->
+    <style name="AppTheme.Font">
+        <item name="android:fontFamily">@font/roboto_regular</item>
+    </style>
+
+    <style name="AppTheme.Font.Bold">
+        <item name="android:fontFamily">@font/roboto_bold</item>
+    </style>
+
+    <style name="AppTheme.Font.Medium">
+        <item name="android:fontFamily">@font/roboto_medium</item>
+    </style>
+
+    <style name="AppTheme.Font.Light">
+        <item name="android:fontFamily">@font/roboto_light</item>
+    </style>
+
+    <style name="AppTheme.Font.Thin">
+        <item name="android:fontFamily">@font/roboto_thin</item>
+    </style>
+
+    <style name="AppTheme.Font.Black">
+        <item name="android:fontFamily">@font/roboto_black</item>
+    </style>
+
+
+    <style name="AppTheme.Font.Italic">
+        <item name="android:fontFamily">@font/roboto_italic</item>
+    </style>
+
+    <!--Font End-->
+
+    <style name="TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="android:textColorHint">@color/textHintColor</item>
+    </style>
+
+    <style name="EditTextStyleIntoTilRegular">
+        <item name="android:textAppearance">@style/AppTheme.Font</item>
+        <item name="android:padding">@dimen/dp_10</item>
+        <item name="android:textSize">@dimen/sp_14</item>
+        <!--<item name="android:textColor">@color/colorAccent</item>-->
+    </style>
+
+    <style name="EditTextRegularGrayHint">
+        <item name="android:textColorHint">@color/textColorBackOnWhiteBackground</item>
+        <item name="android:textAppearance">@style/AppTheme.Font</item>
+        <item name="android:textColor">@color/textColorBackOnWhiteBackground</item>
+    </style>
+
+    <style name="EditTextHintStyleHintLight">
+        <item name="android:textAppearance">@style/AppTheme.Font.Light</item>
+        <item name="android:textSize">@dimen/sp_10</item>
+        <item name="android:textColorHint">@color/textHintColor</item>
+        <!--<item name="android:textColor">@color/colorAccent</item>-->
+    </style>
+
+
+    <!--Text view  whenever we use TextView, give proper size -->
+    <style name="TextViewRegularTeal">
+        <item name="android:textAppearance">@style/AppTheme.Font</item>
+        <item name="android:textColor">@color/colorTeal</item>
+    </style>
+
+    <style name="TextViewBoldBlackOnWhite">
+        <item name="android:textAppearance">@style/AppTheme.Font.Bold</item>
+        <item name="android:textColor">@color/textColorBackOnWhiteBackground</item>
+    </style>
+
+    <style name="TextViewItalicRedOnWhite">
+        <item name="android:textAppearance">@style/AppTheme.Font.Italic</item>
+        <item name="android:textColor">@color/textColorRegOnWhite</item>
+    </style>
+
+    <style name="TextViewBoldTealOnWhite">
+        <item name="android:textAppearance">@style/AppTheme.Font.Bold</item>
+        <item name="android:textColor">@color/colorTeal</item>
+    </style>
+
+    <style name="TextViewMediumBlackOnWhite">
+        <item name="android:textAppearance">@style/AppTheme.Font.Medium</item>
+        <item name="android:textColor">@color/textColorBackOnWhiteBackground</item>
+    </style>
+
+    <style name="TextViewRegularBlackOnWhite">
+        <item name="android:textAppearance">@style/AppTheme.Font</item>
+        <item name="android:textColor">@color/textColorBackOnWhiteBackground</item>
+    </style>
+
+    <style name="TextViewLightBlackOnWhite">
+        <item name="android:textAppearance">@style/AppTheme.Font.Light</item>
+        <item name="android:textColor">@color/textColorBackOnWhiteBackground</item>
+    </style>
+
+    <style name="TextViewBoldWhite">
+        <item name="android:textAppearance">@style/AppTheme.Font.Bold</item>
+        <item name="android:textColor">@color/colorWhite</item>
+    </style>
+
+    <style name="TextViewMediumWhite">
+        <item name="android:textAppearance">@style/AppTheme.Font.Medium</item>
+        <item name="android:textColor">@color/colorWhite</item>
+    </style>
+
+    <style name="TextViewRegularWhite">
+        <item name="android:textAppearance">@style/AppTheme.Font</item>
+        <item name="android:textColor">@color/colorWhite</item>
+    </style>
+
+    <style name="TextViewLightWhite">
+        <item name="android:textAppearance">@style/AppTheme.Font.Light</item>
+        <item name="android:textColor">@color/colorWhite</item>
+    </style>
+
+    <style name="TextViewBoldLightGray">
+        <item name="android:textAppearance">@style/AppTheme.Font.Bold</item>
+        <item name="android:textColor">@color/textColorGrayOnWhiteBackground</item>
+    </style>
+
+    <style name="TextViewMediumLightGray">
+        <item name="android:textAppearance">@style/AppTheme.Font.Medium</item>
+        <item name="android:textColor">@color/textColorGrayOnWhiteBackground</item>
+    </style>
+
+    <style name="TextViewRegularLightGray">
+        <item name="android:textAppearance">@style/AppTheme.Font</item>
+        <item name="android:textColor">@color/textColorGrayOnWhiteBackground</item>z
+    </style>
+
+    <style name="TextViewLightGray">
+        <item name="android:textAppearance">@style/AppTheme.Font.Light</item>
+        <item name="android:textColor">@color/textColorGrayOnWhiteBackground</item>
+    </style>
+
+    <style name="CustomCapsuleButtonGradientBgWhiteText">
+        <item name="android:background">@drawable/gradient_button_capsule</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:minHeight">@null</item>
+        <item name="android:paddingTop">@dimen/dp_8</item>
+        <item name="android:paddingBottom">@dimen/dp_8</item>
+        <item name="android:paddingStart">@dimen/dp_5</item>
+        <item name="android:paddingEnd">@dimen/dp_5</item>
+        <item name="android:textAppearance">@style/AppTheme.Font</item>
+    </style>
+
+    <style name="CustomCapsuleButtonGrayBorderWithGrayText">
+        <item name="android:background">@drawable/button_capsule_with_gray_border</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/textColorGrayOnWhiteBackground</item>
+        <item name="android:minHeight">@null</item>
+        <item name="android:paddingTop">@dimen/dp_8</item>
+        <item name="android:paddingBottom">@dimen/dp_8</item>
+        <item name="android:paddingStart">@dimen/dp_5</item>
+        <item name="android:paddingEnd">@dimen/dp_5</item>
+        <item name="android:textAppearance">@style/AppTheme.Font</item>
+    </style>
+
+    <style name="TextViewBlackTextOnGrayBackground">
+        <item name="android:background">@drawable/gray_button_capsule</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textAppearance">@style/AppTheme.Font</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <!--this style for getting a space between button in alert dialog-->
+    <style name="MyAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <!-- <item name="android:layout_margin">@dimen/dp_5</item>-->
+        <item name="android:layout_marginRight">@dimen/dp_5</item>
+        <item name="android:layout_marginLeft">@dimen/dp_5</item>
     </style>
 
 </resources>

@@ -31,9 +31,16 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintWidth_percent="0.5" />
 
-            <!--  style="@style/TextViewLightBlackTextOnWhiteBgAndColorWhiteTextOnDarkBg"-->
-            <TextView
+            <!--<com.ramanbyte.admission.views.DotProgressLoader
+                android:chapterId="@+chapterId/progress_percentage"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dp_35"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.5"  />-->
 
+            <TextView
                 android:id="@+id/txtLoaderMessage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -42,7 +49,8 @@
                 android:includeFontPadding="false"
                 android:lines="2"
                 android:text="@{baseViewModel.loaderMessageLiveData}"
-                android:textSize="@dimen/sp_12"
+                android:textAppearance="@style/AppTheme.Font"
+                android:textSize="@dimen/sp_14"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/progress_percentage"
