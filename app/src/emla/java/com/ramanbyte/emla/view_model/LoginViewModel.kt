@@ -12,10 +12,12 @@ import com.ramanbyte.base.BaseViewModel
 import com.ramanbyte.emla.data_layer.repositories.MasterRepository
 import com.ramanbyte.emla.models.UserModel
 import com.ramanbyte.emla.models.request.LoginRequest
+import com.ramanbyte.emla.models.request.PledgeStatusRequest
 import com.ramanbyte.utilities.*
 import com.ramanbyte.validation.ObservableValidator
 import com.ramanbyte.validation.ValidationFlags
 import org.kodein.di.generic.instance
+
 /**
  * @AddedBy Vinay Kumbhar <vinay.k@ramanbyte.com>
  * @since 14/04/2020
@@ -25,8 +27,9 @@ class LoginViewModel(var mContext: Context) : BaseViewModel(mContext) {
 
     override var noInternetTryAgain: () -> Unit = {}
 
-    val userLoginRequestLiveData = MutableLiveData<LoginRequest>(LoginRequest())
+    val userLoginRequestLiveData = MutableLiveData(LoginRequest())
     private val masterRepository: MasterRepository by instance()
+    var userEntity = masterRepository.getCurrentUser()
     var isPledgeConfirm: MutableLiveData<Boolean?> = MutableLiveData(null)
     var navigateToNextScreen: MutableLiveData<Boolean?> = MutableLiveData(null)
 
@@ -65,7 +68,7 @@ class LoginViewModel(var mContext: Context) : BaseViewModel(mContext) {
 
     val forgotPasswordClick = MutableLiveData<Boolean?>(null)
 
-    fun doLogin() {
+    fun doLogin(view:View) {
 
         if (loginRequestValidation.validateAll()) {
             if (PermissionsManager.checkPermission(
@@ -106,12 +109,27 @@ class LoginViewModel(var mContext: Context) : BaseViewModel(mContext) {
         }
     }
 
-    fun forgotPassword(view: View) {
-        forgotPasswordClick.value = true
-    }
-
     fun onPledgeConfirmation(button: CompoundButton, check: Boolean) {
         isPledgeConfirm.value = check
+    }
+
+    fun onPledgeTaken(view: View) {
+        if (isPledgeConfirm.value == true) {
+            val pledgeStatusRequest = PledgeStatusRequest()
+            pledgeStatusRequest.status = "Y"
+            val apiCallFunction: suspend () -> Unit = {
+                masterRepository.updatePledgeStatus(pledgeStatusRequest)
+            }
+            invokeApiCall(apiCallFunction = apiCallFunction)
+            navigateToNextScreen.value = true
+        } else {
+            navigateToNextScreen.value = false
+            //show error
+        }
+    }
+
+    fun forgotPassword(view: View) {
+        forgotPasswordClick.value = true
     }
 
     private fun checkPermission() {

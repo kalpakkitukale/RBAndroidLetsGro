@@ -9,6 +9,7 @@
         <item name="android:windowTranslucentNavigation">true</item>-->
     </style>
 
+
     <!--toolbar style -->
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <!--<style name="AppTheme.AppBarOverlay" parent="Theme.Design.NoActionBar" />-->
