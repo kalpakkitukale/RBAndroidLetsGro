@@ -16,7 +16,11 @@ val authModuleDependency = Kodein.Module(DI_AUTH_MODULE, true) {
 
     import(repositoryDependencies, true)
 
-//    bind<OfficeRepository>() with singleton {
-//        OfficeRepository(instance("app-context"))
-//    }
+    bind(overrides = true) from singleton {
+        ViewModelFactory(
+            instance(
+                DI_ACTIVITY_CONTEXT
+            )
+        )
+    }
 }

@@ -16,6 +16,7 @@ import com.ramanbyte.databinding.FragmentQuizInstructionBinding
 import com.ramanbyte.emla.models.InstructionsModel
 import com.ramanbyte.emla.view_model.ShowQuestionsViewModel
 import com.ramanbyte.utilities.*
+import com.ramanbyte.utilities.DateUtils.DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS
 
 /**
  * @author Niraj Naware <niraj.n@ramanbyte.com>
