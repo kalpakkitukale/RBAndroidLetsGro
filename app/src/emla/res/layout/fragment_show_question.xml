@@ -49,14 +49,14 @@
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.22" />
 
-        <!--<com.ramanbyte.idbi.view.CustomViewPager
+        <com.ramanbyte.emla.view.CustomViewPager
             android:id="@+id/vpShowQuestions"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toTopOf="@+id/btnNext"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/guideline" />-->
+            app:layout_constraintTop_toTopOf="@+id/guideline" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnPrevious"
@@ -90,11 +90,10 @@
             android:id="@+id/mainContainer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:constraint_referenced_ids="cardMainContainer,btnNext"
+            app:constraint_referenced_ids="cardMainContainer,btnNext,vpShowQuestions"
             tools:layout_editor_absoluteX="17dp"
             tools:layout_editor_absoluteY="17dp"
             android:visibility="@{showQuestionsViewModel.viewVisibilityLiveData}"/>
-        <!--,vpShowQuestions-->
 
         <include
             android:id="@+id/noInternet"

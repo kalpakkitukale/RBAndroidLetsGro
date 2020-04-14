@@ -2,9 +2,9 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <!--<data>
+    <data>
 
-        <variable
+       <!-- <variable
             name="chapterModel"
             type="com.ramanbyte.idbi.model.ChapterModel" />
 
@@ -14,8 +14,8 @@
 
         <variable
             name="coursesViewModel"
-            type="com.ramanbyte.idbi.view_model.CoursesViewModel" />
-    </data>-->
+            type="com.ramanbyte.idbi.view_model.CoursesViewModel" />-->
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cardMain"
@@ -23,10 +23,12 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/dp_3">
 
+        <!--android:onClick="@{() -> coursesViewModel.onCourseCardClick(chapterModel)}"-->
         <androidx.cardview.widget.CardView
             android:id="@+id/cardLayoutMain"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
             app:cardBackgroundColor="@color/colorTransparent"
             app:cardCornerRadius="@dimen/dp_5"
             app:cardElevation="2dp"
@@ -35,12 +37,12 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
-            <!--android:onClick="@{() -> coursesViewModel.onCourseCardClick(chapterModel)}"-->
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
+                <!-- android:text="@{chapterModel.index}"-->
                 <TextView
                     android:id="@+id/IvVideo"
                     style="@style/TextViewBoldBlackOnWhite"
@@ -48,11 +50,12 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dp_5"
                     android:layout_marginTop="@dimen/dp_5"
+
                     android:textSize="@dimen/sp_14"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
-                <!--android:text="@{chapterModel.index}"-->
 
+                <!--android:text="@{chapterModel.chapterName}"-->
                 <TextView
                     android:id="@+id/tvTopicName"
                     style="@style/TextViewBoldBlackOnWhite"
@@ -60,21 +63,26 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dp_10"
                     android:layout_marginEnd="@dimen/dp_10"
+
                     android:textSize="@dimen/sp_14"
                     app:layout_constraintBottom_toBottomOf="@+id/IvVideo"
                     app:layout_constraintEnd_toStartOf="@+id/IvProgress"
                     app:layout_constraintStart_toEndOf="@+id/IvVideo"
                     app:layout_constraintTop_toTopOf="@+id/IvVideo" />
-                <!--android:text="@{chapterModel.chapterName}"-->
+
+                <!--        android:text="@{String.valueOf(chapterModel.totalSectionCount)}"-->
                 <TextView
                     android:id="@+id/IvProgress"
                     style="@style/TextViewRegularBlackOnWhite"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+
                     android:textSize="@dimen/sp_12"
                     app:layout_constraintEnd_toStartOf="@+id/IvDownload"
                     app:layout_constraintTop_toTopOf="@+id/tvTopicName" />
-                <!--android:text="@{String.valueOf(chapterModel.totalSectionCount)}"-->
+
+                <!--   android:onClick="@{()->coursesViewModel.onChapterDownloadClick(IvDownload, chapterModel)}"
+                    android:visibility="@{chapterModel.downloadVisibility}"-->
                 <ImageView
                     android:id="@+id/IvDownload"
                     android:layout_width="wrap_content"
@@ -84,8 +92,7 @@
                     app:layout_constraintBottom_toBottomOf="@+id/IvProgress"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/IvProgress" />
-                <!--android:onClick="@{()->coursesViewModel.onChapterDownloadClick(IvDownload, chapterModel)}"
-                android:visibility="@{chapterModel.downloadVisibility}"-->
+
                 <ImageView
                     android:id="@+id/ivStatus"
                     android:layout_width="wrap_content"
@@ -95,6 +102,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/tvCourseDescription" />
 
+                <!--android:text="@{chapterModel.description}"-->
                 <TextView
                     android:id="@+id/tvCourseDescription"
                     style="@style/TextViewRegularBlackOnWhite"
@@ -103,11 +111,12 @@
                     android:layout_marginStart="@dimen/dp_5"
                     android:layout_marginTop="@dimen/dp_8"
                     android:maxLines="4"
+
                     android:textSize="@dimen/sp_12"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/tvTopicName"
                     app:layout_constraintTop_toBottomOf="@+id/tvTopicName" />
-                <!--android:text="@{chapterModel.description}"-->
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
