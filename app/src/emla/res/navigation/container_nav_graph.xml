@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/container_nav_graph"
+    app:startDestination="@id/coursesFragment">
+
+    <fragment
+        android:id="@+id/coursesFragment"
+        android:name="com.ramanbyte.emla.ui.fragments.CoursesFragment"
+        android:label="@string/courses" />
+    <fragment
+        android:id="@+id/myDownloadsFragment"
+        android:name="com.ramanbyte.emla.ui.fragments.MyDownloadsFragment"
+        android:label="@string/downloads" />
+    <fragment
+        android:id="@+id/learnerProfileFragment"
+        android:name="com.ramanbyte.emla.ui.fragments.LearnerProfileFragment"
+        android:label="@string/profile" />
+</navigation>

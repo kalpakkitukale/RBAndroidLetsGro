@@ -15,6 +15,7 @@ import com.ramanbyte.emla.models.OptionsModel
 import com.ramanbyte.emla.models.QuestionAndAnswerModel
 import com.ramanbyte.emla.view_model.ShowQuestionsViewModel
 import com.ramanbyte.utilities.*
+import com.ramanbyte.utilities.DateUtils.DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS
 
 class AnswerAdapter(var optionList: ArrayList<OptionsModel>,
                     private val questionAndAnswerModel: QuestionAndAnswerModel?) :  RecyclerView.Adapter<RecyclerView.ViewHolder>() {

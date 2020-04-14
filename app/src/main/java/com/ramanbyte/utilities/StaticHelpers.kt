@@ -147,9 +147,7 @@ const val keyContentUrl = "contentUrl"
 const val KEY_QUIZ_TYPE_ASSESSMENT = 1
 const val KEY_QUIZ_TYPE_FORMATIVE = 3
 const val KEY_QUIZ_TYPE_SUMMATIVE = 2
-const val DATE_SERVER_PATTERN = "MM-dd-yyyy"
 const val keyTestSubmittedSuccess = "Created."
-const val DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS = "yyyy-MM-dd'T'HH:mm:ss"
 const val REQUEST_CODE_APPLICATION_UPDATE = 0X503
 
 const val videoS3UrlTimeOut: Long = 172800000
