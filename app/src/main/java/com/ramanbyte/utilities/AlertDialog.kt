@@ -14,8 +14,8 @@ import com.ramanbyte.base.BaseViewModel
 import com.ramanbyte.databinding.AlertBinding
 
 /**
- * @AddedBy Vinay Kumbhar <vinay.k@ramanbyte.com>
- * @since 27/02/2020
+ * @author Vinay Kumbhar <vinay.pkumbhar@gmail.com>
+ * @since 13-04-2020
  */
 class AlertDialog<T : BaseViewModel>(
     private val mContext: Context,

@@ -6,5 +6,6 @@
     <color name="colorTransparent">#00000000</color>
     <color name="colorWhite">#ffffff</color>
     <color name="colorBlack">#000000</color>
+    <color name="colorLiteGrayLiteWhite">#888888</color>
     <color name="cardBackgroundColor">#FFFFFF</color>
 </resources>

@@ -3,8 +3,8 @@ package com.ramanbyte.emla.models
 import androidx.databinding.BaseObservable
 
 /**
- * @AddedBy Vinay Kumbhar <vinay.k@ramanbyte.com>
- * @since 27/02/2020
+ * @author Vinay Kumbhar <vinay.pkumbhar@gmail.com>
+ * @since 13-04-2020
  */
 abstract class BaseRequestModel : BaseObservable() {
 

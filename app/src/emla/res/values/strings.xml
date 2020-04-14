@@ -4,4 +4,5 @@
     <string name="reset">Reset</string>
     <string name="crop">Crop</string>
     <string name="close">Close</string>
+    <string name="app_name_tag">eMLATag</string>
 </resources>

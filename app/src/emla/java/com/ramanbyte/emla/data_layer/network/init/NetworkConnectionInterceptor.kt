@@ -9,6 +9,10 @@ import com.ramanbyte.utilities.KEY_NO_INTERNET_ERROR
 import okhttp3.Interceptor
 import okhttp3.Response
 
+/**
+ * @addedBy Vinay Kumbhar <vinay.pkumbhar@gmail.com>
+ * @since 13-04-2020
+ */
 class NetworkConnectionInterceptor(val context: Context) : Interceptor {
 
     private val applicationContext = context.applicationContext

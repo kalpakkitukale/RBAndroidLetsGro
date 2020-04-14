@@ -8,7 +8,7 @@ import org.kodein.di.generic.singleton
 
 /**
  * @author Vinay Kumbhar <vinay.k@ramanbyte.com>
- * @since 29/2/20
+ * @since 13-04-2020
  */
 val authModuleDependency = Kodein.Module(DI_AUTH_MODULE, true) {
 

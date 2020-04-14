@@ -7,8 +7,8 @@ import com.ramanbyte.utilities.DateUtils
 import com.ramanbyte.utilities.IpUtility
 
 /**
- * @author Vinay Kumbhar <vinay.k@ramanbyte.com>
- * @since 11/3/20
+ * @author Vinay Kumbhar <vinay.pkumbhar@gmail.com>
+ * @since 13-04-2020
  */
 abstract class BaseModel : BaseObservable() {
     var createdBy: Int? = 0

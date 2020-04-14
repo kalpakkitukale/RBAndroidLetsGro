@@ -255,7 +255,7 @@ object StaticMethodUtilitiesKtx {
                 .round()
                 .build(
                     name.toUpperCase(),
-                    BindingUtils.color(R.color.colorBlueIconOnLightBgAndDarkBg)
+                    BindingUtils.color(R.color.colorWhite)
                 )
             view?.background = textDrawable
         } catch (e: Exception) {
