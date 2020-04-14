@@ -24,15 +24,7 @@ class LoginActivity:BaseActivity<ActivityLoginBinding,LoginViewModel>(authModule
 
     override fun initiate() {
 
-        layoutBinding.apply {
-            btnLogin.setOnClickListener(View.OnClickListener {
-                AppLog.infoLog("LoginClick")
-                val fragment = PreAssessmentTestFragment()
-                val transaction: FragmentTransaction = supportFragmentManager.beginTransaction()
-                transaction.replace(R.id.frameLayout, fragment, "PreAssessmentTestFragment")
-                transaction.commit()
-            })
-        }
+
 
     }
 

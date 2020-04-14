@@ -5,9 +5,9 @@
 
     <data>
 
-        <variable
+        <!--<variable
             name="chapterContentViewModel"
-            type="com.ramanbyte.idbi.view_model.ChapterContentViewModel" />
+            type="com.ramanbyte.idbi.view_model.ChapterContentViewModel" />-->
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -41,13 +41,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/dp_5"
-            android:onClick="@{chapterContentViewModel::takeFormativeTest}"
             android:text="@string/appear_formative"
             android:textAllCaps="true"
             android:textSize="@dimen/sp_14"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+        <!--android:onClick="@{chapterContentViewModel::takeFormativeTest}"-->
 
         <include
             android:id="@+id/noInternet"
@@ -71,8 +71,8 @@
         <androidx.constraintlayout.widget.Group
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="@{chapterContentViewModel.viewVisibilityLiveData}"
             app:constraint_referenced_ids="rvLessonContent,btnAppearFormativeTest" />
+        <!--android:visibility="@{chapterContentViewModel.viewVisibilityLiveData}"-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

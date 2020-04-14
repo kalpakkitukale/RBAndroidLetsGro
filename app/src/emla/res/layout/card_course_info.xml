@@ -4,9 +4,9 @@
 
     <data>
 
-        <variable
+        <!--<variable
             name="coursesViewModel"
-            type="com.ramanbyte.idbi.view_model.CoursesViewModel" />
+            type="com.ramanbyte.idbi.view_model.CoursesViewModel" />-->
 
     </data>
 
@@ -35,12 +35,12 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/dp_5"
-                android:onClick="@{coursesViewModel::onHeaderClick}"
                 android:text="@string/course_information"
                 android:textSize="@dimen/sp_16"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+            <!--android:onClick="@{coursesViewModel::onHeaderClick}"-->
 
             <ImageView
                 android:id="@+id/imgViewCourseInfo"
@@ -72,12 +72,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/dp_5"
-                android:text='@{coursesViewModel.courseSyllabusModel.length +" ("+ coursesViewModel.courseSyllabusModel.durationType+")"}'
                 android:textSize="@dimen/sp_12"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/verticalGuideLine"
                 app:layout_constraintTop_toBottomOf="@+id/headerCourseInfo" />
-
+            <!--android:text='@{coursesViewModel.courseSyllabusModel.length +" ("+ coursesViewModel.courseSyllabusModel.durationType+")"}'-->
             <View
                 android:id="@+id/lengthView"
                 android:layout_width="match_parent"
@@ -107,12 +106,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/dp_5"
-                android:text="@{coursesViewModel.courseSyllabusModel.efforts}"
                 android:textSize="@dimen/sp_12"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/verticalGuideLine"
                 app:layout_constraintTop_toBottomOf="@+id/lengthView" />
-
+            <!--android:text="@{coursesViewModel.courseSyllabusModel.efforts}"-->
             <View
                 android:id="@+id/effortsView"
                 android:layout_width="match_parent"
@@ -141,12 +139,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/dp_5"
-                android:text="@{coursesViewModel.courseSyllabusModel.specialization}"
                 android:textSize="@dimen/sp_12"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/verticalGuideLine"
                 app:layout_constraintTop_toBottomOf="@+id/effortsView" />
-
+            <!--android:text="@{coursesViewModel.courseSyllabusModel.specialization}"-->
             <View
                 android:id="@+id/specializationView"
                 android:layout_width="match_parent"
@@ -175,12 +172,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/dp_5"
-                android:text="@{coursesViewModel.courseSyllabusModel.level}"
                 android:textSize="@dimen/sp_12"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/verticalGuideLine"
                 app:layout_constraintTop_toBottomOf="@+id/specializationView" />
-
+            <!--android:text="@{coursesViewModel.courseSyllabusModel.level}"-->
             <View
                 android:id="@+id/LevelView"
                 android:layout_width="match_parent"
@@ -209,12 +205,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/dp_5"
-                android:text="@{coursesViewModel.courseSyllabusModel.language}"
                 android:textSize="@dimen/sp_12"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/verticalGuideLine"
                 app:layout_constraintTop_toBottomOf="@+id/LevelView" />
-
+            <!--android:text="@{coursesViewModel.courseSyllabusModel.language}"-->
 
             <androidx.constraintlayout.widget.Group
                 android:id="@+id/courseInfoGroup"
