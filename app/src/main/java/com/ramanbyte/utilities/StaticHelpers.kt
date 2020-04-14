@@ -4,8 +4,10 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
+import android.util.DisplayMetrics
 import android.view.View
 import android.view.Window
+import androidx.fragment.app.FragmentActivity
 import com.ramanbyte.R
 import java.lang.reflect.InvocationTargetException
 
@@ -270,6 +272,14 @@ fun getDeviceModelName(): String {
 
 fun getDeviceVersion(): String {
     return BindingUtils.string(R.string.android) + " " + Build.VERSION.RELEASE
+}
+
+fun String?.checkValues(): String = if (isNullOrEmpty()) "NA" else this!!
+
+fun FragmentActivity.displayMetrics(): DisplayMetrics {
+    val displayMetrics = DisplayMetrics()
+    windowManager.defaultDisplay.getMetrics(displayMetrics)
+    return displayMetrics
 }
 
 /*Topic keys*/

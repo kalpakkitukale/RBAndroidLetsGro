@@ -9,6 +9,8 @@ import androidx.paging.PagedList
 import com.ramanbyte.data_layer.base.BaseRepository
 import com.ramanbyte.data_layer.pagination.PaginationResponseHandler
 import com.ramanbyte.emla.data_layer.network.api_layer.CoursesController
+import com.ramanbyte.emla.models.CourseSyllabusModel
+import org.kodein.di.generic.instance
 import com.ramanbyte.emla.data_layer.pagination.PaginationDataSourceFactory
 import com.ramanbyte.emla.data_layer.room.ApplicationDatabase
 import com.ramanbyte.emla.data_layer.room.entities.UserEntity
@@ -81,5 +83,11 @@ class CoursesRepository(mContext: Context) :BaseRepository(mContext) {
         }
         coursesPagedList?.value?.dataSource?.invalidate()
         paginationResponseHandlerLiveData.postValue(PaginationResponseHandler.INIT_LOADING)
+    }
+
+    suspend fun getCoursesSyllabus(courseId: Int): CourseSyllabusModel? {
+        return apiRequest {
+            coursesController.getCoursesSyllabus(courseId, /*userModel?.userId ?:*/ 0)
+        }
     }
 }
