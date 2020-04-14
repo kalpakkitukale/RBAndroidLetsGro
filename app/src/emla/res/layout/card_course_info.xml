@@ -6,7 +6,7 @@
 
         <variable
             name="coursesViewModel"
-            type="com.ramanbyte.idbi.view_model.CoursesViewModel" />
+            type="com.ramanbyte.emla.view_model.CoursesViewModel" />
 
     </data>
 
@@ -72,7 +72,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/dp_5"
-                android:text='@{coursesViewModel.courseSyllabusModel.length +" ("+ coursesViewModel.courseSyllabusModel.durationType+")"}'
+                android:text='@{coursesViewModel.courseSyllabusModelLiveData.length +" ("+ coursesViewModel.courseSyllabusModelLiveData.durationType+")"}'
                 android:textSize="@dimen/sp_12"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/verticalGuideLine"
@@ -107,7 +107,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/dp_5"
-                android:text="@{coursesViewModel.courseSyllabusModel.efforts}"
+                android:text="@{coursesViewModel.courseSyllabusModelLiveData.efforts}"
                 android:textSize="@dimen/sp_12"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/verticalGuideLine"
@@ -141,7 +141,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/dp_5"
-                android:text="@{coursesViewModel.courseSyllabusModel.specialization}"
+                android:text="@{coursesViewModel.courseSyllabusModelLiveData.specialization}"
                 android:textSize="@dimen/sp_12"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/verticalGuideLine"
@@ -175,7 +175,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/dp_5"
-                android:text="@{coursesViewModel.courseSyllabusModel.level}"
+                android:text="@{coursesViewModel.courseSyllabusModelLiveData.level}"
                 android:textSize="@dimen/sp_12"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/verticalGuideLine"
@@ -209,7 +209,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/dp_5"
-                android:text="@{coursesViewModel.courseSyllabusModel.language}"
+                android:text="@{coursesViewModel.courseSyllabusModelLiveData.language}"
                 android:textSize="@dimen/sp_12"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/verticalGuideLine"

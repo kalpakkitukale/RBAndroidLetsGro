@@ -1,11 +1,7 @@
 package com.ramanbyte.emla.ui.fragments
 
-import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.Menu
-import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.FragmentStatePagerAdapter
 import com.ramanbyte.R
 import com.ramanbyte.aws_s3_android.accessor.AppS3Client
@@ -38,12 +34,14 @@ class CourseDetailFragment : BaseFragment<FragmentCourseDetailBinding, CoursesVi
 
     override fun initiate() {
 
-        if (intent != null) {
-            courseModel = intent.getParcelableExtra(KEY_COURSE_MODEL)!!
+        arguments?.apply {
+            courseModel = getParcelable(KEY_COURSE_MODEL)!!
+        }
+
 
             courseModel?.courseImageUrl =
-                AppS3Client.createInstance(this).getFileAccessUrl("dev/"+courseModel?.courseImage?: KEY_BLANK) ?: ""
-        }
+                AppS3Client.createInstance(context!!).getFileAccessUrl("dev/"+courseModel?.courseImage?: KEY_BLANK) ?: ""
+
 
         viewModel.coursesModelLiveData.value = courseModel
         //setUpViewPager(it)
@@ -52,7 +50,7 @@ class CourseDetailFragment : BaseFragment<FragmentCourseDetailBinding, CoursesVi
 
             getCoursesSyllabus()
 
-            courseSyllabusModel.observe(this@CourseDetailFragment, Observer {
+            courseSyllabusModelLiveData.observe(this@CourseDetailFragment, Observer {
                 if (it != null) {
                     menu?.findItem(R.id.view_certificate)?.isVisible =
                         it.summativeAssessmentStatus.equals(
@@ -64,7 +62,7 @@ class CourseDetailFragment : BaseFragment<FragmentCourseDetailBinding, CoursesVi
                 }
             })
 
-            viewModel.courseSyllabusModel.observe(this@CourseDetailFragment, Observer {
+            viewModel.courseSyllabusModelLiveData.observe(this@CourseDetailFragment, Observer {
                 if (it != null)
                     setUpViewPager(it)
 
@@ -73,26 +71,24 @@ class CourseDetailFragment : BaseFragment<FragmentCourseDetailBinding, CoursesVi
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
 
-        val inflater = menuInflater
         inflater.inflate(R.menu.menu_certificate, menu)
         this.menu = menu
-        return true
-
+        super.onCreateOptionsMenu(menu, inflater)
     }
 
 
     private fun setUpViewPager(it: CourseSyllabusModel) {
         viewPagerAdapter = ViewPagerAdapter(
-            supportFragmentManager,
+            childFragmentManager,
             FragmentStatePagerAdapter.POSITION_UNCHANGED
         )
 
         viewPagerAdapter?.addFragmentView(CourseSyllabusFragment.getInstance(), "")
-        viewPagerAdapter?.addFragmentView(CourseSessionFragment.getInstance(), "")
-        if (!it.summativeAssessmentStatus.isNullOrEmpty())
-            viewPagerAdapter?.addFragmentView(CourseResultFragment.getInstance(), "")
+        viewPagerAdapter?.addFragmentView(ChaptersListFragment(), "")
+        /*if (!it.summativeAssessmentStatus.isNullOrEmpty())
+            viewPagerAdapter?.addFragmentView(CourseResultFragment.getInstance(), "")*/
 
         viewPagerCourse.adapter = viewPagerAdapter
         tabLayoutCourse.setupWithViewPager(viewPagerCourse)
