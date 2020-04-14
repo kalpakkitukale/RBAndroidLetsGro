@@ -4,9 +4,9 @@
 
     <data>
 
-        <variable
+        <!--<variable
             name="coursesViewModel"
-            type="com.ramanbyte.idbi.view_model.CoursesViewModel" />
+            type="com.ramanbyte.idbi.view_model.CoursesViewModel" />-->
 
     </data>
 
@@ -29,13 +29,13 @@
                 app:layout_constraintGuide_percent="0.50" />
 
 
+            <!-- android:onClick="@{coursesViewModel::onHeaderClick}"-->
             <TextView
                 android:id="@+id/headerCourseInfo"
                 style="@style/TextViewMediumBlackOnWhite"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/dp_5"
-                android:onClick="@{coursesViewModel::onHeaderClick}"
                 android:text="@string/course_information"
                 android:textSize="@dimen/sp_16"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -66,13 +66,13 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/txtViewLength" />
 
+            <!--android:text='@{coursesViewModel.courseSyllabusModel.length +" ("+ coursesViewModel.courseSyllabusModel.durationType+")"}'-->
             <TextView
                 android:id="@+id/txtViewLength"
                 style="@style/TextViewLightBlackOnWhite"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/dp_5"
-                android:text='@{coursesViewModel.courseSyllabusModel.length +" ("+ coursesViewModel.courseSyllabusModel.durationType+")"}'
                 android:textSize="@dimen/sp_12"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/verticalGuideLine"
@@ -101,13 +101,14 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/txtViewEfforts" />
 
+            <!--   android:text="@{coursesViewModel.courseSyllabusModel.efforts}"-->
             <TextView
                 android:id="@+id/txtViewEfforts"
                 style="@style/TextViewLightBlackOnWhite"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/dp_5"
-                android:text="@{coursesViewModel.courseSyllabusModel.efforts}"
+
                 android:textSize="@dimen/sp_12"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/verticalGuideLine"
@@ -135,13 +136,14 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/txtViewSpecialization" />
 
+            <!-- android:text="@{coursesViewModel.courseSyllabusModel.specialization}"-->
             <TextView
                 android:id="@+id/txtViewSpecialization"
                 style="@style/TextViewLightBlackOnWhite"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/dp_5"
-                android:text="@{coursesViewModel.courseSyllabusModel.specialization}"
+
                 android:textSize="@dimen/sp_12"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/verticalGuideLine"
@@ -169,13 +171,14 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/txtViewLevel" />
 
+            <!--   android:text="@{coursesViewModel.courseSyllabusModel.level}"-->
             <TextView
                 android:id="@+id/txtViewLevel"
                 style="@style/TextViewLightBlackOnWhite"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/dp_5"
-                android:text="@{coursesViewModel.courseSyllabusModel.level}"
+
                 android:textSize="@dimen/sp_12"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/verticalGuideLine"
@@ -203,13 +206,14 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/txtViewLanguage" />
 
+            <!--android:text="@{coursesViewModel.courseSyllabusModel.language}"-->
             <TextView
                 android:id="@+id/txtViewLanguage"
                 style="@style/TextViewLightBlackOnWhite"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/dp_5"
-                android:text="@{coursesViewModel.courseSyllabusModel.language}"
+
                 android:textSize="@dimen/sp_12"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/verticalGuideLine"

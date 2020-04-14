@@ -4,9 +4,9 @@
 
     <data>
 
-        <variable
+      <!--  <variable
             name="showQuestionsViewModel"
-            type="com.ramanbyte.idbi.view_model.ShowQuestionsViewModel" />
+            type="com.ramanbyte.idbi.view_model.ShowQuestionsViewModel" />-->
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
