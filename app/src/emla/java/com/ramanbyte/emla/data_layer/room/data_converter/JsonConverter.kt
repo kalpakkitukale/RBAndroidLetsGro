@@ -1,9 +1,4 @@
 package com.ramanbyte.emla.data_layer.room.data_converter
-
-import androidx.room.TypeConverter
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
-import com.ramanbyte.emla.models.LogInResponseModel
 import java.io.Serializable
 
 class JsonConverter : Serializable {
