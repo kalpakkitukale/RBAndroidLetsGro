@@ -1,23 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutCenter"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".ui.activities.LauncherActivity">
+        android:layout_height="match_parent">
+
+        <!--
+                <ImageView
+                    android:id="@+id/ivElement"
+                    android:layout_width="@dimen/dp_150"
+                    android:layout_height="@dimen/dp_150"
+                    android:src="@drawable/ic_bg_login"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />-->
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivClientLogo"
+            android:layout_width="@dimen/dp_150"
+            android:layout_height="@dimen/dp_150"
+            android:src="@drawable/ic_e_learning"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.39" />
+
 
         <TextView
+            android:id="@+id/tvWelcome"
+            style="@style/TextViewBoldBlackOnWhite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
+            android:text="@string/welcome"
+            android:textSize="@dimen/sp_24"
+            android:layout_marginTop="@dimen/dp_15"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            style="@style/TextViewBoldLightGray"
-            android:textSize="@dimen/sp_40"
-            android:text="@string/welcome"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivClientLogo" />
 
+        <ImageView
+            android:id="@+id/ivElement1"
+            android:layout_width="@dimen/dp_150"
+            android:layout_height="@dimen/dp_40"
+            android:src="@drawable/from_ramanbyte"
+            android:layout_marginBottom="@dimen/dp_15"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
