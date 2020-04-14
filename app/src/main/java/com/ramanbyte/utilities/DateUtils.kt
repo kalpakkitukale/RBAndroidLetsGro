@@ -288,4 +288,18 @@ object DateUtils {
         }
         return null
     }
+
+    fun getCurDate(): String? {
+        try {
+            val calendar = getCurrentCalender()
+            val simpleDateFormat = SimpleDateFormat(DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS, Locale.US)
+            return simpleDateFormat.format(Date(calendar!!.getTimeInMillis()))
+        } catch (e: Exception) {
+            e.printStackTrace()
+            AppLog.errorLog(e.message, e)
+        }
+
+        return null
+    }
+
 }

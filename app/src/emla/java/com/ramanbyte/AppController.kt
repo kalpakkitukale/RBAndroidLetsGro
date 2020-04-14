@@ -4,6 +4,7 @@ import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
 import com.google.gson.GsonBuilder
 import com.ramanbyte.emla.data_layer.network.init.NetworkConnectionInterceptor
+import com.ramanbyte.emla.data_layer.repositories.CoursesRepository
 import com.ramanbyte.emla.data_layer.repositories.MasterRepository
 import com.ramanbyte.emla.view_model.factory.ViewModelFactory
 import com.ramanbyte.emla.data_layer.room.ApplicationDatabase
@@ -53,7 +54,7 @@ class AppController : BaseAppController(), KodeinAware {
             )
         }
         bind() from singleton { MasterRepository(this@AppController) }
-        /*bind() from singleton { OfficeRepository(this@AppController) }*/
+        bind() from singleton { CoursesRepository(this@AppController) }
 
         bind() from singleton { ViewModelFactory(instance()) }
     }
@@ -89,7 +90,7 @@ class AppController : BaseAppController(), KodeinAware {
                 // when you need to adjust those defaults, you set an updated value for only the values you
                 // want to change in the Firebase console.
                 // [START set_default_values]
-                /*setDefaultsAsync(R.xml.remote_config_defaults)*/
+                setDefaultsAsync(R.xml.remote_config_defaults)
                 // [END set_default_values]
             }
 

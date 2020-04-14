@@ -4,7 +4,7 @@
 
     <data>
         <variable
-            name="showQuestionsViewModel"
+            name="showQuestionsVM"
             type="com.ramanbyte.emla.view_model.ShowQuestionsViewModel" />
     </data>
 

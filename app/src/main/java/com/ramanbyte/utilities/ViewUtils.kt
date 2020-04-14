@@ -55,11 +55,11 @@ fun Activity.makeStatusBarTransparent(color : Int = Color.TRANSPARENT) {
     }
 }
 
-fun FragmentActivity.displayMetrics(): DisplayMetrics {
+/*fun FragmentActivity.displayMetrics(): DisplayMetrics {
     val displayMetrics = DisplayMetrics()
     windowManager.defaultDisplay.getMetrics(displayMetrics)
     return displayMetrics
-}
+}*/
 
 fun View.setMarginTop(marginTop: Int) {
     val menuLayoutParams = this.layoutParams as ViewGroup.MarginLayoutParams

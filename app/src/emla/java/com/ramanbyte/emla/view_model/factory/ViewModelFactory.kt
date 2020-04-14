@@ -8,6 +8,7 @@ import com.ramanbyte.emla.view_model.ForgetPasswordViewModel
 import com.ramanbyte.emla.view_model.LauncherViewModel
 import com.ramanbyte.emla.view_model.LoginViewModel
 import com.ramanbyte.emla.view_model.ShowQuestionsViewModel
+import com.ramanbyte.emla.view_model.*
 import com.ramanbyte.view_model.factory.BaseViewModelFactory
 
 /**
@@ -34,6 +35,9 @@ class ViewModelFactory(private val mContext: Context) : BaseViewModelFactory(mCo
             }
             modelClass.isAssignableFrom(ForgetPasswordViewModel::class.java) -> {
                 return ForgetPasswordViewModel(mContext) as T
+            }
+            modelClass.isAssignableFrom(CoursesViewModel::class.java) -> {
+                return CoursesViewModel(mContext) as T
             }
             modelClass.isAssignableFrom(ShowQuestionsViewModel::class.java) -> {
                 return ShowQuestionsViewModel(mContext) as T

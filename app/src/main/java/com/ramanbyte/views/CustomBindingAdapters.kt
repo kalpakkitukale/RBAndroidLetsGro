@@ -3,6 +3,7 @@ package com.ramanbyte.views
 
 import android.annotation.SuppressLint
 import android.graphics.drawable.Drawable
+import android.webkit.WebView
 import android.widget.ImageView
 import android.widget.RadioButton
 import androidx.databinding.BindingAdapter
@@ -100,6 +101,12 @@ class CustomBindingAdapters {
                     }
                 }
             })
+        }
+
+        @JvmStatic
+        @BindingAdapter("app:setHtmlText")
+        fun setHtmlText(webView: WebView, htmlText: String?) {
+            webView.loadData(htmlText,"text/html", "utf-8")
         }
     }
 }

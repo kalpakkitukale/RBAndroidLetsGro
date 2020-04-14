@@ -85,7 +85,7 @@ class AnswerAdapter(var optionList: ArrayList<OptionsModel>,
         } else {
             //(holder as EmailViewHolder).setEmailDetails(employees.get(position))
             (holder as MyAnswerHolderCheckBox).cardCustomCheckboxBinding?.apply {
-                this.showQuestionsViewModel = this@AnswerAdapter.showQuestionsViewModel
+                this.showQuestionsVM = showQuestionsViewModel
 
                 if (clear) {
                     cbAnswer.isChecked = false
