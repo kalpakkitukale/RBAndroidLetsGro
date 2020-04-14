@@ -2,6 +2,7 @@ package com.ramanbyte.utilities
 
 import android.content.Context
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Build
 import android.view.View
 import android.view.Window
@@ -38,10 +39,14 @@ const val KEY_NEW_PASSWORD = "newPassword"
 const val KEY_CONFIRM_NEW_PASSWORD = "confirmPassword"
 const val SELECT = "-Select-"
 
-const val KEY_POSITIVE = "Positive"
-const val KEY_NEGATIVE = "Negative"
-const val KEY_FOLLOW_UP = "Follow up"
-const val KEY_NO_RESPONSE = "No response"
+const val KEY_IS_FIXED_ASPECT_RATIO = "isFixedAspectRatio"
+const val KEY_IMAGE_PATH = "imagePath"
+val KEY_CROP_IMAGE_PATH = "cropImagePath"
+val KEY_CROP_IMAGE_SIZE = "cropImageSize"
+val KEY_APP_STORAGE_FOLDER = BindingUtils.string(R.string.app_name)
+
+const val keyEmailId = "emailId"
+const val keyPassword = "password"
 
 const val KEY_OTP_ONE = "otp_place_one"
 const val KEY_OTP_TWO = "otp_place_two"
@@ -50,74 +55,11 @@ const val KEY_OTP_FOUR = "otp_place_four"
 const val KEY_OTP_FIVE = "otp_place_five"
 const val KEY_OTP_SIX = "otp_place_six"
 
-/*ADD Company START*/
-
-const val keyCompanyName: String = "company_name"
-const val keyCompanyType: String = "company_Type"
-const val keyCompanyEntityId: String = "company_Entity_Id"
-const val keySector_Id: String = "sector_Id"
-const val keySectorId: String = "sectorId"
-const val keySubSectorId: String = "subSector_Id"
-const val keyContactNo: String = "contactNo"
-const val keyWebsite: String = "website"
-const val keyLinkedInProfile: String = "linkedIn_Profile"
-const val KEY_IS_FIXED_ASPECT_RATIO = "isFixedAspectRatio"
-const val KEY_IMAGE_PATH = "imagePath"
-val KEY_CROP_IMAGE_PATH = "cropImagePath"
-val KEY_CROP_IMAGE_SIZE = "cropImageSize"
-val KEY_APP_STORAGE_FOLDER = BindingUtils.string(R.string.app_name)
-
-/*ADD Company END*/
-/*Create Task START*/
-const val keyTaskTitle = "taskTitle"
-const val keyTaskStartDateTime = "taskStartDateTime"
-const val keyTaskEndDateTime = "taskEndDateTime"
-const val keyCityId = "cityId"
-
-const val KEY_SELF = "IND"
-const val KEY_INDIVIDUAL = "IND"
-const val KEY_GROUP = "GRP"
-const val KEY_OUTSIDE_DATABASE = "keyOutsideDatabase"
-const val KEY_RANDOM_ALLOCATION = "keyRandomAllocation"
-const val KEY_MANUAL_ALLOCATION = "keyManualAllocation"
-const val KEY_CREATE_TASK = "keyCreateTask"
-const val INDIVIDUAL = "INDIVIDUAL"
-const val GROUP = "GROUP"
-
-const val KEY_RANDOM = "RAN"
-const val KEY_MANUAL = "MAN"
-
-const val KEY_TASK_NOT_STARTED = "NST"
-const val KEY_TASK_IN_PROGRESS = "ING"
-const val KEY_TASK_COMPLETED = "CMP"
-const val KEY_TASK_EXPIRED = "EXP "
-
-const val KEY_ALLOCATE = "ALLOCATE"
-const val KEY_DEALLOCATE = "DEALLOCATE"
-
-
-
-
-/*Create Task END*/
 
 const val KEY_ANSWER = "answer"
 const val KEY_QUESTION = "questionId"
 const val KEY_OTP = "enteredOTP"
 const val KEY_USERNAME = "userName"
-const val keySessionId = "keySessionId"
-const val keySelectedDate = "keySelectedDate"
-const val keySessionStartTime = "sessionStartTime"
-const val keySessionEndTime = "sessionEndTime"
-const val keyIsSessionGoingOn = "isSessionGoingOn"
-const val keyAll = "All" //do not change the value
-const val keyAssociated = "Associated" //do not change the value
-const val keyNotAssociated = "Not Associated" //do not change the value
-const val keyGroupId = "groupId"
-const val keyGroupName = "groupName"
-const val keyGroupCreatedBy = "groupCreatedBy"
-const val keySelectedGroupMembers = "selectedMembers"
-const val keyGroupMember="groupMember"
-
 const val keyNa = "N/A"
 
 //validation keye
@@ -137,25 +79,6 @@ const val DEL_STATUS = "N"
 const val PASSWORD_SECURITY_STATUS = "passwordSecurityStatus"
 const val IS_ACTIVE_USER = "Y"
 const val PASSWORD_SECURITY_QUESTION_STATUS = "Y"
-
-
-//Task Status
-const val TASK_COMPLETED = "CMP"
-const val TASK_IN_PROGRESS = "INP"
-const val TASK_NOT_STARTED = "NST"
-
-
-// User Types
-const val TYPE_ACADEMIC_ADMIN = "ADM"
-const val TYPE_MENTOR = "FTL"
-const val TYPE_FACULTY = "FTL"
-const val TYPE_STUDENT = "STF"
-const val TYPE_HOD = ""
-const val TYPE_TOP_MANAGMENT = ""
-const val TYPE_EXTERNAL_MENTOR = "EXM"
-const val TYPE_PARENT = "PRT"
-const val TYPE_PLH = "PLH"
-
 
 const val IS_VALID_AND_ACTIVE = 1
 const val PASSWORD_NOT_UPDATED = 2
@@ -187,6 +110,48 @@ const val CAMERA = 0
 const val GALLERY = 1
 const val REMOVE_PHOTO = 2
 const val PATH_SEPARATOR = "/"
+
+
+/**
+ * DATA PARSE KEY
+ * */
+
+const val KEY_COURSE_MODEL = "CourseModel"
+const val KEY_CHAPTER_MODEL = "ChapterModel"
+const val KEY_QUESTION_MODEL = "QuestionModel"
+const val KEY_OPTIONS_MODEL = "OptionsModel"
+const val keyContentModel = "ContentModel"
+const val keySectionId = "sectionId"
+const val keyId = "id"
+const val keyMediaId = "mediaId"
+const val keyIsOffLine = "isOffLine"
+const val keySectionName = "sectionName"
+const val keyCourseId = "courseId"
+const val keyCourseName = "courseName"
+const val keyChapterName = "chapterName"
+const val KEY_VIDEO = "VIDEO"
+const val KEY_Y = "Y"
+const val KEY_N = "N"
+const val KEY_SKIP = "S"
+const val KEY_STAFF = "STF"
+const val KEY_APP = "APP"
+const val keyContentUrl = "contentUrl"
+const val KEY_QUIZ_TYPE_ASSESSMENT = 1
+const val KEY_QUIZ_TYPE_FORMATIVE = 3
+const val KEY_QUIZ_TYPE_SUMMATIVE = 2
+const val DATE_SERVER_PATTERN = "MM-dd-yyyy"
+const val keyTestSubmittedSuccess = "Created."
+const val DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS = "yyyy-MM-dd'T'HH:mm:ss"
+const val REQUEST_CODE_APPLICATION_UPDATE = 0X503
+
+const val videoS3UrlTimeOut: Long = 172800000
+const val keyTestType = "testType"
+const val keyCorrect = "correctQuestion"
+const val keyWrong = "inCorrectQuestion"
+const val KEY_QUESTION_STATUS = "questionStatus"
+const val KEY_QUIZ_RESULT_MODEL = "quizResultModel"
+const val KEY_COURSE_IMAGE_URL = "courseImageUrl"
+const val KEY_DEFAULT_MEDIA_STATUS = -1
 
 
 fun Window.changeStatusBarColor(view: View, colorResourceId: Int) {

@@ -8,7 +8,7 @@ open class BaseViewModelFactory(private val mContext: Context) : ViewModelProvid
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         return when {
-            else -> throw IllegalArgumentException()
+            else -> throw IllegalArgumentException("Please register view model in ViewModelFactory")
         }
     }
 }

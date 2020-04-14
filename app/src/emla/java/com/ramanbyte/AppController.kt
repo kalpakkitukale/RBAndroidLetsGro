@@ -4,6 +4,7 @@ import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
 import com.google.gson.GsonBuilder
 import com.ramanbyte.emla.data_layer.network.init.NetworkConnectionInterceptor
+import com.ramanbyte.emla.data_layer.repositories.MasterRepository
 import com.ramanbyte.emla.view_model.factory.ViewModelFactory
 import com.ramanbyte.emla.data_layer.room.ApplicationDatabase
 import com.ramanbyte.utilities.AppLog
@@ -21,7 +22,7 @@ import java.util.concurrent.TimeUnit
 
 /**
  * @author Vinay Kumbhar <vinay.k@ramanbyte.com>
- * @since 27/2/20
+ * @since 13/04/2020
  */
 class AppController : BaseAppController(), KodeinAware {
 
@@ -51,8 +52,8 @@ class AppController : BaseAppController(), KodeinAware {
                 this@AppController
             )
         }
-       /* bind() from singleton { CompanyDatabaseRepository(this@AppController) }
-        bind() from singleton { OfficeRepository(this@AppController) }*/
+        bind() from singleton { MasterRepository(this@AppController) }
+        /*bind() from singleton { OfficeRepository(this@AppController) }*/
 
         bind() from singleton { ViewModelFactory(instance()) }
     }
