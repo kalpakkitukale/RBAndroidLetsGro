@@ -5,7 +5,7 @@
     <data>
         <variable
             name="showQuestionsViewModel"
-            type="com.ramanbyte.idbi.view_model.ShowQuestionsViewModel" />
+            type="com.ramanbyte.emla.view_model.ShowQuestionsViewModel" />
     </data>
 
     <RelativeLayout

@@ -47,6 +47,14 @@ val KEY_CROP_IMAGE_PATH = "cropImagePath"
 val KEY_CROP_IMAGE_SIZE = "cropImageSize"
 val KEY_APP_STORAGE_FOLDER = BindingUtils.string(R.string.app_name)
 
+const val KEY_RADIO = 1
+const val KEY_CHECKBOX = 2
+const val KEY_QUESTION_IN_GRID = 5
+const val KEY_QUESTION_START_POSITION = 0
+const val KEY_QUE_COUNT = "queCount"
+const val KEY_TOTAL_QUE_COUNT = "totalQueCount"
+const val keyQuestionId = "questionId"
+
 const val keyEmailId = "emailId"
 const val keyPassword = "password"
 
@@ -141,9 +149,7 @@ const val keyContentUrl = "contentUrl"
 const val KEY_QUIZ_TYPE_ASSESSMENT = 1
 const val KEY_QUIZ_TYPE_FORMATIVE = 3
 const val KEY_QUIZ_TYPE_SUMMATIVE = 2
-const val DATE_SERVER_PATTERN = "MM-dd-yyyy"
 const val keyTestSubmittedSuccess = "Created."
-const val DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS = "yyyy-MM-dd'T'HH:mm:ss"
 const val REQUEST_CODE_APPLICATION_UPDATE = 0X503
 
 const val videoS3UrlTimeOut: Long = 172800000

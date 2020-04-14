@@ -7,10 +7,6 @@ import com.ramanbyte.utilities.DateUtils.TIME_DISPLAY_PATTERN
 import com.ramanbyte.utilities.DateUtils.TIME_SERVER_PATTERN
 
 
-/**
- * Created by Kunal Rathod
- * 28/12/19
- */
 class CourseResultModel {
     var quizid: Int = 0
     var examdate: String = ""

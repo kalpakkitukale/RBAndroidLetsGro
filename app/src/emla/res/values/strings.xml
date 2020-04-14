@@ -59,9 +59,10 @@
 
     <string name="dynamic_required">%1$s Required</string>
     <string name="invalid_email_id">Invalid Email Id</string>
+    <string name="courses">Courses</string>
+    <string name="profile">Profile</string>
 
     <string name="jump_to_question">jump to question</string>
-    <string name="profile">profile</string>
     <string name="not_attempted">Not Attempted</string>
     <string name="attempted">Attempted</string>
     <string name="submit_test_message">Are you sure, you want to submit the test?</string>

@@ -5,12 +5,11 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import java.util.ArrayList
 
-
 /**
- * Created by Kunal Rathod
- * 7/12/19
+ * @author Niraj Naware <niraj.n@ramanbyte.com>
+ * @since 14/04/20
  */
-class ViewPagerAdapter(fm : FragmentManager, behaviour : Int) : FragmentStatePagerAdapter(fm,behaviour) {
+class ViewPagerAdapter (fm : FragmentManager, behaviour : Int) : FragmentStatePagerAdapter(fm,behaviour) {
 
 
     private val mFragmentTitleList = ArrayList<String>()

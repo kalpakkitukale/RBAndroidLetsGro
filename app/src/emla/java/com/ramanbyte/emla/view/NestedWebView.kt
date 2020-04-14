@@ -3,16 +3,15 @@ package com.ramanbyte.emla.view
 import android.content.Context
 import android.util.AttributeSet
 import android.view.MotionEvent
-import androidx.core.view.ViewCompat
-import androidx.core.view.MotionEventCompat
-import androidx.core.view.NestedScrollingChildHelper
-import androidx.core.view.NestedScrollingChild
 import android.webkit.WebView
-
+import androidx.core.view.MotionEventCompat
+import androidx.core.view.NestedScrollingChild
+import androidx.core.view.NestedScrollingChildHelper
+import androidx.core.view.ViewCompat
 
 /**
- * Created by Kunal Rathod
- * 16/12/19
+ * @author Niraj Naware <niraj.n@ramanbyte.com>
+ * @since 14/04/20
  */
 class NestedWebView @JvmOverloads constructor(
     context: Context,
