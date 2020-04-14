@@ -8,8 +8,10 @@ import com.ramanbyte.base.BaseViewModel
 import com.ramanbyte.data_layer.CoroutineUtils
 import com.ramanbyte.emla.data_layer.network.init.NetworkConnectionInterceptor
 import com.ramanbyte.emla.data_layer.repositories.QuizRepository
+import com.ramanbyte.emla.data_layer.room.entities.AnswerEntity
 import com.ramanbyte.emla.models.CoursesModel
 import com.ramanbyte.emla.models.InstructionsModel
+import com.ramanbyte.emla.models.OptionsModel
 import com.ramanbyte.emla.models.QuestionAndAnswerModel
 import com.ramanbyte.utilities.AppLog
 import com.ramanbyte.utilities.BindingUtils
@@ -52,6 +54,26 @@ class ShowQuestionsViewModel (var mContext: Context) : BaseViewModel(mContext) {
         MutableLiveData<ArrayList<QuestionAndAnswerModel>>().apply {
             value = arrayListOf()
         }
+
+    val isJumpToQuestionBS = MutableLiveData<Boolean>().apply {
+        value = false
+    }
+
+    val onClickClear = MutableLiveData<Boolean>().apply {
+        value = false
+    }
+
+    val onClickQueNo = MutableLiveData<Int>().apply {
+        value = -1
+    }
+
+    val isTestSubmited = MutableLiveData<Boolean>().apply {
+        value = false
+    }
+
+    val onClickCloseLiveData = MutableLiveData<Boolean>().apply {
+        value = false
+    }
 
 
     /*
@@ -173,7 +195,75 @@ class ShowQuestionsViewModel (var mContext: Context) : BaseViewModel(mContext) {
     }
 
     /*
+    * Open bottom sheet to jump on particular Question
+    * */
+    fun onClickJumpToQuestion(view: View) {
+        if (NetworkConnectionInterceptor(mContext).isInternetAvailable()) {
+            isJumpToQuestionBS.value = true
+        } else {
+            noInternetDialog(BindingUtils.string(R.string.next), view)
+        }
+    }
+
+   /* fun getOptions(questionId: Int): ArrayList<OptionsModel>? {
+
+        return quizRepository.getQuestionRelatedOptions(questionId)?.apply {
+
+            val answerModel = quizRepository.getAnswerForQuestion(questionId)
+
+            answerModel?.also { answerModel ->
+
+                firstOrNull { it.id == answerModel.answer }?.apply {
+                    isChecked = true
+                }
+
+            }
+        }
+    }*/
+
+    fun insertOptionLB(answerEntity: AnswerEntity) {
+        quizRepository.insertOptionLB(answerEntity)
+    }
+
+    /*
     * Quiz Page ------------- End ---------------------
+    * */
+
+
+    /*
+    * jump to particular questione ------------- start ---------------------
+    * */
+    fun onClickQueNo(view: View, position: Int) {
+        if (NetworkConnectionInterceptor(mContext).isInternetAvailable()) {
+            onClickQueNo.postValue(position)
+        } else {
+            noInternetDialog(BindingUtils.string(R.string.next), view)
+        }
+    }
+
+    fun onClickClose(view: View) {
+        onClickCloseLiveData.value = true
+    }
+
+    fun onClickSubmitTest(view: View) {
+
+        setAlertDialogResourceModelMutableLiveData(
+            BindingUtils.string(R.string.submit_test_message),
+            BindingUtils.drawable(R.drawable.ic_submit_confirmation)!!,
+            false,
+            BindingUtils.string(R.string.yes), {
+                isAlertDialogShown.postValue(false)
+                isTestSubmited.value = true
+            },
+            BindingUtils.string(R.string.no), {
+                isAlertDialogShown.postValue(false)
+            }
+        )
+        isAlertDialogShown.postValue(true)
+    }
+
+    /*
+    * jump to particular question ------------- End ---------------------
     * */
 
 

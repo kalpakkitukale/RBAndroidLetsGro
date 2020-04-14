@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+<data>
+    <variable
+        name="cardShowQuestionsViewModel"
+        type="com.ramanbyte.emla.view_model.ShowQuestionsViewModel" />
+    <variable
+        name="questionAndAnswerModel"
+        type="com.ramanbyte.emla.models.QuestionAndAnswerModel" />
+</data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        android:background="@color/colorTransparent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorTransparent">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardMainContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_5"
+                android:background="@color/colorTransparent"
+                app:cardCornerRadius="@dimen/dp_15"
+                app:cardElevation="1dp"
+                app:contentPaddingBottom="@dimen/dp_15"
+                app:contentPaddingLeft="@dimen/dp_15"
+                app:contentPaddingRight="@dimen/dp_15"
+                app:contentPaddingTop="@dimen/dp_5"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/ivClearQue"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorTransparent"
+                    app:layout_anchor="@+id/cardMainContainer"
+                    app:layout_anchorGravity="center">
+
+                    <TextView
+                        android:id="@+id/tvJumpToQuestion"
+                        style="@style/TextViewBoldBlackOnWhite"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="@{() -> cardShowQuestionsViewModel.onClickJumpToQuestion(tvJumpToQuestion)}"
+                        android:padding="@dimen/dp_5"
+                        android:text="01 of 20"
+                        android:textSize="@dimen/sp_14"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <!--<ImageView
+                        android:chapterId="@+chapterId/ivFeedback"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/dp_5"
+                        android:padding="@dimen/dp_5"
+                        android:src="@drawable/ic_play"
+                        app:layout_constraintBottom_toBottomOf="@+chapterId/tvJumpToQuestion"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+chapterId/tvJumpToQuestion" />-->
+
+                    <WebView
+                        android:id="@+id/wvQuestion"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/dp_10"
+                        android:textSize="@dimen/sp_14"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/tvJumpToQuestion"
+                        app:layout_constraintTop_toBottomOf="@+id/tvJumpToQuestion"
+                         />
+                    <!--app:setHtmlText="@{questionAndAnswerModel.question_Title}"-->
+
+                    <TextView
+                        android:id="@+id/tvQuestionMarks"
+                        style="@style/TextViewRegularBlackOnWhite"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:textSize="@dimen/sp_10"
+                        app:layout_constraintStart_toStartOf="@+id/wvQuestion"
+                        app:layout_constraintTop_toBottomOf="@+id/wvQuestion" />
+
+                    <View
+                        android:id="@+id/view2"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="@dimen/dp_15"
+                        android:background="@color/colorDividerGrayOnWhiteBackground"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/wvQuestion"
+                        app:layout_constraintTop_toBottomOf="@+id/tvQuestionMarks" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvAnswer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="@+id/wvQuestion"
+                        app:layout_constraintTop_toBottomOf="@+id/view2"
+                        tools:listitem="@layout/card_custom_radio" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <ImageView
+                android:id="@+id/ivClearQue"
+                style="@style/TextViewRegularBlackOnWhite"
+                android:layout_width="@dimen/dp_50"
+                android:layout_height="@dimen/dp_50"
+                android:background="@drawable/circle_text_view"
+                android:elevation="5dp"
+                android:gravity="center"
+                android:onClick="@{() -> questionAndAnswerModel.clearOptions.invoke()}"
+                android:padding="@dimen/dp_15"
+                android:src="@drawable/ic_eraser"
+                android:textSize="@dimen/sp_22"
+                android:visibility="visible"
+                app:layout_anchor="@id/cardMainContainer"
+                app:layout_anchorGravity="bottom|center"
+                app:layout_constraintBottom_toBottomOf="@+id/cardMainContainer"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardMainContainer" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</layout>
