@@ -13,13 +13,13 @@ import com.ramanbyte.emla.view_model.LoginViewModel
  * @since 14/04/2020
  */
 
-class LoginActivity:BaseActivity<ActivityLoginBinding,LoginViewModel>(authModuleDependency) {
+class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(authModuleDependency) {
     override val viewModelClass: Class<LoginViewModel> = LoginViewModel::class.java
 
-    override fun layoutId(): Int  = R.layout.activity_login
+    override fun layoutId(): Int = R.layout.activity_login
 
     override fun initiate() {
-
+        setListeners()
     }
 
     companion object {
@@ -28,4 +28,15 @@ class LoginActivity:BaseActivity<ActivityLoginBinding,LoginViewModel>(authModule
         }
     }
 
+    private fun setListeners() {
+        layoutBinding.apply {
+            tvForgetPassword.setOnClickListener {
+                startActivity(ForgotPasswordActivity.intent(this@LoginActivity))
+            }
+
+            tvChangePassword.setOnClickListener {
+                startActivity(ChangePasswordActivity.intent(this@LoginActivity))
+            }
+        }
+    }
 }

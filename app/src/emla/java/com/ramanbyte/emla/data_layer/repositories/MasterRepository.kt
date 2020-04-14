@@ -6,6 +6,8 @@ import com.ramanbyte.emla.data_layer.network.api_layer.eMlaApiController
 import com.ramanbyte.emla.data_layer.room.ApplicationDatabase
 import com.ramanbyte.emla.data_layer.room.entities.UserEntity
 import com.ramanbyte.emla.models.UserModel
+import com.ramanbyte.emla.models.request.ChangePasswordModel
+import com.ramanbyte.emla.models.request.ForgetPasswordModel
 import com.ramanbyte.emla.models.request.LoginRequest
 import com.ramanbyte.utilities.KEY_STAFF
 import com.ramanbyte.utilities.replicate
@@ -18,7 +20,7 @@ import org.kodein.di.generic.instance
 
 class MasterRepository(val mContext: Context) : BaseRepository(mContext) {
     private val applicationDatabase: ApplicationDatabase by instance()
-    private val eMlaApiController : eMlaApiController by instance()
+    private val eMlaApiController: eMlaApiController by instance()
 
     suspend fun doLogin(loginRequest: LoginRequest): UserModel? {
 
@@ -38,5 +40,17 @@ class MasterRepository(val mContext: Context) : BaseRepository(mContext) {
         }
 
         return userModel
+    }
+
+    suspend fun forgetPassword(forgetPasswordModel: ForgetPasswordModel): String? {
+        return apiRequest {
+            eMlaApiController.forgotPassword(forgetPasswordModel)
+        }
+    }
+
+    suspend fun changePassword(changePasswordModel: ChangePasswordModel): String? {
+        return apiRequest {
+            eMlaApiController.changePassword(changePasswordModel)
+        }
     }
 }

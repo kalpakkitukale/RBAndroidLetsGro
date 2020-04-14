@@ -4,7 +4,9 @@ import com.amazonaws.services.cognitoidentityprovider.model.ForgotPasswordReques
 import com.ramanbyte.emla.models.CoursesModel
 import com.ramanbyte.emla.models.QuestionAndAnswerModel
 import com.ramanbyte.emla.models.UserModel
+import com.ramanbyte.emla.models.request.ChangePasswordModel
 import com.ramanbyte.emla.models.request.CoursesRequest
+import com.ramanbyte.emla.models.request.ForgetPasswordModel
 import com.ramanbyte.emla.models.request.LoginRequest
 import retrofit2.Response
 import retrofit2.http.Body
@@ -27,8 +29,10 @@ interface eMlaApiController {
     suspend fun doLogin(@Body loginRequest: LoginRequest): Response<UserModel>
 
     @POST("Login/ForgetPassword")
-    suspend fun forgotPassword(@Body forgotPasswordRequest: ForgotPasswordRequest): Response<String>
+    suspend fun forgotPassword(@Body forgetPasswordModel: ForgetPasswordModel): Response<String>
 
+    @POST("Login/ChangePassword")
+    suspend fun changePassword(@Body changePasswordModel: ChangePasswordModel): Response<String>
     /*
     * Master Api's Ends
     * */
@@ -45,13 +49,19 @@ interface eMlaApiController {
     * summative test courseid= something, QuiztypeId = 2
     * */
     @GET("Question/GetQuestionListBycourse/{CourseId}/{QuiztypeId}")
-    suspend fun getQuestionsByCourse(@Path("CourseId") CourseId: Int, @Path("QuiztypeId") QuiztypeId: Int): Response<ArrayList<QuestionAndAnswerModel>>
+    suspend fun getQuestionsByCourse(
+        @Path("CourseId") CourseId: Int,
+        @Path("QuiztypeId") QuiztypeId: Int
+    ): Response<ArrayList<QuestionAndAnswerModel>>
 
     /*
     * Formative test topicId = something, QuiztypeId = 3
     * */
     @GET("Question/GetQuestionListByTopicID/{TopicId}/{QuiztypeId}")
-    suspend fun getQuestionsByTopic(@Path("TopicId") TopicId: Int, @Path("QuiztypeId") QuiztypeId: Int): Response<ArrayList<QuestionAndAnswerModel>>
+    suspend fun getQuestionsByTopic(
+        @Path("TopicId") TopicId: Int,
+        @Path("QuiztypeId") QuiztypeId: Int
+    ): Response<ArrayList<QuestionAndAnswerModel>>
 
     /*
     * Pre-assessment test topicId = 0, courseid= something, QuiztypeId = 1

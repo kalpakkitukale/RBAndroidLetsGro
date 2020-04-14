@@ -135,4 +135,16 @@
     <string name="android">Android</string>
     <string name="phone_state_permission_desc">Due to change in permission strategy of Android 6.0 and above, %1$s needs your permission to read your device info. We only use this data to secure your account. Allow to read Phone state?</string>
 
+    <string name="oldPassword">Old password</string>
+    <string name="newPassword">New password</string>
+    <string name="confirmPassword">Confirm new password</string>
+    <string name="new_password_required">Please Enter New Password</string>
+    <string name="confirm_new_password_required">Please Confirm Password.</string>
+    <string name="enter_valid_new_password">Enter a valid new password</string>
+    <string name="invalid_old_password">Enter a valid old password</string>
+    <string name="enter_valid_confirm_new_password">Enter a valid confirm new password</string>
+    <string name="not_same_new_and_confirm_password">Password does not match.</string>
+    <string name="not_valid_password_pattern">Password should be as per password policy.Please refer to the password policy.</string>
+    <string name="same_old_and_new_password">The new password you have entered is similar to the old one! Please try entering a new password.</string>
+    <string name="youHaveCrossedYourMaximumLimit">oops! you have crossed your maximum limit</string>
 </resources>

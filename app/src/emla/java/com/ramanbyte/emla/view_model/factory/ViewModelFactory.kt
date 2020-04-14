@@ -2,9 +2,12 @@ package com.ramanbyte.emla.view_model.factory
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
+import com.ramanbyte.emla.view_model.ChangePasswordViewModel
 import com.ramanbyte.emla.view_model.ContainerViewModel
+import com.ramanbyte.emla.view_model.ForgetPasswordViewModel
 import com.ramanbyte.emla.view_model.LoginViewModel
 import com.ramanbyte.view_model.factory.BaseViewModelFactory
+
 /**
  * @AddedBy Vinay Kumbhar <vinay.k@ramanbyte.com>
  * @since 14/04/2020
@@ -20,6 +23,12 @@ class ViewModelFactory(private val mContext: Context) : BaseViewModelFactory(mCo
             }
             modelClass.isAssignableFrom(ContainerViewModel::class.java) -> {
                 return ContainerViewModel(mContext) as T
+            }
+            modelClass.isAssignableFrom(ChangePasswordViewModel::class.java) -> {
+                return ChangePasswordViewModel(mContext) as T
+            }
+            modelClass.isAssignableFrom(ForgetPasswordViewModel::class.java) -> {
+                return ForgetPasswordViewModel(mContext) as T
             }
             else -> super.create(modelClass)
         }
