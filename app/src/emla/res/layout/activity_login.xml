@@ -96,7 +96,6 @@
                 android:layout_marginTop="@dimen/dp_10"
                 android:hint="@string/password"
                 app:endIconMode="password_toggle"
-                app:errorText="@{loginViewModel.loginRequestValidation.getValidation(StaticHelpersKt.keyPassword)}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tilUserName">
