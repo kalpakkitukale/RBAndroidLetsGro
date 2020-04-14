@@ -21,7 +21,7 @@ import com.ramanbyte.utilities.*
  * @author Niraj Naware <niraj.n@ramanbyte.com>
  * @since 14/04/20
  */
-class QuizInstructionFragment : BaseFragment<FragmentQuizInstructionBinding, ShowQuestionsViewModel>(false,true) {
+class QuizInstructionFragment : BaseFragment<FragmentQuizInstructionBinding, ShowQuestionsViewModel>() {
 
     private var mContext: Context? = null
     private var instructionsModel = InstructionsModel()

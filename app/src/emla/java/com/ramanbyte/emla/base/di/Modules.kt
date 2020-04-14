@@ -1,5 +1,6 @@
 package com.ramanbyte.emla.base.di
 
+import com.ramanbyte.emla.data_layer.repositories.QuizRepository
 import com.ramanbyte.emla.view_model.factory.ViewModelFactory
 import com.ramanbyte.utilities.DI_ACTIVITY_CONTEXT
 import com.ramanbyte.utilities.DI_AUTH_MODULE
@@ -19,4 +20,11 @@ val authModuleDependency = Kodein.Module(DI_AUTH_MODULE, true) {
 //    bind<OfficeRepository>() with singleton {
 //        OfficeRepository(instance("app-context"))
 //    }
+
+    bind<QuizRepository>() with singleton{
+        QuizRepository(instance())
+    }
+
+
+
 }
