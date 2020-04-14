@@ -79,7 +79,7 @@ class ChangePasswordViewModel(var mContext: Context) : BaseViewModel(mContext) {
                 KEY_NEW_PASSWORD,
                 ValidationFlags.FIELD_MATCH,
                 BindingUtils.string(R.string.not_same_new_and_confirm_password),
-                KEY_NEW_PASSWORD
+                keyPassword
             )
             addRule(
                 keyPassword,
@@ -129,6 +129,18 @@ class ChangePasswordViewModel(var mContext: Context) : BaseViewModel(mContext) {
                 } catch (e: ApiException) {
                     e.printStackTrace()
                     AppLog.errorLog(e.message, e)
+
+                    setAlertDialogResourceModelMutableLiveData(
+                        e.message.toString(),
+                        BindingUtils.drawable(
+                            R.drawable.ic_something_went_wrong
+                        )!!,
+                        true,
+                        BindingUtils.string(R.string.strOk), {
+                            isAlertDialogShown.postValue(false)
+                        }
+                    )
+                    isAlertDialogShown.postValue(true)
                 } catch (e: NoInternetException) {
                     e.printStackTrace()
                     AppLog.errorLog(e.message, e)
@@ -150,7 +162,6 @@ class ChangePasswordViewModel(var mContext: Context) : BaseViewModel(mContext) {
                     AppLog.errorLog(e.message, e)
                 }
             }
-
         }
     }
 

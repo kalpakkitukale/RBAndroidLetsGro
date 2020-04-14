@@ -3,6 +3,7 @@ package com.ramanbyte.emla.ui.activities
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import androidx.lifecycle.Observer
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseActivity
 import com.ramanbyte.databinding.ChangePasswordBinding
@@ -40,7 +41,7 @@ class ChangePasswordActivity : BaseActivity<ChangePasswordBinding, ChangePasswor
             isChangePasswordSuccessfully.observe(this@ChangePasswordActivity, Observer {
                 if (it != null) {
                     if (it == true) {
-                        isEmailSendSuccessfully.value = null
+                        isChangePasswordSuccessfully.value = null
                         finish()
                     }
                 }
@@ -48,3 +49,5 @@ class ChangePasswordActivity : BaseActivity<ChangePasswordBinding, ChangePasswor
         }
     }
 }
+
+/*at com.ramanbyte.emla.data_layer.network.init.NetworkConnectionInterceptor.intercept(NetworkConnectionInterceptor.kt:43)*/
