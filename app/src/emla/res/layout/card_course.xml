@@ -6,7 +6,7 @@
 
         <variable
             name="coursesModel"
-            type="com.ramanbyte.idbi.model.CoursesModel" />
+            type="com.ramanbyte.emla.models.CoursesModel" />
 
         <variable
             name="viewPosition"
@@ -14,7 +14,7 @@
 
         <variable
             name="coursesViewModel"
-            type="com.ramanbyte.idbi.view_model.CoursesViewModel" />
+            type="com.ramanbyte.emla.view_model.CoursesViewModel" />
     </data>
 
     <androidx.cardview.widget.CardView

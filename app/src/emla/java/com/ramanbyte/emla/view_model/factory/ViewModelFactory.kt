@@ -3,6 +3,13 @@ package com.ramanbyte.emla.view_model.factory
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import com.ramanbyte.emla.view_model.*
+import com.ramanbyte.emla.view_model.ChangePasswordViewModel
+import com.ramanbyte.emla.view_model.ContainerViewModel
+import com.ramanbyte.emla.view_model.ForgetPasswordViewModel
+import com.ramanbyte.emla.view_model.LauncherViewModel
+import com.ramanbyte.emla.view_model.LoginViewModel
+import com.ramanbyte.emla.view_model.ShowQuestionsViewModel
+import com.ramanbyte.emla.view_model.*
 import com.ramanbyte.view_model.factory.BaseViewModelFactory
 
 /**
@@ -38,6 +45,18 @@ class ViewModelFactory(private val mContext: Context) : BaseViewModelFactory(mCo
             }
             modelClass.isAssignableFrom(MyDownloadsViewModel::class.java) -> {
                 return MyDownloadsViewModel(mContext) as T
+            }
+            modelClass.isAssignableFrom(ChangePasswordViewModel::class.java) -> {
+                return ChangePasswordViewModel(mContext) as T
+            }
+            modelClass.isAssignableFrom(ForgetPasswordViewModel::class.java) -> {
+                return ForgetPasswordViewModel(mContext) as T
+            }
+            modelClass.isAssignableFrom(CoursesViewModel::class.java) -> {
+                return CoursesViewModel(mContext) as T
+            }
+            modelClass.isAssignableFrom(ShowQuestionsViewModel::class.java) -> {
+                return ShowQuestionsViewModel(mContext) as T
             }
             else -> super.create(modelClass)
         }

@@ -22,24 +22,28 @@ class LauncherActivity : BaseActivity<ActivityLauncherBinding, LauncherViewModel
     override val viewModelClass: Class<LauncherViewModel> get() = LauncherViewModel::class.java
 
     override fun layoutId(): Int = R.layout.activity_launcher
+    
+    var isUserLoggedIn : Boolean = false
 
     override fun initiate() {
         makeStatusBarTransparent()
         setViewModelOps()
+        Handler().postDelayed({
+            if (isUserLoggedIn) {
+                startActivity(ContainerActivity.intent(this@LauncherActivity))
+            } else {
+                startActivity(LoginActivity.intent(this@LauncherActivity))
+            }
+            finish()
+        }, 1500)
     }
 
     private fun setViewModelOps() {
         viewModel.apply {
             userModelLiveData.observe(this@LauncherActivity, Observer {
                 it?.let {
-                    Handler().postDelayed({
-                        if (it.loggedId == KEY_Y) {
-                            startActivity(ContainerActivity.intent(this@LauncherActivity))
-                        } else {
-                            startActivity(LoginActivity.intent(this@LauncherActivity))
-                        }
-                        finish()
-                    }, 1500)
+                    isUserLoggedIn = it.loggedId == KEY_Y
+
                 }
             })
         }

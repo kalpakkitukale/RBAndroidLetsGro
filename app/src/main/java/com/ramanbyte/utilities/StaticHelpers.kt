@@ -4,8 +4,10 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
+import android.util.DisplayMetrics
 import android.view.View
 import android.view.Window
+import androidx.fragment.app.FragmentActivity
 import com.ramanbyte.R
 import java.lang.reflect.InvocationTargetException
 
@@ -35,8 +37,9 @@ const val upperRegex: String = ".*[A-Z].*"
 const val lowerRegex: String = ".*[a-z].*"
 const val specialRegex: String = ".*[!\"#\$%&'()*+,-./:;<=>?@[\\^]_`{|}~].*"
 const val KEY_EMAIL = "email"
+const val KEY_OLD_PASSWORD = "oldPassword"
 const val KEY_NEW_PASSWORD = "newPassword"
-const val KEY_CONFIRM_NEW_PASSWORD = "confirmPassword"
+
 const val SELECT = "-Select-"
 
 const val KEY_IS_FIXED_ASPECT_RATIO = "isFixedAspectRatio"
@@ -44,6 +47,14 @@ const val KEY_IMAGE_PATH = "imagePath"
 val KEY_CROP_IMAGE_PATH = "cropImagePath"
 val KEY_CROP_IMAGE_SIZE = "cropImageSize"
 val KEY_APP_STORAGE_FOLDER = BindingUtils.string(R.string.app_name)
+
+const val KEY_RADIO = 1
+const val KEY_CHECKBOX = 2
+const val KEY_QUESTION_IN_GRID = 5
+const val KEY_QUESTION_START_POSITION = 0
+const val KEY_QUE_COUNT = "queCount"
+const val KEY_TOTAL_QUE_COUNT = "totalQueCount"
+const val keyQuestionId = "questionId"
 
 const val keyEmailId = "emailId"
 const val keyPassword = "password"
@@ -139,9 +150,7 @@ const val keyContentUrl = "contentUrl"
 const val KEY_QUIZ_TYPE_ASSESSMENT = 1
 const val KEY_QUIZ_TYPE_FORMATIVE = 3
 const val KEY_QUIZ_TYPE_SUMMATIVE = 2
-const val DATE_SERVER_PATTERN = "MM-dd-yyyy"
 const val keyTestSubmittedSuccess = "Created."
-const val DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS = "yyyy-MM-dd'T'HH:mm:ss"
 const val REQUEST_CODE_APPLICATION_UPDATE = 0X503
 
 const val videoS3UrlTimeOut: Long = 172800000
@@ -264,6 +273,14 @@ fun getDeviceModelName(): String {
 
 fun getDeviceVersion(): String {
     return BindingUtils.string(R.string.android) + " " + Build.VERSION.RELEASE
+}
+
+fun String?.checkValues(): String = if (isNullOrEmpty()) "NA" else this!!
+
+fun FragmentActivity.displayMetrics(): DisplayMetrics {
+    val displayMetrics = DisplayMetrics()
+    windowManager.defaultDisplay.getMetrics(displayMetrics)
+    return displayMetrics
 }
 
 /*Topic keys*/

@@ -6,6 +6,8 @@ import com.ramanbyte.emla.data_layer.network.api_layer.LoginApiController
 import com.ramanbyte.emla.data_layer.room.ApplicationDatabase
 import com.ramanbyte.emla.data_layer.room.entities.UserEntity
 import com.ramanbyte.emla.models.UserModel
+import com.ramanbyte.emla.models.request.ChangePasswordModel
+import com.ramanbyte.emla.models.request.ForgetPasswordModel
 import com.ramanbyte.emla.models.request.LoginRequest
 import com.ramanbyte.emla.models.request.PledgeStatusRequest
 import com.ramanbyte.utilities.KEY_STAFF
@@ -56,4 +58,15 @@ class MasterRepository(val mContext: Context) : BaseRepository(mContext) {
         return applicationDatabase.getUserDao().getCurrentUser()?.replicate<UserEntity, UserModel>()
     }
 
+    suspend fun forgetPassword(forgetPasswordModel: ForgetPasswordModel): String? {
+        return apiRequest {
+            loginApiController.forgotPassword(forgetPasswordModel)
+        }
+    }
+
+    suspend fun changePassword(changePasswordModel: ChangePasswordModel): String? {
+        return apiRequest {
+            loginApiController.changePassword(changePasswordModel)
+        }
+    }
 }
