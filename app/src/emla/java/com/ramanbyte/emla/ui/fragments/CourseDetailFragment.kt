@@ -8,28 +8,26 @@ import com.ramanbyte.aws_s3_android.accessor.AppS3Client
 import com.ramanbyte.base.BaseFragment
 import com.ramanbyte.databinding.FragmentCourseDetailBinding
 import com.ramanbyte.emla.adapters.ViewPagerAdapter
-import com.ramanbyte.emla.models.ChapterModel
 import com.ramanbyte.emla.models.CoursesModel
 import androidx.lifecycle.Observer
 import com.ramanbyte.emla.models.CourseSyllabusModel
+import com.ramanbyte.emla.view_model.CoursesDetailViewModel
 
-import com.ramanbyte.emla.view_model.CoursesViewModel
 import com.ramanbyte.utilities.*
 import kotlinx.android.synthetic.emla.fragment_course_detail.*
 
 /**
  * A simple [Fragment] subclass.
  */
-class CourseDetailFragment : BaseFragment<FragmentCourseDetailBinding, CoursesViewModel>() {
+class CourseDetailFragment : BaseFragment<FragmentCourseDetailBinding, CoursesDetailViewModel>() {
 
 
     private var courseModel: CoursesModel? = null
-    private var chapterModel: ChapterModel? = null
     private var menu: Menu? = null
 
     private var viewPagerAdapter: ViewPagerAdapter? = null
 
-    override val viewModelClass: Class<CoursesViewModel> = CoursesViewModel::class.java
+    override val viewModelClass: Class<CoursesDetailViewModel> = CoursesDetailViewModel::class.java
     override fun layoutId(): Int = R.layout.fragment_course_detail
 
     override fun initiate() {

@@ -5,8 +5,8 @@
     <data>
 
         <variable
-            name="coursesViewModel"
-            type="com.ramanbyte.emla.view_model.CoursesViewModel" />
+            name="coursesDetailViewModel"
+            type="com.ramanbyte.emla.view_model.CoursesDetailViewModel" />
     </data>
 
 
@@ -32,7 +32,7 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/ic_course_dummy"
                 android:scaleType="fitXY"
-                app:imageUrl='@{coursesViewModel.coursesModelLiveData.courseImageUrl}' />
+                app:imageUrl='@{coursesDetailViewModel.coursesModelLiveData.courseImageUrl}' />
         </androidx.cardview.widget.CardView>
 
         <androidx.constraintlayout.widget.Guideline
@@ -83,7 +83,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/dp_5"
-                            android:onClick="@{coursesViewModel::onHeaderClick}"
+                            android:onClick="@{coursesDetailViewModel::onHeaderClick}"
                             android:text="@string/course_syllabus"
                             android:textSize="@dimen/sp_16"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -114,7 +114,7 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/headerCourseSyllabus"
                             app:layout_scrollFlags="scroll|exitUntilCollapsed"
-                            app:setHtmlText="@{coursesViewModel.courseSyllabusModelLiveData.chapterHTML}" />
+                            app:setHtmlText="@{coursesDetailViewModel.courseSyllabusModelLiveData.chapterHTML}" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.cardview.widget.CardView>
@@ -140,7 +140,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/dp_5"
-                            android:onClick="@{coursesViewModel::onHeaderClick}"
+                            android:onClick="@{coursesDetailViewModel::onHeaderClick}"
                             android:text="@string/assessment_instruction"
                             android:textSize="@dimen/sp_16"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -167,7 +167,7 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/headerAssessmentInstruction"
-                            app:setHtmlText="@{coursesViewModel.courseSyllabusModelLiveData.instructionAssessment}" />
+                            app:setHtmlText="@{coursesDetailViewModel.courseSyllabusModelLiveData.instructionAssessment}" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -194,7 +194,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/dp_5"
-                            android:onClick="@{coursesViewModel::onHeaderClick}"
+                            android:onClick="@{coursesDetailViewModel::onHeaderClick}"
                             android:text="@string/what_i_ll_learn"
                             android:textSize="@dimen/sp_16"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -220,7 +220,7 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/headerWhatIWillLearn"
-                            app:setHtmlText="@{coursesViewModel.courseSyllabusModelLiveData.whtILern}" />
+                            app:setHtmlText="@{coursesDetailViewModel.courseSyllabusModelLiveData.whtILern}" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -248,7 +248,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/dp_5"
-                            android:onClick="@{coursesViewModel::onHeaderClick}"
+                            android:onClick="@{coursesDetailViewModel::onHeaderClick}"
                             android:text="@string/how_to_use"
                             android:textSize="@dimen/sp_16"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -276,7 +276,7 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/headerHowToUse"
-                            app:setHtmlText="@{coursesViewModel.courseSyllabusModelLiveData.hwToUse}" />
+                            app:setHtmlText="@{coursesDetailViewModel.courseSyllabusModelLiveData.hwToUse}" />
 
 
                     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,7 +9,7 @@ import androidx.lifecycle.Observer
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseFragment
 import com.ramanbyte.databinding.FragmentCourseSyllabusBinding
-import com.ramanbyte.emla.view_model.CoursesViewModel
+import com.ramanbyte.emla.view_model.CoursesDetailViewModel
 import com.ramanbyte.utilities.*
 
 
@@ -18,11 +18,11 @@ import com.ramanbyte.utilities.*
  * A simple [Fragment] subclass.
  */
 class CourseSyllabusFragment :
-    BaseFragment<FragmentCourseSyllabusBinding, CoursesViewModel>(true, true) {
+    BaseFragment<FragmentCourseSyllabusBinding, CoursesDetailViewModel>(useParent = true) {
 
     private var mContext: Context? = null
 
-    override val viewModelClass: Class<CoursesViewModel> = CoursesViewModel::class.java
+    override val viewModelClass: Class<CoursesDetailViewModel> = CoursesDetailViewModel::class.java
     override fun layoutId(): Int = R.layout.fragment_course_syllabus
 
     override fun initiate() {
@@ -43,8 +43,8 @@ class CourseSyllabusFragment :
 
         layoutBinding.apply {
             lifecycleOwner = this@CourseSyllabusFragment
-            coursesViewModel = viewModel
-            cardCourseLayout.coursesViewModel = viewModel
+            coursesDetailViewModel = viewModel
+            cardCourseLayout.coursesDetailViewModel = viewModel
 
             rvCourseSyllabus.settings.apply {
                 javaScriptEnabled = true
@@ -67,7 +67,7 @@ class CourseSyllabusFragment :
         }
 
 
-        layoutBinding.coursesViewModel?.apply {
+        viewModel?.apply {
 
 
             //getCoursesSyllabus()
