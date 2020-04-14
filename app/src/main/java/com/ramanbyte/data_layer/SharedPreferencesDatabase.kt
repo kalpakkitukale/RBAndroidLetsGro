@@ -16,6 +16,7 @@ object SharedPreferencesDatabase {
 
     val KEY_DEVICE_IMEI = "DEVICE_IMEI_NUMBER"
     val KEY_THEME = "prefs.theme"
+    val KEY_START_QUIZ_DATE_TIME = "START_DATE_TIME"
 
     private val prefEditor: SharedPreferences.Editor?
         get() {

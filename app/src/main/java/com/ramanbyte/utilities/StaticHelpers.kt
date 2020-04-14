@@ -45,6 +45,14 @@ val KEY_CROP_IMAGE_PATH = "cropImagePath"
 val KEY_CROP_IMAGE_SIZE = "cropImageSize"
 val KEY_APP_STORAGE_FOLDER = BindingUtils.string(R.string.app_name)
 
+const val KEY_RADIO = 1
+const val KEY_CHECKBOX = 2
+const val KEY_QUESTION_IN_GRID = 5
+const val KEY_QUESTION_START_POSITION = 0
+const val KEY_QUE_COUNT = "queCount"
+const val KEY_TOTAL_QUE_COUNT = "totalQueCount"
+const val keyQuestionId = "questionId"
+
 const val keyEmailId = "emailId"
 const val keyPassword = "password"
 

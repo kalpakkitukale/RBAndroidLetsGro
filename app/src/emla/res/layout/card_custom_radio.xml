@@ -4,9 +4,9 @@
 
     <data>
 
-      <!--  <variable
+        <variable
             name="showQuestionsViewModel"
-            type="com.ramanbyte.idbi.view_model.ShowQuestionsViewModel" />-->
+            type="com.ramanbyte.emla.view_model.ShowQuestionsViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -28,12 +28,12 @@
             android:layout_height="wrap_content"
             android:layout_gravity="start"
             android:button="@drawable/custom_radio"
+            android:gravity="start|center_vertical"
             android:layoutDirection="rtl"
-            android:textDirection="ltr"
             android:padding="@dimen/dp_5"
             android:textAlignment="textStart"
-            android:gravity="start|center_vertical"
-                android:textColor="@color/text_color_selector"
+            android:textColor="@color/text_color_selector"
+            android:textDirection="ltr"
             android:textSize="@dimen/sp_14"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

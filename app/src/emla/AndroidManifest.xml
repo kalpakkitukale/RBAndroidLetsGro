@@ -29,7 +29,8 @@
         <activity
             android:name=".emla.ui.activities.LoginActivity"
             android:windowSoftInputMode="adjustResize|stateHidden" />
-        <activity android:name=".emla.ui.activities.ContainerActivity" />
+        <activity android:name=".emla.ui.activities.ContainerActivity">
+        </activity>
     </application>
 
 </manifest>
