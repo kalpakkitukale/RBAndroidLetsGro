@@ -6,4 +6,8 @@
     <string name="close">Close</string>
     <string name="search">search</string>
     <string name="register">Register</string>
+    <string name="old_password">Old password</string>
+    <string name="new_password">New Password</string>
+    <string name="repeat_new_password">Repeat New Password</string>
+    <string name="change_password">Change Password</string>
 </resources>

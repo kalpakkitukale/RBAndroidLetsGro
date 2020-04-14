@@ -49,6 +49,13 @@
         <item name="android:textColorHint">@color/textHintColor</item>
     </style>
 
+    <style name="TextInputLayoutWithoutBorder" parent="Widget.MaterialComponents.TextInputLayout.FilledBox.Dense">
+        <item name="android:textColorHint">@color/textHintColor</item>
+        <item name="hintTextColor">@color/textHintColor</item>
+        <item name="boxStrokeWidth">0.1dp</item>
+        <item name="boxStrokeWidthFocused">1dp</item>
+    </style>
+
     <style name="EditTextStyleIntoTilRegular">
         <item name="android:textAppearance">@style/AppTheme.Font</item>
         <item name="android:padding">@dimen/dp_10</item>
