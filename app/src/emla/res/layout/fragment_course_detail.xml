@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+        <variable
+            name="coursesModel"
+            type="com.ramanbyte.emla.models.CoursesModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".ui.activities.CourseDetailActivity">
+
+        <!--<include
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            layout="@layout/app_bar_layout"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:id="@+id/appBar"/>-->
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/appBar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_40"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayoutCourse"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabGravity="fill"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/appBar"
+            app:tabIconTint="@color/view_pager_selector"
+            app:tabIndicatorColor="@color/view_pager_selector"
+            app:tabMode="fixed" />
+
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewPagerCourse"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tabLayoutCourse" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

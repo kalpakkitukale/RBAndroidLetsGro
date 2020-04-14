@@ -108,6 +108,5 @@ class CustomBindingAdapters {
         fun setHtmlText(webView: WebView, htmlText: String?) {
             webView.loadData(htmlText,"text/html", "utf-8")
         }
-
     }
 }

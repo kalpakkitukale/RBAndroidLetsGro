@@ -4,8 +4,10 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
+import android.util.DisplayMetrics
 import android.view.View
 import android.view.Window
+import androidx.fragment.app.FragmentActivity
 import com.ramanbyte.R
 import java.lang.reflect.InvocationTargetException
 
@@ -35,8 +37,9 @@ const val upperRegex: String = ".*[A-Z].*"
 const val lowerRegex: String = ".*[a-z].*"
 const val specialRegex: String = ".*[!\"#\$%&'()*+,-./:;<=>?@[\\^]_`{|}~].*"
 const val KEY_EMAIL = "email"
+const val KEY_OLD_PASSWORD = "oldPassword"
 const val KEY_NEW_PASSWORD = "newPassword"
-const val KEY_CONFIRM_NEW_PASSWORD = "confirmPassword"
+
 const val SELECT = "-Select-"
 
 const val KEY_IS_FIXED_ASPECT_RATIO = "isFixedAspectRatio"
@@ -270,6 +273,14 @@ fun getDeviceModelName(): String {
 
 fun getDeviceVersion(): String {
     return BindingUtils.string(R.string.android) + " " + Build.VERSION.RELEASE
+}
+
+fun String?.checkValues(): String = if (isNullOrEmpty()) "NA" else this!!
+
+fun FragmentActivity.displayMetrics(): DisplayMetrics {
+    val displayMetrics = DisplayMetrics()
+    windowManager.defaultDisplay.getMetrics(displayMetrics)
+    return displayMetrics
 }
 
 /*Topic keys*/

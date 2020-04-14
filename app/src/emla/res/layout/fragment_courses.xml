@@ -26,13 +26,11 @@
 
         <include
             android:id="@+id/noInternet"
-            layout="@layout/no_internet"
-            android:visibility="gone"/>
+            layout="@layout/no_internet"/>
 
         <include
             android:id="@+id/somethingWentWrong"
-            layout="@layout/something_went_wrong"
-            android:visibility="gone" />
+            layout="@layout/something_went_wrong" />
 
         <include
             android:id="@+id/noData"
@@ -40,8 +38,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:visibility="gone"/>
+            app:layout_constraintTop_toTopOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

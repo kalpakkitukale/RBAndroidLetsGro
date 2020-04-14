@@ -4,9 +4,7 @@ import com.amazonaws.services.cognitoidentityprovider.model.ForgotPasswordReques
 import com.ramanbyte.emla.models.CoursesModel
 import com.ramanbyte.emla.models.QuestionAndAnswerModel
 import com.ramanbyte.emla.models.UserModel
-import com.ramanbyte.emla.models.request.CoursesRequest
-import com.ramanbyte.emla.models.request.LoginRequest
-import com.ramanbyte.emla.models.request.PledgeStatusRequest
+import com.ramanbyte.emla.models.request.*
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -21,7 +19,10 @@ interface LoginApiController {
     suspend fun doLogin(@Body loginRequest: LoginRequest): Response<UserModel>
 
     @POST("ForgetPassword")
-    suspend fun forgotPassword(@Body forgotPasswordRequest: ForgotPasswordRequest): Response<String>
+    suspend fun forgotPassword(@Body forgetPasswordModel: ForgetPasswordModel): Response<String>
+
+    @POST("ChangePassword")
+    suspend fun changePassword(@Body changePasswordModel: ChangePasswordModel):Response<String>
 
     @PUT("UpdateStatus")
     suspend fun updatePledgeStatus(@Body pledgeStatusRequest: PledgeStatusRequest): Response<Int>
