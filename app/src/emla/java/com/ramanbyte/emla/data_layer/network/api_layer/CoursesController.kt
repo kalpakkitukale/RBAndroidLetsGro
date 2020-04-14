@@ -1,5 +1,6 @@
 package com.ramanbyte.emla.data_layer.network.api_layer
 
+import com.ramanbyte.emla.models.CourseSyllabusModel
 import com.ramanbyte.emla.models.CoursesModel
 import com.ramanbyte.emla.models.request.CoursesRequest
 import retrofit2.Response
@@ -16,6 +17,4 @@ interface CoursesController {
     @GET("GetCourseInfoWthihtml/{CourseId}/{userId}")
     suspend fun getCoursesSyllabus(@Path("CourseId") courseId: Int, @Path("userId") userId : Int): Response<CourseSyllabusModel>
 
-    @POST("getCourseListsStudent")
-    suspend fun getCourses(@Body coursesRequest: CoursesRequest): Response<List<CoursesModel>>
 }
