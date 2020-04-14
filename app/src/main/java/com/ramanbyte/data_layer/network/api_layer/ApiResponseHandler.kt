@@ -2,15 +2,18 @@ package com.ramanbyte.data_layer.network.api_layer
 
 import com.google.gson.JsonSyntaxException
 import com.ramanbyte.BaseAppController
-import com.ramanbyte.placement.data_layer.network.exception.ApiException
-import com.ramanbyte.placement.data_layer.network.exception.NoDataException
-import com.ramanbyte.placement.data_layer.network.exception.NoInternetException
+import com.ramanbyte.emla.data_layer.network.exception.ApiException
+import com.ramanbyte.emla.data_layer.network.exception.NoDataException
+import com.ramanbyte.emla.data_layer.network.exception.NoInternetException
 import com.ramanbyte.utilities.KEY_NO_INTERNET_ERROR
 import com.ramanbyte.utilities.KEY_SOMETHING_WENT_WRONG_ERROR
 import org.json.JSONException
 import retrofit2.Response
 import java.net.SocketTimeoutException
-
+/**
+ * @author Vinay Kumbhar <vinay.pkumbhar@gmail.com>
+ * @since 13-04-2020
+ */
 abstract class ApiResponseHandler {
 
     @Throws(

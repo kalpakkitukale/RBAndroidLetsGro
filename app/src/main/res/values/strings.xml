@@ -1,6 +1,19 @@
 <resources>
     <string name="app_name">eMLA</string>
 
+    <string name="android">Android</string>
+    <string name="alert">Alert</string>
+    <string name="strOk">OK</string>
+    <string name="strCancel">Cancel</string>
+    <string name="str_loading">Loading…</string>
+    <string name="try_again_">Try Again</string>
+
+    <string name="please_select_media">Please select media</string>
+    <string name="str_select_from">Select from</string>
+    <string name="strCamera">Camera</string>
+    <string name="strGallary">Gallary</string>
+    <string name="strRemovePhoto">Remove photo</string>
+    <string name="strDocuments">Documents</string>
     <string name="reset">Reset</string>
     <string name="crop">Crop</string>
     <string name="close">Close</string>

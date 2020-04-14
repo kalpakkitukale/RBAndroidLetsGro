@@ -4,6 +4,7 @@ import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
 import com.google.gson.GsonBuilder
 import com.ramanbyte.emla.data_layer.network.init.NetworkConnectionInterceptor
+import com.ramanbyte.emla.view_model.factory.ViewModelFactory
 import com.ramanbyte.emla.data_layer.room.ApplicationDatabase
 import com.ramanbyte.utilities.AppLog
 import okhttp3.OkHttpClient
@@ -52,10 +53,12 @@ class AppController : BaseAppController(), KodeinAware {
         }
        /* bind() from singleton { CompanyDatabaseRepository(this@AppController) }
         bind() from singleton { OfficeRepository(this@AppController) }*/
+
+        bind() from singleton { ViewModelFactory(instance()) }
     }
     override fun onCreate() {
         super.onCreate()
-        getUpFireBaseRemoteConfig()
+        //getUpFireBaseRemoteConfig()
 
     }
 

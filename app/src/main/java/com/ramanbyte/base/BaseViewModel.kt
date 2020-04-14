@@ -21,8 +21,8 @@ import org.kodein.di.android.kodein
 import org.kodein.di.generic.kcontext
 
 /**
- * @author Vinay Kumbhar <vinay.k@ramanbyte.com>
- * @since 27/02/2020
+ * @author Vinay Kumbhar <vinay.pkumbhar@gmail.com>
+ * @since 13-04-2020
  */
 abstract class BaseViewModel(
     mContext: Context? = BaseAppController.applicationInstance

@@ -5,7 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.ramanbyte.placement.data_layer.room.data_converter.JsonConverter
+import com.ramanbyte.emla.data_layer.room.data_converter.JsonConverter
 
 /**
  * @AddedBy Vinay Kumbhar <vinay.k@ramanbyte.com>
@@ -13,11 +13,10 @@ import com.ramanbyte.placement.data_layer.room.data_converter.JsonConverter
  */
 
 
-@Database(
+/*@Database(
     entities = [LogInResponseModel::class] ,
     version = 1
-
-)
+)*/
 @TypeConverters(JsonConverter::class)
 abstract class ApplicationDatabase : RoomDatabase() {
 
@@ -47,6 +46,5 @@ abstract class ApplicationDatabase : RoomDatabase() {
         /*
         * Initialization Complete
         * */
-
     }
 }

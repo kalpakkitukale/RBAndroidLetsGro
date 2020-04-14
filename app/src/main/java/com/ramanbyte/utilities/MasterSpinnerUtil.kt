@@ -6,9 +6,13 @@ import android.widget.Spinner
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import com.ramanbyte.placement.adapters.SpinnerAdapter
+import com.ramanbyte.emla.adapters.SpinnerAdapter
+import com.ramanbyte.models.SpinnerModel
 
-
+/**
+ * @addedBy Vinay Kumbhar <vinay.pkumbhar@gmail.com>
+ * @since 13-04-2020
+ */
 class MasterSpinnerUtil(
     private val mContext: Context,
     private val lifeCycleOwner: LifecycleOwner
@@ -142,7 +146,7 @@ class MasterSpinnerUtil(
         dropDownList: ArrayList<SpinnerModel>
     ) {
 
-        autoCompleteTextView.setAdapter(CustomAutocompleteAdapter.get(mContext, dropDownList))
+        //autoCompleteTextView.setAdapter(CustomAutocompleteAdapter.get(mContext, dropDownList))
 
     }
 

@@ -6,8 +6,8 @@ import android.telephony.TelephonyManager
 import com.ramanbyte.BaseAppController
 
 /**
- * @AddedBy Vinay Kumbhar <vinay.k@ramanbyte.com>
- * @since 26/02/2020
+ * @author Vinay Kumbhar <vinay.pkumbhar@gmail.com>
+ * @since 13-04-2020
  */
 object NetworkConnectivity {
 
