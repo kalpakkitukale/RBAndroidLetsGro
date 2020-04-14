@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="coursesViewModel"
+            type="com.ramanbyte.idbi.view_model.CoursesViewModel" />
+
+    </data>
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardElevation="2dp"
+        app:layout_constraintTop_toBottomOf="@+id/guideline">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/verticalGuideLine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.50" />
+
+
+            <TextView
+                android:id="@+id/headerCourseInfo"
+                style="@style/TextViewMediumBlackOnWhite"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_5"
+                android:onClick="@{coursesViewModel::onHeaderClick}"
+                android:text="@string/course_information"
+                android:textSize="@dimen/sp_16"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imgViewCourseInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/dp_8"
+                android:src="@drawable/ic_down_arrow"
+                app:layout_constraintBottom_toBottomOf="@+id/headerCourseInfo"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/headerCourseInfo" />
+
+            <TextView
+                android:id="@+id/labelLength"
+                style="@style/TextViewMediumBlackOnWhite"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_10"
+                android:padding="@dimen/dp_5"
+                android:text="@string/length"
+                android:textSize="@dimen/sp_12"
+                app:layout_constraintBottom_toBottomOf="@id/txtViewLength"
+                app:layout_constraintEnd_toEndOf="@+id/verticalGuideLine"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/txtViewLength" />
+
+            <TextView
+                android:id="@+id/txtViewLength"
+                style="@style/TextViewLightBlackOnWhite"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/dp_5"
+                android:text='@{coursesViewModel.courseSyllabusModel.length +" ("+ coursesViewModel.courseSyllabusModel.durationType+")"}'
+                android:textSize="@dimen/sp_12"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/verticalGuideLine"
+                app:layout_constraintTop_toBottomOf="@+id/headerCourseInfo" />
+
+            <View
+                android:id="@+id/lengthView"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/sp_1"
+                android:visibility="gone"
+                android:background="@color/colorLightGray"
+                app:layout_constraintTop_toBottomOf="@+id/txtViewLength" />
+
+
+            <TextView
+                android:id="@+id/labelEfforts"
+                style="@style/TextViewMediumBlackOnWhite"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_10"
+                android:padding="@dimen/dp_5"
+                android:text="@string/efforts"
+                android:textSize="@dimen/sp_12"
+                app:layout_constraintBottom_toBottomOf="@+id/txtViewEfforts"
+                app:layout_constraintEnd_toEndOf="@+id/verticalGuideLine"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/txtViewEfforts" />
+
+            <TextView
+                android:id="@+id/txtViewEfforts"
+                style="@style/TextViewLightBlackOnWhite"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/dp_5"
+                android:text="@{coursesViewModel.courseSyllabusModel.efforts}"
+                android:textSize="@dimen/sp_12"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/verticalGuideLine"
+                app:layout_constraintTop_toBottomOf="@+id/lengthView" />
+
+            <View
+                android:id="@+id/effortsView"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/sp_1"
+                android:visibility="gone"
+                android:background="@color/colorLightGray"
+                app:layout_constraintTop_toBottomOf="@+id/txtViewEfforts" />
+
+            <TextView
+                android:id="@+id/labelSpecialization"
+                style="@style/TextViewMediumBlackOnWhite"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_10"
+                android:padding="@dimen/dp_5"
+                android:text="@string/specialization"
+                android:textSize="@dimen/sp_12"
+                app:layout_constraintBottom_toBottomOf="@+id/txtViewSpecialization"
+                app:layout_constraintEnd_toEndOf="@+id/verticalGuideLine"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/txtViewSpecialization" />
+
+            <TextView
+                android:id="@+id/txtViewSpecialization"
+                style="@style/TextViewLightBlackOnWhite"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/dp_5"
+                android:text="@{coursesViewModel.courseSyllabusModel.specialization}"
+                android:textSize="@dimen/sp_12"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/verticalGuideLine"
+                app:layout_constraintTop_toBottomOf="@+id/effortsView" />
+
+            <View
+                android:id="@+id/specializationView"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/sp_1"
+                android:visibility="gone"
+                android:background="@color/colorLightGray"
+                app:layout_constraintTop_toBottomOf="@+id/txtViewSpecialization" />
+
+            <TextView
+                android:id="@+id/labelLevel"
+                style="@style/TextViewMediumBlackOnWhite"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_10"
+                android:padding="@dimen/dp_5"
+                android:text="@string/level"
+                android:textSize="@dimen/sp_12"
+                app:layout_constraintBottom_toBottomOf="@+id/txtViewLevel"
+                app:layout_constraintEnd_toEndOf="@+id/verticalGuideLine"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/txtViewLevel" />
+
+            <TextView
+                android:id="@+id/txtViewLevel"
+                style="@style/TextViewLightBlackOnWhite"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/dp_5"
+                android:text="@{coursesViewModel.courseSyllabusModel.level}"
+                android:textSize="@dimen/sp_12"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/verticalGuideLine"
+                app:layout_constraintTop_toBottomOf="@+id/specializationView" />
+
+            <View
+                android:id="@+id/LevelView"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/sp_1"
+                android:visibility="gone"
+                android:background="@color/colorLightGray"
+                app:layout_constraintTop_toBottomOf="@+id/txtViewLevel" />
+
+            <TextView
+                android:id="@+id/labelLanguage"
+                style="@style/TextViewMediumBlackOnWhite"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_10"
+                android:padding="@dimen/dp_5"
+                android:text="@string/language"
+                android:textSize="@dimen/sp_12"
+                app:layout_constraintBottom_toBottomOf="@+id/txtViewLanguage"
+                app:layout_constraintEnd_toEndOf="@+id/verticalGuideLine"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/txtViewLanguage" />
+
+            <TextView
+                android:id="@+id/txtViewLanguage"
+                style="@style/TextViewLightBlackOnWhite"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/dp_5"
+                android:text="@{coursesViewModel.courseSyllabusModel.language}"
+                android:textSize="@dimen/sp_12"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/verticalGuideLine"
+                app:layout_constraintTop_toBottomOf="@+id/LevelView" />
+
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/courseInfoGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:constraint_referenced_ids="labelLanguage,txtViewLength,txtViewLanguage,labelLevel,labelSpecialization,labelLength,txtViewEfforts,txtViewSpecialization,labelEfforts,txtViewLevel" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>

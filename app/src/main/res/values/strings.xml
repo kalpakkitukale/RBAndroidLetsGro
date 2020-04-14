@@ -22,5 +22,7 @@
     <string name="old_password">Old password</string>
     <string name="new_password">New Password</string>
     <string name="repeat_new_password">Repeat New Password</string>
+    <string name="repeat_password">Repeat Password</string>
     <string name="change_password">Change Password</string>
+    <string name="profile_first_message">Please complete your profile to continue. \n This will help to suggest best suitable course for you.</string>
 </resources>
