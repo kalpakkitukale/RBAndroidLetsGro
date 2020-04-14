@@ -58,16 +58,15 @@ class MasterRepository(val mContext: Context) : BaseRepository(mContext) {
         return applicationDatabase.getUserDao().getCurrentUser()?.replicate<UserEntity, UserModel>()
     }
 
-
     suspend fun forgetPassword(forgetPasswordModel: ForgetPasswordModel): String? {
         return apiRequest {
-            eMlaApiController.forgotPassword(forgetPasswordModel)
+            loginApiController.forgotPassword(forgetPasswordModel)
         }
     }
 
     suspend fun changePassword(changePasswordModel: ChangePasswordModel): String? {
         return apiRequest {
-            eMlaApiController.changePassword(changePasswordModel)
+            loginApiController.changePassword(changePasswordModel)
         }
     }
 }

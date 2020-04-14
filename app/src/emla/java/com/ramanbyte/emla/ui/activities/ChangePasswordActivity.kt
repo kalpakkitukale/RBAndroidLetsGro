@@ -17,7 +17,9 @@ class ChangePasswordActivity : BaseActivity<ChangePasswordBinding, ChangePasswor
 ) {
     override val viewModelClass: Class<ChangePasswordViewModel> =
         ChangePasswordViewModel::class.java
+
     override fun layoutId(): Int = R.layout.change_password
+
     companion object {
 
         fun intent(activity: Activity): Intent {
@@ -25,6 +27,7 @@ class ChangePasswordActivity : BaseActivity<ChangePasswordBinding, ChangePasswor
             return Intent(activity, ChangePasswordActivity::class.java)
         }
     }
+
     override fun initiate() {
         layoutBinding.apply {
             lifecycleOwner = this@ChangePasswordActivity
@@ -33,5 +36,15 @@ class ChangePasswordActivity : BaseActivity<ChangePasswordBinding, ChangePasswor
 
         ProgressLoader(this, viewModel)
         AlertDialog(this, viewModel)
+        viewModel?.apply {
+            isChangePasswordSuccessfully.observe(this@ChangePasswordActivity, Observer {
+                if (it != null) {
+                    if (it == true) {
+                        isEmailSendSuccessfully.value = null
+                        finish()
+                    }
+                }
+            })
+        }
     }
 }

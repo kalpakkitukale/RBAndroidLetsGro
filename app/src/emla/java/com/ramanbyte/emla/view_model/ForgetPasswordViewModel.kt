@@ -55,7 +55,7 @@ class ForgetPasswordViewModel(var mContext: Context) : BaseViewModel(mContext) {
 
         CoroutineUtils.main {
             try {
-                var data = masterRepository.forgetPassword(forgotPasswordModelLiveData.value!!)
+                val data = masterRepository.forgetPassword(forgotPasswordModelLiveData.value!!)
 
                 isAlertDialogShown.postValue(true)
                 setAlertDialogResourceModelMutableLiveData(data!!,
@@ -74,8 +74,9 @@ class ForgetPasswordViewModel(var mContext: Context) : BaseViewModel(mContext) {
                 AppLog.errorLog(e.message, e)
 
                 setAlertDialogResourceModelMutableLiveData(
-                    BindingUtils.string(R.string.some_thing_went_wrong),
-                    BindingUtils.drawable(R.drawable.ic_something_went_wrong
+                    e.message.toString(),
+                    BindingUtils.drawable(
+                        R.drawable.ic_something_went_wrong
                     )!!,
                     true,
                     BindingUtils.string(R.string.strOk), {
@@ -86,6 +87,20 @@ class ForgetPasswordViewModel(var mContext: Context) : BaseViewModel(mContext) {
             } catch (e: NoInternetException) {
                 e.printStackTrace()
                 AppLog.errorLog(e.message, e)
+
+                setAlertDialogResourceModelMutableLiveData(
+                    BindingUtils.string(R.string.no_internet_message),
+                    BindingUtils.drawable(R.drawable.ic_no_internet)!!,
+                    true,
+                    BindingUtils.string(R.string.tryAgain), {
+                        isAlertDialogShown.postValue(false)
+                        forgotPassword(view)
+                    },
+                    BindingUtils.string(R.string.no), {
+                        isAlertDialogShown.postValue(false)
+                    }
+                )
+                isAlertDialogShown.postValue(true)
             } catch (e: NoDataException) {
                 e.printStackTrace()
                 AppLog.errorLog(e.message, e)

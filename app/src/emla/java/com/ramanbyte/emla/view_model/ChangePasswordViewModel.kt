@@ -13,6 +13,7 @@ import com.ramanbyte.emla.data_layer.network.exception.ApiException
 import com.ramanbyte.emla.data_layer.network.exception.NoDataException
 import com.ramanbyte.emla.data_layer.network.exception.NoInternetException
 import com.ramanbyte.emla.data_layer.repositories.MasterRepository
+import com.ramanbyte.emla.data_layer.room.ApplicationDatabase
 import com.ramanbyte.utilities.*
 import com.ramanbyte.validation.ValidationFlags
 import org.kodein.di.generic.instance
@@ -24,6 +25,10 @@ class ChangePasswordViewModel(var mContext: Context) : BaseViewModel(mContext) {
         value = ChangePasswordModel()
     }
     private val masterRepository: MasterRepository by instance()
+    private val applicationDatabase: ApplicationDatabase by instance()
+    var isChangePasswordSuccessfully = MutableLiveData<Boolean>().apply {
+        value = null
+    }
     var changeValidator =
         ObservableValidator(changePasswordModelLiveData.value!!, BR::class.java).apply {
 
@@ -105,6 +110,8 @@ class ChangePasswordViewModel(var mContext: Context) : BaseViewModel(mContext) {
         CoroutineUtils.main {
             if (changeValidator.validateAll()) {
                 try {
+                    changePasswordModelLiveData.value?.userId = 2
+                    //applicationDatabase?.getUserDao()?.getCurrentUser()?.userId!!
                     val response =
                         masterRepository.changePassword(changePasswordModelLiveData.value!!)
 
@@ -114,7 +121,7 @@ class ChangePasswordViewModel(var mContext: Context) : BaseViewModel(mContext) {
                         true,
                         BindingUtils.string(R.string.strOk),
                         {
-                            //isEmailSendSuccessfully.value = true
+                            isChangePasswordSuccessfully.value = true
                             isAlertDialogShown.value = false
                         },
                         "",
@@ -125,6 +132,19 @@ class ChangePasswordViewModel(var mContext: Context) : BaseViewModel(mContext) {
                 } catch (e: NoInternetException) {
                     e.printStackTrace()
                     AppLog.errorLog(e.message, e)
+                    setAlertDialogResourceModelMutableLiveData(
+                        BindingUtils.string(R.string.no_internet_message),
+                        BindingUtils.drawable(R.drawable.ic_no_internet)!!,
+                        true,
+                        BindingUtils.string(R.string.tryAgain), {
+                            isAlertDialogShown.postValue(false)
+                            changePasswordClick(view)
+                        },
+                        BindingUtils.string(R.string.no), {
+                            isAlertDialogShown.postValue(false)
+                        }
+                    )
+                    isAlertDialogShown.postValue(true)
                 } catch (e: NoDataException) {
                     e.printStackTrace()
                     AppLog.errorLog(e.message, e)
