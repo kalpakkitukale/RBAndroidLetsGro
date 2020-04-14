@@ -86,7 +86,7 @@
     <string name="attempts_Allowed">Attempts Allowed</string>
     <string name="grading_method">Grading Method</string>
     <string name="no_more_attempts">No more attempts are allowed</string>
-    <string name="confirmation_method">I hereby affirm that I will not be involved in any authorized and/or illegal activities in the course i will be undertaking.I will maintain the utmost honesty and integrity while taking assessments associated with the learning content.</string>
+    <string name="confirmation_method">I hereby affirm that I will not be involved in any unauthorized and/or illegal activities in the course i will be undertaking.I will maintain the utmost honesty and integrity while taking assessments associated with the learning content.</string>
     <string name="please_agree_the_instruction">Please affirm to the pledge in order to proceed!</string>
     <string name="not_attempted_any_question">Ooh! It seems like you have not attempted any of question in the test.</string>
     <string name="not_valid_user">You are not allow to login with this credentials</string>

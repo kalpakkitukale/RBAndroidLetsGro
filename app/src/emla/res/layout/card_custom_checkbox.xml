@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="showQuestionsViewModel"
+            type="com.ramanbyte.emla.view_model.ShowQuestionsViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/mainConstraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <CheckBox
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:button="@drawable/custom_checkbox"
+            android:textColor="@color/text_color_selector"
+            android:layoutDirection="rtl"
+            android:text="The test item a"
+            android:textAlignment="textStart"
+            android:textSize="@dimen/sp_14"
+            android:id="@+id/cbAnswer"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </RelativeLayout>
+</layout>

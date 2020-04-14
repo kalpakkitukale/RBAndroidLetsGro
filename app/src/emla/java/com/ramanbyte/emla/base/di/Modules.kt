@@ -1,5 +1,7 @@
 package com.ramanbyte.emla.base.di
 
+import com.ramanbyte.emla.view_model.factory.ViewModelFactory
+import com.ramanbyte.utilities.DI_ACTIVITY_CONTEXT
 import com.ramanbyte.utilities.DI_AUTH_MODULE
 import org.kodein.di.Kodein
 import org.kodein.di.generic.bind

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="showQuestionsViewModel"
+            type="com.ramanbyte.emla.view_model.ShowQuestionsViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/mainConstraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!--<RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:chapterId="@+chapterId/rgAnswer"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">-->
+
+        <RadioButton
+            android:id="@+id/rbAnswer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:button="@drawable/custom_radio"
+            android:gravity="start|center_vertical"
+            android:layoutDirection="rtl"
+            android:padding="@dimen/dp_5"
+            android:textAlignment="textStart"
+            android:textColor="@color/text_color_selector"
+            android:textDirection="ltr"
+            android:textSize="@dimen/sp_14"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!--</RadioGroup>-->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

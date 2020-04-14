@@ -5,7 +5,9 @@ import androidx.lifecycle.ViewModel
 import com.ramanbyte.emla.view_model.ChangePasswordViewModel
 import com.ramanbyte.emla.view_model.ContainerViewModel
 import com.ramanbyte.emla.view_model.ForgetPasswordViewModel
+import com.ramanbyte.emla.view_model.LauncherViewModel
 import com.ramanbyte.emla.view_model.LoginViewModel
+import com.ramanbyte.emla.view_model.ShowQuestionsViewModel
 import com.ramanbyte.view_model.factory.BaseViewModelFactory
 
 /**
@@ -18,6 +20,9 @@ class ViewModelFactory(private val mContext: Context) : BaseViewModelFactory(mCo
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
 
         return when {
+            modelClass.isAssignableFrom(LauncherViewModel::class.java) -> {
+                return LauncherViewModel(mContext) as T
+            }
             modelClass.isAssignableFrom(LoginViewModel::class.java) -> {
                 return LoginViewModel(mContext) as T
             }
@@ -29,6 +34,9 @@ class ViewModelFactory(private val mContext: Context) : BaseViewModelFactory(mCo
             }
             modelClass.isAssignableFrom(ForgetPasswordViewModel::class.java) -> {
                 return ForgetPasswordViewModel(mContext) as T
+            }
+            modelClass.isAssignableFrom(ShowQuestionsViewModel::class.java) -> {
+                return ShowQuestionsViewModel(mContext) as T
             }
             else -> super.create(modelClass)
         }

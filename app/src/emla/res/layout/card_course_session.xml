@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!--<data>
+
+        <variable
+            name="chapterModel"
+            type="com.ramanbyte.idbi.model.ChapterModel" />
+
+        <variable
+            name="viewPosition"
+            type="Integer" />
+
+        <variable
+            name="coursesViewModel"
+            type="com.ramanbyte.idbi.view_model.CoursesViewModel" />
+    </data>-->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cardMain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp_3">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardLayoutMain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/colorTransparent"
+            app:cardCornerRadius="@dimen/dp_5"
+            app:cardElevation="2dp"
+            app:cardUseCompatPadding="true"
+            app:contentPadding="@dimen/dp_5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <!--android:onClick="@{() -> coursesViewModel.onCourseCardClick(chapterModel)}"-->
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/IvVideo"
+                    style="@style/TextViewBoldBlackOnWhite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_5"
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:textSize="@dimen/sp_14"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+                <!--android:text="@{chapterModel.index}"-->
+
+                <TextView
+                    android:id="@+id/tvTopicName"
+                    style="@style/TextViewBoldBlackOnWhite"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_10"
+                    android:layout_marginEnd="@dimen/dp_10"
+                    android:textSize="@dimen/sp_14"
+                    app:layout_constraintBottom_toBottomOf="@+id/IvVideo"
+                    app:layout_constraintEnd_toStartOf="@+id/IvProgress"
+                    app:layout_constraintStart_toEndOf="@+id/IvVideo"
+                    app:layout_constraintTop_toTopOf="@+id/IvVideo" />
+                <!--android:text="@{chapterModel.chapterName}"-->
+                <TextView
+                    android:id="@+id/IvProgress"
+                    style="@style/TextViewRegularBlackOnWhite"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/sp_12"
+                    app:layout_constraintEnd_toStartOf="@+id/IvDownload"
+                    app:layout_constraintTop_toTopOf="@+id/tvTopicName" />
+                <!--android:text="@{String.valueOf(chapterModel.totalSectionCount)}"-->
+                <ImageView
+                    android:id="@+id/IvDownload"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/dp_8"
+                    android:src="@drawable/ic_download"
+                    app:layout_constraintBottom_toBottomOf="@+id/IvProgress"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/IvProgress" />
+                <!--android:onClick="@{()->coursesViewModel.onChapterDownloadClick(IvDownload, chapterModel)}"
+                android:visibility="@{chapterModel.downloadVisibility}"-->
+                <ImageView
+                    android:id="@+id/ivStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/dp_8"
+                    android:src="@drawable/ic_tick_checked"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tvCourseDescription" />
+
+                <TextView
+                    android:id="@+id/tvCourseDescription"
+                    style="@style/TextViewRegularBlackOnWhite"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_5"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:maxLines="4"
+                    android:textSize="@dimen/sp_12"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/tvTopicName"
+                    app:layout_constraintTop_toBottomOf="@+id/tvTopicName" />
+                <!--android:text="@{chapterModel.description}"-->
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/viewDisable"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@drawable/transparent_gray_background"
+            android:elevation="@dimen/dp_2"
+            android:orientation="vertical"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/cardLayoutMain"
+            app:layout_constraintEnd_toEndOf="@id/cardLayoutMain"
+            app:layout_constraintStart_toStartOf="@id/cardLayoutMain"
+            app:layout_constraintTop_toTopOf="@id/cardLayoutMain">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                style="@style/TextViewBoldBlackOnWhite"
+                android:layout_width="@dimen/dp_40"
+                android:layout_height="@dimen/dp_40"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/ic_lock"
+                android:elevation="5dp"
+                android:gravity="center_vertical"
+                android:padding="@dimen/dp_16"
+                android:text="@string/lock"
+                android:textSize="@dimen/sp_16"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
