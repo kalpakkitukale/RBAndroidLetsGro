@@ -1,17 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <data>
+
+        <variable
+            name="chaptersSectionViewModel"
+            type="com.ramanbyte.emla.view_model.ChaptersSectionViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/containerMain"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.fragments.ChaptersTopicListFragment">
+        tools:context=".ui.activities.ChapterContentActivity">
 
-        <!-- TODO: Update blank fragment layout -->
-        <TextView
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvSectionList"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/hello_blank_fragment" />
+            android:layout_height="0dp"
+            android:layout_margin="@dimen/dp_8"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toTopOf="@+id/btnAppearFormativeTest"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    </FrameLayout>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnAppearFormativeTest"
+            style="@style/CustomCapsuleButtonGradientBgWhiteText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_5"
+            android:onClick="@{chaptersSectionViewModel::takeFormativeTest}"
+            android:text="@string/appear_formative"
+            android:textAllCaps="true"
+            android:textSize="@dimen/sp_14"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <include
+            android:id="@+id/noInternet"
+            layout="@layout/no_internet"
+            android:visibility="gone" />
+
+        <include
+            android:id="@+id/somethingWentWrong"
+            layout="@layout/something_went_wrong"
+            android:visibility="gone" />
+
+        <include
+            android:id="@+id/noData"
+            layout="@layout/no_data"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.Group
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="@{chaptersSectionViewModel.viewVisibilityLiveData}"
+            app:constraint_referenced_ids="rvLessonContent,btnAppearFormativeTest" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

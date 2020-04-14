@@ -6,15 +6,15 @@
 
         <variable
             name="chapterModel"
-            type="com.ramanbyte.idbi.model.ChapterModel" />
+            type="com.ramanbyte.emla.models.ChaptersModel" />
 
         <variable
             name="viewPosition"
             type="Integer" />
 
         <variable
-            name="coursesViewModel"
-            type="com.ramanbyte.idbi.view_model.CoursesViewModel" />
+            name="chaptersViewModel"
+            type="com.ramanbyte.emla.view_model.ChaptersViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -27,7 +27,7 @@
             android:id="@+id/cardLayoutMain"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="@{() -> coursesViewModel.onCourseCardClick(chapterModel)}"
+            android:onClick="@{() -> chaptersViewModel.onCardClicked(chapterModel)}"
             app:cardBackgroundColor="@color/colorTransparent"
             app:cardCornerRadius="@dimen/dp_5"
             app:cardElevation="2dp"
@@ -81,7 +81,7 @@
                     android:id="@+id/IvDownload"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:onClick="@{()->coursesViewModel.onChapterDownloadClick(IvDownload, chapterModel)}"
+                    android:onClick="@{()->chaptersViewModel.onDownloadClicked(IvDownload, chapterModel)}"
                     android:padding="@dimen/dp_8"
                     android:src="@drawable/ic_download"
                     android:visibility="@{chapterModel.downloadVisibility}"

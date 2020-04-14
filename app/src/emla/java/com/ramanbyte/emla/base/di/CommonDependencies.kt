@@ -5,6 +5,9 @@ import com.ramanbyte.emla.data_layer.network.api_layer.ChaptersController
 import com.ramanbyte.emla.data_layer.network.api_layer.CoursesController
 import com.ramanbyte.emla.data_layer.network.api_layer.LoginApiController
 import com.ramanbyte.emla.data_layer.network.api_layer.SectionsController
+import com.ramanbyte.emla.data_layer.repositories.ChaptersRepository
+import com.ramanbyte.emla.data_layer.repositories.CoursesRepository
+import com.ramanbyte.emla.data_layer.repositories.SectionsRepository
 import org.kodein.di.Kodein
 import org.kodein.di.generic.bind
 import org.kodein.di.generic.instance
@@ -28,6 +31,18 @@ var CLIENT_BASE = "Dev"
 val repositoryDependencies = Kodein.Module("", true) {
 
     import(controllersDependencies, true)
+
+    bind<CoursesRepository>() with singleton {
+        CoursesRepository(instance())
+    }
+
+    bind<ChaptersRepository>() with singleton {
+        ChaptersRepository(instance())
+    }
+
+    bind<SectionsRepository>() with singleton {
+        SectionsRepository(instance())
+    }
 
 }
 

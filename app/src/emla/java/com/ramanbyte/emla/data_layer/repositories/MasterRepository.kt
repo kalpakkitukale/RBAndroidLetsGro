@@ -18,7 +18,7 @@ import org.kodein.di.generic.instance
  */
 
 class MasterRepository(val mContext: Context) : BaseRepository(mContext) {
-    private val applicationDatabase: ApplicationDatabase by instance()
+
     private val loginApiController : LoginApiController by instance()
 
     suspend fun doLogin(loginRequest: LoginRequest): UserModel? {
