@@ -16,4 +16,27 @@
         android:id="@+id/learnerProfileFragment"
         android:name="com.ramanbyte.emla.ui.fragments.LearnerProfileFragment"
         android:label="@string/profile" />
+
+    <fragment
+        android:id="@+id/quizInstructionFragment"
+        android:name="com.ramanbyte.emla.ui.fragments.QuizInstructionFragment"
+        android:label="@string/quiz_instruction" >
+        <action
+            android:id="@+id/action_allTheBestFragment"
+            app:destination="@id/allTheBestFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/allTheBestFragment"
+        android:name="com.ramanbyte.emla.ui.fragments.AllTheBestFragment"
+        android:label="@string/all_the_est" >
+        <action
+            android:id="@+id/action_showQuestionFragment"
+            app:destination="@id/showQuestionFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/showQuestionFragment"
+        android:name="com.ramanbyte.emla.ui.fragments.ShowQuestionFragment"
+        android:label="@string/show_question" />
 </navigation>

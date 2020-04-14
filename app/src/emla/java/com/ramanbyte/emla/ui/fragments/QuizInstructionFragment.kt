@@ -48,7 +48,7 @@ class QuizInstructionFragment : BaseFragment<FragmentQuizInstructionBinding, Sho
     private fun setViewModelObservers() {
         viewModel.apply {
 
-            /*coursesModelLiveData.value?.courseImageUrl = AppS3Client.createInstance(context!!).getFileAccessUrl("dev/"+coursesModelLiveData.value?.courseImage?: KEY_BLANK) ?: ""
+            coursesModelLiveData.value?.courseImageUrl = AppS3Client.createInstance(context!!).getFileAccessUrl("dev/"+coursesModelLiveData.value?.courseImage?: KEY_BLANK) ?: ""
 
             AppLog.infoLog("courseImageUrl ${coursesModelLiveData.value?.courseImageUrl}")
 
@@ -62,32 +62,32 @@ class QuizInstructionFragment : BaseFragment<FragmentQuizInstructionBinding, Sho
 
             layoutBinding.ivQuestion.layoutParams.apply {
                 height = (width * 0.6).toInt()
-            }*/
+            }
 
             /*
             * Get Server instruction
             * */
             getInstructions()
 
-            onClickStartQuizLiveData.observe(this@QuizInstructionFragment, Observer {
-                if (it != null){
-                    if (it == true){
-
-                        /*
-                        * set the Quiz start time in Shared Preferences Database
-                        * */
-                        SharedPreferencesDatabase.setStringPref(SharedPreferencesDatabase.KEY_START_QUIZ_DATE_TIME, DateUtils.getCurrentDateTime(DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS))
-
-                        /*
-                        * open or display the All the Best Screen
-                        * */
-                        val fragment = AllTheBestFragment()
-                        val transaction : FragmentTransaction = fragmentManager!!.beginTransaction()
-                        transaction.replace(R.id.frameLayout, fragment)
-                        transaction.commit()
-                    }
-                }
-            })
+//            onClickStartQuizLiveData.observe(this@QuizInstructionFragment, Observer {
+//                if (it != null){
+//                    if (it == true){
+//
+//                        /*
+//                        * set the Quiz start time in Shared Preferences Database
+//                        * */
+//                        SharedPreferencesDatabase.setStringPref(SharedPreferencesDatabase.KEY_START_QUIZ_DATE_TIME, DateUtils.getCurrentDateTime(DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS))
+//
+//                        /*
+//                        * open or display the All the Best Screen
+//                        * */
+//                        val fragment = AllTheBestFragment()
+//                        val transaction : FragmentTransaction = fragmentManager!!.beginTransaction()
+//                        transaction.replace(R.id.frameLayout, fragment)
+//                        transaction.commit()
+//                    }
+//                }
+//            })
 
         }
     }

@@ -2,6 +2,7 @@ package com.ramanbyte.emla.ui.activities
 
 import android.app.Activity
 import android.content.Intent
+import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -12,6 +13,8 @@ import com.ramanbyte.R
 import com.ramanbyte.base.BaseActivity
 import com.ramanbyte.databinding.ActivityContainerBinding
 import com.ramanbyte.emla.base.di.authModuleDependency
+import com.ramanbyte.emla.ui.fragments.AllTheBestFragment
+import com.ramanbyte.emla.ui.fragments.QuizInstructionFragment
 import com.ramanbyte.emla.view_model.ContainerViewModel
 import com.ramanbyte.utilities.BindingUtils
 import com.ramanbyte.utilities.StaticMethodUtilitiesKtx.changeStatusBarColor
@@ -33,6 +36,7 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding, ContainerViewMo
             setSupportActionBar(mainToolbar)
         }
         setBottomNavigation()
+
     }
 
     private fun setBottomNavigation() {

@@ -3,9 +3,11 @@ package com.ramanbyte.emla.view_model
 import android.content.Context
 import android.view.View
 import androidx.lifecycle.MutableLiveData
+import androidx.navigation.findNavController
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseViewModel
 import com.ramanbyte.data_layer.CoroutineUtils
+import com.ramanbyte.data_layer.SharedPreferencesDatabase
 import com.ramanbyte.emla.data_layer.network.init.NetworkConnectionInterceptor
 import com.ramanbyte.emla.data_layer.repositories.QuizRepository
 import com.ramanbyte.emla.data_layer.room.entities.AnswerEntity
@@ -15,6 +17,8 @@ import com.ramanbyte.emla.models.OptionsModel
 import com.ramanbyte.emla.models.QuestionAndAnswerModel
 import com.ramanbyte.utilities.AppLog
 import com.ramanbyte.utilities.BindingUtils
+import com.ramanbyte.utilities.DateUtils
+import com.ramanbyte.utilities.DateUtils.DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS
 import kotlinx.coroutines.delay
 import org.kodein.di.generic.instance
 
@@ -29,7 +33,7 @@ class ShowQuestionsViewModel (var mContext: Context) : BaseViewModel(mContext) {
 
     var coursesModelLiveData: MutableLiveData<CoursesModel> = MutableLiveData()
     //var chapterModelLiveData: MutableLiveData<ChapterModel> = MutableLiveData()
-    var testType = 0
+    var testType = 2  //niraj
 
     // ------- Instruction Page ----------
     val onClickStartQuizLiveData = MutableLiveData<Boolean>().apply {
@@ -82,7 +86,9 @@ class ShowQuestionsViewModel (var mContext: Context) : BaseViewModel(mContext) {
 
     fun onClickStartQuiz(view: View) {
         if (NetworkConnectionInterceptor(mContext).isInternetAvailable()) {
-            onClickStartQuizLiveData.value = true
+            //onClickStartQuizLiveData.value = true
+            SharedPreferencesDatabase.setStringPref(SharedPreferencesDatabase.KEY_START_QUIZ_DATE_TIME, DateUtils.getCurrentDateTime(DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS))
+            view.findNavController().navigate(R.id.allTheBestFragment)
         } else {
             noInternetDialog(BindingUtils.string(R.string.next), view)
         }
@@ -98,9 +104,9 @@ class ShowQuestionsViewModel (var mContext: Context) : BaseViewModel(mContext) {
                     testType
                 )!!*/
                 quizRepository.getInstructions(
-                    45,
-                    coursesModelLiveData.value?.courseId!!,
-                    2
+                    6123,
+                    4018,
+                    3
                 )!!
             )
         }
@@ -156,11 +162,15 @@ class ShowQuestionsViewModel (var mContext: Context) : BaseViewModel(mContext) {
     }
 
     fun getQuestionsByCourse() {
-        /*invokeApiCall(false) {
+        invokeApiCall(false) {
             questionAndAnswerModelLiveData.postValue(
-                quizRepository.getQuestionsByCourse(
+               /* quizRepository.getQuestionsByCourse(
                     coursesModelLiveData.value?.courseId!!,
                     testType
+                )*/
+                quizRepository.getQuestionsByCourse(
+                    3028,
+                    1
                 )
             )
 
@@ -171,12 +181,12 @@ class ShowQuestionsViewModel (var mContext: Context) : BaseViewModel(mContext) {
                 } else
                     AppLog.infoLog("no_question_available")
             }
-        }*/
+        }
     }
 
     fun getQuestionsByByTopic() {
 
-        /*invokeApiCall {
+       /* invokeApiCall {
             questionAndAnswerModelLiveData.postValue(
                 quizRepository.getQuestionsByTopic(
                     chapterModelLiveData.value?.chapterId!!,

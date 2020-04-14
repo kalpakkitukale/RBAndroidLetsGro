@@ -26,7 +26,7 @@ import com.ramanbyte.utilities.ProgressLoader
  */
 class ShowQuestionFragment : BaseFragment<FragmentShowQuestionBinding, ShowQuestionsViewModel>(
     isActivityParent = false,
-    useParent = true
+    useParent = false
 ) {
 
     var viewPagerAdapter: ViewPagerAdapter? = null

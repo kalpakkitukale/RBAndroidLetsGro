@@ -61,6 +61,9 @@
     <string name="invalid_email_id">Invalid Email Id</string>
     <string name="courses">Courses</string>
     <string name="profile">Profile</string>
+    <string name="quiz_instruction">Quiz Instruction</string>
+    <string name="all_the_est">All The Best</string>
+    <string name="show_question">Show Question</string>
 
     <string name="jump_to_question">jump to question</string>
     <string name="not_attempted">Not Attempted</string>
