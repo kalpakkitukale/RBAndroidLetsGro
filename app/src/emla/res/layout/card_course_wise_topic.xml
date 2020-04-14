@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="chapterContentViewModel"
+            type="com.ramanbyte.idbi.view_model.ChapterContentViewModel" />
+
+        <variable
+            name="contentModel"
+            type="com.ramanbyte.idbi.model.ContentModel" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dp_5"
+        app:cardCornerRadius="@dimen/dp_5"
+        app:cardUseCompatPadding="true"
+        app:contentPadding="@dimen/dp_5">
+
+        <RelativeLayout
+            android:id="@+id/mainLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="@{ () -> chapterContentViewModel.onClicked(mainLayout, contentModel)}">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/IvVideo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_5"
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:onClick="@{()->chapterContentViewModel.onClickDeleteContent(contentModel)}"
+                    android:src="@drawable/ic_play"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvTopicName"
+                    style="@style/TextViewBoldBlackOnWhite"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_10"
+                    android:text='@{String.valueOf(contentModel.id) + " " +contentModel.content_link}'
+                    android:textSize="@dimen/sp_14"
+                    app:layout_constraintBottom_toBottomOf="@+id/IvVideo"
+                    app:layout_constraintEnd_toStartOf="@+id/IvProgress"
+                    app:layout_constraintStart_toEndOf="@+id/IvVideo"
+                    app:layout_constraintTop_toTopOf="@+id/IvVideo" />
+
+                <TextView
+                    android:id="@+id/tvStatus"
+                    style="@style/TextViewLightBlackOnWhite"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@{contentModel.downlaodStatus}"
+                    android:textColor="@{contentModel.downloadStatusColor}"
+                    android:textSize="@dimen/sp_11"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="@+id/tvTopicName"
+                    app:layout_constraintTop_toBottomOf="@id/tvTopicName" />
+
+                <ImageView
+                    android:id="@+id/IvProgress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/dp_5"
+                    android:padding="@dimen/dp_8"
+                    android:src="@drawable/ic_test_quiz"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvTopicName"
+                    app:layout_constraintEnd_toStartOf="@+id/IvDownload"
+                    app:layout_constraintTop_toTopOf="@+id/tvTopicName" />
+
+                <ImageView
+                    android:id="@+id/IvDownload"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{()->chapterContentViewModel.onContentDownloadClick(contentModel)}"
+                    android:padding="@dimen/dp_8"
+                    android:src="@drawable/ic_download"
+                    android:visibility="@{contentModel.downloadVisibility}"
+                    app:layout_constraintBottom_toBottomOf="@+id/IvProgress"
+                    app:layout_constraintEnd_toStartOf="@+id/IvCheck"
+                    app:layout_constraintTop_toTopOf="@+id/IvProgress" />
+
+                <ImageView
+                    android:id="@+id/IvCheck"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/dp_8"
+                    android:src="@drawable/ic_play"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="@+id/IvDownload"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/IvDownload" />
+
+                <TextView
+                    android:id="@+id/tvCourseDescription"
+                    style="@style/TextViewRegularBlackOnWhite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:text="55:00 | 12.5 MB"
+                    android:textSize="@dimen/sp_12"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/tvTopicName"
+                    app:layout_constraintTop_toBottomOf="@+id/tvTopicName" />
+
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:max="100"
+                    android:progress="@{contentModel.completedPosition}"
+                    app:layout_constraintEnd_toEndOf="@+id/IvDownload"
+                    app:layout_constraintStart_toStartOf="@+id/IvVideo"
+                    app:layout_constraintTop_toBottomOf="@+id/tvStatus" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>
