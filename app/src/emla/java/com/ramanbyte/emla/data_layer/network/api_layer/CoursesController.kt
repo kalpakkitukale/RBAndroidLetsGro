@@ -8,6 +8,6 @@ import retrofit2.http.POST
 
 interface CoursesController {
 
-    @POST("Course/getCourseListsStudent")
+    @POST("getCourseListsStudent")
     suspend fun getCourses(@Body coursesRequest: CoursesRequest): Response<List<CoursesModel>>
 }

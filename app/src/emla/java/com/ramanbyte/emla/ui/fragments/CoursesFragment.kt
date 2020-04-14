@@ -2,10 +2,11 @@ package com.ramanbyte.emla.ui.fragments
 
 import android.content.Context
 import android.os.Bundle
+import android.view.*
+import android.widget.EditText
+import android.widget.ImageView
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -14,9 +15,7 @@ import com.ramanbyte.base.BaseFragment
 import com.ramanbyte.databinding.FragmentCoursesBinding
 import com.ramanbyte.emla.adapters.CoursesAdapter
 import com.ramanbyte.emla.view_model.CoursesViewModel
-import com.ramanbyte.utilities.AlertDialog
-import com.ramanbyte.utilities.ProgressLoader
-import com.ramanbyte.utilities.displayMetrics
+import com.ramanbyte.utilities.*
 
 /**
  * @author Vinay Kumbhar <vinay.k@ramanbyte.com>
@@ -25,13 +24,6 @@ import com.ramanbyte.utilities.displayMetrics
 class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>() {
     private lateinit var mContext: Context
     private var coursesAdapter: CoursesAdapter? = null
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_courses, container, false)
-    }
 
     override val viewModelClass: Class<CoursesViewModel>
         get() = CoursesViewModel::class.java
@@ -71,7 +63,7 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
             initPaginationResponseHandler()
 
             coursesPagedList()?.observe(this@CoursesFragment, androidx.lifecycle.Observer {
-                coursesAdapter?.apply { submitList(it) }
+                it?.let { coursesAdapter?.apply { submitList(it) } }
             })
 
             selectedCourseModelLiveData.observe(
@@ -79,6 +71,62 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
 
                 })
         }
+    }
+
+    var menu: Menu? = null
+    private var mSearchView: SearchView? = null
+    var searchItem: MenuItem? = null
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_course_search, menu)
+
+        searchItem = menu.findItem(R.id.action_search_key)
+
+        mSearchView = searchItem?.actionView as SearchView
+
+        val searchEditText = mSearchView!!.findViewById(R.id.search_src_text) as EditText
+
+        searchEditText.setTextColor(BindingUtils.color(R.color.colorWhite))
+        searchEditText.setHintTextColor(BindingUtils.color(R.color.colorTransparent))
+        searchEditText.hint = BindingUtils.string(R.string.search_by_course)
+
+        val searchClose = mSearchView?.findViewById(R.id.search_close_btn) as ImageView
+        searchClose.setImageResource(R.drawable.ic_close_white)
+
+        val searchImgId = R.id.search_button
+        val searchIcon = mSearchView?.findViewById(searchImgId) as ImageView
+        searchIcon.setImageResource(R.drawable.ic_search)
+
+        mSearchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                // api call
+                viewModel.searchQuery.postValue(query.toString())
+                mSearchView!!.clearFocus()
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                if (newText.toString() == KEY_BLANK) {
+                    // viewModel.searchQuery.postValue(newText.toString())
+                }
+                return false
+            }
+        })
+        super.onCreateOptionsMenu(menu, inflater)
+        this.menu = menu
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_search_key -> {
+                mSearchView!!.setQuery(
+                    KEY_BLANK, false
+                )
+                mSearchView!!.clearFocus()
+                mSearchView!!.isIconified = true
+            }
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onAttach(context: Context) {

@@ -3,8 +3,10 @@ package com.ramanbyte.emla.data_layer.network.init
 import android.content.Context
 import android.net.ConnectivityManager
 import com.ramanbyte.BaseAppController
+import com.ramanbyte.R
 import com.ramanbyte.emla.data_layer.network.exception.NoInternetException
 import com.ramanbyte.utilities.AppLog
+import com.ramanbyte.utilities.BindingUtils
 import com.ramanbyte.utilities.KEY_NO_INTERNET_ERROR
 import okhttp3.Interceptor
 import okhttp3.Response
@@ -40,7 +42,7 @@ class NetworkConnectionInterceptor(val context: Context) : Interceptor {
             AppLog.infoLog("Interceptor: Exception :: Log")
             e.printStackTrace()
             AppLog.errorLog(e.message, e)
-            throw NoInternetException(BaseAppController?.mFirebaseRemoteConfig!!.getString(KEY_NO_INTERNET_ERROR).replace("\\n", "\n"))
+            throw NoInternetException(BindingUtils.string(R.string.please_make_sure_you_are_connected_to_internet))
         }
     }
 
