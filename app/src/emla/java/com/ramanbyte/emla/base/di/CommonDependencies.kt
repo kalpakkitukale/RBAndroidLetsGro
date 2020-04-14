@@ -1,7 +1,9 @@
 package com.ramanbyte.emla.base.di
 
 import com.ramanbyte.data_layer.network.init.RetrofitInitializer
-import com.ramanbyte.emla.data_layer.network.api_layer.LoginApiController
+import com.ramanbyte.emla.data_layer.network.api_layer.ChaptersController
+import com.ramanbyte.emla.data_layer.network.api_layer.CoursesController
+import com.ramanbyte.emla.data_layer.network.api_layer.SectionsController
 import org.kodein.di.Kodein
 import org.kodein.di.generic.bind
 import org.kodein.di.generic.instance
@@ -13,19 +15,52 @@ import org.kodein.di.generic.singleton
  */
 
 private const val DOMAIN = "http://webapp.classroomplus.in/"
-private const val E_MARKET_PLACE = "eMarketPlace/"
+private const val EMLA = "eMarketPlace/"
 private const val API = "/api/"
-private const val LOGIN = "Login/"
-var CLIENT_BASE = "Dev"
+private const val LOGIN_CONTROLLER = "Login/"
+private const val COURSE = "Course/"
+private const val CHAPTER = "Chapter/"
+private const val SECTION = "Section/"
+
+var CLIENT_BASE = "test"
 
 val repositoryDependencies = Kodein.Module("", true) {
 
-    bind<LoginApiController>() with singleton {
+    import(controllersDependencies, true)
+
+//    bind<PlacementApiController>() with singleton {
+//        RetrofitInitializer.invoke(
+//            instance(),//db
+//            PlacementApiController::class.java,
+//            DOMAIN + PLACEMENT + CLIENT_BASE + API
+//        )
+//    }
+
+}
+
+private val controllersDependencies = Kodein.Module("controllers_dependencies", true) {
+
+    bind<CoursesController>() with singleton {
         RetrofitInitializer.invoke(
             instance(),//db
-            LoginApiController::class.java,
-            DOMAIN + E_MARKET_PLACE + CLIENT_BASE + API + LOGIN
+            CoursesController::class.java,
+            DOMAIN + EMLA + CLIENT_BASE + API + COURSE
         )
     }
 
+    bind<ChaptersController>() with singleton {
+        RetrofitInitializer.invoke(
+            instance(),//db
+            ChaptersController::class.java,
+            DOMAIN + EMLA + CLIENT_BASE + API + CHAPTER
+        )
+    }
+
+    bind<SectionsController>() with singleton {
+        RetrofitInitializer.invoke(
+            instance(),//db
+            SectionsController::class.java,
+            DOMAIN + EMLA + CLIENT_BASE + API + SECTION
+        )
+    }
 }
