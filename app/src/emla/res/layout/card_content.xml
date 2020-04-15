@@ -4,13 +4,13 @@
 
     <data>
 
-      <!--  <variable
-            name="chapterContentViewModel"
-            type="com.ramanbyte.idbi.view_model.ChapterContentViewModel" />
+        <variable
+            name="contentViewModel"
+            type="com.ramanbyte.emla.view_model.ContentViewModel" />
 
         <variable
             name="contentModel"
-            type="com.ramanbyte.idbi.model.ContentModel" />-->
+            type="com.ramanbyte.emla.models.ContentModel" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -21,51 +21,46 @@
         app:cardUseCompatPadding="true"
         app:contentPadding="@dimen/dp_5">
 
-        <!-- android:onClick="@{ () -> chapterContentViewModel.onClicked(mainLayout, contentModel)}"-->
         <RelativeLayout
             android:id="@+id/mainLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-           >
+            android:onClick="@{ () -> contentViewModel.playOrShowContent(contentModel)}">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <!-- android:onClick="@{()->chapterContentViewModel.onClickDeleteContent(contentModel)}"-->
                 <ImageView
                     android:id="@+id/IvVideo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dp_5"
                     android:layout_marginTop="@dimen/dp_5"
-
                     android:src="@drawable/ic_play"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <!-- android:text='@{String.valueOf(contentModel.id) + " " +contentModel.content_link}'-->
                 <TextView
                     android:id="@+id/tvTopicName"
                     style="@style/TextViewBoldBlackOnWhite"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dp_10"
-
+                    android:text='@{String.valueOf(contentModel.id) + " " +contentModel.content_link}'
                     android:textSize="@dimen/sp_14"
                     app:layout_constraintBottom_toBottomOf="@+id/IvVideo"
                     app:layout_constraintEnd_toStartOf="@+id/IvProgress"
                     app:layout_constraintStart_toEndOf="@+id/IvVideo"
                     app:layout_constraintTop_toTopOf="@+id/IvVideo" />
 
-                <!-- android:text="@{contentModel.downlaodStatus}"
-                    android:textColor="@{contentModel.downloadStatusColor}"-->
                 <TextView
                     android:id="@+id/tvStatus"
                     style="@style/TextViewLightBlackOnWhite"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-
+                    android:text="@{contentModel.downlaodStatus}"
+                    android:textColor="@{contentModel.downloadStatusColor}"
                     android:textSize="@dimen/sp_11"
                     android:visibility="gone"
                     app:layout_constraintStart_toStartOf="@+id/tvTopicName"
@@ -83,15 +78,14 @@
                     app:layout_constraintEnd_toStartOf="@+id/IvDownload"
                     app:layout_constraintTop_toTopOf="@+id/tvTopicName" />
 
-                <!--  android:onClick="@{()->chapterContentViewModel.onContentDownloadClick(contentModel)}"
-                    android:visibility="@{contentModel.downloadVisibility}"-->
                 <ImageView
                     android:id="@+id/IvDownload"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:onClick="@{()->contentViewModel.downloadContent(contentModel)}"
                     android:padding="@dimen/dp_8"
                     android:src="@drawable/ic_download"
-
+                    android:visibility="@{contentModel.downloadVisibility}"
                     app:layout_constraintBottom_toBottomOf="@+id/IvProgress"
                     app:layout_constraintEnd_toStartOf="@+id/IvCheck"
                     app:layout_constraintTop_toTopOf="@+id/IvProgress" />
@@ -121,14 +115,14 @@
                     app:layout_constraintStart_toStartOf="@+id/tvTopicName"
                     app:layout_constraintTop_toBottomOf="@+id/tvTopicName" />
 
-                <!-- android:progress="@{contentModel.completedPosition}"-->
                 <ProgressBar
                     android:id="@+id/progressBar"
                     style="?android:attr/progressBarStyleHorizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:max="100"
-
+                    android:progress="@{contentModel.completedPosition}"
+                    android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="@+id/IvDownload"
                     app:layout_constraintStart_toStartOf="@+id/IvVideo"
                     app:layout_constraintTop_toBottomOf="@+id/tvStatus" />

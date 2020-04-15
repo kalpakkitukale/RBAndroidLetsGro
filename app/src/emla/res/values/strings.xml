@@ -45,14 +45,14 @@
     <string name="fail">fail</string>
     <string name="pass_message">Congratulations you passed!</string>
     <string name="fail_message">Sorry, you failed!</string>
-    <string name="loader_result_message">Please stick with us, while we are calculating your result...!</string>
+    <string name="loader_result_message">Please stick with us, while we are calculating your result…!</string>
     <string name="view_certificate">View Certificate</string>
     <string name="share_certificate">Share Certificate</string>
     <string name="lock">Lock</string>
     <string name="download_title">My Downloads</string>
     <string name="correct">Correct</string>
     <string name="incorrect">Incorrect</string>
-    <string name="delete_local_video_alert">Do you really want delete the video...?</string>
+    <string name="delete_local_video_alert">Do you really want delete the video…?</string>
     <string name="file_stored_message">File has been stored at, %1$s.</string>
     <string name="offline_download_no_data_message">You have not yet downloaded any videos</string>
     <string name="storage_permission_desc">Due to change in permission strategy of Android 6.0 and above, %1$s needs your permission to access your Storage?</string>
@@ -98,8 +98,8 @@
     <string name="please_agree_the_instruction">Please affirm to the pledge in order to proceed!</string>
     <string name="not_attempted_any_question">Ooh! It seems like you have not attempted any of question in the test.</string>
     <string name="not_valid_user">You are not allow to login with this credentials</string>
-    <string name="logout_user_alert">Please check your internet connection to logout...!</string>
-    <string name="pay_video_alert">Please check your internet connection to to play video...!</string>
+    <string name="logout_user_alert">Please check your internet connection to logout…!</string>
+    <string name="pay_video_alert">Please check your internet connection to play video…!</string>
 
     <string name="no_chapter">No Chapter</string>
     <string name="no_more_chapter">No more Chapter</string>
@@ -143,8 +143,10 @@
     <string name="android">Android</string>
     <string name="phone_state_permission_desc">Due to change in permission strategy of Android 6.0 and above, %1$s needs your permission to read your device info. We only use this data to secure your account. Allow to read Phone state?</string>
 
+    <string name="successAccountCreation">Your registration is successful please login to continue.</string>
     <string name="oldPassword">Old password</string>
     <string name="newPassword">New password</string>
+    <string name="confirmPassword1">Confirm password</string>
     <string name="old_password_required">Please enter old password</string>
     <string name="confirmPassword">Confirm new password</string>
     <string name="new_password_required">Please enter new password</string>
@@ -171,4 +173,28 @@
     <string name="filter">Filters</string>
     <string name="specialisation">Specialisation</string>
     <string name="apply">Apply</string>
+
+    <string name="course">Course</string>
+    <string name="chapter">Chapter</string>
+
+    <!--
+Content
+-->
+    <string name="strYes">Yes</string>
+    <string name="strNo">No</string>
+
+    <string name="strDelete">Delete</string>
+    <string name="my_downloads">My Downloads</string>
+    <string name="you_dont_have_downloads">You haven\'t downloaded any content yet.</string>
+    <string name="delete_content_alert">Are you sure to delete the content?</string>
+    <string name="content_deleted_successfully">The requested content deleted successfully</string>
+    <string name="failed_to_delete">Failed to delete the requested content</string>
+    <string name="content_not_available_at_source">Content not available at source. Try downloading again.</string>
+    <string name="preview">Preview</string>
+    <string name="file_download_msg">Please check notification bar for downloading status</string>
+
+    <!--
+    Content Ends
+    -->
+
 </resources>

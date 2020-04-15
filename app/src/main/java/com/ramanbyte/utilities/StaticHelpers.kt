@@ -39,7 +39,6 @@ const val specialRegex: String = ".*[!\"#\$%&'()*+,-./:;<=>?@[\\^]_`{|}~].*"
 const val KEY_EMAIL = "email"
 const val KEY_OLD_PASSWORD = "oldPassword"
 const val KEY_NEW_PASSWORD = "newPassword"//new password
-const val keyPassword = "password"//old password
 const val KEY_CONFIRM_RESET_NEW_PASSWORD = "ConfirmPassword"//confirm new password
 
 
@@ -59,8 +58,12 @@ const val KEY_QUE_COUNT = "queCount"
 const val KEY_TOTAL_QUE_COUNT = "totalQueCount"
 const val keyQuestionId = "questionId"
 
+const val keyFirstName = "firstName"
+const val keyLastName = "lastName"
+const val keyEmailUsername = "emailUsername"
 const val keyEmailId = "emailId"
-
+const val keyPassword = "password"
+const val keyConfirmPassword = "confirmPassword"
 
 const val KEY_OTP_ONE = "otp_place_one"
 const val KEY_OTP_TWO = "otp_place_two"
@@ -142,6 +145,7 @@ const val keySectionName = "sectionName"
 const val keyCourseId = "courseId"
 const val keyCourseName = "courseName"
 const val keyChapterName = "chapterName"
+const val keyChapterId = "chapterId"
 const val KEY_VIDEO = "VIDEO"
 const val KEY_Y = "Y"
 const val KEY_N = "N"
@@ -376,3 +380,13 @@ const val KEY_CHECK_FLAG = "checkFlag"
 const val KEY_COMMENT = "comment"
 const val KEY_YEAR = "0"
 const val KEY_DESCRIPTION = "description"
+
+const val KEY_IMAGE = "image"
+const val KEY_MEDIA_ID = "media_id"
+const val KEY_IS_MEDIA_OFFLINE = "is_media_offline"
+const val KEY_ALLOW_MEDIA_DOWNLOAD = "is_media_download_allowed"
+const val KEY_MEDIA_TYPE_VIDEO = "audio"
+const val KEY_MEDIA_TYPE_AUDIO = "video"
+const val KEY_MEDIA_TYPE_FILE = "file"
+const val KEY_FILE_NAME = "keyFileName"
+const val KEY_FILE_DOWNLOAD = "File Download"

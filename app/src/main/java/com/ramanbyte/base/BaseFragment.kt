@@ -39,10 +39,10 @@ abstract class BaseFragment<LayoutBinding : ViewDataBinding, VM : ViewModel>(
         savedInstanceState: Bundle?
     ): View? {
 
-        if (::layoutBinding.isInitialized)
-            return layoutBinding.root
-
-        layoutBinding = DataBindingUtil.inflate(inflater, layoutId(), container, false)
+        if (!(::layoutBinding.isInitialized))
+            layoutBinding = DataBindingUtil.inflate(inflater, layoutId(), container, false)
+        else
+            container?.removeView(layoutBinding.root)
 
         //bindContentView(inflater, layoutId(), container)
 
@@ -103,5 +103,5 @@ abstract class BaseFragment<LayoutBinding : ViewDataBinding, VM : ViewModel>(
     @LayoutRes
     protected abstract fun layoutId(): Int
 
-    abstract fun initiate()
+    protected abstract fun initiate()
 }

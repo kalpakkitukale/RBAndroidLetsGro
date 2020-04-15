@@ -3,16 +3,20 @@ package com.ramanbyte.emla.view_model
 import android.Manifest
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.view.View
 import android.widget.CompoundButton
 import androidx.databinding.library.baseAdapters.BR
 import androidx.lifecycle.MutableLiveData
+import com.ramanbyte.BaseAppController
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseViewModel
 import com.ramanbyte.emla.data_layer.repositories.MasterRepository
 import com.ramanbyte.emla.models.UserModel
 import com.ramanbyte.emla.models.request.LoginRequest
 import com.ramanbyte.emla.models.request.PledgeStatusRequest
+import com.ramanbyte.emla.ui.activities.CreateAccountActivity
+import com.ramanbyte.emla.ui.activities.LoginActivity
 import com.ramanbyte.utilities.*
 import com.ramanbyte.validation.ObservableValidator
 import com.ramanbyte.validation.ValidationFlags
@@ -76,13 +80,9 @@ class LoginViewModel(var mContext: Context) : BaseViewModel(mContext) {
                 )
             ) {
                 val apiCallFunction: suspend () -> Unit = {
-
-                    if (masterRepository.doLogin(userLoginRequestLiveData.value!!)?.userType == KEY_STAFF) {
-                        userModelLiveData.postValue(
-                            masterRepository.doLogin(
-                                userLoginRequestLiveData.value!!
-                            )
-                        )
+                    val response = masterRepository.doLogin(userLoginRequestLiveData.value!!)
+                    if (response?.userType == KEY_STAFF) {
+                        userModelLiveData.postValue(response)
                     } else {
                         setAlertDialogResourceModelMutableLiveData(
                             BindingUtils.string(R.string.not_valid_user),
@@ -128,8 +128,11 @@ class LoginViewModel(var mContext: Context) : BaseViewModel(mContext) {
     }
 
     fun createAccount(view:View) {
-
-
+        (mContext as Activity).apply {
+            val intent = Intent(this,CreateAccountActivity::class.java)
+            startActivity(intent)
+            BaseAppController.setEnterPageAnimation(this)
+        }
     }
 
     fun forgotPassword(view: View) {

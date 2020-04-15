@@ -5,15 +5,13 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.ramanbyte.emla.data_layer.room.dao.AnswerDao
-import com.ramanbyte.emla.data_layer.room.dao.OptionsDao
-import com.ramanbyte.emla.data_layer.room.dao.QuestionAndAnswerDao
-import com.ramanbyte.emla.data_layer.room.dao.UserDao
+import com.ramanbyte.emla.data_layer.room.dao.*
 import com.ramanbyte.emla.data_layer.room.data_converter.JsonConverter
 import com.ramanbyte.emla.data_layer.room.entities.AnswerEntity
 import com.ramanbyte.emla.data_layer.room.entities.OptionsEntity
 import com.ramanbyte.emla.data_layer.room.entities.QuestionAndAnswerEntity
 import com.ramanbyte.emla.data_layer.room.entities.UserEntity
+import com.ramanbyte.emla.models.MediaInfoModel
 
 /**
  * @AddedBy Vinay Kumbhar <vinay.k@ramanbyte.com>
@@ -22,7 +20,7 @@ import com.ramanbyte.emla.data_layer.room.entities.UserEntity
 
 
 @Database(
-    entities = [UserEntity::class, QuestionAndAnswerEntity::class, OptionsEntity::class, AnswerEntity::class],
+    entities = [UserEntity::class, QuestionAndAnswerEntity::class, OptionsEntity::class, AnswerEntity::class, MediaInfoModel::class],
     version = 1,
     exportSchema = true
 )
@@ -33,6 +31,7 @@ abstract class ApplicationDatabase : RoomDatabase() {
     abstract fun getQuestionAndAnswerDao(): QuestionAndAnswerDao
     abstract fun getOptionsDao(): OptionsDao
     abstract fun getAnswerDao(): AnswerDao
+    abstract fun getMediaInfoDao(): MediaInfoDao
 
     companion object {
 

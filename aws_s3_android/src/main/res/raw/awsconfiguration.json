@@ -14,7 +14,7 @@
   },
   "S3TransferUtility": {
     "Default": {
-      "Bucket": "classroomplus-userfiles-mobilehub-200445379",
+      "Bucket": "emarketplace-learning-assessment",
       "Region": "ap-south-1"
     }
   },
@@ -35,7 +35,7 @@
   },
   "UserFileManager": {
     "Default": {
-      "Bucket": "classroomplus-userfiles-mobilehub-200445379",
+      "Bucket": "emarketplace-learning-assessment",
       "Region": "ap-south-1"
     }
   }

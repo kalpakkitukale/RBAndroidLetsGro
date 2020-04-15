@@ -24,7 +24,6 @@ import java.text.DecimalFormat
 
 class QuizRepository (val mContext: Context) : BaseRepository(mContext){
 
-    private val applicationDatabase: ApplicationDatabase by instance()
     private val questionController: QuestionController by instance()
 
     suspend fun getInstructions(topicId: Int, courseid: Int, QuiztypeId: Int): InstructionsModel? {

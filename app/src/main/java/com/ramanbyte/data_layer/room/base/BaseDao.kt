@@ -9,7 +9,7 @@ interface BaseDao<Entity> {
     fun insert(obj: Entity): Long
 
     @Update
-    fun update(obj: Entity)
+    fun update(obj: Entity) : Int
 
     @Insert
     fun insert(obj: List<Entity>)
