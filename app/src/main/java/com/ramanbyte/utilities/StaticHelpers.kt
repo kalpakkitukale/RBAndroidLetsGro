@@ -39,7 +39,6 @@ const val specialRegex: String = ".*[!\"#\$%&'()*+,-./:;<=>?@[\\^]_`{|}~].*"
 const val KEY_EMAIL = "email"
 const val KEY_OLD_PASSWORD = "oldPassword"
 const val KEY_NEW_PASSWORD = "newPassword"//new password
-const val keyPassword = "password"//old password
 const val KEY_CONFIRM_RESET_NEW_PASSWORD = "ConfirmPassword"//confirm new password
 
 
@@ -59,8 +58,12 @@ const val KEY_QUE_COUNT = "queCount"
 const val KEY_TOTAL_QUE_COUNT = "totalQueCount"
 const val keyQuestionId = "questionId"
 
+const val keyFirstName = "firstName"
+const val keyLastName = "lastName"
+const val keyEmailUsername = "emailUsername"
 const val keyEmailId = "emailId"
-
+const val keyPassword = "password"
+const val keyConfirmPassword = "confirmPassword"
 
 const val KEY_OTP_ONE = "otp_place_one"
 const val KEY_OTP_TWO = "otp_place_two"

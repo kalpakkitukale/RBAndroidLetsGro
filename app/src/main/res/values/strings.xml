@@ -9,6 +9,11 @@
     <string name="str_loading">Loading…</string>
     <string name="try_again_">Try Again</string>
 
+    <!--camera Permission-->
+    <string name="package_uri">package</string>
+    <string name="camera_permission_message">Please allow to access Camera to capture photo</string>
+    <string name="storage_permission_message">Please allow to access Phone storage.</string>
+
     <string name="please_select_media">Please select media</string>
     <string name="str_select_from">Select from</string>
     <string name="strCamera">Camera</string>

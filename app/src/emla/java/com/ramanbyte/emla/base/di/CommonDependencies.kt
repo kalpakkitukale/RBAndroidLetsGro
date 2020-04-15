@@ -24,6 +24,7 @@ private const val DOMAIN = "http://webapp.classroomplus.in/"
 private const val EMLA = "eMarketPlace/"
 private const val API = "/api/"
 private const val LOGIN = "Login/"
+private const val REGISTRATION = "Registration/"
 private const val COURSE = "Course/"
 private const val CHAPTER = "Chapter/"
 private const val SECTION = "Section/"
@@ -60,6 +61,13 @@ private val controllersDependencies = Kodein.Module("controllers_dependencies", 
             instance(),//db
             LoginApiController::class.java,
             DOMAIN + EMLA + CLIENT_BASE + API + LOGIN
+        )
+    }
+    bind<RegistrationController>() with singleton {
+        RetrofitInitializer.invoke(
+            instance(),//db
+            RegistrationController::class.java,
+            DOMAIN + EMLA + CLIENT_BASE + API + REGISTRATION
         )
     }
 

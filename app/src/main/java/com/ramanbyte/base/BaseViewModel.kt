@@ -229,8 +229,7 @@ abstract class BaseViewModel(
             } catch (e: ApiException) {
                 isLoaderShowingLiveData.postValue(false)
                 setAlertDialogResourceModelMutableLiveData(
-                    e.message
-                        ?: BindingUtils.string(R.string.some_thing_went_wrong),
+                    e.message ?: BindingUtils.string(R.string.some_thing_went_wrong),
                     BindingUtils.drawable(R.drawable.ic_something_went_wrong),
                     isInfoAlert = false,
                     positiveButtonText = BindingUtils.string(R.string.tryAgain),
