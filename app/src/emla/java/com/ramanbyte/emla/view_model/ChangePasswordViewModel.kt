@@ -25,7 +25,8 @@ class ChangePasswordViewModel(var mContext: Context) : BaseViewModel(mContext) {
         value = ChangePasswordModel()
     }
     private val masterRepository: MasterRepository by instance()
-    private val applicationDatabase: ApplicationDatabase by instance()
+
+    var userData = masterRepository?.getCurrentUser()
     var isChangePasswordSuccessfully = MutableLiveData<Boolean>().apply {
         value = null
     }
@@ -35,7 +36,7 @@ class ChangePasswordViewModel(var mContext: Context) : BaseViewModel(mContext) {
             addRule(
                 keyPassword,
                 ValidationFlags.FIELD_REQUIRED,
-                BindingUtils.string(R.string.oldPassword)
+                BindingUtils.string(R.string.old_password_required)
 
             )
             addRule(
@@ -109,8 +110,7 @@ class ChangePasswordViewModel(var mContext: Context) : BaseViewModel(mContext) {
         CoroutineUtils.main {
             if (changeValidator.validateAll()) {
                 try {
-                    changePasswordModelLiveData.value?.userId = 2
-                    //applicationDatabase?.getUserDao()?.getCurrentUser()?.userId!!
+                    changePasswordModelLiveData.value?.userId = userData?.userId!!
                     val response =
                         masterRepository.changePassword(changePasswordModelLiveData.value!!)
 

@@ -7,17 +7,18 @@ import android.view.View
 import android.view.ViewGroup
 import com.ramanbyte.R
 
+
 /**
  * A simple [Fragment] subclass.
  */
-class LearnerProfileFragment : Fragment() {
+class EducationDetailFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_learner_profile, container, false)
+        return inflater.inflate(R.layout.fragment_education_detail, container, false)
     }
 
 }
