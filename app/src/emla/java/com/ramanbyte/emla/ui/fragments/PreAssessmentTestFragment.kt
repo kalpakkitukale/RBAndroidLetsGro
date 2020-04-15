@@ -7,12 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentTransaction
+import androidx.navigation.findNavController
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseFragment
 import com.ramanbyte.databinding.FragmentPreAssessmentTestBinding
+import com.ramanbyte.emla.models.CoursesModel
 import com.ramanbyte.emla.view_model.ShowQuestionsViewModel
-import com.ramanbyte.utilities.AlertDialog
-import com.ramanbyte.utilities.ProgressLoader
+import com.ramanbyte.utilities.*
 
 /**
  * @author Niraj Naware <niraj.n@ramanbyte.com>
@@ -22,26 +23,35 @@ class PreAssessmentTestFragment :
     BaseFragment<FragmentPreAssessmentTestBinding, ShowQuestionsViewModel>() {
 
     private var mContext: Context? = null
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_pre_assessment_test, container, false)
-    }
+    private var courseModel: CoursesModel? = null
+    //private var chapterModel: ChapterModel? = null
 
     override val viewModelClass: Class<ShowQuestionsViewModel> = ShowQuestionsViewModel::class.java
 
     override fun layoutId(): Int = R.layout.fragment_pre_assessment_test
 
     override fun initiate() {
+
+        arguments?.apply {
+            courseModel = getParcelable(KEY_COURSE_MODEL)!!
+            //chapterModel = getParcelable(KEY_CHAPTER_MODEL)
+            viewModel.testType = getInt(keyTestType, 0)
+        }
+
+        viewModel.apply {
+            AppLog.infoLog("nircourseModel ${courseModel?.courseId}")
+            coursesModelLiveData.value = courseModel
+            //chapterModelLiveData.value = chapterModel
+        }
         ProgressLoader(mContext!!,viewModel)
         AlertDialog(mContext!!,viewModel)
 
         layoutBinding.apply {
             lifecycleOwner = this@PreAssessmentTestFragment
         }
+
+        /*view?.findNavController()
+            ?.navigate(R.id.quizInstructionFragment)*/
 
         val fragment = QuizInstructionFragment()
         val transaction: FragmentTransaction = fragmentManager?.beginTransaction()!!

@@ -18,6 +18,15 @@
         android:label="@string/profile" />
 
     <fragment
+        android:id="@+id/preAssessmentTestFragment"
+        android:name="com.ramanbyte.emla.ui.fragments.PreAssessmentTestFragment"
+        android:label="@string/test" >
+        <action
+            android:id="@+id/action_quizInstructionFragment"
+            app:destination="@id/quizInstructionFragment" />
+    </fragment>
+
+    <fragment
         android:id="@+id/quizInstructionFragment"
         android:name="com.ramanbyte.emla.ui.fragments.QuizInstructionFragment"
         android:label="@string/quiz_instruction" >

@@ -32,6 +32,7 @@ class AllTheBestFragment : BaseFragment<FragmentAllTheBestBinding, ShowQuestions
     override fun layoutId(): Int = R.layout.fragment_all_the_best
 
     override fun initiate() {
+
         ProgressLoader(mContext!!, viewModel)
         AlertDialog(mContext!!, viewModel)
 
