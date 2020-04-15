@@ -111,6 +111,8 @@ class ShowQuestionFragment : BaseFragment<FragmentShowQuestionBinding, ShowQuest
                     height = (width * 0.6).toInt()
                 }
 
+                setToolbarTitle(coursesModelLiveData.value?.courseName!!)
+
                 questionAndAnswerListLiveData.observe(this@ShowQuestionFragment, Observer {
                     AppLog.infoLog("questionAndAnswerModelLiveDataNir ${it.size}")
                     setPagerList(it)
