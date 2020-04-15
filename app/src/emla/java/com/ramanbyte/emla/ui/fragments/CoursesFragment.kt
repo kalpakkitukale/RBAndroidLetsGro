@@ -70,7 +70,6 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
 
             selectedCourseModelLiveData.observe(
                 this@CoursesFragment, Observer {
-                    AppLog.infoLog("selectedCourseModelLiveData")
                     it?.apply {
 
                         activity?.apply {

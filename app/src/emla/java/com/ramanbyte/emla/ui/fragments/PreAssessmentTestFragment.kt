@@ -39,7 +39,6 @@ class PreAssessmentTestFragment :
         }
 
         viewModel.apply {
-            AppLog.infoLog("nircourseModel ${courseModel?.courseId}")
             coursesModelLiveData.value = courseModel
             //chapterModelLiveData.value = chapterModel
         }
@@ -54,7 +53,7 @@ class PreAssessmentTestFragment :
             ?.navigate(R.id.quizInstructionFragment)*/
 
         val fragment = QuizInstructionFragment()
-        val transaction: FragmentTransaction = fragmentManager?.beginTransaction()!!
+        val transaction: FragmentTransaction = parentFragmentManager?.beginTransaction()!!
         transaction.replace(R.id.frameLayout, fragment)
         transaction.commit()
 
