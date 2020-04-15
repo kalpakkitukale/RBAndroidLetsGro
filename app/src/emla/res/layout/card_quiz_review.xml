@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+
+        <variable
+            name="quizReviewModel"
+            type="com.ramanbyte.emla.models.QuizReviewModel" />
+        <variable
+            name="queNo"
+            type="String" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardLayoutMain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/colorTransparent"
+        app:cardCornerRadius="@dimen/dp_5"
+        app:cardElevation="2dp"
+        app:cardUseCompatPadding="true"
+        app:contentPadding="@dimen/dp_5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorTransparent"
+            app:layout_anchor="@+id/cardMainContainer"
+            app:layout_anchorGravity="center">
+
+            <TextView
+                android:id="@+id/tvQueNo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text='@{queNo + ". "}'
+                android:textSize="@dimen/sp_14"
+                style="@style/TextViewRegularBlackOnWhite"
+                android:layout_marginTop="@dimen/dp_5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <WebView
+                android:id="@+id/wvQuestion"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:setHtmlText="@{quizReviewModel.questionTitle}"
+                android:textSize="@dimen/sp_14"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tvQueNo"
+                app:layout_constraintTop_toBottomOf="@+id/tvJumpToQuestion" />
+            <!--app:setHtmlText="@{questionAndAnswerModel.question_Title}"
+            android:text="@{quizReviewModel.questionTitle}"-->
+
+            <!--<LinearLayout
+                android:id="@+id/llOptions"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:orientation="vertical"
+                app:layout_constraintStart_toStartOf="@+id/wvQuestion"
+                app:layout_constraintTop_toBottomOf="@+id/wvQuestion"/>-->
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvQuizReview"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:elevation="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/wvQuestion"
+                app:layout_constraintTop_toBottomOf="@+id/wvQuestion"
+                tools:listitem="@layout/card_quiz_review_options" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</layout>
