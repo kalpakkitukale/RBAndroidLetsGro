@@ -29,7 +29,7 @@ class ShowQuestionsViewModel(var mContext: Context) : BaseViewModel(mContext) {
     val quizRepository: QuizRepository by instance()
 
     var coursesModelLiveData: MutableLiveData<CoursesModel> = MutableLiveData()
-    var chapterModelLiveData: MutableLiveData<ChapterModel> = MutableLiveData()
+    var chapterModelLiveData: MutableLiveData<ChaptersModel> = MutableLiveData()
     var testType = 2  //niraj
 
     // ------- Instruction Page ----------
