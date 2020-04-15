@@ -263,4 +263,16 @@ object StaticMethodUtilitiesKtx {
             AppLog.errorLog(e.message, e)
         }
     }
+
+    fun getFileExtension(fileName: String?): String? {
+        if (fileName != null && !fileName.isEmpty()) {
+            try {
+                return fileName.substring(fileName.lastIndexOf("."))
+            } catch (e: java.lang.Exception) {
+                e.printStackTrace()
+                AppLog.errorLog(e.message, e)
+            }
+        }
+        return "txt"
+    }
 }

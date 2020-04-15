@@ -5,19 +5,100 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.ramanbyte.R
+import com.ramanbyte.base.BaseFragment
+import com.ramanbyte.databinding.FragmentMyDownloadsBinding
+import com.ramanbyte.emla.adapters.MyDownloadsListAdapter
+import com.ramanbyte.emla.content.ContentViewer
+import com.ramanbyte.emla.content.ExoMediaDownloadUtil
+import com.ramanbyte.emla.view_model.MyDownloadsViewModel
+import com.ramanbyte.utilities.AlertDialog
 
 /**
  * A simple [Fragment] subclass.
  */
-class MyDownloadsFragment : Fragment() {
+class MyDownloadsFragment : BaseFragment<FragmentMyDownloadsBinding, MyDownloadsViewModel>() {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_my_downloads, container, false)
+    override val viewModelClass: Class<MyDownloadsViewModel> = MyDownloadsViewModel::class.java
+
+    override fun layoutId(): Int = R.layout.fragment_my_downloads
+
+    override fun initiate() {
+
+        AlertDialog(context!!, viewModel)
+
+        layoutBinding.apply {
+
+            lifecycleOwner = this@MyDownloadsFragment
+            myDownloadsViewModel = viewModel
+            noData.viewModel = viewModel
+
+        }
+
+        ExoMediaDownloadUtil.loadDownloads(context!!)
+
+        setMediaRecycler()
+
+        setViewModelOps()
+
     }
 
+    private fun setMediaRecycler() {
+
+        val mediaList = viewModel.getMedias()
+
+        layoutBinding?.apply {
+
+            if (mediaList != null) {
+
+                val downloadsListAdapter =
+                    MyDownloadsListAdapter(downloadsViewModel = viewModel, mediaList = mediaList)
+
+                listDownloads?.apply {
+
+                    layoutManager = LinearLayoutManager(context!!, RecyclerView.VERTICAL, false)
+
+                    adapter = downloadsListAdapter
+                }
+            }
+        }
+
+    }
+
+    private fun setViewModelOps() {
+
+        viewModel.apply {
+
+            playOrPreviewLiveData.observe(viewLifecycleOwner, Observer { mediaInfoModel ->
+
+                if (mediaInfoModel != null) {
+
+                    ContentViewer(activity!!).preview(mediaInfoModel)
+
+                    playOrPreviewLiveData.value = null
+
+                }
+            })
+
+            deleteMediaLiveData.observe(viewLifecycleOwner, Observer { mediaInfoModel ->
+
+                if (mediaInfoModel != null) {
+
+                    if (ContentViewer(activity!!).deleteMediaOrFiles(mediaInfoModel)) {
+                        viewModel.deleteMediaInfo(mediaInfoModel.mediaId)
+                        viewModel.showDeleteSuccessDialog()
+                        setMediaRecycler()
+                    } else {
+                        viewModel.showDeleteErrorDialog()
+                    }
+
+                    deleteMediaLiveData.value = null
+                }
+            })
+
+        }
+    }
 }

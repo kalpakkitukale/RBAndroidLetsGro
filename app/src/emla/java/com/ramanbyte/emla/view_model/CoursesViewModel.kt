@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.Navigation.findNavController
 import androidx.navigation.findNavController
+import androidx.navigation.findNavController
 import androidx.paging.PagedList
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseViewModel
@@ -17,6 +18,10 @@ import com.ramanbyte.emla.models.CourseResultModel
 import com.ramanbyte.emla.models.CoursesModel
 import com.ramanbyte.emla.models.UserModel
 import com.ramanbyte.utilities.*
+import com.ramanbyte.utilities.AppLog
+import com.ramanbyte.utilities.BindingUtils
+import com.ramanbyte.utilities.KEY_BLANK
+import com.ramanbyte.utilities.KEY_COURSE_MODEL
 import org.kodein.di.generic.instance
 
 /**
@@ -28,7 +33,9 @@ class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
         coursesRepository.tryAgain()
     }
     private val coursesRepository: CoursesRepository by instance()
+
     val selectedCourseModelLiveData = MutableLiveData<CoursesModel?>(null)
+
     var userData: UserModel? = null
     var searchQuery = MutableLiveData<String>().apply {
         value = KEY_BLANK
@@ -74,9 +81,10 @@ class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
             if (NetworkConnectivity.isConnectedToInternet()) {
                 if (model.preAssessmentStatus.equals("true", true)) {
                     AppLog.infoLog("courses details page")
-                    /*CourseDetailActivity.intent(this).apply {
-                            putExtra(KEY_COURSE_MODEL, it)
-                        }*/
+                    view.findNavController()
+                        .navigate(R.id.action_coursesFragment_to_courseDetailFragment, Bundle().apply {
+                            putParcelable(KEY_COURSE_MODEL, coursesModel)
+                        })
                 } else {
                     val bundle = Bundle()
                     bundle.putParcelable(KEY_COURSE_MODEL, model)

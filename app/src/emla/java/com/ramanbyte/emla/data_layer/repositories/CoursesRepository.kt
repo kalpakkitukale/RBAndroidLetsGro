@@ -21,10 +21,9 @@ import com.ramanbyte.utilities.AppLog
 import com.ramanbyte.utilities.replicate
 import org.kodein.di.generic.instance
 
-class CoursesRepository(mContext: Context) :BaseRepository(mContext) {
+class CoursesRepository(mContext: Context) : BaseRepository(mContext) {
 
-    private val applicationDatabase : ApplicationDatabase by instance()
-    private val coursesController : CoursesController by instance()
+    private val coursesController: CoursesController by instance()
 
     fun getCurrentUser(): UserModel? {
         applicationDatabase.getUserDao().apply {
@@ -33,11 +32,14 @@ class CoursesRepository(mContext: Context) :BaseRepository(mContext) {
     }
 
     private val pageSize = 10
-    private val coursesModelObservable = ObservableField<CoursesRequest>().apply { set(CoursesRequest()) }
+    private val coursesModelObservable =
+        ObservableField<CoursesRequest>().apply { set(CoursesRequest()) }
     lateinit var coursesPagedDataSourceFactory: PaginationDataSourceFactory<CoursesModel, CoursesRequest>
-    private var paginationResponseHandlerLiveData: MutableLiveData<PaginationResponseHandler?> = MutableLiveData(null)
+    private var paginationResponseHandlerLiveData: MutableLiveData<PaginationResponseHandler?> =
+        MutableLiveData(null)
     var coursesPagedList: LiveData<PagedList<CoursesModel>>? = null
-    private val pageListConfig = PagedList.Config.Builder().setEnablePlaceholders(false).setPageSize(pageSize).build()
+    private val pageListConfig =
+        PagedList.Config.Builder().setEnablePlaceholders(false).setPageSize(pageSize).build()
 
     fun initiatePagination() {
         paginationResponseHandlerLiveData.postValue(PaginationResponseHandler.INIT_LOADING)
@@ -55,11 +57,12 @@ class CoursesRepository(mContext: Context) :BaseRepository(mContext) {
             } ?: arrayListOf()
         }
 
-        coursesPagedList = LivePagedListBuilder(coursesPagedDataSourceFactory, pageListConfig).build()
+        coursesPagedList =
+            LivePagedListBuilder(coursesPagedDataSourceFactory, pageListConfig).build()
 
     }
-    fun getPaginationResponseHandler() = paginationResponseHandlerLiveData
 
+    fun getPaginationResponseHandler() = paginationResponseHandlerLiveData
 
 
     /*
@@ -86,8 +89,11 @@ class CoursesRepository(mContext: Context) :BaseRepository(mContext) {
     }
 
     suspend fun getCoursesSyllabus(courseId: Int): CourseSyllabusModel? {
+
+        val userId = applicationDatabase.getUserDao()?.getCurrentUser()?.userId ?: 0
+
         return apiRequest {
-            coursesController.getCoursesSyllabus(courseId, /*userModel?.userId ?:*/ 0)
+            coursesController.getCoursesSyllabus(courseId, userId)
         }
     }
 }
