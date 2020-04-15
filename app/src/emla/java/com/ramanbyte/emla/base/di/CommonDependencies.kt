@@ -1,10 +1,7 @@
 package com.ramanbyte.emla.base.di
 
 import com.ramanbyte.data_layer.network.init.RetrofitInitializer
-import com.ramanbyte.emla.data_layer.network.api_layer.ChaptersController
-import com.ramanbyte.emla.data_layer.network.api_layer.CoursesController
-import com.ramanbyte.emla.data_layer.network.api_layer.LoginApiController
-import com.ramanbyte.emla.data_layer.network.api_layer.SectionsController
+import com.ramanbyte.emla.data_layer.network.api_layer.*
 import org.kodein.di.Kodein
 import org.kodein.di.generic.bind
 import org.kodein.di.generic.instance
@@ -22,6 +19,7 @@ private const val LOGIN = "Login/"
 private const val COURSE = "Course/"
 private const val CHAPTER = "Chapter/"
 private const val SECTION = "Section/"
+private const val QUESTION = "Question/"
 
 var CLIENT_BASE = "Dev"
 
@@ -62,6 +60,14 @@ private val controllersDependencies = Kodein.Module("controllers_dependencies", 
             instance(),//db
             SectionsController::class.java,
             DOMAIN + EMLA + CLIENT_BASE + API + SECTION
+        )
+    }
+
+    bind<QuestionController>() with singleton {
+        RetrofitInitializer.invoke(
+            instance(),//db
+            QuestionController::class.java,
+            DOMAIN + EMLA + CLIENT_BASE + API + QUESTION
         )
     }
 }

@@ -12,6 +12,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebChromeClient
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -30,10 +32,12 @@ import com.ramanbyte.utilities.DateUtils.DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_M
  * @author Niraj Naware <niraj.n@ramanbyte.com>
  * @since 14/04/20
  */
-class ShowQuestionPagerFragment : BaseFragment<CardShowQuestionsBinding, ShowQuestionsViewModel>(
-    isActivityParent = false,
-    useParent = true
-) {
+class ShowQuestionPagerFragment(
+    private val viewModel: ShowQuestionsViewModel, queCount: Int,
+    totalQueCount: Int,
+    questionAndAnswerModel: QuestionAndAnswerModel,
+    optionsModel: ArrayList<OptionsModel>
+) : Fragment() {
 
     var mContext: Context? = null
     var answerAdapter: AnswerAdapter? = null
@@ -42,12 +46,31 @@ class ShowQuestionPagerFragment : BaseFragment<CardShowQuestionsBinding, ShowQue
     var questionAndAnswerModelData = QuestionAndAnswerModel()
     var optionsModelDataList = ArrayList<OptionsModel>()
     var jumpToQuestionBottomSheetFragment: JumpToQuestionBottomSheetFragment? = null
+    lateinit var layoutBinding: CardShowQuestionsBinding
 
-    override val viewModelClass: Class<ShowQuestionsViewModel> = ShowQuestionsViewModel::class.java
+    init {
+        this.queCount = queCount
+        this.totalQueCount = totalQueCount
+        this.questionAndAnswerModelData = questionAndAnswerModel
+        this.optionsModelDataList = optionsModel
+    }
+//    override val viewModelClass: Class<ShowQuestionsViewModel> = ShowQuestionsViewModel::class.java
 
-    override fun layoutId(): Int = R.layout.card_show_questions
+//    override fun layoutId(): Int = R.layout.card_show_questions
 
-    override fun initiate() {
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        layoutBinding =
+            DataBindingUtil.inflate(inflater, R.layout.card_show_questions, container, false)
+        initiate()
+        return layoutBinding.root
+    }
+
+    fun initiate() {
         setData()
         AppLog.infoLog("Initiate::Page::$queCount")
         layoutBinding.apply {
@@ -87,15 +110,14 @@ class ShowQuestionPagerFragment : BaseFragment<CardShowQuestionsBinding, ShowQue
             rvAnswer?.apply {
                 //isNestedScrollingEnabled = true
 
-                //niraj
-                /*val optionsList = viewModel.getOptions(
+                val optionsList = viewModel.getOptions(
                     this@ShowQuestionPagerFragment.questionAndAnswerModelData?.id ?: 0
                 )
 
                 answerAdapter = AnswerAdapter(
                     optionsList ?: arrayListOf(),
                     questionAndAnswerModel
-                )*/
+                )
                 layoutManager = LinearLayoutManager(mContext, RecyclerView.VERTICAL, false)
                 answerAdapter?.showQuestionsViewModel = viewModel
                 adapter = answerAdapter
@@ -105,7 +127,7 @@ class ShowQuestionPagerFragment : BaseFragment<CardShowQuestionsBinding, ShowQue
 
                 questionAndAnswerModelData?.clearOptions = {
                     viewModel.apply {
-                        //deleteQuestionRelatedOptionLB(questionAndAnswerModel?.id ?: 0)  //niraj
+                        deleteQuestionRelatedOptionLB(questionAndAnswerModel?.id ?: 0)
 
                         insertOptionLB(AnswerEntity().apply {
                             this.quiz_Id = questionAndAnswerModel?.quizid ?: 0
@@ -113,7 +135,9 @@ class ShowQuestionPagerFragment : BaseFragment<CardShowQuestionsBinding, ShowQue
                             this.options = KEY_BLANK
                             this.iscorrect = KEY_SKIP
                             this.answer = 0
-                            this.createdDate = DateUtils.getCurrentDateTime(DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS)
+                            this.createdDate = DateUtils.getCurrentDateTime(
+                                DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS
+                            )
                         })
 
                         answerAdapter?.apply {
@@ -235,24 +259,6 @@ class ShowQuestionPagerFragment : BaseFragment<CardShowQuestionsBinding, ShowQue
         }
     }
 
-    companion object {
-        fun newInstance(
-            queCount: Int,
-            totalQueCount: Int,
-            questionAndAnswerModel: QuestionAndAnswerModel,
-            optionsModel: ArrayList<OptionsModel>
-        ): ShowQuestionPagerFragment {  // queCount: Int, totalQueCount: Int
-            val showQuestionPagerFragment = ShowQuestionPagerFragment()
-            val bundle = Bundle()
-            bundle.putInt(KEY_QUE_COUNT, queCount)
-            bundle.putInt(KEY_TOTAL_QUE_COUNT, totalQueCount)
-            bundle.putParcelable(KEY_QUESTION_MODEL, questionAndAnswerModel)
-            bundle.putParcelableArrayList(KEY_OPTIONS_MODEL, optionsModel)
-            showQuestionPagerFragment.arguments = bundle
-
-            return showQuestionPagerFragment
-        }
-    }
 
     override fun onAttach(context: Context) {
         mContext = context

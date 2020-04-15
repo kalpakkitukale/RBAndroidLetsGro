@@ -7,7 +7,11 @@
     <fragment
         android:id="@+id/coursesFragment"
         android:name="com.ramanbyte.emla.ui.fragments.CoursesFragment"
-        android:label="@string/courses" />
+        android:label="@string/courses">
+        <action
+            android:id="@+id/action_coursesFragment_to_preAssessmentTestFragment"
+            app:destination="@id/preAssessmentTestFragment" />
+    </fragment>
     <fragment
         android:id="@+id/myDownloadsFragment"
         android:name="com.ramanbyte.emla.ui.fragments.MyDownloadsFragment"
@@ -16,4 +20,15 @@
         android:id="@+id/learnerProfileFragment"
         android:name="com.ramanbyte.emla.ui.fragments.LearnerProfileFragment"
         android:label="@string/profile" />
+
+    <fragment
+        android:id="@+id/preAssessmentTestFragment"
+        android:name="com.ramanbyte.emla.ui.fragments.PreAssessmentTestFragment"
+        android:label="@string/test">
+        <action
+            android:id="@+id/action_quizInstructionFragment"
+            app:destination="@id/quiz_nav_graph" />
+    </fragment>
+
+
 </navigation>

@@ -8,12 +8,14 @@ import android.widget.ImageView
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseFragment
 import com.ramanbyte.databinding.FragmentCoursesBinding
 import com.ramanbyte.emla.adapters.CoursesAdapter
+import com.ramanbyte.emla.data_layer.network.init.NetworkConnectionInterceptor
 import com.ramanbyte.emla.view_model.CoursesViewModel
 import com.ramanbyte.utilities.*
 
@@ -68,6 +70,43 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
 
             selectedCourseModelLiveData.observe(
                 this@CoursesFragment, Observer {
+                    it?.apply {
+
+                        activity?.apply {
+                            if (NetworkConnectionInterceptor(mContext).isInternetAvailable()) {
+
+                                if (preAssessmentStatus.equals("true", true)) {
+                                    AppLog.infoLog("courses details page")
+                                    /*CourseDetailActivity.intent(this).apply {
+                                        putExtra(KEY_COURSE_MODEL, it)
+                                    }*/
+                                } else {
+                                    val bundle = Bundle()
+                                    bundle.putParcelable(KEY_COURSE_MODEL, it)
+                                    bundle.putInt(keyTestType, KEY_QUIZ_TYPE_ASSESSMENT)
+                                    view?.findNavController()?.navigate(R.id.preAssessmentTestFragment, bundle)
+                                }
+
+                            } else {
+                                viewModel.apply {
+                                    setAlertDialogResourceModelMutableLiveData(
+                                        BindingUtils.string(R.string.no_internet_message),
+                                        BindingUtils.drawable(R.drawable.ic_no_internet)!!,
+                                        true,
+                                        BindingUtils.string(R.string.yes), {
+                                            isAlertDialogShown.postValue(false)
+                                        },
+                                        BindingUtils.string(R.string.no), {
+                                            isAlertDialogShown.postValue(false)
+                                        }
+                                    )
+                                    isAlertDialogShown.postValue(true)
+                                }
+                            }
+
+                        }
+
+                    }
 
                 })
         }
