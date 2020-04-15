@@ -59,6 +59,13 @@ class ContentModel() : Parcelable, BaseObservable() {
             notifyPropertyChanged(BR.downloadStatusColor)
         }
 
+    @Bindable
+    var isDownloaded = false
+        set(value) {
+            field = value
+            notifyPropertyChanged(BR.isDownloaded)
+        }
+
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeInt(id)
         parcel.writeInt(chapter_Id)

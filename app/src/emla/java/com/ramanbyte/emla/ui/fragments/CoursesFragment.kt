@@ -65,11 +65,6 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
             coursesPagedList()?.observe(this@CoursesFragment, androidx.lifecycle.Observer {
                 it?.let { coursesAdapter?.apply { submitList(it) } }
             })
-
-            selectedCourseModelLiveData.observe(
-                this@CoursesFragment, Observer {
-
-                })
         }
     }
 

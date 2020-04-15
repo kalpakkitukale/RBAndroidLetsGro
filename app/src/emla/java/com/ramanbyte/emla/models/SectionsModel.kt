@@ -1,9 +1,11 @@
 package com.ramanbyte.emla.models
 
 import android.view.View
+import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
+import com.ramanbyte.BR
 
-class SectionsModel {
+class SectionsModel : BaseObservable() {
     var id: Int = 0
     var sequenceNo: Int = 0
     var course_Id: Int = 0

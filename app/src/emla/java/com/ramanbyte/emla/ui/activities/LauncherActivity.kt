@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import androidx.lifecycle.Observer
+import com.ramanbyte.AppController
 import com.ramanbyte.R
+import com.ramanbyte.aws_s3_android.accessor.AppS3Client
 import com.ramanbyte.base.BaseActivity
 import com.ramanbyte.databinding.ActivityLauncherBinding
 import com.ramanbyte.emla.base.di.authModuleDependency
@@ -17,15 +19,19 @@ import com.ramanbyte.utilities.makeStatusBarTransparent
  * @since 14/04/2020
  */
 
-class LauncherActivity : BaseActivity<ActivityLauncherBinding, LauncherViewModel>(authModuleDependency) {
+class LauncherActivity :
+    BaseActivity<ActivityLauncherBinding, LauncherViewModel>(authModuleDependency) {
 
     override val viewModelClass: Class<LauncherViewModel> get() = LauncherViewModel::class.java
 
     override fun layoutId(): Int = R.layout.activity_launcher
-    
-    var isUserLoggedIn : Boolean = false
+
+    var isUserLoggedIn: Boolean = false
 
     override fun initiate() {
+
+        AppS3Client.createInstance(applicationContext).setDefaultObject("dev")
+
         makeStatusBarTransparent()
         setViewModelOps()
         Handler().postDelayed({

@@ -152,4 +152,28 @@
     <string name="not_valid_password_pattern">Password should be as per password policy.Please refer to the password policy.</string>
     <string name="same_old_and_new_password">The new password you have entered is similar to the old one! Please try entering a new password.</string>
     <string name="youHaveCrossedYourMaximumLimit">oops! you have crossed your maximum limit</string>
+
+    <string name="course">Course</string>
+    <string name="chapter">Chapter</string>
+
+    <!--
+Content
+-->
+    <string name="strYes">Yes</string>
+    <string name="strNo">No</string>
+
+    <string name="strDelete">Delete</string>
+    <string name="my_downloads">My Downloads</string>
+    <string name="you_dont_have_downloads">You haven\'t downloaded any content yet.</string>
+    <string name="delete_content_alert">Are you sure to delete the content?</string>
+    <string name="content_deleted_successfully">The requested content deleted successfully</string>
+    <string name="failed_to_delete">Failed to delete the requested content</string>
+    <string name="content_not_available_at_source">Content not available at source. Try downloading again.</string>
+    <string name="preview">Preview</string>
+    <string name="file_download_msg">Please check notification bar for downloading status</string>
+
+    <!--
+    Content Ends
+    -->
+
 </resources>

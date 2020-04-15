@@ -9,6 +9,7 @@ import android.os.Environment
 import android.provider.DocumentsContract
 import android.provider.MediaStore
 import android.text.TextUtils
+import android.webkit.MimeTypeMap
 import com.google.android.gms.common.util.IOUtils
 import com.ramanbyte.BaseAppController
 import com.ramanbyte.utilities.DateUtils.DATE_TIME_SECONDS_PATTERN_FOR_FILE
@@ -421,5 +422,31 @@ object FileUtils {
     fun getApplicationFolder(): String {
         return Environment.getExternalStorageDirectory().toString() +
                 PATH_SEPARATOR + KEY_APP_STORAGE_FOLDER
+    }
+
+    fun getMimeType(extension: String): String? {
+        val ext = extension.substringAfterLast(".")
+        var type: String? = ""
+        type = MimeTypeMap.getSingleton().getMimeTypeFromExtension(ext)
+        AppLog.infoLog("Image Type ==${type}")
+        return type
+    }
+
+    fun getFileExtension(file: File): String {
+        val name = file.name
+        try {
+            return name.substring(name.lastIndexOf(".") + 1)
+        } catch (e: Exception) {
+            return ""
+        }
+    }
+
+    fun getNewCreatedPdfFilePath(customFileName: String): String {
+        var fileName = customFileName
+        if (fileName.isEmpty()) {
+            fileName = "$KEY_LOCAL_FILE_INITIALS$KEY_UNIQUE_FILE_NAME_ADDITION_STRING" +
+                    "${DateUtils.getCurrentDateTime(DATE_TIME_SECONDS_PATTERN_FOR_FILE)}$KEY_PDF_DOCUMENT_EXTENSION"
+        }
+        return getNewCreatedFilePath(fileName)
     }
 }

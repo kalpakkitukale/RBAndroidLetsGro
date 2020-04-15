@@ -1,17 +1,19 @@
 package com.ramanbyte.emla.ui.fragments
 
-import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseFragment
 import com.ramanbyte.databinding.FragmentChaptersSectionListBinding
 import com.ramanbyte.emla.adapters.ChaptersSectionListAdapter
+import com.ramanbyte.emla.content.ContentViewer
+import com.ramanbyte.emla.models.ChaptersModel
+import com.ramanbyte.emla.models.CoursesModel
+import com.ramanbyte.emla.models.MediaInfoModel
 import com.ramanbyte.emla.view_model.ChaptersSectionViewModel
 import com.ramanbyte.utilities.AlertDialog
+import com.ramanbyte.utilities.KEY_CHAPTER_MODEL
+import com.ramanbyte.utilities.KEY_COURSE_MODEL
 import com.ramanbyte.utilities.ProgressLoader
 
 /**
@@ -31,6 +33,11 @@ class ChaptersSectionListFragment :
 
         ProgressLoader(context!!, viewModel)
         AlertDialog(context!!, viewModel)
+
+        arguments?.apply {
+            viewModel.coursesModel = getParcelable(KEY_COURSE_MODEL)
+            viewModel.chaptersModel = getParcelable(KEY_CHAPTER_MODEL)
+        }
 
         layoutBinding?.apply {
 
@@ -65,7 +72,7 @@ class ChaptersSectionListFragment :
 
         viewModel.apply {
 
-            getList(0)
+            getList(chaptersModel?.chapterId ?: 0)
 
             getList()?.observe(this@ChaptersSectionListFragment, Observer {
 
@@ -73,6 +80,27 @@ class ChaptersSectionListFragment :
 
             })
 
+            contentMutableList?.observe(this@ChaptersSectionListFragment, Observer {
+
+                it?.apply {
+
+                    if (isNotEmpty()) {
+
+                        forEach { contentModel ->
+
+                            ContentViewer(context!!, viewModel).download(
+                                contentModel,
+                                MediaInfoModel().apply {
+                                    chapterId = viewModel.chaptersModel?.chapterId ?: 0
+                                    courseId = viewModel.coursesModel?.courseId ?: 0
+                                    courseName = viewModel.coursesModel?.courseName ?: ""
+                                    chapterName =
+                                        viewModel.chaptersModel?.chapterName ?: ""
+                                })
+                        }
+                    }
+                }
+            })
         }
 
     }

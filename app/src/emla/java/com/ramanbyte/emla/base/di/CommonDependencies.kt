@@ -9,6 +9,7 @@ import com.ramanbyte.emla.data_layer.repositories.ChaptersRepository
 import com.ramanbyte.emla.data_layer.repositories.CoursesRepository
 import com.ramanbyte.emla.data_layer.repositories.SectionsRepository
 import com.ramanbyte.emla.data_layer.network.api_layer.*
+import com.ramanbyte.emla.data_layer.repositories.ContentRepository
 import org.kodein.di.Kodein
 import org.kodein.di.generic.bind
 import org.kodein.di.generic.instance
@@ -28,7 +29,7 @@ private const val CHAPTER = "Chapter/"
 private const val SECTION = "Section/"
 private const val QUESTION = "Question/"
 
-var CLIENT_BASE = "Dev"
+var CLIENT_BASE = "Test"
 
 val repositoryDependencies = Kodein.Module("", true) {
 
@@ -44,6 +45,10 @@ val repositoryDependencies = Kodein.Module("", true) {
 
     bind<SectionsRepository>() with singleton {
         SectionsRepository(instance())
+    }
+
+    bind<ContentRepository>() with singleton {
+        ContentRepository(instance())
     }
 
 }

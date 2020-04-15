@@ -15,11 +15,11 @@ interface ChaptersController {
     * POST getChapterLists
     * */
     @POST("getChapterLists")
-    fun getList(@Body chapterRequest: ChapterRequest): Response<ArrayList<ChaptersModel>>
+    suspend fun getList(@Body chapterRequest: ChapterRequest): Response<List<ChaptersModel>>
 
     /*
     * GET GetListOfVideos/{chapterId}
     * */
     @GET("GetListOfVideos/{chapterId}")
-    fun getContentList(@Path("chapterId") chapterId: Int): Response<ArrayList<ContentModel>>
+    suspend fun getContentList(@Path("chapterId") chapterId: Int): Response<List<ContentModel>>
 }

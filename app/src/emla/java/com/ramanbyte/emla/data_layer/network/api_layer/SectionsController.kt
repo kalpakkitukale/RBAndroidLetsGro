@@ -11,7 +11,7 @@ import retrofit2.http.Path
 
 interface SectionsController {
 
-    @POST("Section/GetAllSection")
+    @POST("GetAllSection")
     suspend fun getList(@Body sectionRequest: SectionsRequest): Response<List<SectionsModel>>
 
     @GET("GetSectionContent/{sectionId}/{userId}")

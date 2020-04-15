@@ -7,7 +7,14 @@
     <fragment
         android:id="@+id/coursesFragment"
         android:name="com.ramanbyte.emla.ui.fragments.CoursesFragment"
-        android:label="@string/courses" />
+        android:label="@string/courses" >
+        <action
+            android:id="@+id/action_coursesFragment_to_courseDetailFragment"
+            app:destination="@id/courseDetailFragment" />
+        <action
+            android:id="@+id/action_coursesFragment_to_quizInstructionFragment"
+            app:destination="@id/quizInstructionFragment" />
+    </fragment>
     <fragment
         android:id="@+id/myDownloadsFragment"
         android:name="com.ramanbyte.emla.ui.fragments.MyDownloadsFragment"
@@ -20,7 +27,7 @@
     <fragment
         android:id="@+id/quizInstructionFragment"
         android:name="com.ramanbyte.emla.ui.fragments.QuizInstructionFragment"
-        android:label="@string/quiz_instruction" >
+        android:label="@string/quiz_instruction">
         <action
             android:id="@+id/action_allTheBestFragment"
             app:destination="@id/allTheBestFragment" />
@@ -29,7 +36,7 @@
     <fragment
         android:id="@+id/allTheBestFragment"
         android:name="com.ramanbyte.emla.ui.fragments.AllTheBestFragment"
-        android:label="@string/all_the_est" >
+        android:label="@string/all_the_est">
         <action
             android:id="@+id/action_showQuestionFragment"
             app:destination="@id/showQuestionFragment" />
@@ -39,4 +46,34 @@
         android:id="@+id/showQuestionFragment"
         android:name="com.ramanbyte.emla.ui.fragments.ShowQuestionFragment"
         android:label="@string/show_question" />
+    <fragment
+        android:id="@+id/chaptersListFragment"
+        android:name="com.ramanbyte.emla.ui.fragments.ChaptersListFragment"
+        android:label="ChaptersListFragment" />
+    <fragment
+        android:id="@+id/chaptersSectionListFragment"
+        android:name="com.ramanbyte.emla.ui.fragments.ChaptersSectionListFragment"
+        android:label="ChaptersSectionListFragment" >
+        <action
+            android:id="@+id/action_chaptersSectionListFragment_to_contentListFragment"
+            app:destination="@id/contentListFragment" />
+        <action
+            android:id="@+id/action_chaptersSectionListFragment_to_quizInstructionFragment"
+            app:destination="@id/quizInstructionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/courseDetailFragment"
+        android:name="com.ramanbyte.emla.ui.fragments.CourseDetailFragment"
+        android:label="CourseDetailFragment" >
+        <action
+            android:id="@+id/action_courseDetailFragment_to_chaptersSectionListFragment"
+            app:destination="@id/chaptersSectionListFragment" />
+        <action
+            android:id="@+id/action_courseDetailFragment_to_quizInstructionFragment"
+            app:destination="@id/quizInstructionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/contentListFragment"
+        android:name="com.ramanbyte.emla.ui.fragments.ContentListFragment"
+        android:label="ContentListFragment" />
 </navigation>

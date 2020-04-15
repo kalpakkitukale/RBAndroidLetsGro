@@ -34,6 +34,12 @@ class ViewModelFactory(private val mContext: Context) : BaseViewModelFactory(mCo
             modelClass.isAssignableFrom(LearnerProfileViewModel::class.java) -> {
                 return LearnerProfileViewModel(mContext) as T
             }
+            modelClass.isAssignableFrom(CoursesViewModel::class.java) -> {
+                return CoursesViewModel(mContext) as T
+            }
+            modelClass.isAssignableFrom(CoursesDetailViewModel::class.java) -> {
+                return CoursesDetailViewModel(mContext) as T
+            }
             modelClass.isAssignableFrom(ChaptersViewModel::class.java) -> {
                 return ChaptersViewModel(mContext) as T
             }
@@ -41,7 +47,7 @@ class ViewModelFactory(private val mContext: Context) : BaseViewModelFactory(mCo
                 return ChaptersSectionViewModel(mContext) as T
             }
             modelClass.isAssignableFrom(ContentViewModel::class.java) -> {
-                return ContainerViewModel(mContext) as T
+                return ContentViewModel(mContext) as T
             }
             modelClass.isAssignableFrom(MyDownloadsViewModel::class.java) -> {
                 return MyDownloadsViewModel(mContext) as T
@@ -52,11 +58,14 @@ class ViewModelFactory(private val mContext: Context) : BaseViewModelFactory(mCo
             modelClass.isAssignableFrom(ForgetPasswordViewModel::class.java) -> {
                 return ForgetPasswordViewModel(mContext) as T
             }
-            modelClass.isAssignableFrom(CoursesViewModel::class.java) -> {
-                return CoursesViewModel(mContext) as T
-            }
             modelClass.isAssignableFrom(ShowQuestionsViewModel::class.java) -> {
                 return ShowQuestionsViewModel(mContext) as T
+            }
+            modelClass.isAssignableFrom(FileViewerViewModel::class.java) -> {
+                return FileViewerViewModel() as T
+            }
+            modelClass.isAssignableFrom(MediaPlaybackViewModel::class.java) -> {
+                return MediaPlaybackViewModel(mContext) as T
             }
             else -> super.create(modelClass)
         }

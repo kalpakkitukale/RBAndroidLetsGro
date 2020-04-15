@@ -72,6 +72,6 @@ class ChaptersRepository(mContext: Context) : BaseRepository(mContext) {
 
         return apiRequest {
             chaptersController.getContentList(chapterId)
-        } ?: arrayListOf()
+        }?.toCollection(arrayListOf()) ?: arrayListOf<ContentModel>()
     }
 }

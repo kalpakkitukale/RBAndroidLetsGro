@@ -2,7 +2,12 @@ package com.ramanbyte.emla.adapters
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LifecycleRegistry
+import androidx.lifecycle.Observer
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -28,13 +33,82 @@ class ChaptersListAdapter(private val chaptersViewModel: ChaptersViewModel) :
     }
 
     inner class ChaptersListViewHolder(private val cardChapterBinding: CardChapterBinding) :
-        RecyclerView.ViewHolder(cardChapterBinding.root) {
+        RecyclerView.ViewHolder(cardChapterBinding.root), LifecycleOwner {
+
+        private var lifecycleRegistry: LifecycleRegistry
+
+        init {
+            lifecycleRegistry = LifecycleRegistry(this)
+            lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
+        }
+
+        override fun getLifecycle(): Lifecycle {
+            return lifecycleRegistry
+        }
 
         fun bindData() {
+
+            lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_START)
 
             cardChapterBinding.apply {
 
                 val chaptersModel = getItem(adapterPosition)
+
+                ivStatus.visibility =
+                    if (chaptersModel?.formativeAssessmentStaus.equals("true", true)) {
+                        View.VISIBLE
+                    } else {
+                        View.GONE
+                    }
+
+                if (adapterPosition > 0) {
+
+                    val isEnabled =
+                        !(getItem(adapterPosition - 1)?.formativeAssessmentStaus.isNullOrEmpty()
+                                || getItem(adapterPosition - 1)?.formativeAssessmentStaus.equals(
+                            "false",
+                            true
+                        ))
+
+                    viewDisable.visibility = if (isEnabled) {
+                        View.GONE
+                    } else {
+                        View.VISIBLE
+                    }
+
+                    cardLayoutMain.isEnabled = isEnabled
+                    IvDownload.isEnabled = isEnabled
+
+                } else {
+                    viewDisable.visibility = View.GONE
+                }
+
+                this@ChaptersListAdapter.chaptersViewModel?.isAllCourseSessionCompleted?.value =
+                    ((this@ChaptersListAdapter.chaptersViewModel?.isAllCourseSessionCompleted?.value == true) && (chaptersModel?.formativeAssessmentStaus.equals(
+                        "true",
+                        true
+                    )))
+
+                this@ChaptersListAdapter.chaptersViewModel?.getMediaInfoByChapterId(
+                    chapterModel?.chapterId ?: 0
+                )
+                    ?.observe(this@ChaptersListViewHolder, Observer { list ->
+
+                        val downloadedList = list.filter {
+                            it.mediaStatus != -1
+                        }
+
+                        val perSectionTotalCount = chapterModel?.sectionlist?.sumBy {
+                            it.contentCount
+                        }
+
+                        chaptersModel?.downloadVisibility =
+                            if ((list.isNotEmpty() && downloadedList.size == perSectionTotalCount) || perSectionTotalCount == 0) { // chapterModel.totalSectionCount //&& downloadedList.size == chapterModel.totalSectionCount
+                                View.GONE
+                            } else {
+                                View.VISIBLE
+                            }
+                    })
 
                 this.chapterModel = chaptersModel?.apply {
                     index = (adapterPosition + 1).toString()

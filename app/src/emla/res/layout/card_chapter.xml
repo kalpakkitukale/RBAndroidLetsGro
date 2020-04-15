@@ -27,7 +27,7 @@
             android:id="@+id/cardLayoutMain"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="@{() -> chaptersViewModel.onCardClicked(chapterModel)}"
+            android:onClick="@{() -> chaptersViewModel.onCardClicked(cardLayoutMain,chapterModel)}"
             app:cardBackgroundColor="@color/colorTransparent"
             app:cardCornerRadius="@dimen/dp_5"
             app:cardElevation="2dp"

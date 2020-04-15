@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">eMLA</string>
 
+    <string name="path_authority">com.ramanbyte.eMla</string>
     <string name="android">Android</string>
     <string name="alert">Alert</string>
     <string name="strOk">OK</string>
@@ -25,4 +26,15 @@
     <string name="repeat_password">Repeat Password</string>
     <string name="change_password">Change Password</string>
     <string name="profile_first_message">Please complete your profile to continue. \n This will help to suggest best suitable course for you.</string>
+    <string name="no_sections">No sections</string>
+    <string name="no_more_sections">No more sections</string>
+    <string name="course_details_unavailable">Course details are not available yet!</string>
+    <string name="getting_course_details">Getting course details…</string>
+    <string name="no_content_uploaded">No content has been uploaded yet!</string>
+
+    <string name="notifications_channel_name">Notifications</string>
+    <string name="notifications_channel_no_sound">No sound</string>
+    <string name="notifications_admin_channel_description">Notifications sent from the app admin</string>
+    <string name="getting_content_for">Fetching content data for</string>
+
 </resources>
