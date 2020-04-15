@@ -7,7 +7,11 @@
     <fragment
         android:id="@+id/coursesFragment"
         android:name="com.ramanbyte.emla.ui.fragments.CoursesFragment"
-        android:label="@string/courses" />
+        android:label="@string/courses">
+        <action
+            android:id="@+id/action_coursesFragment_to_preAssessmentTestFragment"
+            app:destination="@id/preAssessmentTestFragment" />
+    </fragment>
     <fragment
         android:id="@+id/myDownloadsFragment"
         android:name="com.ramanbyte.emla.ui.fragments.MyDownloadsFragment"
@@ -20,32 +24,11 @@
     <fragment
         android:id="@+id/preAssessmentTestFragment"
         android:name="com.ramanbyte.emla.ui.fragments.PreAssessmentTestFragment"
-        android:label="@string/test" >
+        android:label="@string/test">
         <action
             android:id="@+id/action_quizInstructionFragment"
-            app:destination="@id/quizInstructionFragment" />
+            app:destination="@id/quiz_nav_graph" />
     </fragment>
 
-    <fragment
-        android:id="@+id/quizInstructionFragment"
-        android:name="com.ramanbyte.emla.ui.fragments.QuizInstructionFragment"
-        android:label="@string/quiz_instruction" >
-        <action
-            android:id="@+id/action_allTheBestFragment"
-            app:destination="@id/allTheBestFragment" />
-    </fragment>
 
-    <fragment
-        android:id="@+id/allTheBestFragment"
-        android:name="com.ramanbyte.emla.ui.fragments.AllTheBestFragment"
-        android:label="@string/all_the_best_fragment" >
-        <action
-            android:id="@+id/action_showQuestionFragment"
-            app:destination="@id/showQuestionFragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/showQuestionFragment"
-        android:name="com.ramanbyte.emla.ui.fragments.ShowQuestionFragment"
-        android:label="@string/show_question" />
 </navigation>

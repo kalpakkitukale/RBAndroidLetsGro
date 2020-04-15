@@ -84,8 +84,7 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
                                     val bundle = Bundle()
                                     bundle.putParcelable(KEY_COURSE_MODEL, it)
                                     bundle.putInt(keyTestType, KEY_QUIZ_TYPE_ASSESSMENT)
-                                    view?.findNavController()
-                                        ?.navigate(R.id.preAssessmentTestFragment, bundle)
+                                    view?.findNavController()?.navigate(R.id.preAssessmentTestFragment, bundle)
                                 }
 
                             } else {
@@ -96,7 +95,6 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
                                         true,
                                         BindingUtils.string(R.string.yes), {
                                             isAlertDialogShown.postValue(false)
-
                                         },
                                         BindingUtils.string(R.string.no), {
                                             isAlertDialogShown.postValue(false)

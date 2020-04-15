@@ -29,7 +29,7 @@ import com.ramanbyte.utilities.*
  * @author Niraj Naware <niraj.n@ramanbyte.com>
  * @since 14/04/20
  */
-class ShowQuestionFragment : BaseFragment<FragmentShowQuestionBinding, ShowQuestionsViewModel>() {
+class ShowQuestionFragment : BaseFragment<FragmentShowQuestionBinding, ShowQuestionsViewModel>(isActivityParent = false,useParent = true,isNestedGraph = true) {
 
     var viewPagerAdapter: ViewPagerAdapter? = null
     private var mContext: Context? = null
@@ -333,13 +333,7 @@ class ShowQuestionFragment : BaseFragment<FragmentShowQuestionBinding, ShowQuest
 
                 totalQueCount = questionList.size
 
-                val questionPagerFragment =
-                    ShowQuestionPagerFragment.newInstance(
-                        queCount!!,
-                        totalQueCount,
-                        questionList[i],
-                        arrayListOf()
-                    )
+                val questionPagerFragment = ShowQuestionPagerFragment(viewModel,queCount!!, totalQueCount, questionList[i], arrayListOf())
                 viewPagerAdapter!!.addFragmentView(questionPagerFragment, "")
             }
         }

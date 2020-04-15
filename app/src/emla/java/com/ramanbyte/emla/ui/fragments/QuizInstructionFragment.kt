@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.ramanbyte.R
 import com.ramanbyte.aws_s3_android.accessor.AppS3Client
 import com.ramanbyte.base.BaseFragment
@@ -22,7 +23,7 @@ import com.ramanbyte.utilities.DateUtils.DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_M
  * @author Niraj Naware <niraj.n@ramanbyte.com>
  * @since 14/04/20
  */
-class QuizInstructionFragment : BaseFragment<FragmentQuizInstructionBinding, ShowQuestionsViewModel>() {
+class QuizInstructionFragment : BaseFragment<FragmentQuizInstructionBinding, ShowQuestionsViewModel>(isActivityParent = false,useParent = true,isNestedGraph = true) {
 
     private var mContext: Context? = null
     private var instructionsModel = InstructionsModel()
@@ -81,10 +82,7 @@ class QuizInstructionFragment : BaseFragment<FragmentQuizInstructionBinding, Sho
                         /*
                         * open or display the All the Best Screen
                         * */
-                        val fragment = AllTheBestFragment()
-                        val transaction : FragmentTransaction = fragmentManager!!.beginTransaction()
-                        transaction.replace(R.id.frameLayout, fragment)
-                        transaction.commit()
+                        findNavController().navigate(R.id.action_allTheBestFragment)
                     }
                 }
             })
