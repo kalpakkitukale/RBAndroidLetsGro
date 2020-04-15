@@ -18,7 +18,6 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ramanbyte.R
-import com.ramanbyte.base.BaseFragment
 import com.ramanbyte.databinding.CardShowQuestionsBinding
 import com.ramanbyte.emla.adapters.AnswerAdapter
 import com.ramanbyte.emla.data_layer.room.entities.AnswerEntity
@@ -158,11 +157,11 @@ class ShowQuestionPagerFragment(
 
     private fun setData() {
         layoutBinding.apply {
-            if (arguments != null) {
+            /*if (arguments != null) {
                 queCount = arguments?.getInt(KEY_QUE_COUNT)
                 totalQueCount = arguments?.getInt(KEY_TOTAL_QUE_COUNT)
                 questionAndAnswerModelData = arguments?.getParcelable(KEY_QUESTION_MODEL)!!
-                optionsModelDataList = arguments?.getParcelableArrayList(KEY_OPTIONS_MODEL)!!
+                optionsModelDataList = arguments?.getParcelableArrayList(KEY_OPTIONS_MODEL)!!*/
 
                 /*
                 *  Set current question and total question count
@@ -223,7 +222,7 @@ class ShowQuestionPagerFragment(
                     )
                 }
                 tvQuestionMarks.text = spannableStringQuestionMarks
-            }
+            //}
         }
     }
 

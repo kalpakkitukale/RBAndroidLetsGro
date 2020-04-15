@@ -24,7 +24,7 @@ import org.kodein.di.generic.instance
  * @author Niraj Naware <niraj.n@ramanbyte.com>
  * @since 14/04/20
  */
-class ShowQuestionsViewModel (var mContext: Context) : BaseViewModel(mContext) {
+class ShowQuestionsViewModel(var mContext: Context) : BaseViewModel(mContext) {
 
     val quizRepository: QuizRepository by instance()
 
@@ -138,16 +138,16 @@ class ShowQuestionsViewModel (var mContext: Context) : BaseViewModel(mContext) {
 
         invokeApiCall {
             instructionsModelLiveData.postValue(
-                /*quizRepository.getInstructions(
+                quizRepository.getInstructions(
                     chapterModelLiveData.value?.chapterId ?: 0,
                     coursesModelLiveData.value?.courseId!!,
                     testType
-                )!!*/
-                quizRepository.getInstructions(
-                    6123,
-                    4018,
-                    3
                 )!!
+                /* quizRepository.getInstructions(
+                     6123,
+                     4018,
+                     3
+                 )!!*/
             )
         }
     }
@@ -204,14 +204,14 @@ class ShowQuestionsViewModel (var mContext: Context) : BaseViewModel(mContext) {
     fun getQuestionsByCourse() {
         invokeApiCall(false) {
             questionAndAnswerModelLiveData.postValue(
-               /* quizRepository.getQuestionsByCourse(
+                quizRepository.getQuestionsByCourse(
                     coursesModelLiveData.value?.courseId!!,
                     testType
-                )*/
-                quizRepository.getQuestionsByCourse(
+                )
+                /*quizRepository.getQuestionsByCourse(
                     3028,
                     1
-                )
+                )*/
             )
 
             val questionAndAnswerModel = quizRepository.getAllQuestion()
@@ -248,7 +248,7 @@ class ShowQuestionsViewModel (var mContext: Context) : BaseViewModel(mContext) {
     * */
     fun onClickJumpToQuestion(view: View) {
         if (NetworkConnectionInterceptor(mContext).isInternetAvailable()) {
-            isJumpToQuestionBS.value = true
+            //isJumpToQuestionBS.value = true
         } else {
             noInternetDialog(BindingUtils.string(R.string.next), view)
         }
@@ -294,6 +294,10 @@ class ShowQuestionsViewModel (var mContext: Context) : BaseViewModel(mContext) {
             )
         }
     }
+
+    fun getTotalQuestionCount(): Int = quizRepository.getTotalQuestionCount()
+
+    fun getAllQuestions(): List<QuestionAndAnswerModel> = quizRepository.getAllQuestions()
 
     /*
     * Quiz Page ------------- End ---------------------

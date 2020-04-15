@@ -167,8 +167,6 @@ class ShowQuestionFragment : BaseFragment<FragmentShowQuestionBinding, ShowQuest
 
                                 if (testType == KEY_QUIZ_TYPE_ASSESSMENT) {
 
-                                    activity?.apply {
-
                                         //niraj
                                         /*startActivity(CourseDetailActivity.intent(this).apply {
                                             putExtra(KEY_COURSE_MODEL, coursesModelLiveData.value)
@@ -184,7 +182,7 @@ class ShowQuestionFragment : BaseFragment<FragmentShowQuestionBinding, ShowQuest
                                             ?.navigate(R.id.courseDetailFragment, bundle)
 
                                         isAlertDialogShown.postValue(false)
-                                    }
+
                                 } else {
                                     isAlertDialogShown.postValue(false)
 
