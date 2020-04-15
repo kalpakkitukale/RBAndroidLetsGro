@@ -1,19 +1,12 @@
 package com.ramanbyte.emla.ui.fragments
 
 import android.content.Context
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.FragmentTransaction
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseFragment
 import com.ramanbyte.databinding.FragmentPreAssessmentTestBinding
-import com.ramanbyte.emla.models.ChapterModel
+import com.ramanbyte.emla.models.ChaptersModel
 import com.ramanbyte.emla.models.CoursesModel
 import com.ramanbyte.emla.view_model.ShowQuestionsViewModel
 import com.ramanbyte.utilities.*
@@ -27,7 +20,7 @@ class PreAssessmentTestFragment :
 
     private var mContext: Context? = null
     private var courseModel: CoursesModel? = null
-    private var chapterModel: ChapterModel? = null
+    private var chapterModel: ChaptersModel? = null
 
     override val viewModelClass: Class<ShowQuestionsViewModel> = ShowQuestionsViewModel::class.java
 

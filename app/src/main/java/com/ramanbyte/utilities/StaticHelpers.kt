@@ -133,7 +133,7 @@ const val PATH_SEPARATOR = "/"
  * */
 
 const val KEY_COURSE_MODEL = "CourseModel"
-const val KEY_CHAPTER_MODEL = "ChapterModel"
+const val KEY_CHAPTER_MODEL = "ChaptersModel"
 const val KEY_QUESTION_MODEL = "QuestionModel"
 const val KEY_OPTIONS_MODEL = "OptionsModel"
 const val keyContentModel = "ContentModel"
