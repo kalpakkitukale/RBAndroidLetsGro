@@ -27,6 +27,9 @@ class ViewModelFactory(private val mContext: Context) : BaseViewModelFactory(mCo
             modelClass.isAssignableFrom(LoginViewModel::class.java) -> {
                 return LoginViewModel(mContext) as T
             }
+            modelClass.isAssignableFrom(CreateAccountViewModel::class.java) -> {
+                return CreateAccountViewModel(mContext) as T
+            }
             modelClass.isAssignableFrom(ContainerViewModel::class.java) -> {
                 return ContainerViewModel(mContext) as T
             }
