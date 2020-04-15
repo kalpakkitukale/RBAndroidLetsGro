@@ -1,9 +1,6 @@
 package com.ramanbyte.emla.data_layer.network.api_layer
 
-import com.ramanbyte.emla.models.InstructionsModel
-import com.ramanbyte.emla.models.QuestionAndAnswerModel
-import com.ramanbyte.emla.models.QuizResultModel
-import com.ramanbyte.emla.models.QuizmarksModel
+import com.ramanbyte.emla.models.*
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -41,5 +38,10 @@ interface QuestionController {
 
     @POST("SubmitQuiz")
     suspend fun submitTest(@Body testSubmitModel: QuizmarksModel): Response<QuizResultModel>
+
+    @GET("getQuestionListswithPagination/{EmpId}/{quizId}/{status}/{pageno}/{PageSize}/{attemptStatus}")
+    suspend fun getQuestionForQuizReview(
+        @Path("EmpId") EmpId: Int, @Path("quizId") quizId: Int, @Path("status") status: String, @Path("pageno") pageno: Int, @Path("PageSize") PageSize: Int, @Path("attemptStatus") attemptStatus: Int
+    ): Response<ArrayList<QuizReviewModel>>
 
 }

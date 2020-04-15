@@ -11,6 +11,7 @@ import androidx.navigation.findNavController
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseFragment
 import com.ramanbyte.databinding.FragmentPreAssessmentTestBinding
+import com.ramanbyte.emla.models.ChapterModel
 import com.ramanbyte.emla.models.CoursesModel
 import com.ramanbyte.emla.view_model.ShowQuestionsViewModel
 import com.ramanbyte.utilities.*
@@ -24,7 +25,7 @@ class PreAssessmentTestFragment :
 
     private var mContext: Context? = null
     private var courseModel: CoursesModel? = null
-    //private var chapterModel: ChapterModel? = null
+    private var chapterModel: ChapterModel? = null
 
     override val viewModelClass: Class<ShowQuestionsViewModel> = ShowQuestionsViewModel::class.java
 
@@ -34,13 +35,13 @@ class PreAssessmentTestFragment :
 
         arguments?.apply {
             courseModel = getParcelable(KEY_COURSE_MODEL)!!
-            //chapterModel = getParcelable(KEY_CHAPTER_MODEL)
+            chapterModel = getParcelable(KEY_CHAPTER_MODEL)
             viewModel.testType = getInt(keyTestType, 0)
         }
 
         viewModel.apply {
             coursesModelLiveData.value = courseModel
-            //chapterModelLiveData.value = chapterModel
+            chapterModelLiveData.value = chapterModel
         }
         ProgressLoader(mContext!!,viewModel)
         AlertDialog(mContext!!,viewModel)

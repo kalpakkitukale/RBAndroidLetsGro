@@ -48,4 +48,14 @@
         android:id="@+id/showQuestionFragment"
         android:name="com.ramanbyte.emla.ui.fragments.ShowQuestionFragment"
         android:label="@string/show_question" />
+
+    <fragment
+        android:id="@+id/quizReviewFragment"
+        android:name="com.ramanbyte.emla.ui.fragments.QuizReviewFragment"
+        android:label="@string/quiz_review" />
+
+    <fragment
+        android:id="@+id/courseDetailFragment"
+        android:name="com.ramanbyte.emla.ui.fragments.CourseDetailFragment"
+        android:label="@string/course_detail" />
 </navigation>
