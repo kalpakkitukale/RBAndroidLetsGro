@@ -127,6 +127,11 @@ class LoginViewModel(var mContext: Context) : BaseViewModel(mContext) {
         }
     }
 
+    fun createAccount(view:View) {
+
+
+    }
+
     fun forgotPassword(view: View) {
         forgotPasswordClick.value = true
     }

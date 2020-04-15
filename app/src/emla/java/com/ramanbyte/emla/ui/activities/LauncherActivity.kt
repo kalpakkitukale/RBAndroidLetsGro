@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import androidx.lifecycle.Observer
+import com.ramanbyte.BaseAppController
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseActivity
 import com.ramanbyte.databinding.ActivityLauncherBinding
@@ -35,6 +36,7 @@ class LauncherActivity : BaseActivity<ActivityLauncherBinding, LauncherViewModel
                 startActivity(LoginActivity.intent(this@LauncherActivity))
             }
             finish()
+            BaseAppController.setEnterPageAnimation(this@LauncherActivity)
         }, 1500)
     }
 
