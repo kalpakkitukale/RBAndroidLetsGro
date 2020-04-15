@@ -5,7 +5,10 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="android:textAppearance">@style/AppTheme.Font</item><!--
+        <item name="android:textViewStyle">@style/AppTheme.Font</item>
+        <item name="android:textAppearance">@style/AppTheme.Font</item>
+        <!--
+        <item name="android:textAppearance">@style/AppTheme.Font</item>
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowTranslucentNavigation">true</item>-->
     </style>
@@ -14,6 +17,8 @@
     <!--toolbar style -->
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" >
         <item name="android:textAppearance">@style/AppTheme.Font</item>
+        <item name="android:textViewStyle">@style/AppTheme.Font</item>
+        <item name="button_style">@style/AppTheme.Font</item>
     </style>
     <!--<style name="AppTheme.AppBarOverlay" parent="Theme.Design.NoActionBar" />-->
 
@@ -52,6 +57,9 @@
     <style name="TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
         <item name="android:textColorHint">@color/textHintColor</item>
         <item name="android:textAppearance">@style/AppTheme.Font</item>
+        <item name="android:textViewStyle">@style/AppTheme.Font</item>
+        <item name="button_style">@style/AppTheme.Font</item>
+
     </style>
 
     <style name="TextInputLayoutWithoutBorder" parent="Widget.MaterialComponents.TextInputLayout.FilledBox.Dense">
@@ -59,10 +67,14 @@
         <item name="hintTextColor">@color/textHintColor</item>
         <item name="boxStrokeWidth">0.1dp</item>
         <item name="android:textAppearance">@style/AppTheme.Font</item>
+        <item name="android:textViewStyle">@style/AppTheme.Font</item>
+        <item name="button_style">@style/AppTheme.Font</item>
         <item name="boxStrokeWidthFocused">1dp</item>
     </style>
 
     <style name="EditTextStyleIntoTilRegular">
+        <item name="android:textViewStyle">@style/AppTheme.Font</item>
+        <item name="button_style">@style/AppTheme.Font</item>
         <item name="android:textAppearance">@style/AppTheme.Font</item>
         <item name="android:padding">@dimen/dp_10</item>
         <item name="android:textSize">@dimen/sp_14</item>

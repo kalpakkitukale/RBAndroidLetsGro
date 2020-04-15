@@ -19,7 +19,7 @@
     <fragment
         android:id="@+id/learnerProfileFragment"
         android:name="com.ramanbyte.emla.ui.fragments.SettingFragment"
-        android:label="@string/action_settings">
+        android:label="@string/action_settings" >
         <action
             android:id="@+id/action_learnerProfileFragment_to_changePasswordFragment"
             app:destination="@id/changePasswordFragment" />
