@@ -72,39 +72,39 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
                 this@CoursesFragment, Observer {
                     it?.apply {
 
-                        activity?.apply {
-                            if (NetworkConnectionInterceptor(mContext).isInternetAvailable()) {
+                        if (NetworkConnectionInterceptor(mContext).isInternetAvailable()) {
 
-                                if (preAssessmentStatus.equals("true", true)) {
-                                    AppLog.infoLog("courses details page")
-                                    val bundle = Bundle()
-                                    bundle.putParcelable(KEY_COURSE_MODEL, it)
-                                    view?.findNavController()?.navigate(R.id.courseDetailFragment, bundle)
-                                } else {
-                                    val bundle = Bundle()
-                                    bundle.putParcelable(KEY_COURSE_MODEL, it)
-                                    bundle.putInt(keyTestType, KEY_QUIZ_TYPE_ASSESSMENT)
-                                    view?.findNavController()?.navigate(R.id.preAssessmentTestFragment, bundle)
-                                }
-
+                            if (preAssessmentStatus.equals("true", true)) {
+                                AppLog.infoLog("courses details page")
+                                val bundle = Bundle()
+                                bundle.putParcelable(KEY_COURSE_MODEL, it)
+                                view?.findNavController()
+                                    ?.navigate(R.id.courseDetailFragment, bundle)
                             } else {
-                                viewModel.apply {
-                                    setAlertDialogResourceModelMutableLiveData(
-                                        BindingUtils.string(R.string.no_internet_message),
-                                        BindingUtils.drawable(R.drawable.ic_no_internet)!!,
-                                        true,
-                                        BindingUtils.string(R.string.yes), {
-                                            isAlertDialogShown.postValue(false)
-                                        },
-                                        BindingUtils.string(R.string.no), {
-                                            isAlertDialogShown.postValue(false)
-                                        }
-                                    )
-                                    isAlertDialogShown.postValue(true)
-                                }
+                                val bundle = Bundle()
+                                bundle.putParcelable(KEY_COURSE_MODEL, it)
+                                bundle.putInt(keyTestType, KEY_QUIZ_TYPE_ASSESSMENT)
+                                view?.findNavController()
+                                    ?.navigate(R.id.preAssessmentTestFragment, bundle)
                             }
 
+                        } else {
+                            viewModel.apply {
+                                setAlertDialogResourceModelMutableLiveData(
+                                    BindingUtils.string(R.string.no_internet_message),
+                                    BindingUtils.drawable(R.drawable.ic_no_internet)!!,
+                                    true,
+                                    BindingUtils.string(R.string.yes), {
+                                        isAlertDialogShown.postValue(false)
+                                    },
+                                    BindingUtils.string(R.string.no), {
+                                        isAlertDialogShown.postValue(false)
+                                    }
+                                )
+                                isAlertDialogShown.postValue(true)
+                            }
                         }
+
 
                     }
 
