@@ -39,7 +39,7 @@
     <string name="first_name">First Name</string>
     <string name="middle_name">Middle Name</string>
     <string name="last_name">Last Name</string>
-    <string name="date_of_birth">Date Of Birth</string>
+    <string name="date_of_birth">Date of Birth</string>
     <string name="designation">Designation</string>
     <string name="pass">pass</string>
     <string name="fail">fail</string>
@@ -66,6 +66,8 @@
     <string name="quiz_instruction">Quiz Instruction</string>
     <string name="all_the_best_fragment">All The Best</string>
     <string name="show_question">Show Question</string>
+    <string name="course_detail">Course Detail</string>
+    <string name="quiz_review">Quiz Review</string>
 
     <string name="jump_to_question">jump to question</string>
     <string name="not_attempted">Not Attempted</string>
@@ -145,9 +147,10 @@
     <string name="oldPassword">Old password</string>
     <string name="newPassword">New password</string>
     <string name="confirmPassword1">Confirm password</string>
+    <string name="old_password_required">Please enter old password</string>
     <string name="confirmPassword">Confirm new password</string>
-    <string name="new_password_required">Please Enter New Password</string>
-    <string name="confirm_new_password_required">Please Confirm Password.</string>
+    <string name="new_password_required">Please enter new password</string>
+    <string name="confirm_new_password_required">Please enter repeat new password.</string>
     <string name="enter_valid_new_password">Enter a valid new password</string>
     <string name="invalid_old_password">Enter a valid old password</string>
     <string name="enter_valid_confirm_new_password">Enter a valid confirm new password</string>
@@ -155,4 +158,43 @@
     <string name="not_valid_password_pattern">Password should be as per password policy.Please refer to the password policy.</string>
     <string name="same_old_and_new_password">The new password you have entered is similar to the old one! Please try entering a new password.</string>
     <string name="youHaveCrossedYourMaximumLimit">oops! you have crossed your maximum limit</string>
+    <string name="firstName">First Name</string>
+    <string name="middleName">Middle Name</string>
+    <string name="lastName">Last Name</string>
+    <string name="mobileNumber">Mobile Number</string>
+    <string name="state">State</string>
+    <string name="city">City</string>
+    <string name="program">Program</string>
+    <string name="batchYear">BatchYear</string>
+    <string name="pattern">Pattern</string>
+    <string name="university">University</string>
+    <string name="institute">Institute</string>
+
+    <string name="filter">Filters</string>
+    <string name="specialisation">Specialisation</string>
+    <string name="apply">Apply</string>
+
+    <string name="course">Course</string>
+    <string name="chapter">Chapter</string>
+
+    <!--
+Content
+-->
+    <string name="strYes">Yes</string>
+    <string name="strNo">No</string>
+
+    <string name="strDelete">Delete</string>
+    <string name="my_downloads">My Downloads</string>
+    <string name="you_dont_have_downloads">You haven\'t downloaded any content yet.</string>
+    <string name="delete_content_alert">Are you sure to delete the content?</string>
+    <string name="content_deleted_successfully">The requested content deleted successfully</string>
+    <string name="failed_to_delete">Failed to delete the requested content</string>
+    <string name="content_not_available_at_source">Content not available at source. Try downloading again.</string>
+    <string name="preview">Preview</string>
+    <string name="file_download_msg">Please check notification bar for downloading status</string>
+
+    <!--
+    Content Ends
+    -->
+
 </resources>

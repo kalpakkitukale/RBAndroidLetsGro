@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="quizReviewOptionModel"
+            type="com.ramanbyte.emla.models.QuizReviewOptionModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorTransparent"
+        app:layout_anchor="@+id/cardMainContainer"
+        app:layout_anchorGravity="center">
+
+        <TextView
+            android:id="@+id/tvOptions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/sp_12"
+            android:drawablePadding="@dimen/dp_10"
+            android:drawableStart="@drawable/circle_attempted"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="parent" />
+
+        <!--<com.ramanbyte.idbi.view.BulletTextView
+            android:id="@+id/tvOptions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/sp_12"
+            app:bullt_visible="true"
+            app:gapBetweenText="@dimen/dp_22"
+            app:radious="8" />-->
+        <!--android:text="@{quizReviewOptionModel.values}"-->
+
+    </LinearLayout>
+</layout>
