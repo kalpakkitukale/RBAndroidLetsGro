@@ -74,9 +74,9 @@ class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
             if (NetworkConnectivity.isConnectedToInternet()) {
                 if (model.preAssessmentStatus.equals("true", true)) {
                     AppLog.infoLog("courses details page")
-                    /*CourseDetailActivity.intent(this).apply {
-                            putExtra(KEY_COURSE_MODEL, it)
-                        }*/
+                    val bundle = Bundle()
+                    bundle.putParcelable(KEY_COURSE_MODEL, model)
+                    view.findNavController().navigate(R.id.courseDetailFragment, bundle)
                 } else {
                     val bundle = Bundle()
                     bundle.putParcelable(KEY_COURSE_MODEL, model)
