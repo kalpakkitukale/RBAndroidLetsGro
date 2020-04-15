@@ -155,4 +155,10 @@
     <string name="not_valid_password_pattern">Password should be as per password policy.Please refer to the password policy.</string>
     <string name="same_old_and_new_password">The new password you have entered is similar to the old one! Please try entering a new password.</string>
     <string name="youHaveCrossedYourMaximumLimit">oops! you have crossed your maximum limit</string>
+
+    <string name="filter">Filters</string>
+    <string name="program">Program</string>
+    <string name="pattern">Pattern</string>
+    <string name="specialisation">Specialisation</string>
+    <string name="apply">Apply</string>
 </resources>
