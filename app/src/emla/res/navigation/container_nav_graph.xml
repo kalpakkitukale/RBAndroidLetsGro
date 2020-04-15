@@ -12,8 +12,8 @@
             android:id="@+id/action_coursesFragment_to_courseDetailFragment"
             app:destination="@id/courseDetailFragment" />
         <action
-            android:id="@+id/action_coursesFragment_to_quizInstructionFragment"
-            app:destination="@id/quizInstructionFragment" />
+            android:id="@+id/action_coursesFragment_to_preAssessmentTestFragment"
+            app:destination="@id/preAssessmentTestFragment" />
     </fragment>
     <fragment
         android:id="@+id/myDownloadsFragment"
@@ -21,31 +21,25 @@
         android:label="@string/downloads" />
     <fragment
         android:id="@+id/learnerProfileFragment"
-        android:name="com.ramanbyte.emla.ui.fragments.LearnerProfileFragment"
-        android:label="@string/profile" />
-
-    <fragment
-        android:id="@+id/quizInstructionFragment"
-        android:name="com.ramanbyte.emla.ui.fragments.QuizInstructionFragment"
-        android:label="@string/quiz_instruction">
+        android:name="com.ramanbyte.emla.ui.fragments.SettingFragment"
+        android:label="@string/action_settings">
         <action
-            android:id="@+id/action_allTheBestFragment"
-            app:destination="@id/allTheBestFragment" />
+            android:id="@+id/action_learnerProfileFragment_to_changePasswordFragment"
+            app:destination="@id/changePasswordFragment" />
     </fragment>
 
     <fragment
-        android:id="@+id/allTheBestFragment"
-        android:name="com.ramanbyte.emla.ui.fragments.AllTheBestFragment"
-        android:label="@string/all_the_est">
+        android:id="@+id/preAssessmentTestFragment"
+        android:name="com.ramanbyte.emla.ui.fragments.PreAssessmentTestFragment"
+        android:label="@string/test">
         <action
-            android:id="@+id/action_showQuestionFragment"
-            app:destination="@id/showQuestionFragment" />
+            android:id="@+id/action_quizInstructionFragment"
+            app:destination="@id/quiz_nav_graph" />
     </fragment>
-
     <fragment
-        android:id="@+id/showQuestionFragment"
-        android:name="com.ramanbyte.emla.ui.fragments.ShowQuestionFragment"
-        android:label="@string/show_question" />
+        android:id="@+id/changePasswordFragment"
+        android:name="com.ramanbyte.emla.ui.fragments.ChangePasswordFragment"
+        android:label="@string/change_password" />
     <fragment
         android:id="@+id/chaptersListFragment"
         android:name="com.ramanbyte.emla.ui.fragments.ChaptersListFragment"

@@ -1,14 +1,22 @@
 package com.ramanbyte.emla.data_layer.repositories
 
 import android.content.Context
+import androidx.databinding.ObservableField
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.paging.LivePagedListBuilder
+import androidx.paging.PagedList
 import com.ramanbyte.data_layer.SharedPreferencesDatabase
 import com.ramanbyte.data_layer.base.BaseRepository
+import com.ramanbyte.data_layer.pagination.PaginationResponseHandler
 import com.ramanbyte.emla.data_layer.network.api_layer.QuestionController
+import com.ramanbyte.emla.data_layer.pagination.PaginationDataSourceFactory
 import com.ramanbyte.emla.data_layer.room.ApplicationDatabase
 import com.ramanbyte.emla.data_layer.room.entities.AnswerEntity
 import com.ramanbyte.emla.data_layer.room.entities.OptionsEntity
 import com.ramanbyte.emla.data_layer.room.entities.QuestionAndAnswerEntity
 import com.ramanbyte.emla.models.*
+import com.ramanbyte.emla.models.request.QuizReviewRequestModel
 import com.ramanbyte.utilities.*
 import com.ramanbyte.utilities.DateUtils.DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS
 import org.kodein.di.generic.instance
@@ -268,6 +276,75 @@ class QuizRepository (val mContext: Context) : BaseRepository(mContext){
         }
 
     }
+
+
+    //----------------------------------------------------------------------------------------
+
+    var questionForQuizReviewPagedList: LiveData<PagedList<QuizReviewModel>>? = null
+    lateinit var questionForQuizReviewPagedDataSourceFactory: PaginationDataSourceFactory<QuizReviewModel, QuizReviewRequestModel>
+    private val pageSize = 10
+    private val pageListConfig =
+        PagedList.Config.Builder().setEnablePlaceholders(false).setPageSize(pageSize).build()
+
+    private val quizReviewRequestModelObservable = ObservableField<QuizReviewRequestModel>().apply {
+        set(QuizReviewRequestModel())
+    }
+
+    private var paginationResponseHandlerLiveData: MutableLiveData<PaginationResponseHandler?> =
+        MutableLiveData(null)
+
+    fun initiatePagination(quizId: Int, status: String, attemptstatus: Int) {
+
+        val empId = applicationDatabase.getUserDao().getCurrentUser()?.userId
+
+        quizReviewRequestModelObservable.apply {
+            set(QuizReviewRequestModel().apply {
+                this.status = status
+                this.attemptStatus = attemptstatus
+            })
+        }
+
+        questionForQuizReviewPagedDataSourceFactory = PaginationDataSourceFactory(
+            quizReviewRequestModelObservable,
+            paginationResponseHandlerLiveData
+        ) { quizReviewModel ->
+            apiRequest {
+                questionController.getQuestionForQuizReview(
+                    empId!!,
+                    quizId,
+                    quizReviewModel.status,
+                    quizReviewModel.pageNo,
+                    pageSize,
+                    quizReviewModel.attemptStatus
+                )
+            }!!
+        }
+
+        questionForQuizReviewPagedList =
+            LivePagedListBuilder(
+                questionForQuizReviewPagedDataSourceFactory,
+                pageListConfig
+            ).build()
+
+        paginationResponseHandlerLiveData.postValue(PaginationResponseHandler.INIT_LOADING)
+    }
+
+    fun getPaginationResponseHandler() = paginationResponseHandlerLiveData
+
+    fun retryQuestionForQuizReview(quizId: Int, questionStatus: String, attemptstatus: Int) {
+
+        quizReviewRequestModelObservable.apply {
+            set(QuizReviewRequestModel().apply {
+                this.status = questionStatus
+                this.quizId = quizId
+                this.attemptStatus = attemptstatus
+            })
+        }
+
+        questionForQuizReviewPagedList?.value?.dataSource?.invalidate()
+        paginationResponseHandlerLiveData.postValue(PaginationResponseHandler.INIT_LOADING)
+    }
+
 
 
 

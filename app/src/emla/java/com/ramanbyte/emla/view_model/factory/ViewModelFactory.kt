@@ -28,6 +28,9 @@ class ViewModelFactory(private val mContext: Context) : BaseViewModelFactory(mCo
             modelClass.isAssignableFrom(LoginViewModel::class.java) -> {
                 return LoginViewModel(mContext) as T
             }
+            modelClass.isAssignableFrom(CreateAccountViewModel::class.java) -> {
+                return CreateAccountViewModel(mContext) as T
+            }
             modelClass.isAssignableFrom(ContainerViewModel::class.java) -> {
                 return ContainerViewModel(mContext) as T
             }
@@ -66,6 +69,12 @@ class ViewModelFactory(private val mContext: Context) : BaseViewModelFactory(mCo
             }
             modelClass.isAssignableFrom(MediaPlaybackViewModel::class.java) -> {
                 return MediaPlaybackViewModel(mContext) as T
+            }
+            modelClass.isAssignableFrom(CoursesDetailViewModel::class.java) -> {
+                return CoursesDetailViewModel(mContext) as T
+            }
+            modelClass.isAssignableFrom(SettingViewModel::class.java) -> {
+                return SettingViewModel(mContext) as T
             }
             else -> super.create(modelClass)
         }

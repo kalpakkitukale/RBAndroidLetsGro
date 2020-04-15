@@ -38,7 +38,10 @@ const val lowerRegex: String = ".*[a-z].*"
 const val specialRegex: String = ".*[!\"#\$%&'()*+,-./:;<=>?@[\\^]_`{|}~].*"
 const val KEY_EMAIL = "email"
 const val KEY_OLD_PASSWORD = "oldPassword"
-const val KEY_NEW_PASSWORD = "newPassword"
+const val KEY_NEW_PASSWORD = "newPassword"//new password
+const val keyPassword = "password"//old password
+const val KEY_CONFIRM_RESET_NEW_PASSWORD = "ConfirmPassword"//confirm new password
+
 
 const val SELECT = "-Select-"
 
@@ -57,7 +60,7 @@ const val KEY_TOTAL_QUE_COUNT = "totalQueCount"
 const val keyQuestionId = "questionId"
 
 const val keyEmailId = "emailId"
-const val keyPassword = "password"
+
 
 const val KEY_OTP_ONE = "otp_place_one"
 const val KEY_OTP_TWO = "otp_place_two"
@@ -80,7 +83,6 @@ const val KEY_LOGIN_LOGOUT_STATUS = "loginLogOutStatus"
 //reset password Key
 const val KEY_PASSWORD_OLD = "Password"
 const val KEY_RESET_NEW_PASSWORD = "NewPassword"
-const val KEY_CONFIRM_RESET_NEW_PASSWORD = "ConfirmPassword"
 const val KEY_LOGIN_USERNAME = "username"
 const val KEY_LOGIN_PASSWORD = "password"
 

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.Handler
 import androidx.lifecycle.Observer
 import com.ramanbyte.AppController
+import com.ramanbyte.BaseAppController
 import com.ramanbyte.R
 import com.ramanbyte.aws_s3_android.accessor.AppS3Client
 import com.ramanbyte.base.BaseActivity
@@ -41,6 +42,7 @@ class LauncherActivity :
                 startActivity(LoginActivity.intent(this@LauncherActivity))
             }
             finish()
+            BaseAppController.setEnterPageAnimation(this@LauncherActivity)
         }, 1500)
     }
 

@@ -4,14 +4,17 @@
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item><!--
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="android:textAppearance">@style/AppTheme.Font</item><!--
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowTranslucentNavigation">true</item>-->
     </style>
 
 
     <!--toolbar style -->
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" >
+        <item name="android:textAppearance">@style/AppTheme.Font</item>
+    </style>
     <!--<style name="AppTheme.AppBarOverlay" parent="Theme.Design.NoActionBar" />-->
 
     <!-- START Font Style-->
@@ -48,12 +51,14 @@
 
     <style name="TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
         <item name="android:textColorHint">@color/textHintColor</item>
+        <item name="android:textAppearance">@style/AppTheme.Font</item>
     </style>
 
     <style name="TextInputLayoutWithoutBorder" parent="Widget.MaterialComponents.TextInputLayout.FilledBox.Dense">
         <item name="android:textColorHint">@color/textHintColor</item>
         <item name="hintTextColor">@color/textHintColor</item>
         <item name="boxStrokeWidth">0.1dp</item>
+        <item name="android:textAppearance">@style/AppTheme.Font</item>
         <item name="boxStrokeWidthFocused">1dp</item>
     </style>
 
@@ -188,6 +193,7 @@
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:textAppearance">@style/AppTheme.Font</item>
     </style>
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
@@ -197,6 +203,7 @@
         <!-- <item name="android:layout_margin">@dimen/dp_5</item>-->
         <item name="android:layout_marginRight">@dimen/dp_5</item>
         <item name="android:layout_marginLeft">@dimen/dp_5</item>
+        <item name="android:textAppearance">@style/AppTheme.Font</item>
     </style>
 
 </resources>

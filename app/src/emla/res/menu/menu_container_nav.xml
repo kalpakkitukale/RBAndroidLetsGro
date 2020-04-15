@@ -12,7 +12,7 @@
          android:title="@string/downloads" />
     <item
          android:id="@+id/learnerProfileFragment"
-         android:icon="@drawable/ic_user"
-         android:title="@string/profile" />
+         android:icon="@drawable/ic_settings"
+         android:title="@string/action_settings" />
 
 </menu>
