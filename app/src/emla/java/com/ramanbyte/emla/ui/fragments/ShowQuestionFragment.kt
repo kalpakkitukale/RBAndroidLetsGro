@@ -83,6 +83,7 @@ class ShowQuestionFragment : BaseFragment<FragmentShowQuestionBinding, ShowQuest
                     isAlertDialogShown.postValue(true)
                 }
                 true
+
             }
             else -> super.onOptionsItemSelected(item)
         }
