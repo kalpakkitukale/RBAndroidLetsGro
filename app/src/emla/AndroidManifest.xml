@@ -29,8 +29,12 @@
         <activity
             android:name=".emla.ui.activities.LoginActivity"
             android:windowSoftInputMode="adjustResize|stateHidden" />
-        <activity android:name=".emla.ui.activities.ContainerActivity">
-        </activity>
+        <activity
+            android:name=".emla.ui.activities.CreateAccountActivity"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity android:name=".emla.ui.activities.ContainerActivity" />
+        <activity android:name=".emla.ui.activities.ForgotPasswordActivity" />
+        <activity android:name=".emla.ui.activities.ChangePasswordActivity" />
     </application>
 
 </manifest>

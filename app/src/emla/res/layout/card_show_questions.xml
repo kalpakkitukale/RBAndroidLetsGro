@@ -1,22 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-<data>
-    <variable
-        name="cardShowQuestionsViewModel"
-        type="com.ramanbyte.emla.view_model.ShowQuestionsViewModel" />
-    <variable
-        name="questionAndAnswerModel"
-        type="com.ramanbyte.emla.models.QuestionAndAnswerModel" />
-</data>
+    <data>
+
+        <variable
+            name="cardShowQuestionsViewModel"
+            type="com.ramanbyte.emla.view_model.ShowQuestionsViewModel" />
+
+        <variable
+            name="questionAndAnswerModel"
+            type="com.ramanbyte.emla.models.QuestionAndAnswerModel" />
+    </data>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="none"
-        android:background="@color/colorTransparent">
+        android:background="@color/colorTransparent"
+        android:scrollbars="none">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -78,8 +80,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="@+id/tvJumpToQuestion"
                         app:layout_constraintTop_toBottomOf="@+id/tvJumpToQuestion"
-                         />
-                    <!--app:setHtmlText="@{questionAndAnswerModel.question_Title}"-->
+                        app:setHtmlText="@{questionAndAnswerModel.question_Title}" />
 
                     <TextView
                         android:id="@+id/tvQuestionMarks"

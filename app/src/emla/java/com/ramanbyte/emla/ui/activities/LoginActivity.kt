@@ -16,6 +16,7 @@ import androidx.lifecycle.Observer
 import androidx.work.Data
 import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
+import com.ramanbyte.BaseAppController
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseActivity
 import com.ramanbyte.databinding.ActivityLoginBinding
@@ -37,7 +38,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(authMod
     override fun layoutId(): Int = R.layout.activity_login
 
     override fun initiate() {
-
+        setListeners()
         makeStatusBarTransparent()
         layoutBinding.apply {
             lifecycleOwner = this@LoginActivity
@@ -64,6 +65,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(authMod
                             callWorkerToMangeUserDevice()
                             startActivity(ContainerActivity.intent(this@LoginActivity))
                             finish()
+                            BaseAppController.setEnterPageAnimation(this@LoginActivity)
                         }
 
                     }
@@ -181,6 +183,18 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(authMod
     companion object {
         fun intent(activity: Activity): Intent {
             return Intent(activity, LoginActivity::class.java)
+        }
+    }
+
+    private fun setListeners() {
+        layoutBinding.apply {
+            tvForgetPassword.setOnClickListener {
+                startActivity(ForgotPasswordActivity.intent(this@LoginActivity))
+            }
+
+            tvChangePassword.setOnClickListener {
+                startActivity(ChangePasswordActivity.intent(this@LoginActivity))
+            }
         }
     }
 }

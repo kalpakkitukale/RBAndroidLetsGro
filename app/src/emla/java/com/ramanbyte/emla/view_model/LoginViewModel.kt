@@ -32,7 +32,6 @@ class LoginViewModel(var mContext: Context) : BaseViewModel(mContext) {
     var userEntity = masterRepository.getCurrentUser()
     var isPledgeConfirm: MutableLiveData<Boolean?> = MutableLiveData(null)
     var navigateToNextScreen: MutableLiveData<Boolean?> = MutableLiveData(null)
-
     val loginRequestValidation =
         ObservableValidator(userLoginRequestLiveData.value!!, BR::class.java).apply {
 
@@ -126,6 +125,11 @@ class LoginViewModel(var mContext: Context) : BaseViewModel(mContext) {
             navigateToNextScreen.value = false
             //show error
         }
+    }
+
+    fun createAccount(view:View) {
+
+
     }
 
     fun forgotPassword(view: View) {

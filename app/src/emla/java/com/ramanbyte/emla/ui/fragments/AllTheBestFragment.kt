@@ -9,6 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseFragment
 import com.ramanbyte.databinding.FragmentAllTheBestBinding
@@ -22,7 +24,7 @@ import com.ramanbyte.utilities.ProgressLoader
  * @author Niraj Naware <niraj.n@ramanbyte.com>
  * @since 14/04/20
  */
-class AllTheBestFragment : BaseFragment<FragmentAllTheBestBinding, ShowQuestionsViewModel>(true, true) {
+class AllTheBestFragment : BaseFragment<FragmentAllTheBestBinding, ShowQuestionsViewModel>(isActivityParent = false,useParent = true,isNestedGraph = true) {
 
     private var mContext: Context? = null
 
@@ -31,6 +33,7 @@ class AllTheBestFragment : BaseFragment<FragmentAllTheBestBinding, ShowQuestions
     override fun layoutId(): Int = R.layout.fragment_all_the_best
 
     override fun initiate() {
+
         ProgressLoader(mContext!!, viewModel)
         AlertDialog(mContext!!, viewModel)
 
@@ -58,10 +61,7 @@ class AllTheBestFragment : BaseFragment<FragmentAllTheBestBinding, ShowQuestions
     }
 
     private fun startTest() {
-        /*val fragment = ShowQuestionFragment()
-        val transaction: FragmentTransaction = requireFragmentManager().beginTransaction()
-        transaction.replace(R.id.frameLayout, fragment,"ShowQuestionFragment")
-        transaction.commit()*/
+        findNavController().navigate(R.id.action_showQuestionFragment)
     }
 
     override fun onAttach(context: Context) {

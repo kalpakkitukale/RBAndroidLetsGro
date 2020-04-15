@@ -37,8 +37,9 @@ const val upperRegex: String = ".*[A-Z].*"
 const val lowerRegex: String = ".*[a-z].*"
 const val specialRegex: String = ".*[!\"#\$%&'()*+,-./:;<=>?@[\\^]_`{|}~].*"
 const val KEY_EMAIL = "email"
+const val KEY_OLD_PASSWORD = "oldPassword"
 const val KEY_NEW_PASSWORD = "newPassword"
-const val KEY_CONFIRM_NEW_PASSWORD = "confirmPassword"
+
 const val SELECT = "-Select-"
 
 const val KEY_IS_FIXED_ASPECT_RATIO = "isFixedAspectRatio"

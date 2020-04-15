@@ -37,9 +37,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:scaleType="fitXY"
+                app:imageUrl="@{instructionShowQuestionsViewModel.coursesModelLiveData.courseImageUrl}"
                 android:background="@drawable/ic_course_dummy"
                  />
-            <!--app:imageUrl="@{instructionShowQuestionsViewModel.coursesModelLiveData.courseImageUrl}"-->
         </androidx.cardview.widget.CardView>
 
         <androidx.constraintlayout.widget.Guideline
@@ -66,9 +66,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_10"
-                android:textSize="@dimen/sp_16" />
-            <!--android:text="@{instructionShowQuestionsViewModel.instructionsModelLiveData.quiz_Title}"
-            android:text="@{instructionShowQuestionsViewModel.instructionsModelLiveData.quiz_Title}"-->
+                android:textSize="@dimen/sp_16"
+                android:text="@{instructionShowQuestionsViewModel.instructionsModelLiveData.quiz_Title}"/>
+            <!--android:text="@{instructionShowQuestionsViewModel.instructionsModelLiveData.quiz_Title}"-->
 
             <TextView
                 android:id="@+id/tvInstruction"
@@ -103,10 +103,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_16"
+                android:text="@{instructionShowQuestionsViewModel.instructionsModelLiveData.total_Questions}"
                 app:layout_constraintEnd_toEndOf="@+id/cardMainContainer"
                 app:layout_constraintStart_toStartOf="@+id/cardMainContainer"
                 app:layout_constraintTop_toBottomOf="@+id/lblTotalNoOfQue" />
-            <!--android:text="@{instructionShowQuestionsViewModel.instructionsModelLiveData.total_Questions}"-->
 
         </LinearLayout>
 
@@ -116,21 +116,21 @@
             android:layout_height="@dimen/dp_100"
             android:layout_marginTop="@dimen/dp_10"
             android:textSize="@dimen/sp_14"
+            app:setHtmlText="@{instructionShowQuestionsViewModel.instructionsModelLiveData.common_Instruction}"
             app:layout_constraintEnd_toEndOf="@+id/cardMainContainer"
             app:layout_constraintStart_toStartOf="@+id/cardMainContainer"
             app:layout_constraintTop_toBottomOf="@+id/mainLinear" />
-        <!--app:setHtmlText="@{instructionShowQuestionsViewModel.instructionsModelLiveData.common_Instruction}"-->
+
 
         <com.ramanbyte.emla.view.NestedWebView
             android:id="@+id/wvStaticInstructions"
             android:layout_width="0dp"
             android:layout_height="@dimen/dp_100"
             android:textSize="@dimen/sp_14"
+            app:setHtmlText="@{instructionShowQuestionsViewModel.instructionsModelLiveData.static_Instructions}"
             app:layout_constraintEnd_toEndOf="@+id/cardMainContainer"
             app:layout_constraintStart_toStartOf="@+id/cardMainContainer"
             app:layout_constraintTop_toBottomOf="@+id/wvCommonInstruction" />
-        <!--app:setHtmlText="@{instructionShowQuestionsViewModel.instructionsModelLiveData.static_Instructions}"-->
-
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnStartQuiz"

@@ -2,9 +2,11 @@ package com.ramanbyte.data_layer.network.api_layer
 
 import com.google.gson.JsonSyntaxException
 import com.ramanbyte.BaseAppController
+import com.ramanbyte.R
 import com.ramanbyte.emla.data_layer.network.exception.ApiException
 import com.ramanbyte.emla.data_layer.network.exception.NoDataException
 import com.ramanbyte.emla.data_layer.network.exception.NoInternetException
+import com.ramanbyte.utilities.BindingUtils
 import com.ramanbyte.utilities.KEY_NO_INTERNET_ERROR
 import com.ramanbyte.utilities.KEY_SOMETHING_WENT_WRONG_ERROR
 import org.json.JSONException
@@ -35,9 +37,7 @@ abstract class ApiResponseHandler {
                 if (responseData != null) {
 
                     if (responseData is String && responseData.toString().contains("<html>", true))
-                        throw NoInternetException( BaseAppController.mFirebaseRemoteConfig!!.getString(
-                            KEY_NO_INTERNET_ERROR
-                        ))
+                        throw NoInternetException(BindingUtils.string(R.string.please_make_sure_you_are_connected_to_internet))
 
                     return responseData
 
@@ -50,13 +50,10 @@ abstract class ApiResponseHandler {
 
                 val errorBody = response.errorBody()?.string()
                 if (errorBody != null && isHtmlString(errorBody.toString()))
-                    throw ApiException(
-                        BaseAppController.mFirebaseRemoteConfig!!.getString(
-                            KEY_SOMETHING_WENT_WRONG_ERROR))
+                    throw ApiException(BindingUtils.string(R.string.some_thing_went_wrong))
 
                 if (errorBody != null && errorBody.toString().contains("404"))
-                    throw NoInternetException(BaseAppController.mFirebaseRemoteConfig!!.getString(
-                        KEY_SOMETHING_WENT_WRONG_ERROR))
+                    throw NoInternetException(BindingUtils.string(R.string.some_thing_went_wrong))
 
                 /**changed to errorBody from response.errorBody()?.string() to display error message*/
                 message.append(errorBody?.replace("\"", ""))
@@ -66,30 +63,32 @@ abstract class ApiResponseHandler {
 
         } catch (e: JSONException) {
             e.printStackTrace()
-            throw NoInternetException(BaseAppController.mFirebaseRemoteConfig!!.getString(
-                KEY_SOMETHING_WENT_WRONG_ERROR))
-        } catch (e: JsonSyntaxException) {
+            throw NoInternetException(BindingUtils.string(R.string.some_thing_went_wrong))
+        } catch (e: com.google.gson.JsonSyntaxException) {
             e.printStackTrace()
             throw NoInternetException(
-                BaseAppController.mFirebaseRemoteConfig!!.getString(
-                    KEY_NO_INTERNET_ERROR)
+                BindingUtils.string(R.string.please_make_sure_you_are_connected_to_internet)
             )
         } catch (e: java.lang.IllegalStateException) {
             e.printStackTrace()
-            throw ApiException(
-                BaseAppController.mFirebaseRemoteConfig!!.getString(
-                    KEY_SOMETHING_WENT_WRONG_ERROR))
+            throw NoInternetException(
+                BindingUtils.string(R.string.please_make_sure_you_are_connected_to_internet)
+            )
         } catch (e: java.net.UnknownHostException) {
             e.printStackTrace()
             throw NoInternetException(
-                BaseAppController.mFirebaseRemoteConfig!!.getString(
-                    KEY_NO_INTERNET_ERROR)
+                BindingUtils.string(R.string.please_make_sure_you_are_connected_to_internet)
             )
         } catch (e: SocketTimeoutException) {
             e.printStackTrace()
             throw NoInternetException(
-                BaseAppController.mFirebaseRemoteConfig!!.getString(
-                    KEY_SOMETHING_WENT_WRONG_ERROR))
+                BindingUtils.string(R.string.some_thing_went_wrong)
+            )
+        } catch (e : java.lang.reflect.UndeclaredThrowableException){
+            e.printStackTrace()
+            throw NoInternetException(
+                BindingUtils.string(R.string.some_thing_went_wrong)
+            )
         }
     }
 

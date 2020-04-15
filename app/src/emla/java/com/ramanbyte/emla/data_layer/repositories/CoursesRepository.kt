@@ -17,22 +17,20 @@ import com.ramanbyte.emla.data_layer.room.entities.UserEntity
 import com.ramanbyte.emla.models.CoursesModel
 import com.ramanbyte.emla.models.UserModel
 import com.ramanbyte.emla.models.request.CoursesRequest
+import com.ramanbyte.utilities.AppLog
 import com.ramanbyte.utilities.replicate
 import org.kodein.di.generic.instance
 
 class CoursesRepository(mContext: Context) :BaseRepository(mContext) {
 
-    val coursesController: CoursesController by instance()
+    private val applicationDatabase : ApplicationDatabase by instance()
+    private val coursesController : CoursesController by instance()
 
-    suspend fun getCoursesSyllabus(courseId: Int): CourseSyllabusModel? {
-        return apiRequest {
-            coursesController.getCoursesSyllabus(courseId, /*userModel?.userId ?:*/ 0)
+    fun getCurrentUser(): UserModel? {
+        applicationDatabase.getUserDao().apply {
+            return getCurrentUser()?.replicate<UserEntity, UserModel>()
         }
     }
-
-
-    val applicationDatabase : ApplicationDatabase by instance()
-    val userModel = applicationDatabase.getUserDao().getCurrentUser()?.replicate<UserEntity, UserModel>()
 
     private val pageSize = 10
     private val coursesModelObservable = ObservableField<CoursesRequest>().apply { set(CoursesRequest()) }
@@ -45,6 +43,7 @@ class CoursesRepository(mContext: Context) :BaseRepository(mContext) {
         paginationResponseHandlerLiveData.postValue(PaginationResponseHandler.INIT_LOADING)
         coursesPagedDataSourceFactory = PaginationDataSourceFactory(
             coursesModelObservable.apply {
+                val userModel = getCurrentUser()
                 set(CoursesRequest().apply {
                     this.userId = userModel?.userId ?: 0
                 })
@@ -61,12 +60,7 @@ class CoursesRepository(mContext: Context) :BaseRepository(mContext) {
     }
     fun getPaginationResponseHandler() = paginationResponseHandlerLiveData
 
-    fun searchCourse(searchString: String) {
-        coursesModelObservable.get().apply {
-            this?.searchKey = searchString
-        }
-        coursesPagedList?.value?.dataSource?.invalidate()
-    }
+
 
     /*
   * This function is used for to fetch the fresh order history list on try again button
@@ -74,6 +68,13 @@ class CoursesRepository(mContext: Context) :BaseRepository(mContext) {
     fun tryAgain() {
         coursesPagedList?.value?.dataSource?.invalidate()
         paginationResponseHandlerLiveData.postValue(PaginationResponseHandler.INIT_LOADING)
+    }
+
+    fun searchCourse(searchString: String) {
+        coursesModelObservable.get().apply {
+            this?.searchKey = searchString
+        }
+        coursesPagedList?.value?.dataSource?.invalidate()
     }
 
     fun filterCourseList(coursesRequest: CoursesRequest) {
@@ -84,4 +85,9 @@ class CoursesRepository(mContext: Context) :BaseRepository(mContext) {
         paginationResponseHandlerLiveData.postValue(PaginationResponseHandler.INIT_LOADING)
     }
 
+    suspend fun getCoursesSyllabus(courseId: Int): CourseSyllabusModel? {
+        return apiRequest {
+            coursesController.getCoursesSyllabus(courseId, /*userModel?.userId ?:*/ 0)
+        }
+    }
 }
