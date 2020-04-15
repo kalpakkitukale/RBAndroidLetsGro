@@ -56,8 +56,12 @@ const val KEY_QUE_COUNT = "queCount"
 const val KEY_TOTAL_QUE_COUNT = "totalQueCount"
 const val keyQuestionId = "questionId"
 
+const val keyFirstName = "firstName"
+const val keyLastName = "lastName"
+const val keyEmailUsername = "emailUsername"
 const val keyEmailId = "emailId"
 const val keyPassword = "password"
+const val keyConfirmPassword = "confirmPassword"
 
 const val KEY_OTP_ONE = "otp_place_one"
 const val KEY_OTP_TWO = "otp_place_two"

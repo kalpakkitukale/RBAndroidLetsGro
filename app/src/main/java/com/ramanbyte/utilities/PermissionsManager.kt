@@ -67,7 +67,7 @@ object PermissionsManager {
 
         return if (deniedPermissions.size > 0) {
 //            if (!SharedPreferencesDatabase.getBoolPref(SharedPreferencesDatabase.IS_PERMISSION_DENIED))
-//                ActivityCompat.requestPermissions(thisActivity, deniedPermissions.toTypedArray(), permissionRequestCode)
+                ActivityCompat.requestPermissions(thisActivity, deniedPermissions.toTypedArray(), permissionRequestCode)
 
             false
         } else {
