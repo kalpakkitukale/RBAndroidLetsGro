@@ -7,7 +7,7 @@
     <fragment
         android:id="@+id/coursesFragment"
         android:name="com.ramanbyte.emla.ui.fragments.CoursesFragment"
-        android:label="@string/courses" >
+        android:label="@string/courses">
         <action
             android:id="@+id/action_coursesFragment_to_courseDetailFragment"
             app:destination="@id/courseDetailFragment" />
@@ -31,40 +31,32 @@
     <fragment
         android:id="@+id/preAssessmentTestFragment"
         android:name="com.ramanbyte.emla.ui.fragments.PreAssessmentTestFragment"
-        android:label="@string/test">
-        <action
-            android:id="@+id/action_quizInstructionFragment"
-            app:destination="@id/quiz_nav_graph" />
-    </fragment>
+        android:label="@string/test" />
     <fragment
         android:id="@+id/changePasswordFragment"
         android:name="com.ramanbyte.emla.ui.fragments.ChangePasswordFragment"
         android:label="@string/change_password" />
     <fragment
-        android:id="@+id/chaptersListFragment"
-        android:name="com.ramanbyte.emla.ui.fragments.ChaptersListFragment"
-        android:label="ChaptersListFragment" />
-    <fragment
         android:id="@+id/chaptersSectionListFragment"
         android:name="com.ramanbyte.emla.ui.fragments.ChaptersSectionListFragment"
-        android:label="ChaptersSectionListFragment" >
+        android:label="ChaptersSectionListFragment">
         <action
             android:id="@+id/action_chaptersSectionListFragment_to_contentListFragment"
             app:destination="@id/contentListFragment" />
         <action
-            android:id="@+id/action_chaptersSectionListFragment_to_quizInstructionFragment"
-            app:destination="@id/quizInstructionFragment" />
+            android:id="@+id/action_chaptersSectionListFragment_to_preAssessmentTestFragment"
+            app:destination="@id/preAssessmentTestFragment" />
     </fragment>
     <fragment
         android:id="@+id/courseDetailFragment"
         android:name="com.ramanbyte.emla.ui.fragments.CourseDetailFragment"
-        android:label="CourseDetailFragment" >
+        android:label="CourseDetailFragment">
         <action
             android:id="@+id/action_courseDetailFragment_to_chaptersSectionListFragment"
             app:destination="@id/chaptersSectionListFragment" />
         <action
-            android:id="@+id/action_courseDetailFragment_to_quizInstructionFragment"
-            app:destination="@id/quizInstructionFragment" />
+            android:id="@+id/action_courseDetailFragment_to_preAssessmentTestFragment"
+            app:destination="@id/preAssessmentTestFragment" />
     </fragment>
     <fragment
         android:id="@+id/contentListFragment"

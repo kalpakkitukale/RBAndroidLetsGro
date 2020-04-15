@@ -34,6 +34,8 @@ class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
     }
     private val coursesRepository: CoursesRepository by instance()
 
+    val selectedCourseModelLiveData = MutableLiveData<CoursesModel?>(null)
+
     var userData: UserModel? = null
     var searchQuery = MutableLiveData<String>().apply {
         value = KEY_BLANK
@@ -79,9 +81,10 @@ class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
             if (NetworkConnectivity.isConnectedToInternet()) {
                 if (model.preAssessmentStatus.equals("true", true)) {
                     AppLog.infoLog("courses details page")
-                    /*CourseDetailActivity.intent(this).apply {
-                            putExtra(KEY_COURSE_MODEL, it)
-                        }*/
+                    view.findNavController()
+                        .navigate(R.id.action_coursesFragment_to_courseDetailFragment, Bundle().apply {
+                            putParcelable(KEY_COURSE_MODEL, coursesModel)
+                        })
                 } else {
                     val bundle = Bundle()
                     bundle.putParcelable(KEY_COURSE_MODEL, model)

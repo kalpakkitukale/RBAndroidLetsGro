@@ -98,7 +98,7 @@ class ChaptersSectionViewModel(mContext: Context) : BaseViewModel(mContext) {
     fun takeFormativeTest(buttonView: View) {
         buttonView.findNavController()
             .navigate(
-                R.id.action_chaptersSectionListFragment_to_quizInstructionFragment,
+                R.id.action_chaptersSectionListFragment_to_preAssessmentTestFragment,
                 Bundle().apply {
                     putInt(keyTestType, KEY_QUIZ_TYPE_FORMATIVE)
                     putParcelable(KEY_CHAPTER_MODEL, chaptersModel)
