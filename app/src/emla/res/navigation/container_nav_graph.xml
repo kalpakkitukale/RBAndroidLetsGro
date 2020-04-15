@@ -38,7 +38,7 @@
     <fragment
         android:id="@+id/allTheBestFragment"
         android:name="com.ramanbyte.emla.ui.fragments.AllTheBestFragment"
-        android:label="@string/all_the_est" >
+        android:label="@string/all_the_best_fragment" >
         <action
             android:id="@+id/action_showQuestionFragment"
             app:destination="@id/showQuestionFragment" />

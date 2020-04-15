@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="showQuestionsViewModel"
+            type="com.ramanbyte.emla.view_model.ShowQuestionsViewModel" />
+
+        <variable
+            name="staticHelper"
+            type="com.ramanbyte.utilities.StaticHelpersKt" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/mainConstraintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_16"
+            android:layout_marginEnd="@dimen/dp_16"
+            android:layout_marginBottom="@dimen/dp_16">
+
+            <TextView
+                android:id="@+id/tvTitle"
+                style="@style/TextViewBoldBlackOnWhite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="@dimen/sp_16"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvScore"
+                style="@style/TextViewRegularBlackOnWhite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:gravity="center"
+                android:text="@string/passing_score"
+                android:textSize="@dimen/sp_14"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+
+            <TextView
+                android:id="@+id/lblCorrectQuestion"
+                style="@style/TextViewRegularBlackOnWhite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_12"
+                android:gravity="center"
+                android:text="@string/correct_question"
+                android:textSize="@dimen/sp_14"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintEnd_toStartOf="@+id/tvCorrectQuestion"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvScore" />
+
+            <TextView
+                android:id="@+id/tvCorrectQuestion"
+                style="@style/TextViewRegularBlackOnWhite"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:text="10"
+                android:layout_marginStart="@dimen/dp_2"
+                android:onClick="@{() -> showQuestionsViewModel.onClickDialogCorrectQuestion(tvCorrectQuestion,staticHelper.keyCorrect)}"
+                android:textColor="@color/approvalInTAT"
+                android:textSize="@dimen/sp_14"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintWidth_percent="0.11"
+                app:layout_constraintStart_toEndOf="@+id/lblCorrectQuestion"
+                app:layout_constraintTop_toTopOf="@+id/lblCorrectQuestion"
+                app:layout_constraintBottom_toBottomOf="@+id/lblCorrectQuestion"/>
+
+            <TextView
+                android:id="@+id/lblIncorrectQuestion"
+                style="@style/TextViewRegularBlackOnWhite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_12"
+                android:gravity="center"
+                android:text="@string/incorrect_question"
+                android:textSize="@dimen/sp_14"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintEnd_toStartOf="@+id/tvIncorrectQuestion"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvCorrectQuestion" />
+
+            <TextView
+                android:id="@+id/tvIncorrectQuestion"
+                style="@style/TextViewRegularBlackOnWhite"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:text="2"
+                android:onClick="@{() -> showQuestionsViewModel.onClickDialogIncorrectQuestion(tvIncorrectQuestion,staticHelper.keyWrong)}"
+                android:textColor="@color/approvalInTAT"
+                android:textSize="@dimen/sp_14"
+                android:layout_marginLeft="@dimen/dp_2"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintWidth_percent="0.11"
+                app:layout_constraintStart_toEndOf="@+id/lblIncorrectQuestion"
+                app:layout_constraintTop_toTopOf="@+id/lblIncorrectQuestion"
+                app:layout_constraintBottom_toBottomOf="@+id/lblIncorrectQuestion"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnOk"
+                style="@style/CustomCapsuleButtonGradientBgWhiteText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:layout_marginEnd="@dimen/dp_22"
+                android:text="@string/strOk"
+                android:onClick="@{() -> showQuestionsViewModel.onClickDialogOk(btnOk,staticHelper.keyCorrect)}"
+                android:textSize="@dimen/sp_14"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvIncorrectQuestion" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </RelativeLayout>
+
+</layout>

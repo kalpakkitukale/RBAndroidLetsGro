@@ -11,13 +11,8 @@ import com.ramanbyte.data_layer.SharedPreferencesDatabase
 import com.ramanbyte.emla.data_layer.network.init.NetworkConnectionInterceptor
 import com.ramanbyte.emla.data_layer.repositories.QuizRepository
 import com.ramanbyte.emla.data_layer.room.entities.AnswerEntity
-import com.ramanbyte.emla.models.CoursesModel
-import com.ramanbyte.emla.models.InstructionsModel
-import com.ramanbyte.emla.models.OptionsModel
-import com.ramanbyte.emla.models.QuestionAndAnswerModel
-import com.ramanbyte.utilities.AppLog
-import com.ramanbyte.utilities.BindingUtils
-import com.ramanbyte.utilities.DateUtils
+import com.ramanbyte.emla.models.*
+import com.ramanbyte.utilities.*
 import com.ramanbyte.utilities.DateUtils.DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS
 import kotlinx.coroutines.delay
 import org.kodein.di.generic.instance
@@ -32,7 +27,7 @@ class ShowQuestionsViewModel (var mContext: Context) : BaseViewModel(mContext) {
     val quizRepository: QuizRepository by instance()
 
     var coursesModelLiveData: MutableLiveData<CoursesModel> = MutableLiveData()
-    //var chapterModelLiveData: MutableLiveData<ChapterModel> = MutableLiveData()
+    var chapterModelLiveData: MutableLiveData<ChapterModel> = MutableLiveData()
     var testType = 2  //niraj
 
     // ------- Instruction Page ----------
@@ -79,6 +74,23 @@ class ShowQuestionsViewModel (var mContext: Context) : BaseViewModel(mContext) {
         value = false
     }
 
+    val isQuizSubmited = MutableLiveData<QuizResultModel>().apply {
+        value = null
+    }
+
+    //---------------- QuizReview -----------------------
+    var onClickDialogCorrectQuestionLiveData = MutableLiveData<String>().apply {
+        value = KEY_BLANK
+    }
+
+    var onClickDialogIncorrectQuestionLiveData = MutableLiveData<String>().apply {
+        value = KEY_BLANK
+    }
+
+    var onClickDialogOkLiveData = MutableLiveData<String>().apply {
+        value = KEY_BLANK
+    }
+
 
     /*
     * Instruction Page ------------- Start ---------------------
@@ -86,9 +98,9 @@ class ShowQuestionsViewModel (var mContext: Context) : BaseViewModel(mContext) {
 
     fun onClickStartQuiz(view: View) {
         if (NetworkConnectionInterceptor(mContext).isInternetAvailable()) {
-            //onClickStartQuizLiveData.value = true
-            SharedPreferencesDatabase.setStringPref(SharedPreferencesDatabase.KEY_START_QUIZ_DATE_TIME, DateUtils.getCurrentDateTime(DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS))
-            view.findNavController().navigate(R.id.allTheBestFragment)
+            onClickStartQuizLiveData.value = true
+            /*SharedPreferencesDatabase.setStringPref(SharedPreferencesDatabase.KEY_START_QUIZ_DATE_TIME, DateUtils.getCurrentDateTime(DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS))
+            view.findNavController().navigate(R.id.allTheBestFragment)*/
         } else {
             noInternetDialog(BindingUtils.string(R.string.next), view)
         }
@@ -215,7 +227,7 @@ class ShowQuestionsViewModel (var mContext: Context) : BaseViewModel(mContext) {
         }
     }
 
-   /* fun getOptions(questionId: Int): ArrayList<OptionsModel>? {
+    fun getOptions(questionId: Int): ArrayList<OptionsModel>? {
 
         return quizRepository.getQuestionRelatedOptions(questionId)?.apply {
 
@@ -229,10 +241,31 @@ class ShowQuestionsViewModel (var mContext: Context) : BaseViewModel(mContext) {
 
             }
         }
-    }*/
+    }
 
     fun insertOptionLB(answerEntity: AnswerEntity) {
         quizRepository.insertOptionLB(answerEntity)
+    }
+
+    fun isQuestionAttempted(question_Id: Int): Int? {
+        return quizRepository.isQuestionAttempted(question_Id)
+    }
+
+    fun deleteQuestionRelatedOptionLB(question_Id: Int) {
+        quizRepository.deleteQuestionRelatedOptionLB(question_Id)
+    }
+
+    fun submitTest() {
+        invokeApiCall {
+            isQuizSubmited.postValue(
+                quizRepository.submitTest(
+                    coursesModelLiveData?.value?.courseId ?: 0,
+                    chapterId = if (KEY_QUIZ_TYPE_FORMATIVE == testType) chapterModelLiveData?.value?.chapterId
+                        ?: 0 else 0,
+                    testType = testType
+                )
+            )
+        }
     }
 
     /*
@@ -274,6 +307,27 @@ class ShowQuestionsViewModel (var mContext: Context) : BaseViewModel(mContext) {
 
     /*
     * jump to particular question ------------- End ---------------------
+    * */
+
+
+    /*
+    * question review ------------- Start ---------------------
+    * */
+
+    fun onClickDialogCorrectQuestion(view: View, questionStatus: String) {
+        onClickDialogCorrectQuestionLiveData.value = questionStatus
+    }
+
+    fun onClickDialogIncorrectQuestion(view: View, questionStatus: String) {
+        onClickDialogIncorrectQuestionLiveData.value = questionStatus
+    }
+
+    fun onClickDialogOk(view: View, questionStatus: String) {
+        onClickDialogOkLiveData.value = questionStatus
+    }
+
+    /*
+    * question review ------------- End ---------------------
     * */
 
 

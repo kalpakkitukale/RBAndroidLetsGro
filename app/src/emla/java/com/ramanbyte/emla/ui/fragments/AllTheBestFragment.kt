@@ -60,11 +60,11 @@ class AllTheBestFragment : BaseFragment<FragmentAllTheBestBinding, ShowQuestions
     }
 
     private fun startTest() {
-        /*val fragment = ShowQuestionFragment()
-        val transaction: FragmentTransaction = requireFragmentManager().beginTransaction()
+        val fragment = ShowQuestionFragment()
+        val transaction: FragmentTransaction = fragmentManager?.beginTransaction()!!
         transaction.replace(R.id.frameLayout, fragment,"ShowQuestionFragment")
-        transaction.commit()*/
-        view?.findNavController()?.navigate(R.id.showQuestionFragment)
+        transaction.commit()
+        //view?.findNavController()?.navigate(R.id.showQuestionFragment)
     }
 
     override fun onAttach(context: Context) {

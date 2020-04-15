@@ -87,15 +87,14 @@ class ShowQuestionPagerFragment : BaseFragment<CardShowQuestionsBinding, ShowQue
             rvAnswer?.apply {
                 //isNestedScrollingEnabled = true
 
-                //niraj
-                /*val optionsList = viewModel.getOptions(
+                val optionsList = viewModel.getOptions(
                     this@ShowQuestionPagerFragment.questionAndAnswerModelData?.id ?: 0
                 )
 
                 answerAdapter = AnswerAdapter(
                     optionsList ?: arrayListOf(),
                     questionAndAnswerModel
-                )*/
+                )
                 layoutManager = LinearLayoutManager(mContext, RecyclerView.VERTICAL, false)
                 answerAdapter?.showQuestionsViewModel = viewModel
                 adapter = answerAdapter
@@ -105,7 +104,7 @@ class ShowQuestionPagerFragment : BaseFragment<CardShowQuestionsBinding, ShowQue
 
                 questionAndAnswerModelData?.clearOptions = {
                     viewModel.apply {
-                        //deleteQuestionRelatedOptionLB(questionAndAnswerModel?.id ?: 0)  //niraj
+                        deleteQuestionRelatedOptionLB(questionAndAnswerModel?.id ?: 0)
 
                         insertOptionLB(AnswerEntity().apply {
                             this.quiz_Id = questionAndAnswerModel?.quizid ?: 0
