@@ -1,12 +1,183 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+  <!--  <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent">-->
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tvProgram"
+                style="@style/TextViewMediumBlackOnWhite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableEnd="@drawable/ic_arrow_down_gray"
+                android:drawablePadding="@dimen/dp_10"
+                android:hint="@string/program"
+                android:layout_margin="@dimen/dp_22"
+                android:paddingStart="@dimen/dp_10"
+                android:textSize="@dimen/sp_14"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/spinnerProgram" />
+
+            <Spinner
+                android:id="@+id/spinnerProgram"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="@id/tvProgram"
+                app:layout_constraintEnd_toEndOf="@id/tvProgram"
+                app:layout_constraintStart_toStartOf="@id/tvProgram" />
 
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilBatchYear"
+                style="@style/TextInputLayoutWithoutBorder"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_22"
+                android:hint="@string/batchYear"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/spinnerProgram">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etBatchYear"
+                    style="@style/EditTextRegularGrayHint"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorTransparent"
+                    android:drawablePadding="@dimen/dp_5"
+                    android:imeOptions="actionNext"
+                    android:inputType="textEmailAddress"
+                    android:lines="1"
+                    android:maxLength="50"
+                    android:singleLine="true"
+                    android:textSize="@dimen/sp_16"
+                    app:hintAnimationEnabled="false" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/tvPattern"
+                style="@style/TextViewMediumBlackOnWhite"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_25"
+                android:drawableEnd="@drawable/ic_arrow_down_gray"
+                android:drawablePadding="@dimen/dp_10"
+                android:hint="@string/pattern"
+                android:paddingStart="@dimen/dp_10"
+                android:textSize="@dimen/sp_14"
+                app:layout_constraintEnd_toEndOf="@+id/tilBatchYear"
+                app:layout_constraintStart_toStartOf="@+id/tilBatchYear"
+                app:layout_constraintTop_toBottomOf="@id/tilBatchYear" />
+
+            <Spinner
+                android:id="@+id/spinnerPattern"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="@id/tvProgram"
+                app:layout_constraintEnd_toEndOf="@id/tvProgram"
+                app:layout_constraintStart_toStartOf="@id/tvProgram" />
+
+            <TextView
+                android:id="@+id/tvSpecialisation"
+                style="@style/TextViewMediumBlackOnWhite"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_27"
+                android:drawableEnd="@drawable/ic_arrow_down_gray"
+                android:drawablePadding="@dimen/dp_10"
+                android:hint="@string/specialization"
+                android:paddingStart="@dimen/dp_10"
+                android:textSize="@dimen/sp_14"
+                app:layout_constraintEnd_toEndOf="@+id/tvPattern"
+                app:layout_constraintStart_toStartOf="@+id/tvPattern"
+                app:layout_constraintTop_toBottomOf="@id/tvPattern" />
+
+            <Spinner
+                android:id="@+id/spinnerSpecialisation"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="@id/tvSpecialisation"
+                app:layout_constraintEnd_toEndOf="@id/tvSpecialisation"
+                app:layout_constraintStart_toStartOf="@id/tvSpecialisation" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilUniversity"
+                style="@style/TextInputLayoutWithoutBorder"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_22"
+                android:hint="@string/university"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/spinnerSpecialisation">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etUniversity"
+                    style="@style/EditTextRegularGrayHint"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorTransparent"
+                    android:drawablePadding="@dimen/dp_5"
+                    android:imeOptions="actionNext"
+                    android:inputType="textEmailAddress"
+                    android:lines="1"
+                    android:maxLength="50"
+                    android:singleLine="true"
+                    android:textSize="@dimen/sp_16"
+                    app:hintAnimationEnabled="false" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilInstitute"
+                style="@style/TextInputLayoutWithoutBorder"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_22"
+                android:hint="@string/institute"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tilUniversity">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etInstitute"
+                    style="@style/EditTextRegularGrayHint"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorTransparent"
+                    android:drawablePadding="@dimen/dp_5"
+                    android:imeOptions="actionNext"
+                    android:inputType="textEmailAddress"
+                    android:lines="1"
+                    android:maxLength="50"
+                    android:singleLine="true"
+                    android:textSize="@dimen/sp_16"
+                    app:hintAnimationEnabled="false" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnSave"
+                style="@style/CustomCapsuleButtonGradientBgWhiteText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:includeFontPadding="false"
+                android:paddingTop="@dimen/dp_10"
+                android:paddingBottom="@dimen/dp_10"
+                android:text="@string/save"
+                android:textAllCaps="true"
+                android:textSize="@dimen/sp_16"
+                android:layout_marginBottom="@dimen/dp_22"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/tilInstitute"
+                app:layout_constraintStart_toStartOf="@+id/tilInstitute" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+   <!-- </androidx.core.widget.NestedScrollView>-->
 </layout>
