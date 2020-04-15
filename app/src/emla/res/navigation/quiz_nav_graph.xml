@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/quiz_nav_graph"
+    app:startDestination="@id/quizInstructionFragment">
+    <fragment
+        android:id="@+id/quizInstructionFragment"
+        android:name="com.ramanbyte.emla.ui.fragments.QuizInstructionFragment"
+        android:label="@string/quiz_instruction">
+        <action
+            android:id="@+id/action_allTheBestFragment"
+            app:destination="@id/allTheBestFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/allTheBestFragment"
+        android:name="com.ramanbyte.emla.ui.fragments.AllTheBestFragment"
+        android:label="@string/all_the_best_fragment">
+        <action
+            android:id="@+id/action_showQuestionFragment"
+            app:destination="@id/showQuestionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/showQuestionFragment"
+        android:name="com.ramanbyte.emla.ui.fragments.ShowQuestionFragment"
+        android:label="@string/show_question" >
+        <action
+            android:id="@+id/action_jumpToQuestionBottomSheetFragment"
+            app:destination="@id/jumpToQuestionBottomSheetFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/jumpToQuestionBottomSheetFragment"
+        android:name="com.ramanbyte.emla.ui.fragments.JumpToQuestionBottomSheetFragment"
+        android:label="@string/jump_to_question">
+    </fragment>
+
+    <fragment
+        android:id="@+id/quizReviewFragment"
+        android:name="com.ramanbyte.emla.ui.fragments.QuizReviewFragment"
+        android:label="@string/quiz_review" />
+
+    <fragment
+        android:id="@+id/courseDetailFragment"
+        android:name="com.ramanbyte.emla.ui.fragments.CourseDetailFragment"
+        android:label="@string/course_detail" />
+
+</navigation>

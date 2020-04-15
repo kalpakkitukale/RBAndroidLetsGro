@@ -25,7 +25,8 @@ class ChangePasswordViewModel(var mContext: Context) : BaseViewModel(mContext) {
         value = ChangePasswordModel()
     }
     private val masterRepository: MasterRepository by instance()
-    private val applicationDatabase: ApplicationDatabase by instance()
+
+    var userData = masterRepository?.getCurrentUser()
     var isChangePasswordSuccessfully = MutableLiveData<Boolean>().apply {
         value = null
     }
@@ -33,66 +34,59 @@ class ChangePasswordViewModel(var mContext: Context) : BaseViewModel(mContext) {
         ObservableValidator(changePasswordModelLiveData.value!!, BR::class.java).apply {
 
             addRule(
-                KEY_OLD_PASSWORD,
+                keyPassword,
                 ValidationFlags.FIELD_REQUIRED,
-                BindingUtils.string(R.string.oldPassword)
+                BindingUtils.string(R.string.old_password_required)
 
             )
             addRule(
-                keyPassword,
+                KEY_NEW_PASSWORD,//new password
                 ValidationFlags.FIELD_REQUIRED,
                 BindingUtils.string(R.string.new_password_required)
 
             )
             addRule(
-                KEY_NEW_PASSWORD,
+                KEY_CONFIRM_RESET_NEW_PASSWORD,
                 ValidationFlags.FIELD_REQUIRED,
                 BindingUtils.string(R.string.confirm_new_password_required)
 
             )
             addRule(
-                KEY_OLD_PASSWORD,
+                keyPassword,
                 ValidationFlags.FIELD_CONTAINS_SPACE,
                 BindingUtils.string(R.string.invalid_old_password)
             )
 
             addRule(
-                keyPassword,
+                KEY_NEW_PASSWORD,
                 ValidationFlags.FIELD_CONTAINS_SPACE,
                 BindingUtils.string(R.string.enter_valid_new_password)
             )
 
             addRule(
-                KEY_NEW_PASSWORD,
+                KEY_CONFIRM_RESET_NEW_PASSWORD,
                 ValidationFlags.FIELD_CONTAINS_SPACE,
                 BindingUtils.string(R.string.enter_valid_confirm_new_password)
             )
 
             addRule(
-                keyPassword,
+                KEY_NEW_PASSWORD,
                 ValidationFlags.FIELD_NOT_MATCH,
                 BindingUtils.string(R.string.same_old_and_new_password),
-                KEY_OLD_PASSWORD
-            )
-
-            addRule(
-                KEY_NEW_PASSWORD,
-                ValidationFlags.FIELD_MATCH,
-                BindingUtils.string(R.string.not_same_new_and_confirm_password),
                 keyPassword
             )
             addRule(
-                keyPassword,
+                KEY_CONFIRM_RESET_NEW_PASSWORD,
+                ValidationFlags.FIELD_MATCH,
+                BindingUtils.string(R.string.not_same_new_and_confirm_password),
+                KEY_NEW_PASSWORD
+            )
+            addRule(
+                KEY_NEW_PASSWORD,
                 ValidationFlags.FIELD_PASSWORD,
                 BindingUtils.string(R.string.not_valid_password_pattern)
             )
             addRule(
-                KEY_OLD_PASSWORD,
-                ValidationFlags.FIELD_MAX,
-                BindingUtils.string(R.string.youHaveCrossedYourMaximumLimit),
-                limit = 15
-            )
-            addRule(
                 keyPassword,
                 ValidationFlags.FIELD_MAX,
                 BindingUtils.string(R.string.youHaveCrossedYourMaximumLimit),
@@ -100,6 +94,12 @@ class ChangePasswordViewModel(var mContext: Context) : BaseViewModel(mContext) {
             )
             addRule(
                 KEY_NEW_PASSWORD,
+                ValidationFlags.FIELD_MAX,
+                BindingUtils.string(R.string.youHaveCrossedYourMaximumLimit),
+                limit = 15
+            )
+            addRule(
+                KEY_CONFIRM_RESET_NEW_PASSWORD,
                 ValidationFlags.FIELD_MAX,
                 BindingUtils.string(R.string.youHaveCrossedYourMaximumLimit),
                 limit = 15
@@ -110,8 +110,7 @@ class ChangePasswordViewModel(var mContext: Context) : BaseViewModel(mContext) {
         CoroutineUtils.main {
             if (changeValidator.validateAll()) {
                 try {
-                    changePasswordModelLiveData.value?.userId = 2
-                    //applicationDatabase?.getUserDao()?.getCurrentUser()?.userId!!
+                    changePasswordModelLiveData.value?.userId = userData?.userId!!
                     val response =
                         masterRepository.changePassword(changePasswordModelLiveData.value!!)
 
@@ -126,6 +125,8 @@ class ChangePasswordViewModel(var mContext: Context) : BaseViewModel(mContext) {
                         },
                         "",
                         {})
+
+
                 } catch (e: ApiException) {
                     e.printStackTrace()
                     AppLog.errorLog(e.message, e)

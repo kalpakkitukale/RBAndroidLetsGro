@@ -16,6 +16,7 @@ import androidx.lifecycle.Observer
 import androidx.work.Data
 import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
+import com.ramanbyte.BaseAppController
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseActivity
 import com.ramanbyte.databinding.ActivityLoginBinding
@@ -64,6 +65,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(authMod
                             callWorkerToMangeUserDevice()
                             startActivity(ContainerActivity.intent(this@LoginActivity))
                             finish()
+                            BaseAppController.setEnterPageAnimation(this@LoginActivity)
                         }
 
                     }
@@ -188,10 +190,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(authMod
         layoutBinding.apply {
             tvForgetPassword.setOnClickListener {
                 startActivity(ForgotPasswordActivity.intent(this@LoginActivity))
-            }
-
-            tvChangePassword.setOnClickListener {
-                startActivity(ChangePasswordActivity.intent(this@LoginActivity))
             }
         }
     }

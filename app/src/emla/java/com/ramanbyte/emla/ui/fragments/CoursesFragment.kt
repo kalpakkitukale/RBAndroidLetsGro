@@ -70,7 +70,6 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
 
             selectedCourseModelLiveData.observe(
                 this@CoursesFragment, Observer {
-                    AppLog.infoLog("selectedCourseModelLiveData")
                     it?.apply {
 
                         activity?.apply {
@@ -78,15 +77,14 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
 
                                 if (preAssessmentStatus.equals("true", true)) {
                                     AppLog.infoLog("courses details page")
-                                    /*CourseDetailActivity.intent(this).apply {
-                                        putExtra(KEY_COURSE_MODEL, it)
-                                    }*/
+                                    val bundle = Bundle()
+                                    bundle.putParcelable(KEY_COURSE_MODEL, it)
+                                    view?.findNavController()?.navigate(R.id.courseDetailFragment, bundle)
                                 } else {
                                     val bundle = Bundle()
                                     bundle.putParcelable(KEY_COURSE_MODEL, it)
                                     bundle.putInt(keyTestType, KEY_QUIZ_TYPE_ASSESSMENT)
-                                    view?.findNavController()
-                                        ?.navigate(R.id.preAssessmentTestFragment, bundle)
+                                    view?.findNavController()?.navigate(R.id.preAssessmentTestFragment, bundle)
                                 }
 
                             } else {
@@ -97,7 +95,6 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
                                         true,
                                         BindingUtils.string(R.string.yes), {
                                             isAlertDialogShown.postValue(false)
-
                                         },
                                         BindingUtils.string(R.string.no), {
                                             isAlertDialogShown.postValue(false)
