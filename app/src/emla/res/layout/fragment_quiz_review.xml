@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+   <data>
+       <variable
+           name="quizReviewViewModel"
+           type="com.ramanbyte.emla.view_model.ShowQuestionsViewModel" />
+       <variable
+           name="staticHelper"
+           type="com.ramanbyte.utilities.StaticHelpersKt" />
+
+       <variable
+           name="quizResultModel"
+           type="com.ramanbyte.emla.models.QuizResultModel" />
+
+       <variable
+           name="courseImageUrl"
+           type="String" />
+   </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="@dimen/dp_15"
+        android:paddingRight="@dimen/dp_15"
+        android:paddingBottom="@dimen/dp_15">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardMainContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="0dp"
+            app:cardCornerRadius="@dimen/dp_15"
+            app:cardElevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivQuestion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_course_dummy"
+                android:scaleType="fitXY"
+                app:imageUrl="@{courseImageUrl}"/>
+            <!--app:imageUrl="@{quizReviewViewModel.coursesModelLiveData.courseImageUrl}"-->
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.22" />
+
+        <RadioGroup
+            android:id="@+id/rgTab"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/guideline">
+
+            <androidx.appcompat.widget.AppCompatRadioButton
+                android:id="@+id/rbCorrect"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/custom_radio_selector"
+                android:button="@null"
+                android:gravity="center"
+                android:onClick="@{() -> quizReviewViewModel.onClickTabButton(rbCorrect,staticHelper.keyCorrect,quizResultModel)}"
+                android:text="@string/correct"
+                android:textColor="@color/radio_text_color_selector" />
+
+            <androidx.appcompat.widget.AppCompatRadioButton
+                android:id="@+id/rbWrong"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/custom_radio_selector"
+                android:button="@null"
+                android:gravity="center"
+                android:onClick="@{() -> quizReviewViewModel.onClickTabButton(rbWrong,staticHelper.keyWrong, quizResultModel)}"
+                android:text="@string/incorrect"
+                android:textColor="@color/radio_text_color_selector" />
+        </RadioGroup>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvQuizReview"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="@dimen/dp_2"
+            android:visibility="@{quizReviewViewModel.viewVisibilityLiveData}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rgTab"
+            tools:listitem="@layout/card_quiz_review" />
+
+        <include
+            android:id="@+id/noInternet"
+            layout="@layout/no_internet"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rgTab" />
+
+        <include
+            android:id="@+id/somethingWentWrong"
+            layout="@layout/something_went_wrong"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginEnd="17dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rgTab" />
+
+        <include
+            android:id="@+id/noData"
+            layout="@layout/no_data"
+            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rgTab" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

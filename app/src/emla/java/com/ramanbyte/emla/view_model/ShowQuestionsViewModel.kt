@@ -2,12 +2,15 @@ package com.ramanbyte.emla.view_model
 
 import android.content.Context
 import android.view.View
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.findNavController
+import androidx.paging.PagedList
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseViewModel
 import com.ramanbyte.data_layer.CoroutineUtils
 import com.ramanbyte.data_layer.SharedPreferencesDatabase
+import com.ramanbyte.data_layer.pagination.PaginationMessages
 import com.ramanbyte.emla.data_layer.network.init.NetworkConnectionInterceptor
 import com.ramanbyte.emla.data_layer.repositories.QuizRepository
 import com.ramanbyte.emla.data_layer.room.entities.AnswerEntity
@@ -21,8 +24,7 @@ import org.kodein.di.generic.instance
  * @author Niraj Naware <niraj.n@ramanbyte.com>
  * @since 14/04/20
  */
-class ShowQuestionsViewModel (var mContext: Context) : BaseViewModel(mContext) {
-    override var noInternetTryAgain: () -> Unit = {}
+class ShowQuestionsViewModel(var mContext: Context) : BaseViewModel(mContext) {
 
     val quizRepository: QuizRepository by instance()
 
@@ -91,6 +93,32 @@ class ShowQuestionsViewModel (var mContext: Context) : BaseViewModel(mContext) {
         value = KEY_BLANK
     }
 
+    var onClickTabButtonLiveData = MutableLiveData<String>().apply {
+        value = KEY_BLANK
+    }
+
+    var quizResultModel: QuizResultModel? = null
+
+    var tabTypeSelectedLiveData = MutableLiveData<String>().apply {
+        value = keyCorrect
+    }
+
+    override var noInternetTryAgain: () -> Unit = {
+        if (tabTypeSelectedLiveData.value == keyCorrect) {
+            quizRepository.retryQuestionForQuizReview(
+                quizResultModel?.quizid!!,
+                keyCorrect,
+                quizResultModel?.attemptstatus!!
+            )
+        } else {
+            quizRepository.retryQuestionForQuizReview(
+                quizResultModel?.quizid!!,
+                keyWrong,
+                quizResultModel?.attemptstatus!!
+            )
+        }
+    }
+
 
     /*
     * Instruction Page ------------- Start ---------------------
@@ -110,16 +138,16 @@ class ShowQuestionsViewModel (var mContext: Context) : BaseViewModel(mContext) {
 
         invokeApiCall {
             instructionsModelLiveData.postValue(
-                /*quizRepository.getInstructions(
+                quizRepository.getInstructions(
                     chapterModelLiveData.value?.chapterId ?: 0,
                     coursesModelLiveData.value?.courseId!!,
                     testType
-                )!!*/
-                quizRepository.getInstructions(
-                    6123,
-                    4018,
-                    3
                 )!!
+                /* quizRepository.getInstructions(
+                     6123,
+                     4018,
+                     3
+                 )!!*/
             )
         }
     }
@@ -176,14 +204,14 @@ class ShowQuestionsViewModel (var mContext: Context) : BaseViewModel(mContext) {
     fun getQuestionsByCourse() {
         invokeApiCall(false) {
             questionAndAnswerModelLiveData.postValue(
-               /* quizRepository.getQuestionsByCourse(
+                quizRepository.getQuestionsByCourse(
                     coursesModelLiveData.value?.courseId!!,
                     testType
-                )*/
-                quizRepository.getQuestionsByCourse(
+                )
+                /*quizRepository.getQuestionsByCourse(
                     3028,
                     1
-                )
+                )*/
             )
 
             val questionAndAnswerModel = quizRepository.getAllQuestion()
@@ -197,8 +225,7 @@ class ShowQuestionsViewModel (var mContext: Context) : BaseViewModel(mContext) {
     }
 
     fun getQuestionsByByTopic() {
-
-       /* invokeApiCall {
+        invokeApiCall {
             questionAndAnswerModelLiveData.postValue(
                 quizRepository.getQuestionsByTopic(
                     chapterModelLiveData.value?.chapterId!!,
@@ -213,7 +240,7 @@ class ShowQuestionsViewModel (var mContext: Context) : BaseViewModel(mContext) {
                 } else
                     AppLog.infoLog("no_question_available")
             }
-        }*/
+        }
     }
 
     /*
@@ -221,7 +248,7 @@ class ShowQuestionsViewModel (var mContext: Context) : BaseViewModel(mContext) {
     * */
     fun onClickJumpToQuestion(view: View) {
         if (NetworkConnectionInterceptor(mContext).isInternetAvailable()) {
-            isJumpToQuestionBS.value = true
+            //isJumpToQuestionBS.value = true
         } else {
             noInternetDialog(BindingUtils.string(R.string.next), view)
         }
@@ -268,6 +295,10 @@ class ShowQuestionsViewModel (var mContext: Context) : BaseViewModel(mContext) {
         }
     }
 
+    fun getTotalQuestionCount(): Int = quizRepository.getTotalQuestionCount()
+
+    fun getAllQuestions(): List<QuestionAndAnswerModel> = quizRepository.getAllQuestions()
+
     /*
     * Quiz Page ------------- End ---------------------
     * */
@@ -313,6 +344,39 @@ class ShowQuestionsViewModel (var mContext: Context) : BaseViewModel(mContext) {
     /*
     * question review ------------- Start ---------------------
     * */
+
+    fun onClickTabButton(view: View, tabType: String, quizResultModel: QuizResultModel) {
+        this.quizResultModel = quizResultModel
+
+        onClickTabButtonLiveData.value = tabType
+        AppLog.infoLog("quizResultModel_quizid ${quizResultModel.quizid}")
+    }
+
+    fun getQuestionForQuizReview(quizid: Int, status: String, attemptstatus: Int) {
+
+        quizRepository.initiatePagination(quizid, status, attemptstatus)
+
+        quizRepository.getPaginationResponseHandler().observeForever {
+            if (it != null) {
+
+                paginationResponse(
+                    it,
+                    //PaginationMessages("No Data", "No More data", "No Internet", "Something Wrong")
+                    PaginationMessages(
+                        BindingUtils.string(R.string.no_data),
+                        BindingUtils.string(R.string.no_data),
+                        BindingUtils.string(R.string.no_internet_message),
+                        BindingUtils.string(R.string.some_thing_went_wrong)
+                    )
+                )
+                AppLog.infoLog("Pagination :: ${it.msg} :: ${it.status}")
+            }
+        }
+    }
+
+    fun questionForQuizReviewPagedList(): LiveData<PagedList<QuizReviewModel>>? {
+        return quizRepository.questionForQuizReviewPagedList
+    }
 
     fun onClickDialogCorrectQuestion(view: View, questionStatus: String) {
         onClickDialogCorrectQuestionLiveData.value = questionStatus
