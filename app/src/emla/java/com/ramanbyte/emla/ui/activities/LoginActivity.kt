@@ -191,10 +191,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(authMod
             tvForgetPassword.setOnClickListener {
                 startActivity(ForgotPasswordActivity.intent(this@LoginActivity))
             }
-
-            tvChangePassword.setOnClickListener {
-                startActivity(ChangePasswordActivity.intent(this@LoginActivity))
-            }
         }
     }
 }

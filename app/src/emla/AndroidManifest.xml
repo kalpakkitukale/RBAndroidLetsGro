@@ -34,7 +34,6 @@
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity android:name=".emla.ui.activities.ContainerActivity" />
         <activity android:name=".emla.ui.activities.ForgotPasswordActivity" />
-        <activity android:name=".emla.ui.activities.ChangePasswordActivity" />
     </application>
 
 </manifest>

@@ -143,9 +143,10 @@
 
     <string name="oldPassword">Old password</string>
     <string name="newPassword">New password</string>
+    <string name="old_password_required">Please enter old password</string>
     <string name="confirmPassword">Confirm new password</string>
-    <string name="new_password_required">Please Enter New Password</string>
-    <string name="confirm_new_password_required">Please Confirm Password.</string>
+    <string name="new_password_required">Please enter new password</string>
+    <string name="confirm_new_password_required">Please enter repeat new password.</string>
     <string name="enter_valid_new_password">Enter a valid new password</string>
     <string name="invalid_old_password">Enter a valid old password</string>
     <string name="enter_valid_confirm_new_password">Enter a valid confirm new password</string>
