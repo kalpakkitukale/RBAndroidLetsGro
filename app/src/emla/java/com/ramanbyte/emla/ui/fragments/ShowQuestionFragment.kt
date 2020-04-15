@@ -5,15 +5,13 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.view.Window
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager.widget.ViewPager
 import com.ramanbyte.R
 import com.ramanbyte.aws_s3_android.accessor.AppS3Client
@@ -59,9 +57,36 @@ class ShowQuestionFragment : BaseFragment<FragmentShowQuestionBinding, ShowQuest
             /*val value = arguments!!.getString(KEY_QUESTION_IMAGE)
             AppLog.infoLog("value $value")*/
 
+            setHasOptionsMenu(true)
             setViewModelObservers()
         }
 
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                viewModel.apply {
+
+                    setAlertDialogResourceModelMutableLiveData(
+                        BindingUtils.string(R.string.leave_test_message),
+                        BindingUtils.drawable(R.drawable.ic_submit_confirmation)!!,
+                        false,
+                        BindingUtils.string(R.string.yes), {
+                            isAlertDialogShown.postValue(false)
+                            view?.findNavController()?.navigate(R.id.coursesFragment)
+                        },
+                        BindingUtils.string(R.string.no), {
+                            isAlertDialogShown.postValue(false)
+                        }
+                    )
+                    isAlertDialogShown.postValue(true)
+                }
+                true
+
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     private fun setViewModelObservers() {
@@ -86,6 +111,8 @@ class ShowQuestionFragment : BaseFragment<FragmentShowQuestionBinding, ShowQuest
                 layoutBinding.imgQue.layoutParams.apply {
                     height = (width * 0.6).toInt()
                 }
+
+                setToolbarTitle(coursesModelLiveData.value?.courseName!!)
 
                 questionAndAnswerListLiveData.observe(this@ShowQuestionFragment, Observer {
                     AppLog.infoLog("questionAndAnswerModelLiveDataNir ${it.size}")

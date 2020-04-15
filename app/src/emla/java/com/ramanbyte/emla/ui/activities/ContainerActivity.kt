@@ -15,6 +15,7 @@ import com.ramanbyte.databinding.ActivityContainerBinding
 import com.ramanbyte.emla.base.di.authModuleDependency
 import com.ramanbyte.emla.ui.fragments.AllTheBestFragment
 import com.ramanbyte.emla.ui.fragments.QuizInstructionFragment
+import com.ramanbyte.emla.ui.fragments.ShowQuestionFragment
 import com.ramanbyte.emla.view_model.ContainerViewModel
 import com.ramanbyte.utilities.BindingUtils
 import com.ramanbyte.utilities.StaticMethodUtilitiesKtx.changeStatusBarColor
@@ -61,6 +62,34 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding, ContainerViewMo
     companion object {
         fun intent(activity: Activity): Intent {
             return Intent(activity, ContainerActivity::class.java)
+        }
+    }
+
+    override fun onBackPressed() {
+        //viewModel.alertInterruptDialog()
+        //super.onBackPressed()
+
+        val fragment = supportFragmentManager.findFragmentByTag(BindingUtils.string(R.string.show_question)) as ShowQuestionFragment?  // ShowQuestionFragment
+
+        if (fragment != null) {
+            viewModel.apply {
+
+                setAlertDialogResourceModelMutableLiveData(
+                    BindingUtils.string(R.string.leave_test_message),
+                    BindingUtils.drawable(R.drawable.ic_submit_confirmation)!!,
+                    false,
+                    BindingUtils.string(R.string.yes), {
+                        isAlertDialogShown.postValue(false)
+                        super.onBackPressed()
+                    },
+                    BindingUtils.string(R.string.no), {
+                        isAlertDialogShown.postValue(false)
+                    }
+                )
+                isAlertDialogShown.postValue(true)
+            }
+        }else {
+            super.onBackPressed()
         }
     }
 

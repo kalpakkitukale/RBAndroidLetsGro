@@ -65,6 +65,8 @@ class QuizInstructionFragment : BaseFragment<FragmentQuizInstructionBinding, Sho
                 height = (width * 0.6).toInt()
             }
 
+            setToolbarTitle(coursesModelLiveData.value?.courseName!!)
+
             /*
             * Get Server instruction
             * */
