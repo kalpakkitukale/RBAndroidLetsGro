@@ -8,10 +8,10 @@ class ChangePasswordModel : BaseObservable() {
     var userId: Int = 0
 
     @Bindable
-    var oldPassword: String = ""
+    var ConfirmPassword: String = ""
         set(value) {
             field = value
-            notifyPropertyChanged(BR.oldPassword)
+            notifyPropertyChanged(BR.ConfirmPassword)
         }
 
     @Bindable

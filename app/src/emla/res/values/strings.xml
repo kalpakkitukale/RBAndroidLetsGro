@@ -164,4 +164,8 @@
     <string name="pattern">Pattern</string>
     <string name="university">University</string>
     <string name="institute">Institute</string>
+
+    <string name="filter">Filters</string>
+    <string name="specialisation">Specialisation</string>
+    <string name="apply">Apply</string>
 </resources>
