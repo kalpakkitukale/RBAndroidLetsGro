@@ -3,6 +3,7 @@ package com.ramanbyte.emla.ui.fragments
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentStatePagerAdapter
 import com.ramanbyte.R
@@ -30,7 +31,6 @@ class CourseDetailFragment : BaseFragment<FragmentCourseDetailBinding, CoursesDe
 
     private var courseModel: CoursesModel? = null
     private var menu: Menu? = null
-
     private var viewPagerAdapter: ViewPagerAdapter? = null
 
     override val viewModelClass: Class<CoursesDetailViewModel> = CoursesDetailViewModel::class.java
@@ -72,17 +72,17 @@ class CourseDetailFragment : BaseFragment<FragmentCourseDetailBinding, CoursesDe
 
             getCoursesSyllabus()
 
-              courseSyllabusModelLiveData.observe(this@CourseDetailFragment, Observer {
-                  if (it != null) {
-                      menu?.findItem(R.id.view_certificate)?.isVisible =true
-                         /* it.summativeAssessmentStatus.equals(
-                              "true",
-                              true
-                          )*/
-                  } else {
-                      menu?.findItem(R.id.view_certificate)?.isVisible = false
-                  }
-              })
+            courseSyllabusModelLiveData.observe(this@CourseDetailFragment, Observer {
+                if (it != null) {
+                    menu?.findItem(R.id.view_certificate)?.isVisible =
+                        it.summativeAssessmentStatus.equals(
+                            "true",
+                            true
+                        )
+                } else {
+                    menu?.findItem(R.id.view_certificate)?.isVisible = false
+                }
+            })
 
             viewModel.courseSyllabusModelLiveData.observe(this@CourseDetailFragment, Observer {
                 if (it != null)
@@ -113,42 +113,45 @@ class CourseDetailFragment : BaseFragment<FragmentCourseDetailBinding, CoursesDe
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
 
         inflater.inflate(R.menu.menu_certificate, menu)
-        this.menu = menu
         super.onCreateOptionsMenu(menu, inflater)
+        this.menu = menu
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == android.R.id.home) {
-            findNavController().navigateUp()
-        } else if (item.itemId == R.id.view_certificate) {
-
-            if (NetworkConnectionInterceptor(context!!)?.isInternetAvailable()) {
-
-                val intent = Intent(context!!, CertificateViewerActivity::class.java)
-                intent.putExtra("userId", viewModel.userData?.userId)
-                intent.putExtra("courseId", viewModel.coursesModelLiveData.value?.courseId)
-                startActivity(intent)
-            } else {
-                viewModel.apply {
-                    setAlertDialogResourceModelMutableLiveData(
-                        BindingUtils.string(R.string.no_internet_message),
-                        BindingUtils.drawable(R.drawable.ic_no_internet)!!,
-                        true,
-                        BindingUtils.string(R.string.yes), {
-                            isAlertDialogShown.postValue(false)
-
-                        },
-                        BindingUtils.string(R.string.no), {
-                            isAlertDialogShown.postValue(false)
-                        }
-                    )
-                    isAlertDialogShown.postValue(true)
-                }
+        return when (item.itemId) {
+            android.R.id.home -> {
+                findNavController().navigateUp()
+                true
             }
-            return true
-        }
+            R.id.view_certificate -> {
+                if (NetworkConnectionInterceptor(context!!)?.isInternetAvailable()) {
 
-        return super.onOptionsItemSelected(item)
+                    val intent = Intent(context!!, CertificateViewerActivity::class.java)
+                    intent.putExtra("userId", viewModel.userData?.userId)
+                    intent.putExtra("courseId", viewModel.coursesModelLiveData.value?.courseId)
+                    startActivity(intent)
+                } else {
+                    viewModel.apply {
+                        setAlertDialogResourceModelMutableLiveData(
+                            BindingUtils.string(R.string.no_internet_message),
+                            BindingUtils.drawable(R.drawable.ic_no_internet)!!,
+                            true,
+                            BindingUtils.string(R.string.yes), {
+                                isAlertDialogShown.postValue(false)
+
+                            },
+                            BindingUtils.string(R.string.no), {
+                                isAlertDialogShown.postValue(false)
+                            }
+                        )
+                        isAlertDialogShown.postValue(true)
+                    }
+                }
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
 
@@ -160,8 +163,8 @@ class CourseDetailFragment : BaseFragment<FragmentCourseDetailBinding, CoursesDe
 
         viewPagerAdapter?.addFragmentView(CourseSyllabusFragment.getInstance(), "")
         viewPagerAdapter?.addFragmentView(ChaptersListFragment(), "")
-        /*if (!it.summativeAssessmentStatus.isNullOrEmpty())
-            viewPagerAdapter?.addFragmentView(CourseResultFragment.getInstance(), "")*/
+        if (!it.summativeAssessmentStatus.isNullOrEmpty())
+            viewPagerAdapter?.addFragmentView(CourseResultFragment.getInstance(), "")
 
         viewPagerCourse.adapter = viewPagerAdapter
         tabLayoutCourse.apply {

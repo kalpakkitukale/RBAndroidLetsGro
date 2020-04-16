@@ -11,7 +11,9 @@ import com.ramanbyte.emla.data_layer.network.exception.NoDataException
 import com.ramanbyte.emla.data_layer.network.exception.NoInternetException
 import com.ramanbyte.emla.data_layer.repositories.CoursesRepository
 import com.ramanbyte.emla.data_layer.repositories.MasterRepository
+import com.ramanbyte.emla.data_layer.repositories.QuizRepository
 import com.ramanbyte.emla.models.ChaptersModel
+import com.ramanbyte.emla.models.CourseResultModel
 import com.ramanbyte.emla.models.CourseSyllabusModel
 import com.ramanbyte.emla.models.CoursesModel
 import com.ramanbyte.utilities.AppLog
@@ -22,6 +24,7 @@ class CoursesDetailViewModel(val mContext: Context) : BaseViewModel(mContext = m
 
     private val coursesRepository: CoursesRepository by instance()
     private val masterRepository: MasterRepository by instance()
+    private val questionRepository: QuizRepository by instance()
     var userData = masterRepository?.getCurrentUser()
     var coursesModelLiveData: MutableLiveData<CoursesModel> = MutableLiveData()
     var selectedChaptersModelLiveData: MutableLiveData<ChaptersModel?> = MutableLiveData(null)
@@ -29,6 +32,8 @@ class CoursesDetailViewModel(val mContext: Context) : BaseViewModel(mContext = m
     var courseSyllabusModelLiveData = MutableLiveData<CourseSyllabusModel?>(null)
 
     var showValidationMessage = MutableLiveData<String>(null)
+
+    var courseResultModelListLiveData = MutableLiveData<List<CourseResultModel>>()
 
     override var noInternetTryAgain: () -> Unit = {
         getCoursesSyllabus()
@@ -122,6 +127,70 @@ class CoursesDetailViewModel(val mContext: Context) : BaseViewModel(mContext = m
                 )
                 coroutineToggleLoader()
             }
+        }
+    }
+
+
+    fun getCourseResult() {
+        CoroutineUtils.main {
+
+            try {
+                coroutineToggleLoader(BindingUtils.string(R.string.getting_course_details))
+
+                courseResultModelListLiveData.postValue(
+                    questionRepository.getCourseResult(
+                        coursesModelLiveData.value?.courseId ?: 0
+                    )
+                )
+
+                toggleLayoutVisibility(
+                    View.VISIBLE,
+                    View.GONE,
+                    View.GONE,
+                    "",
+                    View.GONE
+                )
+
+                coroutineToggleLoader()
+
+            } catch (e: ApiException) {
+                e.printStackTrace()
+                AppLog.errorLog(e.message, e)
+
+                toggleLayoutVisibility(
+                    View.GONE,
+                    View.GONE,
+                    View.GONE,
+                    BindingUtils.string(R.string.some_thing_went_wrong),
+                    View.VISIBLE
+                )
+
+                coroutineToggleLoader()
+
+            } catch (e: NoInternetException) {
+                e.printStackTrace()
+                AppLog.errorLog(e.message, e)
+                toggleLayoutVisibility(
+                    View.GONE,
+                    View.GONE,
+                    View.VISIBLE,
+                    BindingUtils.string(R.string.no_internet_message),
+                    View.GONE
+                )
+                coroutineToggleLoader()
+            } catch (e: NoDataException) {
+                e.printStackTrace()
+                AppLog.errorLog(e.message, e)
+                toggleLayoutVisibility(
+                    View.GONE,
+                    View.VISIBLE,
+                    View.GONE,
+                    BindingUtils.string(R.string.course_details_unavailable),
+                    View.GONE
+                )
+                coroutineToggleLoader()
+            }
+
         }
     }
 }

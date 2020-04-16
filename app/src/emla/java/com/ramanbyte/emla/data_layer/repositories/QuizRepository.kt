@@ -22,7 +22,7 @@ import com.ramanbyte.utilities.DateUtils.DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_M
 import org.kodein.di.generic.instance
 import java.text.DecimalFormat
 
-class QuizRepository (val mContext: Context) : BaseRepository(mContext){
+class QuizRepository(val mContext: Context) : BaseRepository(mContext) {
 
     private val questionController: QuestionController by instance()
 
@@ -77,7 +77,9 @@ class QuizRepository (val mContext: Context) : BaseRepository(mContext){
                             this.options = KEY_BLANK
                             this.iscorrect = "S"
                             this.answer = 0
-                            this.createdDate = DateUtils.getCurrentDateTime(DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS)
+                            this.createdDate = DateUtils.getCurrentDateTime(
+                                DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS
+                            )
                         })
 
                     }
@@ -135,7 +137,9 @@ class QuizRepository (val mContext: Context) : BaseRepository(mContext){
                                 this.options = KEY_BLANK
                                 this.iscorrect = KEY_SKIP
                                 this.answer = 0
-                                this.createdDate = DateUtils.getCurrentDateTime(DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS)
+                                this.createdDate = DateUtils.getCurrentDateTime(
+                                    DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS
+                                )
                             })
                         }
                     }
@@ -205,8 +209,6 @@ class QuizRepository (val mContext: Context) : BaseRepository(mContext){
             questionController.submitTest(quizModel)
         }
     }
-
-
 
 
     //------------- Local data base functions ---------------------------
@@ -345,7 +347,10 @@ class QuizRepository (val mContext: Context) : BaseRepository(mContext){
         paginationResponseHandlerLiveData.postValue(PaginationResponseHandler.INIT_LOADING)
     }
 
-
-
-
+    suspend fun getCourseResult(courseId: Int): ArrayList<CourseResultModel>? {
+        val userId = applicationDatabase?.getUserDao()?.getCurrentUser()?.userId
+        return apiRequest {
+            questionController.getCourseResult(courseId, userId!!)
+        }
+    }
 }
