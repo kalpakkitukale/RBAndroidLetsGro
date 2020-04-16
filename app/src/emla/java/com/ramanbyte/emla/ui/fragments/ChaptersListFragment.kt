@@ -54,7 +54,7 @@ class ChaptersListFragment :
         layoutBinding?.apply {
 
             lifecycleOwner = this@ChaptersListFragment
-
+            courseDetailViewModel = parentViewModel
             chaptersViewModel = viewModel
             noData.viewModel = viewModel
             noInternet.viewModel = viewModel

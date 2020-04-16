@@ -287,7 +287,7 @@ class ContentViewer(
 
                     mediaType = KEY_MEDIA_TYPE_FILE
 
-                    FileUtils.getNewCreatedFilePath(contentModel.content_link)
+                    FileUtils.getNewCreatedFilePath(FileUtils.getFileNameFromPath(FileUtils.getOriginalFileName(contentLink)))
                 }
             }
 

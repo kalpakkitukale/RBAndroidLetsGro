@@ -1,6 +1,7 @@
 package com.ramanbyte.emla.view_model
 
 import android.content.Context
+import androidx.lifecycle.MutableLiveData
 import com.ramanbyte.base.BaseViewModel
 
 /**
@@ -11,4 +12,6 @@ class ContainerViewModel(mContext: Context) : BaseViewModel(mContext = mContext)
     override var noInternetTryAgain = {
 
     }
+
+    val toolbarTitleLiveData = MutableLiveData<String>()
 }

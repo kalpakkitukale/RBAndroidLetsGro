@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -20,10 +21,8 @@ import com.ramanbyte.emla.ui.fragments.AllTheBestFragment
 import com.ramanbyte.emla.ui.fragments.QuizInstructionFragment
 import com.ramanbyte.emla.ui.fragments.ShowQuestionFragment
 import com.ramanbyte.emla.view_model.ContainerViewModel
-import com.ramanbyte.utilities.BindingUtils
+import com.ramanbyte.utilities.*
 import com.ramanbyte.utilities.StaticMethodUtilitiesKtx.changeStatusBarColor
-import com.ramanbyte.utilities.changeStatusBarColor
-import com.ramanbyte.utilities.makeStatusBarTransparent
 
 
 class ContainerActivity : BaseActivity<ActivityContainerBinding, ContainerViewModel>(
@@ -36,9 +35,16 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding, ContainerViewMo
     override fun layoutId(): Int = R.layout.activity_container
 
     override fun initiate() {
+
+        //Assigning Loader
+        //ProgressLoader(mContext!!, viewModel)
+        AlertDialog(this, viewModel)
+
         changeStatusBarColor(window, R.color.colorPrimaryDark)
         layoutBinding.apply {
             lifecycleOwner = this@ContainerActivity
+
+            containerViewModel = viewModel
 
             navController = findNavController(R.id.containerNavHost)
             appBarConfiguration = AppBarConfiguration.Builder(
@@ -65,11 +71,12 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding, ContainerViewMo
             when (destination.id) {
                 R.id.coursesFragment,
                 R.id.myDownloadsFragment,
-                R.id.learnerProfileFragment-> showBottomNavigation()//show bottom nav on these fragments only
+                R.id.learnerProfileFragment -> showBottomNavigation()//show bottom nav on these fragments only
                 else -> hideBottomNavigation()//hide bottom navigation
             }
         }
     }
+
     private fun hideBottomNavigation() { //Hide both drawer and bottom navigation bar
         layoutBinding.apply {
             bottomNavigationView.visibility = View.GONE
@@ -82,6 +89,7 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding, ContainerViewMo
             setupNavControl() //To configure navController with drawer and bottom navigation
         }
     }
+
     private fun setupNavControl() {
         layoutBinding.apply {
             bottomNavigationView.setupWithNavController(navController) //Setup Bottom navigation with navController
@@ -96,12 +104,7 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding, ContainerViewMo
     }
 
     override fun onBackPressed() {
-        //viewModel.alertInterruptDialog()
-        //super.onBackPressed()
-
-        val fragment = supportFragmentManager.findFragmentByTag(BindingUtils.string(R.string.show_question)) as ShowQuestionFragment?  // ShowQuestionFragment
-
-        if (fragment != null) {
+        if (navController.currentDestination?.id == R.id.preAssessmentTestFragment) {
             viewModel.apply {
 
                 setAlertDialogResourceModelMutableLiveData(
@@ -110,7 +113,7 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding, ContainerViewMo
                     false,
                     BindingUtils.string(R.string.yes), {
                         isAlertDialogShown.postValue(false)
-                        super.onBackPressed()
+                        startActivity(ContainerActivity.intent(this@ContainerActivity))
                     },
                     BindingUtils.string(R.string.no), {
                         isAlertDialogShown.postValue(false)
@@ -118,7 +121,7 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding, ContainerViewMo
                 )
                 isAlertDialogShown.postValue(true)
             }
-        }else {
+        } else {
             super.onBackPressed()
         }
     }

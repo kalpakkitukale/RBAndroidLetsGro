@@ -9,6 +9,7 @@ import android.text.style.BackgroundColorSpan
 import android.text.style.ForegroundColorSpan
 import android.text.style.RelativeSizeSpan
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebChromeClient
@@ -82,6 +83,8 @@ class ShowQuestionPagerFragment(
         setRecyclerAdapter()
         setViewModelObservers()
     }
+
+
 
     private fun setRecyclerAdapter() {
         layoutBinding.apply {
@@ -244,7 +247,7 @@ class ShowQuestionPagerFragment(
                         // open bottom sheet
                         if (jumpToQuestionBottomSheetFragment == null)
                             jumpToQuestionBottomSheetFragment =
-                                JumpToQuestionBottomSheetFragment.get(questionAndAnswerModelData.id)
+                                JumpToQuestionBottomSheetFragment.get(questionAndAnswerModelData.id,viewModel)
 
                         jumpToQuestionBottomSheetFragment?.show(
                             childFragmentManager,
