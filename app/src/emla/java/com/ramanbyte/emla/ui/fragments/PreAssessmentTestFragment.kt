@@ -1,19 +1,13 @@
 package com.ramanbyte.emla.ui.fragments
 
 import android.content.Context
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseFragment
 import com.ramanbyte.databinding.FragmentPreAssessmentTestBinding
-import com.ramanbyte.emla.models.ChapterModel
+import com.ramanbyte.emla.models.ChaptersModel
 import com.ramanbyte.emla.models.CoursesModel
 import com.ramanbyte.emla.view_model.ShowQuestionsViewModel
 import com.ramanbyte.utilities.*
@@ -27,7 +21,7 @@ class PreAssessmentTestFragment :
 
     private var mContext: Context? = null
     private var courseModel: CoursesModel? = null
-    private var chapterModel: ChapterModel? = null
+    private var chapterModel: ChaptersModel? = null
 
     override val viewModelClass: Class<ShowQuestionsViewModel> = ShowQuestionsViewModel::class.java
 
@@ -55,7 +49,7 @@ class PreAssessmentTestFragment :
 
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    /*override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             android.R.id.home -> {
                 findNavController().navigateUp()
@@ -64,6 +58,32 @@ class PreAssessmentTestFragment :
             else -> {
                 super.onOptionsItemSelected(item)
             }
+        }
+    }*/
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                viewModel.apply {
+
+                    setAlertDialogResourceModelMutableLiveData(
+                        BindingUtils.string(R.string.leave_test_message),
+                        BindingUtils.drawable(R.drawable.ic_submit_confirmation)!!,
+                        false,
+                        BindingUtils.string(R.string.yes), {
+                            isAlertDialogShown.postValue(false)
+                            view?.findNavController()?.navigate(R.id.coursesFragment)
+                        },
+                        BindingUtils.string(R.string.no), {
+                            isAlertDialogShown.postValue(false)
+                        }
+                    )
+                    isAlertDialogShown.postValue(true)
+                }
+                true
+
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 

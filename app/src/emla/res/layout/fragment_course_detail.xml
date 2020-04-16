@@ -2,9 +2,15 @@
 <layout>
 
     <data>
+
         <variable
             name="coursesModel"
             type="com.ramanbyte.emla.models.CoursesModel" />
+
+        <variable
+            name="coursesDetailViewModel"
+            type="com.ramanbyte.emla.view_model.CoursesDetailViewModel" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -24,36 +30,52 @@
             app:layout_constraintLeft_toLeftOf="parent"
             android:id="@+id/appBar"/>-->
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/appBar"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_40"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabLayoutCourse"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tabGravity="fill"
-            app:layout_constraintStart_toStartOf="parent"
+            android:visibility="@{coursesDetailViewModel.viewVisibilityLiveData}"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/appBar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tabGravity="fill"
             app:tabIconTint="@color/view_pager_selector"
             app:tabIndicatorColor="@color/view_pager_selector"
             app:tabMode="fixed" />
-
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/viewPagerCourse"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:visibility="@{coursesDetailViewModel.viewVisibilityLiveData}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tabLayoutCourse" />
+
+        <include
+            android:id="@+id/no_data"
+            layout="@layout/no_data"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <include
+            android:id="@+id/no_internet"
+            layout="@layout/no_internet"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <include
+            android:id="@+id/something_went_wrong"
+            layout="@layout/something_went_wrong"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

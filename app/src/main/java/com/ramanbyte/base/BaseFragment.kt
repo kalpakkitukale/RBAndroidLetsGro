@@ -2,6 +2,7 @@ package com.ramanbyte.base
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
@@ -10,6 +11,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.ramanbyte.emla.ui.activities.ContainerActivity
 import com.ramanbyte.emla.view_model.ContainerViewModel
 import org.kodein.di.Kodein
@@ -39,10 +41,10 @@ abstract class BaseFragment<LayoutBinding : ViewDataBinding, VM : ViewModel>(
         savedInstanceState: Bundle?
     ): View? {
 
-        if (::layoutBinding.isInitialized)
-            return layoutBinding.root
-
-        layoutBinding = DataBindingUtil.inflate(inflater, layoutId(), container, false)
+        if (!(::layoutBinding.isInitialized))
+            layoutBinding = DataBindingUtil.inflate(inflater, layoutId(), container, false)
+        else
+            container?.removeView(layoutBinding.root)
 
         //bindContentView(inflater, layoutId(), container)
 
@@ -82,10 +84,11 @@ abstract class BaseFragment<LayoutBinding : ViewDataBinding, VM : ViewModel>(
     }
 
     fun setToolbarTitle(strTitle: String) {
-        (activity as ContainerActivity?)?.apply {
-            supportActionBar?.apply {
-                title = strTitle
-            }
+        activity?.apply {
+
+            ViewModelProvider(this).get(ContainerViewModel::class.java).toolbarTitleLiveData.value =
+                strTitle
+
         }
     }
 
@@ -103,5 +106,16 @@ abstract class BaseFragment<LayoutBinding : ViewDataBinding, VM : ViewModel>(
     @LayoutRes
     protected abstract fun layoutId(): Int
 
-    abstract fun initiate()
+    protected abstract fun initiate()
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return  when (item.itemId) {
+            android.R.id.home->{
+                findNavController().navigateUp()
+                true
+            }
+            else-> super.onOptionsItemSelected(item)
+        }
+    }
+
 }

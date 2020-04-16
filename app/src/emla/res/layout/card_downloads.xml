@@ -4,169 +4,127 @@
 
     <data>
 
-       <!-- <variable
-            name="downloadsViewModel"
-            type="com.ramanbyte.idbi.view_model.DownloadsViewModel" />
-
         <variable
             name="mediaInfoModel"
-            type="com.ramanbyte.idbi.model.MediaInfoModel" />-->
+            type="com.ramanbyte.emla.models.MediaInfoModel" />
+
+        <variable
+            name="downloadsViewModel"
+            type="com.ramanbyte.emla.view_model.MyDownloadsViewModel" />
+
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cardContainer"
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/dp_5"
-        android:layout_marginRight="@dimen/dp_5"
+        android:layout_marginStart="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_5"
+        android:layout_marginEnd="@dimen/dp_10"
         android:layout_marginBottom="@dimen/dp_5"
-        android:background="@drawable/white_background_with_gradient_border"
-        android:elevation="@dimen/dp_3">
+        app:cardBackgroundColor="@color/cardBackgroundColor"
+        app:cardCornerRadius="@dimen/dp_5"
+        app:contentPadding="@dimen/dp_8">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/childConstraint"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bottom_corner_white_background_with_gradient_border"
-            android:elevation="1dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_height="match_parent"
+            android:paddingTop="@dimen/dp_10"
+            android:paddingBottom="@dimen/dp_10">
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/ivVideo"
-                android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/tvContentTitle"
+                style="@style/TextViewMediumBlackOnWhite"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dp_10"
-                android:layout_marginTop="@dimen/dp_10"
-                android:src="@drawable/ic_play"
+                android:text="@{mediaInfoModel.contentLink}"
+                android:textSize="@dimen/sp_14"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <!-- android:text="@{mediaInfoModel.contentLink}"-->
             <TextView
-                android:id="@+id/tvTopicName"
-                style="@style/TextViewBoldBlackOnWhite"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dp_10"
-
-                android:textSize="@dimen/sp_14"
-                app:layout_constraintEnd_toStartOf="@+id/ivRemove"
-                app:layout_constraintStart_toEndOf="@+id/ivVideo"
-                app:layout_constraintTop_toTopOf="@+id/ivVideo" />
-
-            <!-- android:onClick="@{()->downloadsViewModel.onClickRemoveDownload(ivRemove, mediaInfoModel)}"-->
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/ivRemove"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_marginEnd="@dimen/dp_5"
-
-                android:padding="@dimen/dp_3"
-                android:src="@drawable/ic_delete_button"
-                android:visibility="visible"
-                app:layout_constraintBottom_toBottomOf="@+id/ivVideo"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/tvTopicName"
-                app:layout_constraintTop_toTopOf="@+id/ivVideo" />
-            <!--android:visibility="@{contentModel.downloadVisibility}"-->
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/ivTick"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_marginEnd="@dimen/dp_5"
-                android:padding="@dimen/dp_3"
-                android:src="@drawable/ic_tick_checked"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="@+id/ivVideo"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/tvTopicName"
-                app:layout_constraintTop_toTopOf="@+id/ivVideo" />
-
-            <TextView
-                android:id="@+id/tvDurationAndSize"
+                android:id="@+id/lblContentSubject"
                 style="@style/TextViewRegularBlackOnWhite"
-                android:layout_width="@dimen/dp_100"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="55:10 | 12.5 MB"
-                android:textSize="@dimen/sp_12"
-                android:visibility="gone"
-                app:layout_constraintStart_toStartOf="@+id/tvTopicName"
-                app:layout_constraintTop_toBottomOf="@+id/tvTopicName" />
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/ivFlip"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/dp_16"
                 android:layout_marginTop="@dimen/dp_10"
-                android:layout_marginEnd="@dimen/dp_5"
-                android:layout_marginBottom="@dimen/dp_10"
-                android:background="@drawable/ic_down_arrow"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:text='@{@string/course +" : "}'
+                android:textSize="@dimen/sp_12"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvContentTitle" />
+
+            <TextView
+                android:id="@+id/tvContentSubject"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text='@{mediaInfoModel.courseName}'
+                android:textSize="@dimen/sp_12"
+                app:layout_constraintStart_toEndOf="@+id/lblContentSubject"
+                app:layout_constraintTop_toTopOf="@+id/lblContentSubject" />
+
+            <TextView
+                android:id="@+id/lblContentTopic"
+                style="@style/TextViewRegularBlackOnWhite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_3"
+                android:text='@{@string/chapter +" : "}'
+                android:textSize="@dimen/sp_12"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvContentSubject" />
+
+            <TextView
+                android:id="@+id/tvContentTopic"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text='@{mediaInfoModel.chapterName}'
+                android:textSize="@dimen/sp_12"
+                app:layout_constraintStart_toEndOf="@+id/lblContentTopic"
+                app:layout_constraintTop_toTopOf="@+id/lblContentTopic" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/TextViewRegularBlackOnWhite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_15"
+                android:text="@string/content_not_available_at_source"
+                android:textAppearance="@style/AppTheme.Font"
+                android:textSize="@dimen/sp_12"
+                android:visibility="@{mediaInfoModel.noFileMessageVisibility}"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvDurationAndSize" />
+                app:layout_constraintTop_toBottomOf="@+id/tvContentTopic" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnDelete"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/dp_10"
+                android:minHeight="@dimen/dp_25"
+                android:onClick="@{()->downloadsViewModel.deleteMedia(mediaInfoModel)}"
+                android:text="@string/strDelete"
+                android:textAllCaps="false"
+                android:textSize="@dimen/sp_12"
+                android:visibility="@{mediaInfoModel.deleteButtonVisibility}"
+                app:layout_constraintEnd_toStartOf="@+id/btnPreview"
+                app:layout_constraintTop_toTopOf="@+id/btnPreview" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnPreview"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_15"
+                android:minHeight="@dimen/dp_25"
+                android:onClick="@{()->downloadsViewModel.playMedia(mediaInfoModel)}"
+                android:text="@string/preview"
+                android:textAllCaps="false"
+                android:textSize="@dimen/sp_12"
+                android:visibility="@{mediaInfoModel.previewButtonVisibility}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvContentTopic" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-<!-- android:text='@{@string/course_name+" : "+ mediaInfoModel.courseName}'-->
-        <TextView
-            android:id="@+id/tvCourseName"
-            style="@style/TextViewRegularBlackOnWhite"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/dp_10"
 
-            android:textSize="@dimen/sp_12"
-            app:layout_constraintEnd_toEndOf="@+id/childConstraint"
-            app:layout_constraintStart_toStartOf="@+id/childConstraint"
-            app:layout_constraintTop_toBottomOf="@+id/childConstraint" />
+    </com.google.android.material.card.MaterialCardView>
 
-        <!--  android:text='@{@string/chapter_name+" : "+ mediaInfoModel.chapterName}'-->
-        <TextView
-            android:id="@+id/tvChapterName"
-            style="@style/TextViewRegularBlackOnWhite"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_5"
-            android:layout_marginBottom="@dimen/dp_5"
-
-            android:textSize="@dimen/sp_12"
-            app:layout_constraintEnd_toEndOf="@+id/tvCourseName"
-            app:layout_constraintStart_toStartOf="@+id/tvCourseName"
-            app:layout_constraintTop_toBottomOf="@+id/tvCourseName" />
-
-        <!-- android:text='@{@string/section_name+" : "+ mediaInfoModel.sectionName}'-->
-        <TextView
-            android:id="@+id/tvSectionName"
-            style="@style/TextViewRegularBlackOnWhite"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_5"
-            android:layout_marginBottom="@dimen/dp_10"
-
-            android:textSize="@dimen/sp_12"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/tvCourseName"
-            app:layout_constraintStart_toStartOf="@+id/tvCourseName"
-            app:layout_constraintTop_toBottomOf="@+id/tvChapterName" />
-
-        <androidx.constraintlayout.widget.Group
-            android:id="@+id/gpFilpLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            app:constraint_referenced_ids="tvCourseName,tvSectionName,tvChapterName" />
-
-        <!--<TextView
-            android:id="@+id/tvSubSectionName"
-            style="@style/TextViewRegularBlackOnWhite"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@{mediaInfoModel.sectionName}"
-            android:textSize="@dimen/sp_14"
-            app:layout_constraintEnd_toEndOf="@+id/tvTopicName"
-            app:layout_constraintStart_toStartOf="@+id/tvTopicName"
-            app:layout_constraintTop_toBottomOf="@+id/tvSectionName" />-->
-    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

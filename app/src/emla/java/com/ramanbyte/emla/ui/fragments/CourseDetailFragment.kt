@@ -1,5 +1,6 @@
 package com.ramanbyte.emla.ui.fragments
 
+import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentStatePagerAdapter
@@ -10,6 +11,8 @@ import com.ramanbyte.databinding.FragmentCourseDetailBinding
 import com.ramanbyte.emla.adapters.ViewPagerAdapter
 import com.ramanbyte.emla.models.CoursesModel
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.ramanbyte.emla.models.CourseSyllabusModel
 import com.ramanbyte.emla.view_model.CoursesDetailViewModel
 
@@ -32,19 +35,37 @@ class CourseDetailFragment : BaseFragment<FragmentCourseDetailBinding, CoursesDe
 
     override fun initiate() {
 
+        ProgressLoader(context!!, viewModel)
+
         arguments?.apply {
             courseModel = getParcelable(KEY_COURSE_MODEL)!!
         }
 
+        setToolbarTitle(courseModel?.courseName!!)
 
-            courseModel?.courseImageUrl =
-                AppS3Client.createInstance(context!!).getFileAccessUrl("dev/"+courseModel?.courseImage?: KEY_BLANK) ?: ""
+        courseModel?.courseImageUrl =
+            AppS3Client.createInstance(context!!).getFileAccessUrl(
+                courseModel?.courseImage ?: KEY_BLANK
+            ) ?: ""
 
+        layoutBinding.apply {
 
-        viewModel.coursesModelLiveData.value = courseModel
-        //setUpViewPager(it)
+            lifecycleOwner = this@CourseDetailFragment
+
+            coursesDetailViewModel = viewModel
+            noData.viewModel = viewModel
+            noInternet.viewModel = viewModel
+            somethingWentWrong.viewModel = viewModel
+        }
+
+        viewModelOps()
+    }
+
+    private fun viewModelOps() {
 
         viewModel.apply {
+
+            coursesModelLiveData.value = courseModel
 
             getCoursesSyllabus()
 
@@ -66,6 +87,23 @@ class CourseDetailFragment : BaseFragment<FragmentCourseDetailBinding, CoursesDe
 
             })
 
+            selectedChaptersModelLiveData.observe(
+                this@CourseDetailFragment,
+                Observer { chaptersModel ->
+
+                    chaptersModel?.apply {
+
+                        selectedChaptersModelLiveData.value = null
+
+                        findNavController()
+                            .navigate(
+                                R.id.action_courseDetailFragment_to_chaptersSectionListFragment,
+                                Bundle().apply {
+                                    putParcelable(KEY_COURSE_MODEL, courseModel)
+                                    putParcelable(KEY_CHAPTER_MODEL, chaptersModel)
+                                })
+                    }
+                })
         }
     }
 
@@ -89,22 +127,13 @@ class CourseDetailFragment : BaseFragment<FragmentCourseDetailBinding, CoursesDe
             viewPagerAdapter?.addFragmentView(CourseResultFragment.getInstance(), "")*/
 
         viewPagerCourse.adapter = viewPagerAdapter
-        tabLayoutCourse.setupWithViewPager(viewPagerCourse)
-
-        setupTabIcon()
+        tabLayoutCourse.apply {
+            setupWithViewPager(viewPagerCourse)
+            getTabAt(0)?.icon = BindingUtils.drawable(R.drawable.ic_open_book)
+            getTabAt(1)?.icon = BindingUtils.drawable(R.drawable.ic_education)
+            getTabAt(2)?.icon = BindingUtils.drawable(R.drawable.ic_timeline)
+        }
 
     }
-
-    private fun setupTabIcon() {
-        tabLayoutCourse.getTabAt(0)?.icon = BindingUtils.drawable(R.drawable.ic_open_book)
-        tabLayoutCourse.getTabAt(1)?.icon = BindingUtils.drawable(R.drawable.ic_education)
-        tabLayoutCourse.getTabAt(2)?.icon = BindingUtils.drawable(R.drawable.ic_timeline)
-    }
-
-    override fun onResume() {
-        super.onResume()
-        //layoutBinding.appBar.title = BindingUtils.string(R.string.basics_of_sales)
-    }
-
 }
 

@@ -49,7 +49,7 @@ abstract class ApiResponseHandler {
                 val message = StringBuilder()
 
                 val errorBody = response.errorBody()?.string()
-                if (errorBody != null && isHtmlString(errorBody.toString()))
+                if (errorBody != null && isHtmlString(errorBody.toString()) || response.code() == 404)
                     throw ApiException(BindingUtils.string(R.string.some_thing_went_wrong))
 
                 if (errorBody != null && errorBody.toString().contains("404"))

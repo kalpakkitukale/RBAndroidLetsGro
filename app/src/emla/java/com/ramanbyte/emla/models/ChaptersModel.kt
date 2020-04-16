@@ -5,8 +5,9 @@ import android.os.Parcelable
 import android.view.View
 import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
+import com.ramanbyte.BR
 
-class ChapterModel() : Parcelable, BaseObservable() {
+class ChaptersModel() : Parcelable, BaseObservable() {
 
     var chapterId: Int? = 0
     var chapterName: String? = ""
@@ -15,16 +16,16 @@ class ChapterModel() : Parcelable, BaseObservable() {
     var sequencestatus: String? = null
     var sequenceId: Int = 0
     var sectionListDropdown: String? = ""
-    var sectionlist= ArrayList<SectionModel>()
+    var sectionlist = ArrayList<SectionsModel>()
     var totalSectionCount: Int = 0
     var formativeAssessmentStaus: String? = null
 
-    /*@Bindable
+    @Bindable
     var downloadVisibility = View.GONE
-        set(value){
+        set(value) {
             field = value
             notifyPropertyChanged(BR.downloadVisibility)
-        }*/
+        }
 
     var index: String? = ""
 
@@ -50,12 +51,12 @@ class ChapterModel() : Parcelable, BaseObservable() {
         return 0
     }
 
-    companion object CREATOR : Parcelable.Creator<ChapterModel> {
-        override fun createFromParcel(parcel: Parcel): ChapterModel {
-            return ChapterModel(parcel)
+    companion object CREATOR : Parcelable.Creator<ChaptersModel> {
+        override fun createFromParcel(parcel: Parcel): ChaptersModel {
+            return ChaptersModel(parcel)
         }
 
-        override fun newArray(size: Int): Array<ChapterModel?> {
+        override fun newArray(size: Int): Array<ChaptersModel?> {
             return arrayOfNulls(size)
         }
     }

@@ -29,7 +29,7 @@ class ShowQuestionsViewModel(var mContext: Context) : BaseViewModel(mContext) {
     val quizRepository: QuizRepository by instance()
 
     var coursesModelLiveData: MutableLiveData<CoursesModel> = MutableLiveData()
-    var chapterModelLiveData: MutableLiveData<ChapterModel> = MutableLiveData()
+    var chapterModelLiveData: MutableLiveData<ChaptersModel> = MutableLiveData()
     var testType = 2  //niraj
 
     // ------- Instruction Page ----------
@@ -248,7 +248,7 @@ class ShowQuestionsViewModel(var mContext: Context) : BaseViewModel(mContext) {
     * */
     fun onClickJumpToQuestion(view: View) {
         if (NetworkConnectionInterceptor(mContext).isInternetAvailable()) {
-            //isJumpToQuestionBS.value = true
+            isJumpToQuestionBS.value = true
         } else {
             noInternetDialog(BindingUtils.string(R.string.next), view)
         }

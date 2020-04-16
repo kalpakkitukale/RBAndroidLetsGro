@@ -10,6 +10,7 @@ import com.ramanbyte.emla.data_layer.network.exception.NoDataException
 import com.ramanbyte.emla.data_layer.network.exception.NoInternetException
 import com.ramanbyte.emla.models.BaseRequestModel
 import com.ramanbyte.utilities.AppLog
+import java.lang.IllegalArgumentException
 
 /**
  * @author Vinay Kumbhar <vinay.k@ramanbyte.com>
@@ -47,6 +48,10 @@ class PaginationDataSource<T, R : BaseRequestModel>(
                 e.printStackTrace()
                 AppLog.errorLog(e.message, e)
                 paginationResponseHandlerLiveData.postValue(PaginationResponseHandler.INIT_NO_DATA)
+            } catch (e: IllegalArgumentException) {
+                e.printStackTrace()
+                AppLog.errorLog(e.message, e)
+                paginationResponseHandlerLiveData.postValue(PaginationResponseHandler.INIT_ERROR)
             } catch (e: Exception) {
                 e.printStackTrace()
                 AppLog.errorLog(e.message, e)
@@ -86,6 +91,10 @@ class PaginationDataSource<T, R : BaseRequestModel>(
                 e.printStackTrace()
                 AppLog.errorLog(e.message, e)
                 paginationResponseHandlerLiveData.postValue(PaginationResponseHandler.PAGE_NO_DATA)
+            } catch (e: IllegalArgumentException) {
+                e.printStackTrace()
+                AppLog.errorLog(e.message, e)
+                paginationResponseHandlerLiveData.postValue(PaginationResponseHandler.INIT_ERROR)
             } catch (e: Exception) {
                 e.printStackTrace()
                 AppLog.errorLog(e.message, e)
