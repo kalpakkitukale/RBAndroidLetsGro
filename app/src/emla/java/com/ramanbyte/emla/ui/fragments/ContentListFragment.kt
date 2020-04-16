@@ -59,6 +59,8 @@ class ContentListFragment : BaseFragment<FragmentContentListBinding, ContentView
                 chapterId = getInt(keyChapterId, 0)
                 courseName = getString(keyCourseName)
                 chapterName = getString(keyChapterName)
+
+                setToolbarTitle(sectionName!!)
             }
 
             getContentList()
@@ -84,6 +86,8 @@ class ContentListFragment : BaseFragment<FragmentContentListBinding, ContentView
                                 courseId = viewModel.courseId ?: 0
                                 courseName = viewModel.courseName ?: ""
                                 chapterName = viewModel.chapterName ?: ""
+                                sectionName = viewModel.sectionName!!
+                                sectionId = viewModel.sectionId
                             })
 
                         playOrPreviewLiveData.value = null

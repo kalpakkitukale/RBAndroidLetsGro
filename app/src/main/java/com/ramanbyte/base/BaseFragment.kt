@@ -82,10 +82,11 @@ abstract class BaseFragment<LayoutBinding : ViewDataBinding, VM : ViewModel>(
     }
 
     fun setToolbarTitle(strTitle: String) {
-        (activity as ContainerActivity?)?.apply {
-            supportActionBar?.apply {
-                title = strTitle
-            }
+        activity?.apply {
+
+            ViewModelProvider(this).get(ContainerViewModel::class.java).toolbarTitleLiveData.value =
+                strTitle
+
         }
     }
 

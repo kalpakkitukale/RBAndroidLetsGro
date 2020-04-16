@@ -68,7 +68,7 @@
     <string name="show_question">Show Question</string>
     <string name="course_detail">Course Detail</string>
     <string name="quiz_review">Quiz Review</string>
-
+    <string name="path_authority">com.ramanbyte.emla</string>
     <string name="jump_to_question">jump to question</string>
     <string name="not_attempted">Not Attempted</string>
     <string name="attempted">Attempted</string>
