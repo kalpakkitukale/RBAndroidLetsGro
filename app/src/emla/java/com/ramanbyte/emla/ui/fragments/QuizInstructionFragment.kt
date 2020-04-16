@@ -49,7 +49,7 @@ class QuizInstructionFragment : BaseFragment<FragmentQuizInstructionBinding, Sho
     private fun setViewModelObservers() {
         viewModel.apply {
 
-            coursesModelLiveData.value?.courseImageUrl = AppS3Client.createInstance(context!!).getFileAccessUrl("dev/"+coursesModelLiveData.value?.courseImage?: KEY_BLANK) ?: ""
+            coursesModelLiveData.value?.courseImageUrl = AppS3Client.createInstance(context!!).getFileAccessUrl(coursesModelLiveData.value?.courseImage?: KEY_BLANK) ?: ""
 
             AppLog.infoLog("courseImageUrl ${coursesModelLiveData.value?.courseImageUrl}")
 
@@ -65,7 +65,7 @@ class QuizInstructionFragment : BaseFragment<FragmentQuizInstructionBinding, Sho
                 height = (width * 0.6).toInt()
             }
 
-            setToolbarTitle(coursesModelLiveData.value?.courseName!!)
+            //setToolbarTitle(coursesModelLiveData.value?.courseName!!)
 
             /*
             * Get Server instruction

@@ -30,7 +30,7 @@ class ShowQuestionsViewModel(var mContext: Context) : BaseViewModel(mContext) {
 
     var coursesModelLiveData: MutableLiveData<CoursesModel> = MutableLiveData()
     var chapterModelLiveData: MutableLiveData<ChaptersModel> = MutableLiveData()
-    var testType = 2  //niraj
+    var testType = 0
 
     // ------- Instruction Page ----------
     val onClickStartQuizLiveData = MutableLiveData<Boolean>().apply {
@@ -48,8 +48,8 @@ class ShowQuestionsViewModel(var mContext: Context) : BaseViewModel(mContext) {
         value = false
     }
 
-    val questionAndAnswerListLiveData: MutableLiveData<ArrayList<QuestionAndAnswerModel>> =
-        MutableLiveData()
+    val questionAndAnswerListLiveData: MutableLiveData<ArrayList<QuestionAndAnswerModel>?> =
+        MutableLiveData(null)
 
     val questionAndAnswerModelLiveData =
         MutableLiveData<ArrayList<QuestionAndAnswerModel>>().apply {

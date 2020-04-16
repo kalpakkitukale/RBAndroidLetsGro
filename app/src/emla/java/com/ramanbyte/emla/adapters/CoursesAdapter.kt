@@ -54,7 +54,7 @@ class CoursesAdapter(private val displayMetrics: DisplayMetrics) :
                 holder.cardCourseBinding.ivStatus.visibility = View.GONE
             }
 
-            courseImageUrl = AppS3Client.createInstance(context!!).getFileAccessUrl("dev/$courseImage"?: KEY_BLANK)
+            courseImageUrl = AppS3Client.createInstance(context!!).getFileAccessUrl(courseImage?: KEY_BLANK)
         })
     }
 
