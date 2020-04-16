@@ -1,5 +1,6 @@
 package com.ramanbyte.emla.ui.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
@@ -13,7 +14,9 @@ import com.ramanbyte.emla.models.CoursesModel
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import com.ramanbyte.emla.data_layer.network.init.NetworkConnectionInterceptor
 import com.ramanbyte.emla.models.CourseSyllabusModel
+import com.ramanbyte.emla.ui.activities.CertificateViewerActivity
 import com.ramanbyte.emla.view_model.CoursesDetailViewModel
 
 import com.ramanbyte.utilities.*
@@ -34,7 +37,7 @@ class CourseDetailFragment : BaseFragment<FragmentCourseDetailBinding, CoursesDe
     override fun layoutId(): Int = R.layout.fragment_course_detail
 
     override fun initiate() {
-
+        setHasOptionsMenu(true)
         ProgressLoader(context!!, viewModel)
 
         arguments?.apply {
@@ -69,17 +72,17 @@ class CourseDetailFragment : BaseFragment<FragmentCourseDetailBinding, CoursesDe
 
             getCoursesSyllabus()
 
-            courseSyllabusModelLiveData.observe(this@CourseDetailFragment, Observer {
-                if (it != null) {
-                    menu?.findItem(R.id.view_certificate)?.isVisible =
-                        it.summativeAssessmentStatus.equals(
-                            "true",
-                            true
-                        )
-                } else {
-                    menu?.findItem(R.id.view_certificate)?.isVisible = false
-                }
-            })
+            /*  courseSyllabusModelLiveData.observe(this@CourseDetailFragment, Observer {
+                  if (it != null) {
+                      menu?.findItem(R.id.view_certificate)?.isVisible =
+                          it.summativeAssessmentStatus.equals(
+                              "true",
+                              true
+                          )
+                  } else {
+                      menu?.findItem(R.id.view_certificate)?.isVisible = false
+                  }
+              })*/
 
             viewModel.courseSyllabusModelLiveData.observe(this@CourseDetailFragment, Observer {
                 if (it != null)
@@ -112,6 +115,40 @@ class CourseDetailFragment : BaseFragment<FragmentCourseDetailBinding, CoursesDe
         inflater.inflate(R.menu.menu_certificate, menu)
         this.menu = menu
         super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) {
+            findNavController().navigateUp()
+        } else if (item.itemId == R.id.view_certificate) {
+
+            if (NetworkConnectionInterceptor(context!!)?.isInternetAvailable()) {
+
+                val intent = Intent(context!!, CertificateViewerActivity::class.java)
+                intent.putExtra("userId", viewModel.userData?.userId)
+                intent.putExtra("courseId", viewModel.coursesModelLiveData.value?.courseId)
+                startActivity(intent)
+            } else {
+                viewModel.apply {
+                    setAlertDialogResourceModelMutableLiveData(
+                        BindingUtils.string(R.string.no_internet_message),
+                        BindingUtils.drawable(R.drawable.ic_no_internet)!!,
+                        true,
+                        BindingUtils.string(R.string.yes), {
+                            isAlertDialogShown.postValue(false)
+
+                        },
+                        BindingUtils.string(R.string.no), {
+                            isAlertDialogShown.postValue(false)
+                        }
+                    )
+                    isAlertDialogShown.postValue(true)
+                }
+            }
+            return true
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 
 

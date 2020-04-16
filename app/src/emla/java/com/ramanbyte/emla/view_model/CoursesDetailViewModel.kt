@@ -10,6 +10,7 @@ import com.ramanbyte.emla.data_layer.network.exception.ApiException
 import com.ramanbyte.emla.data_layer.network.exception.NoDataException
 import com.ramanbyte.emla.data_layer.network.exception.NoInternetException
 import com.ramanbyte.emla.data_layer.repositories.CoursesRepository
+import com.ramanbyte.emla.data_layer.repositories.MasterRepository
 import com.ramanbyte.emla.models.ChaptersModel
 import com.ramanbyte.emla.models.CourseSyllabusModel
 import com.ramanbyte.emla.models.CoursesModel
@@ -20,7 +21,8 @@ import org.kodein.di.generic.instance
 class CoursesDetailViewModel(val mContext: Context) : BaseViewModel(mContext = mContext) {
 
     private val coursesRepository: CoursesRepository by instance()
-
+    private val masterRepository: MasterRepository by instance()
+    var userData = masterRepository?.getCurrentUser()
     var coursesModelLiveData: MutableLiveData<CoursesModel> = MutableLiveData()
     var selectedChaptersModelLiveData: MutableLiveData<ChaptersModel?> = MutableLiveData(null)
 
