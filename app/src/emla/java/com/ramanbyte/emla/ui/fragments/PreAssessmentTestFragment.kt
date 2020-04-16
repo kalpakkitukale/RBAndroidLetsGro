@@ -2,6 +2,7 @@ package com.ramanbyte.emla.ui.fragments
 
 import android.content.Context
 import android.view.MenuItem
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseFragment
@@ -48,7 +49,7 @@ class PreAssessmentTestFragment :
 
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    /*override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             android.R.id.home -> {
                 findNavController().navigateUp()
@@ -57,6 +58,32 @@ class PreAssessmentTestFragment :
             else -> {
                 super.onOptionsItemSelected(item)
             }
+        }
+    }*/
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                viewModel.apply {
+
+                    setAlertDialogResourceModelMutableLiveData(
+                        BindingUtils.string(R.string.leave_test_message),
+                        BindingUtils.drawable(R.drawable.ic_submit_confirmation)!!,
+                        false,
+                        BindingUtils.string(R.string.yes), {
+                            isAlertDialogShown.postValue(false)
+                            view?.findNavController()?.navigate(R.id.coursesFragment)
+                        },
+                        BindingUtils.string(R.string.no), {
+                            isAlertDialogShown.postValue(false)
+                        }
+                    )
+                    isAlertDialogShown.postValue(true)
+                }
+                true
+
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 

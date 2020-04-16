@@ -57,37 +57,12 @@ class ShowQuestionFragment : BaseFragment<FragmentShowQuestionBinding, ShowQuest
             /*val value = arguments!!.getString(KEY_QUESTION_IMAGE)
             AppLog.infoLog("value $value")*/
 
-            setHasOptionsMenu(true)
             setViewModelObservers()
         }
 
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            android.R.id.home -> {
-                viewModel.apply {
 
-                    setAlertDialogResourceModelMutableLiveData(
-                        BindingUtils.string(R.string.leave_test_message),
-                        BindingUtils.drawable(R.drawable.ic_submit_confirmation)!!,
-                        false,
-                        BindingUtils.string(R.string.yes), {
-                            isAlertDialogShown.postValue(false)
-                            view?.findNavController()?.navigate(R.id.coursesFragment)
-                        },
-                        BindingUtils.string(R.string.no), {
-                            isAlertDialogShown.postValue(false)
-                        }
-                    )
-                    isAlertDialogShown.postValue(true)
-                }
-                true
-
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
 
     private fun setViewModelObservers() {
         layoutBinding.apply {
