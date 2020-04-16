@@ -43,6 +43,7 @@ class AllTheBestFragment : BaseFragment<FragmentAllTheBestBinding, ShowQuestions
         }
 
         viewModel.apply {
+
             if (testType == KEY_QUIZ_TYPE_FORMATIVE)
                 getQuestionsByByTopic()
             else

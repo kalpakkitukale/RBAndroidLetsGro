@@ -2,6 +2,7 @@ package com.ramanbyte.emla.ui.fragments
 
 import android.content.Context
 import android.view.MenuItem
+import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.ramanbyte.R
@@ -29,6 +30,8 @@ class PreAssessmentTestFragment :
 
     override fun initiate() {
 
+
+
         arguments?.apply {
             courseModel = getParcelable(KEY_COURSE_MODEL)!!
             chapterModel = getParcelable(KEY_CHAPTER_MODEL)
@@ -38,7 +41,10 @@ class PreAssessmentTestFragment :
         viewModel.apply {
             coursesModelLiveData.value = courseModel
             chapterModelLiveData.value = chapterModel
+
+            setToolbarTitle(coursesModelLiveData?.value?.courseName!!)
         }
+
         ProgressLoader(mContext!!, viewModel)
         AlertDialog(mContext!!, viewModel)
 

@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 abstract class BaseParentFragment<LayoutBinding : ViewDataBinding, VM : ViewModel, ParentVM : BaseViewModel>(
     isActivityParent: Boolean = false,
     useParent: Boolean = false,
-    isNestedGraph: Boolean = false
+    private val isNestedGraph: Boolean = false
 ) : BaseFragment<LayoutBinding, VM>(isActivityParent, useParent, isNestedGraph) {
 
     lateinit var parentViewModel: ParentVM
@@ -19,8 +19,15 @@ abstract class BaseParentFragment<LayoutBinding : ViewDataBinding, VM : ViewMode
     abstract val parentViewModelClass: Class<ParentVM>
 
     override fun initiate() {
-        requireParentFragment().run {
-            parentViewModel = ViewModelProvider(this).get(parentViewModelClass)
+
+        if(isNestedGraph){
+            requireParentFragment().requireParentFragment().run {
+                parentViewModel = ViewModelProvider(this).get(parentViewModelClass)
+            }
+        }else{
+            requireParentFragment().run {
+                parentViewModel = ViewModelProvider(this).get(parentViewModelClass)
+            }
         }
 
         initiateView()
