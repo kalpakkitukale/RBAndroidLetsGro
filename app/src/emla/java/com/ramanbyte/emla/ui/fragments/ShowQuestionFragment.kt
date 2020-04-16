@@ -77,19 +77,21 @@ class ShowQuestionFragment :
                         AppS3Client.createInstance(context!!).getFileAccessUrl(
                             coursesModelLiveData.value?.courseImage ?: KEY_BLANK
                         ) ?: ""
-                }
 
-                val width =
-                    (activity!!).displayMetrics().widthPixels - (BindingUtils.dimen(R.dimen.dp_5) * 2)
 
-                val layoutParams = layoutBinding.imgQue.layoutParams
+                    val width =
+                        (activity!!).displayMetrics().widthPixels - (BindingUtils.dimen(R.dimen.dp_5) * 2)
 
-                layoutParams.height = (width * 0.6).toInt()
+                    val layoutParams = layoutBinding.imgQue.layoutParams
 
-                layoutBinding.imgQue.layoutParams = layoutParams
+                    layoutParams.height = (width * 0.6).toInt()
 
-                layoutBinding.imgQue.layoutParams.apply {
-                    height = (width * 0.6).toInt()
+                    layoutBinding.imgQue.layoutParams = layoutParams
+
+                    layoutBinding.imgQue.layoutParams.apply {
+                        height = (width * 0.6).toInt()
+                    }
+
                 }
 
                 parentViewModel.questionAndAnswerListLiveData.observe(
@@ -115,6 +117,18 @@ class ShowQuestionFragment :
                                 /*if (currentItem != totalQueCount - 1)
                                     btnNext.text = BindingUtils.string(R.string.next)*/
                             }
+                        }
+                    }
+                })
+
+                /*
+                * this will observer when test submit from the jump to bottom sheet page
+                * */
+                isTestSubmitedFormJBS.observe(this@ShowQuestionFragment, Observer {
+                    if (it != null) {
+                        if (it == true) {
+                            isTestSubmitedFormJBS.value = false
+                            parentViewModel.submitTest()
                         }
                     }
                 })

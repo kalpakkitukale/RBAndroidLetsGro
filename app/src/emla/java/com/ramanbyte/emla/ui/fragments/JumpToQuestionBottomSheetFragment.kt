@@ -140,10 +140,12 @@ class JumpToQuestionBottomSheetFragment() : BottomSheetDialogFragment() {
                     if (it == true) {
                         dialog?.cancel()
                         isTestSubmited.value = false
-                        submitTest()
+                        isTestSubmitedFormJBS.value = true
+                        //submitTest()
                     }
                 }
             })
+
 
             onClickQueNo.observe(this@JumpToQuestionBottomSheetFragment, Observer {
                 if (it != null) {

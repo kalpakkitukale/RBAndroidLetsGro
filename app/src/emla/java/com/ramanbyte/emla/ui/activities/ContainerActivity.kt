@@ -106,7 +106,6 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding, ContainerViewMo
     override fun onBackPressed() {
         if (navController.currentDestination?.id == R.id.preAssessmentTestFragment) {
             viewModel.apply {
-
                 setAlertDialogResourceModelMutableLiveData(
                     BindingUtils.string(R.string.leave_test_message),
                     BindingUtils.drawable(R.drawable.ic_submit_confirmation)!!,
@@ -121,7 +120,9 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding, ContainerViewMo
                 )
                 isAlertDialogShown.postValue(true)
             }
-        } else {
+        } else if (navController.currentDestination?.id == R.id.coursesFragment) {
+            moveTaskToBack(true)
+        }else{
             super.onBackPressed()
         }
     }
