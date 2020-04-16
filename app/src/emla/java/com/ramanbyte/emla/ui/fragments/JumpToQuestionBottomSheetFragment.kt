@@ -9,6 +9,7 @@ import android.view.WindowManager
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -20,27 +21,16 @@ import com.ramanbyte.emla.view_model.ShowQuestionsViewModel
 import com.ramanbyte.utilities.*
 
 
-class JumpToQuestionBottomSheetFragment : BottomSheetDialogFragment() {
+class JumpToQuestionBottomSheetFragment() : BottomSheetDialogFragment() {
 
     var mContext: Context? = null
     var jumpToQuestionBinding: JumpToQuestionBinding? = null
-    var viewModel: ShowQuestionsViewModel? = null
     var jumpToQueAdapter: JumpToQueAdapter? = null
     var questionModelDataList = ArrayList<QuestionAndAnswerModel>()
-
+    private var viewModel: ShowQuestionsViewModel? = null
     var questionId = 0
 
     companion object {
-
-        /*fun getInstance(questionList: ArrayList<QuestionAndAnswerModel>): JumpToQuestionBottomSheetFragment {
-
-            val jumpToQuestionBottomSheetFragment = JumpToQuestionBottomSheetFragment()
-            val bundle = Bundle()
-            bundle.putParcelableArrayList(KEY_QUESTION_MODEL, questionList)
-            jumpToQuestionBottomSheetFragment.arguments = bundle
-
-            return jumpToQuestionBottomSheetFragment
-        }*/
 
         fun get(
             questionId: Int
@@ -72,7 +62,6 @@ class JumpToQuestionBottomSheetFragment : BottomSheetDialogFragment() {
         )
 
         if (arguments != null) {
-//            questionModelDataList = arguments?.getParcelableArrayList(KEY_QUESTION_MODEL)!!
             questionId = arguments?.getInt(keyQuestionId, 0) ?: 0
         }
 
@@ -110,10 +99,8 @@ class JumpToQuestionBottomSheetFragment : BottomSheetDialogFragment() {
 
     private fun initComponents() {
 
-        requireParentFragment()?.apply {
-            viewModel =
-                ViewModelProviders.of(this)
-                    .get(ShowQuestionsViewModel::class.java)
+        requireParentFragment()?.requireParentFragment().apply {
+            viewModel = ViewModelProvider(this).get(ShowQuestionsViewModel::class.java)
         }
 
         //Assigning Loader

@@ -9,6 +9,7 @@ import android.text.style.BackgroundColorSpan
 import android.text.style.ForegroundColorSpan
 import android.text.style.RelativeSizeSpan
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebChromeClient
@@ -18,6 +19,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ramanbyte.R
+import com.ramanbyte.base.BaseFragment
 import com.ramanbyte.databinding.CardShowQuestionsBinding
 import com.ramanbyte.emla.adapters.AnswerAdapter
 import com.ramanbyte.emla.data_layer.room.entities.AnswerEntity
@@ -31,12 +33,8 @@ import com.ramanbyte.utilities.DateUtils.DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_M
  * @author Niraj Naware <niraj.n@ramanbyte.com>
  * @since 14/04/20
  */
-class ShowQuestionPagerFragment(
-    private val viewModel: ShowQuestionsViewModel, queCount: Int,
-    totalQueCount: Int,
-    questionAndAnswerModel: QuestionAndAnswerModel,
-    optionsModel: ArrayList<OptionsModel>
-) : Fragment() {
+class ShowQuestionPagerFragment : BaseFragment<CardShowQuestionsBinding, ShowQuestionsViewModel>(isActivityParent = false,
+    useParent = true){
 
     var mContext: Context? = null
     var answerAdapter: AnswerAdapter? = null
@@ -45,43 +43,43 @@ class ShowQuestionPagerFragment(
     var questionAndAnswerModelData = QuestionAndAnswerModel()
     var optionsModelDataList = ArrayList<OptionsModel>()
     var jumpToQuestionBottomSheetFragment: JumpToQuestionBottomSheetFragment? = null
-    lateinit var layoutBinding: CardShowQuestionsBinding
 
-    init {
-        this.queCount = queCount
-        this.totalQueCount = totalQueCount
-        this.questionAndAnswerModelData = questionAndAnswerModel
-        this.optionsModelDataList = optionsModel
-    }
-//    override val viewModelClass: Class<ShowQuestionsViewModel> = ShowQuestionsViewModel::class.java
+    override val viewModelClass: Class<ShowQuestionsViewModel> = ShowQuestionsViewModel::class.java
 
-//    override fun layoutId(): Int = R.layout.card_show_questions
+    override fun layoutId(): Int = R.layout.card_show_questions
 
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        layoutBinding =
-            DataBindingUtil.inflate(inflater, R.layout.card_show_questions, container, false)
-        initiate()
-        return layoutBinding.root
-    }
-
-    fun initiate() {
+    override fun initiate() {
         setData()
         AppLog.infoLog("Initiate::Page::$queCount")
         layoutBinding.apply {
-
             lifecycleOwner = this@ShowQuestionPagerFragment
             cardShowQuestionsViewModel = viewModel
             questionAndAnswerModel = questionAndAnswerModelData
         }
-
         setRecyclerAdapter()
         setViewModelObservers()
     }
+
+    companion object {
+        fun newInstance(
+            queCount: Int,
+            totalQueCount: Int,
+            questionAndAnswerModel: QuestionAndAnswerModel,
+            optionsModel: ArrayList<OptionsModel>
+        ): ShowQuestionPagerFragment {  // queCount: Int, totalQueCount: Int
+            val showQuestionPagerFragment = ShowQuestionPagerFragment()
+            val bundle = Bundle()
+            bundle.putInt(KEY_QUE_COUNT, queCount)
+            bundle.putInt(KEY_TOTAL_QUE_COUNT, totalQueCount)
+            bundle.putParcelable(KEY_QUESTION_MODEL, questionAndAnswerModel)
+            bundle.putParcelableArrayList(KEY_OPTIONS_MODEL, optionsModel)
+            showQuestionPagerFragment.arguments = bundle
+
+            return showQuestionPagerFragment
+        }
+    }
+
+
 
     private fun setRecyclerAdapter() {
         layoutBinding.apply {
@@ -157,11 +155,11 @@ class ShowQuestionPagerFragment(
 
     private fun setData() {
         layoutBinding.apply {
-            /*if (arguments != null) {
+            if (arguments != null) {
                 queCount = arguments?.getInt(KEY_QUE_COUNT)
                 totalQueCount = arguments?.getInt(KEY_TOTAL_QUE_COUNT)
                 questionAndAnswerModelData = arguments?.getParcelable(KEY_QUESTION_MODEL)!!
-                optionsModelDataList = arguments?.getParcelableArrayList(KEY_OPTIONS_MODEL)!!*/
+                optionsModelDataList = arguments?.getParcelableArrayList(KEY_OPTIONS_MODEL)!!
 
                 /*
                 *  Set current question and total question count
@@ -222,7 +220,7 @@ class ShowQuestionPagerFragment(
                     )
                 }
                 tvQuestionMarks.text = spannableStringQuestionMarks
-            //}
+            }
         }
     }
 
