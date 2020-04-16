@@ -31,7 +31,7 @@ class LauncherActivity :
 
     override fun initiate() {
 
-        AppS3Client.createInstance(applicationContext).setDefaultObject("dev")
+        AppS3Client.createInstance(applicationContext).setDefaultObject("test")
 
         makeStatusBarTransparent()
         setViewModelOps()

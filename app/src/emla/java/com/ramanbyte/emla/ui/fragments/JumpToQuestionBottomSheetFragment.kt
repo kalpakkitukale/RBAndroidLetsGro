@@ -20,11 +20,10 @@ import com.ramanbyte.emla.view_model.ShowQuestionsViewModel
 import com.ramanbyte.utilities.*
 
 
-class JumpToQuestionBottomSheetFragment : BottomSheetDialogFragment() {
+class JumpToQuestionBottomSheetFragment(private val viewModel: ShowQuestionsViewModel) : BottomSheetDialogFragment() {
 
     var mContext: Context? = null
     var jumpToQuestionBinding: JumpToQuestionBinding? = null
-    var viewModel: ShowQuestionsViewModel? = null
     var jumpToQueAdapter: JumpToQueAdapter? = null
     var questionModelDataList = ArrayList<QuestionAndAnswerModel>()
 
@@ -43,9 +42,10 @@ class JumpToQuestionBottomSheetFragment : BottomSheetDialogFragment() {
         }*/
 
         fun get(
-            questionId: Int
+            questionId: Int,
+            viewModel: ShowQuestionsViewModel
         ): JumpToQuestionBottomSheetFragment =
-            JumpToQuestionBottomSheetFragment().apply {
+            JumpToQuestionBottomSheetFragment(viewModel).apply {
                 arguments = Bundle().apply {
                     putInt(keyQuestionId, questionId)
                 }
@@ -110,11 +110,7 @@ class JumpToQuestionBottomSheetFragment : BottomSheetDialogFragment() {
 
     private fun initComponents() {
 
-        requireParentFragment()?.apply {
-            viewModel =
-                ViewModelProviders.of(this)
-                    .get(ShowQuestionsViewModel::class.java)
-        }
+
 
         //Assigning Loader
         ProgressLoader(mContext!!, viewModel!!)

@@ -54,7 +54,7 @@
             android:permission="android.permission.BIND_JOB_SERVICE" />
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.ramanbyte.emla"
+            android:authorities="@string/path_authority"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
