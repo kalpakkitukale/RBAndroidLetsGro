@@ -72,17 +72,17 @@ class CourseDetailFragment : BaseFragment<FragmentCourseDetailBinding, CoursesDe
 
             getCoursesSyllabus()
 
-            /*  courseSyllabusModelLiveData.observe(this@CourseDetailFragment, Observer {
+              courseSyllabusModelLiveData.observe(this@CourseDetailFragment, Observer {
                   if (it != null) {
-                      menu?.findItem(R.id.view_certificate)?.isVisible =
-                          it.summativeAssessmentStatus.equals(
+                      menu?.findItem(R.id.view_certificate)?.isVisible =true
+                         /* it.summativeAssessmentStatus.equals(
                               "true",
                               true
-                          )
+                          )*/
                   } else {
                       menu?.findItem(R.id.view_certificate)?.isVisible = false
                   }
-              })*/
+              })
 
             viewModel.courseSyllabusModelLiveData.observe(this@CourseDetailFragment, Observer {
                 if (it != null)
