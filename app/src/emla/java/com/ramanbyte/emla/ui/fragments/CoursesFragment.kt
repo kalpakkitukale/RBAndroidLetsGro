@@ -36,6 +36,7 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
 
     override fun initiate() {
         layoutBinding.apply {
+            setToolbarTitle(BindingUtils.string(R.string.courses))
             lifecycleOwner = this@CoursesFragment
             ProgressLoader(mContext, viewModel)
             AlertDialog(mContext, viewModel)
@@ -148,7 +149,6 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
 
         val searchClose = mSearchView?.findViewById(R.id.search_close_btn) as ImageView
         searchClose.setImageResource(R.drawable.ic_close_white)
-
         val searchImgId = R.id.search_button
         val searchIcon = mSearchView?.findViewById(searchImgId) as ImageView
         searchIcon.setImageResource(R.drawable.ic_search)
@@ -156,15 +156,13 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
         mSearchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 // api call
-                viewModel.searchQuery.postValue(query.toString())
-                mSearchView!!.clearFocus()
+//                viewModel.searchQuery.postValue(query.toString())
+//                mSearchView!!.clearFocus()
                 return true
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                if (newText.toString() == KEY_BLANK) {
-                    // viewModel.searchQuery.postValue(newText.toString())
-                }
+                viewModel.searchQuery.postValue(newText.toString())
                 return false
             }
         })
@@ -190,6 +188,7 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
             else -> super.onOptionsItemSelected(item)
         }
     }
+
     var badgeView: View? = null
     private fun setupBadge(showCount: Boolean? = false) {
         if (badgeView != null) {

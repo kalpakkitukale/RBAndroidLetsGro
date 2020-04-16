@@ -103,28 +103,28 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding, ContainerViewMo
         }
     }
 
-    override fun onBackPressed() {
-        if (navController.currentDestination?.id == R.id.preAssessmentTestFragment) {
-            viewModel.apply {
-
-                setAlertDialogResourceModelMutableLiveData(
-                    BindingUtils.string(R.string.leave_test_message),
-                    BindingUtils.drawable(R.drawable.ic_submit_confirmation)!!,
-                    false,
-                    BindingUtils.string(R.string.yes), {
-                        isAlertDialogShown.postValue(false)
-                        startActivity(ContainerActivity.intent(this@ContainerActivity))
-                    },
-                    BindingUtils.string(R.string.no), {
-                        isAlertDialogShown.postValue(false)
-                    }
-                )
-                isAlertDialogShown.postValue(true)
-            }
-        } else {
-            super.onBackPressed()
-        }
-    }
+//    override fun onBackPressed() {
+//        if (navController.currentDestination?.id == R.id.preAssessmentTestFragment) {
+//            viewModel.apply {
+//
+//                setAlertDialogResourceModelMutableLiveData(
+//                    BindingUtils.string(R.string.leave_test_message),
+//                    BindingUtils.drawable(R.drawable.ic_submit_confirmation)!!,
+//                    false,
+//                    BindingUtils.string(R.string.yes), {
+//                        isAlertDialogShown.postValue(false)
+//                        startActivity(ContainerActivity.intent(this@ContainerActivity))
+//                    },
+//                    BindingUtils.string(R.string.no), {
+//                        isAlertDialogShown.postValue(false)
+//                    }
+//                )
+//                isAlertDialogShown.postValue(true)
+//            }
+//        } else {
+//            super.onBackPressed()
+//        }
+//    }
 
 
 }
