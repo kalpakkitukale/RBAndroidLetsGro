@@ -75,7 +75,6 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
                         if (NetworkConnectionInterceptor(mContext).isInternetAvailable()) {
 
                             if (preAssessmentStatus.equals("true", true)) {
-                                AppLog.infoLog("courses details page")
                                 val bundle = Bundle()
                                 bundle.putParcelable(KEY_COURSE_MODEL, it)
                                 view?.findNavController()

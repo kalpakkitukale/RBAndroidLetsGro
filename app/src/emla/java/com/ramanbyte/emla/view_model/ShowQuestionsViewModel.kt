@@ -143,11 +143,6 @@ class ShowQuestionsViewModel(var mContext: Context) : BaseViewModel(mContext) {
                     coursesModelLiveData.value?.courseId!!,
                     testType
                 )!!
-                /* quizRepository.getInstructions(
-                     6123,
-                     4018,
-                     3
-                 )!!*/
             )
         }
     }

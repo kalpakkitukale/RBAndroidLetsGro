@@ -72,7 +72,12 @@ class ShowQuestionFragment :
         layoutBinding.apply {
             viewModel.apply {
 
-                parentViewModel.coursesModelLiveData.value?.courseImageUrl = AppS3Client.createInstance(context!!).getFileAccessUrl(coursesModelLiveData.value?.courseImage ?: KEY_BLANK) ?: ""
+                parentViewModel.apply {
+                    coursesModelLiveData.value?.courseImageUrl =
+                        AppS3Client.createInstance(context!!).getFileAccessUrl(
+                            coursesModelLiveData.value?.courseImage ?: KEY_BLANK
+                        ) ?: ""
+                }
 
                 val width =
                     (activity!!).displayMetrics().widthPixels - (BindingUtils.dimen(R.dimen.dp_5) * 2)
@@ -126,7 +131,7 @@ class ShowQuestionFragment :
                                     BindingUtils.string(R.string.yes), {
                                         isAlertDialogShown.postValue(false)
                                         //isTestSubmited.value = true
-                                        submitTest()
+                                        parentViewModel.submitTest()
                                     },
                                     BindingUtils.string(R.string.no), {
                                         isAlertDialogShown.postValue(false)
@@ -159,64 +164,65 @@ class ShowQuestionFragment :
                     }
                 })
 
-                isQuizSubmited.observe(this@ShowQuestionFragment, Observer {
-                    if (it != null) {
+                parentViewModel.apply {
+                    isQuizSubmited.observe(this@ShowQuestionFragment, Observer {
+                        if (it != null) {
 
-                        setAlertDialogResourceModelMutableLiveData(
-                            BindingUtils.string(R.string.test_completed),
-                            BindingUtils.drawable(R.drawable.ic_e_learning),
-                            true,
-                            BindingUtils.string(R.string.strOk), {
+                            setAlertDialogResourceModelMutableLiveData(
+                                BindingUtils.string(R.string.test_completed),
+                                BindingUtils.drawable(R.drawable.ic_e_learning),
+                                true,
+                                BindingUtils.string(R.string.strOk), {
 
-                                if (testType == KEY_QUIZ_TYPE_ASSESSMENT) {
-                                    val bundle = Bundle()
-                                    bundle.putParcelable(
-                                        KEY_COURSE_MODEL,
-                                        coursesModelLiveData.value
-                                    )
-                                    view?.findNavController()
-                                        ?.navigate(R.id.courseDetailFragment, bundle)
+                                    if (testType == KEY_QUIZ_TYPE_ASSESSMENT) {
+                                        val bundle = Bundle()
+                                        bundle.putParcelable(
+                                            KEY_COURSE_MODEL,
+                                            coursesModelLiveData.value
+                                        )
+                                        view?.findNavController()
+                                            ?.navigate(R.id.courseDetailFragment, bundle)
 
-                                    isAlertDialogShown.postValue(false)
+                                        isAlertDialogShown.postValue(false)
 
-                                } else {
-                                    isAlertDialogShown.postValue(false)
+                                    } else {
+                                        isAlertDialogShown.postValue(false)
 
-                                    loaderMessageLiveData.set(BindingUtils.string(R.string.loader_result_message))
-                                    isLoaderShowingLiveData.postValue(true)
+                                        loaderMessageLiveData.set(BindingUtils.string(R.string.loader_result_message))
+                                        isLoaderShowingLiveData.postValue(true)
 
-                                    val handler = Handler()
-                                    handler.postDelayed(Runnable {
-                                        isLoaderShowingLiveData.postValue(false)
+                                        val handler = Handler()
+                                        handler.postDelayed(Runnable {
+                                            isLoaderShowingLiveData.postValue(false)
 
-                                        if (it.ispass == KEY_Y) {
-                                            if (testType == KEY_QUIZ_TYPE_FORMATIVE) {
-                                                showCustomDialogQuizReview(it)
+                                            if (it.ispass == KEY_Y) {
+                                                if (testType == KEY_QUIZ_TYPE_FORMATIVE) {
+                                                    showCustomDialogQuizReview(it)
+                                                } else {
+                                                    quizResultAlertDialog(
+                                                        it.passMessage!!,
+                                                        R.drawable.ic_pass
+                                                    )
+                                                }
                                             } else {
-                                                quizResultAlertDialog(
-                                                    it.passMessage!!,
-                                                    R.drawable.ic_pass
-                                                )
+                                                if (testType == KEY_QUIZ_TYPE_FORMATIVE) {
+                                                    showCustomDialogQuizReview(it)
+                                                } else {
+                                                    quizResultAlertDialog(
+                                                        it.failMessage!!,
+                                                        R.drawable.ic_fail
+                                                    )
+                                                }
                                             }
-                                        } else {
-                                            if (testType == KEY_QUIZ_TYPE_FORMATIVE) {
-                                                showCustomDialogQuizReview(it)
-                                            } else {
-                                                quizResultAlertDialog(
-                                                    it.failMessage!!,
-                                                    R.drawable.ic_fail
-                                                )
-                                            }
-                                        }
 
-                                    }, 5000)
+                                        }, 5000)
+                                    }
                                 }
-                            }
-                        )
-                        isAlertDialogShown.postValue(true)
-                    }
-                })
-
+                            )
+                            isAlertDialogShown.postValue(true)
+                        }
+                    })
+                }
 
             }
         }
