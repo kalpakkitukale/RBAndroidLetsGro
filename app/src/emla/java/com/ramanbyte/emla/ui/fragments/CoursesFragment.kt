@@ -16,6 +16,7 @@ import com.ramanbyte.base.BaseFragment
 import com.ramanbyte.databinding.FragmentCoursesBinding
 import com.ramanbyte.emla.adapters.CoursesAdapter
 import com.ramanbyte.emla.data_layer.network.init.NetworkConnectionInterceptor
+import com.ramanbyte.emla.view.RecommendedCourseFilterBottomSheet
 import com.ramanbyte.emla.view_model.CoursesViewModel
 import com.ramanbyte.utilities.*
 
@@ -26,6 +27,7 @@ import com.ramanbyte.utilities.*
 class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>() {
     private lateinit var mContext: Context
     private var coursesAdapter: CoursesAdapter? = null
+    private var courseFilterBottomSheet: RecommendedCourseFilterBottomSheet? = null
 
     override val viewModelClass: Class<CoursesViewModel>
         get() = CoursesViewModel::class.java
@@ -109,6 +111,13 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
                     }
 
                 })
+
+            isFilterApplied.observe(this@CoursesFragment, Observer {
+                it?.let {
+                    setupBadge(it)
+                    isFilterApplied.postValue(null)
+                }
+            })
         }
     }
 
@@ -117,6 +126,15 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
     var searchItem: MenuItem? = null
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_course_search, menu)
+
+        val menuItem = menu.findItem(R.id.action_filter)
+
+        val actionView = menuItem.actionView
+        badgeView = actionView.findViewById(R.id.filter_badge) as View
+        setupBadge()
+        actionView.setOnClickListener {
+            onOptionsItemSelected(menuItem)
+        }
 
         searchItem = menu.findItem(R.id.action_search_key)
 
@@ -155,18 +173,38 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
+        return when (item.itemId) {
             R.id.action_search_key -> {
                 mSearchView!!.setQuery(
                     KEY_BLANK, false
                 )
                 mSearchView!!.clearFocus()
                 mSearchView!!.isIconified = true
+                true
+            }
+            R.id.action_filter -> {
+                courseFilterBottomSheet = RecommendedCourseFilterBottomSheet()
+                courseFilterBottomSheet?.show(childFragmentManager, "course_filter")
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+    var badgeView: View? = null
+    private fun setupBadge(showCount: Boolean? = false) {
+        if (badgeView != null) {
+            if (showCount == true) {
+                if (badgeView?.visibility != View.VISIBLE) {
+                    badgeView?.visibility = View.VISIBLE
+                }
+            } else {
+                if (badgeView?.visibility != View.GONE) {
+                    badgeView?.visibility = View.GONE
+                }
             }
         }
-
-        return super.onOptionsItemSelected(item)
     }
+
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

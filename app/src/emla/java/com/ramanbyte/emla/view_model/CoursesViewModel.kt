@@ -35,7 +35,7 @@ class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
     private val coursesRepository: CoursesRepository by instance()
 
     val selectedCourseModelLiveData = MutableLiveData<CoursesModel?>(null)
-
+    var isFilterApplied = MutableLiveData<Boolean>(null)
     var userData: UserModel? = null
     var searchQuery = MutableLiveData<String>().apply {
         value = KEY_BLANK
