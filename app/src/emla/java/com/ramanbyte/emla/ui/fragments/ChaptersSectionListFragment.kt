@@ -37,6 +37,8 @@ class ChaptersSectionListFragment :
         arguments?.apply {
             viewModel.coursesModel = getParcelable(KEY_COURSE_MODEL)
             viewModel.chaptersModel = getParcelable(KEY_CHAPTER_MODEL)
+
+            setToolbarTitle(viewModel.chaptersModel?.chapterName!!)
         }
 
         layoutBinding?.apply {

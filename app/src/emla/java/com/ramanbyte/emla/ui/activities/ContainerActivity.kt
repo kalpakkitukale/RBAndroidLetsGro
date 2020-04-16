@@ -44,6 +44,8 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding, ContainerViewMo
         layoutBinding.apply {
             lifecycleOwner = this@ContainerActivity
 
+            containerViewModel = viewModel
+
             navController = findNavController(R.id.containerNavHost)
             appBarConfiguration = AppBarConfiguration.Builder(
                 R.id.coursesFragment, R.id.myDownloadsFragment,
@@ -69,11 +71,12 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding, ContainerViewMo
             when (destination.id) {
                 R.id.coursesFragment,
                 R.id.myDownloadsFragment,
-                R.id.learnerProfileFragment-> showBottomNavigation()//show bottom nav on these fragments only
+                R.id.learnerProfileFragment -> showBottomNavigation()//show bottom nav on these fragments only
                 else -> hideBottomNavigation()//hide bottom navigation
             }
         }
     }
+
     private fun hideBottomNavigation() { //Hide both drawer and bottom navigation bar
         layoutBinding.apply {
             bottomNavigationView.visibility = View.GONE
@@ -86,6 +89,7 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding, ContainerViewMo
             setupNavControl() //To configure navController with drawer and bottom navigation
         }
     }
+
     private fun setupNavControl() {
         layoutBinding.apply {
             bottomNavigationView.setupWithNavController(navController) //Setup Bottom navigation with navController
@@ -117,7 +121,7 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding, ContainerViewMo
                 )
                 isAlertDialogShown.postValue(true)
             }
-        }else {
+        } else {
             super.onBackPressed()
         }
     }

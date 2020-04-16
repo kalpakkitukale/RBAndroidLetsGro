@@ -9,6 +9,10 @@
             name="chaptersViewModel"
             type="com.ramanbyte.emla.view_model.ChaptersViewModel" />
 
+        <variable
+            name="courseDetailViewModel"
+            type="com.ramanbyte.emla.view_model.CoursesDetailViewModel" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -32,11 +36,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/ic_course_dummy"
+                app:imageUrl="@{courseDetailViewModel.coursesModelLiveData.courseImageUrl}"
                 android:scaleType="fitXY" />
 
             <!--
 
-                app:imageUrl="@{coursesViewModel.coursesModelLiveData.courseImageUrl}"
+
             -->
 
         </androidx.cardview.widget.CardView>

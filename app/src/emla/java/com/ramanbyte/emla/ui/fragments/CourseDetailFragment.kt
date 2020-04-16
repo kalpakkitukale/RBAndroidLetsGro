@@ -41,9 +41,11 @@ class CourseDetailFragment : BaseFragment<FragmentCourseDetailBinding, CoursesDe
             courseModel = getParcelable(KEY_COURSE_MODEL)!!
         }
 
+        setToolbarTitle(courseModel?.courseName!!)
+
         courseModel?.courseImageUrl =
             AppS3Client.createInstance(context!!).getFileAccessUrl(
-                "dev/" + courseModel?.courseImage ?: KEY_BLANK
+                courseModel?.courseImage ?: KEY_BLANK
             ) ?: ""
 
         layoutBinding.apply {
