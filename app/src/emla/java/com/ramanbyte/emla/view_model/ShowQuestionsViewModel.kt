@@ -248,7 +248,7 @@ class ShowQuestionsViewModel(var mContext: Context) : BaseViewModel(mContext) {
     * */
     fun onClickJumpToQuestion(view: View) {
         if (NetworkConnectionInterceptor(mContext).isInternetAvailable()) {
-            //isJumpToQuestionBS.value = true
+            isJumpToQuestionBS.value = true
         } else {
             noInternetDialog(BindingUtils.string(R.string.next), view)
         }
