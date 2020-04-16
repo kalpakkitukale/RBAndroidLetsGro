@@ -72,6 +72,10 @@ class ShowQuestionsViewModel(var mContext: Context) : BaseViewModel(mContext) {
         value = false
     }
 
+    val isTestSubmitedFormJBS = MutableLiveData<Boolean>().apply {
+        value = false
+    }
+
     val onClickCloseLiveData = MutableLiveData<Boolean>().apply {
         value = false
     }

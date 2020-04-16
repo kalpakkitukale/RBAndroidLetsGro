@@ -138,9 +138,11 @@ class JumpToQuestionBottomSheetFragment() : BottomSheetDialogFragment() {
             isTestSubmited.observe(this@JumpToQuestionBottomSheetFragment, Observer {
                 if (it != null) {
                     if (it == true) {
+                        AppLog.infoLog("niraj_nawareJBS")
                         dialog?.cancel()
                         isTestSubmited.value = false
-                        submitTest()
+                        isTestSubmitedFormJBS.value = true
+                        //submitTest()
                     }
                 }
             })
