@@ -72,7 +72,7 @@ class ShowQuestionFragment :
         layoutBinding.apply {
             viewModel.apply {
 
-                coursesModelLiveData.value?.courseImageUrl = AppS3Client.createInstance(context!!).getFileAccessUrl(coursesModelLiveData.value?.courseImage ?: KEY_BLANK) ?: ""
+                parentViewModel.coursesModelLiveData.value?.courseImageUrl = AppS3Client.createInstance(context!!).getFileAccessUrl(coursesModelLiveData.value?.courseImage ?: KEY_BLANK) ?: ""
 
                 val width =
                     (activity!!).displayMetrics().widthPixels - (BindingUtils.dimen(R.dimen.dp_5) * 2)
