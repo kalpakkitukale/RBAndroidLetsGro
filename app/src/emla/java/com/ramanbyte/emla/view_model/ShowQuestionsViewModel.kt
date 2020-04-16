@@ -30,7 +30,7 @@ class ShowQuestionsViewModel(var mContext: Context) : BaseViewModel(mContext) {
 
     var coursesModelLiveData: MutableLiveData<CoursesModel> = MutableLiveData()
     var chapterModelLiveData: MutableLiveData<ChaptersModel> = MutableLiveData()
-    var testType = 2  //niraj
+    var testType = 0
 
     // ------- Instruction Page ----------
     val onClickStartQuizLiveData = MutableLiveData<Boolean>().apply {
@@ -48,8 +48,8 @@ class ShowQuestionsViewModel(var mContext: Context) : BaseViewModel(mContext) {
         value = false
     }
 
-    val questionAndAnswerListLiveData: MutableLiveData<ArrayList<QuestionAndAnswerModel>> =
-        MutableLiveData()
+    val questionAndAnswerListLiveData: MutableLiveData<ArrayList<QuestionAndAnswerModel>?> =
+        MutableLiveData(null)
 
     val questionAndAnswerModelLiveData =
         MutableLiveData<ArrayList<QuestionAndAnswerModel>>().apply {
@@ -69,6 +69,10 @@ class ShowQuestionsViewModel(var mContext: Context) : BaseViewModel(mContext) {
     }
 
     val isTestSubmited = MutableLiveData<Boolean>().apply {
+        value = false
+    }
+
+    val isTestSubmitedFormJBS = MutableLiveData<Boolean>().apply {
         value = false
     }
 
@@ -143,11 +147,6 @@ class ShowQuestionsViewModel(var mContext: Context) : BaseViewModel(mContext) {
                     coursesModelLiveData.value?.courseId!!,
                     testType
                 )!!
-                /* quizRepository.getInstructions(
-                     6123,
-                     4018,
-                     3
-                 )!!*/
             )
         }
     }

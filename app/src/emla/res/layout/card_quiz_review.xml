@@ -47,11 +47,11 @@
                 android:id="@+id/wvQuestion"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:setHtmlText="@{quizReviewModel.questionTitle}"
                 android:textSize="@dimen/sp_14"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/tvQueNo"
-                app:layout_constraintTop_toBottomOf="@+id/tvJumpToQuestion" />
+                app:layout_constraintTop_toTopOf="@+id/tvQueNo"
+                app:setHtmlText="@{quizReviewModel.questionTitle}" />
             <!--app:setHtmlText="@{questionAndAnswerModel.question_Title}"
             android:text="@{quizReviewModel.questionTitle}"-->
 
