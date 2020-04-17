@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.work.Data
 import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
+import com.google.android.material.snackbar.Snackbar
 import com.ramanbyte.BaseAppController
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseActivity
@@ -103,8 +104,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(authMod
                         finish()
 
                     } else {
-                        //TODO need message for error
-                        layoutBinding.layoutMain.snackbar(BindingUtils.string(R.string.please_agree_the_instruction))
+                        layoutBinding.layoutMain.snack(BindingUtils.string(R.string.please_agree_the_instruction),Snackbar.LENGTH_LONG,{})
                         navigateToNextScreen.value = null
                     }
                 }
