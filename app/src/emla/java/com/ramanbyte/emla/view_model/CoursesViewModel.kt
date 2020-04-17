@@ -140,8 +140,8 @@ class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
             val isFilterSelected = hasFilter()
 
             filterRequestModel = CoursesRequest().apply {
-                userId = if (isFilterSelected) 0 else userData?.userId!!
-                userType = tempFilterModel.userType
+                userId = /*if (isFilterSelected) 0 else */ userData?.userId!!
+                userType = userData?.userType!!
                 programId = tempFilterModel.programId
                 specializationId = tempFilterModel.specializationId
                 patternId = tempFilterModel.patternId
@@ -157,14 +157,14 @@ class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
         }
     }
 
-    fun hasFilter(): Boolean {
+    private fun hasFilter(): Boolean {
         return (tempFilterModel.userType.isNotEmpty() ||
                 tempFilterModel.programId != 0 ||
                 tempFilterModel.patternId != 0 ||
                 tempFilterModel.specializationId != 0)
     }
 
-    fun getFilterState(): Boolean {
+    private fun getFilterState(): Boolean {
         return (filterRequestModel.userType.isNotEmpty() ||
                 filterRequestModel.programId != 0 ||
                 filterRequestModel.patternId != 0 ||
@@ -173,7 +173,7 @@ class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
 
     fun onClearFilterClick(view: View) {
         tempFilterModel.apply {
-            userId = userData?.userId!!
+            /* userId = userData?.userId!!*/
             userType = ""
             programId = 0
             specializationId = 0

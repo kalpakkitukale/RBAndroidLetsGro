@@ -33,6 +33,7 @@
     <string name="no_courses">No Courses</string>
     <string name="no_more_courses">No more courses</string>
     <string name="no_internet_message">No Internet Connection</string>
+    <string name="no_test_found_message">No Test Found</string>
     <string name="marks">Mark(s)</string>
     <string name="try_again">Try Again?</string>
     <string name="all_the_best">All the best !</string>
@@ -197,4 +198,5 @@ Content
     Content Ends
     -->
 
+    <string name="logout_message">Do you want to logout...!!!</string>
 </resources>

@@ -18,6 +18,21 @@ object SharedPreferencesDatabase {
     val KEY_THEME = "prefs.theme"
     val KEY_START_QUIZ_DATE_TIME = "START_DATE_TIME"
 
+    val USER_ID = "userId"
+    val KEY_IS_NEW_TOKEN_UPDATED = "KEY_IS_NEW_TOKEN_UPDATED"
+    val KEY_DEVICE_INSTANCE_ID = "DEVICE_INSTANCE_ID"
+    val KEY_IS_DEVICE_TOKEN_SET = "IS_DEVICE_TOKEN_SET"
+
+    val KEY_AUTH_TOKEN = "AUTH_TOKEN"
+    val KEY_TOKEN_DATE_TIME = "TOKEN_DATE_TIME"
+
+    val KEY_CAMPUS_ID = "CAMPUS_ID"
+    val KEY_CLIENT_NAME = "CLIENT_NAME"
+    val KEY_AWS_S3_ENABLE = "ENABLE_AWS_S3"
+    val KEY_IS_LOGGED_IN = "IS_LOGGED_IN"
+    val IS_PERMISSION_DENIED = "isPermissionDenied"
+    val PRE_ASSESSMENT_STATUS = "PRE_ASSESSMENT_STATUS"
+
     private val prefEditor: SharedPreferences.Editor?
         get() {
             try {

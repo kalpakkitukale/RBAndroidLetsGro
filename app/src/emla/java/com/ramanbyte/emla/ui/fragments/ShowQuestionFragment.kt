@@ -196,7 +196,7 @@ class ShowQuestionFragment :
                                             coursesModelLiveData.value
                                         )
                                         view?.findNavController()
-                                            ?.navigate(R.id.courseDetailFragment, bundle)
+                                            ?.navigate(R.id.action_showQuestionFragment_to_courseDetailFragment, bundle)
 
                                         isAlertDialogShown.postValue(false)
 
