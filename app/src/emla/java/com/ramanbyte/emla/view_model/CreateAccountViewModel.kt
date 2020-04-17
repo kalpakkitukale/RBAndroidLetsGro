@@ -44,6 +44,7 @@ class CreateAccountViewModel(var mContext: Context) : BaseViewModel(mContext = m
             val apiCallFunction: suspend () -> Unit = {
                 val response = registrationRepository.register(
                     registrationMutableLiveData.value!!.apply {
+                        userType = KEY_STUDENT
                         userImageFilename =
                             if (uploadFileName.value?.isNotEmpty()!! && uploadFilePath.value?.isNotEmpty()!!) {
                                 /*AppS3Client.createInstance(mContext)
@@ -62,7 +63,7 @@ class CreateAccountViewModel(var mContext: Context) : BaseViewModel(mContext = m
                             }
                     }
                 )
-                if(response?.isNotEmpty()!!){
+                if (response?.isNotEmpty()!!) {
                     if (uploadFileName.value?.isNotEmpty()!! && uploadFilePath.value?.isNotEmpty()!!) {
                         AppS3Client.createInstance(mContext)
                             .upload(

@@ -1,9 +1,5 @@
 package com.ramanbyte.base
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -20,11 +16,11 @@ abstract class BaseParentFragment<LayoutBinding : ViewDataBinding, VM : ViewMode
 
     override fun initiate() {
 
-        if(isNestedGraph){
+        if (isNestedGraph) {
             requireParentFragment().requireParentFragment().run {
                 parentViewModel = ViewModelProvider(this).get(parentViewModelClass)
             }
-        }else{
+        } else {
             requireParentFragment().run {
                 parentViewModel = ViewModelProvider(this).get(parentViewModelClass)
             }

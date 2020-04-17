@@ -5,17 +5,16 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import android.view.*
-import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.Window
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.viewpager.widget.ViewPager
 import com.ramanbyte.R
 import com.ramanbyte.aws_s3_android.accessor.AppS3Client
-import com.ramanbyte.base.BaseFragment
 import com.ramanbyte.base.BaseParentFragment
 import com.ramanbyte.databinding.DialogQuizReviewBinding
 import com.ramanbyte.databinding.FragmentShowQuestionBinding
@@ -197,7 +196,7 @@ class ShowQuestionFragment :
                                             coursesModelLiveData.value
                                         )
                                         view?.findNavController()
-                                            ?.navigate(R.id.courseDetailFragment, bundle)
+                                            ?.navigate(R.id.action_showQuestionFragment_to_courseDetailFragment, bundle)
 
                                         isAlertDialogShown.postValue(false)
 

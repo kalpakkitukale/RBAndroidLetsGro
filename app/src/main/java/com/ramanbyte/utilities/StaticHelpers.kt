@@ -2,7 +2,6 @@ package com.ramanbyte.utilities
 
 import android.content.Context
 import android.content.pm.PackageManager
-import android.net.Uri
 import android.os.Build
 import android.util.DisplayMetrics
 import android.view.View
@@ -157,7 +156,7 @@ const val KEY_VIDEO = "VIDEO"
 const val KEY_Y = "Y"
 const val KEY_N = "N"
 const val KEY_SKIP = "S"
-const val KEY_STAFF = "STF"
+const val KEY_STUDENT = "STF"
 const val KEY_APP = "APP"
 const val keyContentUrl = "contentUrl"
 const val KEY_QUIZ_TYPE_ASSESSMENT = 1

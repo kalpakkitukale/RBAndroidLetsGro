@@ -107,18 +107,20 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
         searchEditText.hint = BindingUtils.string(R.string.search_by_course)
 
         val searchClose = mSearchView?.findViewById(R.id.search_close_btn) as ImageView
-        searchClose.apply { setImageResource(R.drawable.ic_close_white)
-        setOnClickListener {
-            if (TextUtils.isEmpty(searchEditText.text.toString())) {
-                if (mSearchView?.isIconified ==false) {
-                    mSearchView?.isIconified = true
+        searchClose.apply {
+            setImageResource(R.drawable.ic_close_white)
+            setOnClickListener {
+                if (TextUtils.isEmpty(searchEditText.text.toString())) {
+                    if (mSearchView?.isIconified == false) {
+                        mSearchView?.isIconified = true
+                    }
+                } else {
+                    searchEditText.setText("")
+                    viewModel.searchQuery.postValue("")
+                    mSearchView!!.clearFocus()
                 }
-            } else {
-                searchEditText.setText("")
-                viewModel.searchQuery.postValue("")
-                mSearchView!!.clearFocus()
             }
-        }}
+        }
         val searchImgId = R.id.search_button
         val searchIcon = mSearchView?.findViewById(searchImgId) as ImageView
         searchIcon.setImageResource(R.drawable.ic_search)

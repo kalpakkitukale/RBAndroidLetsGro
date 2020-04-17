@@ -2,8 +2,6 @@ package com.ramanbyte.emla.ui.fragments
 
 import android.content.Context
 import android.view.MenuItem
-import androidx.lifecycle.Observer
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseFragment
@@ -29,7 +27,6 @@ class PreAssessmentTestFragment :
     override fun layoutId(): Int = R.layout.fragment_pre_assessment_test
 
     override fun initiate() {
-
 
 
         arguments?.apply {

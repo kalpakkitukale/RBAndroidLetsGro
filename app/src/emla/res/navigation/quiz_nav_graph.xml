@@ -26,6 +26,9 @@
         <action
             android:id="@+id/action_jumpToQuestionBottomSheetFragment"
             app:destination="@id/jumpToQuestionBottomSheetFragment" />
+        <action
+            android:id="@+id/action_showQuestionFragment_to_courseDetailFragment"
+            app:destination="@id/courseDetailFragment" />
     </fragment>
 
     <fragment

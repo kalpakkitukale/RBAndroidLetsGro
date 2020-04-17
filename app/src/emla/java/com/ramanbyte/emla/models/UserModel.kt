@@ -9,6 +9,7 @@ import com.google.gson.annotations.SerializedName
 open class UserModel {
 
     var userId: Int = 0
+    var user_Reff_Id: Int = 0
     var emailId = ""
     @SerializedName("isLoggedId")
     var loggedId = "N"

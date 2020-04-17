@@ -7,8 +7,6 @@ import com.ramanbyte.base.BaseFragment
 import com.ramanbyte.databinding.FragmentChaptersSectionListBinding
 import com.ramanbyte.emla.adapters.ChaptersSectionListAdapter
 import com.ramanbyte.emla.content.ContentViewer
-import com.ramanbyte.emla.models.ChaptersModel
-import com.ramanbyte.emla.models.CoursesModel
 import com.ramanbyte.emla.models.MediaInfoModel
 import com.ramanbyte.emla.view_model.ChaptersSectionViewModel
 import com.ramanbyte.utilities.*

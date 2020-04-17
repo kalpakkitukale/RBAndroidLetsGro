@@ -12,7 +12,6 @@ import android.graphics.Color
 import android.net.Uri
 import android.os.AsyncTask
 import android.os.Build
-import com.ramanbyte.R
 import android.os.Bundle
 import android.os.Environment
 import android.print.PdfConverter
@@ -27,8 +26,7 @@ import android.webkit.WebViewClient
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import com.ramanbyte.BuildConfig
-
+import com.ramanbyte.R
 import com.ramanbyte.aws_s3_android.utilities.S3Constant
 import com.ramanbyte.databinding.ActivityApplicationFormViewerBinding
 import com.ramanbyte.utilities.*
@@ -125,9 +123,6 @@ class CertificateViewerActivity : AppCompatActivity() {
     }
 
 
-
-
-
     private fun initToolbar() {
         try {
 
@@ -212,8 +207,8 @@ class CertificateViewerActivity : AppCompatActivity() {
                 return true
             }
 
-            R.id.view_share ->{
-                if(certificateFilePath != null) {
+            R.id.view_share -> {
+                if (certificateFilePath != null) {
                     val intentShareFile = Intent(Intent.ACTION_SEND)
                     intentShareFile.setType("application/pdf")
                     intentShareFile.putExtra(

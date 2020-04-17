@@ -8,7 +8,6 @@ import com.ramanbyte.databinding.RecommendedCourseFilterBinding
 import com.ramanbyte.emla.view_model.CoursesViewModel
 import com.ramanbyte.models.SpinnerModel
 import com.ramanbyte.utilities.*
-import java.lang.Exception
 
 /**
  * @author Vinay Kumbhar <vinay.pkumbhar@gmail.com>
@@ -33,7 +32,7 @@ class RecommendedCourseFilterBottomSheet :
         try {
             layoutBinding.apply {
 
-//                mainContainer.viewTreeObserver.addOnGlobalLayoutListener {
+                //                mainContainer.viewTreeObserver.addOnGlobalLayoutListener {
 //                    val dialog = dialog as BottomSheetDialog
 //                    getDialog()!!.window!!.apply {
 //                        setSoftInputMode(WindowManager.LayoutParams.FLAG_FULLSCREEN)

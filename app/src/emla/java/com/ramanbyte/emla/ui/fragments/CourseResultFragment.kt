@@ -13,9 +13,9 @@ import com.ramanbyte.utilities.ProgressLoader
 import com.ramanbyte.utilities.skipTrailingZeroes
 
 class CourseResultFragment :
-    BaseFragment<FragmentCourseResultBinding, CoursesDetailViewModel>(false,true) {
+    BaseFragment<FragmentCourseResultBinding, CoursesDetailViewModel>(false, true) {
 
-    private var mContext : Context?= null
+    private var mContext: Context? = null
     private var maxScoreCourseModel = CourseResultModel()
 
     override val viewModelClass: Class<CoursesDetailViewModel> = CoursesDetailViewModel::class.java
@@ -50,23 +50,28 @@ class CourseResultFragment :
             getCourseResult()
 
             courseResultModelListLiveData.observe(this@CourseResultFragment, Observer {
-                if(it != null && it.size > 0){
+                if (it != null && it.size > 0) {
                     //finding max obtained value
-                    maxScoreCourseModel = it.maxBy { courseResultModel -> courseResultModel.obtainedmarks }!!
+                    maxScoreCourseModel =
+                        it.maxBy { courseResultModel -> courseResultModel.obtainedmarks }!!
 
 
-                    layoutBinding.tvFinalMarks.text = "${skipTrailingZeroes(maxScoreCourseModel.obtainedmarks)} / ${skipTrailingZeroes(maxScoreCourseModel.totalmarks)}"
+                    layoutBinding.tvFinalMarks.text =
+                        "${skipTrailingZeroes(maxScoreCourseModel.obtainedmarks)} / ${skipTrailingZeroes(
+                            maxScoreCourseModel.totalmarks
+                        )}"
 
-                    val courseResultAdapter = CourseResultAdapter(it as ArrayList<CourseResultModel>).apply {
-                        courseViewModel = viewModel
-                    }
+                    val courseResultAdapter =
+                        CourseResultAdapter(it as ArrayList<CourseResultModel>).apply {
+                            courseViewModel = viewModel
+                        }
                     layoutBinding.rvResult.adapter = courseResultAdapter
                 }
             })
         }
     }
 
-    companion object{
+    companion object {
         fun getInstance() = CourseResultFragment()
     }
 
