@@ -33,7 +33,10 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>()
             clickOnLogoutLiveData?.observe(this@SettingFragment, Observer { click ->
                 if (click != null) {
                     if (click == true) {
-                        val intent = Intent(context!!, LoginActivity::class.java)
+                        val intent = Intent(context!!, LoginActivity::class.java).apply {
+                            flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                        }
+
                         startActivity(intent)
                         clickOnLogoutLiveData?.value = false
                     }
