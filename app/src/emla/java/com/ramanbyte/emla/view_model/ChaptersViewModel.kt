@@ -16,10 +16,7 @@ import com.ramanbyte.emla.data_layer.network.exception.NoDataException
 import com.ramanbyte.emla.data_layer.network.exception.NoInternetException
 import com.ramanbyte.emla.data_layer.repositories.ChaptersRepository
 import com.ramanbyte.emla.data_layer.repositories.ContentRepository
-import com.ramanbyte.emla.models.ChaptersModel
-import com.ramanbyte.emla.models.ContentModel
-import com.ramanbyte.emla.models.CoursesModel
-import com.ramanbyte.emla.models.MediaInfoModel
+import com.ramanbyte.emla.models.*
 import com.ramanbyte.utilities.*
 import org.kodein.di.generic.instance
 
@@ -31,11 +28,11 @@ class ChaptersViewModel(mContext: Context) : BaseViewModel(mContext) {
     var courseModel: CoursesModel? = null
 
     var selectedChaptersModelLiveData: MutableLiveData<ChaptersModel?> = MutableLiveData(null)
-    var downloadRequestedChapter : ChaptersModel ? = null
+    var downloadRequestedChapter: ChaptersModel? = null
 
     var isAllCourseSessionCompleted = MutableLiveData<Boolean>(true)
     var showValidationMessage = MutableLiveData<String>(null)
-
+    var courseSyllabusModel: CourseSyllabusModel? = null
     var contentMutableList: MutableLiveData<ArrayList<ContentModel>> = MutableLiveData()
 
     override var noInternetTryAgain: () -> Unit = {
@@ -92,14 +89,30 @@ class ChaptersViewModel(mContext: Context) : BaseViewModel(mContext) {
     }
 
     fun takeSummativeTest(buttonView: View) {
-        buttonView.findNavController()
-            .navigate(
-                R.id.action_courseDetailFragment_to_preAssessmentTestFragment,
-                Bundle().apply {
-                    putInt(keyTestType, KEY_QUIZ_TYPE_SUMMATIVE)
-                    putParcelable(KEY_CHAPTER_MODEL, ChaptersModel())
-                    putParcelable(KEY_COURSE_MODEL, courseModel)
-                })
+
+        if (courseModel?.summativeAssessmentStatus.equals(
+                "true",
+                true
+            )
+        ) {
+            showValidationMessage.value = BindingUtils.string(R.string.clear_exam)
+        } else {
+
+            if (courseModel?.summativeaAtemptCount!! < courseSyllabusModel?.totalSummativeCount!!) {
+                buttonView.findNavController()
+                    .navigate(
+                        R.id.action_courseDetailFragment_to_preAssessmentTestFragment,
+                        Bundle().apply {
+                            putInt(keyTestType, KEY_QUIZ_TYPE_SUMMATIVE)
+                            putParcelable(KEY_CHAPTER_MODEL, ChaptersModel())
+                            putParcelable(KEY_COURSE_MODEL, courseModel)
+                        })
+
+            } else {
+                showValidationMessage.value = BindingUtils.string(R.string.lost_attempt_message)
+            }
+
+        }
     }
 
     fun addMediaInfo(mediaInfoModel: MediaInfoModel): Long =

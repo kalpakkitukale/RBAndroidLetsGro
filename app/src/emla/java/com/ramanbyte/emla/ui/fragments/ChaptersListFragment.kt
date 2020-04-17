@@ -38,6 +38,7 @@ class ChaptersListFragment :
     override fun initiateView() {
 
         viewModel.courseModel = parentViewModel.coursesModelLiveData.value
+        viewModel.courseSyllabusModel = parentViewModel.courseSyllabusModelLiveData.value
 
         ProgressLoader(context!!, viewModel)
         AlertDialog(context!!, viewModel)
