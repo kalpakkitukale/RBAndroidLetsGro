@@ -49,7 +49,6 @@
                     android:layout_marginStart="@dimen/dp_10"
                     android:text='@{String.valueOf(contentModel.id) + " " +contentModel.content_link}'
                     android:textSize="@dimen/sp_14"
-                    app:layout_constraintBottom_toBottomOf="@+id/IvVideo"
                     app:layout_constraintEnd_toStartOf="@+id/IvProgress"
                     app:layout_constraintStart_toEndOf="@+id/IvVideo"
                     app:layout_constraintTop_toTopOf="@+id/IvVideo" />
