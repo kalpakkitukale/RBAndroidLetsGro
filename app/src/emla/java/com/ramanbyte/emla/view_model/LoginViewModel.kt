@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.CompoundButton
 import androidx.databinding.library.baseAdapters.BR
 import androidx.lifecycle.MutableLiveData
+import com.google.android.material.snackbar.Snackbar
 import com.ramanbyte.BaseAppController
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseViewModel
@@ -71,7 +72,8 @@ class LoginViewModel(var mContext: Context) : BaseViewModel(mContext) {
     val forgotPasswordClick = MutableLiveData<Boolean?>(null)
 
     fun doLogin(view:View) {
-
+        view.snack(BindingUtils.string(R.string.please_agree_the_instruction),
+            Snackbar.LENGTH_LONG,{})
         if (loginRequestValidation.validateAll()) {
             if (PermissionsManager.checkPermission(
                     mContext as Activity,
