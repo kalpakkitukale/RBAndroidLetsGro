@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="courseResultModel"
+            type="com.ramanbyte.emla.models.CourseResultModel" />
+
+        <import type="com.ramanbyte.utilities.StaticHelpersKt"/>
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="@dimen/dp_3"
+        app:contentPadding="@dimen/dp_3"
+        android:layout_margin="@dimen/dp_3">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/dp_5"
+            android:paddingTop="@dimen/dp_5"
+            android:paddingEnd="@dimen/dp_5"
+            android:paddingBottom="@dimen/dp_5">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvNumber"
+                style="@style/TextViewBoldBlackOnWhite"
+                android:layout_width="@dimen/dp_25"
+                android:layout_height="@dimen/dp_25"
+                android:background="@drawable/circle_text_view_teal_bg"
+                android:gravity="center"
+                android:text="@{courseResultModel.index}"
+                android:textSize="@dimen/sp_14"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.21" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.74" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/labelMarks"
+                style="@style/TextViewRegularBlackOnWhite"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/marks"
+                android:textSize="@dimen/sp_11"
+                app:layout_constraintEnd_toStartOf="@+id/guideline3"
+                app:layout_constraintHorizontal_bias="0.57"
+                app:layout_constraintStart_toStartOf="@+id/guideline2"
+                app:layout_constraintTop_toTopOf="@+id/tvNumber" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvMarks"
+                style="@style/TextViewBoldBlackOnWhite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text='@{StaticHelpersKt.skipTrailingZeroes(courseResultModel.obtainedmarks) + `/` + StaticHelpersKt.skipTrailingZeroes(courseResultModel.totalmarks)w}'
+                android:textSize="@dimen/sp_18"
+                app:layout_constraintEnd_toStartOf="@+id/guideline3"
+                app:layout_constraintStart_toStartOf="@+id/guideline2"
+                app:layout_constraintTop_toBottomOf="@+id/labelMarks" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvDate"
+                style="@style/TextViewRegularTeal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_3"
+                android:gravity="center"
+                android:text='@{courseResultModel.examdate + " (" + courseResultModel.day + ")"}'
+                android:textSize="@dimen/sp_14"
+                app:layout_constraintEnd_toStartOf="@+id/guideline3"
+                app:layout_constraintStart_toStartOf="@+id/guideline2"
+                app:layout_constraintTop_toBottomOf="@+id/tvMarks" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvTime"
+                style="@style/TextViewRegularBlackOnWhite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_time"
+                android:gravity="right|center"
+                android:drawablePadding="@dimen/dp_5"
+                android:text="@{courseResultModel.totminutes}"
+                android:textSize="@dimen/sp_11"
+                app:layout_constraintBottom_toTopOf="@+id/tvMarks"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/labelMarks" />
+            <!--app:layout_constraintStart_toEndOf="@+id/labelMarks"-->
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

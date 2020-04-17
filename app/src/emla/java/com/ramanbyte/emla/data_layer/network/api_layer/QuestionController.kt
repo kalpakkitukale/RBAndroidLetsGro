@@ -44,4 +44,7 @@ interface QuestionController {
         @Path("EmpId") EmpId: Int, @Path("quizId") quizId: Int, @Path("status") status: String, @Path("pageno") pageno: Int, @Path("PageSize") PageSize: Int, @Path("attemptStatus") attemptStatus: Int
     ): Response<ArrayList<QuizReviewModel>>
 
+    @GET("GetResult/{userId}/{courseId}")
+    suspend fun getCourseResult(@Path("courseId") courseId: Int, @Path("userId") userId: Int): Response<ArrayList<CourseResultModel>>
+
 }
