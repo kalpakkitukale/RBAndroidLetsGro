@@ -108,14 +108,14 @@ abstract class BaseFragment<LayoutBinding : ViewDataBinding, VM : ViewModel>(
 
     protected abstract fun initiate()
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return  when (item.itemId) {
-            android.R.id.home->{
-                findNavController().navigateUp()
-                true
-            }
-            else-> super.onOptionsItemSelected(item)
-        }
-    }
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        return  when (item.itemId) {
+//            android.R.id.home->{
+//                findNavController().navigateUp()
+//                true
+//            }
+//            else-> super.onOptionsItemSelected(item)
+//        }
+//    }
 
 }

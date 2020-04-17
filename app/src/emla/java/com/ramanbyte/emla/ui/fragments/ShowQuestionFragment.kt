@@ -57,6 +57,7 @@ class ShowQuestionFragment :
             lifecycleOwner = this@ShowQuestionFragment
 
             showQuestionsViewModel = viewModel
+            showQuestionsParentViewModel = parentViewModel
             noInternet.viewModel = viewModel
             noData.viewModel = viewModel
             somethingWentWrong.viewModel = viewModel
@@ -78,6 +79,7 @@ class ShowQuestionFragment :
                             coursesModelLiveData.value?.courseImage ?: KEY_BLANK
                         ) ?: ""
 
+                    AppLog.infoLog("courseImageUrl :: Show Que Page ${coursesModelLiveData.value?.courseImageUrl}")
 
                     val width =
                         (activity!!).displayMetrics().widthPixels - (BindingUtils.dimen(R.dimen.dp_5) * 2)
@@ -284,7 +286,7 @@ class ShowQuestionFragment :
                                 bundle.putParcelable(KEY_QUIZ_RESULT_MODEL, quizResultModel)
                                 bundle.putString(
                                     KEY_COURSE_IMAGE_URL,
-                                    coursesModelLiveData.value?.courseImageUrl
+                                    parentViewModel.coursesModelLiveData.value?.courseImageUrl
                                 )
                                 view?.findNavController()
                                     ?.navigate(R.id.quizReviewFragment, bundle)
@@ -304,7 +306,7 @@ class ShowQuestionFragment :
                                 bundle.putParcelable(KEY_QUIZ_RESULT_MODEL, quizResultModel)
                                 bundle.putString(
                                     KEY_COURSE_IMAGE_URL,
-                                    coursesModelLiveData.value?.courseImageUrl
+                                    parentViewModel.coursesModelLiveData.value?.courseImageUrl
                                 )
                                 view?.findNavController()
                                     ?.navigate(R.id.quizReviewFragment, bundle)
@@ -347,7 +349,7 @@ class ShowQuestionFragment :
                                 bundle.putParcelable(KEY_QUIZ_RESULT_MODEL, quizResultModel)
                                 bundle.putString(
                                     KEY_COURSE_IMAGE_URL,
-                                    coursesModelLiveData.value?.courseImageUrl
+                                    parentViewModel.coursesModelLiveData.value?.courseImageUrl
                                 )
                                 view?.findNavController()
                                     ?.navigate(R.id.quizReviewFragment, bundle)

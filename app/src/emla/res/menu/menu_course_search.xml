@@ -10,4 +10,12 @@
         app:showAsAction="ifRoom"
         tools:targetApi="O" />
 
+    <item
+        android:id="@+id/action_filter"
+        android:icon="@drawable/ic_filter"
+        app:actionLayout="@layout/custom_action_badge_layout"
+        app:showAsAction="ifRoom"
+        android:title="@string/filter">
+    </item>
+
 </menu>
