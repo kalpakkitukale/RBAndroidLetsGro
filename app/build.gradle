@@ -127,4 +127,6 @@ dependencies {
 
     //exo-player
     implementation 'com.google.android.exoplayer:exoplayer:2.10.0'
+
+    implementation 'com.github.barteksc:android-pdf-viewer:2.8.2'
 }

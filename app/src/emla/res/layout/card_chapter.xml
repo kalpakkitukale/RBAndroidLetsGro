@@ -44,14 +44,16 @@
                 <TextView
                     android:id="@+id/IvVideo"
                     style="@style/TextViewBoldBlackOnWhite"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dp_5"
                     android:layout_marginTop="@dimen/dp_5"
-                    android:text="@{chapterModel.index}"
+                    android:text="ejbdjebdbhebdhebhdbhebdhbehjdbhebdhbehjbdhbehdbehbdhbehbdhebdbhejbdjhbehjbdehbhjdb"
                     android:textSize="@dimen/sp_14"
+                    app:layout_constraintEnd_toStartOf="@+id/IvDownload"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+                <!--android:text="@{chapterModel.index}"-->
 
                 <TextView
                     android:id="@+id/tvTopicName"

@@ -9,6 +9,5 @@ import androidx.databinding.BaseObservable
 abstract class BaseRequestModel : BaseObservable() {
 
     var pageNo      : Int = 0
-    //var pageno      : Int = 0
     var pageSize    : Int = 10
 }

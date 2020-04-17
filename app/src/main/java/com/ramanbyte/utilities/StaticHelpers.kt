@@ -2,7 +2,6 @@ package com.ramanbyte.utilities
 
 import android.content.Context
 import android.content.pm.PackageManager
-import android.net.Uri
 import android.os.Build
 import android.util.DisplayMetrics
 import android.view.View
@@ -10,6 +9,8 @@ import android.view.Window
 import androidx.fragment.app.FragmentActivity
 import com.ramanbyte.R
 import java.lang.reflect.InvocationTargetException
+import java.math.BigDecimal
+import java.text.DecimalFormat
 
 /**
  * @AddedBy Vinay Kumbhar <vinay.k@ramanbyte.com>
@@ -390,3 +391,23 @@ const val KEY_MEDIA_TYPE_AUDIO = "video"
 const val KEY_MEDIA_TYPE_FILE = "file"
 const val KEY_FILE_NAME = "keyFileName"
 const val KEY_FILE_DOWNLOAD = "File Download"
+
+
+fun skipTrailingZeroes(number: Double?): String {
+    var trimmedNumber = "0"
+
+    val decimalFormat = DecimalFormat("#.##")
+    val obtainedMarksDbl = number!!
+
+    if (obtainedMarksDbl > 0.0) {
+        trimmedNumber = decimalFormat.format(obtainedMarksDbl)
+
+        if (trimmedNumber.contains(".00") || trimmedNumber.contains(".0")) {
+            trimmedNumber = BigDecimal(obtainedMarksDbl)
+                .setScale(2, BigDecimal.ROUND_HALF_EVEN)
+                .stripTrailingZeros().toPlainString()
+        }
+    }
+
+    return trimmedNumber
+}

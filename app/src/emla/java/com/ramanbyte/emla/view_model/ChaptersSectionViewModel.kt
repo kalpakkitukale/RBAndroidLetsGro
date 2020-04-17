@@ -31,7 +31,7 @@ class ChaptersSectionViewModel(mContext: Context) : BaseViewModel(mContext) {
 
     var coursesModel: CoursesModel? = null
     var chaptersModel: ChaptersModel? = null
-
+    var errorMessage = MutableLiveData<String?>(null)
     var downloadRequestedSection: SectionsModel? = null
     var contentMutableList: MutableLiveData<ArrayList<ContentModel>> = MutableLiveData()
 
@@ -96,14 +96,21 @@ class ChaptersSectionViewModel(mContext: Context) : BaseViewModel(mContext) {
     }
 
     fun takeFormativeTest(buttonView: View) {
-        buttonView.findNavController()
-            .navigate(
-                R.id.action_chaptersSectionListFragment_to_preAssessmentTestFragment,
-                Bundle().apply {
-                    putInt(keyTestType, KEY_QUIZ_TYPE_FORMATIVE)
-                    putParcelable(KEY_CHAPTER_MODEL, chaptersModel)
-                    putParcelable(KEY_COURSE_MODEL, coursesModel)
-                })
+
+        if (!chaptersModel?.formativeAssessmentStaus.equals("true", true)) {
+            buttonView.findNavController()
+                .navigate(
+                    R.id.action_chaptersSectionListFragment_to_preAssessmentTestFragment,
+                    Bundle().apply {
+                        putInt(keyTestType, KEY_QUIZ_TYPE_FORMATIVE)
+                        putParcelable(KEY_CHAPTER_MODEL, chaptersModel)
+                        putParcelable(KEY_COURSE_MODEL, coursesModel)
+                    })
+        } else {
+            errorMessage.value = "You have cleared the test.!!"
+
+        }
+
     }
 
     fun addMediaInfo(mediaInfoModel: MediaInfoModel): Long =

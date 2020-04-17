@@ -1,15 +1,11 @@
 package com.ramanbyte.emla.base.di
 
 import com.ramanbyte.data_layer.network.init.RetrofitInitializer
-import com.ramanbyte.emla.data_layer.network.api_layer.ChaptersController
-import com.ramanbyte.emla.data_layer.network.api_layer.CoursesController
-import com.ramanbyte.emla.data_layer.network.api_layer.LoginApiController
-import com.ramanbyte.emla.data_layer.network.api_layer.SectionsController
+import com.ramanbyte.emla.data_layer.network.api_layer.*
 import com.ramanbyte.emla.data_layer.repositories.ChaptersRepository
+import com.ramanbyte.emla.data_layer.repositories.ContentRepository
 import com.ramanbyte.emla.data_layer.repositories.CoursesRepository
 import com.ramanbyte.emla.data_layer.repositories.SectionsRepository
-import com.ramanbyte.emla.data_layer.network.api_layer.*
-import com.ramanbyte.emla.data_layer.repositories.ContentRepository
 import org.kodein.di.Kodein
 import org.kodein.di.generic.bind
 import org.kodein.di.generic.instance
@@ -30,7 +26,7 @@ private const val CHAPTER = "Chapter/"
 private const val SECTION = "Section/"
 private const val QUESTION = "Question/"
 
-var CLIENT_BASE = "Test"
+var CLIENT_BASE = "Dev"
 
 val repositoryDependencies = Kodein.Module("", true) {
 

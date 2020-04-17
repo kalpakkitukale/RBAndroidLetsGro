@@ -35,9 +35,9 @@
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity android:name=".emla.ui.activities.ContainerActivity" />
         <activity android:name=".emla.ui.activities.ForgotPasswordActivity" />
-        <activity android:name=".emla.ui.activities.ChangePasswordActivity" />
         <activity android:name=".emla.ui.activities.FileViewerActivity" />
         <activity android:name=".emla.ui.activities.MediaPlaybackActivity" />
+        <activity android:name=".emla.ui.activities.CertificateViewerActivity" />
 
         <service
             android:name=".emla.content.ExoDownloadService"
@@ -52,6 +52,7 @@
             android:name="com.google.android.exoplayer2.scheduler.PlatformScheduler$PlatformSchedulerService"
             android:exported="true"
             android:permission="android.permission.BIND_JOB_SERVICE" />
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="@string/path_authority"

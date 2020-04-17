@@ -4,19 +4,16 @@ import android.content.Context
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.navigation.findNavController
 import androidx.paging.PagedList
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseViewModel
 import com.ramanbyte.data_layer.CoroutineUtils
-import com.ramanbyte.data_layer.SharedPreferencesDatabase
 import com.ramanbyte.data_layer.pagination.PaginationMessages
 import com.ramanbyte.emla.data_layer.network.init.NetworkConnectionInterceptor
 import com.ramanbyte.emla.data_layer.repositories.QuizRepository
 import com.ramanbyte.emla.data_layer.room.entities.AnswerEntity
 import com.ramanbyte.emla.models.*
 import com.ramanbyte.utilities.*
-import com.ramanbyte.utilities.DateUtils.DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS
 import kotlinx.coroutines.delay
 import org.kodein.di.generic.instance
 
@@ -30,7 +27,7 @@ class ShowQuestionsViewModel(var mContext: Context) : BaseViewModel(mContext) {
 
     var coursesModelLiveData: MutableLiveData<CoursesModel> = MutableLiveData()
     var chapterModelLiveData: MutableLiveData<ChaptersModel> = MutableLiveData()
-    var testType = 2  //niraj
+    var testType = 0
 
     // ------- Instruction Page ----------
     val onClickStartQuizLiveData = MutableLiveData<Boolean>().apply {
@@ -48,8 +45,8 @@ class ShowQuestionsViewModel(var mContext: Context) : BaseViewModel(mContext) {
         value = false
     }
 
-    val questionAndAnswerListLiveData: MutableLiveData<ArrayList<QuestionAndAnswerModel>> =
-        MutableLiveData()
+    val questionAndAnswerListLiveData: MutableLiveData<ArrayList<QuestionAndAnswerModel>?> =
+        MutableLiveData(null)
 
     val questionAndAnswerModelLiveData =
         MutableLiveData<ArrayList<QuestionAndAnswerModel>>().apply {
@@ -69,6 +66,10 @@ class ShowQuestionsViewModel(var mContext: Context) : BaseViewModel(mContext) {
     }
 
     val isTestSubmited = MutableLiveData<Boolean>().apply {
+        value = false
+    }
+
+    val isTestSubmitedFormJBS = MutableLiveData<Boolean>().apply {
         value = false
     }
 
@@ -143,11 +144,6 @@ class ShowQuestionsViewModel(var mContext: Context) : BaseViewModel(mContext) {
                     coursesModelLiveData.value?.courseId!!,
                     testType
                 )!!
-                /* quizRepository.getInstructions(
-                     6123,
-                     4018,
-                     3
-                 )!!*/
             )
         }
     }

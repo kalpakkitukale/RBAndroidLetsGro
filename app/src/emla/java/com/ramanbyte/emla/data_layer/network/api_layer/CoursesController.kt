@@ -11,7 +11,7 @@ import retrofit2.http.Path
 
 interface CoursesController {
 
-    @POST("getCourseListsStudent")
+    @POST("getrecomdedcourselist")
     suspend fun getCourses(@Body coursesRequest: CoursesRequest): Response<List<CoursesModel>>
 
     @GET("GetCourseInfoWthihtml/{CourseId}/{userId}")
