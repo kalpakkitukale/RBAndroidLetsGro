@@ -5,17 +5,14 @@ import android.app.Activity
 import android.app.Dialog
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Color
 import android.net.Uri
 import android.provider.Settings
 import android.view.LayoutInflater
-import android.view.View
-import android.view.Window
-import android.view.WindowManager
 import androidx.lifecycle.Observer
 import androidx.work.Data
 import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
+import com.google.android.material.snackbar.Snackbar
 import com.ramanbyte.BaseAppController
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseActivity
@@ -57,7 +54,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(authMod
                 }
             userModelLiveData.observe(this@LoginActivity, Observer {
                 it?.let {
-                    if (it.userType.equals(KEY_STAFF, true)) {
+                    if (it.userType.equals(KEY_STUDENT, true)) {
 
                         if (it.loggedId != KEY_Y)
                             showPledgeDialog()
@@ -107,8 +104,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(authMod
                         finish()
 
                     } else {
-                        //TODO need message for error
-                        layoutBinding.layoutMain.snackbar(BindingUtils.string(R.string.please_agree_the_instruction))
+                        layoutBinding.layoutMain.snack(BindingUtils.string(R.string.please_agree_the_instruction),Snackbar.LENGTH_LONG,{})
                         navigateToNextScreen.value = null
                     }
                 }

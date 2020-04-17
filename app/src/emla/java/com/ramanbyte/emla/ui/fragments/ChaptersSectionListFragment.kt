@@ -7,14 +7,9 @@ import com.ramanbyte.base.BaseFragment
 import com.ramanbyte.databinding.FragmentChaptersSectionListBinding
 import com.ramanbyte.emla.adapters.ChaptersSectionListAdapter
 import com.ramanbyte.emla.content.ContentViewer
-import com.ramanbyte.emla.models.ChaptersModel
-import com.ramanbyte.emla.models.CoursesModel
 import com.ramanbyte.emla.models.MediaInfoModel
 import com.ramanbyte.emla.view_model.ChaptersSectionViewModel
-import com.ramanbyte.utilities.AlertDialog
-import com.ramanbyte.utilities.KEY_CHAPTER_MODEL
-import com.ramanbyte.utilities.KEY_COURSE_MODEL
-import com.ramanbyte.utilities.ProgressLoader
+import com.ramanbyte.utilities.*
 
 /**
  * A simple [Fragment] subclass.
@@ -101,6 +96,12 @@ class ChaptersSectionListFragment :
                                 })
                         }
                     }
+                }
+            })
+
+            errorMessage.observe(this@ChaptersSectionListFragment, Observer {
+                if (it != null) {
+                    layoutBinding.containerMain.snackbar(it)
                 }
             })
         }

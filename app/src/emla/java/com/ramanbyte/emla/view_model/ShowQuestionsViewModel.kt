@@ -2,19 +2,23 @@ package com.ramanbyte.emla.view_model
 
 import android.content.Context
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.paging.PagedList
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseViewModel
 import com.ramanbyte.data_layer.CoroutineUtils
 import com.ramanbyte.data_layer.SharedPreferencesDatabase
 import com.ramanbyte.data_layer.pagination.PaginationMessages
+import com.ramanbyte.emla.data_layer.network.exception.NoDataException
 import com.ramanbyte.emla.data_layer.network.init.NetworkConnectionInterceptor
 import com.ramanbyte.emla.data_layer.repositories.QuizRepository
 import com.ramanbyte.emla.data_layer.room.entities.AnswerEntity
 import com.ramanbyte.emla.models.*
+import com.ramanbyte.emla.ui.activities.ContainerActivity
 import com.ramanbyte.utilities.*
 import com.ramanbyte.utilities.DateUtils.DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS
 import kotlinx.coroutines.delay
@@ -30,10 +34,14 @@ class ShowQuestionsViewModel(var mContext: Context) : BaseViewModel(mContext) {
 
     var coursesModelLiveData: MutableLiveData<CoursesModel> = MutableLiveData()
     var chapterModelLiveData: MutableLiveData<ChaptersModel> = MutableLiveData()
-    var testType = 2  //niraj
+    var testType = 0
 
     // ------- Instruction Page ----------
     val onClickStartQuizLiveData = MutableLiveData<Boolean>().apply {
+        value = false
+    }
+
+    val isQuizFoundLiveData = MutableLiveData<Boolean>().apply {
         value = false
     }
 
@@ -48,8 +56,8 @@ class ShowQuestionsViewModel(var mContext: Context) : BaseViewModel(mContext) {
         value = false
     }
 
-    val questionAndAnswerListLiveData: MutableLiveData<ArrayList<QuestionAndAnswerModel>> =
-        MutableLiveData()
+    val questionAndAnswerListLiveData: MutableLiveData<ArrayList<QuestionAndAnswerModel>?> =
+        MutableLiveData(null)
 
     val questionAndAnswerModelLiveData =
         MutableLiveData<ArrayList<QuestionAndAnswerModel>>().apply {
@@ -69,6 +77,10 @@ class ShowQuestionsViewModel(var mContext: Context) : BaseViewModel(mContext) {
     }
 
     val isTestSubmited = MutableLiveData<Boolean>().apply {
+        value = false
+    }
+
+    val isTestSubmitedFormJBS = MutableLiveData<Boolean>().apply {
         value = false
     }
 
@@ -127,8 +139,6 @@ class ShowQuestionsViewModel(var mContext: Context) : BaseViewModel(mContext) {
     fun onClickStartQuiz(view: View) {
         if (NetworkConnectionInterceptor(mContext).isInternetAvailable()) {
             onClickStartQuizLiveData.value = true
-            /*SharedPreferencesDatabase.setStringPref(SharedPreferencesDatabase.KEY_START_QUIZ_DATE_TIME, DateUtils.getCurrentDateTime(DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS))
-            view.findNavController().navigate(R.id.allTheBestFragment)*/
         } else {
             noInternetDialog(BindingUtils.string(R.string.next), view)
         }
@@ -137,18 +147,20 @@ class ShowQuestionsViewModel(var mContext: Context) : BaseViewModel(mContext) {
     fun getInstructions() {
 
         invokeApiCall {
-            instructionsModelLiveData.postValue(
-                quizRepository.getInstructions(
-                    chapterModelLiveData.value?.chapterId ?: 0,
-                    coursesModelLiveData.value?.courseId!!,
-                    testType
-                )!!
-                /* quizRepository.getInstructions(
-                     6123,
-                     4018,
-                     3
-                 )!!*/
-            )
+            try {
+                instructionsModelLiveData.postValue(
+                    quizRepository.getInstructions(
+                        chapterModelLiveData.value?.chapterId ?: 0,
+                        coursesModelLiveData.value?.courseId!!,
+                        testType
+                    )!!
+                )
+            } catch (e: NoDataException) {
+                isQuizFoundLiveData.postValue(true)
+                e.printStackTrace()
+                e.message
+            }
+
         }
     }
 

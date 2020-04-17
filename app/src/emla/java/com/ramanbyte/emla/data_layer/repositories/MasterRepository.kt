@@ -3,15 +3,10 @@ package com.ramanbyte.emla.data_layer.repositories
 import android.content.Context
 import com.ramanbyte.data_layer.base.BaseRepository
 import com.ramanbyte.emla.data_layer.network.api_layer.LoginApiController
-import com.ramanbyte.emla.data_layer.room.ApplicationDatabase
 import com.ramanbyte.emla.data_layer.room.entities.UserEntity
 import com.ramanbyte.emla.models.UserModel
-import com.ramanbyte.emla.models.request.ChangePasswordModel
-import com.ramanbyte.emla.models.request.ForgetPasswordModel
-import com.ramanbyte.emla.models.request.LoginRequest
-import com.ramanbyte.emla.models.request.PledgeStatusRequest
-import com.ramanbyte.utilities.KEY_STAFF
-import com.ramanbyte.utilities.replicate
+import com.ramanbyte.emla.models.request.*
+import com.ramanbyte.utilities.*
 import org.kodein.di.generic.instance
 
 /**
@@ -32,7 +27,7 @@ class MasterRepository(val mContext: Context) : BaseRepository(mContext) {
         }
 
         userModel?.apply {
-            if (userModel.userType == KEY_STAFF) {
+            if (userModel.userType == KEY_STUDENT) {
                 applicationDatabase.getUserDao().apply {
                     delete()
                     insert(userModel.replicate<UserModel, UserEntity>()!!)
@@ -56,6 +51,10 @@ class MasterRepository(val mContext: Context) : BaseRepository(mContext) {
 
     fun getCurrentUser(): UserModel? {
         return applicationDatabase.getUserDao().getCurrentUser()?.replicate<UserEntity, UserModel>()
+    }
+
+    fun deleteUser() {
+        applicationDatabase.getUserDao().delete()
     }
 
     suspend fun forgetPassword(forgetPasswordModel: ForgetPasswordModel): String? {

@@ -4,7 +4,7 @@ import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
 import com.google.gson.annotations.SerializedName
 import com.ramanbyte.BR
-import com.ramanbyte.utilities.IpUtility
+import com.ramanbyte.utilities.KEY_STUDENT
 
 /**
  * @author Vinay Kumbhar <vinay.pkumbhar@gmail.com>
@@ -88,6 +88,7 @@ class RegistrationModel : BaseObservable() {
     var user_Reff_Id: Int? = 0
     var user_Role: Int? = 0
     var user_Status: String? = ""
+    var userType: String? = KEY_STUDENT
     var yearofExperience: Int? = 0
 
     var cityName = ""

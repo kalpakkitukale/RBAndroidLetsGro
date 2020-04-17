@@ -2,12 +2,18 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+
+        <variable
+            name="courseViewModel"
+            type="com.ramanbyte.emla.view_model.CoursesViewModel" />
+    </data>
+
     <androidx.cardview.widget.CardView
+        android:id="@+id/mainContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/dp_5"
-        app:cardCornerRadius="@dimen/dp_15"
-        app:cardElevation="0dp">
+        android:layout_margin="@dimen/dp_5">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -32,6 +38,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/dp_5"
+                android:onClick="@{courseViewModel::onCloseBottomSheet}"
                 android:src="@drawable/ic_close_black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -53,8 +60,10 @@
                 android:layout_marginTop="@dimen/dp_10"
                 android:drawableEnd="@drawable/ic_arrow_down_gray"
                 android:drawablePadding="@dimen/dp_10"
-                android:hint="@string/profile"
+                android:hint="@string/program"
+                android:onClick="@{()->spinnerProgram.performClick()}"
                 android:textSize="@dimen/sp_14"
+                android:text="@{courseViewModel.programName}"
                 app:layout_constraintTop_toBottomOf="@id/viewFilter" />
 
             <Spinner
@@ -75,7 +84,9 @@
                 android:drawableEnd="@drawable/ic_arrow_down_gray"
                 android:drawablePadding="@dimen/dp_10"
                 android:hint="@string/pattern"
+                android:onClick="@{()->spinnerPattern.performClick()}"
                 android:textSize="@dimen/sp_14"
+                android:text="@{courseViewModel.patternName}"
                 app:layout_constraintEnd_toEndOf="@id/tvProgram"
                 app:layout_constraintStart_toStartOf="@id/tvProgram"
                 app:layout_constraintTop_toBottomOf="@id/tvProgram" />
@@ -99,6 +110,8 @@
                 android:drawablePadding="@dimen/dp_10"
                 android:hint="@string/specialisation"
                 android:textSize="@dimen/sp_14"
+                android:onClick="@{()->spinnerSpecialisation.performClick()}"
+                android:text="@{courseViewModel.specializationName}"
                 app:layout_constraintEnd_toEndOf="@id/tvPattern"
                 app:layout_constraintStart_toStartOf="@id/tvPattern"
                 app:layout_constraintTop_toBottomOf="@id/tvPattern" />
@@ -127,6 +140,7 @@
                 android:layout_marginTop="@dimen/dp_15"
                 android:text="@string/apply"
                 android:textSize="@dimen/sp_14"
+                android:onClick="@{courseViewModel::onApplyFilterClick}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/viewFilterAboveDeleteButton"
                 app:layout_constraintWidth_percent="0.19" />
@@ -137,6 +151,7 @@
                 android:layout_height="@dimen/dp_30"
                 android:layout_marginEnd="@dimen/dp_15"
                 android:padding="@dimen/dp_5"
+                android:onClick="@{courseViewModel::onClearFilterClick}"
                 android:src="@drawable/ic_delete_button"
                 app:layout_constraintBottom_toBottomOf="@id/btnApplyFilter"
                 app:layout_constraintEnd_toStartOf="@+id/btnApplyFilter"

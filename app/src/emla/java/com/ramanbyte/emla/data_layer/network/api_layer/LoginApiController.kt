@@ -26,4 +26,5 @@ interface LoginApiController {
 
     @PUT("UpdateStatus")
     suspend fun updatePledgeStatus(@Body pledgeStatusRequest: PledgeStatusRequest): Response<Int>
+
 }

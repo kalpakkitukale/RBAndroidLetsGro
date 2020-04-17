@@ -8,6 +8,7 @@ import com.ramanbyte.emla.models.CountryModel
 import com.ramanbyte.emla.models.RegistrationModel
 import com.ramanbyte.emla.models.StateModel
 import com.ramanbyte.emla.models.response.MasterDataResponseModel
+import com.ramanbyte.emla.models.response.CommonDropdownModel
 import org.kodein.di.generic.instance
 
 /**
@@ -77,5 +78,23 @@ class RegistrationRepository(val mContext: Context) : BaseRepository(mContext) {
         return apiRequest {
             registrationController.getSpecializations()
         } ?: arrayListOf()
+    }
+
+    suspend fun getAllPrograms(): List<CommonDropdownModel>? {
+        return apiRequest {
+            registrationController.getAllPrograms()
+        }
+    }
+
+    suspend fun getAllPatterns(): List<CommonDropdownModel>? {
+        return apiRequest {
+            registrationController.getAllPatterns()
+        }
+    }
+
+    suspend fun getAllSpecializations(): List<CommonDropdownModel>? {
+        return apiRequest {
+            registrationController.getAllSpecializations()
+        }
     }
 }

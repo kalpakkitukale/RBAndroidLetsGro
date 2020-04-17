@@ -2,7 +2,6 @@ package com.ramanbyte.utilities
 
 import android.content.Context
 import android.content.pm.PackageManager
-import android.net.Uri
 import android.os.Build
 import android.util.DisplayMetrics
 import android.view.View
@@ -10,6 +9,8 @@ import android.view.Window
 import androidx.fragment.app.FragmentActivity
 import com.ramanbyte.R
 import java.lang.reflect.InvocationTargetException
+import java.math.BigDecimal
+import java.text.DecimalFormat
 
 /**
  * @AddedBy Vinay Kumbhar <vinay.k@ramanbyte.com>
@@ -25,6 +26,11 @@ const val KEY_API_ERROR = "key_api_error"
 const val KEY_NO_INTERNET_ERROR = "key_internet_error"
 const val KEY_PAGINATION_NO_DATA = "key_pagination_no_data"
 const val KEY_SOMETHING_WENT_WRONG_ERROR = "key_something_wend_wrong_error"
+
+
+const val KEY_LOGIN_STATUS_YES = "Y"
+const val KEY_LOGIN_STATUS_NO = "N"
+const val KEY_DEVICE_ID = "deviceId"
 
 const val KEY_NA = "N/A"
 const val KEY_BLANK = ""
@@ -150,7 +156,7 @@ const val KEY_VIDEO = "VIDEO"
 const val KEY_Y = "Y"
 const val KEY_N = "N"
 const val KEY_SKIP = "S"
-const val KEY_STAFF = "STF"
+const val KEY_STUDENT = "STF"
 const val KEY_APP = "APP"
 const val keyContentUrl = "contentUrl"
 const val KEY_QUIZ_TYPE_ASSESSMENT = 1
@@ -390,3 +396,23 @@ const val KEY_MEDIA_TYPE_AUDIO = "video"
 const val KEY_MEDIA_TYPE_FILE = "file"
 const val KEY_FILE_NAME = "keyFileName"
 const val KEY_FILE_DOWNLOAD = "File Download"
+
+
+fun skipTrailingZeroes(number: Double?): String {
+    var trimmedNumber = "0"
+
+    val decimalFormat = DecimalFormat("#.##")
+    val obtainedMarksDbl = number!!
+
+    if (obtainedMarksDbl > 0.0) {
+        trimmedNumber = decimalFormat.format(obtainedMarksDbl)
+
+        if (trimmedNumber.contains(".00") || trimmedNumber.contains(".0")) {
+            trimmedNumber = BigDecimal(obtainedMarksDbl)
+                .setScale(2, BigDecimal.ROUND_HALF_EVEN)
+                .stripTrailingZeros().toPlainString()
+        }
+    }
+
+    return trimmedNumber
+}

@@ -5,17 +5,17 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import android.view.*
-import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.Window
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.viewpager.widget.ViewPager
 import com.ramanbyte.R
 import com.ramanbyte.aws_s3_android.accessor.AppS3Client
-import com.ramanbyte.base.BaseFragment
+import com.ramanbyte.base.BaseParentFragment
 import com.ramanbyte.databinding.DialogQuizReviewBinding
 import com.ramanbyte.databinding.FragmentShowQuestionBinding
 import com.ramanbyte.emla.adapters.ViewPagerAdapter
@@ -29,18 +29,24 @@ import com.ramanbyte.utilities.*
  * @author Niraj Naware <niraj.n@ramanbyte.com>
  * @since 14/04/20
  */
-class ShowQuestionFragment : BaseFragment<FragmentShowQuestionBinding, ShowQuestionsViewModel>(isActivityParent = false,useParent = true,isNestedGraph = true) {
+class ShowQuestionFragment :
+    BaseParentFragment<FragmentShowQuestionBinding, ShowQuestionsViewModel, ShowQuestionsViewModel>(
+        isNestedGraph = true
+    ) {
 
     var viewPagerAdapter: ViewPagerAdapter? = null
     private var mContext: Context? = null
     var queCount: Int? = 0
     var totalQueCount: Int = 0
 
+    override val parentViewModelClass: Class<ShowQuestionsViewModel> =
+        ShowQuestionsViewModel::class.java
+
     override val viewModelClass: Class<ShowQuestionsViewModel> = ShowQuestionsViewModel::class.java
 
     override fun layoutId(): Int = R.layout.fragment_show_question
 
-    override fun initiate() {
+    override fun initiateView() {
 
         //Assigning Loader
         ProgressLoader(mContext!!, viewModel)
@@ -50,6 +56,7 @@ class ShowQuestionFragment : BaseFragment<FragmentShowQuestionBinding, ShowQuest
             lifecycleOwner = this@ShowQuestionFragment
 
             showQuestionsViewModel = viewModel
+            showQuestionsParentViewModel = parentViewModel
             noInternet.viewModel = viewModel
             noData.viewModel = viewModel
             somethingWentWrong.viewModel = viewModel
@@ -57,67 +64,44 @@ class ShowQuestionFragment : BaseFragment<FragmentShowQuestionBinding, ShowQuest
             /*val value = arguments!!.getString(KEY_QUESTION_IMAGE)
             AppLog.infoLog("value $value")*/
 
-            //setHasOptionsMenu(true)
             setViewModelObservers()
         }
     }
-
-    /*override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            android.R.id.home -> {
-                viewModel.apply {
-
-                    setAlertDialogResourceModelMutableLiveData(
-                        BindingUtils.string(R.string.leave_test_message),
-                        BindingUtils.drawable(R.drawable.ic_submit_confirmation)!!,
-                        false,
-                        BindingUtils.string(R.string.yes), {
-                            isAlertDialogShown.postValue(false)
-                            view?.findNavController()?.navigate(R.id.coursesFragment)
-                        },
-                        BindingUtils.string(R.string.no), {
-                            isAlertDialogShown.postValue(false)
-                        }
-                    )
-                    isAlertDialogShown.postValue(true)
-                }
-                true
-
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
-    }*/
-
 
     private fun setViewModelObservers() {
         layoutBinding.apply {
             viewModel.apply {
 
-                coursesModelLiveData.value?.courseImageUrl =
-                    AppS3Client.createInstance(context!!).getFileAccessUrl(
-                        coursesModelLiveData.value?.courseImage ?: KEY_BLANK
-                    )
-                        ?: ""
+                parentViewModel.apply {
+                    coursesModelLiveData.value?.courseImageUrl =
+                        AppS3Client.createInstance(context!!).getFileAccessUrl(
+                            coursesModelLiveData.value?.courseImage ?: KEY_BLANK
+                        ) ?: ""
 
-                val width =
-                    (activity!!).displayMetrics().widthPixels - (BindingUtils.dimen(R.dimen.dp_5) * 2)
+                    AppLog.infoLog("courseImageUrl :: Show Que Page ${coursesModelLiveData.value?.courseImageUrl}")
 
-                val layoutParams = layoutBinding.imgQue.layoutParams
+                    val width =
+                        (activity!!).displayMetrics().widthPixels - (BindingUtils.dimen(R.dimen.dp_5) * 2)
 
-                layoutParams.height = (width * 0.6).toInt()
+                    val layoutParams = layoutBinding.imgQue.layoutParams
 
-                layoutBinding.imgQue.layoutParams = layoutParams
+                    layoutParams.height = (width * 0.6).toInt()
 
-                layoutBinding.imgQue.layoutParams.apply {
-                    height = (width * 0.6).toInt()
+                    layoutBinding.imgQue.layoutParams = layoutParams
+
+                    layoutBinding.imgQue.layoutParams.apply {
+                        height = (width * 0.6).toInt()
+                    }
+
                 }
 
-                setToolbarTitle(coursesModelLiveData.value?.courseName!!)
-
-                questionAndAnswerListLiveData.observe(this@ShowQuestionFragment, Observer {
-                    AppLog.infoLog("questionAndAnswerModelLiveDataNir ${it.size}")
-                    setPagerList(it)
-                })
+                parentViewModel.questionAndAnswerListLiveData.observe(
+                    this@ShowQuestionFragment,
+                    Observer {
+                        it?.apply {
+                            setPagerList(it)
+                        }
+                    })
 
                 questionAndAnswerModelLiveData.observe(this@ShowQuestionFragment, Observer {
                     if (it != null) {
@@ -138,6 +122,18 @@ class ShowQuestionFragment : BaseFragment<FragmentShowQuestionBinding, ShowQuest
                     }
                 })
 
+                /*
+                * this will observer when test submit from the jump to bottom sheet page
+                * */
+                isTestSubmitedFormJBS.observe(this@ShowQuestionFragment, Observer {
+                    if (it != null) {
+                        if (it == true) {
+                            isTestSubmitedFormJBS.value = false
+                            parentViewModel.submitTest()
+                        }
+                    }
+                })
+
                 onClickNextLiveData.observe(this@ShowQuestionFragment, Observer {
                     if (it != null) {
                         if (it == true) {
@@ -150,7 +146,7 @@ class ShowQuestionFragment : BaseFragment<FragmentShowQuestionBinding, ShowQuest
                                     BindingUtils.string(R.string.yes), {
                                         isAlertDialogShown.postValue(false)
                                         //isTestSubmited.value = true
-                                        submitTest()
+                                        parentViewModel.submitTest()
                                     },
                                     BindingUtils.string(R.string.no), {
                                         isAlertDialogShown.postValue(false)
@@ -183,71 +179,65 @@ class ShowQuestionFragment : BaseFragment<FragmentShowQuestionBinding, ShowQuest
                     }
                 })
 
-                isQuizSubmited.observe(this@ShowQuestionFragment, Observer {
-                    if (it != null) {
+                parentViewModel.apply {
+                    isQuizSubmited.observe(this@ShowQuestionFragment, Observer {
+                        if (it != null) {
 
-                        setAlertDialogResourceModelMutableLiveData(
-                            BindingUtils.string(R.string.test_completed),
-                            BindingUtils.drawable(R.drawable.ic_e_learning),
-                            true,
-                            BindingUtils.string(R.string.strOk), {
+                            setAlertDialogResourceModelMutableLiveData(
+                                BindingUtils.string(R.string.test_completed),
+                                BindingUtils.drawable(R.drawable.ic_e_learning),
+                                true,
+                                BindingUtils.string(R.string.strOk), {
 
-                                if (testType == KEY_QUIZ_TYPE_ASSESSMENT) {
-
-                                        //niraj
-                                        /*startActivity(CourseDetailActivity.intent(this).apply {
-                                            putExtra(KEY_COURSE_MODEL, coursesModelLiveData.value)
-                                        })
-                                        finish()*/
-
+                                    if (testType == KEY_QUIZ_TYPE_ASSESSMENT) {
                                         val bundle = Bundle()
                                         bundle.putParcelable(
                                             KEY_COURSE_MODEL,
                                             coursesModelLiveData.value
                                         )
                                         view?.findNavController()
-                                            ?.navigate(R.id.courseDetailFragment, bundle)
+                                            ?.navigate(R.id.action_showQuestionFragment_to_courseDetailFragment, bundle)
 
                                         isAlertDialogShown.postValue(false)
 
-                                } else {
-                                    isAlertDialogShown.postValue(false)
+                                    } else {
+                                        isAlertDialogShown.postValue(false)
 
-                                    loaderMessageLiveData.set(BindingUtils.string(R.string.loader_result_message))
-                                    isLoaderShowingLiveData.postValue(true)
+                                        loaderMessageLiveData.set(BindingUtils.string(R.string.loader_result_message))
+                                        isLoaderShowingLiveData.postValue(true)
 
-                                    val handler = Handler()
-                                    handler.postDelayed(Runnable {
-                                        isLoaderShowingLiveData.postValue(false)
+                                        val handler = Handler()
+                                        handler.postDelayed(Runnable {
+                                            isLoaderShowingLiveData.postValue(false)
 
-                                        if (it.ispass == KEY_Y) {
-                                            if (testType == KEY_QUIZ_TYPE_FORMATIVE) {
-                                                showCustomDialogQuizReview(it)
+                                            if (it.ispass == KEY_Y) {
+                                                if (testType == KEY_QUIZ_TYPE_FORMATIVE) {
+                                                    showCustomDialogQuizReview(it)
+                                                } else {
+                                                    quizResultAlertDialog(
+                                                        it.passMessage!!,
+                                                        R.drawable.ic_pass
+                                                    )
+                                                }
                                             } else {
-                                                quizResultAlertDialog(
-                                                    it.passMessage!!,
-                                                    R.drawable.ic_pass
-                                                )
+                                                if (testType == KEY_QUIZ_TYPE_FORMATIVE) {
+                                                    showCustomDialogQuizReview(it)
+                                                } else {
+                                                    quizResultAlertDialog(
+                                                        it.failMessage!!,
+                                                        R.drawable.ic_fail
+                                                    )
+                                                }
                                             }
-                                        } else {
-                                            if (testType == KEY_QUIZ_TYPE_FORMATIVE) {
-                                                showCustomDialogQuizReview(it)
-                                            } else {
-                                                quizResultAlertDialog(
-                                                    it.failMessage!!,
-                                                    R.drawable.ic_fail
-                                                )
-                                            }
-                                        }
 
-                                    }, 5000)
+                                        }, 5000)
+                                    }
                                 }
-                            }
-                        )
-                        isAlertDialogShown.postValue(true)
-                    }
-                })
-
+                            )
+                            isAlertDialogShown.postValue(true)
+                        }
+                    })
+                }
 
             }
         }
@@ -295,20 +285,10 @@ class ShowQuestionFragment : BaseFragment<FragmentShowQuestionBinding, ShowQuest
                                 bundle.putParcelable(KEY_QUIZ_RESULT_MODEL, quizResultModel)
                                 bundle.putString(
                                     KEY_COURSE_IMAGE_URL,
-                                    coursesModelLiveData.value?.courseImageUrl
+                                    parentViewModel.coursesModelLiveData.value?.courseImageUrl
                                 )
                                 view?.findNavController()
                                     ?.navigate(R.id.quizReviewFragment, bundle)
-
-                                // niraj
-                                /*startActivity(QuizReviewActivity.intent(activity!!).apply {
-                                    putExtra(KEY_QUESTION_STATUS, it)
-                                    putExtra(KEY_QUIZ_RESULT_MODEL, quizResultModel)
-                                putExtra(KEY_COURSE_IMAGE_URL, coursesModelLiveData.value?.courseImageUrl)
-                            })
-                            activity!!.finish()
-                                dialog.dismiss()
-                                onClickDialogCorrectQuestionLiveData.value = KEY_BLANK*/
                             }
 
                         }
@@ -325,20 +305,10 @@ class ShowQuestionFragment : BaseFragment<FragmentShowQuestionBinding, ShowQuest
                                 bundle.putParcelable(KEY_QUIZ_RESULT_MODEL, quizResultModel)
                                 bundle.putString(
                                     KEY_COURSE_IMAGE_URL,
-                                    coursesModelLiveData.value?.courseImageUrl
+                                    parentViewModel.coursesModelLiveData.value?.courseImageUrl
                                 )
                                 view?.findNavController()
                                     ?.navigate(R.id.quizReviewFragment, bundle)
-
-                                //niraj
-                                /*startActivity(QuizReviewActivity.intent(activity!!).apply {
-                                    putExtra(KEY_QUESTION_STATUS, it)
-                                    putExtra(KEY_QUIZ_RESULT_MODEL, quizResultModel)
-                                    putExtra(KEY_COURSE_IMAGE_URL, coursesModelLiveData.value?.courseImageUrl)
-                                })
-                                activity!!.finish()
-                                dialog.dismiss()
-                                onClickDialogIncorrectQuestionLiveData.value = KEY_BLANK*/
                             }
                         }
                     }
@@ -366,34 +336,22 @@ class ShowQuestionFragment : BaseFragment<FragmentShowQuestionBinding, ShowQuest
                                 )
                                 isAlertDialogShown.postValue(true)
                             } else {
-
+                                /*
+                                * attempted question
+                                * */
                                 val bundle = Bundle()
-                                if (quizResultModel.correct == 0){
+                                if (quizResultModel.correct == 0) {
                                     bundle.putString(KEY_QUESTION_STATUS, keyWrong)
-                                }else{
+                                } else {
                                     bundle.putString(KEY_QUESTION_STATUS, keyCorrect)
                                 }
                                 bundle.putParcelable(KEY_QUIZ_RESULT_MODEL, quizResultModel)
                                 bundle.putString(
                                     KEY_COURSE_IMAGE_URL,
-                                    coursesModelLiveData.value?.courseImageUrl
+                                    parentViewModel.coursesModelLiveData.value?.courseImageUrl
                                 )
                                 view?.findNavController()
                                     ?.navigate(R.id.quizReviewFragment, bundle)
-
-                                /*
-                                * attempted question
-                                * */  // niraj
-                                /*startActivity(QuizReviewActivity.intent(activity!!).apply {
-                                    if (quizResultModel.correct == 0){
-                                        putExtra(KEY_QUESTION_STATUS, keyWrong)
-                                    }else{
-                                        putExtra(KEY_QUESTION_STATUS, keyCorrect)
-                                    }
-                                    putExtra(KEY_QUIZ_RESULT_MODEL, quizResultModel)
-                                    putExtra(KEY_COURSE_IMAGE_URL, coursesModelLiveData.value?.courseImageUrl)
-                                })
-                                activity!!.finish()*/
                             }
 
                             dialog.dismiss()
@@ -415,14 +373,6 @@ class ShowQuestionFragment : BaseFragment<FragmentShowQuestionBinding, ShowQuest
                 true,
                 BindingUtils.string(R.string.strOk), {
                     activity?.apply {
-                        /*startActivity(
-                            CourseDetailActivity.intent(this).apply {
-                                putExtra(KEY_COURSE_MODEL, coursesModelLiveData.value)
-                                putExtra(KEY_CHAPTER_MODEL, chapterModelLiveData.value)
-                            }
-                        )
-                        activity!!.finish()*/
-
                         startActivity(ContainerActivity.intent(activity!!).apply {
                             flags =
                                 Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
@@ -470,7 +420,16 @@ class ShowQuestionFragment : BaseFragment<FragmentShowQuestionBinding, ShowQuest
 
                 totalQueCount = questionList.size
 
-                val questionPagerFragment = ShowQuestionPagerFragment(viewModel,queCount!!, totalQueCount, questionList[i], arrayListOf())
+                //val questionPagerFragment = ShowQuestionPagerFragment(viewModel,queCount!!, totalQueCount, questionList[i], arrayListOf())
+
+                val questionPagerFragment =
+                    ShowQuestionPagerFragment.newInstance(
+                        queCount!!,
+                        totalQueCount,
+                        questionList[i],
+                        arrayListOf()
+                    )
+
                 viewPagerAdapter!!.addFragmentView(questionPagerFragment, "")
             }
         }
@@ -491,7 +450,6 @@ class ShowQuestionFragment : BaseFragment<FragmentShowQuestionBinding, ShowQuest
             positionOffset: Float,
             positionOffsetPixels: Int
         ) {
-            AppLog.infoLog("nnnnnnnn $position")
             layoutBinding.btnPrevious.apply {
                 if (position == 0) visibility = View.GONE else visibility = View.VISIBLE
             }

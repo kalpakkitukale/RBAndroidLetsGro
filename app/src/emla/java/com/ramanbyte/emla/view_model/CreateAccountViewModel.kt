@@ -44,6 +44,7 @@ class CreateAccountViewModel(var mContext: Context) : BaseViewModel(mContext = m
             val apiCallFunction: suspend () -> Unit = {
                 val response = registrationRepository.register(
                     registrationMutableLiveData.value!!.apply {
+                        userType = KEY_STUDENT
                         userImageFilename =
                             if (uploadFileName.value?.isNotEmpty()!! && uploadFilePath.value?.isNotEmpty()!!) {
                                 /*AppS3Client.createInstance(mContext)
@@ -62,7 +63,7 @@ class CreateAccountViewModel(var mContext: Context) : BaseViewModel(mContext = m
                             }
                     }
                 )
-                if(response?.isNotEmpty()!!){
+                if (response?.isNotEmpty()!!) {
                     if (uploadFileName.value?.isNotEmpty()!! && uploadFilePath.value?.isNotEmpty()!!) {
                         AppS3Client.createInstance(mContext)
                             .upload(
@@ -134,6 +135,43 @@ class CreateAccountViewModel(var mContext: Context) : BaseViewModel(mContext = m
                 ValidationFlags.FIELD_MATCH,
                 BindingUtils.string(R.string.not_same_new_and_confirm_password),
                 keyPassword
+            )
+
+            addRule(
+                keyPassword,
+                ValidationFlags.FIELD_CONTAINS_SPACE,
+                BindingUtils.string(R.string.enter_valid_new_password)
+            )
+
+            addRule(
+                keyConfirmPassword,
+                ValidationFlags.FIELD_CONTAINS_SPACE,
+                BindingUtils.string(R.string.enter_valid_confirm_new_password)
+            )
+
+            addRule(
+                keyConfirmPassword,
+                ValidationFlags.FIELD_MATCH,
+                BindingUtils.string(R.string.not_same_new_and_confirm_password),
+                keyPassword
+            )
+            addRule(
+                keyPassword,
+                ValidationFlags.FIELD_PASSWORD,
+                BindingUtils.string(R.string.not_valid_password_pattern)
+            )
+
+            addRule(
+                keyPassword,
+                ValidationFlags.FIELD_MAX,
+                BindingUtils.string(R.string.youHaveCrossedYourMaximumLimit),
+                limit = 15
+            )
+            addRule(
+                keyConfirmPassword,
+                ValidationFlags.FIELD_MAX,
+                BindingUtils.string(R.string.youHaveCrossedYourMaximumLimit),
+                limit = 15
             )
         }
 

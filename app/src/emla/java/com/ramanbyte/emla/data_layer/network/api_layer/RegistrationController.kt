@@ -5,6 +5,7 @@ import com.ramanbyte.emla.models.CountryModel
 import com.ramanbyte.emla.models.RegistrationModel
 import com.ramanbyte.emla.models.StateModel
 import com.ramanbyte.emla.models.response.MasterDataResponseModel
+import com.ramanbyte.emla.models.response.CommonDropdownModel
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -19,6 +20,15 @@ interface RegistrationController {
 
     @POST("InsertRegistrationDetails")
     suspend fun register(@Body registrationModel: RegistrationModel): Response<String>
+
+    @GET("GetProgramLevalDetails")
+    suspend fun getAllPrograms(): Response<List<CommonDropdownModel>>
+
+    @GET("GetPatternDetails")
+    suspend fun getAllPatterns(): Response<List<CommonDropdownModel>>
+
+    @GET("GetSpecializationDetails")
+    suspend fun getAllSpecializations(): Response<List<CommonDropdownModel>>
 
     @GET("GetProfileDetails/{userReffId}")
     suspend fun getProfile(@Path("userReffId") userReffId: Int): Response<RegistrationModel>
