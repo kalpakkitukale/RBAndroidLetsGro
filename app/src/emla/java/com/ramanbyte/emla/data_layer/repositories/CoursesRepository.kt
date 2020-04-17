@@ -75,6 +75,7 @@ class CoursesRepository(mContext: Context) : BaseRepository(mContext) {
             this?.searchKey = searchString
         }
         coursesPagedList?.value?.dataSource?.invalidate()
+        paginationResponseHandlerLiveData.postValue(PaginationResponseHandler.INIT_LOADING)
     }
 
     fun filterCourseList(coursesRequest: CoursesRequest) {

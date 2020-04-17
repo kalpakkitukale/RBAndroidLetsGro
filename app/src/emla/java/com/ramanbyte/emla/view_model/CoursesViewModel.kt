@@ -36,7 +36,6 @@ class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
     private val coursesRepository: CoursesRepository by instance()
     private val registrationRepository: RegistrationRepository by instance()
 
-    val selectedCourseModelLiveData = MutableLiveData<CoursesModel?>(null)
     var isFilterApplied = MutableLiveData<Boolean>(null)
 
     var tempFilterModel = CoursesRequest()
@@ -51,8 +50,9 @@ class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
     var patternsListMutableLiveData = MutableLiveData<List<CommonDropdownModel>>()
     var specializationsListMutableLiveData = MutableLiveData<List<CommonDropdownModel>>()
     var programName = ObservableField<String>().apply { set(BindingUtils.string(R.string.program)) }
-    var patternName = ObservableField<String>().apply {set(BindingUtils.string(R.string.pattern))}
-    var specializationName = ObservableField<String>().apply {set(BindingUtils.string(R.string.specialisation))}
+    var patternName = ObservableField<String>().apply { set(BindingUtils.string(R.string.pattern)) }
+    var specializationName =
+        ObservableField<String>().apply { set(BindingUtils.string(R.string.specialisation)) }
 
     var userData: UserModel? = null
     var searchQuery = MutableLiveData<String>().apply {
@@ -69,22 +69,28 @@ class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
     }
 
     fun initPaginationResponseHandler() {
-        coursesRepository.getPaginationResponseHandler().observeForever {
-            if (it != null) {
-                paginationResponse(
-                    it,
-                    //PaginationMessages("No Data", "No More data", "No Internet", "Something Wrong")
-                    PaginationMessages(
-                        BindingUtils.string(R.string.no_courses),
-                        BindingUtils.string(R.string.no_more_courses),
-                        BindingUtils.string(R.string.please_make_sure_you_are_connected_to_internet),
-                        BindingUtils.string(R.string.some_thing_went_wrong)
+        if (getFilterState()) {
+            isFilterApplied.postValue(true)
+            //filterCourseList(filterRequestModel)
+        } else {
+            coursesRepository.getPaginationResponseHandler().observeForever {
+                if (it != null) {
+                    paginationResponse(
+                        it,
+                        //PaginationMessages("No Data", "No More data", "No Internet", "Something Wrong")
+                        PaginationMessages(
+                            BindingUtils.string(R.string.no_courses),
+                            BindingUtils.string(R.string.no_more_courses),
+                            BindingUtils.string(R.string.please_make_sure_you_are_connected_to_internet),
+                            BindingUtils.string(R.string.some_thing_went_wrong)
+                        )
                     )
-                )
-                AppLog.infoLog("Pagination :: ${it.msg} :: ${it.status}")
+                    AppLog.infoLog("Pagination :: ${it.msg} :: ${it.status}")
+                }
             }
+
+            coursesRepository.initiatePagination()
         }
-        coursesRepository.initiatePagination()
     }
 
     fun coursesPagedList(): LiveData<PagedList<CoursesModel>>? {
@@ -109,7 +115,8 @@ class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
                     val bundle = Bundle()
                     bundle.putParcelable(KEY_COURSE_MODEL, model)
                     bundle.putInt(keyTestType, KEY_QUIZ_TYPE_ASSESSMENT)
-                    view.findNavController().navigate(R.id.preAssessmentTestFragment, bundle)
+                    view.findNavController()
+                        .navigate(R.id.action_coursesFragment_to_preAssessmentTestFragment, bundle)
                 }
             } else {
                 setAlertDialogResourceModelMutableLiveData(
@@ -135,13 +142,10 @@ class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
     /**Filter operations*/
     fun onApplyFilterClick(view: View) {
         try {
-            val isFilterSelected =(tempFilterModel.userType.isNotEmpty() ||
-                    tempFilterModel.programId !=0 ||
-                    tempFilterModel.patternId != 0 ||
-                    tempFilterModel.specializationId != 0)
+            val isFilterSelected = hasFilter()
 
             filterRequestModel = CoursesRequest().apply {
-                userId = if(isFilterSelected) 0 else userData?.userId!!
+                userId = if (isFilterSelected) 0 else userData?.userId!!
                 userType = tempFilterModel.userType
                 programId = tempFilterModel.programId
                 specializationId = tempFilterModel.specializationId
@@ -156,6 +160,20 @@ class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
             e.printStackTrace()
             AppLog.errorLog(e.message, e)
         }
+    }
+
+    fun hasFilter(): Boolean {
+        return (tempFilterModel.userType.isNotEmpty() ||
+                tempFilterModel.programId != 0 ||
+                tempFilterModel.patternId != 0 ||
+                tempFilterModel.specializationId != 0)
+    }
+
+    fun getFilterState(): Boolean {
+        return (filterRequestModel.userType.isNotEmpty() ||
+                filterRequestModel.programId != 0 ||
+                filterRequestModel.patternId != 0 ||
+                filterRequestModel.specializationId != 0)
     }
 
     fun onClearFilterClick(view: View) {
