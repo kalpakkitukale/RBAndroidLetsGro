@@ -78,7 +78,7 @@ class PreAssessmentTestFragment :
                         false,
                         BindingUtils.string(R.string.yes), {
                             isAlertDialogShown.postValue(false)
-                            view?.findNavController()?.navigate(R.id.coursesFragment)
+                            findNavController().navigateUp()
                         },
                         BindingUtils.string(R.string.no), {
                             isAlertDialogShown.postValue(false)

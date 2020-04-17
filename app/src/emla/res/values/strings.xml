@@ -198,4 +198,5 @@ Content
     Content Ends
     -->
 
+    <string name="logout_message">Do you want to logout...!!!</string>
 </resources>

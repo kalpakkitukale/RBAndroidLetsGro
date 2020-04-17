@@ -3,25 +3,18 @@ package com.ramanbyte.emla.ui.activities
 import android.app.Activity
 import android.content.Intent
 import android.view.View
-import androidx.drawerlayout.widget.DrawerLayout
-import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseActivity
 import com.ramanbyte.databinding.ActivityContainerBinding
 import com.ramanbyte.emla.base.di.authModuleDependency
-import com.ramanbyte.emla.ui.fragments.AllTheBestFragment
-import com.ramanbyte.emla.ui.fragments.QuizInstructionFragment
-import com.ramanbyte.emla.ui.fragments.ShowQuestionFragment
 import com.ramanbyte.emla.view_model.ContainerViewModel
-import com.ramanbyte.utilities.*
+import com.ramanbyte.utilities.AlertDialog
+import com.ramanbyte.utilities.BindingUtils
 import com.ramanbyte.utilities.StaticMethodUtilitiesKtx.changeStatusBarColor
 
 
