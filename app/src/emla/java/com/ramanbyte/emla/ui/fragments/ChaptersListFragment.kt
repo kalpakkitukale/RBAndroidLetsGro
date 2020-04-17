@@ -1,15 +1,9 @@
 package com.ramanbyte.emla.ui.fragments
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import com.ramanbyte.R
-import com.ramanbyte.base.BaseFragment
 import com.ramanbyte.base.BaseParentFragment
 import com.ramanbyte.databinding.FragmentChaptersListBinding
 import com.ramanbyte.emla.adapters.ChaptersListAdapter
@@ -18,7 +12,6 @@ import com.ramanbyte.emla.models.MediaInfoModel
 import com.ramanbyte.emla.view_model.ChaptersViewModel
 import com.ramanbyte.emla.view_model.CoursesDetailViewModel
 import com.ramanbyte.utilities.*
-import org.kodein.di.generic.instance
 
 /**
  * A simple [Fragment] subclass.

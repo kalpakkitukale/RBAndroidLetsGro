@@ -8,13 +8,7 @@ import android.text.SpannableString
 import android.text.style.BackgroundColorSpan
 import android.text.style.ForegroundColorSpan
 import android.text.style.RelativeSizeSpan
-import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
 import android.webkit.WebChromeClient
-import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -33,8 +27,10 @@ import com.ramanbyte.utilities.DateUtils.DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_M
  * @author Niraj Naware <niraj.n@ramanbyte.com>
  * @since 14/04/20
  */
-class ShowQuestionPagerFragment : BaseFragment<CardShowQuestionsBinding, ShowQuestionsViewModel>(isActivityParent = false,
-    useParent = true){
+class ShowQuestionPagerFragment : BaseFragment<CardShowQuestionsBinding, ShowQuestionsViewModel>(
+    isActivityParent = false,
+    useParent = true
+) {
 
     var mContext: Context? = null
     var answerAdapter: AnswerAdapter? = null

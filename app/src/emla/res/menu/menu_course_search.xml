@@ -13,9 +13,8 @@
     <item
         android:id="@+id/action_filter"
         android:icon="@drawable/ic_filter"
+        android:title="@string/filter"
         app:actionLayout="@layout/custom_action_badge_layout"
-        app:showAsAction="ifRoom"
-        android:title="@string/filter">
-    </item>
+        app:showAsAction="ifRoom"></item>
 
 </menu>

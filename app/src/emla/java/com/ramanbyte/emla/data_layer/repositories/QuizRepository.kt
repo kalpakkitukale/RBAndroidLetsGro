@@ -11,7 +11,6 @@ import com.ramanbyte.data_layer.base.BaseRepository
 import com.ramanbyte.data_layer.pagination.PaginationResponseHandler
 import com.ramanbyte.emla.data_layer.network.api_layer.QuestionController
 import com.ramanbyte.emla.data_layer.pagination.PaginationDataSourceFactory
-import com.ramanbyte.emla.data_layer.room.ApplicationDatabase
 import com.ramanbyte.emla.data_layer.room.entities.AnswerEntity
 import com.ramanbyte.emla.data_layer.room.entities.OptionsEntity
 import com.ramanbyte.emla.data_layer.room.entities.QuestionAndAnswerEntity

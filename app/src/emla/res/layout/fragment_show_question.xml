@@ -41,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:scaleType="fitXY"
                 android:background="@drawable/ic_course_dummy"
-                app:imageUrl="@{showQuestionsParentViewModel.coursesModelLiveData.courseImageUrl}"/>
+                app:imageUrl="@{showQuestionsParentViewModel.coursesModelLiveData.courseImageUrl}" />
             <!--android:background="@drawable/button_capsule_with_gray_border"-->
         </androidx.cardview.widget.CardView>
 

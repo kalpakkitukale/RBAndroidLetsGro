@@ -2,24 +2,23 @@ package com.ramanbyte.emla.ui.fragments
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.*
-import androidx.appcompat.widget.SearchView
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentStatePagerAdapter
+import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.ramanbyte.R
 import com.ramanbyte.aws_s3_android.accessor.AppS3Client
 import com.ramanbyte.base.BaseFragment
 import com.ramanbyte.databinding.FragmentCourseDetailBinding
 import com.ramanbyte.emla.adapters.ViewPagerAdapter
-import com.ramanbyte.emla.models.CoursesModel
-import androidx.lifecycle.Observer
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import com.ramanbyte.emla.data_layer.network.init.NetworkConnectionInterceptor
 import com.ramanbyte.emla.models.CourseSyllabusModel
+import com.ramanbyte.emla.models.CoursesModel
 import com.ramanbyte.emla.ui.activities.CertificateViewerActivity
 import com.ramanbyte.emla.view_model.CoursesDetailViewModel
-
 import com.ramanbyte.utilities.*
 import kotlinx.android.synthetic.emla.fragment_course_detail.*
 
