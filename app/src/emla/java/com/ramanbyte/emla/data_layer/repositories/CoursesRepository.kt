@@ -9,14 +9,14 @@ import androidx.paging.PagedList
 import com.ramanbyte.data_layer.base.BaseRepository
 import com.ramanbyte.data_layer.pagination.PaginationResponseHandler
 import com.ramanbyte.emla.data_layer.network.api_layer.CoursesController
-import com.ramanbyte.emla.models.CourseSyllabusModel
-import org.kodein.di.generic.instance
 import com.ramanbyte.emla.data_layer.pagination.PaginationDataSourceFactory
 import com.ramanbyte.emla.data_layer.room.entities.UserEntity
+import com.ramanbyte.emla.models.CourseSyllabusModel
 import com.ramanbyte.emla.models.CoursesModel
 import com.ramanbyte.emla.models.UserModel
 import com.ramanbyte.emla.models.request.CoursesRequest
 import com.ramanbyte.utilities.replicate
+import org.kodein.di.generic.instance
 
 class CoursesRepository(mContext: Context) : BaseRepository(mContext) {
 

@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <data>
+
         <variable
             name="courseViewModel"
             type="com.ramanbyte.emla.view_model.CoursesViewModel" />
@@ -59,9 +61,9 @@
                 android:drawableEnd="@drawable/ic_arrow_down_gray"
                 android:drawablePadding="@dimen/dp_10"
                 android:hint="@string/program"
-                android:text="@{courseViewModel.programName}"
-                android:textSize="@dimen/sp_14"
                 android:onClick="@{()->spinnerProgram.performClick()}"
+                android:textSize="@dimen/sp_14"
+                android:text="@{courseViewModel.programName}"
                 app:layout_constraintTop_toBottomOf="@id/viewFilter" />
 
             <Spinner
@@ -82,9 +84,9 @@
                 android:drawableEnd="@drawable/ic_arrow_down_gray"
                 android:drawablePadding="@dimen/dp_10"
                 android:hint="@string/pattern"
-                android:text="@{courseViewModel.patternName}"
-                android:textSize="@dimen/sp_14"
                 android:onClick="@{()->spinnerPattern.performClick()}"
+                android:textSize="@dimen/sp_14"
+                android:text="@{courseViewModel.patternName}"
                 app:layout_constraintEnd_toEndOf="@id/tvProgram"
                 app:layout_constraintStart_toStartOf="@id/tvProgram"
                 app:layout_constraintTop_toBottomOf="@id/tvProgram" />
@@ -108,8 +110,8 @@
                 android:drawablePadding="@dimen/dp_10"
                 android:hint="@string/specialisation"
                 android:textSize="@dimen/sp_14"
-                android:text="@{courseViewModel.specializationName}"
                 android:onClick="@{()->spinnerSpecialisation.performClick()}"
+                android:text="@{courseViewModel.specializationName}"
                 app:layout_constraintEnd_toEndOf="@id/tvPattern"
                 app:layout_constraintStart_toStartOf="@id/tvPattern"
                 app:layout_constraintTop_toBottomOf="@id/tvPattern" />

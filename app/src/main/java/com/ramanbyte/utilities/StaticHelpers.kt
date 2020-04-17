@@ -2,7 +2,6 @@ package com.ramanbyte.utilities
 
 import android.content.Context
 import android.content.pm.PackageManager
-import android.net.Uri
 import android.os.Build
 import android.util.DisplayMetrics
 import android.view.View

@@ -12,7 +12,6 @@ import android.view.Window
 import android.view.WindowManager
 import android.widget.ProgressBar
 import android.widget.Toast
-import androidx.core.view.marginLeft
 import com.ramanbyte.R
 import com.ramanbyte.databinding.DialogLoadingBinding
 
@@ -87,7 +86,7 @@ object AlertUtilities {
         negativeListener: (DialogInterface, Int) -> Unit
     ) {
         try {
-            val builder = AlertDialog.Builder(mContext,R.style.MyAlertDialogStyle)
+            val builder = AlertDialog.Builder(mContext, R.style.MyAlertDialogStyle)
             builder.setMessage(msg)
             builder.setPositiveButton(
                 if (positiveBtnText != null && !positiveBtnText.isEmpty()) positiveBtnText else BindingUtils.string(
@@ -106,8 +105,10 @@ object AlertUtilities {
             alertDialog.setCancelable(false)
             alertDialog.setCanceledOnTouchOutside(false)
             alertDialog.show()
-            alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setBackgroundColor(BindingUtils.color(R.color.colorPrimary))
-            alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setBackgroundColor(BindingUtils.color(R.color.colorPrimary))
+            alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE)
+                .setBackgroundColor(BindingUtils.color(R.color.colorPrimary))
+            alertDialog.getButton(AlertDialog.BUTTON_POSITIVE)
+                .setBackgroundColor(BindingUtils.color(R.color.colorPrimary))
 
         } catch (e: Exception) {
             e.printStackTrace()

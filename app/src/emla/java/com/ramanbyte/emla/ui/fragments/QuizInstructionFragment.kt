@@ -1,12 +1,6 @@
 package com.ramanbyte.emla.ui.fragments
 
 import android.content.Context
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
@@ -51,7 +45,10 @@ class QuizInstructionFragment : BaseFragment<FragmentQuizInstructionBinding, Sho
     private fun setViewModelObservers() {
         viewModel.apply {
 
-            coursesModelLiveData.value?.courseImageUrl = AppS3Client.createInstance(context!!).getFileAccessUrl(coursesModelLiveData.value?.courseImage?: KEY_BLANK) ?: ""
+            coursesModelLiveData.value?.courseImageUrl =
+                AppS3Client.createInstance(context!!).getFileAccessUrl(
+                    coursesModelLiveData.value?.courseImage ?: KEY_BLANK
+                ) ?: ""
 
             AppLog.infoLog("courseImageUrl ${coursesModelLiveData.value?.courseImageUrl}")
 

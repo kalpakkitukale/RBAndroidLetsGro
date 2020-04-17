@@ -18,12 +18,7 @@ import com.ramanbyte.emla.models.UserModel
 import com.ramanbyte.emla.models.request.CoursesRequest
 import com.ramanbyte.emla.models.response.CommonDropdownModel
 import com.ramanbyte.utilities.*
-import com.ramanbyte.utilities.AppLog
-import com.ramanbyte.utilities.BindingUtils
-import com.ramanbyte.utilities.KEY_BLANK
-import com.ramanbyte.utilities.KEY_COURSE_MODEL
 import org.kodein.di.generic.instance
-import java.lang.Exception
 
 /**
  * @author Vinay Kumbhar <vinay.pkumbhar@gmail.com>

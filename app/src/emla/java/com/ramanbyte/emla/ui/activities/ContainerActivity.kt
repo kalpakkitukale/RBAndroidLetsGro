@@ -115,7 +115,7 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding, ContainerViewMo
             }
         } else if (navController.currentDestination?.id == R.id.coursesFragment) {
             moveTaskToBack(true)
-        }else{
+        } else {
             super.onBackPressed()
         }
     }

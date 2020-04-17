@@ -2,7 +2,9 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <data>
+
         <variable
             name="coursesViewModel"
             type="com.ramanbyte.emla.view_model.CoursesDetailViewModel" />
@@ -20,34 +22,34 @@
             android:elevation="0dp"
             app:cardCornerRadius="@dimen/dp_8"
             app:cardElevation="0dp"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/dp_5"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="@dimen/dp_5">
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/imageView"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_150"
+                    android:background="@drawable/ic_course_dummy"
                     android:scaleType="fitXY"
                     app:imageUrl="@{coursesViewModel.coursesModelLiveData.courseImageUrl}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:background="@drawable/ic_course_dummy" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/llDetails"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"
                     android:background="@color/colorTransparent"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="@+id/imageView"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent">
@@ -132,8 +134,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/no_more_attempts"
-            android:visibility="gone"
             android:textSize="@dimen/sp_14"
+            android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@+id/labelFinalMarks"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -176,7 +178,7 @@
         <include
             android:id="@+id/noInternet"
             layout="@layout/no_internet"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
         <include
             android:id="@+id/somethingWentWrong"
@@ -186,11 +188,11 @@
         <include
             android:id="@+id/noData"
             layout="@layout/no_data"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:visibility="gone"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <!--<androidx.constraintlayout.widget.Group
             android:layout_width="match_parent"
