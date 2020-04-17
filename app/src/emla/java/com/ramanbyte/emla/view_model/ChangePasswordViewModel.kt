@@ -148,7 +148,7 @@ class ChangePasswordViewModel(var mContext: Context) : BaseViewModel(mContext) {
                     setAlertDialogResourceModelMutableLiveData(
                         BindingUtils.string(R.string.no_internet_message),
                         BindingUtils.drawable(R.drawable.ic_no_internet)!!,
-                        true,
+                        false,
                         BindingUtils.string(R.string.tryAgain), {
                             isAlertDialogShown.postValue(false)
                             changePasswordClick(view)

@@ -28,6 +28,11 @@ const val KEY_NO_INTERNET_ERROR = "key_internet_error"
 const val KEY_PAGINATION_NO_DATA = "key_pagination_no_data"
 const val KEY_SOMETHING_WENT_WRONG_ERROR = "key_something_wend_wrong_error"
 
+
+const val KEY_LOGIN_STATUS_YES = "Y"
+const val KEY_LOGIN_STATUS_NO = "N"
+const val KEY_DEVICE_ID = "deviceId"
+
 const val KEY_NA = "N/A"
 const val KEY_BLANK = ""
 const val KEY_OK = "Ok"
