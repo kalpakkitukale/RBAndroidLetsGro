@@ -5,13 +5,9 @@ import android.app.Activity
 import android.app.Dialog
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Color
 import android.net.Uri
 import android.provider.Settings
 import android.view.LayoutInflater
-import android.view.View
-import android.view.Window
-import android.view.WindowManager
 import androidx.lifecycle.Observer
 import androidx.work.Data
 import androidx.work.OneTimeWorkRequest
@@ -57,7 +53,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(authMod
                 }
             userModelLiveData.observe(this@LoginActivity, Observer {
                 it?.let {
-                    if (it.userType.equals(KEY_STAFF, true)) {
+                    if (it.userType.equals(KEY_STUDENT, true)) {
 
                         if (it.loggedId != KEY_Y)
                             showPledgeDialog()
