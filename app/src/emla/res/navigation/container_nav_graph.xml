@@ -20,12 +20,15 @@
         android:name="com.ramanbyte.emla.ui.fragments.MyDownloadsFragment"
         android:label="@string/downloads" />
     <fragment
-        android:id="@+id/learnerProfileFragment"
+        android:id="@+id/settingFragment"
         android:name="com.ramanbyte.emla.ui.fragments.SettingFragment"
         android:label="@string/action_settings" >
         <action
-            android:id="@+id/action_learnerProfileFragment_to_changePasswordFragment"
+            android:id="@+id/action_settingFragment_to_changePasswordFragment"
             app:destination="@id/changePasswordFragment" />
+        <action
+            android:id="@+id/action_settingFragment_to_learnerProfileFragment"
+            app:destination="@id/learnerProfileFragment" />
     </fragment>
 
     <fragment
@@ -62,4 +65,9 @@
         android:id="@+id/contentListFragment"
         android:name="com.ramanbyte.emla.ui.fragments.ContentListFragment"
         android:label="ContentListFragment" />
+    <fragment
+        android:id="@+id/learnerProfileFragment"
+        android:name="com.ramanbyte.emla.ui.fragments.LearnerProfileFragment"
+        android:label="LearnerProfileFragment" />
+
 </navigation>

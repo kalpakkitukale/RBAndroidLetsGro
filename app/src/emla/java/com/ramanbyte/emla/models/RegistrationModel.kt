@@ -48,7 +48,7 @@ class RegistrationModel : BaseObservable() {
         }
 
     var address: String? = ""
-    var batchYearId: Int? = 0
+    var batchYearId: String = ""
     var branchId: Int? = 0
     var branname: String? = ""
     var campusId: Int? = 0
@@ -89,4 +89,10 @@ class RegistrationModel : BaseObservable() {
     var user_Role: Int? = 0
     var user_Status: String? = ""
     var yearofExperience: Int? = 0
+
+    var cityName = ""
+    var stateName = ""
+    var programLevel = ""
+    var pattern = ""
+    var specialization = ""
 }
