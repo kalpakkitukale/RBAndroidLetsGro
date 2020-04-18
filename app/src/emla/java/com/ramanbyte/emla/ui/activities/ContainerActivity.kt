@@ -97,7 +97,7 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding, ContainerViewMo
     }
 
     override fun onBackPressed() {
-        if (navController.currentDestination?.id == R.id.preAssessmentTestFragment) {
+        /*if (navController.currentDestination?.id == R.id.preAssessmentTestFragment) {
             viewModel.apply {
                 setAlertDialogResourceModelMutableLiveData(
                     BindingUtils.string(R.string.leave_test_message),
@@ -105,7 +105,8 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding, ContainerViewMo
                     false,
                     BindingUtils.string(R.string.yes), {
                         isAlertDialogShown.postValue(false)
-                        startActivity(ContainerActivity.intent(this@ContainerActivity))
+                        //startActivity(ContainerActivity.intent(this@ContainerActivity))
+                        moveTaskToBack(true)
                     },
                     BindingUtils.string(R.string.no), {
                         isAlertDialogShown.postValue(false)
@@ -113,7 +114,7 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding, ContainerViewMo
                 )
                 isAlertDialogShown.postValue(true)
             }
-        } else if (navController.currentDestination?.id == R.id.coursesFragment) {
+        } else*/ if (navController.currentDestination?.id == R.id.coursesFragment) {
             moveTaskToBack(true)
         } else {
             super.onBackPressed()

@@ -10,6 +10,11 @@
         <action
             android:id="@+id/action_allTheBestFragment"
             app:destination="@id/allTheBestFragment" />
+        <!--app:popUpTo="@+id/coursesFragment"
+        app:popUpToInclusive="true"-->
+        <action
+            android:id="@+id/action_quizInstructionFragment_to_coursesFragment"
+            app:destination="@id/coursesFragment" />
     </fragment>
     <fragment
         android:id="@+id/allTheBestFragment"
@@ -46,5 +51,10 @@
         android:id="@+id/courseDetailFragment"
         android:name="com.ramanbyte.emla.ui.fragments.CourseDetailFragment"
         android:label="@string/course_detail" />
+
+    <fragment
+        android:id="@+id/coursesFragment"
+        android:name="com.ramanbyte.emla.ui.fragments.CoursesFragment"
+        android:label="@string/courses" />
 
 </navigation>

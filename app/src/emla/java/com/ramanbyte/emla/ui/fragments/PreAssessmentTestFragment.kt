@@ -1,7 +1,9 @@
 package com.ramanbyte.emla.ui.fragments
 
 import android.content.Context
+import android.view.KeyEvent
 import android.view.MenuItem
+import android.view.View
 import androidx.navigation.fragment.findNavController
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseFragment
@@ -10,6 +12,7 @@ import com.ramanbyte.emla.models.ChaptersModel
 import com.ramanbyte.emla.models.CoursesModel
 import com.ramanbyte.emla.view_model.ShowQuestionsViewModel
 import com.ramanbyte.utilities.*
+
 
 /**
  * @author Niraj Naware <niraj.n@ramanbyte.com>
@@ -50,7 +53,51 @@ class PreAssessmentTestFragment :
         }
         setHasOptionsMenu(true)
 
+        //**************************
+
+
+        layoutBinding.root.apply {
+            isFocusableInTouchMode = true
+            requestFocus()
+            setOnKeyListener(object : View.OnKeyListener {
+                override fun onKey(v: View?, keyCode: Int, event: KeyEvent): Boolean {
+                    AppLog.infoLog("keyCode: $keyCode")
+                    if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() === KeyEvent.ACTION_UP) {
+                        AppLog.infoLog("onKey Back listener is working!!!")
+                        /*Log.i(android.R.attr.tag, "onKey Back listener is working!!!")
+                        fragmentManager!!.popBackStack(
+                            null,
+                            FragmentManager.POP_BACK_STACK_INCLUSIVE
+                        )*/
+
+
+                        viewModel.apply {
+                            setAlertDialogResourceModelMutableLiveData(
+                                BindingUtils.string(R.string.leave_test_message),
+                                BindingUtils.drawable(R.drawable.ic_submit_confirmation)!!,
+                                false,
+                                BindingUtils.string(R.string.yes), {
+                                    isAlertDialogShown.postValue(false)
+                                    findNavController().navigateUp()
+                                },
+                                BindingUtils.string(R.string.no), {
+                                    isAlertDialogShown.postValue(false)
+                                }
+                            )
+                            isAlertDialogShown.postValue(true)
+                        }
+
+                        return true
+                    }
+                    return false
+                }
+            })
+        }
+
+
     }
+
+
 
     /*override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
@@ -95,5 +142,9 @@ class PreAssessmentTestFragment :
         mContext = context
         super.onAttach(context)
     }
+
+
+
+
 
 }

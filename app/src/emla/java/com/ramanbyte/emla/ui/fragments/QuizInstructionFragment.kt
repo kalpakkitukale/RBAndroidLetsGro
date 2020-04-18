@@ -1,6 +1,7 @@
 package com.ramanbyte.emla.ui.fragments
 
 import android.content.Context
+import android.view.MenuItem
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
@@ -39,6 +40,7 @@ class QuizInstructionFragment : BaseFragment<FragmentQuizInstructionBinding, Sho
             instructionsModel = this@QuizInstructionFragment.instructionsModel
         }
 
+        setHasOptionsMenu(true)
         setViewModelObservers()
     }
 
@@ -71,6 +73,8 @@ class QuizInstructionFragment : BaseFragment<FragmentQuizInstructionBinding, Sho
             * */
             getInstructions()
 
+
+
             /*
             * Show alert when there is no test found
             * */
@@ -83,8 +87,11 @@ class QuizInstructionFragment : BaseFragment<FragmentQuizInstructionBinding, Sho
                             true,
                             BindingUtils.string(R.string.strOk), {
                                 //backPressed(view!!)
-                                //view?.findNavController()?.navigate(R.id.coursesFragment)
-                                startActivity(ContainerActivity.intent(activity!!))
+                                view?.findNavController()?.navigate(R.id.action_quizInstructionFragment_to_coursesFragment)
+                                //startActivity(ContainerActivity.intent(activity!!))
+
+                                //layoutBinding.root.findNavController()?.navigateUp()
+                                //findNavController().navigateUp()
                                 isAlertDialogShown.postValue(false)
                             }
                         )
@@ -114,8 +121,38 @@ class QuizInstructionFragment : BaseFragment<FragmentQuizInstructionBinding, Sho
         }
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                viewModel.apply {
+
+                    setAlertDialogResourceModelMutableLiveData(
+                        BindingUtils.string(R.string.leave_test_message),
+                        BindingUtils.drawable(R.drawable.ic_submit_confirmation)!!,
+                        false,
+                        BindingUtils.string(R.string.yes), {
+                            isAlertDialogShown.postValue(false)
+                            findNavController().navigateUp()
+                        },
+                        BindingUtils.string(R.string.no), {
+                            isAlertDialogShown.postValue(false)
+                        }
+                    )
+                    isAlertDialogShown.postValue(true)
+                }
+                true
+
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
     override fun onAttach(context: Context) {
         mContext = context
         super.onAttach(context)
     }
+
+
+
+
 }
