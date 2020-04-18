@@ -4,6 +4,8 @@
 
     <data>
 
+        <import type="com.ramanbyte.utilities.StaticHelpersKt" />
+
         <variable
             name="learnerProfileViewModel"
             type="com.ramanbyte.emla.view_model.LearnerProfileViewModel" />
@@ -28,6 +30,7 @@
             android:hint="@string/program_level"
             app:endIconDrawable="@drawable/ic_arrow_down_gray"
             app:endIconMode="custom"
+            app:errorText="@{learnerProfileViewModel.educationDetailsDataValidator.getValidation(StaticHelpersKt.keyProgramLevel)}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -44,7 +47,7 @@
                 android:lines="1"
                 android:onClick="@{()->spinnerProgram.performClick()}"
                 android:singleLine="true"
-                android:text="@={learnerProfileViewModel.registrationModelLiveData.programLevel}"
+                android:text="@={learnerProfileViewModel.registrationModelLiveData.educationLevlName}"
                 android:textSize="@dimen/sp_16" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -63,6 +66,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/dp_22"
             android:hint="@string/batchYear"
+            app:errorText="@{learnerProfileViewModel.educationDetailsDataValidator.getValidation(StaticHelpersKt.keyBatchYear)}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/spinnerProgram">
@@ -75,11 +79,11 @@
                 android:background="@color/colorTransparent"
                 android:drawablePadding="@dimen/dp_5"
                 android:imeOptions="actionNext"
-                android:inputType="number"
+                android:inputType="text"
                 android:lines="1"
                 android:maxLength="50"
                 android:singleLine="true"
-                android:text="@{learnerProfileViewModel.registrationModelLiveData.batchYearId}"
+                android:text="@={learnerProfileViewModel.registrationModelLiveData.batchYearId}"
                 android:textSize="@dimen/sp_16"
                 app:hintAnimationEnabled="false" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -94,6 +98,7 @@
             android:hint="@string/pattern"
             app:endIconDrawable="@drawable/ic_arrow_down_gray"
             app:endIconMode="custom"
+            app:errorText="@{learnerProfileViewModel.educationDetailsDataValidator.getValidation(StaticHelpersKt.keyPattern)}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tilBatchYear">
@@ -132,6 +137,7 @@
             android:hint="@string/specialisation"
             app:endIconDrawable="@drawable/ic_arrow_down_gray"
             app:endIconMode="custom"
+            app:errorText="@{learnerProfileViewModel.educationDetailsDataValidator.getValidation(StaticHelpersKt.keySpecialization)}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/spinnerPattern">
@@ -148,7 +154,7 @@
                 android:lines="1"
                 android:onClick="@{()->spinnerSpecialisation.performClick()}"
                 android:singleLine="true"
-                android:text="@={learnerProfileViewModel.registrationModelLiveData.specialization}"
+                android:text="@={learnerProfileViewModel.registrationModelLiveData.specializationName}"
                 android:textSize="@dimen/sp_16" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -167,6 +173,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/dp_22"
             android:hint="@string/university"
+            app:errorText="@{learnerProfileViewModel.educationDetailsDataValidator.getValidation(StaticHelpersKt.keyUniversity)}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/spinnerSpecialisation">
@@ -183,7 +190,7 @@
                 android:lines="1"
                 android:maxLength="50"
                 android:singleLine="true"
-                android:text="@{learnerProfileViewModel.registrationModelLiveData.universityName}"
+                android:text="@={learnerProfileViewModel.registrationModelLiveData.universityName}"
                 android:textSize="@dimen/sp_16"
                 app:hintAnimationEnabled="false" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -195,6 +202,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/dp_22"
             android:hint="@string/institute"
+            app:errorText="@{learnerProfileViewModel.educationDetailsDataValidator.getValidation(StaticHelpersKt.keyInstitute)}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tilUniversity">
@@ -211,7 +219,7 @@
                 android:lines="1"
                 android:maxLength="50"
                 android:singleLine="true"
-                android:text="@{learnerProfileViewModel.registrationModelLiveData.instituteName}"
+                android:text="@={learnerProfileViewModel.registrationModelLiveData.instituteName}"
                 android:textSize="@dimen/sp_16"
                 app:hintAnimationEnabled="false" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -223,6 +231,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/dp_22"
             android:includeFontPadding="false"
+            android:onClick="@{learnerProfileViewModel::saveProfile}"
             android:paddingTop="@dimen/dp_10"
             android:paddingBottom="@dimen/dp_10"
             android:text="@string/save"

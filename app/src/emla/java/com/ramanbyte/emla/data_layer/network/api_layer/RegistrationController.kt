@@ -34,7 +34,7 @@ interface RegistrationController {
     suspend fun getProfile(@Path("userReffId") userReffId: Int): Response<RegistrationModel>
 
     @POST("InsertUpdateProfileDetails")
-    suspend fun updateLearnerProfile(@Body registrationModel: RegistrationModel): Response<String>
+    suspend fun updateLearnerProfile(@Body registrationModel: RegistrationModel): Response<Int>
 
     @GET("GetAllCountrys")
     suspend fun getCountries(): Response<ArrayList<CountryModel>>

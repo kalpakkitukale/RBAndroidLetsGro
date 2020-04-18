@@ -46,5 +46,11 @@
     <string name="getting_program_level">Getting program levels…</string>
     <string name="getting_specializations">Getting specializations…</string>
     <string name="program_level">Program Level</string>
+    <string name="invalid_mobile_no">Invalid mobile number</string>
+    <string name="learner_profile">Learner Profile</string>
+    <string name="updating_profile">Updating profile…</string>
+    <string name="acknowledge_pledge">Acknowledging pledge…</string>
+    <string name="profile_updated_successfully">Profile updated successfully!</string>
+    <string name="profile_update_failed">Failed to update your profile! Try again?</string>
 
 </resources>

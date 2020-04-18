@@ -16,7 +16,7 @@ import org.kodein.di.generic.instance
 
 class MasterRepository(val mContext: Context) : BaseRepository(mContext) {
 
-    private val loginApiController : LoginApiController by instance()
+    private val loginApiController: LoginApiController by instance()
 
     suspend fun doLogin(loginRequest: LoginRequest): UserModel? {
 
@@ -37,7 +37,7 @@ class MasterRepository(val mContext: Context) : BaseRepository(mContext) {
         return userModel
     }
 
-    suspend fun updatePledgeStatus(pledgeStatusRequest: PledgeStatusRequest) {
+    suspend fun updatePledgeStatus(pledgeStatusRequest: PledgeStatusRequest): Int {
         val status = apiRequest {
             loginApiController.updatePledgeStatus(pledgeStatusRequest.apply {
                 userId = getCurrentUser()?.userId ?: 0
@@ -47,6 +47,7 @@ class MasterRepository(val mContext: Context) : BaseRepository(mContext) {
         if (status == 1) {
             applicationDatabase.getUserDao().updateCurrentUserStatus()
         }
+        return status ?: 0
     }
 
     fun getCurrentUser(): UserModel? {

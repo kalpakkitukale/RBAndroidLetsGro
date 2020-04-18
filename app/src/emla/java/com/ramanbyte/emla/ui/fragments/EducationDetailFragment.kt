@@ -23,8 +23,7 @@ import kotlinx.android.synthetic.emla.fragment_education_detail.*
  */
 class EducationDetailFragment :
     BaseFragment<FragmentEducationDetailBinding, LearnerProfileViewModel>(
-        useParent = true,
-        isNestedGraph = true
+        useParent = true
     ) {
 
     override val viewModelClass: Class<LearnerProfileViewModel> =
@@ -42,7 +41,7 @@ class EducationDetailFragment :
 
         layoutBinding.apply {
 
-            lifecycleOwner = this@EducationDetailFragment
+            lifecycleOwner = viewLifecycleOwner
 
             learnerProfileViewModel = viewModel
         }
@@ -123,7 +122,7 @@ class EducationDetailFragment :
                                         StaticMethodUtilitiesKtx.hideSpinnerDropDown(layoutBinding.spinnerProgram)
 
                                         registrationModelLiveData?.value?.apply {
-                                            programLevelId = id
+                                            programLevelId = masterDataResponseModel.id
                                             //programLevel = itemName ?: ""
                                             layoutBinding.etProgramLevel.setText(itemName ?: "")
                                         }
@@ -154,7 +153,7 @@ class EducationDetailFragment :
                                         StaticMethodUtilitiesKtx.hideSpinnerDropDown(layoutBinding.spinnerPattern)
 
                                         registrationModelLiveData?.value?.apply {
-                                            patternId = id
+                                            patternId = masterDataResponseModel.id
 //                                            pattern = itemName ?: ""
                                             layoutBinding.etPattern.setText(itemName ?: "")
                                         }
@@ -186,7 +185,7 @@ class EducationDetailFragment :
                                         )
 
                                         registrationModelLiveData?.value?.apply {
-                                            specializationId = id
+                                            specializationId = masterDataResponseModel.id
 //                                            specialization = itemName ?: ""
                                             layoutBinding.etSpecialization.setText(itemName ?: "")
                                         }

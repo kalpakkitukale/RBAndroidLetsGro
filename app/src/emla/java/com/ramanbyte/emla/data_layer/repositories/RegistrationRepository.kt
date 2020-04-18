@@ -9,6 +9,7 @@ import com.ramanbyte.emla.models.RegistrationModel
 import com.ramanbyte.emla.models.StateModel
 import com.ramanbyte.emla.models.response.MasterDataResponseModel
 import com.ramanbyte.emla.models.response.CommonDropdownModel
+import com.ramanbyte.utilities.KEY_Y
 import org.kodein.di.generic.instance
 
 /**
@@ -19,6 +20,12 @@ class RegistrationRepository(val mContext: Context) : BaseRepository(mContext) {
 
     private val registrationController: RegistrationController by instance()
 
+    fun isUserActive(): Boolean {
+
+        return applicationDatabase?.getUserDao()?.getCurrentUser()?.loggedId == KEY_Y
+
+    }
+
     suspend fun register(registrationModel: RegistrationModel): String? {
         return apiRequest {
             registrationController.register(registrationModel)
@@ -27,7 +34,7 @@ class RegistrationRepository(val mContext: Context) : BaseRepository(mContext) {
 
     suspend fun getProfile(): RegistrationModel? {
 
-        val userReffId = applicationDatabase.getUserDao().getCurrentUser()?.userId ?: 0
+        val userReffId = applicationDatabase.getUserDao().getCurrentUser()?.user_Reff_Id ?: 0
 
         return apiRequest {
 
@@ -37,10 +44,10 @@ class RegistrationRepository(val mContext: Context) : BaseRepository(mContext) {
 
     }
 
-    suspend fun updateLearnerProfile(registrationModel: RegistrationModel) {
-        apiRequest {
+    suspend fun updateLearnerProfile(registrationModel: RegistrationModel): Int {
+        return apiRequest {
             registrationController.updateLearnerProfile(registrationModel)
-        }
+        } ?: 0
     }
 
     suspend fun getCountries(): ArrayList<CountryModel> {
