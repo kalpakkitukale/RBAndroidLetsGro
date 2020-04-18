@@ -15,6 +15,7 @@ class UserEntity {
     var id: Int = 0
 
     var userId: Int = 0
+    var user_Reff_Id: Int = 0
 
     var firstName = ""
     var middleName = ""

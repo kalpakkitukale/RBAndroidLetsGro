@@ -16,6 +16,7 @@ object DateUtils {
     const val TIME_SERVER_PATTERN = "hh:mma"
     const val TIME_24_HR_PATTERN = "HH:mm"
     const val DATE_DISPLAY_PATTERN = "dd MMM yyyy"
+    const val DATE_DISPLAY_PATTERN_SEP = "dd-MMM-yyyy"
     const val DATE_DISPLAY_PATTERN_WITH_WEEKNAME = "dd MMM yyyy '('EEEE')'"
     const val DATE_SQLITE_PATTERN = "yyyy-MM-dd"
     const val DATE_PICKER_PATTERN = "yyyy-M-dd"

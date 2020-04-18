@@ -1,24 +1,12 @@
 package com.ramanbyte.emla.data_layer.repositories
 
 import android.content.Context
-import com.ramanbyte.R
-import com.ramanbyte.data_layer.SharedPreferencesDatabase
-import com.ramanbyte.data_layer.SharedPreferencesDatabase.KEY_DEVICE_IMEI
-import com.ramanbyte.data_layer.SharedPreferencesDatabase.KEY_DEVICE_INSTANCE_ID
-import com.ramanbyte.data_layer.SharedPreferencesDatabase.KEY_IS_DEVICE_TOKEN_SET
-import com.ramanbyte.data_layer.SharedPreferencesDatabase.getIntPref
-import com.ramanbyte.data_layer.SharedPreferencesDatabase.getStringPref
-import com.ramanbyte.data_layer.SharedPreferencesDatabase.setBoolPref
-import com.ramanbyte.data_layer.SharedPreferencesDatabase.setIntPref
 import com.ramanbyte.data_layer.base.BaseRepository
 import com.ramanbyte.emla.data_layer.network.api_layer.LoginApiController
-import com.ramanbyte.emla.data_layer.room.ApplicationDatabase
 import com.ramanbyte.emla.data_layer.room.entities.UserEntity
 import com.ramanbyte.emla.models.UserModel
 import com.ramanbyte.emla.models.request.*
 import com.ramanbyte.utilities.*
-import com.ramanbyte.utilities.DateUtils.getCurDate
-import com.ramanbyte.utilities.IpUtility.Companion.getIpAddress
 import org.kodein.di.generic.instance
 
 /**
@@ -28,7 +16,7 @@ import org.kodein.di.generic.instance
 
 class MasterRepository(val mContext: Context) : BaseRepository(mContext) {
 
-    private val loginApiController : LoginApiController by instance()
+    private val loginApiController: LoginApiController by instance()
 
     suspend fun doLogin(loginRequest: LoginRequest): UserModel? {
 
@@ -39,7 +27,7 @@ class MasterRepository(val mContext: Context) : BaseRepository(mContext) {
         }
 
         userModel?.apply {
-            if (userModel.userType == KEY_STAFF) {
+            if (userModel.userType == KEY_STUDENT) {
                 applicationDatabase.getUserDao().apply {
                     delete()
                     insert(userModel.replicate<UserModel, UserEntity>()!!)
@@ -49,7 +37,7 @@ class MasterRepository(val mContext: Context) : BaseRepository(mContext) {
         return userModel
     }
 
-    suspend fun updatePledgeStatus(pledgeStatusRequest: PledgeStatusRequest) {
+    suspend fun updatePledgeStatus(pledgeStatusRequest: PledgeStatusRequest): Int {
         val status = apiRequest {
             loginApiController.updatePledgeStatus(pledgeStatusRequest.apply {
                 userId = getCurrentUser()?.userId ?: 0
@@ -59,6 +47,7 @@ class MasterRepository(val mContext: Context) : BaseRepository(mContext) {
         if (status == 1) {
             applicationDatabase.getUserDao().updateCurrentUserStatus()
         }
+        return status ?: 0
     }
 
     fun getCurrentUser(): UserModel? {

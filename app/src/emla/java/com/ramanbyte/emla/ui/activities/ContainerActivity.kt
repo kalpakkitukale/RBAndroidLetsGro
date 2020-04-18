@@ -5,6 +5,7 @@ import android.content.Intent
 import android.view.View
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
@@ -42,7 +43,7 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding, ContainerViewMo
             navController = findNavController(R.id.containerNavHost)
             appBarConfiguration = AppBarConfiguration.Builder(
                 R.id.coursesFragment, R.id.myDownloadsFragment,
-                R.id.learnerProfileFragment
+                R.id.settingFragment
             ).build()
             setSupportActionBar(mainToolbar)
             setupActionBarWithNavController(
@@ -64,7 +65,7 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding, ContainerViewMo
             when (destination.id) {
                 R.id.coursesFragment,
                 R.id.myDownloadsFragment,
-                R.id.learnerProfileFragment -> showBottomNavigation()//show bottom nav on these fragments only
+                R.id.settingFragment -> showBottomNavigation()//show bottom nav on these fragments only
                 else -> hideBottomNavigation()//hide bottom navigation
             }
         }
@@ -116,6 +117,26 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding, ContainerViewMo
             }
         } else*/ if (navController.currentDestination?.id == R.id.coursesFragment) {
             moveTaskToBack(true)
+        } else if (navController.currentDestination?.id == R.id.learnerProfileFragment) {
+
+            viewModel.apply {
+
+                setAlertDialogResourceModelMutableLiveData(
+                    BindingUtils.string(R.string.profile_changes_discarded),
+                    BindingUtils.drawable(R.drawable.ic_submit_confirmation)!!,
+                    false,
+                    BindingUtils.string(R.string.yes), {
+                        isAlertDialogShown.postValue(false)
+                        navController.navigateUp()
+                    },
+                    BindingUtils.string(R.string.no), {
+                        isAlertDialogShown.postValue(false)
+                    }
+                )
+                isAlertDialogShown.postValue(true)
+
+            }
+
         } else {
             super.onBackPressed()
         }

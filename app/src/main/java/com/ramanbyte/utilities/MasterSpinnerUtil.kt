@@ -6,6 +6,7 @@ import android.widget.Spinner
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
+import com.ramanbyte.emla.adapters.CustomAutocompleteAdapter
 import com.ramanbyte.emla.adapters.SpinnerAdapter
 import com.ramanbyte.models.SpinnerModel
 
@@ -38,7 +39,9 @@ class MasterSpinnerUtil(
         spinner: Spinner,
         noSelectionItemName: String = SELECT,
         defaultSelectAction: () -> Unit = {},
-        addDefaultSelection: Boolean = true
+        addDefaultSelection: Boolean = true,
+        initialSelection: Any = 0,
+        isSelectionWithIndex: Boolean = true
     ) {
 
         this.spinner = spinner
@@ -61,7 +64,7 @@ class MasterSpinnerUtil(
                 if (addDefaultSelection)
                     newList.add(0, getDefaultSpinnerModel())
 
-                setupSpinnerAdapter(spinner, newList, 0)
+                setupSpinnerAdapter(spinner, newList, initialSelection, isSelectionWithIndex)
             }
 
 
@@ -146,7 +149,7 @@ class MasterSpinnerUtil(
         dropDownList: ArrayList<SpinnerModel>
     ) {
 
-        //autoCompleteTextView.setAdapter(CustomAutocompleteAdapter.get(mContext, dropDownList))
+        autoCompleteTextView.setAdapter(CustomAutocompleteAdapter.get(mContext, dropDownList))
 
     }
 

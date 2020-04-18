@@ -211,5 +211,6 @@ class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
         invokeApiCall(apiCallFunction = apiCallFunction)
     }
 
+    fun isUserActive(): Boolean = registrationRepository.isUserActive()
 
 }

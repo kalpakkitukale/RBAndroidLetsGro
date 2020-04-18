@@ -156,7 +156,8 @@
     <string name="invalid_old_password">Enter a valid old password</string>
     <string name="enter_valid_confirm_new_password">Enter a valid confirm new password</string>
     <string name="not_same_new_and_confirm_password">Password does not match.</string>
-    <string name="not_valid_password_pattern">Password should be as per password policy.Please refer to the password policy.</string>
+    <!--<string name="not_valid_password_pattern">Password should be as per password policy.Please refer to the password policy.</string>-->
+    <string name="not_valid_password_pattern">Password must contain min. 6 characters with 1 uppercase, 1 lowercase, 1 number and 1 special character.</string>
     <string name="same_old_and_new_password">The new password you have entered is similar to the old one! Please try entering a new password.</string>
     <string name="youHaveCrossedYourMaximumLimit">oops! you have crossed your maximum limit</string>
     <string name="firstName">First Name</string>
@@ -198,5 +199,20 @@ Content
     Content Ends
     -->
 
-    <string name="logout_message">Do you want to logout...!!!</string>
+    <string name="logout_message">Are you sure to logout?</string>
+
+    <string name="getting_content_for">Fetching content data for</string>
+    <string name="getting_states">Getting states…</string>
+    <string name="getting_cities">Getting cities…</string>
+    <string name="getting_patterns">Getting patterns…</string>
+    <string name="getting_program_level">Getting program levels…</string>
+    <string name="getting_specializations">Getting specializations…</string>
+    <string name="program_level">Program Level</string>
+    <string name="invalid_mobile_no">Invalid mobile number</string>
+    <string name="learner_profile">Learner Profile</string>
+    <string name="updating_profile">Updating profile…</string>
+    <string name="acknowledge_pledge">Acknowledging pledge…</string>
+    <string name="profile_updated_successfully">Profile updated successfully!</string>
+    <string name="profile_update_failed">Failed to update your profile! Try again?</string>
+    <string name="profile_changes_discarded">Any made changes will be discarded! Are you sure?</string>
 </resources>

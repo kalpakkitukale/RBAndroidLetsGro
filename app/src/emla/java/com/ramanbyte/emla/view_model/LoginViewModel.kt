@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.CompoundButton
 import androidx.databinding.library.baseAdapters.BR
 import androidx.lifecycle.MutableLiveData
+import com.google.android.material.snackbar.Snackbar
 import com.ramanbyte.BaseAppController
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseViewModel
@@ -16,7 +17,6 @@ import com.ramanbyte.emla.models.UserModel
 import com.ramanbyte.emla.models.request.LoginRequest
 import com.ramanbyte.emla.models.request.PledgeStatusRequest
 import com.ramanbyte.emla.ui.activities.CreateAccountActivity
-import com.ramanbyte.emla.ui.activities.LoginActivity
 import com.ramanbyte.utilities.*
 import com.ramanbyte.validation.ObservableValidator
 import com.ramanbyte.validation.ValidationFlags
@@ -72,7 +72,8 @@ class LoginViewModel(var mContext: Context) : BaseViewModel(mContext) {
     val forgotPasswordClick = MutableLiveData<Boolean?>(null)
 
     fun doLogin(view:View) {
-
+        /*view.snack(BindingUtils.string(R.string.please_agree_the_instruction),
+            Snackbar.LENGTH_LONG,{})*/
         if (loginRequestValidation.validateAll()) {
             if (PermissionsManager.checkPermission(
                     mContext as Activity,
@@ -81,7 +82,7 @@ class LoginViewModel(var mContext: Context) : BaseViewModel(mContext) {
             ) {
                 val apiCallFunction: suspend () -> Unit = {
                     val response = masterRepository.doLogin(userLoginRequestLiveData.value!!)
-                    if (response?.userType == KEY_STAFF) {
+                    if (response?.userType == KEY_STUDENT) {
                         userModelLiveData.postValue(response)
                     } else {
                         setAlertDialogResourceModelMutableLiveData(

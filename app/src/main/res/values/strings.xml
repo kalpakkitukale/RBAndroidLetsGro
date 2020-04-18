@@ -39,6 +39,5 @@
     <string name="notifications_channel_name">Notifications</string>
     <string name="notifications_channel_no_sound">No sound</string>
     <string name="notifications_admin_channel_description">Notifications sent from the app admin</string>
-    <string name="getting_content_for">Fetching content data for</string>
 
 </resources>

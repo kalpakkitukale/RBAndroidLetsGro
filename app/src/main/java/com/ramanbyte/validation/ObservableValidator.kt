@@ -312,7 +312,7 @@ class ObservableValidator<T : Observable>(
     private fun logProperty(property: String) {
         try {
             var value: String = observedObject::class.java.getMethod("get" + property.capitalize())
-                .invoke(observedObject).toString()
+                .invoke(observedObject)?.toString() ?: ""
             //Log.d(TAG, value)
         } catch (e: Exception) {
             e.printStackTrace()
