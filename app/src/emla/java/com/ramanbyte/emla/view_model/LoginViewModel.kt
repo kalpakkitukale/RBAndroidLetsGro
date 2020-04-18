@@ -72,8 +72,8 @@ class LoginViewModel(var mContext: Context) : BaseViewModel(mContext) {
     val forgotPasswordClick = MutableLiveData<Boolean?>(null)
 
     fun doLogin(view:View) {
-        view.snack(BindingUtils.string(R.string.please_agree_the_instruction),
-            Snackbar.LENGTH_LONG,{})
+        /*view.snack(BindingUtils.string(R.string.please_agree_the_instruction),
+            Snackbar.LENGTH_LONG,{})*/
         if (loginRequestValidation.validateAll()) {
             if (PermissionsManager.checkPermission(
                     mContext as Activity,

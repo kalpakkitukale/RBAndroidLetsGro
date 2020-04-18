@@ -92,7 +92,8 @@ class PersonalDetailFragment :
 
         viewModel.apply {
 
-            layoutBinding.etCity.setText(registrationModelLiveData?.value?.cityName)
+            isSettingCity = true
+            citiesQueryLiveData.value = registrationModelLiveData?.value?.cityName
 
             statesListLiveData.observe(this@PersonalDetailFragment, Observer { statesList ->
 
