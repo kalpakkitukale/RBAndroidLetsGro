@@ -7,6 +7,7 @@ import android.widget.CompoundButton
 import androidx.core.text.isDigitsOnly
 import androidx.databinding.library.baseAdapters.BR
 import androidx.lifecycle.MutableLiveData
+import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import com.ramanbyte.R
 import com.ramanbyte.aws_s3_android.accessor.AppS3Client
@@ -61,6 +62,10 @@ class LearnerProfileViewModel(private val mContext: Context) : BaseViewModel(mCo
         MutableLiveData<Drawable>().apply {
             value = BindingUtils.drawable(R.drawable.ic_default_profile)
         }
+
+    val showPledgeDialogLiveData = MutableLiveData<Boolean?>(null)
+    var isPledgeConfirm: MutableLiveData<Boolean?> = MutableLiveData(null)
+    val navigateToCoursePage = MutableLiveData<Boolean?>(null)
 
     fun getProfile() {
 
@@ -403,9 +408,6 @@ class LearnerProfileViewModel(private val mContext: Context) : BaseViewModel(mCo
             goToNextPageLiveData.value = true
     }
 
-    val showPledgeDialogLiveData = MutableLiveData<Boolean?>(null)
-    var isPledgeConfirm: MutableLiveData<Boolean?> = MutableLiveData(null)
-
     fun saveProfile(view: View) {
 
         if (educationDetailsDataValidator?.validateAll() == true) {
@@ -518,8 +520,9 @@ class LearnerProfileViewModel(private val mContext: Context) : BaseViewModel(mCo
                         positiveButtonClickFunctionality = {
 
                             if (isPledgeConfirm.value != null) {
-                                view.findNavController()
-                                    .navigate(R.id.action_learnerProfileFragment_to_coursesFragment)
+                               navigateToCoursePage.postValue(
+                                   true
+                               )
                             } else {
                                 view.findNavController().navigateUp()
                             }

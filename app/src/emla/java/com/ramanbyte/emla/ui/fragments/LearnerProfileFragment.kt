@@ -12,6 +12,7 @@ import android.widget.CalendarView
 import android.widget.DatePicker
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.lifecycle.Observer
+import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.ramanbyte.R
 import com.ramanbyte.aws_s3_android.accessor.AppS3Client
@@ -103,6 +104,18 @@ class LearnerProfileFragment :
                 }
 
 
+            })
+
+            navigateToCoursePage.observe(viewLifecycleOwner, Observer {
+
+                it?.apply {
+
+                    if(this){
+                        findNavController()
+                            .navigate(R.id.action_learnerProfileFragment_to_coursesFragment)
+                        navigateToCoursePage.value = null
+                    }
+                }
             })
         }
 
