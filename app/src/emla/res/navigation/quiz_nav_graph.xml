@@ -33,7 +33,7 @@
             app:destination="@id/jumpToQuestionBottomSheetFragment" />
         <action
             android:id="@+id/action_showQuestionFragment_to_courseDetailFragment"
-            app:destination="@id/courseDetailFragment" />
+            app:destination="@id/quizCourseDetailFragment" />
     </fragment>
 
     <fragment
@@ -45,10 +45,14 @@
     <fragment
         android:id="@+id/quizReviewFragment"
         android:name="com.ramanbyte.emla.ui.fragments.QuizReviewFragment"
-        android:label="@string/quiz_review" />
+        android:label="@string/quiz_review">
+        <action
+            android:id="@+id/action_quizReviewFragment_to_courseDetailFragment"
+            app:destination="@id/quizCourseDetailFragment" />
+    </fragment>
 
     <fragment
-        android:id="@+id/courseDetailFragment"
+        android:id="@+id/quizCourseDetailFragment"
         android:name="com.ramanbyte.emla.ui.fragments.CourseDetailFragment"
         android:label="@string/course_detail" />
 

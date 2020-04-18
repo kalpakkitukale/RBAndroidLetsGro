@@ -11,6 +11,8 @@ import android.view.Window
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.lifecycle.Observer
+import androidx.navigation.NavOptions
+import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.viewpager.widget.ViewPager
 import com.ramanbyte.R
@@ -195,8 +197,8 @@ class ShowQuestionFragment :
                                             KEY_COURSE_MODEL,
                                             coursesModelLiveData.value
                                         )
-                                        view?.findNavController()
-                                            ?.navigate(R.id.action_showQuestionFragment_to_courseDetailFragment, bundle)
+                                        val navOption = NavOptions.Builder().setPopUpTo(R.id.coursesFragment, false).build()
+                                        activity?.let { Navigation.findNavController(it,R.id.containerNavHost).navigate(R.id.courseDetailFragment, bundle, navOption) }
 
                                         isAlertDialogShown.postValue(false)
 
@@ -283,9 +285,9 @@ class ShowQuestionFragment :
                                 val bundle = Bundle()
                                 bundle.putString(KEY_QUESTION_STATUS, it)
                                 bundle.putParcelable(KEY_QUIZ_RESULT_MODEL, quizResultModel)
-                                bundle.putString(
-                                    KEY_COURSE_IMAGE_URL,
-                                    parentViewModel.coursesModelLiveData.value?.courseImageUrl
+                                bundle.putParcelable(
+                                    KEY_COURSE_MODEL,
+                                    parentViewModel.coursesModelLiveData.value!!
                                 )
                                 view?.findNavController()
                                     ?.navigate(R.id.quizReviewFragment, bundle)
@@ -295,6 +297,7 @@ class ShowQuestionFragment :
                     }
                 })
 
+
                 onClickDialogIncorrectQuestionLiveData.observe(this@ShowQuestionFragment, Observer {
                     if (it != null) {
                         if (it.isNotEmpty()) {
@@ -303,9 +306,9 @@ class ShowQuestionFragment :
                                 val bundle = Bundle()
                                 bundle.putString(KEY_QUESTION_STATUS, it)
                                 bundle.putParcelable(KEY_QUIZ_RESULT_MODEL, quizResultModel)
-                                bundle.putString(
-                                    KEY_COURSE_IMAGE_URL,
-                                    parentViewModel.coursesModelLiveData.value?.courseImageUrl
+                                bundle.putParcelable(
+                                    KEY_COURSE_MODEL,
+                                    parentViewModel.coursesModelLiveData.value!!
                                 )
                                 view?.findNavController()
                                     ?.navigate(R.id.quizReviewFragment, bundle)
@@ -328,10 +331,19 @@ class ShowQuestionFragment :
                                     true,
                                     BindingUtils.string(R.string.strOk), {
                                         isAlertDialogShown.postValue(false)
-                                        startActivity(ContainerActivity.intent(activity!!).apply {
+                                        //niraj
+                                        /*startActivity(ContainerActivity.intent(activity!!).apply {
                                             flags =
                                                 Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                                        })
+                                        })*/
+
+                                        val bundle = Bundle()
+                                        bundle.putParcelable(
+                                            KEY_COURSE_MODEL,
+                                            parentViewModel.coursesModelLiveData.value
+                                        )
+                                        val navOption = NavOptions.Builder().setPopUpTo(R.id.coursesFragment, false).build()
+                                        activity?.let { Navigation.findNavController(it,R.id.containerNavHost).navigate(R.id.courseDetailFragment, bundle, navOption) }
                                     }
                                 )
                                 isAlertDialogShown.postValue(true)
@@ -346,9 +358,9 @@ class ShowQuestionFragment :
                                     bundle.putString(KEY_QUESTION_STATUS, keyCorrect)
                                 }
                                 bundle.putParcelable(KEY_QUIZ_RESULT_MODEL, quizResultModel)
-                                bundle.putString(
-                                    KEY_COURSE_IMAGE_URL,
-                                    parentViewModel.coursesModelLiveData.value?.courseImageUrl
+                                bundle.putParcelable(
+                                    KEY_COURSE_MODEL,
+                                    parentViewModel.coursesModelLiveData.value
                                 )
                                 view?.findNavController()
                                     ?.navigate(R.id.quizReviewFragment, bundle)
@@ -372,13 +384,22 @@ class ShowQuestionFragment :
                 BindingUtils.drawable(drawable)!!,
                 true,
                 BindingUtils.string(R.string.strOk), {
-                    activity?.apply {
+                    /*activity?.apply {
                         startActivity(ContainerActivity.intent(activity!!).apply {
                             flags =
                                 Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                         })
                         isAlertDialogShown.postValue(false)
-                    }
+                    }*/
+
+                    val bundle = Bundle()
+                    bundle.putParcelable(
+                        KEY_COURSE_MODEL,
+                        parentViewModel.coursesModelLiveData.value
+                    )
+                    val navOption = NavOptions.Builder().setPopUpTo(R.id.coursesFragment, false).build()
+                    activity?.let { Navigation.findNavController(it,R.id.containerNavHost).navigate(R.id.courseDetailFragment, bundle, navOption) }
+                    isAlertDialogShown.postValue(false)
                 }
             )
             isAlertDialogShown.postValue(true)
@@ -398,25 +419,6 @@ class ShowQuestionFragment :
 
             // get question realted options
             viewModel.apply {
-
-                //getOptions(questionList[i].id)
-
-                /*optionsListLiveData.observe(this@ShowQuestionFragment, Observer {
-                    if (it != null) {
-                        //setPagerList(it)
-                        //AppLog.infoLog("optionsListLiveData ${it[0].options}")
-                        //optionsList = it
-
-                        val questionPagerFragment =
-                            ShowQuestionPagerFragment.newInstance(
-                                queCount!!,
-                                questionList.size, // totalQueCount
-                                questionList[i],
-                                it
-                            )  // queCount, totalQueCount
-                        viewPagerAdapter!!.addFragmentView(questionPagerFragment, "")
-                    }
-                })*/
 
                 totalQueCount = questionList.size
 
@@ -465,11 +467,6 @@ class ShowQuestionFragment :
                         text = BindingUtils.string(R.string.submit_test)
                     } else
                         text = BindingUtils.string(R.string.next)
-
-                    /*optionsList[position].apply {
-                        AppLog.infoLog("localDBAns ${selectedOption} $iscorrect $question_Id")
-                        //updateOption(rbAnswer.text.toString(), iscorrect, question_Id )
-                    }*/
 
                 }
 

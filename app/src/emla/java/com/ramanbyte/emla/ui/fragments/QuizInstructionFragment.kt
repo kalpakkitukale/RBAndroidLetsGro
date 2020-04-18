@@ -3,6 +3,8 @@ package com.ramanbyte.emla.ui.fragments
 import android.content.Context
 import android.view.MenuItem
 import androidx.lifecycle.Observer
+import androidx.navigation.NavOptions
+import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.ramanbyte.R
@@ -86,12 +88,7 @@ class QuizInstructionFragment : BaseFragment<FragmentQuizInstructionBinding, Sho
                             BindingUtils.drawable(R.drawable.ic_no_data)!!,
                             true,
                             BindingUtils.string(R.string.strOk), {
-                                //backPressed(view!!)
-                                view?.findNavController()?.navigate(R.id.action_quizInstructionFragment_to_coursesFragment)
-                                //startActivity(ContainerActivity.intent(activity!!))
-
-                                //layoutBinding.root.findNavController()?.navigateUp()
-                                //findNavController().navigateUp()
+                                isBackPressLiveData.value = true
                                 isAlertDialogShown.postValue(false)
                             }
                         )
@@ -151,8 +148,5 @@ class QuizInstructionFragment : BaseFragment<FragmentQuizInstructionBinding, Sho
         mContext = context
         super.onAttach(context)
     }
-
-
-
 
 }
