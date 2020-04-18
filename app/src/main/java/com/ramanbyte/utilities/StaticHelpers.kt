@@ -71,6 +71,27 @@ const val keyEmailId = "emailId"
 const val keyPassword = "password"
 const val keyConfirmPassword = "confirmPassword"
 
+/*
+* Profile validation keys Starts
+* */
+
+const val keyMiddleName = "middleName"
+const val keyDateOfBirth = "dateofBirthstring"
+const val keyContactNo = "contactNo"
+const val keyState = "state"
+const val keyCity = "cityName"
+
+const val keyProgramLevel = "programLevelId"
+const val keyBatchYear = "batchYearId"
+const val keyPattern = "patternId"
+const val keySpecialization = "specializationId"
+const val keyUniversity = "universityName"
+const val keyInstitute = "instituteName"
+
+/*
+* Profile validation keys Ends
+* */
+
 const val KEY_OTP_ONE = "otp_place_one"
 const val KEY_OTP_TWO = "otp_place_two"
 const val KEY_OTP_THREE = "otp_place_three"
@@ -321,72 +342,6 @@ const val keyOfficeId = "office_id"
 const val keyIsEdit = "keyIsEdit"
 const val keyContactPersonId = "contactPersonId"
 
-/*
-* Google Maps Keys
-* */
-
-const val KEY_ADMINISTRATIVE_AREA_LEVEL_1 = "administrative_area_level_1"
-const val KEY_ADMINISTRATIVE_AREA_LEVEL_2 = "administrative_area_level_2"
-const val KEY_G_COUNTRY = "country"
-const val KEY_G_POSTAL_ADDRESS = "postal_code"
-const val KEY_G_ROUTE = "route"
-const val KEY_G_POLITICAL = "political"
-const val KEY_G_STREET_NUMBER = "street_number"
-const val KEY_SUB_LOCALITY_LEVEL_2 = "sublocality_level_2"
-
-/*
-* Google Map Keys Ends
-* */
-
-/*
-*Office Validation Keys
-* */
-
-const val KEY_OFFICE_TYPE = "office_Type"
-const val KEY_OFFICE_TITLE = "office_Title"
-const val KEY_ADDRESS_LINE_1 = "address_line1"
-const val KEY_ADDRESS_LINE_2 = "address_line2"
-const val KEY_COUNTRY = "country"
-const val KEY_STATE = "state"
-const val KEY_CITY = "city"
-const val KEY_PINCODE = "pincode"
-const val KEY_LOCATION_URL = "locationUrl"
-const val KEY_ADDRESS = "address"
-
-/*
-*Office Validation Keys Ends
-* */
-
-/*
-*Key Contact Validation Keys
-* */
-
-const val KEY_CONTACT_NAME = "contactPerson_Name"
-const val KEY_CONTACT_GENDER = "gender"
-const val KEY_CONTACT_DESIGNATION = "designation"
-const val KEY_CONTACT_CONTACT_NO = "contactNo"
-const val KEY_CONTACT_EMAIL_ID = "email_Id"
-const val KEY_CONTACT_OFFICE_TYPE = "officetitle"
-
-/*
-*Key Contact Validation Keys Ends
-* */
-
-/*Shital K.*/
-/*Add remark validation key*/
-const val KEY_TASK_TYPE = "task_Type"
-const val KEY_REMARK = "remark"
-const val KEY_START_DATE = "startDate"
-const val KEY_START_TIME = "startTime"
-const val KEY_REMARK_TYPE = "R"
-const val KEY_REMARK_TYPE_COMMENT = "C"
-const val KEY_GROUP_NAME = "group_name"
-const val KEY_CHECK_FLAG = "checkFlag"
-
-const val KEY_COMMENT = "comment"
-const val KEY_YEAR = "0"
-const val KEY_DESCRIPTION = "description"
-
 const val KEY_IMAGE = "image"
 const val KEY_MEDIA_ID = "media_id"
 const val KEY_IS_MEDIA_OFFLINE = "is_media_offline"
@@ -396,7 +351,6 @@ const val KEY_MEDIA_TYPE_AUDIO = "video"
 const val KEY_MEDIA_TYPE_FILE = "file"
 const val KEY_FILE_NAME = "keyFileName"
 const val KEY_FILE_DOWNLOAD = "File Download"
-
 
 fun skipTrailingZeroes(number: Double?): String {
     var trimmedNumber = "0"

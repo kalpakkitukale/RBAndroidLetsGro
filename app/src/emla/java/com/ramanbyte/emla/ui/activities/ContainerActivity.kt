@@ -42,7 +42,7 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding, ContainerViewMo
             navController = findNavController(R.id.containerNavHost)
             appBarConfiguration = AppBarConfiguration.Builder(
                 R.id.coursesFragment, R.id.myDownloadsFragment,
-                R.id.learnerProfileFragment
+                R.id.settingFragment
             ).build()
             setSupportActionBar(mainToolbar)
             setupActionBarWithNavController(
@@ -64,7 +64,7 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding, ContainerViewMo
             when (destination.id) {
                 R.id.coursesFragment,
                 R.id.myDownloadsFragment,
-                R.id.learnerProfileFragment -> showBottomNavigation()//show bottom nav on these fragments only
+                R.id.settingFragment -> showBottomNavigation()//show bottom nav on these fragments only
                 else -> hideBottomNavigation()//hide bottom navigation
             }
         }

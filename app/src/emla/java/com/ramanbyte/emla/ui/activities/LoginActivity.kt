@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.work.Data
 import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
+import com.google.android.material.snackbar.Snackbar
 import com.ramanbyte.BaseAppController
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseActivity
@@ -47,22 +48,22 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(authMod
 
     private fun setViewModelOps() {
         viewModel.apply {
-            if (userEntity != null)
+           /* if (userEntity != null)
                 if (userEntity?.loggedId != KEY_Y) {
                     showPledgeDialog()
-                }
+                }*/
             userModelLiveData.observe(this@LoginActivity, Observer {
                 it?.let {
                     if (it.userType.equals(KEY_STUDENT, true)) {
 
-                        if (it.loggedId != KEY_Y)
+                     /*   if (it.loggedId != KEY_Y)
                             showPledgeDialog()
-                        else {
-                            callWorkerToMangeUserDevice()
+                        else {*/
+                            //callWorkerToMangeUserDevice()
                             startActivity(ContainerActivity.intent(this@LoginActivity))
                             finish()
                             BaseAppController.setEnterPageAnimation(this@LoginActivity)
-                        }
+                      //  }
 
                     }
                 }
@@ -89,7 +90,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(authMod
             PledgeDialogBinding.inflate(LayoutInflater.from(this))
         dialog.setContentView(pledgeBinding.root)
         dialog.window?.setDimAmount(0.2F)
-        pledgeBinding.loginViewModel = viewModel
+       // pledgeBinding.loginViewModel = viewModel
         dialog.setCanceledOnTouchOutside(false)
 
         viewModel.apply {
@@ -103,8 +104,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(authMod
                         finish()
 
                     } else {
-                        //TODO need message for error
-                        layoutBinding.layoutMain.snackbar(BindingUtils.string(R.string.please_agree_the_instruction))
+                        layoutBinding.layoutMain.snack(BindingUtils.string(R.string.please_agree_the_instruction),Snackbar.LENGTH_LONG,{})
                         navigateToNextScreen.value = null
                     }
                 }

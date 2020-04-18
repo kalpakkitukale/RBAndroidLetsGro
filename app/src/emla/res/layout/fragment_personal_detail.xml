@@ -1,10 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.ramanbyte.utilities.StaticHelpersKt" />
+
+        <variable
+            name="learnerProfileViewModel"
+            type="com.ramanbyte.emla.view_model.LearnerProfileViewModel" />
+
+    </data>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:fillViewport="true"
+        android:fitsSystemWindows="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -17,11 +30,12 @@
                 android:layout_marginStart="@dimen/dp_10"
                 android:layout_marginTop="@dimen/dp_25"
                 android:layout_marginEnd="@dimen/dp_10"
+                app:imageUrl="@{learnerProfileViewModel.profileImageUrl}"
+                app:placeHolder="@{learnerProfileViewModel.profileErrorDrawable}"
                 android:src="@drawable/ic_default_profile"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilFirstName"
@@ -30,6 +44,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/dp_22"
                 android:hint="@string/first_name"
+                app:errorText="@{learnerProfileViewModel.personalDetailsDataValidator.getValidation(StaticHelpersKt.keyFirstName)}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/ivUserImage">
@@ -46,6 +61,7 @@
                     android:lines="1"
                     android:maxLength="50"
                     android:singleLine="true"
+                    android:text="@={learnerProfileViewModel.registrationModelLiveData.firstName}"
                     android:textSize="@dimen/sp_16"
                     app:hintAnimationEnabled="false" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -57,6 +73,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/dp_22"
                 android:hint="@string/middle_name"
+                app:errorText="@{learnerProfileViewModel.personalDetailsDataValidator.getValidation(StaticHelpersKt.keyMiddleName)}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tilFirstName">
@@ -73,6 +90,7 @@
                     android:lines="1"
                     android:maxLength="50"
                     android:singleLine="true"
+                    android:text="@={learnerProfileViewModel.registrationModelLiveData.middleName}"
                     android:textSize="@dimen/sp_16"
                     app:hintAnimationEnabled="false" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -84,6 +102,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/dp_22"
                 android:hint="@string/last_name"
+                app:errorText="@{learnerProfileViewModel.personalDetailsDataValidator.getValidation(StaticHelpersKt.keyLastName)}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tilMiddleName">
@@ -100,6 +119,7 @@
                     android:lines="1"
                     android:maxLength="50"
                     android:singleLine="true"
+                    android:text="@={learnerProfileViewModel.registrationModelLiveData.lastName}"
                     android:textSize="@dimen/sp_16"
                     app:hintAnimationEnabled="false" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -111,6 +131,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/dp_22"
                 android:hint="@string/date_of_birth"
+                app:errorText="@{learnerProfileViewModel.personalDetailsDataValidator.getValidation(StaticHelpersKt.keyDateOfBirth)}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tilLastName">
@@ -122,11 +143,15 @@
                     android:layout_height="wrap_content"
                     android:background="@color/colorTransparent"
                     android:drawablePadding="@dimen/dp_5"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
                     android:imeOptions="actionNext"
                     android:inputType="date"
+                    android:onClick="@{learnerProfileViewModel::showDateDialog}"
                     android:lines="1"
                     android:maxLength="50"
                     android:singleLine="true"
+                    android:text="@={learnerProfileViewModel.registrationModelLiveData.dateofBirthstring}"
                     android:textSize="@dimen/sp_16"
                     app:hintAnimationEnabled="false" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -138,6 +163,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/dp_22"
                 android:hint="@string/emailId"
+                app:errorText="@{learnerProfileViewModel.personalDetailsDataValidator.getValidation(StaticHelpersKt.keyEmailUsername)}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tilDoB">
@@ -154,6 +180,7 @@
                     android:lines="1"
                     android:maxLength="50"
                     android:singleLine="true"
+                    android:text="@={learnerProfileViewModel.registrationModelLiveData.emailUsername}"
                     android:textSize="@dimen/sp_16"
                     app:hintAnimationEnabled="false" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -166,6 +193,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/dp_22"
                 android:hint="@string/mobileNumber"
+                app:errorText="@{learnerProfileViewModel.personalDetailsDataValidator.getValidation(StaticHelpersKt.keyContactNo)}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tilEmailId">
@@ -180,45 +208,64 @@
                     android:imeOptions="actionNext"
                     android:inputType="phone"
                     android:lines="1"
-                    android:maxLength="50"
+                    android:maxLength="10"
                     android:singleLine="true"
+                    android:text="@={learnerProfileViewModel.registrationModelLiveData.contactNo}"
                     android:textSize="@dimen/sp_16"
                     app:hintAnimationEnabled="false" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <TextView
-                android:id="@+id/tvState"
-                style="@style/TextViewMediumBlackOnWhite"
-                android:layout_width="0dp"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilState"
+                style="@style/TextInputLayoutWithoutBorder"
+                android:layout_width="@dimen/dp_0"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_22"
-                android:drawableEnd="@drawable/ic_arrow_down_gray"
-                android:drawablePadding="@dimen/dp_10"
-                android:paddingStart="@dimen/dp_10"
+                android:layout_margin="@dimen/dp_22"
+                android:layout_marginTop="@dimen/dp_15"
                 android:hint="@string/state"
-                android:textSize="@dimen/sp_14"
-                app:layout_constraintEnd_toEndOf="@+id/tilMobileNo"
-                app:layout_constraintStart_toStartOf="@+id/tilMobileNo"
-                app:layout_constraintTop_toBottomOf="@id/tilMobileNo" />
+                app:endIconDrawable="@drawable/ic_arrow_down_gray"
+                app:endIconMode="custom"
+                app:errorText="@{learnerProfileViewModel.personalDetailsDataValidator.getValidation(StaticHelpersKt.keyState)}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tilMobileNo">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etState"
+                    style="@style/EditTextRegularGrayHint"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorTransparent"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:gravity="center_vertical"
+                    android:lines="1"
+                    android:onClick="@{()->spState.performClick()}"
+                    android:singleLine="true"
+                    android:text="@={learnerProfileViewModel.registrationModelLiveData.stateName}"
+                    android:textSize="@dimen/sp_16" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <Spinner
                 android:id="@+id/spState"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                app:layout_constraintBottom_toBottomOf="@id/tvState"
-                app:layout_constraintEnd_toEndOf="@id/tvState"
-                app:layout_constraintStart_toStartOf="@id/tvState" />
+                app:layout_constraintBottom_toBottomOf="@id/tilState"
+                app:layout_constraintEnd_toEndOf="@id/tilState"
+                app:layout_constraintStart_toStartOf="@id/tilState" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilCity"
                 style="@style/TextInputLayoutWithoutBorder"
-                android:layout_width="0dp"
+                android:layout_width="@dimen/dp_0"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/dp_22"
+                android:layout_marginTop="@dimen/dp_15"
                 android:hint="@string/city"
+                app:errorText="@{learnerProfileViewModel.personalDetailsDataValidator.getValidation(StaticHelpersKt.keyCity)}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvState">
+                app:layout_constraintTop_toBottomOf="@+id/spState">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etCity"
@@ -227,15 +274,26 @@
                     android:layout_height="wrap_content"
                     android:background="@color/colorTransparent"
                     android:drawablePadding="@dimen/dp_5"
-                    android:imeOptions="actionDone"
+                    android:imeOptions="actionNext"
                     android:inputType="textCapSentences"
                     android:lines="1"
                     android:maxLength="50"
                     android:singleLine="true"
+                    android:text="@={learnerProfileViewModel.citiesQueryLiveData}"
                     android:textSize="@dimen/sp_16"
                     app:hintAnimationEnabled="false" />
 
             </com.google.android.material.textfield.TextInputLayout>
+
+            <AutoCompleteTextView
+                android:id="@+id/actvCity"
+                style="@style/EditTextRegularGrayHint"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="@+id/tilCity"
+                app:layout_constraintEnd_toEndOf="@+id/tilCity"
+                app:layout_constraintStart_toStartOf="@+id/tilCity"
+                tools:ignore="LabelFor" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnNext"
@@ -244,16 +302,17 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_16"
                 android:layout_marginBottom="@dimen/dp_22"
+                android:includeFontPadding="false"
+                android:onClick="@{learnerProfileViewModel::savePersonalDetails}"
                 android:paddingTop="@dimen/dp_10"
                 android:paddingBottom="@dimen/dp_10"
-                android:includeFontPadding="false"
                 android:text="@string/next"
                 android:textAllCaps="true"
                 android:textSize="@dimen/sp_16"
-                app:layout_constraintTop_toBottomOf="@id/tilCity"
-                app:layout_constraintStart_toStartOf="@id/tilCity"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/tilCity"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                app:layout_constraintStart_toStartOf="@id/tilCity"
+                app:layout_constraintTop_toBottomOf="@id/tilCity" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

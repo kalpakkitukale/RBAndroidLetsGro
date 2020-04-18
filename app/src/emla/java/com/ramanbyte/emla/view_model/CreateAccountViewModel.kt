@@ -136,6 +136,43 @@ class CreateAccountViewModel(var mContext: Context) : BaseViewModel(mContext = m
                 BindingUtils.string(R.string.not_same_new_and_confirm_password),
                 keyPassword
             )
+
+            addRule(
+                keyPassword,
+                ValidationFlags.FIELD_CONTAINS_SPACE,
+                BindingUtils.string(R.string.enter_valid_new_password)
+            )
+
+            addRule(
+                keyConfirmPassword,
+                ValidationFlags.FIELD_CONTAINS_SPACE,
+                BindingUtils.string(R.string.enter_valid_confirm_new_password)
+            )
+
+            addRule(
+                keyConfirmPassword,
+                ValidationFlags.FIELD_MATCH,
+                BindingUtils.string(R.string.not_same_new_and_confirm_password),
+                keyPassword
+            )
+            addRule(
+                keyPassword,
+                ValidationFlags.FIELD_PASSWORD,
+                BindingUtils.string(R.string.not_valid_password_pattern)
+            )
+
+            addRule(
+                keyPassword,
+                ValidationFlags.FIELD_MAX,
+                BindingUtils.string(R.string.youHaveCrossedYourMaximumLimit),
+                limit = 15
+            )
+            addRule(
+                keyConfirmPassword,
+                ValidationFlags.FIELD_MAX,
+                BindingUtils.string(R.string.youHaveCrossedYourMaximumLimit),
+                limit = 15
+            )
         }
 
 }

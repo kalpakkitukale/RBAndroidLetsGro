@@ -10,6 +10,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ramanbyte.R
@@ -35,6 +36,12 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
     override fun layoutId(): Int = R.layout.fragment_courses
 
     override fun initiate() {
+
+        if (!viewModel.isUserActive()) {
+            findNavController().navigate(R.id.action_coursesFragment_to_learnerProfileFragment)
+            return
+        }
+
         layoutBinding.apply {
             setToolbarTitle(BindingUtils.string(R.string.courses))
             lifecycleOwner = this@CoursesFragment
@@ -46,6 +53,7 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
             somethingWentWrong.viewModel = viewModel
 
         }
+
         setAdapter()
         setViewModelOp()
     }

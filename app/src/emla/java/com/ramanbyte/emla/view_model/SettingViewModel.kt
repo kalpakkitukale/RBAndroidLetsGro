@@ -22,7 +22,12 @@ class SettingViewModel(var mContext: Context) : BaseViewModel(mContext) {
 
     fun onClickChangePassword(view: View) {
         view.findNavController()
-            .navigate(R.id.action_learnerProfileFragment_to_changePasswordFragment)
+            .navigate(R.id.action_settingFragment_to_changePasswordFragment)
+    }
+
+    fun onClickProfile(view: View) {
+        view.findNavController()
+            .navigate(R.id.action_settingFragment_to_learnerProfileFragment)
     }
 
     fun clickOnLogout(view: View) {
