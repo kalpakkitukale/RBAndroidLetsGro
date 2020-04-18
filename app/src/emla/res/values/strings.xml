@@ -198,5 +198,20 @@ Content
     Content Ends
     -->
 
-    <string name="logout_message">Do you want to logout...!!!</string>
+    <string name="logout_message">Are you sure to logout?</string>
+
+    <string name="getting_content_for">Fetching content data for</string>
+    <string name="getting_states">Getting states…</string>
+    <string name="getting_cities">Getting cities…</string>
+    <string name="getting_patterns">Getting patterns…</string>
+    <string name="getting_program_level">Getting program levels…</string>
+    <string name="getting_specializations">Getting specializations…</string>
+    <string name="program_level">Program Level</string>
+    <string name="invalid_mobile_no">Invalid mobile number</string>
+    <string name="learner_profile">Learner Profile</string>
+    <string name="updating_profile">Updating profile…</string>
+    <string name="acknowledge_pledge">Acknowledging pledge…</string>
+    <string name="profile_updated_successfully">Profile updated successfully!</string>
+    <string name="profile_update_failed">Failed to update your profile! Try again?</string>
+    <string name="profile_changes_discarded">Any made changes will be discarded! Are you sure?</string>
 </resources>

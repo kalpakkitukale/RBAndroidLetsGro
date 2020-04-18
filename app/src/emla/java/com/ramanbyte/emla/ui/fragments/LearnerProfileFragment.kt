@@ -5,12 +5,14 @@ import android.app.Dialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CalendarView
 import android.widget.DatePicker
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.ramanbyte.R
 import com.ramanbyte.aws_s3_android.accessor.AppS3Client
 import com.ramanbyte.base.BaseFragment
@@ -174,7 +176,30 @@ class LearnerProfileFragment :
 
             show()
         }
+    }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                viewModel.apply {
 
+                    setAlertDialogResourceModelMutableLiveData(
+                        BindingUtils.string(R.string.profile_changes_discarded),
+                        BindingUtils.drawable(R.drawable.ic_submit_confirmation)!!,
+                        false,
+                        BindingUtils.string(R.string.yes), {
+                            isAlertDialogShown.postValue(false)
+                            findNavController().navigateUp()
+                        },
+                        BindingUtils.string(R.string.no), {
+                            isAlertDialogShown.postValue(false)
+                        }
+                    )
+                    isAlertDialogShown.postValue(true)
+                }
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 }
