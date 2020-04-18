@@ -191,4 +191,19 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
         super.onAttach(context)
         mContext = context
     }
+
+    override fun onPause() {
+        AppLog.infoLog("NirajMethod :: onPause")
+        super.onPause()
+    }
+
+    override fun onResume() {
+        AppLog.infoLog("NirajMethod :: onResume")
+        super.onResume()
+    }
+
+    override fun onStart() {
+        AppLog.infoLog("NirajMethod :: onStart")
+        super.onStart()
+    }
 }

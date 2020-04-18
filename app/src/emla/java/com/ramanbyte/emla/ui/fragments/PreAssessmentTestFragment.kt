@@ -71,7 +71,7 @@ class PreAssessmentTestFragment :
                         )*/
 
 
-                        viewModel.apply {
+                        /*viewModel.apply {
                             setAlertDialogResourceModelMutableLiveData(
                                 BindingUtils.string(R.string.leave_test_message),
                                 BindingUtils.drawable(R.drawable.ic_submit_confirmation)!!,
@@ -85,7 +85,9 @@ class PreAssessmentTestFragment :
                                 }
                             )
                             isAlertDialogShown.postValue(true)
-                        }
+                        }*/
+
+                        findNavController().navigateUp()
 
                         return true
                     }
