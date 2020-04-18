@@ -5,6 +5,7 @@ import android.content.Intent
 import android.view.View
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
@@ -115,6 +116,26 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding, ContainerViewMo
             }
         } else if (navController.currentDestination?.id == R.id.coursesFragment) {
             moveTaskToBack(true)
+        } else if (navController.currentDestination?.id == R.id.learnerProfileFragment) {
+
+            viewModel.apply {
+
+                setAlertDialogResourceModelMutableLiveData(
+                    BindingUtils.string(R.string.profile_changes_discarded),
+                    BindingUtils.drawable(R.drawable.ic_submit_confirmation)!!,
+                    false,
+                    BindingUtils.string(R.string.yes), {
+                        isAlertDialogShown.postValue(false)
+                        navController.navigateUp()
+                    },
+                    BindingUtils.string(R.string.no), {
+                        isAlertDialogShown.postValue(false)
+                    }
+                )
+                isAlertDialogShown.postValue(true)
+
+            }
+
         } else {
             super.onBackPressed()
         }
