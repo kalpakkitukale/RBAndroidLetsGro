@@ -47,6 +47,7 @@
     <string name="pass_message">Congratulations you passed!</string>
     <string name="fail_message">Sorry, you failed!</string>
     <string name="loader_result_message">Please stick with us, while we are calculating your result…!</string>
+    <string name="alpha_digit_format">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz</string>
     <string name="view_certificate">View Certificate</string>
     <string name="share_certificate">Share Certificate</string>
     <string name="lock">Lock</string>
@@ -205,6 +206,7 @@ Content
     <string name="getting_states">Getting states…</string>
     <string name="getting_cities">Getting cities…</string>
     <string name="getting_patterns">Getting patterns…</string>
+    <string name="getting_profile">Getting profile details…</string>
     <string name="getting_program_level">Getting program levels…</string>
     <string name="getting_specializations">Getting specializations…</string>
     <string name="program_level">Program Level</string>
