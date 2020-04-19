@@ -1,7 +1,15 @@
 package com.ramanbyte.emla.ui.fragments
 
 import android.content.Context
+import android.os.Bundle
+import android.view.KeyEvent
 import android.view.MenuItem
+import android.view.View
+import androidx.lifecycle.Observer
+import androidx.navigation.NavController
+import androidx.navigation.NavOptions
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseFragment
@@ -10,6 +18,7 @@ import com.ramanbyte.emla.models.ChaptersModel
 import com.ramanbyte.emla.models.CoursesModel
 import com.ramanbyte.emla.view_model.ShowQuestionsViewModel
 import com.ramanbyte.utilities.*
+
 
 /**
  * @author Niraj Naware <niraj.n@ramanbyte.com>
@@ -21,6 +30,7 @@ class PreAssessmentTestFragment :
     private var mContext: Context? = null
     private var courseModel: CoursesModel? = null
     private var chapterModel: ChaptersModel? = null
+    private lateinit var navController: NavController
 
     override val viewModelClass: Class<ShowQuestionsViewModel> = ShowQuestionsViewModel::class.java
 
@@ -40,6 +50,15 @@ class PreAssessmentTestFragment :
             chapterModelLiveData.value = chapterModel
 
             setToolbarTitle(coursesModelLiveData?.value?.courseName!!)
+
+            isBackPressLiveData.observe(this@PreAssessmentTestFragment, Observer {
+                if (it != null){
+                    if (it == true){
+                        findNavController().navigateUp()
+                        isBackPressLiveData.value = false
+                    }
+                }
+            })
         }
 
         ProgressLoader(mContext!!, viewModel)
@@ -50,19 +69,41 @@ class PreAssessmentTestFragment :
         }
         setHasOptionsMenu(true)
 
+        /*
+        * Code to handle the back press
+        * */
+        layoutBinding.root.apply {
+            isFocusableInTouchMode = true
+            requestFocus()
+            setOnKeyListener(object : View.OnKeyListener {
+                override fun onKey(v: View?, keyCode: Int, event: KeyEvent): Boolean {
+                    AppLog.infoLog("keyCode: $keyCode")
+                    if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() === KeyEvent.ACTION_UP) {
+
+                            viewModel.apply {
+                                setAlertDialogResourceModelMutableLiveData(
+                                    BindingUtils.string(R.string.leave_test_message),
+                                    BindingUtils.drawable(R.drawable.ic_submit_confirmation)!!,
+                                    false,
+                                    BindingUtils.string(R.string.yes), {
+                                        isAlertDialogShown.postValue(false)
+                                        findNavController().navigateUp()
+                                    },
+                                    BindingUtils.string(R.string.no), {
+                                        isAlertDialogShown.postValue(false)
+                                    }
+                                )
+                                isAlertDialogShown.postValue(true)
+                            }
+
+                        return true
+                    }
+                    return false
+                }
+            })
+        }
     }
 
-    /*override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            android.R.id.home -> {
-                findNavController().navigateUp()
-                true
-            }
-            else -> {
-                super.onOptionsItemSelected(item)
-            }
-        }
-    }*/
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
@@ -75,7 +116,18 @@ class PreAssessmentTestFragment :
                         false,
                         BindingUtils.string(R.string.yes), {
                             isAlertDialogShown.postValue(false)
-                            findNavController().navigateUp()
+
+                            if (testType == 1){
+                                findNavController().navigateUp()
+                            }else{
+                                val bundle = Bundle()
+                                bundle.putParcelable(
+                                    KEY_COURSE_MODEL,
+                                    courseModel
+                                )
+                                val navOption = NavOptions.Builder().setPopUpTo(R.id.coursesFragment, false).build()
+                                activity?.let { Navigation.findNavController(it,R.id.containerNavHost).navigate(R.id.courseDetailFragment, bundle, navOption) }
+                            }
                         },
                         BindingUtils.string(R.string.no), {
                             isAlertDialogShown.postValue(false)
@@ -95,5 +147,4 @@ class PreAssessmentTestFragment :
         mContext = context
         super.onAttach(context)
     }
-
 }

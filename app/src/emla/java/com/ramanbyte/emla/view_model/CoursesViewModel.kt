@@ -26,6 +26,7 @@ import org.kodein.di.generic.instance
  */
 class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
     override var noInternetTryAgain: () -> Unit = {
+        AppLog.infoLog("NirajMethod :: noInternetTryAgain")
         coursesRepository.tryAgain()
     }
     private val coursesRepository: CoursesRepository by instance()
@@ -99,7 +100,6 @@ class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
         coursesModel.let { model ->
             if (NetworkConnectivity.isConnectedToInternet()) {
                 if (model.preAssessmentStatus.equals("true", true)) {
-                    AppLog.infoLog("courses details page")
                     view.findNavController()
                         .navigate(
                             R.id.action_coursesFragment_to_courseDetailFragment,

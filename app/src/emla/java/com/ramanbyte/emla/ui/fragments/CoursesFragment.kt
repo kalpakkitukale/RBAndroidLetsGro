@@ -191,4 +191,5 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
         super.onAttach(context)
         mContext = context
     }
+
 }

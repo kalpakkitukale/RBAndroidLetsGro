@@ -2,17 +2,20 @@ package com.ramanbyte.emla.ui.fragments
 
 import android.content.Context
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.navigation.NavOptions
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseFragment
 import com.ramanbyte.databinding.FragmentQuizReviewBinding
 import com.ramanbyte.emla.adapters.QuizReviewQuestionsAdapter
+import com.ramanbyte.emla.models.CoursesModel
 import com.ramanbyte.emla.models.QuizResultModel
 import com.ramanbyte.emla.view_model.ShowQuestionsViewModel
 import com.ramanbyte.utilities.*
@@ -23,6 +26,7 @@ class QuizReviewFragment : BaseFragment<FragmentQuizReviewBinding, ShowQuestions
     var quizReviewQuestionsAdapter: QuizReviewQuestionsAdapter? = null
     var questionStatus: String? = KEY_BLANK
     var courseImageUrl: String? = KEY_BLANK
+    var courseModel: CoursesModel? = null
     var quizResultModel: QuizResultModel? = null
     var mContext: Context? = null
 
@@ -35,7 +39,8 @@ class QuizReviewFragment : BaseFragment<FragmentQuizReviewBinding, ShowQuestions
         arguments?.apply {
             questionStatus = getString(KEY_QUESTION_STATUS)!!
             quizResultModel = getParcelable(KEY_QUIZ_RESULT_MODEL)
-            courseImageUrl = getString(KEY_COURSE_IMAGE_URL)
+            courseModel = getParcelable(KEY_COURSE_MODEL)
+            courseImageUrl = courseModel?.courseImageUrl
         }
 
         ProgressLoader(mContext!!, viewModel)
@@ -153,11 +158,50 @@ class QuizReviewFragment : BaseFragment<FragmentQuizReviewBinding, ShowQuestions
                     }
                 }
             })
+        }
 
 
+        /*
+        * Code to handle the back press
+        * */
+        layoutBinding.root.apply {
+            isFocusableInTouchMode = true
+            requestFocus()
+            setOnKeyListener(object : View.OnKeyListener {
+                override fun onKey(v: View?, keyCode: Int, event: KeyEvent): Boolean {
+                    AppLog.infoLog("keyCode: $keyCode")
+                    if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() === KeyEvent.ACTION_UP) {
+                        viewModel.apply {
+                            setAlertDialogResourceModelMutableLiveData(
+                                BindingUtils.string(R.string.leave_test_message),
+                                BindingUtils.drawable(R.drawable.ic_submit_confirmation)!!,
+                                false,
+                                BindingUtils.string(R.string.yes), {
+                                    isAlertDialogShown.postValue(false)
+
+                                    val bundle = Bundle()
+                                    bundle.putParcelable(
+                                        KEY_COURSE_MODEL,
+                                        courseModel
+                                    )
+                                    val navOption = NavOptions.Builder().setPopUpTo(R.id.coursesFragment, false).build()
+                                    activity?.let { Navigation.findNavController(it,R.id.containerNavHost).navigate(R.id.courseDetailFragment, bundle, navOption) }
+                                },
+                                BindingUtils.string(R.string.no), {
+                                    isAlertDialogShown.postValue(false)
+                                }
+                            )
+                            isAlertDialogShown.postValue(true)
+                        }
+                        return true
+                    }
+                    return false
+                }
+            })
         }
 
     }
+
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

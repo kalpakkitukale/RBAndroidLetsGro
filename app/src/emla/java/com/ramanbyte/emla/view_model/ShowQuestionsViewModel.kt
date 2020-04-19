@@ -41,6 +41,10 @@ class ShowQuestionsViewModel(var mContext: Context) : BaseViewModel(mContext) {
         value = false
     }
 
+    val isBackPressLiveData = MutableLiveData<Boolean>().apply {
+        value = false
+    }
+
     val isQuizFoundLiveData = MutableLiveData<Boolean>().apply {
         value = false
     }

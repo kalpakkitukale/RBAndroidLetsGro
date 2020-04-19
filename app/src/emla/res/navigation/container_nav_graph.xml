@@ -39,7 +39,8 @@
     <fragment
         android:id="@+id/preAssessmentTestFragment"
         android:name="com.ramanbyte.emla.ui.fragments.PreAssessmentTestFragment"
-        android:label="@string/test" />
+        android:label="@string/test"
+        app:launchSingleTop="true"/>
     <fragment
         android:id="@+id/changePasswordFragment"
         android:name="com.ramanbyte.emla.ui.fragments.ChangePasswordFragment"
