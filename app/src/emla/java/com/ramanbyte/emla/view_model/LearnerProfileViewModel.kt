@@ -79,14 +79,35 @@ class LearnerProfileViewModel(private val mContext: Context) : BaseViewModel(mCo
                 e.printStackTrace()
                 AppLog.errorLog(e.message, e)
                 coroutineToggleLoader()
+                toggleLayoutVisibility(
+                    View.GONE,
+                    View.GONE,
+                    View.GONE,
+                    BindingUtils.string(R.string.error_occured_while_getting_profile),
+                    View.VISIBLE
+                )
             } catch (e: NoDataException) {
                 e.printStackTrace()
                 AppLog.errorLog(e.message, e)
                 coroutineToggleLoader()
+                toggleLayoutVisibility(
+                    View.GONE,
+                    View.VISIBLE,
+                    View.GONE,
+                    BindingUtils.string(R.string.unable_to_fetch_dependencie),
+                    View.GONE
+                )
             } catch (e: NoInternetException) {
                 e.printStackTrace()
                 AppLog.errorLog(e.message, e)
                 coroutineToggleLoader()
+                toggleLayoutVisibility(
+                    View.GONE,
+                    View.GONE,
+                    View.VISIBLE,
+                    BindingUtils.string(R.string.please_make_sure_you_are_connected_to_internet),
+                    View.GONE
+                )
             }
         }
     }
@@ -271,7 +292,19 @@ class LearnerProfileViewModel(private val mContext: Context) : BaseViewModel(mCo
             try {
 
                 coroutineToggleLoader(BindingUtils.string(R.string.getting_states))
-                statesListLiveData.postValue(registrationRepository.getStates())
+
+                val countryList = registrationRepository.getCountries()
+
+                val countryModelLst =
+                    countryList?.firstOrNull { it?.country_name?.toLowerCase()?.contains("india")  ==  true}
+
+                statesListLiveData.postValue(
+                    registrationRepository.getStates(
+                        countryModelLst?.country_id ?: 0
+                    )
+                )
+
+
                 coroutineToggleLoader()
 
                 getProfile()
@@ -280,14 +313,35 @@ class LearnerProfileViewModel(private val mContext: Context) : BaseViewModel(mCo
                 e.printStackTrace()
                 AppLog.errorLog(e.message, e)
                 coroutineToggleLoader()
+                toggleLayoutVisibility(
+                    View.GONE,
+                    View.GONE,
+                    View.GONE,
+                    BindingUtils.string(R.string.error_occured_while_getting_profile),
+                    View.VISIBLE
+                )
             } catch (e: NoDataException) {
                 e.printStackTrace()
                 AppLog.errorLog(e.message, e)
                 coroutineToggleLoader()
+                toggleLayoutVisibility(
+                    View.GONE,
+                    View.VISIBLE,
+                    View.GONE,
+                    BindingUtils.string(R.string.unable_to_fetch_dependencie),
+                    View.GONE
+                )
             } catch (e: NoInternetException) {
                 e.printStackTrace()
                 AppLog.errorLog(e.message, e)
                 coroutineToggleLoader()
+                toggleLayoutVisibility(
+                    View.GONE,
+                    View.GONE,
+                    View.VISIBLE,
+                    BindingUtils.string(R.string.please_make_sure_you_are_connected_to_internet),
+                    View.GONE
+                )
             }
 
         }
@@ -309,14 +363,35 @@ class LearnerProfileViewModel(private val mContext: Context) : BaseViewModel(mCo
                 e.printStackTrace()
                 AppLog.errorLog(e.message, e)
                 coroutineToggleLoader()
+                toggleLayoutVisibility(
+                    View.GONE,
+                    View.GONE,
+                    View.GONE,
+                    BindingUtils.string(R.string.error_occured_while_getting_profile),
+                    View.VISIBLE
+                )
             } catch (e: NoDataException) {
                 e.printStackTrace()
                 AppLog.errorLog(e.message, e)
                 coroutineToggleLoader()
+                toggleLayoutVisibility(
+                    View.GONE,
+                    View.VISIBLE,
+                    View.GONE,
+                    BindingUtils.string(R.string.unable_to_fetch_dependencie),
+                    View.GONE
+                )
             } catch (e: NoInternetException) {
                 e.printStackTrace()
                 AppLog.errorLog(e.message, e)
                 coroutineToggleLoader()
+                toggleLayoutVisibility(
+                    View.GONE,
+                    View.GONE,
+                    View.VISIBLE,
+                    BindingUtils.string(R.string.please_make_sure_you_are_connected_to_internet),
+                    View.GONE
+                )
             }
         }
     }
@@ -333,14 +408,35 @@ class LearnerProfileViewModel(private val mContext: Context) : BaseViewModel(mCo
                 e.printStackTrace()
                 AppLog.errorLog(e.message, e)
                 coroutineToggleLoader()
+                toggleLayoutVisibility(
+                    View.GONE,
+                    View.GONE,
+                    View.GONE,
+                    BindingUtils.string(R.string.error_occured_while_getting_profile),
+                    View.VISIBLE
+                )
             } catch (e: NoDataException) {
                 e.printStackTrace()
                 AppLog.errorLog(e.message, e)
                 coroutineToggleLoader()
+                toggleLayoutVisibility(
+                    View.GONE,
+                    View.VISIBLE,
+                    View.GONE,
+                    BindingUtils.string(R.string.unable_to_fetch_dependencie),
+                    View.GONE
+                )
             } catch (e: NoInternetException) {
                 e.printStackTrace()
                 AppLog.errorLog(e.message, e)
                 coroutineToggleLoader()
+                toggleLayoutVisibility(
+                    View.GONE,
+                    View.GONE,
+                    View.VISIBLE,
+                    BindingUtils.string(R.string.please_make_sure_you_are_connected_to_internet),
+                    View.GONE
+                )
             }
 
         }
@@ -358,14 +454,35 @@ class LearnerProfileViewModel(private val mContext: Context) : BaseViewModel(mCo
                 e.printStackTrace()
                 AppLog.errorLog(e.message, e)
                 coroutineToggleLoader()
+                toggleLayoutVisibility(
+                    View.GONE,
+                    View.GONE,
+                    View.GONE,
+                    BindingUtils.string(R.string.error_occured_while_getting_profile),
+                    View.VISIBLE
+                )
             } catch (e: NoDataException) {
                 e.printStackTrace()
                 AppLog.errorLog(e.message, e)
                 coroutineToggleLoader()
+                toggleLayoutVisibility(
+                    View.GONE,
+                    View.VISIBLE,
+                    View.GONE,
+                    BindingUtils.string(R.string.unable_to_fetch_dependencie),
+                    View.GONE
+                )
             } catch (e: NoInternetException) {
                 e.printStackTrace()
                 AppLog.errorLog(e.message, e)
                 coroutineToggleLoader()
+                toggleLayoutVisibility(
+                    View.GONE,
+                    View.GONE,
+                    View.VISIBLE,
+                    BindingUtils.string(R.string.please_make_sure_you_are_connected_to_internet),
+                    View.GONE
+                )
             }
         }
     }
@@ -383,14 +500,35 @@ class LearnerProfileViewModel(private val mContext: Context) : BaseViewModel(mCo
                 e.printStackTrace()
                 AppLog.errorLog(e.message, e)
                 coroutineToggleLoader()
+                toggleLayoutVisibility(
+                    View.GONE,
+                    View.GONE,
+                    View.GONE,
+                    BindingUtils.string(R.string.error_occured_while_getting_profile),
+                    View.VISIBLE
+                )
             } catch (e: NoDataException) {
                 e.printStackTrace()
                 AppLog.errorLog(e.message, e)
                 coroutineToggleLoader()
+                toggleLayoutVisibility(
+                    View.GONE,
+                    View.VISIBLE,
+                    View.GONE,
+                    BindingUtils.string(R.string.unable_to_fetch_dependencie),
+                    View.GONE
+                )
             } catch (e: NoInternetException) {
                 e.printStackTrace()
                 AppLog.errorLog(e.message, e)
                 coroutineToggleLoader()
+                toggleLayoutVisibility(
+                    View.GONE,
+                    View.GONE,
+                    View.VISIBLE,
+                    BindingUtils.string(R.string.please_make_sure_you_are_connected_to_internet),
+                    View.GONE
+                )
             }
 
         }
@@ -520,9 +658,9 @@ class LearnerProfileViewModel(private val mContext: Context) : BaseViewModel(mCo
                         positiveButtonClickFunctionality = {
 
                             if (isPledgeConfirm.value != null) {
-                               navigateToCoursePage.postValue(
-                                   true
-                               )
+                                navigateToCoursePage.postValue(
+                                    true
+                                )
                             } else {
                                 view.findNavController().navigateUp()
                             }
@@ -579,6 +717,6 @@ class LearnerProfileViewModel(private val mContext: Context) : BaseViewModel(mCo
     }
 
     override var noInternetTryAgain: () -> Unit = {
-
+        getStates()
     }
 }

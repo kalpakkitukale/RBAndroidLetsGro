@@ -47,6 +47,11 @@ class LearnerProfileFragment :
         layoutBinding.apply {
 
             lifecycleOwner = viewLifecycleOwner
+
+            learnerProfileViewModel = viewModel
+            noData.viewModel = viewModel
+            somethingWentWrong.viewModel = viewModel
+            noInternet.viewModel = viewModel
         }
 
         viewModelOps()
@@ -110,7 +115,7 @@ class LearnerProfileFragment :
 
                 it?.apply {
 
-                    if(this){
+                    if (this) {
                         findNavController()
                             .navigate(R.id.action_learnerProfileFragment_to_coursesFragment)
                         navigateToCoursePage.value = null

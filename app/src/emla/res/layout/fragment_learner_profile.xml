@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
+    <data>
+
+        <variable
+            name="learnerProfileViewModel"
+            type="com.ramanbyte.emla.view_model.LearnerProfileViewModel" />
+
+    </data>
+
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
@@ -34,7 +42,27 @@
         <com.ramanbyte.emla.view.CustomViewPager
             android:id="@+id/viewPageLearnerProfile"
             android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="@{learnerProfileViewModel.viewVisibilityLiveData}" />
+
+        <include
+            android:id="@+id/noData"
+            layout="@layout/no_data"
+            android:layout_width="match_parent"
             android:layout_height="match_parent" />
+
+         <include
+            android:id="@+id/somethingWentWrong"
+            layout="@layout/something_went_wrong"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+         <include
+            android:id="@+id/noInternet"
+            layout="@layout/no_internet"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
 
     </RelativeLayout>
 </layout>
