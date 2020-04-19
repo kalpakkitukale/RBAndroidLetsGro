@@ -253,6 +253,7 @@
                 android:id="@+id/spState"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+                android:background="@android:color/transparent"
                 app:layout_constraintBottom_toBottomOf="@id/tilState"
                 app:layout_constraintEnd_toEndOf="@id/tilState"
                 app:layout_constraintStart_toStartOf="@id/tilState" />

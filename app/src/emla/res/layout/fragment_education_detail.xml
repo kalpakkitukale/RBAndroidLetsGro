@@ -55,6 +55,7 @@
             android:id="@+id/spinnerProgram"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:background="@android:color/transparent"
             app:layout_constraintBottom_toBottomOf="@id/tilProgramLevel"
             app:layout_constraintEnd_toEndOf="@id/tilProgramLevel"
             app:layout_constraintStart_toStartOf="@id/tilProgramLevel" />
@@ -123,6 +124,7 @@
             android:id="@+id/spinnerPattern"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:background="@android:color/transparent"
             app:layout_constraintBottom_toBottomOf="@id/tilPattern"
             app:layout_constraintEnd_toEndOf="@id/tilPattern"
             app:layout_constraintStart_toStartOf="@id/tilPattern" />
@@ -162,6 +164,7 @@
             android:id="@+id/spinnerSpecialisation"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:background="@android:color/transparent"
             app:layout_constraintBottom_toBottomOf="@id/tilSpecialization"
             app:layout_constraintEnd_toEndOf="@id/tilSpecialization"
             app:layout_constraintStart_toStartOf="@id/tilSpecialization" />
