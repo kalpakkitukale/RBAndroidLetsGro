@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ramanbyte.databinding.CardChapterBinding
 import com.ramanbyte.emla.models.ChaptersModel
 import com.ramanbyte.emla.view_model.ChaptersViewModel
+import com.ramanbyte.utilities.AppLog
 
 class ChaptersListAdapter(private val chaptersViewModel: ChaptersViewModel) :
     PagedListAdapter<ChaptersModel, ChaptersListAdapter.ChaptersListViewHolder>(DIFF_CALLBACK) {

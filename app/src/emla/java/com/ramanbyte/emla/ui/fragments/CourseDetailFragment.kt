@@ -162,6 +162,7 @@ class CourseDetailFragment : BaseFragment<FragmentCourseDetailBinding, CoursesDe
 
         viewPagerAdapter?.addFragmentView(CourseSyllabusFragment.getInstance(), "")
         viewPagerAdapter?.addFragmentView(ChaptersListFragment(), "")
+        AppLog.debugLog("summativeAssessmentStatus ------------------ ${it.summativeAssessmentStatus}")
         if (!it.summativeAssessmentStatus.isNullOrEmpty())
             viewPagerAdapter?.addFragmentView(CourseResultFragment.getInstance(), "")
 
