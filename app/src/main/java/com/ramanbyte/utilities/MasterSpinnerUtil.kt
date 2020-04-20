@@ -28,6 +28,8 @@ class MasterSpinnerUtil(
 
     var selectedItemId = 0
     var selectedItemPosition = 0
+    var initialSelection: Any = 0
+    var isSelectionWithIndex: Boolean = true
 
     private fun getDefaultSpinnerModel() = SpinnerModel().apply {
 
@@ -47,13 +49,15 @@ class MasterSpinnerUtil(
         this.spinner = spinner
         this.noSelectionItemName = noSelectionItemName
         this.defaultSelectAction = defaultSelectAction
+        this.initialSelection = initialSelection
+        this.isSelectionWithIndex
 
         setupSpinnerAdapter(spinner, arrayListOf<SpinnerModel>().apply {
 
             if (addDefaultSelection)
                 add(getDefaultSpinnerModel())
 
-        }, 0)
+        }, initialSelection, isSelectionWithIndex)
 
         spinnerItemListLiveData.observe(lifeCycleOwner, Observer { spinnerList ->
 
@@ -66,8 +70,6 @@ class MasterSpinnerUtil(
 
                 setupSpinnerAdapter(spinner, newList, initialSelection, isSelectionWithIndex)
             }
-
-
         })
     }
 

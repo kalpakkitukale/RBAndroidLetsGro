@@ -301,6 +301,23 @@ class ObservableValidator<T : Observable>(
         }
     }
 
+    fun updateSpinnerSelection(newSpinnerSelection: Int, field: String, newMessage: String) {
+
+        val bindingField: Field = bindingResource.getDeclaredField(field)
+        bindingField.isAccessible = true
+        val propertyId: Int = bindingField.getInt(null)
+
+        val index =
+            rules[propertyId]?.indexOfFirst { it.rule == ValidationFlags.FIELD_SPINNER_SELECTION }
+
+        if (index != null) {
+            rules[propertyId]?.get(index)?.apply {
+                spinnerSelection = newSpinnerSelection
+                message = newMessage
+            }
+        }
+    }
+
     //Yep logszz
     fun logRules(propertyId: Int) {
         rules[propertyId]?.forEach {
@@ -617,6 +634,11 @@ class ObservableValidator<T : Observable>(
                 } else {
                     //validationRule.spinnerSelection = 1
                 }
+            } else if (value == -1) {
+                validations[validationRule.propertyId].also {
+                    it?.value = validationRule.message
+                }
+                return false
             }
         }
 

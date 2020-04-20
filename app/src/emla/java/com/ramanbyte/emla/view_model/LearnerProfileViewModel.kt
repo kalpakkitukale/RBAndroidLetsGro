@@ -67,6 +67,8 @@ class LearnerProfileViewModel(private val mContext: Context) : BaseViewModel(mCo
     var isPledgeConfirm: MutableLiveData<Boolean?> = MutableLiveData(null)
     val navigateToCoursePage = MutableLiveData<Boolean?>(null)
 
+    var isCityAvailable = true
+
     fun getProfile() {
 
         CoroutineUtils.main {
@@ -94,7 +96,7 @@ class LearnerProfileViewModel(private val mContext: Context) : BaseViewModel(mCo
                     View.GONE,
                     View.VISIBLE,
                     View.GONE,
-                    BindingUtils.string(R.string.unable_to_fetch_dependencie),
+                    BindingUtils.string(R.string.no_profile_data_found),
                     View.GONE
                 )
             } catch (e: NoInternetException) {
@@ -196,15 +198,28 @@ class LearnerProfileViewModel(private val mContext: Context) : BaseViewModel(mCo
                     spinnerSelectPosition = -1
                 )
 
+                /*   addRule(
+                       keyCity,
+                       ValidationFlags.FIELD_SPINNER_SELECTION,
+                       BindingUtils.string(
+                           R.string.dynamic_required,
+                           BindingUtils.string(
+                               R.string.city
+                           )
+                       ),
+                       spinnerSelectPosition = -1
+                   )*/
+
                 addRule(
                     keyCity,
-                    ValidationFlags.FIELD_REQUIRED,
+                    ValidationFlags.FIELD_SPINNER_SELECTION,
                     BindingUtils.string(
                         R.string.dynamic_required,
                         BindingUtils.string(
                             R.string.city
                         )
-                    )
+                    ),
+                    spinnerSelectPosition = -1
                 )
             }
 
@@ -296,7 +311,7 @@ class LearnerProfileViewModel(private val mContext: Context) : BaseViewModel(mCo
                 val countryList = registrationRepository.getCountries()
 
                 val countryModelLst =
-                    countryList?.firstOrNull { it?.country_name?.toLowerCase()?.contains("india")  ==  true}
+                    countryList?.firstOrNull { it?.country_name?.toLowerCase()?.contains("india") == true }
 
                 statesListLiveData.postValue(
                     registrationRepository.getStates(
@@ -542,7 +557,7 @@ class LearnerProfileViewModel(private val mContext: Context) : BaseViewModel(mCo
         /*view.findNavController()
             .navigate(R.id.action_personalDetailFragment_to_educationDetailFragment)*/
 
-        if (personalDetailsDataValidator?.validateAll() == true)
+        if (personalDetailsDataValidator?.validateAll() == true && isCityAvailable)
             goToNextPageLiveData.value = true
     }
 
