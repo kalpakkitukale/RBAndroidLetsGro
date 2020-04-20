@@ -2,7 +2,6 @@ package com.ramanbyte.emla.ui.fragments
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -37,7 +36,6 @@ class CourseDetailFragment : BaseFragment<FragmentCourseDetailBinding, CoursesDe
     override fun layoutId(): Int = R.layout.fragment_course_detail
 
     override fun initiate() {
-        setHasOptionsMenu(true)
         ProgressLoader(context!!, viewModel)
 
         arguments?.apply {
@@ -74,15 +72,15 @@ class CourseDetailFragment : BaseFragment<FragmentCourseDetailBinding, CoursesDe
 
             courseSyllabusModelLiveData.observe(this@CourseDetailFragment, Observer {
 
-                Handler().postDelayed(Runnable {
+                AppLog.debugLog("courseSyllabusModelLiveData called ------- ")
+                if (menu != null) {
                     if (it != null && !it.summativeAssessmentStatus.isNullOrEmpty()) {
                         menu?.findItem(R.id.view_certificate)?.isVisible =
                             it.summativeAssessmentStatus.equals("true", true)
                     } else {
                         menu?.findItem(R.id.view_certificate)?.isVisible = false
                     }
-                }, 500)
-
+                }
             })
 
             viewModel.courseSyllabusModelLiveData.observe(this@CourseDetailFragment, Observer {
@@ -114,8 +112,9 @@ class CourseDetailFragment : BaseFragment<FragmentCourseDetailBinding, CoursesDe
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
 
         inflater.inflate(R.menu.menu_certificate, menu)
-        super.onCreateOptionsMenu(menu, inflater)
         this.menu = menu
+        super.onCreateOptionsMenu(menu, inflater)
+
 
     }
 
