@@ -17,7 +17,7 @@ import com.ramanbyte.utilities.*
  * A simple [Fragment] subclass.
  */
 class ChaptersListFragment :
-    BaseParentFragment<FragmentChaptersListBinding, ChaptersViewModel, CoursesDetailViewModel>() {
+    BaseParentFragment<FragmentChaptersListBinding, ChaptersViewModel, CoursesDetailViewModel>(hasOptionsMenu = false) {
 
     override val viewModelClass: Class<ChaptersViewModel> = ChaptersViewModel::class.java
 

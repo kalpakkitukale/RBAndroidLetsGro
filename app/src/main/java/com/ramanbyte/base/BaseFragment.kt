@@ -19,7 +19,8 @@ import org.kodein.di.generic.instance
 abstract class BaseFragment<LayoutBinding : ViewDataBinding, VM : ViewModel>(
     private val isActivityParent: Boolean = false,
     private val useParent: Boolean = false,
-    private val isNestedGraph: Boolean = false
+    private val isNestedGraph: Boolean = false,
+    private val hasOptionsMenu: Boolean = true
 ) : Fragment(),
     KodeinAware {
 
@@ -47,7 +48,7 @@ abstract class BaseFragment<LayoutBinding : ViewDataBinding, VM : ViewModel>(
 
         //  context ?: return layoutBinding.root
 
-        setHasOptionsMenu(true)
+        setHasOptionsMenu(hasOptionsMenu)
 
         subscribeUi()
 

@@ -18,7 +18,7 @@ import com.ramanbyte.utilities.*
  * A simple [Fragment] subclass.
  */
 class CourseSyllabusFragment :
-    BaseFragment<FragmentCourseSyllabusBinding, CoursesDetailViewModel>(useParent = true) {
+    BaseFragment<FragmentCourseSyllabusBinding, CoursesDetailViewModel>(useParent = true, hasOptionsMenu = false) {
 
     private var mContext: Context? = null
 

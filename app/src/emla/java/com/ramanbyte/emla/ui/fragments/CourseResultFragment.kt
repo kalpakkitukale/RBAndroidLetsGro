@@ -13,7 +13,10 @@ import com.ramanbyte.utilities.ProgressLoader
 import com.ramanbyte.utilities.skipTrailingZeroes
 
 class CourseResultFragment :
-    BaseFragment<FragmentCourseResultBinding, CoursesDetailViewModel>(false, true) {
+    BaseFragment<FragmentCourseResultBinding, CoursesDetailViewModel>(
+        useParent = true,
+        hasOptionsMenu = false
+    ) {
 
     private var mContext: Context? = null
     private var maxScoreCourseModel = CourseResultModel()

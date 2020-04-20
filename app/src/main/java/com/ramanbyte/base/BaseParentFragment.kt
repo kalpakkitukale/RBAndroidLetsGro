@@ -7,8 +7,9 @@ import androidx.lifecycle.ViewModelProvider
 abstract class BaseParentFragment<LayoutBinding : ViewDataBinding, VM : ViewModel, ParentVM : BaseViewModel>(
     isActivityParent: Boolean = false,
     useParent: Boolean = false,
-    private val isNestedGraph: Boolean = false
-) : BaseFragment<LayoutBinding, VM>(isActivityParent, useParent, isNestedGraph) {
+    private val isNestedGraph: Boolean = false,
+    private val hasOptionsMenu: Boolean = true
+) : BaseFragment<LayoutBinding, VM>(isActivityParent, useParent, isNestedGraph, hasOptionsMenu) {
 
     lateinit var parentViewModel: ParentVM
 
