@@ -48,6 +48,7 @@ class ContentRepository(mContext: Context) : BaseRepository(mContext) {
                     mediaType = mediaInfoModel.mediaType
                     expirationDate = mediaInfoModel.expirationDate
                     contentLink = mediaInfoModel.contentLink
+                    requestId = mediaInfoModel.requestId
                     /*  createdDateTime = mediaInfoModel.createdDateTime
                       modifiedDateTime = mediaInfoModel.modifiedDateTime*/
                 }).toLong()
