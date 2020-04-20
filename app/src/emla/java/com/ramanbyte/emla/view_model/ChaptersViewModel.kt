@@ -98,7 +98,16 @@ class ChaptersViewModel(mContext: Context) : BaseViewModel(mContext) {
             showValidationMessage.value = BindingUtils.string(R.string.clear_exam)
         } else {
 
-            if (courseModel?.summativeaAtemptCount!! < courseSyllabusModel?.totalSummativeCount!!) {
+            buttonView.findNavController()
+                .navigate(
+                    R.id.action_courseDetailFragment_to_preAssessmentTestFragment,
+                    Bundle().apply {
+                        putInt(keyTestType, KEY_QUIZ_TYPE_SUMMATIVE)
+                        putParcelable(KEY_CHAPTER_MODEL, ChaptersModel())
+                        putParcelable(KEY_COURSE_MODEL, courseModel)
+                    })
+
+            /*if (courseModel?.summativeaAtemptCount!! < courseSyllabusModel?.totalSummativeCount!!) {
                 buttonView.findNavController()
                     .navigate(
                         R.id.action_courseDetailFragment_to_preAssessmentTestFragment,
@@ -110,8 +119,7 @@ class ChaptersViewModel(mContext: Context) : BaseViewModel(mContext) {
 
             } else {
                 showValidationMessage.value = BindingUtils.string(R.string.lost_attempt_message)
-            }
-
+            }*/
         }
     }
 
