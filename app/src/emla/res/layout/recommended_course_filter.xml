@@ -60,7 +60,7 @@
                 android:layout_marginTop="@dimen/dp_10"
                 android:drawableEnd="@drawable/ic_arrow_down_gray"
                 android:drawablePadding="@dimen/dp_10"
-                android:hint="@string/program"
+                android:hint="@string/program_level"
                 android:onClick="@{()->spinnerProgram.performClick()}"
                 android:textSize="@dimen/sp_14"
                 android:text="@{courseViewModel.programName}"

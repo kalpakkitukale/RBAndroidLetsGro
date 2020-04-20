@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "567617559139",
+    "firebase_url": "https://lets-grow-emarket.firebaseio.com",
+    "project_id": "lets-grow-emarket",
+    "storage_bucket": "lets-grow-emarket.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:567617559139:android:664f0fa35bdeab17ca3656",
+        "android_client_info": {
+          "package_name": "com.ramanbyte.emla"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "567617559139-r3s8rpch82l3gh4dlg0gkha3iejgn42d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBDPC31RhRE3R6nJHmKD-6OrY6Ip5sdPCQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "567617559139-r3s8rpch82l3gh4dlg0gkha3iejgn42d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
