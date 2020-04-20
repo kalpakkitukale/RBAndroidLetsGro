@@ -110,6 +110,7 @@ class ChangePasswordViewModel(var mContext: Context) : BaseViewModel(mContext) {
         CoroutineUtils.main {
             if (changeValidator.validateAll()) {
                 try {
+                    isLoaderShowingLiveData.postValue(true)
                     changePasswordModelLiveData.value?.userId = userData?.userId!!
                     val response =
                         masterRepository.changePassword(changePasswordModelLiveData.value!!)
@@ -126,11 +127,11 @@ class ChangePasswordViewModel(var mContext: Context) : BaseViewModel(mContext) {
                         "",
                         {})
 
-
+                    isLoaderShowingLiveData.postValue(false)
                 } catch (e: ApiException) {
                     e.printStackTrace()
                     AppLog.errorLog(e.message, e)
-
+                    isLoaderShowingLiveData.postValue(false)
                     setAlertDialogResourceModelMutableLiveData(
                         e.message.toString(),
                         BindingUtils.drawable(
@@ -145,6 +146,7 @@ class ChangePasswordViewModel(var mContext: Context) : BaseViewModel(mContext) {
                 } catch (e: NoInternetException) {
                     e.printStackTrace()
                     AppLog.errorLog(e.message, e)
+                    isLoaderShowingLiveData.postValue(false)
                     setAlertDialogResourceModelMutableLiveData(
                         BindingUtils.string(R.string.no_internet_message),
                         BindingUtils.drawable(R.drawable.ic_no_internet)!!,
@@ -161,6 +163,7 @@ class ChangePasswordViewModel(var mContext: Context) : BaseViewModel(mContext) {
                 } catch (e: NoDataException) {
                     e.printStackTrace()
                     AppLog.errorLog(e.message, e)
+                    isLoaderShowingLiveData.postValue(false)
                 }
             }
         }
