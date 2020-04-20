@@ -39,5 +39,7 @@
     <string name="notifications_channel_name">Notifications</string>
     <string name="notifications_channel_no_sound">No sound</string>
     <string name="notifications_admin_channel_description">Notifications sent from the app admin</string>
+    <string name="error_occured_while_getting_profile">Some error ocurred while getting your profile. Try agaon after sometime.</string>
+    <string name="unable_to_fetch_dependencie">Unable to fetch some depdendencies. Kindly contact support!</string>
 
 </resources>
