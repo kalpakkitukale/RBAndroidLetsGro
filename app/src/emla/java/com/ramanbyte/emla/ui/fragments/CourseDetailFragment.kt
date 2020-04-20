@@ -2,6 +2,7 @@ package com.ramanbyte.emla.ui.fragments
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -71,16 +72,17 @@ class CourseDetailFragment : BaseFragment<FragmentCourseDetailBinding, CoursesDe
             getCoursesSyllabus()
 
             courseSyllabusModelLiveData.observe(this@CourseDetailFragment, Observer {
-
-                AppLog.debugLog("courseSyllabusModelLiveData called ------- ")
-                if (menu != null) {
-                    if (it != null && !it.summativeAssessmentStatus.isNullOrEmpty()) {
-                        menu?.findItem(R.id.view_certificate)?.isVisible =
-                            it.summativeAssessmentStatus.equals("true", true)
-                    } else {
-                        menu?.findItem(R.id.view_certificate)?.isVisible = false
+                Handler().postDelayed(Runnable {
+                    AppLog.debugLog("courseSyllabusModelLiveData called ------- ")
+                    if (menu != null) {
+                        if (it != null && !it.summativeAssessmentStatus.isNullOrEmpty()) {
+                            menu?.findItem(R.id.view_certificate)?.isVisible =
+                                it.summativeAssessmentStatus.equals("true", true)
+                        } else {
+                            menu?.findItem(R.id.view_certificate)?.isVisible = false
+                        }
                     }
-                }
+                }, 500)
             })
 
             viewModel.courseSyllabusModelLiveData.observe(this@CourseDetailFragment, Observer {
@@ -165,7 +167,7 @@ class CourseDetailFragment : BaseFragment<FragmentCourseDetailBinding, CoursesDe
         viewPagerAdapter?.addFragmentView(ChaptersListFragment(), "")
         AppLog.debugLog("summativeAssessmentStatus ------------------ ${it.summativeAssessmentStatus}")
         if (!it.summativeAssessmentStatus.isNullOrEmpty())
-            viewPagerAdapter?.addFragmentView(CourseResultFragment.getInstance(), "")
+            viewPagerAdapter?.addFragmentView(CourseResultFragment(), "")
 
         viewPagerCourse.adapter = viewPagerAdapter
         tabLayoutCourse.apply {
