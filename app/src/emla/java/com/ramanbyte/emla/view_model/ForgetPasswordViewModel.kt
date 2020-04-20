@@ -55,6 +55,7 @@ class ForgetPasswordViewModel(var mContext: Context) : BaseViewModel(mContext) {
 
         CoroutineUtils.main {
             try {
+                isLoaderShowingLiveData.postValue(true)
                 val data = masterRepository.forgetPassword(forgotPasswordModelLiveData.value!!)
 
                 isAlertDialogShown.postValue(true)
@@ -68,11 +69,11 @@ class ForgetPasswordViewModel(var mContext: Context) : BaseViewModel(mContext) {
                     },
                     "",
                     {})
-
+                isLoaderShowingLiveData.postValue(false)
             } catch (e: ApiException) {
                 e.printStackTrace()
                 AppLog.errorLog(e.message, e)
-
+                isLoaderShowingLiveData.postValue(false)
                 setAlertDialogResourceModelMutableLiveData(
                     e.message.toString(),
                     BindingUtils.drawable(
@@ -87,6 +88,7 @@ class ForgetPasswordViewModel(var mContext: Context) : BaseViewModel(mContext) {
             } catch (e: NoInternetException) {
                 e.printStackTrace()
                 AppLog.errorLog(e.message, e)
+                isLoaderShowingLiveData.postValue(false)
 
                 setAlertDialogResourceModelMutableLiveData(
                     BindingUtils.string(R.string.no_internet_message),
@@ -103,6 +105,7 @@ class ForgetPasswordViewModel(var mContext: Context) : BaseViewModel(mContext) {
                 isAlertDialogShown.postValue(true)
             } catch (e: NoDataException) {
                 e.printStackTrace()
+                isLoaderShowingLiveData.postValue(false)
                 AppLog.errorLog(e.message, e)
             }
         }
