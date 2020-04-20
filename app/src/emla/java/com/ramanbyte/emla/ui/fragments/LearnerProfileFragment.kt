@@ -22,6 +22,7 @@ import com.ramanbyte.databinding.PledgeDialogBinding
 import com.ramanbyte.emla.adapters.ViewPagerAdapter
 import com.ramanbyte.emla.view_model.LearnerProfileViewModel
 import com.ramanbyte.utilities.*
+import org.joda.time.DateTime
 import java.util.*
 
 /**
@@ -69,6 +70,9 @@ class LearnerProfileFragment :
 
                     if (state != 0)
                         getCities(state ?: 0)
+
+                    if (city != 0)
+                        isCityAvailable = true
 
                     profileImageUrl.value =
                         AppS3Client.createInstance(context!!)
@@ -177,6 +181,7 @@ class LearnerProfileFragment :
             month,
             day
         )
+        datePickerDialog.datePicker.maxDate = DateTime.now().millis
         datePickerDialog.show()
     }
 

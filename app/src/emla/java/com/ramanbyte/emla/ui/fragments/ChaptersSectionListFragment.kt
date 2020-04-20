@@ -1,7 +1,9 @@
 package com.ramanbyte.emla.ui.fragments
 
+import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseFragment
 import com.ramanbyte.databinding.FragmentChaptersSectionListBinding
@@ -106,5 +108,16 @@ class ChaptersSectionListFragment :
             })
         }
 
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                findNavController().navigateUp()
+                true
+            }
+
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 }

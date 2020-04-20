@@ -65,20 +65,25 @@ class EducationDetailFragment :
                             //programLevel = SELECT
                             layoutBinding.etProgramLevel.setText(SELECT)
                         }
-                    })
+                    }, initialSelection = viewModel?.registrationModelLiveData?.value?.state ?: 0)
 
                 }
 
             patternsSpinnerUtil = MasterSpinnerUtil(context!!, this@EducationDetailFragment).apply {
 
-                setup(spinnerPattern, defaultSelectAction = {
-                    StaticMethodUtilitiesKtx.hideSpinnerDropDown(spinnerPattern)
+                setup(
+                    spinnerPattern,
+                    defaultSelectAction = {
+                        StaticMethodUtilitiesKtx.hideSpinnerDropDown(spinnerPattern)
 
-                    viewModel.registrationModelLiveData?.value?.apply {
-                        patternId = 0
-                        layoutBinding.etPattern.setText(SELECT)
-                    }
-                })
+                        viewModel.registrationModelLiveData?.value?.apply {
+                            patternId = 0
+                            layoutBinding.etPattern.setText(SELECT)
+                        }
+                    },
+                    initialSelection = viewModel.registrationModelLiveData?.value?.patternId ?: 0,
+                    isSelectionWithIndex = true
+                )
 
             }
 
@@ -92,7 +97,7 @@ class EducationDetailFragment :
                             specializationId = 0
                             layoutBinding.etSpecialization.setText(SELECT)
                         }
-                    })
+                    }, initialSelection = viewModel?.registrationModelLiveData?.value?.state ?: 0)
 
                 }
         }
@@ -157,6 +162,9 @@ class EducationDetailFragment :
 //                                            pattern = itemName ?: ""
                                             layoutBinding.etPattern.setText(itemName ?: "")
                                         }
+                                    }
+                                    if (registrationModelLiveData?.value?.patternId == id) {
+                                        registrationModelLiveData?.value?.pattern = itemName ?: ""
                                     }
                                 }
                             }.toCollection(arrayListOf())

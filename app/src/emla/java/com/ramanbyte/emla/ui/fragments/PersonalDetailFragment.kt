@@ -81,7 +81,7 @@ class PersonalDetailFragment :
                 state = 0
                 layoutBinding.etState.setText(SELECT)
             }
-        })
+        }, initialSelection = viewModel?.registrationModelLiveData?.value?.state ?: 0)
 
         citiesMasterSpinnerUtil = MasterSpinnerUtil(context!!, this@PersonalDetailFragment).apply {
             setup(layoutBinding.actvCity)
@@ -156,8 +156,15 @@ class PersonalDetailFragment :
 //                                    cityName = itemName ?: ""
                                         isSettingCity = true
                                         cityName = itemName ?: ""
-                                        layoutBinding.etCity.setText(itemName)
+                                        layoutBinding.etCity.apply {
+                                            setText(itemName)
+                                        }
+                                        layoutBinding?.tilCity?.apply {
+                                            error = ""
+                                            isErrorEnabled = false
+                                        }
                                     }
+                                    isCityAvailable = true
                                 }
                             }
 
@@ -171,6 +178,41 @@ class PersonalDetailFragment :
                                 actvCity.dismissDropDown()
 
                             actvCity.showDropDown()
+
+                            if (query.isEmpty()) {
+
+                                personalDetailsDataValidator?.updateSpinnerSelection(
+                                    -1, keyCity, BindingUtils.string(
+                                        R.string.dynamic_required,
+                                        BindingUtils.string(
+                                            R.string.city
+                                        )
+                                    )
+                                )
+
+                                registrationModelLiveData?.value?.city = -1
+                            }
+
+                            layoutBinding?.actvCity.setOnFocusChangeListener { view, isFocussed ->
+                                if (isFocussed) {
+                                    if (actvCity.isShown)
+                                        actvCity.dismissDropDown()
+
+                                    actvCity.showDropDown()
+                                }
+                            }
+                        } else {
+                            if (actvCity.isShown)
+                                actvCity.dismissDropDown()
+
+                            if (query.isNotEmpty()) {
+                                personalDetailsDataValidator?.updateSpinnerSelection(
+                                    0, keyCity, BindingUtils.string(
+                                        R.string.invalid_city_selected
+                                    )
+                                )
+                                registrationModelLiveData?.value?.city = 0
+                            }
                         }
                     }
                 } else {

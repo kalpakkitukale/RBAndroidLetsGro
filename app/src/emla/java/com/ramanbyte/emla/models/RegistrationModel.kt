@@ -192,6 +192,12 @@ class RegistrationModel : BaseObservable() {
 
     var stateName = ""
     var educationLevlName = ""
+    @Bindable
     var pattern = ""
+        set(value) {
+            field = value
+            notifyPropertyChanged(BR.pattern)
+        }
+
     var specializationName = ""
 }
