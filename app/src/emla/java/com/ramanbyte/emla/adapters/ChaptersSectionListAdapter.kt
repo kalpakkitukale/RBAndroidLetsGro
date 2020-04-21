@@ -72,7 +72,7 @@ class ChaptersSectionListAdapter(private val chaptersSectionViewModel: ChaptersS
                                 it.mediaStatus != -1
                             }
 
-                            if ((downloadedList.isNotEmpty() && downloadedList.size == sectionsModel?.contentCount) || sectionsModel?.contentCount == 0) {
+                            if ((downloadedList.isNotEmpty() && downloadedList.size >= sectionsModel?.contentCount ?: -1) || sectionsModel?.contentCount == 0) {
                                 sectionsModel?.downloadVisibility = View.GONE
                             } else {
                                 sectionsModel?.downloadVisibility = View.VISIBLE

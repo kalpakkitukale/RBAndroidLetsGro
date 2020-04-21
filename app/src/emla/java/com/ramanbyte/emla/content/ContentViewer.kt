@@ -251,7 +251,7 @@ class ContentViewer(
 
         val mimeType = FileUtils.getMimeType(contentModel.content_link)
 
-        val requestId = Math.random().toString()
+        val requestId = StaticMethodUtilitiesKtx.getRandomString.invoke()
 
         mediaInfoModel.apply {
             mediaId = contentModel.id
@@ -287,7 +287,13 @@ class ContentViewer(
 
                     mediaType = KEY_MEDIA_TYPE_FILE
 
-                    FileUtils.getNewCreatedFilePath(FileUtils.getFileNameFromPath(FileUtils.getOriginalFileName(contentLink)))
+                    FileUtils.getNewCreatedFilePath(
+                        FileUtils.getFileNameFromPath(
+                            FileUtils.getOriginalFileName(
+                                contentLink
+                            )
+                        )
+                    )
                 }
             }
 

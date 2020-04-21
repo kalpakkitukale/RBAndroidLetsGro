@@ -275,4 +275,17 @@ object StaticMethodUtilitiesKtx {
         }
         return "txt"
     }
+
+    val getRandomString = {
+
+        val alphaNumeric = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz"
+        var count = 20
+        val builder = StringBuilder()
+
+        while (count-- !== 0) {
+            val character = (Random().nextInt(alphaNumeric.length))
+            builder.append(alphaNumeric[character])
+        }
+        builder.toString()
+    }
 }

@@ -91,7 +91,7 @@ class ChaptersListAdapter(private val chaptersViewModel: ChaptersViewModel) :
                     )))
 
                 this@ChaptersListAdapter.chaptersViewModel?.getMediaInfoByChapterId(
-                    chapterModel?.chapterId ?: 0
+                    chaptersModel?.chapterId ?: 0
                 )
                     ?.observe(this@ChaptersListViewHolder, Observer { list ->
 
@@ -104,7 +104,7 @@ class ChaptersListAdapter(private val chaptersViewModel: ChaptersViewModel) :
                         }
 
                         chaptersModel?.downloadVisibility =
-                            if ((list.isNotEmpty() && downloadedList.size == perSectionTotalCount) || perSectionTotalCount == 0) { // chapterModel.totalSectionCount //&& downloadedList.size == chapterModel.totalSectionCount
+                            if ((list.isNotEmpty() && downloadedList.size >= perSectionTotalCount ?: -1) || perSectionTotalCount == 0) { // chapterModel.totalSectionCount //&& downloadedList.size == chapterModel.totalSectionCount
                                 View.GONE
                             } else {
                                 View.VISIBLE

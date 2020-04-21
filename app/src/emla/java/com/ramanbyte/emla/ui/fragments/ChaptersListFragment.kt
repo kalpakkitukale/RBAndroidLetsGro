@@ -17,7 +17,9 @@ import com.ramanbyte.utilities.*
  * A simple [Fragment] subclass.
  */
 class ChaptersListFragment :
-    BaseParentFragment<FragmentChaptersListBinding, ChaptersViewModel, CoursesDetailViewModel>(hasOptionsMenu = false) {
+    BaseParentFragment<FragmentChaptersListBinding, ChaptersViewModel, CoursesDetailViewModel>(
+        hasOptionsMenu = false
+    ) {
 
     override val viewModelClass: Class<ChaptersViewModel> = ChaptersViewModel::class.java
 
@@ -128,6 +130,8 @@ class ChaptersListFragment :
                                     courseName = viewModel.courseModel?.courseName ?: ""
                                     chapterName =
                                         viewModel.downloadRequestedChapter?.chapterName ?: ""
+                                    sectionId = contentModel.sectionId
+                                    sectionName = contentModel.sectionName
                                 })
                         }
                     }

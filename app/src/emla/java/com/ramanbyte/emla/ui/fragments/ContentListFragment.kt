@@ -113,6 +113,8 @@ class ContentListFragment : BaseFragment<FragmentContentListBinding, ContentView
                                 courseId = viewModel.courseId ?: 0
                                 courseName = viewModel.courseName ?: ""
                                 chapterName = viewModel.chapterName ?: ""
+                                sectionName = viewModel.sectionName!!
+                                sectionId = viewModel.sectionId
                             })
 
                         downloadLiveData.value = null

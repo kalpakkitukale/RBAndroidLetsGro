@@ -9,17 +9,17 @@ import com.ramanbyte.emla.models.MediaInfoModel
 @Dao
 interface MediaInfoDao : BaseDao<MediaInfoModel> {
 
-    @Query("SELECT * FROM MediaInfoModel WHERE mediaId = :mediaId")
-    fun getMediaInfo(mediaId: Int): MediaInfoModel?
+    @Query("SELECT * FROM MediaInfoModel WHERE mediaId = :mediaId AND userId = :userId")
+    fun getMediaInfo(mediaId: Int, userId: Int): MediaInfoModel?
 
-    @Query("SELECT * FROM MediaInfoModel WHERE mediaId = :mediaId")
-    fun getMediaInfoLiveData(mediaId: Int): LiveData<MediaInfoModel?>
+    @Query("SELECT * FROM MediaInfoModel WHERE mediaId = :mediaId AND userId = :userId")
+    fun getMediaInfoLiveData(mediaId: Int, userId: Int): LiveData<MediaInfoModel?>
 
-    @Query("SELECT * FROM MediaInfoModel WHERE chapterId = :topicId")
-    fun getMediaInfoChapterId(topicId: Int): LiveData<List<MediaInfoModel>>
+    @Query("SELECT * FROM MediaInfoModel WHERE chapterId = :topicId AND userId = :userId")
+    fun getMediaInfoChapterId(topicId: Int, userId: Int): LiveData<List<MediaInfoModel>>
 
-    @Query("SELECT * FROM MediaInfoModel WHERE sectionId = :divisionId")
-    fun getMediaInfoBySectionId(divisionId: Int): LiveData<List<MediaInfoModel>>
+    @Query("SELECT * FROM MediaInfoModel WHERE sectionId = :divisionId AND userId = :userId")
+    fun getMediaInfoBySectionId(divisionId: Int, userId: Int): LiveData<List<MediaInfoModel>>
 
     @Query("SELECT * FROM MediaInfoModel WHERE syncStatus = 0")
     fun getUnsynced(): List<MediaInfoModel>
@@ -27,8 +27,8 @@ interface MediaInfoDao : BaseDao<MediaInfoModel> {
     @Query("UPDATE MediaInfoModel SET mediaStatus = :mediaStatus WHERE requestId = :downloadId")
     fun updateMediaStatusByDownloadId(mediaStatus: Int, downloadId: String)
 
-    @Query("SELECT * FROM MediaInfoModel WHERE mediaStatus <>:mediaStatus")  // WHERE mediaStatus = 3
-    fun getMediaInfoAll(mediaStatus: Int): List<MediaInfoModel>
+    @Query("SELECT * FROM MediaInfoModel WHERE mediaStatus <>:mediaStatus AND userId = :userId")  // WHERE mediaStatus = 3
+    fun getMediaInfoAll(mediaStatus: Int, userId: Int): List<MediaInfoModel>
 
     @Query("SELECT COUNT(*) FROM MediaInfoModel WHERE mediaId = :mediaId")
     fun getCountMediaInfo(mediaId: Int): Int

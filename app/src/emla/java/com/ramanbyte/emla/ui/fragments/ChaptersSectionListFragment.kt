@@ -95,6 +95,8 @@ class ChaptersSectionListFragment :
                                     courseName = viewModel.coursesModel?.courseName ?: ""
                                     chapterName =
                                         viewModel.chaptersModel?.chapterName ?: ""
+                                    sectionName = viewModel.downloadRequestedSection?.section_Name ?: ""
+                                    sectionId = viewModel.downloadRequestedSection?.id ?: 0
                                 })
                         }
                     }

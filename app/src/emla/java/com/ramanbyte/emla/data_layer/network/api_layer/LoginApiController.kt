@@ -27,4 +27,10 @@ interface LoginApiController {
     @PUT("UpdateStatus")
     suspend fun updatePledgeStatus(@Body pledgeStatusRequest: PledgeStatusRequest): Response<Int>
 
+    @POST("InsertLogout/{userId}")
+    suspend fun insertLogout(@Body manageUserDeviceModel: ManageUserDeviceModel, @Path("userId") userId: Int): Response<Int>
+
+    @POST("UpdateLogout/{userId}")
+    suspend fun updateLogout(@Body manageUserDeviceModel: ManageUserDeviceModel, @Path("userId") userId: Int): Response<Int>
+
 }

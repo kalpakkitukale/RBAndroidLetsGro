@@ -73,7 +73,7 @@ class RecommendedCourseFilterBottomSheet :
                     setup(spinnerProgram, defaultSelectAction = {
                         viewModel.apply {
                             tempFilterModel.programId = 0
-                            programName.set(BindingUtils.string(R.string.program))
+                            programName.set(BindingUtils.string(R.string.program_level))
                         }
                         StaticMethodUtilitiesKtx.hideSpinnerDropDown(layoutBinding.spinnerProgram)
 
@@ -191,7 +191,7 @@ class RecommendedCourseFilterBottomSheet :
                 it?.let {
                     if (it) {
                         layoutBinding.apply {
-                            programName.set(BindingUtils.string(R.string.program))
+                            programName.set(BindingUtils.string(R.string.program_level))
                             patternName.set(BindingUtils.string(R.string.pattern))
                             specializationName.set(BindingUtils.string(R.string.specialisation))
                         }
