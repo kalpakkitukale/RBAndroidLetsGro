@@ -36,6 +36,10 @@ class LoginViewModel(var mContext: Context) : BaseViewModel(mContext) {
     var userEntity = masterRepository.getCurrentUser()
     var isPledgeConfirm: MutableLiveData<Boolean?> = MutableLiveData(null)
     var navigateToNextScreen: MutableLiveData<Boolean?> = MutableLiveData(null)
+
+   init {
+       loaderMessageLiveData.set(BindingUtils.string(R.string.str_loading))
+   }
     val loginRequestValidation =
         ObservableValidator(userLoginRequestLiveData.value!!, BR::class.java).apply {
 
