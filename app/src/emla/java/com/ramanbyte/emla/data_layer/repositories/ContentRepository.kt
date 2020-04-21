@@ -8,7 +8,6 @@ import com.ramanbyte.data_layer.base.BaseRepository
 import com.ramanbyte.emla.data_layer.network.api_layer.SectionsController
 import com.ramanbyte.emla.models.ContentModel
 import com.ramanbyte.emla.models.MediaInfoModel
-import com.ramanbyte.utilities.DateUtils
 import com.ramanbyte.utilities.FileUtils
 import com.ramanbyte.utilities.KEY_MEDIA_TYPE_AUDIO
 import com.ramanbyte.utilities.KEY_MEDIA_TYPE_VIDEO
@@ -33,6 +32,9 @@ class ContentRepository(mContext: Context) : BaseRepository(mContext) {
     * */
 
     fun insertMediaInfo(mediaInfoModel: MediaInfoModel): Long {
+
+        val userId = applicationDatabase.getUserDao()?.getCurrentUser()?.userId ?: 0
+        mediaInfoModel.userId = userId
 
         applicationDatabase.getMediaInfoDao().apply {
 
@@ -59,13 +61,13 @@ class ContentRepository(mContext: Context) : BaseRepository(mContext) {
     }
 
     fun getMediaInfo(mediaId: Int): MediaInfoModel? {
-
-        return applicationDatabase.getMediaInfoDao().getMediaInfo(mediaId)
+        val userId = applicationDatabase.getUserDao()?.getCurrentUser()?.userId ?: 0
+        return applicationDatabase.getMediaInfoDao().getMediaInfo(mediaId, userId)
     }
 
     fun getMediaInfoModelLiveData(mediaId: Int): LiveData<MediaInfoModel?> {
-
-        return applicationDatabase.getMediaInfoDao().getMediaInfoLiveData(mediaId)
+        val userId = applicationDatabase.getUserDao()?.getCurrentUser()?.userId ?: 0
+        return applicationDatabase.getMediaInfoDao().getMediaInfoLiveData(mediaId, userId)
     }
 
     fun updateMediaInfo(mediaInfoModel: MediaInfoModel) {
@@ -79,20 +81,23 @@ class ContentRepository(mContext: Context) : BaseRepository(mContext) {
     }
 
     fun getMedias(): List<MediaInfoModel> {
-
-        return applicationDatabase.getMediaInfoDao().getMediaInfoAll(-1)
+        val userId = applicationDatabase.getUserDao()?.getCurrentUser()?.userId ?: 0
+        return applicationDatabase.getMediaInfoDao().getMediaInfoAll(-1, userId)
     }
 
     fun deleteMediaInfo(mediaId: Int): Int {
+        val userId = applicationDatabase.getUserDao()?.getCurrentUser()?.userId ?: 0
         return applicationDatabase.getMediaInfoDao().deleteMediaInfo(mediaId)
     }
 
     fun getMediaInfoByChapterId(chapterId: Int): LiveData<List<MediaInfoModel>> {
-        return applicationDatabase?.getMediaInfoDao()?.getMediaInfoChapterId(chapterId)
+        val userId = applicationDatabase.getUserDao()?.getCurrentUser()?.userId ?: 0
+        return applicationDatabase?.getMediaInfoDao()?.getMediaInfoChapterId(chapterId, userId)
     }
 
     fun getMediaInfoBySectionId(sectionId: Int): LiveData<List<MediaInfoModel>> {
-        return applicationDatabase?.getMediaInfoDao()?.getMediaInfoBySectionId(sectionId)
+        val userId = applicationDatabase.getUserDao()?.getCurrentUser()?.userId ?: 0
+        return applicationDatabase?.getMediaInfoDao()?.getMediaInfoBySectionId(sectionId, userId)
     }
 
     fun isMediaDownloaded(
