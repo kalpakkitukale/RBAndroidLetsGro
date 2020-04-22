@@ -281,7 +281,7 @@ class ShowQuestionFragment :
                     if (it != null) {
                         if (it.isNotEmpty()) {
                             if (quizResultModel.correct != 0) {
-
+                                isAlertDialogShown.postValue(false)
                                 val bundle = Bundle()
                                 bundle.putString(KEY_QUESTION_STATUS, it)
                                 bundle.putParcelable(KEY_QUIZ_RESULT_MODEL, quizResultModel)
@@ -302,7 +302,7 @@ class ShowQuestionFragment :
                     if (it != null) {
                         if (it.isNotEmpty()) {
                             if (quizResultModel.incorrect != 0) {
-
+                                isAlertDialogShown.postValue(false)
                                 val bundle = Bundle()
                                 bundle.putString(KEY_QUESTION_STATUS, it)
                                 bundle.putParcelable(KEY_QUIZ_RESULT_MODEL, quizResultModel)
