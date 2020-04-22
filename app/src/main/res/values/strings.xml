@@ -39,8 +39,8 @@
     <string name="notifications_channel_name">Notifications</string>
     <string name="notifications_channel_no_sound">No sound</string>
     <string name="notifications_admin_channel_description">Notifications sent from the app admin</string>
-    <string name="error_occured_while_getting_profile">Some error ocurred while getting your profile. Try agaon after sometime.</string>
-    <string name="unable_to_fetch_dependencie">Unable to fetch some depdendencies. Kindly contact support!</string>
+    <string name="error_occured_while_getting_profile">Some error occurred while getting your profile. Try again after sometime.</string>
+    <string name="unable_to_fetch_dependencie">Unable to fetch some dependencies. Kindly contact support!</string>
     <string name="no_profile_data_found">No profile data found</string>
     <string name="invalid_city_selected">Invalid city selected</string>
 

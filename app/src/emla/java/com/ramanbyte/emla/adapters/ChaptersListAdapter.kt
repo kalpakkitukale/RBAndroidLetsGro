@@ -62,14 +62,19 @@ class ChaptersListAdapter(private val chaptersViewModel: ChaptersViewModel) :
                         View.GONE
                     }
 
+                /**
+                 * @since 22 Apr 2020
+                 * @author Mansi Manakiki Mody
+                 * After discussing with Raman Sir, remove chapter lock feature from the eMarket Project.
+                 */
                 if (adapterPosition > 0) {
 
-                    val isEnabled =
-                        !(getItem(adapterPosition - 1)?.formativeAssessmentStaus.isNullOrEmpty()
+                    val isEnabled = true
+                        /*!(getItem(adapterPosition - 1)?.formativeAssessmentStaus.isNullOrEmpty()
                                 || getItem(adapterPosition - 1)?.formativeAssessmentStaus.equals(
                             "false",
                             true
-                        ))
+                        ))*/
 
                     viewDisable.visibility = if (isEnabled) {
                         View.GONE
@@ -84,8 +89,8 @@ class ChaptersListAdapter(private val chaptersViewModel: ChaptersViewModel) :
                     viewDisable.visibility = View.GONE
                 }
 
-                this@ChaptersListAdapter.chaptersViewModel?.isAllCourseSessionCompleted?.value =
-                    ((this@ChaptersListAdapter.chaptersViewModel?.isAllCourseSessionCompleted?.value == true) && (chaptersModel?.formativeAssessmentStaus.equals(
+                this@ChaptersListAdapter.chaptersViewModel.isAllCourseSessionCompleted.value =
+                    ((this@ChaptersListAdapter.chaptersViewModel.isAllCourseSessionCompleted.value == true) && (chaptersModel?.formativeAssessmentStaus.equals(
                         "true",
                         true
                     )))
