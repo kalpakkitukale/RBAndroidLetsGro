@@ -281,7 +281,7 @@ class ShowQuestionFragment :
                     if (it != null) {
                         if (it.isNotEmpty()) {
                             if (quizResultModel.correct != 0) {
-                                isAlertDialogShown.postValue(false)
+
                                 val bundle = Bundle()
                                 bundle.putString(KEY_QUESTION_STATUS, it)
                                 bundle.putParcelable(KEY_QUIZ_RESULT_MODEL, quizResultModel)
@@ -291,6 +291,9 @@ class ShowQuestionFragment :
                                 )
                                 view?.findNavController()
                                     ?.navigate(R.id.quizReviewFragment, bundle)
+
+                                dialog.dismiss()
+                                onClickDialogCorrectQuestionLiveData.value = KEY_BLANK
                             }
 
                         }
@@ -302,7 +305,7 @@ class ShowQuestionFragment :
                     if (it != null) {
                         if (it.isNotEmpty()) {
                             if (quizResultModel.incorrect != 0) {
-                                isAlertDialogShown.postValue(false)
+
                                 val bundle = Bundle()
                                 bundle.putString(KEY_QUESTION_STATUS, it)
                                 bundle.putParcelable(KEY_QUIZ_RESULT_MODEL, quizResultModel)
@@ -312,6 +315,9 @@ class ShowQuestionFragment :
                                 )
                                 view?.findNavController()
                                     ?.navigate(R.id.quizReviewFragment, bundle)
+
+                                dialog.dismiss()
+                                onClickDialogIncorrectQuestionLiveData.value = KEY_BLANK
                             }
                         }
                     }
