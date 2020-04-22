@@ -169,6 +169,7 @@ class CourseDetailFragment : BaseFragment<FragmentCourseDetailBinding, CoursesDe
         if (!it.summativeAssessmentStatus.isNullOrEmpty())
             viewPagerAdapter?.addFragmentView(CourseResultFragment(), "")
 
+        viewPagerCourse.offscreenPageLimit = 3
         viewPagerCourse.adapter = viewPagerAdapter
         tabLayoutCourse.apply {
             setupWithViewPager(viewPagerCourse)

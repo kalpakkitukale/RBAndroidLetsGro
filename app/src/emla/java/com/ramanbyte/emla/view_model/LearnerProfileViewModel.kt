@@ -77,6 +77,13 @@ class LearnerProfileViewModel(private val mContext: Context) : BaseViewModel(mCo
                 coroutineToggleLoader(BindingUtils.string(R.string.getting_patterns))
                 registrationModelLiveData?.postValue(registrationRepository.getProfile())
                 coroutineToggleLoader()
+                toggleLayoutVisibility(
+                    View.VISIBLE,
+                    View.GONE,
+                    View.GONE,
+                    BindingUtils.string(R.string.error_occured_while_getting_profile),
+                    View.GONE
+                )
             } catch (e: ApiException) {
                 e.printStackTrace()
                 AppLog.errorLog(e.message, e)

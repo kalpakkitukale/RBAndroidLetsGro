@@ -59,7 +59,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(authMod
                      /*   if (it.loggedId != KEY_Y)
                             showPledgeDialog()
                         else {*/
-                            //callWorkerToMangeUserDevice()
+                            callWorkerToMangeUserDevice()
                             startActivity(ContainerActivity.intent(this@LoginActivity))
                             finish()
                             BaseAppController.setEnterPageAnimation(this@LoginActivity)

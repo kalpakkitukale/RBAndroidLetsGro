@@ -46,7 +46,7 @@ class MangeUserDevice(val mContext: Context, workerParams: WorkerParameters) :
 
 
     override fun doWork(): Result {
-        try {
+        return try {
             setIMEINumber(mContext)
             val statusType = inputData.getInt(KEY_LOGIN_LOGOUT_STATUS, -1)
             if (statusType == 1) {
@@ -54,18 +54,18 @@ class MangeUserDevice(val mContext: Context, workerParams: WorkerParameters) :
             } else {
                 manageUserDevicesForLogOut(statusType)
             }
-            return Result.success()
+            Result.success()
         } catch (e: Exception) {
             e.printStackTrace()
             AppLog.errorLog(e.message, e)
-            return Result.failure()
+            Result.failure()
         }
     }
 
     private fun manageUserDevicesForLogIn(activeStatus: Int) {
         CoroutineUtils.main {
             try {
-                //masterRepository.insertLogout(activeStatus)
+                masterRepository.insertLogout(activeStatus)
             } catch (e: ApiException) {
                 e.printStackTrace()
                 AppLog.errorLog(e.message, e)
@@ -82,8 +82,8 @@ class MangeUserDevice(val mContext: Context, workerParams: WorkerParameters) :
     private fun manageUserDevicesForLogOut(activeStatus: Int) {
         CoroutineUtils.main {
             try {
-                //masterRepository.updateLogout(activeStatus)
-                //masterRepository.deleteUser()
+                masterRepository.updateLogout(activeStatus)
+                masterRepository.deleteUser()
             } catch (e: ApiException) {
                 e.printStackTrace()
                 AppLog.errorLog(e.message, e);

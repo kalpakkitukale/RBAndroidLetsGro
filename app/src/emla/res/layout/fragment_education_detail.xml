@@ -80,7 +80,7 @@
                 android:background="@color/colorTransparent"
                 android:drawablePadding="@dimen/dp_5"
                 android:imeOptions="actionNext"
-                android:inputType="text"
+                android:inputType="numberSigned"
                 android:lines="1"
                 android:maxLength="50"
                 android:singleLine="true"

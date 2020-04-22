@@ -45,7 +45,8 @@ class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
     var programsListMutableLiveData = MutableLiveData<List<CommonDropdownModel>>()
     var patternsListMutableLiveData = MutableLiveData<List<CommonDropdownModel>>()
     var specializationsListMutableLiveData = MutableLiveData<List<CommonDropdownModel>>()
-    var programName = ObservableField<String>().apply { set(BindingUtils.string(R.string.program)) }
+    var programName =
+        ObservableField<String>().apply { set(BindingUtils.string(R.string.program_level)) }
     var patternName = ObservableField<String>().apply { set(BindingUtils.string(R.string.pattern)) }
     var specializationName =
         ObservableField<String>().apply { set(BindingUtils.string(R.string.specialisation)) }
@@ -99,20 +100,25 @@ class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
     fun courseClick(view: View, coursesModel: CoursesModel) {
         coursesModel.let { model ->
             if (NetworkConnectivity.isConnectedToInternet()) {
-                if (model.preAssessmentStatus.equals("true", true)) {
-                    view.findNavController()
-                        .navigate(
-                            R.id.action_coursesFragment_to_courseDetailFragment,
-                            Bundle().apply {
-                                putParcelable(KEY_COURSE_MODEL, coursesModel)
-                            })
-                } else {
+                /**
+                 * @author Mansi Manakiki Mody
+                 * @since 22 April 2020
+                 * After discussing with Raman Sir No need of Pre Assessment in eMarket. User will direct redirect to course detail page
+                 */
+                /*if (model.preAssessmentStatus.equals("true", true)) {*/
+                view.findNavController()
+                    .navigate(
+                        R.id.action_coursesFragment_to_courseDetailFragment,
+                        Bundle().apply {
+                            putParcelable(KEY_COURSE_MODEL, coursesModel)
+                        })
+                /*} else {
                     val bundle = Bundle()
                     bundle.putParcelable(KEY_COURSE_MODEL, model)
                     bundle.putInt(keyTestType, KEY_QUIZ_TYPE_ASSESSMENT)
                     view.findNavController()
                         .navigate(R.id.action_coursesFragment_to_preAssessmentTestFragment, bundle)
-                }
+                }*/
             } else {
                 setAlertDialogResourceModelMutableLiveData(
                     BindingUtils.string(R.string.no_internet_message),
