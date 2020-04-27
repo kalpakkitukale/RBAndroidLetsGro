@@ -217,4 +217,9 @@ Content
     <string name="profile_updated_successfully">Profile updated successfully!</string>
     <string name="profile_update_failed">Failed to update your profile! Try again?</string>
     <string name="profile_changes_discarded">Any made changes will be discarded! Are you sure?</string>
+
+
+    <!--Recently ask questions-->
+    <string name="reply">Reply</string>
+
 </resources>
