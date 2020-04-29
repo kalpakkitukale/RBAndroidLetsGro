@@ -16,4 +16,6 @@
     <color name="textColorRegOnWhite">#e57373</color>
     <color name="colorGrayTransparent">#a6aaaaaa</color>
     <color name="approvalInTAT">#2281c2</color>
+
+    <color name="exoTransparentBlack">#66000000</color>
 </resources>

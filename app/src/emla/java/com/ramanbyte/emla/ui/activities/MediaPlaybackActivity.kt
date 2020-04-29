@@ -1,12 +1,23 @@
 package com.ramanbyte.emla.ui.activities
 
+import android.content.Context
+import android.content.pm.ActivityInfo
+import android.content.res.Configuration
+import android.media.AudioManager
 import android.net.Uri
+import android.os.Build
+import android.provider.Settings
+import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
 import android.view.WindowManager
+import androidx.annotation.RequiresApi
+import androidx.constraintlayout.widget.ConstraintSet
 import com.google.android.exoplayer2.ExoPlayerFactory
 import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.exoplayer2.source.ProgressiveMediaSource
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector
+import com.google.android.exoplayer2.ui.AspectRatioFrameLayout
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
 import com.google.android.exoplayer2.upstream.cache.CacheDataSourceFactory
 import com.google.android.exoplayer2.util.Util
@@ -15,14 +26,23 @@ import com.ramanbyte.base.BaseActivity
 import com.ramanbyte.databinding.ActivityMediaPlaybackBinding
 import com.ramanbyte.emla.base.di.authModuleDependency
 import com.ramanbyte.emla.content.ExoMediaDownloadUtil
+import com.ramanbyte.emla.view.OnSwipeTouchListener
 import com.ramanbyte.emla.view_model.MediaPlaybackViewModel
 import com.ramanbyte.utilities.AppLog
 import com.ramanbyte.utilities.BindingUtils
 import com.ramanbyte.utilities.KEY_IS_MEDIA_OFFLINE
 import com.ramanbyte.utilities.KEY_MEDIA_ID
+import kotlinx.android.synthetic.emla.activity_media_playback.*
+import kotlinx.android.synthetic.emla.exo_comment_layout.*
+import kotlinx.android.synthetic.emla.exo_playback_control_view.*
+import org.kodein.di.On
 
 class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPlaybackViewModel>(
     authModuleDependency) {
+
+    var layoutInflaterr: LayoutInflater? = null
+    var view1: View? = null
+    var constraintSet: ConstraintSet? = null
 
     override val viewModelClass: Class<MediaPlaybackViewModel> = MediaPlaybackViewModel::class.java
 
@@ -59,6 +79,83 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
 
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
+
+        layoutInflaterr = LayoutInflater.from(this)
+        view1 = layoutInflaterr?.inflate(R.layout.exo_comment_layout, null, false)
+        constraintSet = ConstraintSet()
+
+        exoBtnComment.setOnClickListener(View.OnClickListener {
+            exoBtnComment.visibility = View.INVISIBLE
+            constraintSet?.clone(mainConstraint)
+            mainConstraint?.addView(view1)
+
+            closeComment.setOnClickListener(View.OnClickListener {
+                mainConstraint?.removeView(view1)
+                constraintSet?.clone(mainConstraint)
+                normalConstrains()
+                exoBtnComment.visibility = View.VISIBLE
+            })
+
+            landscapeConstrains()
+        })
+
+        doubleTapBackward.setOnTouchListener(object : OnSwipeTouchListener(this@MediaPlaybackActivity){
+
+            override fun onDoubleTap() {
+                simpleExoPlayer?.seekTo(simpleExoPlayer!!.currentPosition - 12000)
+            }
+            override fun onSwipeTop() {
+                val audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
+                var maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
+                var currentVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC)
+                if(currentVolume < maxVolume){
+                    audioManager.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_RAISE, AudioManager.FLAG_SHOW_UI)
+                    audioManager.setStreamVolume(AudioManager.STREAM_MUSIC,currentVolume+2,0)
+                }
+            }
+
+            @RequiresApi(Build.VERSION_CODES.P)
+            override fun onSwipeBottom() {
+                val audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
+                var currentVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC)
+                var minVolume = audioManager.getStreamMinVolume(AudioManager.STREAM_MUSIC)
+                if(currentVolume > minVolume){
+                    audioManager.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_RAISE, AudioManager.FLAG_SHOW_UI)
+                    audioManager.setStreamVolume(AudioManager.STREAM_MUSIC,currentVolume-2,0)
+                }
+            }
+        })
+
+        doubleTapForward.setOnTouchListener(object : OnSwipeTouchListener(this@MediaPlaybackActivity){
+
+            override fun onDoubleTap() {
+                simpleExoPlayer?.seekTo(simpleExoPlayer!!.currentPosition + 12000)
+            }
+            override fun onSwipeTop() {
+                val curBrightnessValue = Settings.System.getInt(contentResolver, Settings.System.SCREEN_BRIGHTNESS)
+                val SysBackLightValue = curBrightnessValue + 25
+                Settings.System.putInt(contentResolver, Settings.System.SCREEN_BRIGHTNESS, SysBackLightValue)
+            }
+            @RequiresApi(Build.VERSION_CODES.P)
+            override fun onSwipeBottom() {
+                val curBrightnessValue = Settings.System.getInt(contentResolver, Settings.System.SCREEN_BRIGHTNESS)
+                val SysBackLightValue = curBrightnessValue - 25
+                Settings.System.putInt(contentResolver, Settings.System.SCREEN_BRIGHTNESS, SysBackLightValue)
+            }
+        })
+
+        exoBtnLike.setOnClickListener(View.OnClickListener {
+            Log.d("BtnEvent","Btn Like")
+
+        })
+        exoBtnDislike.setOnClickListener(View.OnClickListener {
+            Log.d("BtnEvent","Btn DisLike")
+
+        })
+        exoBtnWishlist.setOnClickListener(View.OnClickListener {
+            Log.d("BtnEvent","Btn wishlist")
+
+        })
     }
 
     override fun onStart() {
@@ -70,6 +167,9 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
                 this@MediaPlaybackActivity,
                 DefaultTrackSelector()
             )
+
+            requestedOrientation =  (ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE)
+            playerView.setResizeMode(AspectRatioFrameLayout.RESIZE_MODE_FILL)
 
             playerView.player = simpleExoPlayer
 
@@ -159,6 +259,25 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
             release()
         }
         simpleExoPlayer = null
+    }
+
+    fun landscapeConstrains(){
+        constraintSet?.connect(R.id.player_view, ConstraintSet.END, R.id.guidelineHorizontal, ConstraintSet.START, 0)
+        constraintSet?.connect(R.id.player_view, ConstraintSet.BOTTOM, R.id.mainConstraint, ConstraintSet.BOTTOM, 0)
+        constraintSet?.connect(R.id.commentLayout, ConstraintSet.START, R.id.guidelineHorizontal, ConstraintSet.END, 0)
+        constraintSet?.connect(R.id.commentLayout, ConstraintSet.END, R.id.mainConstraint, ConstraintSet.END, 0)
+        constraintSet?.connect(R.id.commentLayout, ConstraintSet.TOP, R.id.mainConstraint, ConstraintSet.TOP, 0)
+        constraintSet?.connect(R.id.commentLayout, ConstraintSet.BOTTOM, R.id.mainConstraint, ConstraintSet.BOTTOM, 0)
+        constraintSet?.applyTo(mainConstraint)
+    }
+
+    fun normalConstrains(){
+        Log.d("OnMethods","..normalConstrains")
+        constraintSet?.connect(R.id.player_view, ConstraintSet.START, R.id.mainConstraint, ConstraintSet.START, 0)
+        constraintSet?.connect(R.id.player_view, ConstraintSet.END, R.id.mainConstraint, ConstraintSet.END, 0)
+        constraintSet?.connect(R.id.player_view, ConstraintSet.TOP, R.id.mainConstraint, ConstraintSet.TOP, 0)
+        constraintSet?.connect(R.id.player_view, ConstraintSet.BOTTOM, R.id.mainConstraint, ConstraintSet.BOTTOM, 0)
+        constraintSet?.applyTo(mainConstraint)
     }
 
 }
