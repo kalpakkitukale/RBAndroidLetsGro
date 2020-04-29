@@ -128,7 +128,9 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
             }
         })
 
-        doubleTapForward.setOnTouchListener(object : OnSwipeTouchListener(this@MediaPlaybackActivity){
+        doubleTapForward.setOnTouchListener(object : OnSwi)
+
+        /*doubleTapForward.setOnTouchListener(object : OnSwipeTouchListener(this@MediaPlaybackActivity){
 
             override fun onDoubleTap() {
                 simpleExoPlayer?.seekTo(simpleExoPlayer!!.currentPosition + 12000)
@@ -144,7 +146,7 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
                 val SysBackLightValue = curBrightnessValue - 25
                 Settings.System.putInt(contentResolver, Settings.System.SCREEN_BRIGHTNESS, SysBackLightValue)
             }
-        })
+        })*/
 
         exoBtnLike.setOnClickListener(View.OnClickListener {
             Log.d("BtnEvent","Btn Like")
