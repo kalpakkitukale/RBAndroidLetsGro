@@ -35,4 +35,10 @@ interface MediaInfoDao : BaseDao<MediaInfoModel> {
 
     @Query("DELETE FROM MediaInfoModel WHERE mediaId = :mediaId")
     fun deleteMediaInfo(mediaId: Int): Int
+
+    @Query("UPDATE MediaInfoModel SET likeVideo = :likeVideo WHERE mediaId = :mediaId")
+    fun updateMediaLikeVideoByMediaId(likeVideo: String, mediaId: Int)
+
+    @Query("UPDATE MediaInfoModel SET favouriteVideo = :favouriteVideo WHERE mediaId = :mediaId")
+    fun updateMediaFavouriteVideoByMediaId(favouriteVideo: String, mediaId: Int)
 }

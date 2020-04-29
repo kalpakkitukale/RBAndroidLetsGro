@@ -16,13 +16,11 @@ import com.ramanbyte.databinding.ActivityMediaPlaybackBinding
 import com.ramanbyte.emla.base.di.authModuleDependency
 import com.ramanbyte.emla.content.ExoMediaDownloadUtil
 import com.ramanbyte.emla.view_model.MediaPlaybackViewModel
-import com.ramanbyte.utilities.AppLog
-import com.ramanbyte.utilities.BindingUtils
-import com.ramanbyte.utilities.KEY_IS_MEDIA_OFFLINE
-import com.ramanbyte.utilities.KEY_MEDIA_ID
+import com.ramanbyte.utilities.*
 
 class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPlaybackViewModel>(
-    authModuleDependency) {
+    authModuleDependency
+) {
 
     override val viewModelClass: Class<MediaPlaybackViewModel> = MediaPlaybackViewModel::class.java
 
@@ -159,6 +157,13 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
             release()
         }
         simpleExoPlayer = null
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        viewModel.apply {
+            //insertSectionContentLog(KEY_FAVOURITE_VIDEO, KEY_BLANK, KEY_Y, mediaId)
+        }
     }
 
 }

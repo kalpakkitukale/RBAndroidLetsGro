@@ -1,6 +1,7 @@
 package com.ramanbyte.emla.data_layer.network.api_layer
 
 import com.ramanbyte.emla.models.ContentModel
+import com.ramanbyte.emla.models.MediaInfoModel
 import com.ramanbyte.emla.models.SectionsModel
 import com.ramanbyte.emla.models.request.SectionsRequest
 import retrofit2.Response
@@ -16,5 +17,8 @@ interface SectionsController {
 
     @GET("GetSectionContent/{sectionId}/{userId}")
     suspend fun getContentList(@Path("sectionId") sectionId: Int, @Path("userId") userId: Int): Response<ArrayList<ContentModel>>
+
+    @POST("InsertSectionContentLog")
+    suspend fun insertSectionContentLog(@Body mediaInfoEntity: MediaInfoModel): Response<Int>
 
 }
