@@ -189,6 +189,7 @@
         app:layout_constraintTop_toTopOf="@+id/exoBtnWishlist" />
 
     <TextView
+        android:id="@+id/tvLabelComment"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/do_you_have_any_questions"
