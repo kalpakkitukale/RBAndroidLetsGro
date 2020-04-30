@@ -28,7 +28,7 @@ import com.ramanbyte.base.BaseActivity
 import com.ramanbyte.databinding.ActivityMediaPlaybackBinding
 import com.ramanbyte.emla.base.di.authModuleDependency
 import com.ramanbyte.emla.content.ExoMediaDownloadUtil
-//import com.ramanbyte.emla.view.OnSwipeTouchListener
+import com.ramanbyte.emla.view.OnSwipeTouchListener
 import com.ramanbyte.emla.view_model.MediaPlaybackViewModel
 import com.ramanbyte.utilities.AppLog
 import com.ramanbyte.utilities.BindingUtils
@@ -90,6 +90,7 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
 
         exoBtnComment.setOnClickListener(View.OnClickListener {
             exoBtnComment.visibility = View.INVISIBLE
+            tvLabelComment.visibility = View.INVISIBLE
             constraintSet?.clone(mainConstraint)
             mainConstraint?.addView(view1)
 
@@ -98,6 +99,7 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
                 constraintSet?.clone(mainConstraint)
                 normalConstrains()
                 exoBtnComment.visibility = View.VISIBLE
+                tvLabelComment.visibility = View.VISIBLE
             })
 
             landscapeConstrains()
@@ -344,82 +346,24 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
         simpleExoPlayer = null
     }
 
-    fun landscapeConstrains() {
-        constraintSet?.connect(
-            R.id.player_view,
-            ConstraintSet.END,
-            R.id.guidelineHorizontal,
-            ConstraintSet.START,
-            0
-        )
-        constraintSet?.connect(
-            R.id.player_view,
-            ConstraintSet.BOTTOM,
-            R.id.mainConstraint,
-            ConstraintSet.BOTTOM,
-            0
-        )
-        constraintSet?.connect(
-            R.id.commentLayout,
-            ConstraintSet.START,
-            R.id.guidelineHorizontal,
-            ConstraintSet.END,
-            0
-        )
-        constraintSet?.connect(
-            R.id.commentLayout,
-            ConstraintSet.END,
-            R.id.mainConstraint,
-            ConstraintSet.END,
-            0
-        )
-        constraintSet?.connect(
-            R.id.commentLayout,
-            ConstraintSet.TOP,
-            R.id.mainConstraint,
-            ConstraintSet.TOP,
-            0
-        )
-        constraintSet?.connect(
-            R.id.commentLayout,
-            ConstraintSet.BOTTOM,
-            R.id.mainConstraint,
-            ConstraintSet.BOTTOM,
-            0
-        )
+    fun landscapeConstrains(){
+        constraintSet?.connect(R.id.player_view, ConstraintSet.END, R.id.guidelineHorizontal, ConstraintSet.START, 0)
+        constraintSet?.connect(R.id.player_view, ConstraintSet.BOTTOM, R.id.mainConstraint, ConstraintSet.BOTTOM, 0)
+        constraintSet?.connect(R.id.exoBtnWishlist, ConstraintSet.END, R.id.mainConstraint, ConstraintSet.END, 0)
+        constraintSet?.connect(R.id.commentLayout, ConstraintSet.START, R.id.guidelineHorizontal, ConstraintSet.END, 0)
+        constraintSet?.connect(R.id.commentLayout, ConstraintSet.END, R.id.mainConstraint, ConstraintSet.END, 0)
+        constraintSet?.connect(R.id.commentLayout, ConstraintSet.TOP, R.id.mainConstraint, ConstraintSet.TOP, 0)
+        constraintSet?.connect(R.id.commentLayout, ConstraintSet.BOTTOM, R.id.mainConstraint, ConstraintSet.BOTTOM, 0)
         constraintSet?.applyTo(mainConstraint)
     }
 
-    fun normalConstrains() {
-        Log.d("OnMethods", "..normalConstrains")
-        constraintSet?.connect(
-            R.id.player_view,
-            ConstraintSet.START,
-            R.id.mainConstraint,
-            ConstraintSet.START,
-            0
-        )
-        constraintSet?.connect(
-            R.id.player_view,
-            ConstraintSet.END,
-            R.id.mainConstraint,
-            ConstraintSet.END,
-            0
-        )
-        constraintSet?.connect(
-            R.id.player_view,
-            ConstraintSet.TOP,
-            R.id.mainConstraint,
-            ConstraintSet.TOP,
-            0
-        )
-        constraintSet?.connect(
-            R.id.player_view,
-            ConstraintSet.BOTTOM,
-            R.id.mainConstraint,
-            ConstraintSet.BOTTOM,
-            0
-        )
+    fun normalConstrains(){
+        Log.d("OnMethods","..normalConstrains")
+        constraintSet?.connect(R.id.exoBtnWishlist, ConstraintSet.END, R.id.exoBtnComment, ConstraintSet.START, 0)
+        constraintSet?.connect(R.id.player_view, ConstraintSet.START, R.id.mainConstraint, ConstraintSet.START, 0)
+        constraintSet?.connect(R.id.player_view, ConstraintSet.END, R.id.mainConstraint, ConstraintSet.END, 0)
+        constraintSet?.connect(R.id.player_view, ConstraintSet.TOP, R.id.mainConstraint, ConstraintSet.TOP, 0)
+        constraintSet?.connect(R.id.player_view, ConstraintSet.BOTTOM, R.id.mainConstraint, ConstraintSet.BOTTOM, 0)
         constraintSet?.applyTo(mainConstraint)
     }
 
