@@ -15,6 +15,8 @@ import com.ramanbyte.emla.data_layer.repositories.SectionsRepository
 import com.ramanbyte.emla.models.MediaInfoModel
 import com.ramanbyte.utilities.AppLog
 import com.ramanbyte.utilities.BindingUtils
+import com.ramanbyte.utilities.KEY_BLANK
+import com.ramanbyte.utilities.snackbar
 import org.kodein.di.generic.instance
 
 class MediaPlaybackViewModel(mContext: Context) : BaseViewModel(mContext) {
@@ -36,6 +38,7 @@ class MediaPlaybackViewModel(mContext: Context) : BaseViewModel(mContext) {
 
 
     fun insertSectionContentLog(
+        view: View,
         whichClick: String,
         isLikeVideo: String,
         isFavouriteVideo: String,
@@ -44,50 +47,20 @@ class MediaPlaybackViewModel(mContext: Context) : BaseViewModel(mContext) {
         CoroutineUtils.main {
 
             try {
-                //courseResultModelListLiveData.postValue(
                 sectionsRepository.insertSectionContentLog(
                     whichClick,
                     isLikeVideo,
                     isFavouriteVideo,
                     mediaId
                 )
-                //)
-
-                toggleLayoutVisibility(
-                    View.VISIBLE,
-                    View.GONE,
-                    View.GONE,
-                    "",
-                    View.GONE
-                )
-
-                coroutineToggleLoader()
-
             } catch (e: ApiException) {
                 e.printStackTrace()
                 AppLog.errorLog(e.message, e)
-
-                toggleLayoutVisibility(
-                    View.GONE,
-                    View.GONE,
-                    View.GONE,
-                    BindingUtils.string(R.string.some_thing_went_wrong),
-                    View.VISIBLE
-                )
-
-                coroutineToggleLoader()
-
+                view.snackbar(BindingUtils.string(R.string.some_thing_went_wrong))
             } catch (e: NoInternetException) {
                 e.printStackTrace()
                 AppLog.errorLog(e.message, e)
-                toggleLayoutVisibility(
-                    View.GONE,
-                    View.GONE,
-                    View.VISIBLE,
-                    BindingUtils.string(R.string.no_internet_message),
-                    View.GONE
-                )
-                coroutineToggleLoader()
+                view.snackbar(BindingUtils.string(R.string.no_internet_message))
             } catch (e: Exception) {
                 e.printStackTrace()
                 AppLog.errorLog(e.message, e)

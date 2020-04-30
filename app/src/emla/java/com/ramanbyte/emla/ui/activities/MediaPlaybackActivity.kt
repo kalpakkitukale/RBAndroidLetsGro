@@ -13,6 +13,7 @@ import android.view.View
 import android.view.WindowManager
 import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintSet
+import androidx.lifecycle.Observer
 import com.google.android.exoplayer2.ExoPlayerFactory
 import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.exoplayer2.source.ProgressiveMediaSource
@@ -21,12 +22,13 @@ import com.google.android.exoplayer2.ui.AspectRatioFrameLayout
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
 import com.google.android.exoplayer2.upstream.cache.CacheDataSourceFactory
 import com.google.android.exoplayer2.util.Util
+import com.google.android.material.snackbar.Snackbar
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseActivity
 import com.ramanbyte.databinding.ActivityMediaPlaybackBinding
 import com.ramanbyte.emla.base.di.authModuleDependency
 import com.ramanbyte.emla.content.ExoMediaDownloadUtil
-import com.ramanbyte.emla.view.OnSwipeTouchListener
+//import com.ramanbyte.emla.view.OnSwipeTouchListener
 import com.ramanbyte.emla.view_model.MediaPlaybackViewModel
 import com.ramanbyte.utilities.AppLog
 import com.ramanbyte.utilities.BindingUtils
@@ -101,7 +103,7 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
             landscapeConstrains()
         })
 
-        doubleTapBackward.setOnTouchListener(object : OnSwipeTouchListener(this@MediaPlaybackActivity){
+        /*doubleTapBackward.setOnTouchListener(object : OnSwipeTouchListener(this@MediaPlaybackActivity){
 
             override fun onDoubleTap() {
                 simpleExoPlayer?.seekTo(simpleExoPlayer!!.currentPosition - 12000)
@@ -126,9 +128,7 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
                     audioManager.setStreamVolume(AudioManager.STREAM_MUSIC,currentVolume-2,0)
                 }
             }
-        })
-
-        doubleTapForward.setOnTouchListener(object : OnSwi)
+        })*/
 
         /*doubleTapForward.setOnTouchListener(object : OnSwipeTouchListener(this@MediaPlaybackActivity){
 
@@ -148,18 +148,97 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
             }
         })*/
 
-        exoBtnLike.setOnClickListener(View.OnClickListener {
-            Log.d("BtnEvent","Btn Like")
+        var isLikeClick: Boolean = false
+        var isUnlikeClick: Boolean = false
+        var addToWishList: Boolean = false
 
-        })
-        exoBtnDislike.setOnClickListener(View.OnClickListener {
-            Log.d("BtnEvent","Btn DisLike")
+        viewModel.apply {
 
-        })
-        exoBtnWishlist.setOnClickListener(View.OnClickListener {
-            Log.d("BtnEvent","Btn wishlist")
+            /*
+            * Click event for the Like
+            * */
+            exoBtnLike.setOnClickListener(View.OnClickListener {
+                if (NetworkConnectivity.isConnectedToInternet()) {
+                    if (isUnlikeClick) {
+                        AppLog.infoLog("BtnLike :: true -- Y")
+                        insertSectionContentLog(it,KEY_LIKE_VIDEO, KEY_Y, KEY_BLANK, mediaId)
+                        exoBtnLike.setImageDrawable(BindingUtils.drawable(R.drawable.ic_thumb_up_checked))
+                        isLikeClick = true
+                        exoBtnDislike.setImageDrawable(BindingUtils.drawable(R.drawable.ic_thumb_down_exo))
+                        isUnlikeClick = false
+                    } else {
+                        if (isLikeClick) {
+                            AppLog.infoLog("BtnLike :: false -- ")
+                            insertSectionContentLog(it,KEY_LIKE_VIDEO, KEY_BLANK, KEY_BLANK, mediaId)
+                            exoBtnLike.setImageDrawable(BindingUtils.drawable(R.drawable.ic_thumb_up))
+                            isLikeClick = false
+                        } else {
+                            AppLog.infoLog("BtnLike :: true -- Y")
+                            insertSectionContentLog(it,KEY_LIKE_VIDEO, KEY_Y, KEY_BLANK, mediaId)
+                            exoBtnLike.setImageDrawable(BindingUtils.drawable(R.drawable.ic_thumb_up_checked))
+                            isLikeClick = true
+                        }
+                    }
+                } else {
+                    it.snackbar(BindingUtils.string(R.string.no_internet_message))
+                }
+            })
 
-        })
+
+            /*
+            * Click event for the Unlike
+            * */
+            exoBtnDislike.setOnClickListener(View.OnClickListener {
+
+                if (NetworkConnectivity.isConnectedToInternet()) {
+
+                    if (isLikeClick) {
+                        AppLog.infoLog("BtnUnlike :: true -- N")
+                        insertSectionContentLog(it,KEY_LIKE_VIDEO, KEY_N, KEY_BLANK, mediaId)
+                        exoBtnDislike.setImageResource(R.drawable.ic_thumb_down_checked)
+                        isUnlikeClick = true
+                        exoBtnLike.setImageDrawable(BindingUtils.drawable(R.drawable.ic_thumb_up))
+                        isLikeClick = false
+                    } else {
+                        if (isUnlikeClick) {
+                            AppLog.infoLog("BtnUnlike :: false -- ")
+                            insertSectionContentLog(it,KEY_LIKE_VIDEO, KEY_BLANK, KEY_BLANK, mediaId)
+                            exoBtnDislike.setImageDrawable(BindingUtils.drawable(R.drawable.ic_thumb_down_exo))
+                            isUnlikeClick = false
+                        } else {
+                            AppLog.infoLog("BtnUnlike :: true -- N")
+                            insertSectionContentLog(it,KEY_LIKE_VIDEO, KEY_N, KEY_BLANK, mediaId)
+                            exoBtnDislike.setImageDrawable(BindingUtils.drawable(R.drawable.ic_thumb_down_checked))
+                            isUnlikeClick = true
+                        }
+                    }
+                } else {
+                    it.snackbar(BindingUtils.string(R.string.no_internet_message))
+                }
+            })
+
+            /*
+            * Click event for the Add to wish list
+            * */
+            exoBtnWishlist.setOnClickListener(View.OnClickListener {
+                if (NetworkConnectivity.isConnectedToInternet()) {
+                    if (addToWishList) {
+                        AppLog.infoLog("BtnWishlist :: false -- ")
+                        insertSectionContentLog(it,KEY_FAVOURITE_VIDEO, KEY_BLANK, KEY_BLANK, mediaId)
+                        exoBtnWishlist.setImageDrawable(BindingUtils.drawable(R.drawable.ic_heart))
+                        addToWishList = false
+                    } else {
+                        AppLog.infoLog("BtnWishlist :: true -- Y")
+                        insertSectionContentLog(it,KEY_FAVOURITE_VIDEO, KEY_BLANK, KEY_Y, mediaId)
+                        exoBtnWishlist.setImageDrawable(BindingUtils.drawable(R.drawable.ic_heart_checked))
+                        addToWishList = true
+                    }
+                } else {
+                    it.snackbar(BindingUtils.string(R.string.no_internet_message))
+                }
+            })
+
+        }
     }
 
     override fun onStart() {
@@ -172,7 +251,7 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
                 DefaultTrackSelector()
             )
 
-            requestedOrientation =  (ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE)
+            requestedOrientation = (ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE)
             playerView.setResizeMode(AspectRatioFrameLayout.RESIZE_MODE_FILL)
 
             playerView.player = simpleExoPlayer
@@ -265,30 +344,83 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
         simpleExoPlayer = null
     }
 
-    fun landscapeConstrains(){
-        constraintSet?.connect(R.id.player_view, ConstraintSet.END, R.id.guidelineHorizontal, ConstraintSet.START, 0)
-        constraintSet?.connect(R.id.player_view, ConstraintSet.BOTTOM, R.id.mainConstraint, ConstraintSet.BOTTOM, 0)
-        constraintSet?.connect(R.id.commentLayout, ConstraintSet.START, R.id.guidelineHorizontal, ConstraintSet.END, 0)
-        constraintSet?.connect(R.id.commentLayout, ConstraintSet.END, R.id.mainConstraint, ConstraintSet.END, 0)
-        constraintSet?.connect(R.id.commentLayout, ConstraintSet.TOP, R.id.mainConstraint, ConstraintSet.TOP, 0)
-        constraintSet?.connect(R.id.commentLayout, ConstraintSet.BOTTOM, R.id.mainConstraint, ConstraintSet.BOTTOM, 0)
+    fun landscapeConstrains() {
+        constraintSet?.connect(
+            R.id.player_view,
+            ConstraintSet.END,
+            R.id.guidelineHorizontal,
+            ConstraintSet.START,
+            0
+        )
+        constraintSet?.connect(
+            R.id.player_view,
+            ConstraintSet.BOTTOM,
+            R.id.mainConstraint,
+            ConstraintSet.BOTTOM,
+            0
+        )
+        constraintSet?.connect(
+            R.id.commentLayout,
+            ConstraintSet.START,
+            R.id.guidelineHorizontal,
+            ConstraintSet.END,
+            0
+        )
+        constraintSet?.connect(
+            R.id.commentLayout,
+            ConstraintSet.END,
+            R.id.mainConstraint,
+            ConstraintSet.END,
+            0
+        )
+        constraintSet?.connect(
+            R.id.commentLayout,
+            ConstraintSet.TOP,
+            R.id.mainConstraint,
+            ConstraintSet.TOP,
+            0
+        )
+        constraintSet?.connect(
+            R.id.commentLayout,
+            ConstraintSet.BOTTOM,
+            R.id.mainConstraint,
+            ConstraintSet.BOTTOM,
+            0
+        )
         constraintSet?.applyTo(mainConstraint)
     }
 
-    fun normalConstrains(){
-        Log.d("OnMethods","..normalConstrains")
-        constraintSet?.connect(R.id.player_view, ConstraintSet.START, R.id.mainConstraint, ConstraintSet.START, 0)
-        constraintSet?.connect(R.id.player_view, ConstraintSet.END, R.id.mainConstraint, ConstraintSet.END, 0)
-        constraintSet?.connect(R.id.player_view, ConstraintSet.TOP, R.id.mainConstraint, ConstraintSet.TOP, 0)
-        constraintSet?.connect(R.id.player_view, ConstraintSet.BOTTOM, R.id.mainConstraint, ConstraintSet.BOTTOM, 0)
+    fun normalConstrains() {
+        Log.d("OnMethods", "..normalConstrains")
+        constraintSet?.connect(
+            R.id.player_view,
+            ConstraintSet.START,
+            R.id.mainConstraint,
+            ConstraintSet.START,
+            0
+        )
+        constraintSet?.connect(
+            R.id.player_view,
+            ConstraintSet.END,
+            R.id.mainConstraint,
+            ConstraintSet.END,
+            0
+        )
+        constraintSet?.connect(
+            R.id.player_view,
+            ConstraintSet.TOP,
+            R.id.mainConstraint,
+            ConstraintSet.TOP,
+            0
+        )
+        constraintSet?.connect(
+            R.id.player_view,
+            ConstraintSet.BOTTOM,
+            R.id.mainConstraint,
+            ConstraintSet.BOTTOM,
+            0
+        )
         constraintSet?.applyTo(mainConstraint)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        viewModel.apply {
-            //insertSectionContentLog(KEY_FAVOURITE_VIDEO, KEY_BLANK, KEY_Y, mediaId)
-        }
     }
 
 }
