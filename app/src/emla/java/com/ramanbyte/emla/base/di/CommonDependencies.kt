@@ -26,7 +26,7 @@ private const val CHAPTER = "Chapter/"
 private const val SECTION = "Section/"
 private const val QUESTION = "Question/"
 
-var CLIENT_BASE = "prod"
+var CLIENT_BASE = "test"
 
 val repositoryDependencies = Kodein.Module("", true) {
 
