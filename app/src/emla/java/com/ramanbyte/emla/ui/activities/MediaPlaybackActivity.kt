@@ -48,6 +48,11 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
     var view1: View? = null
     var constraintSet: ConstraintSet? = null
 
+    var isLikeClick: Boolean = false
+    var isUnlikeClick: Boolean = false
+    var addToWishList: Boolean = false
+
+
     override val viewModelClass: Class<MediaPlaybackViewModel> = MediaPlaybackViewModel::class.java
 
     override fun layoutId(): Int = R.layout.activity_media_playback
@@ -70,6 +75,29 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
         viewModel.getMediaInfo(mediaId)
 
         url = viewModel.mediaInfoModel?.mediaUrl ?: ""
+
+        viewModel.mediaInfoModel?.apply {
+            if (likeVideo == KEY_Y){
+                exoBtnLike.setImageDrawable(BindingUtils.drawable(R.drawable.ic_thumb_up_checked))
+                isLikeClick = true
+            }else if (likeVideo == KEY_N){
+                exoBtnDislike.setImageDrawable(BindingUtils.drawable(R.drawable.ic_thumb_down_checked))
+                isUnlikeClick = true
+            }else{
+                exoBtnLike.setImageDrawable(BindingUtils.drawable(R.drawable.ic_thumb_up))
+                isLikeClick = false
+                exoBtnDislike.setImageDrawable(BindingUtils.drawable(R.drawable.ic_thumb_down_exo))
+                isUnlikeClick = false
+            }
+
+            if (favouriteVideo == KEY_Y){
+                exoBtnWishlist.setImageDrawable(BindingUtils.drawable(R.drawable.ic_heart_checked))
+                addToWishList = true
+            }else{
+                exoBtnWishlist.setImageDrawable(BindingUtils.drawable(R.drawable.ic_heart))
+                addToWishList = false
+            }
+        }
 
         window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_IMMERSIVE
                 // Set the content to appear under the system bars so that the
@@ -172,10 +200,6 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
                 )
             }
         })
-
-        var isLikeClick: Boolean = false
-        var isUnlikeClick: Boolean = false
-        var addToWishList: Boolean = false
 
         viewModel.apply {
 
