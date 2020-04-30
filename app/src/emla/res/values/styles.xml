@@ -225,4 +225,18 @@
         <item name="android:textAppearance">@style/AppTheme.Font</item>
     </style>
 
+    <!-- styles for image button in media player controls -->
+    <style name="exoImageButtonStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/transparent</item>
+    </style>
+    <style name="exoTextViewStyles">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/colorTransparent</item>
+    </style>
+
+
+
 </resources>
