@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">eMLA</string>
-    <string name="app_name_tag">eMLATag</string>
-    <string name="app_name_file">eMLA</string>
+    <string name="app_name">Let’s Gro</string>
+    <string name="app_name_tag">LetsGroTag</string>
+    <string name="app_name_file">Lets Gro</string>
     <string name="tryAgain">Try Again</string>
     <string name="dummyText">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. </string>
     <string name="rs">\u20B9</string>
@@ -78,7 +78,7 @@
     <string name="leave_test_message">Are you sure, you want to leave the test?</string>
     <string name="test_completed">Your test has been completed successfully.</string>
     <string name="title_activity_pre_assessment_test">PreAssessmentTestActivity</string>
-    <string name="log_out_description">This is the logout buttont</string>
+    <string name="log_out_description">This is the logout button</string>
     <string name="forget_password">Forgot Password</string>
     <string name="how_to_use">How to use ?</string>
     <string name="what_i_ll_learn">What I\'ll Learn ?</string>

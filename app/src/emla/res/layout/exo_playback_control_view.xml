@@ -125,6 +125,9 @@
         android:id="@+id/exoBtnWishlist"
         style="@style/exoImageButtonStyle"
         android:src="@drawable/ic_heart"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingTop="@dimen/dp_10"
+        android:paddingBottom="@dimen/dp_10"
         app:layout_constraintBottom_toBottomOf="@+id/exoBtnDislike"
         app:layout_constraintEnd_toStartOf="@+id/exoBtnComment"
         app:layout_constraintStart_toEndOf="@+id/exoBtnDislike"
@@ -136,13 +139,17 @@
         android:textSize="@dimen/sp_10"
         android:layout_margin="@dimen/dp_5"
         app:layout_constraintStart_toEndOf="@+id/exoBtnWishlist"
-        app:layout_constraintTop_toTopOf="@+id/exoBtnWishlist"/>
+        app:layout_constraintTop_toTopOf="@+id/exoBtnWishlist"
+        app:layout_constraintBottom_toBottomOf="@+id/exoBtnWishlist"/>
 
 
     <ImageButton
         android:id="@+id/exoBtnDislike"
         style="@style/exoImageButtonStyle"
         android:src="@drawable/ic_thumb_down_exo"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingTop="@dimen/dp_10"
+        android:paddingBottom="@dimen/dp_10"
         app:layout_constraintBottom_toBottomOf="@+id/exoBtnLike"
         app:layout_constraintEnd_toStartOf="@+id/exoBtnWishlist"
         app:layout_constraintStart_toEndOf="@+id/exoBtnLike"
@@ -154,13 +161,17 @@
         android:textSize="@dimen/sp_10"
         android:layout_margin="@dimen/dp_5"
         app:layout_constraintStart_toEndOf="@+id/exoBtnDislike"
-        app:layout_constraintTop_toTopOf="@+id/exoBtnDislike"/>
+        app:layout_constraintTop_toTopOf="@+id/exoBtnDislike"
+        app:layout_constraintBottom_toBottomOf="@+id/exoBtnDislike"/>
 
     <ImageButton
         android:id="@+id/exoBtnLike"
         style="@style/exoImageButtonStyle"
         android:layout_marginBottom="@dimen/dp_20"
         android:src="@drawable/ic_thumb_up"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingTop="@dimen/dp_10"
+        android:paddingBottom="@dimen/dp_10"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/exoBtnDislike"
         app:layout_constraintStart_toStartOf="parent" />
@@ -171,7 +182,8 @@
         android:textSize="@dimen/sp_10"
         android:layout_margin="@dimen/dp_5"
         app:layout_constraintStart_toEndOf="@+id/exoBtnLike"
-        app:layout_constraintTop_toTopOf="@+id/exoBtnLike"/>
+        app:layout_constraintTop_toTopOf="@+id/exoBtnLike"
+        app:layout_constraintBottom_toBottomOf="@+id/exoBtnLike"/>
 
     <ImageButton
         android:id="@+id/exoBtnComment"
@@ -191,6 +203,7 @@
         android:layout_margin="@dimen/dp_5"
         app:layout_constraintStart_toEndOf="@+id/exoBtnComment"
         app:layout_constraintEnd_toEndOf="@+id/exo_duration"
-        app:layout_constraintTop_toTopOf="@+id/exoBtnComment"/>
+        app:layout_constraintTop_toTopOf="@+id/exoBtnComment"
+        app:layout_constraintBottom_toBottomOf="@+id/exoBtnComment"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

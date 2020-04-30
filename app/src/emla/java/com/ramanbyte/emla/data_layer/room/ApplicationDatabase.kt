@@ -5,6 +5,8 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.ramanbyte.emla.data_layer.room.dao.*
 import com.ramanbyte.emla.data_layer.room.data_converter.JsonConverter
 import com.ramanbyte.emla.data_layer.room.entities.AnswerEntity
@@ -12,6 +14,7 @@ import com.ramanbyte.emla.data_layer.room.entities.OptionsEntity
 import com.ramanbyte.emla.data_layer.room.entities.QuestionAndAnswerEntity
 import com.ramanbyte.emla.data_layer.room.entities.UserEntity
 import com.ramanbyte.emla.models.MediaInfoModel
+import com.ramanbyte.utilities.AppLog
 
 /**
  * @AddedBy Vinay Kumbhar <vinay.k@ramanbyte.com>
@@ -21,7 +24,7 @@ import com.ramanbyte.emla.models.MediaInfoModel
 
 @Database(
     entities = [UserEntity::class, QuestionAndAnswerEntity::class, OptionsEntity::class, AnswerEntity::class, MediaInfoModel::class],
-    version = 1,
+    version = 2,
     exportSchema = true
 )
 abstract class ApplicationDatabase : RoomDatabase() {
@@ -53,9 +56,19 @@ abstract class ApplicationDatabase : RoomDatabase() {
 
         private fun buildDatabase(mContext: Context) = Room.databaseBuilder(
             mContext, ApplicationDatabase::class.java, "db_emla.db"
-        ).allowMainThreadQueries().build()
+        ).allowMainThreadQueries()
+            .addMigrations(MIGRATION_1_2)
+            .build()
         /*
         * Initialization Complete
         * */
+
+        private val MIGRATION_1_2: Migration = object : Migration(1, 2) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                database.execSQL("ALTER TABLE MediaInfoModel ADD likeVideo VARCHAR DEFAULT '' NOT NULL")
+                database.execSQL("ALTER TABLE MediaInfoModel ADD favouriteVideo VARCHAR DEFAULT '' NOT NULL")
+                AppLog.infoLog("Application Database: AlterMediaInfoModelTable")
+            }
+        }
     }
 }

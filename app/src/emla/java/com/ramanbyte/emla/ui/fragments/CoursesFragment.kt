@@ -20,6 +20,7 @@ import com.ramanbyte.emla.adapters.CoursesAdapter
 import com.ramanbyte.emla.view.RecommendedCourseFilterBottomSheet
 import com.ramanbyte.emla.view_model.CoursesViewModel
 import com.ramanbyte.utilities.*
+import kotlinx.android.synthetic.emla.exo_playback_control_view.*
 
 /**
  * @author Vinay Kumbhar <vinay.k@ramanbyte.com>

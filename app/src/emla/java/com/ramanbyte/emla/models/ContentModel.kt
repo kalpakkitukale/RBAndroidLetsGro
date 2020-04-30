@@ -5,6 +5,7 @@ import android.os.Parcelable
 import android.view.View
 import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
+import com.google.gson.annotations.SerializedName
 import com.ramanbyte.BR
 import com.ramanbyte.R
 import com.ramanbyte.utilities.BindingUtils
@@ -22,11 +23,17 @@ class ContentModel() : Parcelable, BaseObservable() {
     var isVideo = false
 
     var duration: Long = 0
-    var completedPosition: Int = 0
+    var completedPosition: Int = 0 //seekPosition
 
     var sectionId = 0
     var chapterName = KEY_BLANK
     var sectionName = KEY_BLANK
+
+    /*
+    * this parameter added By Niraj
+    * */
+    var isLikeVideo: String = KEY_BLANK
+    var isFavouriteVideo: String = KEY_BLANK
 
     @Bindable
     var downloadVisibility: Int = View.GONE
