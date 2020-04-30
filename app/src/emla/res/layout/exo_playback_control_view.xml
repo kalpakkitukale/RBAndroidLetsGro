@@ -17,14 +17,12 @@
        app:layout_constraintEnd_toStartOf="@+id/doubleTapForward"
        app:layout_constraintStart_toStartOf="parent"
        app:layout_constraintTop_toTopOf="parent"
-       app:layout_constraintBottom_toBottomOf="parent"
-       android:orientation="horizontal" />
+       app:layout_constraintBottom_toBottomOf="parent"/>
 
     <ImageView
        android:id="@+id/doubleTapForward"
        android:layout_width="0dp"
        android:layout_height="0dp"
-       android:orientation="horizontal"
        app:layout_constraintBottom_toBottomOf="parent"
        app:layout_constraintEnd_toEndOf="parent"
        app:layout_constraintStart_toEndOf="@+id/doubleTapBackward"
@@ -32,10 +30,7 @@
 
     <ImageButton
         android:id="@id/exo_play"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:background="@color/transparent"
+        style="@style/exoImageButtonStyle"
         android:src="@drawable/ic_play1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -44,10 +39,7 @@
 
     <ImageButton
         android:id="@id/exo_pause"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:clickable="true"
-        android:background="@color/transparent"
+        style="@style/exoImageButtonStyle"
         android:src="@drawable/ic_pause_black_24dp"
         app:layout_constraintBottom_toBottomOf="@+id/exo_play"
         app:layout_constraintEnd_toEndOf="@+id/exo_play"
@@ -57,12 +49,10 @@
 
     <TextView
         android:id="@id/exo_position"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/exoTextViewStyles"
         android:includeFontPadding="false"
         android:paddingLeft="4dp"
         android:paddingRight="4dp"
-        android:textColor="@color/colorTransparent"
         android:textSize="14sp"
         android:textStyle="bold"
         android:layout_marginStart="@dimen/dp_20"
@@ -86,12 +76,10 @@
 
     <TextView
         android:id="@id/exo_duration"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/exoTextViewStyles"
         android:includeFontPadding="false"
         android:paddingLeft="4dp"
         android:paddingRight="4dp"
-        android:textColor="@color/colorTransparent"
         android:textSize="14sp"
         android:textStyle="bold"
         android:layout_marginEnd="@dimen/dp_20"
@@ -111,12 +99,31 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/exoBtnLike"/>
 
+   <!-- <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteX="39dp"
+        tools:layout_editor_absoluteY="237dp">
+
+        <ImageButton
+            android:id="@+id/exoBtnWishlist"
+            style="@style/exoImageButtonStyle"
+            android:src="@drawable/ic_heart" />
+
+        <TextView
+            style="@style/exoTextViewStyles"
+            android:layout_gravity="top"
+            android:layout_margin="@dimen/dp_5"
+            android:text="@string/wishlist"
+            android:textSize="@dimen/sp_10" />
+
+
+    </com.google.android.material.textfield.TextInputLayout>-->
 
     <ImageButton
         android:id="@+id/exoBtnWishlist"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/transparent"
+        style="@style/exoImageButtonStyle"
         android:src="@drawable/ic_heart"
         android:paddingLeft="@dimen/dp_10"
         android:paddingTop="@dimen/dp_10"
@@ -127,11 +134,9 @@
         app:layout_constraintTop_toTopOf="@+id/exoBtnDislike" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/exoTextViewStyles"
         android:text="@string/wishlist"
         android:textSize="@dimen/sp_10"
-        android:textColor="@color/colorTransparent"
         android:layout_margin="@dimen/dp_5"
         app:layout_constraintStart_toEndOf="@+id/exoBtnWishlist"
         app:layout_constraintTop_toTopOf="@+id/exoBtnWishlist"
@@ -140,9 +145,7 @@
 
     <ImageButton
         android:id="@+id/exoBtnDislike"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/transparent"
+        style="@style/exoImageButtonStyle"
         android:src="@drawable/ic_thumb_down_exo"
         android:paddingLeft="@dimen/dp_10"
         android:paddingTop="@dimen/dp_10"
@@ -153,11 +156,9 @@
         app:layout_constraintTop_toTopOf="@+id/exoBtnLike" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/exoTextViewStyles"
         android:text="@string/dislike"
         android:textSize="@dimen/sp_10"
-        android:textColor="@color/colorTransparent"
         android:layout_margin="@dimen/dp_5"
         app:layout_constraintStart_toEndOf="@+id/exoBtnDislike"
         app:layout_constraintTop_toTopOf="@+id/exoBtnDislike"
@@ -165,10 +166,8 @@
 
     <ImageButton
         android:id="@+id/exoBtnLike"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/exoImageButtonStyle"
         android:layout_marginBottom="@dimen/dp_20"
-        android:background="@color/transparent"
         android:src="@drawable/ic_thumb_up"
         android:paddingLeft="@dimen/dp_10"
         android:paddingTop="@dimen/dp_10"
@@ -178,11 +177,9 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/exoTextViewStyles"
         android:text="@string/like"
         android:textSize="@dimen/sp_10"
-        android:textColor="@color/colorTransparent"
         android:layout_margin="@dimen/dp_5"
         app:layout_constraintStart_toEndOf="@+id/exoBtnLike"
         app:layout_constraintTop_toTopOf="@+id/exoBtnLike"
@@ -190,10 +187,8 @@
 
     <ImageButton
         android:id="@+id/exoBtnComment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/exoImageButtonStyle"
         android:layout_marginEnd="@dimen/dp_50"
-        android:background="@color/transparent"
         android:src="@drawable/ic_comment"
         app:layout_constraintBottom_toBottomOf="@+id/exoBtnWishlist"
         app:layout_constraintEnd_toEndOf="parent"
@@ -202,11 +197,9 @@
 
     <TextView
         android:id="@+id/tvLabelComment"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        style="@style/exoTextViewStyles"
         android:text="@string/do_you_have_any_questions"
         android:textSize="@dimen/sp_10"
-        android:textColor="@color/colorTransparent"
         android:layout_margin="@dimen/dp_5"
         app:layout_constraintStart_toEndOf="@+id/exoBtnComment"
         app:layout_constraintEnd_toEndOf="@+id/exo_duration"
