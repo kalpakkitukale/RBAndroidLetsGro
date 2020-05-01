@@ -21,7 +21,6 @@ import org.kodein.di.generic.instance
 
 class MediaPlaybackViewModel(mContext: Context) : BaseViewModel(mContext) {
 
-    //Repo
     private val contentRepository: ContentRepository by instance()
     private val sectionsRepository: SectionsRepository by instance()
 

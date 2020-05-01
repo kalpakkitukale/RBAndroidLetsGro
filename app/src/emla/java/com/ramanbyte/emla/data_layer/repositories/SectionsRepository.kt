@@ -95,11 +95,12 @@ class SectionsRepository(mContext: Context) : BaseRepository(mContext) {
         * */
         if (whichClick == KEY_LIKE_VIDEO) {
             applicationDatabase.getMediaInfoDao()
-                .updateMediaLikeVideoByMediaId(isLikeVideo, mediaId)
+                .updateMediaLikeVideoByMediaId(isLikeVideo, mediaId,userId)
         } else {
             applicationDatabase.getMediaInfoDao()
-                .updateMediaFavouriteVideoByMediaId(isFavouriteVideo, mediaId)
+                .updateMediaFavouriteVideoByMediaId(isFavouriteVideo, mediaId,userId)
         }
+
 
         /*
         * get all the record from local database which is not sync to server
@@ -116,11 +117,9 @@ class SectionsRepository(mContext: Context) : BaseRepository(mContext) {
             }!!
             if (result!! > 0) {
                 /*
-                * if data is sync to server then change the syncStatus = 1 into local table
+                * if data is inserted to server then change then result!! > 0
                 * */
                 AppLog.infoLog("dataInserted")
-                //this.syncStatus = 1
-                //applicationDatabase.getMediaInfoDao().update(this)
             }
         }
         return result!!

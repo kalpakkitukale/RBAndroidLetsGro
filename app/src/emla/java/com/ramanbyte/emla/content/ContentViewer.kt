@@ -259,6 +259,8 @@ class ContentViewer(
             expirationDate = "2020-03-27"
             this@apply.requestId = requestId
             contentLink = contentModel.content_link
+            likeVideo = contentModel.isLike ?: KEY_BLANK
+            favouriteVideo = contentModel.isFavourite ?: KEY_BLANK
             /* createdDateTime = courseContentModel.createdDateTime
              modifiedDateTime = courseContentModel.modifiedDateTime*/
 
