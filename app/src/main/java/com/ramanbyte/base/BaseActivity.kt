@@ -22,7 +22,10 @@ import org.kodein.di.generic.bind
 import org.kodein.di.generic.instance
 import org.kodein.di.generic.singleton
 
-abstract class BaseActivity<LayoutBinding : ViewDataBinding, VM : ViewModel>(private val moduleDependency: Kodein.Module) :
+abstract class BaseActivity<LayoutBinding : ViewDataBinding, VM : ViewModel>(
+    private val moduleDependency: Kodein.Module,
+    private val isLandscape: Boolean = false
+) :
     AppCompatActivity(), KodeinAware {
 
     val _parentKodein by kodein()
@@ -47,7 +50,9 @@ abstract class BaseActivity<LayoutBinding : ViewDataBinding, VM : ViewModel>(pri
     @SuppressLint("SourceLockedOrientationActivity")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+
+        requestedOrientation =
+            if (isLandscape) ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE else ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 
         bindContentView(layoutId())
 
