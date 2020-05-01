@@ -37,7 +37,12 @@
         <activity android:name=".emla.ui.activities.ContainerActivity" />
         <activity android:name=".emla.ui.activities.ForgotPasswordActivity" />
         <activity android:name=".emla.ui.activities.FileViewerActivity" />
-        <activity android:name=".emla.ui.activities.MediaPlaybackActivity" />
+
+        <activity
+            android:name=".emla.ui.activities.MediaPlaybackActivity"
+            android:screenOrientation="landscape"
+            tools:ignore="LockedOrientationActivity" />
+
         <activity android:name=".emla.ui.activities.CertificateViewerActivity" />
 
         <service
