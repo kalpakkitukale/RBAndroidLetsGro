@@ -196,9 +196,6 @@ const val KEY_QUIZ_RESULT_MODEL = "quizResultModel"
 const val KEY_COURSE_IMAGE_URL = "courseImageUrl"
 const val KEY_DEFAULT_MEDIA_STATUS = -1
 
-const val KEY_LIKE_VIDEO = "LikeVideo"
-const val KEY_FAVOURITE_VIDEO = "FavouriteVideo"
-
 
 fun Window.changeStatusBarColor(view: View, colorResourceId: Int) {
     //clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)

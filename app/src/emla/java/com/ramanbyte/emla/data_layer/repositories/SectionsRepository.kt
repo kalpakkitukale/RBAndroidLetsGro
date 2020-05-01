@@ -18,7 +18,6 @@ import com.ramanbyte.emla.models.UserModel
 import com.ramanbyte.emla.models.request.SectionsRequest
 import com.ramanbyte.utilities.AppLog
 import com.ramanbyte.utilities.KEY_DEVICE_ID
-import com.ramanbyte.utilities.KEY_LIKE_VIDEO
 import com.ramanbyte.utilities.replicate
 import org.kodein.di.generic.instance
 
@@ -83,9 +82,6 @@ class SectionsRepository(mContext: Context) : BaseRepository(mContext) {
     * call the api to insert SectionContentLog to the server
     * */
     suspend fun insertSectionContentLog(
-        whichClick: String,
-        isLikeVideo: String,
-        isFavouriteVideo: String,
         mediaId: Int
     ): Int {
 
@@ -94,27 +90,14 @@ class SectionsRepository(mContext: Context) : BaseRepository(mContext) {
         /*
         * get all the record from local database which is not sync to server
         * */
-        if (whichClick == KEY_LIKE_VIDEO) {
-            applicationDatabase.getMediaInfoDao()
-                .updateMediaLikeVideoByMediaId(isLikeVideo, mediaId,userId)
-        } else {
-            applicationDatabase.getMediaInfoDao()
-                .updateMediaFavouriteVideoByMediaId(isFavouriteVideo, mediaId,userId)
-        }
-
-
-        /*
-        * get all the record from local database which is not sync to server
-        * */
-        val allMediaInfo =
-            applicationDatabase.getMediaInfoDao().getMediaInfo(mediaId, userId)
+        val allMediaInfo = applicationDatabase.getMediaInfoDao().getMediaInfo(mediaId, userId)
 
         allMediaInfo?.apply {
             this.createdBy = userId
             this.modifiedBy = userId
             this.device_Id = getIntPref(KEY_DEVICE_ID)
             result = apiRequest {
-                sectionsController.insertSectionContentLog(allMediaInfo!!)
+                sectionsController.insertSectionContentLog(allMediaInfo)
             }!!
             if (result!! > 0) {
                 /*

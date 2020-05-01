@@ -47,7 +47,6 @@ class ContentRepository(mContext: Context) : BaseRepository(mContext) {
                     mediaId = mediaInfoModel.mediaId
                     mediaUrl = mediaInfoModel.mediaUrl
                     duration = mediaInfoModel.duration
-                    mediaStatus = mediaInfoModel.mediaStatus
                     mediaType = mediaInfoModel.mediaType
                     expirationDate = mediaInfoModel.expirationDate
                     contentLink = mediaInfoModel.contentLink
