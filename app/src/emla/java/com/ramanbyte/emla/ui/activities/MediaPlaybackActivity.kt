@@ -41,7 +41,8 @@ import org.kodein.di.On
 import com.ramanbyte.utilities.*
 
 class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPlaybackViewModel>(
-    authModuleDependency
+    authModuleDependency,
+    isLandscape = true
 ) {
 
     var layoutInflaterr: LayoutInflater? = null
@@ -77,23 +78,23 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
         url = viewModel.mediaInfoModel?.mediaUrl ?: ""
 
         viewModel.mediaInfoModel?.apply {
-            if (likeVideo == KEY_Y){
+            if (likeVideo == KEY_Y) {
                 exoBtnLike.setImageDrawable(BindingUtils.drawable(R.drawable.ic_thumb_up_checked))
                 isLikeClick = true
-            }else if (likeVideo == KEY_N){
+            } else if (likeVideo == KEY_N) {
                 exoBtnDislike.setImageDrawable(BindingUtils.drawable(R.drawable.ic_thumb_down_checked))
                 isUnlikeClick = true
-            }else{
+            } else {
                 exoBtnLike.setImageDrawable(BindingUtils.drawable(R.drawable.ic_thumb_up))
                 isLikeClick = false
                 exoBtnDislike.setImageDrawable(BindingUtils.drawable(R.drawable.ic_thumb_down_exo))
                 isUnlikeClick = false
             }
 
-            if (favouriteVideo == KEY_Y){
+            if (favouriteVideo == KEY_Y) {
                 exoBtnWishlist.setImageDrawable(BindingUtils.drawable(R.drawable.ic_heart_checked))
                 addToWishList = true
-            }else{
+            } else {
                 exoBtnWishlist.setImageDrawable(BindingUtils.drawable(R.drawable.ic_heart))
                 addToWishList = false
             }
@@ -321,8 +322,8 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
             /*
             * this is for the Landscape orientation and full mode
             * */
-            /*requestedOrientation = (ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE)
-            playerView.setResizeMode(AspectRatioFrameLayout.RESIZE_MODE_FILL)*/
+            //
+            playerView.setResizeMode(AspectRatioFrameLayout.RESIZE_MODE_FILL)
 
             playerView.player = simpleExoPlayer
 
