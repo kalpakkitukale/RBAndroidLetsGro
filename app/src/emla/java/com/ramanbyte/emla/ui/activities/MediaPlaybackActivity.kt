@@ -322,7 +322,7 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
             * this is for the Landscape orientation and full mode
             * */
             /*requestedOrientation = (ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE)
-            playerView.setResizeMode(AspectRatioFrameLayout.RESIZE_MODE_FILL)*/
+            playerView.resizeMode = AspectRatioFrameLayout.RESIZE_MODE_FILL*/
 
             playerView.player = simpleExoPlayer
 
