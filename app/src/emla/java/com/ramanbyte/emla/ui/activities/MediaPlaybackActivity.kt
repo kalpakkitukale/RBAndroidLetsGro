@@ -68,6 +68,9 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
 
     override fun initiate() {
 
+        ProgressLoader(this, viewModel)
+        AlertDialog(this, viewModel)
+
         intent.extras?.apply {
             mediaId = getInt(KEY_MEDIA_ID) ?: 0
             isOffLine = getBoolean(KEY_IS_MEDIA_OFFLINE) ?: false

@@ -46,12 +46,14 @@ class MediaPlaybackViewModel(mContext: Context) : BaseViewModel(mContext) {
         CoroutineUtils.main {
 
             try {
+                //isLoaderShowingLiveData.postValue(true)
                 sectionsRepository.insertSectionContentLog(
                     whichClick,
                     isLikeVideo,
                     isFavouriteVideo,
                     mediaId
                 )
+                //isLoaderShowingLiveData.postValue(false)
             } catch (e: ApiException) {
                 e.printStackTrace()
                 AppLog.errorLog(e.message, e)
