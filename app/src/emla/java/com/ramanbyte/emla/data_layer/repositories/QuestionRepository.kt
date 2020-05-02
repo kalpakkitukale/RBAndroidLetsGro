@@ -5,7 +5,9 @@ import com.ramanbyte.data_layer.SharedPreferencesDatabase.getIntPref
 import com.ramanbyte.data_layer.base.BaseRepository
 import com.ramanbyte.emla.data_layer.network.api_layer.QuestionController
 import com.ramanbyte.emla.models.AskQuestionModel
+import com.ramanbyte.emla.models.request.AskQuestionRequestModel
 import com.ramanbyte.emla.models.MediaInfoModel
+import com.ramanbyte.emla.models.QuestionAndAnswerModel
 import com.ramanbyte.utilities.KEY_BLANK
 import com.ramanbyte.utilities.KEY_DEVICE_ID
 import org.kodein.di.generic.instance
@@ -17,11 +19,12 @@ class QuestionRepository(mContext: Context) : BaseRepository(mContext) {
     suspend fun insertAskQuestion(
         mediaInfoModel: MediaInfoModel,
         question: String
-    ): AskQuestionModel? {
+    ): AskQuestionRequestModel? {
 
         val userId = applicationDatabase.getUserDao().getCurrentUser()?.userId!!
 
-        val askQuestionModel = AskQuestionModel().apply {
+        val askQuestionModel = AskQuestionRequestModel()
+            .apply {
             student_Id = userId
             course_Id = mediaInfoModel.courseId
             chpater_Id = mediaInfoModel.chapterId
@@ -37,6 +40,14 @@ class QuestionRepository(mContext: Context) : BaseRepository(mContext) {
         return apiRequest {
             questionController.insertAskQuestion(askQuestionModel)
         }
+    }
+
+    suspend fun getQuestionAndAnswer(contentId: Int): ArrayList<AskQuestionModel>? {
+        val userId = applicationDatabase.getUserDao().getCurrentUser()?.userId!!
+        val questionAndAnswerModel = apiRequest {
+            questionController.getQuestionAndAnswer(userId, contentId)
+        }
+        return questionAndAnswerModel
     }
 
 }

@@ -10,6 +10,7 @@ import com.ramanbyte.emla.data_layer.network.exception.NoInternetException
 import com.ramanbyte.emla.data_layer.repositories.ContentRepository
 import com.ramanbyte.emla.data_layer.repositories.QuestionRepository
 import com.ramanbyte.emla.data_layer.repositories.SectionsRepository
+import com.ramanbyte.emla.models.AskQuestionModel
 import com.ramanbyte.emla.models.MediaInfoModel
 import com.ramanbyte.utilities.AppLog
 import org.kodein.di.generic.instance
@@ -28,6 +29,10 @@ class MediaPlaybackViewModel(mContext: Context) : BaseViewModel(mContext) {
 
     var onClickAskQuestionLiveData = MutableLiveData<Boolean>().apply {
         value = false
+    }
+
+    var questionAndAnswerListLiveData = MutableLiveData<List<AskQuestionModel>>().apply {
+        value = arrayListOf()
     }
 
     fun getMediaInfo(mediaId: Int) {
@@ -91,6 +96,25 @@ class MediaPlaybackViewModel(mContext: Context) : BaseViewModel(mContext) {
             }
 
         }
+    }
+
+    fun getQuestionAndAnswer(){
+        CoroutineUtils.main {
+            try {
+                val response = questionRepository.getQuestionAndAnswer(mediaInfoModel?.mediaId!!)
+                questionAndAnswerListLiveData.postValue(response)
+            } catch (e: ApiException) {
+                e.printStackTrace()
+                AppLog.errorLog(e.message, e)
+            } catch (e: NoInternetException) {
+                e.printStackTrace()
+                AppLog.errorLog(e.message, e)
+            } catch (e: Exception) {
+                e.printStackTrace()
+                AppLog.errorLog(e.message, e)
+            }
+        }
+
     }
 
     fun onClickCloseComment(view: View) {

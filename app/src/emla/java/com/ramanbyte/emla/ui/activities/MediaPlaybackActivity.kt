@@ -15,6 +15,9 @@ import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.exoplayer2.ExoPlayerFactory
 import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.exoplayer2.source.ProgressiveMediaSource
@@ -28,6 +31,8 @@ import com.ramanbyte.R
 import com.ramanbyte.base.BaseActivity
 import com.ramanbyte.databinding.ActivityMediaPlaybackBinding
 import com.ramanbyte.databinding.ExoCommentLayoutBinding
+import com.ramanbyte.emla.adapters.JumpToQueAdapter
+import com.ramanbyte.emla.adapters.VideoQuestionReplyAdapter
 import com.ramanbyte.emla.base.di.authModuleDependency
 import com.ramanbyte.emla.content.ExoMediaDownloadUtil
 import com.ramanbyte.emla.view.OnSwipeTouchListener
@@ -54,6 +59,8 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
     var isLikeClick: Boolean = false
     var isUnlikeClick: Boolean = false
     var addToWishList: Boolean = false
+
+    var videoQuestionReplyAdapter: VideoQuestionReplyAdapter? = null
 
 
     override val viewModelClass: Class<MediaPlaybackViewModel> = MediaPlaybackViewModel::class.java
@@ -133,6 +140,7 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
 
         exoCommentLayoutBinding.apply {
             mediaPlaybackViewModel = viewModel
+
         }
 
         constraintSet = ConstraintSet()
@@ -144,12 +152,33 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
             mainConstraint?.addView(view1)
 
             landscapeConstrains()
+
+            viewModel.apply {
+
+                getQuestionAndAnswer()
+
+                questionAndAnswerListLiveData.observe(this@MediaPlaybackActivity, Observer {
+                    if (it != null){
+                        exoCommentLayoutBinding.rvComment.apply {
+                            videoQuestionReplyAdapter = VideoQuestionReplyAdapter()
+                            videoQuestionReplyAdapter?.apply {
+                                layoutManager =
+                                    LinearLayoutManager(this@MediaPlaybackActivity, RecyclerView.VERTICAL, false)
+                                mediaPlaybackViewModel = viewModel
+                                askQuestionList = it
+                                adapter = this
+                            }
+                        }
+                    }
+                })
+            }
+
         })
 
         viewModel.apply {
             onClickCloseCommentLiveData.observe(this@MediaPlaybackActivity, Observer {
-                if (it != null){
-                    if (it == true){
+                if (it != null) {
+                    if (it == true) {
                         mainConstraint?.removeView(view1)
                         constraintSet?.clone(mainConstraint)
                         normalConstrains()
@@ -161,12 +190,12 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
             })
 
             onClickAskQuestionLiveData.observe(this@MediaPlaybackActivity, Observer {
-                if (it != null){
-                    if (it == true){
+                if (it != null) {
+                    if (it == true) {
                         val question = exoCommentLayoutBinding.etAskQuestion.text.toString()
-                        if (question.isNotBlank()){
+                        if (question.isNotBlank()) {
                             insertAskQuestion(question)
-                        }else{
+                        } else {
                             AppLog.infoLog("Blank Question not added.")
                         }
                         onClickAskQuestionLiveData.value = false
