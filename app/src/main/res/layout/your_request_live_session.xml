@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvlabelTitleLSR"
+        style="@style/TextViewBoldBlackOnWhite"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/dp_20"
+        android:paddingEnd="@dimen/dp_10"
+        android:paddingTop="@dimen/dp_10"
+        android:paddingBottom="@dimen/dp_10"
+        android:text="@string/your_request"
+        android:textSize="@dimen/sp_16"
+        app:layout_constraintEnd_toStartOf="@+id/imageView2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:background="@color/transparent"
+        android:paddingStart="@dimen/dp_5"
+        android:paddingEnd="@dimen/dp_10"
+        android:paddingTop="@dimen/dp_5"
+        android:paddingBottom="@dimen/dp_5"
+        android:src="@drawable/ic_arrow_up_gray_24dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvlabelTitleLSR"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/tvlabelTitleLSR"
+        app:layout_constraintTop_toTopOf="@+id/tvlabelTitleLSR" />
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvLableMobieNoRequest"
+        style="@style/TextViewRegularLightGray"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/mobile_number"
+        android:textSize="@dimen/sp_10"
+        android:layout_marginStart="@dimen/dp_25"
+        app:layout_constraintStart_toStartOf="@+id/tvlabelTitleLSR"
+        app:layout_constraintTop_toBottomOf="@+id/tvlabelTitleLSR" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvMobileNoRequest"
+        style="@style/TextViewBoldBlackOnWhite"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_5"
+        android:drawableStart="@drawable/ic_call"
+        android:drawablePadding="@dimen/dp_5"
+        android:text="8140404044"
+        android:textSize="@dimen/sp_16"
+        android:layout_marginEnd="@dimen/dp_20"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tvLableMobieNoRequest"
+        app:layout_constraintTop_toBottomOf="@+id/tvLableMobieNoRequest" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvLableAlternateMobieNoRequest"
+        style="@style/TextViewRegularLightGray"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/alternate_mobile_number"
+        android:textSize="@dimen/sp_10"
+        android:layout_marginTop="@dimen/dp_20"
+        app:layout_constraintStart_toStartOf="@+id/tvMobileNoRequest"
+        app:layout_constraintTop_toBottomOf="@+id/tvMobileNoRequest" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvAlternateMobileNoRequest"
+        style="@style/TextViewBoldBlackOnWhite"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_5"
+        android:drawableStart="@drawable/ic_call"
+        android:drawablePadding="@dimen/dp_5"
+        android:text="8140404044"
+        android:textSize="@dimen/sp_16"
+        app:layout_constraintEnd_toEndOf="@+id/tvMobileNoRequest"
+        app:layout_constraintStart_toStartOf="@+id/tvLableAlternateMobieNoRequest"
+        app:layout_constraintTop_toBottomOf="@+id/tvLableAlternateMobieNoRequest" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvLableTimeToCOntact"
+        style="@style/TextViewRegularLightGray"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/time_to_contact"
+        android:textSize="@dimen/sp_10"
+        android:layout_marginTop="@dimen/dp_20"
+        app:layout_constraintStart_toStartOf="@+id/tvAlternateMobileNoRequest"
+        app:layout_constraintTop_toBottomOf="@+id/tvAlternateMobileNoRequest" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvRequestTime"
+        style="@style/TextViewBoldBlackOnWhite"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_5"
+        android:drawableStart="@drawable/ic_access_time"
+        android:drawablePadding="@dimen/dp_5"
+        android:text="9:30 AM To 10:30 AM"
+        android:textSize="@dimen/sp_16"
+        app:layout_constraintEnd_toEndOf="@+id/tvAlternateMobileNoRequest"
+        app:layout_constraintStart_toStartOf="@+id/tvLableTimeToCOntact"
+        app:layout_constraintTop_toBottomOf="@+id/tvLableTimeToCOntact" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvLableLearnSession"
+        style="@style/TextViewRegularLightGray"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/what_you_want_to_learn_in_live_session"
+        android:layout_marginTop="@dimen/dp_20"
+        android:textSize="@dimen/sp_10"
+        app:layout_constraintStart_toStartOf="@+id/tvRequestTime"
+        app:layout_constraintTop_toBottomOf="@+id/tvRequestTime" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvTextLearnsession"
+        style="@style/TextViewBoldBlackOnWhite"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
+        android:text="Android is a mobile operating system based on a modified version of the Linux kernel and other open source software"
+        android:textSize="@dimen/sp_16"
+        android:layout_marginBottom="@dimen/dp_20"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/tvRequestTime"
+        app:layout_constraintStart_toStartOf="@+id/tvLableLearnSession"
+        app:layout_constraintTop_toBottomOf="@+id/tvLableLearnSession" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

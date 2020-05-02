@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="@dimen/dp_5"
+    android:elevation="2dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.ramanbyte.views.RoundedImageView
+            android:id="@+id/rivCardAddReply"
+            android:layout_width="@dimen/dp_40"
+            android:layout_height="@dimen/dp_40"
+            android:layout_margin="@dimen/dp_20"
+            android:background="@drawable/circle_transparent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvNameCardAddReply"
+            style="@style/TextViewRegularLightGray"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Dr. Sudit Joshi"
+            android:textSize="@dimen/sp_12"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/rivCardAddReply"
+            app:layout_constraintTop_toTopOf="@+id/rivCardAddReply" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvTextAddReviewCardAddReply"
+            style="@style/TextViewBoldBlackOnWhite"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Android is a mobile operating system based on a modified version of the Linux kernel and other open source software"
+            android:layout_marginTop="@dimen/dp_10"
+            android:textSize="@dimen/sp_14"
+            app:layout_constraintEnd_toEndOf="@+id/tvNameCardAddReply"
+            app:layout_constraintStart_toStartOf="@+id/tvNameCardAddReply"
+            app:layout_constraintTop_toBottomOf="@+id/tvNameCardAddReply" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvDateCardAddReply"
+            style="@style/TextViewBoldLightGray"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="27 Apr 2020 ! 12:16 AM"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginBottom="@dimen/dp_10"
+            android:textSize="@dimen/sp_10"
+            app:layout_constraintEnd_toEndOf="@+id/tvTextAddReviewCardAddReply"
+            app:layout_constraintStart_toStartOf="@+id/tvTextAddReviewCardAddReply"
+            app:layout_constraintTop_toBottomOf="@+id/tvTextAddReviewCardAddReply"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

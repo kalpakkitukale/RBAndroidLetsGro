@@ -58,5 +58,7 @@
     <string name="understanding_sales_cycle">Understanding Sales Cycle</string>
     <string name="request_to_live_session">Request to Live Session</string>
     <string name="_12_16_pm">12:16 PM</string>
+    <string name="your_request">Your Request</string>
+    <string name="add_reply">Add Reply</string>
 
 </resources>
