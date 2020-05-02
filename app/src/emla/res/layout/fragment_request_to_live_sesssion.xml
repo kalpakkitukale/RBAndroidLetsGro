@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilMobileNo"
+        style="@style/TextInputLayoutWithoutBorder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp_22"
+        android:hint="@string/mobile_number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etMobileNo"
+            style="@style/EditTextRegularGrayHint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dp_16"
+            android:background="@color/colorTransparent"
+            android:drawableStart="@drawable/ic_call"
+            android:drawablePadding="@dimen/dp_10"
+            android:inputType="number"
+            android:maxLength="10"
+            android:textSize="@dimen/sp_16" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilAlternateMobileNo"
+        style="@style/TextInputLayoutWithoutBorder"
+        android:layout_width="0dp"
+        android:gravity="bottom"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_22"
+        app:layout_constraintEnd_toEndOf="@+id/tilMobileNo"
+        app:layout_constraintStart_toStartOf="@+id/tilMobileNo"
+        app:layout_constraintTop_toBottomOf="@+id/tilMobileNo">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etAlternateMobileNo"
+            style="@style/EditTextRegularGrayHint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dp_16"
+            android:background="@color/colorTransparent"
+            android:drawableStart="@drawable/ic_call"
+            android:hint="@string/alternate_mobile_number"
+            android:drawablePadding="@dimen/dp_10"
+            android:singleLine="true"
+            android:inputType="number"
+            android:maxLength="10"
+            android:textSize="@dimen/sp_16" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilTimeToContact"
+        style="@style/TextInputLayoutWithoutBorder"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_22"
+        app:layout_constraintEnd_toEndOf="@+id/tilAlternateMobileNo"
+        app:layout_constraintStart_toStartOf="@+id/tilAlternateMobileNo"
+        app:layout_constraintTop_toBottomOf="@+id/tilAlternateMobileNo">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etTimeToContact"
+            style="@style/EditTextRegularGrayHint"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="@string/time_to_contact"
+            android:padding="@dimen/dp_16"
+            android:background="@color/colorTransparent"
+            android:drawableStart="@drawable/ic_access_time"
+            android:drawablePadding="@dimen/dp_10"
+            android:inputType="date"
+            android:maxLength="10"
+            android:textSize="@dimen/sp_16" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilLearnInLiveSession"
+        style="@style/TextInputLayoutWithoutBorder"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_22"
+        app:layout_constraintEnd_toEndOf="@+id/tilTimeToContact"
+        app:layout_constraintStart_toStartOf="@+id/tilTimeToContact"
+        app:layout_constraintTop_toBottomOf="@+id/tilTimeToContact">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etLearnInLiveSession"
+            style="@style/EditTextRegularGrayHint"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorTransparent"
+            android:padding="@dimen/dp_16"
+            android:text="@string/what_you_want_to_learn_in_live_session"
+            android:lines="1"
+            android:maxLength="50"
+            android:inputType="text"
+            android:textSize="@dimen/sp_16" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnSendLiveSession"
+        style="@style/CustomCapsuleButtonBgTealWhiteText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/send"
+        android:textSize="@dimen/sp_16"
+        app:layout_constraintBottom_toBottomOf="@+id/btnCancelLiveSession"
+        app:layout_constraintEnd_toEndOf="@+id/tilLearnInLiveSession"
+        app:layout_constraintTop_toTopOf="@+id/btnCancelLiveSession" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnCancelLiveSession"
+        style="@style/CustomCapsuleButtonGradientorderWithGrayTealText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cancel"
+        android:layout_marginTop="@dimen/dp_22"
+        android:layout_marginEnd="@dimen/dp_22"
+        android:textSize="@dimen/sp_16"
+        app:layout_constraintEnd_toStartOf="@+id/btnSendLiveSession"
+        app:layout_constraintTop_toBottomOf="@+id/tilLearnInLiveSession" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

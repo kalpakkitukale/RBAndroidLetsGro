@@ -171,6 +171,18 @@
         <item name="android:textColor">@color/textColorGrayOnWhiteBackground</item>
     </style>
 
+    <style name="CustomCapsuleButtonBgTealWhiteText">
+        <item name="android:background">@drawable/button_capsule_with_tin_color</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:minHeight">@null</item>
+        <item name="android:paddingTop">@dimen/dp_8</item>
+        <item name="android:paddingBottom">@dimen/dp_8</item>
+        <item name="android:paddingStart">@dimen/dp_5</item>
+        <item name="android:paddingEnd">@dimen/dp_5</item>
+        <item name="android:textAppearance">@style/AppTheme.Font</item>
+    </style>
+
     <style name="CustomCapsuleButtonGradientBgWhiteText">
         <item name="android:background">@drawable/gradient_button_capsule</item>
         <item name="android:gravity">center</item>
@@ -187,6 +199,18 @@
         <item name="android:background">@drawable/button_capsule_with_gray_border</item>
         <item name="android:gravity">center</item>
         <item name="android:textColor">@color/textColorGrayOnWhiteBackground</item>
+        <item name="android:minHeight">@null</item>
+        <item name="android:paddingTop">@dimen/dp_8</item>
+        <item name="android:paddingBottom">@dimen/dp_8</item>
+        <item name="android:paddingStart">@dimen/dp_5</item>
+        <item name="android:paddingEnd">@dimen/dp_5</item>
+        <item name="android:textAppearance">@style/AppTheme.Font</item>
+    </style>
+
+    <style name="CustomCapsuleButtonGradientorderWithGrayTealText">
+        <item name="android:background">@drawable/white_button_capsule_with_gradient_border</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/colorTeal</item>
         <item name="android:minHeight">@null</item>
         <item name="android:paddingTop">@dimen/dp_8</item>
         <item name="android:paddingBottom">@dimen/dp_8</item>
@@ -230,7 +254,9 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:background">@color/transparent</item>
+        <item name="android:layout_margin">@dimen/dp_3</item>
     </style>
+
     <style name="exoTextViewStyles">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
