@@ -133,7 +133,7 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
             constraintSet?.clone(mainConstraint)
             mainConstraint?.addView(view1)
 
-            closeComment.setOnClickListener(View.OnClickListener {
+            ivCloseComment.setOnClickListener(View.OnClickListener {
                 mainConstraint?.removeView(view1)
                 constraintSet?.clone(mainConstraint)
                 normalConstrains()
@@ -153,8 +153,8 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
 
             override fun onSwipeTop() {
                 val audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
-                var maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
-                var currentVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC)
+                val maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
+                val currentVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC)
                 if (currentVolume < maxVolume) {
                     audioManager.adjustStreamVolume(
                         AudioManager.STREAM_MUSIC,
@@ -514,6 +514,11 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
             0
         )
         constraintSet?.applyTo(mainConstraint)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        viewModel.insertAskQuestion()
     }
 
 }

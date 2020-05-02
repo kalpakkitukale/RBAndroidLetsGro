@@ -2,10 +2,7 @@ package com.ramanbyte.emla.base.di
 
 import com.ramanbyte.data_layer.network.init.RetrofitInitializer
 import com.ramanbyte.emla.data_layer.network.api_layer.*
-import com.ramanbyte.emla.data_layer.repositories.ChaptersRepository
-import com.ramanbyte.emla.data_layer.repositories.ContentRepository
-import com.ramanbyte.emla.data_layer.repositories.CoursesRepository
-import com.ramanbyte.emla.data_layer.repositories.SectionsRepository
+import com.ramanbyte.emla.data_layer.repositories.*
 import org.kodein.di.Kodein
 import org.kodein.di.generic.bind
 import org.kodein.di.generic.instance
@@ -46,6 +43,10 @@ val repositoryDependencies = Kodein.Module("", true) {
 
     bind<ContentRepository>() with singleton {
         ContentRepository(instance())
+    }
+
+    bind<QuestionRepository>() with singleton {
+        QuestionRepository(instance())
     }
 
 }
