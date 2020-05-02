@@ -161,8 +161,12 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
             })
 
             onClickAskQuestionLiveData.observe(this@MediaPlaybackActivity, Observer {
+
+                Log.d("BtnClick","value1>>"+it)
                 if (it != null){
+                    Log.d("BtnClick","value2>>"+it)
                     if (it == true){
+                        Log.d("BtnClick","value3>>"+it)
                         val question = exoCommentLayoutBinding.etAskQuestion.text.toString()
                         if (question.isNotBlank()){
                             insertAskQuestion(question)
@@ -469,13 +473,23 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
             ConstraintSet.BOTTOM,
             0
         )
+
         constraintSet?.connect(
-            R.id.exoBtnWishlist,
-            ConstraintSet.END,
-            R.id.mainConstraint,
-            ConstraintSet.END,
-            0
+            R.id.exoBtnLike,
+            ConstraintSet.START,
+            R.id.player_view,
+            ConstraintSet.START,
+            50
         )
+
+        constraintSet?.connect(
+            R.id.textView6,
+            ConstraintSet.END,
+            R.id.player_view,
+            ConstraintSet.END,
+            10
+        )
+
         constraintSet?.connect(
             R.id.commentLayout,
             ConstraintSet.START,

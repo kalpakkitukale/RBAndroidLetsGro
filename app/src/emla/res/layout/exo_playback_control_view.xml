@@ -17,7 +17,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/doubleTapForward"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
         android:id="@+id/doubleTapForward"
@@ -100,142 +101,31 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <!--<com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/llWishList"
-        android:layout_weight="1"
-        android:gravity="bottom"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="@dimen/dp_5"
-        android:clickable="true"
-        app:layout_constraintBottom_toBottomOf="@+id/llDislike"
-        app:layout_constraintTop_toTopOf="@+id/llDislike"
-        app:layout_constraintEnd_toStartOf="@+id/llComment"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/llDislike">
-
-        <ImageButton
-            android:id="@+id/exoBtnWishlist"
-            style="@style/exoImageButtonStyle"
-            android:src="@drawable/ic_heart" />
-
-        <TextView
-            style="@style/exoTextViewStyles"
-            android:layout_gravity="top"
-            android:layout_margin="@dimen/dp_5"
-            android:text="@string/wishlist"
-            android:textSize="@dimen/sp_10" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/llDislike"
-        android:layout_weight="1"
-        android:gravity="bottom"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="@dimen/dp_5"
-        android:clickable="true"
-        app:layout_constraintBottom_toBottomOf="@+id/llLike"
-        app:layout_constraintEnd_toStartOf="@+id/llWishList"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/llLike"
-        app:layout_constraintTop_toTopOf="@+id/llLike">
-
-        <ImageButton
-            android:id="@+id/exoBtnDislike"
-            style="@style/exoImageButtonStyle"
-            android:src="@drawable/ic_thumb_down_exo" />
-
-        <TextView
-            style="@style/exoTextViewStyles"
-            android:layout_gravity="top"
-            android:layout_margin="@dimen/dp_5"
-            android:text="@string/dislike"
-            android:textSize="@dimen/sp_10" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/llLike"
-        android:layout_weight="1"
-        android:gravity="bottom"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="@dimen/dp_5"
-        android:clickable="true"
-        android:layout_marginBottom="@dimen/dp_20"
-        app:layout_constraintEnd_toStartOf="@+id/llDislike"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteY="230dp">
-
-        <ImageButton
-            android:id="@+id/exoBtnLike"
-            style="@style/exoImageButtonStyle"
-            android:src="@drawable/ic_thumb_up" />
-
-        <TextView
-            android:id="@+id/tvLabelComment"
-            style="@style/exoTextViewStyles"
-            android:layout_margin="@dimen/dp_5"
-            android:text="@string/like"
-            android:textSize="@dimen/sp_10" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/llComment"
-        android:layout_weight="2"
-        android:gravity="bottom"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="@dimen/dp_5"
-        android:clickable="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/llWishList"
-        app:layout_constraintBottom_toBottomOf="@+id/llWishList"
-        app:layout_constraintTop_toTopOf="@+id/llWishList"
-        tools:layout_editor_absoluteY="230dp">
-
-        <ImageButton
-            android:id="@+id/exoBtnComment"
-            style="@style/exoImageButtonStyle"
-            android:src="@drawable/ic_comment" />
-
-        <TextView
-            style="@style/exoTextViewStyles"
-            android:layout_gravity="top"
-            android:layout_margin="@dimen/dp_5"
-            android:text="@string/do_you_have_any_questions"
-            android:textSize="@dimen/sp_10" />
-
-    </com.google.android.material.textfield.TextInputLayout>-->
 
     <ImageButton
         android:id="@+id/exoBtnWishlist"
         style="@style/exoImageButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:paddingLeft="@dimen/dp_10"
         android:paddingTop="@dimen/dp_10"
         android:paddingBottom="@dimen/dp_10"
         android:src="@drawable/ic_heart"
         app:layout_constraintBottom_toBottomOf="@+id/exoBtnDislike"
-        app:layout_constraintEnd_toStartOf="@+id/exoBtnComment"
-        app:layout_constraintStart_toEndOf="@+id/exoBtnDislike"
+        app:layout_constraintEnd_toStartOf="@+id/textView6"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/textView5"
         app:layout_constraintTop_toTopOf="@+id/exoBtnDislike" />
 
     <TextView
+        android:id="@+id/textView6"
         style="@style/exoTextViewStyles"
-        android:layout_margin="@dimen/dp_5"
+        android:layout_width="0dp"
         android:text="@string/wishlist"
         android:textSize="@dimen/sp_10"
         app:layout_constraintBottom_toBottomOf="@+id/exoBtnWishlist"
+        app:layout_constraintEnd_toEndOf="@+id/exoBtnComment"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/exoBtnWishlist"
         app:layout_constraintTop_toTopOf="@+id/exoBtnWishlist" />
 
@@ -243,63 +133,76 @@
     <ImageButton
         android:id="@+id/exoBtnDislike"
         style="@style/exoImageButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:paddingLeft="@dimen/dp_10"
         android:paddingTop="@dimen/dp_10"
         android:paddingBottom="@dimen/dp_10"
         android:src="@drawable/ic_thumb_down_exo"
         app:layout_constraintBottom_toBottomOf="@+id/exoBtnLike"
-        app:layout_constraintEnd_toStartOf="@+id/exoBtnWishlist"
-        app:layout_constraintStart_toEndOf="@+id/exoBtnLike"
+        app:layout_constraintEnd_toStartOf="@+id/textView5"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/textView4"
         app:layout_constraintTop_toTopOf="@+id/exoBtnLike" />
 
     <TextView
+        android:id="@+id/textView5"
         style="@style/exoTextViewStyles"
-        android:layout_margin="@dimen/dp_5"
+        android:layout_width="0dp"
         android:text="@string/dislike"
         android:textSize="@dimen/sp_10"
         app:layout_constraintBottom_toBottomOf="@+id/exoBtnDislike"
+        app:layout_constraintEnd_toStartOf="@+id/exoBtnWishlist"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/exoBtnDislike"
         app:layout_constraintTop_toTopOf="@+id/exoBtnDislike" />
 
     <ImageButton
         android:id="@+id/exoBtnLike"
         style="@style/exoImageButtonStyle"
-        android:layout_marginBottom="@dimen/dp_20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:paddingLeft="@dimen/dp_10"
         android:paddingTop="@dimen/dp_10"
         android:paddingBottom="@dimen/dp_10"
         android:src="@drawable/ic_thumb_up"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/exoBtnDislike"
+        app:layout_constraintEnd_toStartOf="@+id/textView4"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
+        android:id="@+id/textView4"
         style="@style/exoTextViewStyles"
-        android:layout_margin="@dimen/dp_5"
+        android:layout_width="0dp"
         android:text="@string/like"
         android:textSize="@dimen/sp_10"
         app:layout_constraintBottom_toBottomOf="@+id/exoBtnLike"
+        app:layout_constraintEnd_toStartOf="@+id/exoBtnDislike"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/exoBtnLike"
         app:layout_constraintTop_toTopOf="@+id/exoBtnLike" />
 
     <ImageButton
         android:id="@+id/exoBtnComment"
         style="@style/exoImageButtonStyle"
-        android:layout_marginEnd="@dimen/dp_50"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:src="@drawable/ic_comment"
         app:layout_constraintBottom_toBottomOf="@+id/exoBtnWishlist"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/exoBtnWishlist"
+        app:layout_constraintEnd_toStartOf="@+id/tvLabelComment"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/textView6"
         app:layout_constraintTop_toTopOf="@+id/exoBtnWishlist" />
 
     <TextView
         android:id="@+id/tvLabelComment"
         style="@style/exoTextViewStyles"
-        android:layout_margin="@dimen/dp_5"
+        android:layout_width="0dp"
         android:text="@string/do_you_have_any_questions"
         android:textSize="@dimen/sp_10"
         app:layout_constraintBottom_toBottomOf="@+id/exoBtnComment"
-        app:layout_constraintEnd_toEndOf="@+id/exo_duration"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/exoBtnComment"
         app:layout_constraintTop_toTopOf="@+id/exoBtnComment" />
 
