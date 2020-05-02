@@ -2,23 +2,16 @@ package com.ramanbyte.emla.view_model
 
 import android.content.Context
 import android.view.View
-import androidx.constraintlayout.widget.ConstraintSet
 import androidx.lifecycle.MutableLiveData
-import com.ramanbyte.R
 import com.ramanbyte.base.BaseViewModel
 import com.ramanbyte.data_layer.CoroutineUtils
 import com.ramanbyte.emla.data_layer.network.exception.ApiException
-import com.ramanbyte.emla.data_layer.network.exception.NoDataException
 import com.ramanbyte.emla.data_layer.network.exception.NoInternetException
 import com.ramanbyte.emla.data_layer.repositories.ContentRepository
 import com.ramanbyte.emla.data_layer.repositories.QuestionRepository
 import com.ramanbyte.emla.data_layer.repositories.SectionsRepository
-import com.ramanbyte.emla.models.AskQuestionModel
 import com.ramanbyte.emla.models.MediaInfoModel
 import com.ramanbyte.utilities.AppLog
-import com.ramanbyte.utilities.BindingUtils
-import com.ramanbyte.utilities.KEY_BLANK
-import com.ramanbyte.utilities.snackbar
 import org.kodein.di.generic.instance
 
 class MediaPlaybackViewModel(mContext: Context) : BaseViewModel(mContext) {
@@ -28,6 +21,14 @@ class MediaPlaybackViewModel(mContext: Context) : BaseViewModel(mContext) {
     private val questionRepository: QuestionRepository by instance()
 
     var mediaInfoModel: MediaInfoModel? = null
+
+    var onClickCloseCommentLiveData = MutableLiveData<Boolean>().apply {
+        value = false
+    }
+
+    var onClickAskQuestionLiveData = MutableLiveData<Boolean>().apply {
+        value = false
+    }
 
     fun getMediaInfo(mediaId: Int) {
         mediaInfoModel = contentRepository.getMediaInfo(mediaId)
@@ -68,13 +69,12 @@ class MediaPlaybackViewModel(mContext: Context) : BaseViewModel(mContext) {
     }
 
 
-    fun insertAskQuestion() {
+    fun insertAskQuestion(question:String) {
         CoroutineUtils.main {
-
             try {
                 //isLoaderShowingLiveData.postValue(true)
                 //contentRepository.updateMediaInfo(mediaInfoModel)
-                questionRepository.insertAskQuestion(mediaInfoModel!!)
+                questionRepository.insertAskQuestion(mediaInfoModel!!, question)
 
                 //isLoaderShowingLiveData.postValue(false)
             } catch (e: ApiException) {
@@ -91,6 +91,15 @@ class MediaPlaybackViewModel(mContext: Context) : BaseViewModel(mContext) {
             }
 
         }
+    }
+
+    fun onClickCloseComment(view: View) {
+        onClickCloseCommentLiveData.value = true
+    }
+
+
+    fun onClickAskQuestion(view: View) {
+        onClickAskQuestionLiveData.value = true
     }
 
 }

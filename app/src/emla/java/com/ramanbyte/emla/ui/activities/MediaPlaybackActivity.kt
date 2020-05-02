@@ -13,6 +13,7 @@ import android.view.View
 import android.view.WindowManager
 import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintSet
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.google.android.exoplayer2.ExoPlayerFactory
 import com.google.android.exoplayer2.SimpleExoPlayer
@@ -26,6 +27,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseActivity
 import com.ramanbyte.databinding.ActivityMediaPlaybackBinding
+import com.ramanbyte.databinding.ExoCommentLayoutBinding
 import com.ramanbyte.emla.base.di.authModuleDependency
 import com.ramanbyte.emla.content.ExoMediaDownloadUtil
 import com.ramanbyte.emla.view.OnSwipeTouchListener
@@ -125,6 +127,14 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
 
         layoutInflaterr = LayoutInflater.from(this)
         view1 = layoutInflaterr?.inflate(R.layout.exo_comment_layout, null, false)
+
+        //val dataBinding: ExoCommentLayoutBinding = DataBindingUtil.setContentView(this, R.layout.exo_comment_layout)
+        val exoCommentLayoutBinding: ExoCommentLayoutBinding = ExoCommentLayoutBinding.bind(view1!!)
+
+        exoCommentLayoutBinding.apply {
+            mediaPlaybackViewModel = viewModel
+        }
+
         constraintSet = ConstraintSet()
 
         exoBtnComment.setOnClickListener(View.OnClickListener {
@@ -133,16 +143,37 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
             constraintSet?.clone(mainConstraint)
             mainConstraint?.addView(view1)
 
-            ivCloseComment.setOnClickListener(View.OnClickListener {
-                mainConstraint?.removeView(view1)
-                constraintSet?.clone(mainConstraint)
-                normalConstrains()
-                exoBtnComment.visibility = View.VISIBLE
-                tvLabelComment.visibility = View.VISIBLE
-            })
-
             landscapeConstrains()
         })
+
+        viewModel.apply {
+            onClickCloseCommentLiveData.observe(this@MediaPlaybackActivity, Observer {
+                if (it != null){
+                    if (it == true){
+                        mainConstraint?.removeView(view1)
+                        constraintSet?.clone(mainConstraint)
+                        normalConstrains()
+                        exoBtnComment.visibility = View.VISIBLE
+                        tvLabelComment.visibility = View.VISIBLE
+                        onClickCloseCommentLiveData.value = false
+                    }
+                }
+            })
+
+            onClickAskQuestionLiveData.observe(this@MediaPlaybackActivity, Observer {
+                if (it != null){
+                    if (it == true){
+                        val question = exoCommentLayoutBinding.etAskQuestion.text.toString()
+                        if (question.isNotBlank()){
+                            insertAskQuestion(question)
+                        }else{
+                            AppLog.infoLog("Blank Question not added.")
+                        }
+                        onClickAskQuestionLiveData.value = false
+                    }
+                }
+            })
+        }
 
         doubleTapBackward.setOnTouchListener(object :
             OnSwipeTouchListener(this@MediaPlaybackActivity) {
@@ -518,7 +549,7 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
 
     override fun onDestroy() {
         super.onDestroy()
-        viewModel.insertAskQuestion()
+        //viewModel.insertAskQuestion()
     }
 
 }

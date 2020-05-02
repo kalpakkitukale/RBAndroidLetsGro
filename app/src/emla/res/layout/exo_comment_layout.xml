@@ -2,7 +2,9 @@
 <layout xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="mediaPlaybackViewModel"
+            type="com.ramanbyte.emla.view_model.MediaPlaybackViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -32,6 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/dp_10"
+            android:onClick="@{ () -> mediaPlaybackViewModel.onClickCloseComment(ivCloseComment)}"
             android:src="@drawable/ic_close_black"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
@@ -42,14 +45,14 @@
             android:layout_height="0dp"
             android:layout_margin="@dimen/dp_8"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toTopOf="@+id/etText"
+            app:layout_constraintBottom_toTopOf="@+id/etAskQuestion"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/lblCommentTitle"
             tools:listitem="@layout/card_recently_ask_questions"/>
 
         <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/etText"
+            android:id="@+id/etAskQuestion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/dp_10"
@@ -58,13 +61,23 @@
             android:imeOptions="actionNext"
             android:inputType="textCapSentences"
             android:lines="1"
-            android:drawableEnd="@drawable/ic_send_black"
             android:maxLength="50"
             android:singleLine="true"
             android:hint="@string/ask_questions_with_question_mark"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_send_black"
+            android:id="@+id/ivAskQuestion"
+            android:padding="@dimen/dp_10"
+            android:onClick="@{ () -> mediaPlaybackViewModel.onClickAskQuestion(ivAskQuestion)}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/etAskQuestion"
+            app:layout_constraintBottom_toBottomOf="@+id/etAskQuestion"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
