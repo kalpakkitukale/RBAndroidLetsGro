@@ -32,8 +32,8 @@ class ContentModel() : Parcelable, BaseObservable() {
     /*
     * this parameter added By Niraj
     * */
-    var isLikeVideo: String = KEY_BLANK
-    var isFavouriteVideo: String = KEY_BLANK
+    var isLike: String = KEY_BLANK
+    var isFavourite: String = KEY_BLANK
 
     @Bindable
     var downloadVisibility: Int = View.GONE

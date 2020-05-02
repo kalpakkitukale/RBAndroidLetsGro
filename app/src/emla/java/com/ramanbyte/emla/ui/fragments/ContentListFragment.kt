@@ -90,6 +90,8 @@ class ContentListFragment : BaseFragment<FragmentContentListBinding, ContentView
                                 chapterName = viewModel.chapterName ?: ""
                                 sectionName = viewModel.sectionName!!
                                 sectionId = viewModel.sectionId
+                                likeVideo = contentModel.isLike ?: ""
+                                favouriteVideo = contentModel.isFavourite ?: ""
                             })
 
                         playOrPreviewLiveData.value = null
@@ -115,6 +117,8 @@ class ContentListFragment : BaseFragment<FragmentContentListBinding, ContentView
                                 chapterName = viewModel.chapterName ?: ""
                                 sectionName = viewModel.sectionName!!
                                 sectionId = viewModel.sectionId
+                                likeVideo = contentModel.isLike ?: ""
+                                favouriteVideo = contentModel.isFavourite ?: ""
                             })
 
                         downloadLiveData.value = null
@@ -146,5 +150,10 @@ class ContentListFragment : BaseFragment<FragmentContentListBinding, ContentView
 
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        viewModel.getContentList()
     }
 }

@@ -8,6 +8,7 @@ import com.ramanbyte.data_layer.base.BaseRepository
 import com.ramanbyte.emla.data_layer.network.api_layer.SectionsController
 import com.ramanbyte.emla.models.ContentModel
 import com.ramanbyte.emla.models.MediaInfoModel
+import com.ramanbyte.utilities.AppLog
 import com.ramanbyte.utilities.FileUtils
 import com.ramanbyte.utilities.KEY_MEDIA_TYPE_AUDIO
 import com.ramanbyte.utilities.KEY_MEDIA_TYPE_VIDEO
@@ -46,11 +47,12 @@ class ContentRepository(mContext: Context) : BaseRepository(mContext) {
                     mediaId = mediaInfoModel.mediaId
                     mediaUrl = mediaInfoModel.mediaUrl
                     duration = mediaInfoModel.duration
-                    mediaStatus = mediaInfoModel.mediaStatus
                     mediaType = mediaInfoModel.mediaType
                     expirationDate = mediaInfoModel.expirationDate
                     contentLink = mediaInfoModel.contentLink
                     requestId = mediaInfoModel.requestId
+                    likeVideo = mediaInfoModel.likeVideo
+                    favouriteVideo = mediaInfoModel.favouriteVideo
                     /*  createdDateTime = mediaInfoModel.createdDateTime
                       modifiedDateTime = mediaInfoModel.modifiedDateTime*/
                 }).toLong()

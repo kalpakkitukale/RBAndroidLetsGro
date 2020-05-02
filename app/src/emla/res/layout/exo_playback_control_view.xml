@@ -5,28 +5,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layoutDirection="ltr"
     android:background="@color/exoTransparentBlack"
+    android:layoutDirection="ltr"
     android:paddingStart="20dp"
     android:paddingEnd="20dp">
 
-     <ImageView
-       android:id="@+id/doubleTapBackward"
-       android:layout_width="0dp"
-       android:layout_height="0dp"
-       app:layout_constraintEnd_toStartOf="@+id/doubleTapForward"
-       app:layout_constraintStart_toStartOf="parent"
-       app:layout_constraintTop_toTopOf="parent"
-       app:layout_constraintBottom_toBottomOf="parent"/>
+    <ImageView
+        android:id="@+id/doubleTapBackward"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/doubleTapForward"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-       android:id="@+id/doubleTapForward"
-       android:layout_width="0dp"
-       android:layout_height="0dp"
-       app:layout_constraintBottom_toBottomOf="parent"
-       app:layout_constraintEnd_toEndOf="parent"
-       app:layout_constraintStart_toEndOf="@+id/doubleTapBackward"
-       app:layout_constraintTop_toTopOf="parent" />
+        android:id="@+id/doubleTapForward"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/doubleTapBackward"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <ImageButton
         android:id="@id/exo_play"
@@ -50,13 +51,13 @@
     <TextView
         android:id="@id/exo_position"
         style="@style/exoTextViewStyles"
+        android:layout_marginStart="@dimen/dp_20"
+        android:layout_marginBottom="@dimen/dp_16"
         android:includeFontPadding="false"
         android:paddingLeft="4dp"
         android:paddingRight="4dp"
         android:textSize="14sp"
         android:textStyle="bold"
-        android:layout_marginStart="@dimen/dp_20"
-        android:layout_marginBottom="@dimen/dp_16"
         app:layout_constraintBottom_toTopOf="@+id/barrier"
         app:layout_constraintEnd_toStartOf="@+id/exo_progress"
         app:layout_constraintHorizontal_bias="0.5"
@@ -66,8 +67,8 @@
         android:id="@id/exo_progress"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:bar_height="1dp"
         android:layout_weight="1"
+        app:bar_height="1dp"
         app:layout_constraintBottom_toBottomOf="@+id/exo_position"
         app:layout_constraintEnd_toStartOf="@+id/exo_duration"
         app:layout_constraintStart_toEndOf="@+id/exo_position"
@@ -77,12 +78,12 @@
     <TextView
         android:id="@id/exo_duration"
         style="@style/exoTextViewStyles"
+        android:layout_marginEnd="@dimen/dp_20"
         android:includeFontPadding="false"
         android:paddingLeft="4dp"
         android:paddingRight="4dp"
         android:textSize="14sp"
         android:textStyle="bold"
-        android:layout_marginEnd="@dimen/dp_20"
         app:layout_constraintBottom_toBottomOf="@+id/exo_progress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -93,18 +94,26 @@
         android:id="@+id/barrier"
         android:layout_width="0dp"
         android:layout_height="1dp"
-        android:background="@color/colorTransparent"
         android:layout_marginBottom="@dimen/dp_16"
-        app:layout_constraintStart_toStartOf="parent"
+        android:background="@color/colorTransparent"
+        app:layout_constraintBottom_toTopOf="@+id/exoBtnLike"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/exoBtnLike"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
-   <!-- <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="wrap_content"
+    <!--<com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/llWishList"
+        android:layout_weight="1"
+        android:gravity="bottom"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        tools:layout_editor_absoluteX="39dp"
-        tools:layout_editor_absoluteY="237dp">
+        android:padding="@dimen/dp_5"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="@+id/llDislike"
+        app:layout_constraintTop_toTopOf="@+id/llDislike"
+        app:layout_constraintEnd_toStartOf="@+id/llComment"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/llDislike">
 
         <ImageButton
             android:id="@+id/exoBtnWishlist"
@@ -118,16 +127,104 @@
             android:text="@string/wishlist"
             android:textSize="@dimen/sp_10" />
 
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/llDislike"
+        android:layout_weight="1"
+        android:gravity="bottom"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/dp_5"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="@+id/llLike"
+        app:layout_constraintEnd_toStartOf="@+id/llWishList"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/llLike"
+        app:layout_constraintTop_toTopOf="@+id/llLike">
+
+        <ImageButton
+            android:id="@+id/exoBtnDislike"
+            style="@style/exoImageButtonStyle"
+            android:src="@drawable/ic_thumb_down_exo" />
+
+        <TextView
+            style="@style/exoTextViewStyles"
+            android:layout_gravity="top"
+            android:layout_margin="@dimen/dp_5"
+            android:text="@string/dislike"
+            android:textSize="@dimen/sp_10" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/llLike"
+        android:layout_weight="1"
+        android:gravity="bottom"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/dp_5"
+        android:clickable="true"
+        android:layout_marginBottom="@dimen/dp_20"
+        app:layout_constraintEnd_toStartOf="@+id/llDislike"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteY="230dp">
+
+        <ImageButton
+            android:id="@+id/exoBtnLike"
+            style="@style/exoImageButtonStyle"
+            android:src="@drawable/ic_thumb_up" />
+
+        <TextView
+            android:id="@+id/tvLabelComment"
+            style="@style/exoTextViewStyles"
+            android:layout_margin="@dimen/dp_5"
+            android:text="@string/like"
+            android:textSize="@dimen/sp_10" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/llComment"
+        android:layout_weight="2"
+        android:gravity="bottom"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/dp_5"
+        android:clickable="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/llWishList"
+        app:layout_constraintBottom_toBottomOf="@+id/llWishList"
+        app:layout_constraintTop_toTopOf="@+id/llWishList"
+        tools:layout_editor_absoluteY="230dp">
+
+        <ImageButton
+            android:id="@+id/exoBtnComment"
+            style="@style/exoImageButtonStyle"
+            android:src="@drawable/ic_comment" />
+
+        <TextView
+            style="@style/exoTextViewStyles"
+            android:layout_gravity="top"
+            android:layout_margin="@dimen/dp_5"
+            android:text="@string/do_you_have_any_questions"
+            android:textSize="@dimen/sp_10" />
 
     </com.google.android.material.textfield.TextInputLayout>-->
 
     <ImageButton
         android:id="@+id/exoBtnWishlist"
         style="@style/exoImageButtonStyle"
-        android:src="@drawable/ic_heart"
         android:paddingLeft="@dimen/dp_10"
         android:paddingTop="@dimen/dp_10"
         android:paddingBottom="@dimen/dp_10"
+        android:src="@drawable/ic_heart"
         app:layout_constraintBottom_toBottomOf="@+id/exoBtnDislike"
         app:layout_constraintEnd_toStartOf="@+id/exoBtnComment"
         app:layout_constraintStart_toEndOf="@+id/exoBtnDislike"
@@ -135,21 +232,21 @@
 
     <TextView
         style="@style/exoTextViewStyles"
+        android:layout_margin="@dimen/dp_5"
         android:text="@string/wishlist"
         android:textSize="@dimen/sp_10"
-        android:layout_margin="@dimen/dp_5"
+        app:layout_constraintBottom_toBottomOf="@+id/exoBtnWishlist"
         app:layout_constraintStart_toEndOf="@+id/exoBtnWishlist"
-        app:layout_constraintTop_toTopOf="@+id/exoBtnWishlist"
-        app:layout_constraintBottom_toBottomOf="@+id/exoBtnWishlist"/>
+        app:layout_constraintTop_toTopOf="@+id/exoBtnWishlist" />
 
 
     <ImageButton
         android:id="@+id/exoBtnDislike"
         style="@style/exoImageButtonStyle"
-        android:src="@drawable/ic_thumb_down_exo"
         android:paddingLeft="@dimen/dp_10"
         android:paddingTop="@dimen/dp_10"
         android:paddingBottom="@dimen/dp_10"
+        android:src="@drawable/ic_thumb_down_exo"
         app:layout_constraintBottom_toBottomOf="@+id/exoBtnLike"
         app:layout_constraintEnd_toStartOf="@+id/exoBtnWishlist"
         app:layout_constraintStart_toEndOf="@+id/exoBtnLike"
@@ -157,33 +254,33 @@
 
     <TextView
         style="@style/exoTextViewStyles"
+        android:layout_margin="@dimen/dp_5"
         android:text="@string/dislike"
         android:textSize="@dimen/sp_10"
-        android:layout_margin="@dimen/dp_5"
+        app:layout_constraintBottom_toBottomOf="@+id/exoBtnDislike"
         app:layout_constraintStart_toEndOf="@+id/exoBtnDislike"
-        app:layout_constraintTop_toTopOf="@+id/exoBtnDislike"
-        app:layout_constraintBottom_toBottomOf="@+id/exoBtnDislike"/>
+        app:layout_constraintTop_toTopOf="@+id/exoBtnDislike" />
 
     <ImageButton
         android:id="@+id/exoBtnLike"
         style="@style/exoImageButtonStyle"
         android:layout_marginBottom="@dimen/dp_20"
-        android:src="@drawable/ic_thumb_up"
         android:paddingLeft="@dimen/dp_10"
         android:paddingTop="@dimen/dp_10"
         android:paddingBottom="@dimen/dp_10"
+        android:src="@drawable/ic_thumb_up"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/exoBtnDislike"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         style="@style/exoTextViewStyles"
+        android:layout_margin="@dimen/dp_5"
         android:text="@string/like"
         android:textSize="@dimen/sp_10"
-        android:layout_margin="@dimen/dp_5"
+        app:layout_constraintBottom_toBottomOf="@+id/exoBtnLike"
         app:layout_constraintStart_toEndOf="@+id/exoBtnLike"
-        app:layout_constraintTop_toTopOf="@+id/exoBtnLike"
-        app:layout_constraintBottom_toBottomOf="@+id/exoBtnLike"/>
+        app:layout_constraintTop_toTopOf="@+id/exoBtnLike" />
 
     <ImageButton
         android:id="@+id/exoBtnComment"
@@ -198,12 +295,12 @@
     <TextView
         android:id="@+id/tvLabelComment"
         style="@style/exoTextViewStyles"
+        android:layout_margin="@dimen/dp_5"
         android:text="@string/do_you_have_any_questions"
         android:textSize="@dimen/sp_10"
-        android:layout_margin="@dimen/dp_5"
-        app:layout_constraintStart_toEndOf="@+id/exoBtnComment"
+        app:layout_constraintBottom_toBottomOf="@+id/exoBtnComment"
         app:layout_constraintEnd_toEndOf="@+id/exo_duration"
-        app:layout_constraintTop_toTopOf="@+id/exoBtnComment"
-        app:layout_constraintBottom_toBottomOf="@+id/exoBtnComment"/>
+        app:layout_constraintStart_toEndOf="@+id/exoBtnComment"
+        app:layout_constraintTop_toTopOf="@+id/exoBtnComment" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

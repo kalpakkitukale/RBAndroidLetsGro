@@ -47,4 +47,7 @@ interface QuestionController {
     @GET("GetResult/{userId}/{courseId}")
     suspend fun getCourseResult(@Path("courseId") courseId: Int, @Path("userId") userId: Int): Response<ArrayList<CourseResultModel>>
 
+    @POST("InsertQNA")
+    suspend fun insertAskQuestion(@Body askQuestionModel: AskQuestionModel): Response<AskQuestionModel>
+
 }

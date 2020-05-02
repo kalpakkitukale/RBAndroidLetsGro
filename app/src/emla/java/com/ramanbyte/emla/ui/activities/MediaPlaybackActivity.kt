@@ -68,6 +68,9 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
 
     override fun initiate() {
 
+        ProgressLoader(this, viewModel)
+        AlertDialog(this, viewModel)
+
         intent.extras?.apply {
             mediaId = getInt(KEY_MEDIA_ID) ?: 0
             isOffLine = getBoolean(KEY_IS_MEDIA_OFFLINE) ?: false
@@ -77,26 +80,33 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
 
         url = viewModel.mediaInfoModel?.mediaUrl ?: ""
 
+        /*
+        * Set selection for like unlike and add to wish list
+        * */
         viewModel.mediaInfoModel?.apply {
-            if (likeVideo == KEY_Y) {
-                exoBtnLike.setImageDrawable(BindingUtils.drawable(R.drawable.ic_thumb_up_checked))
-                isLikeClick = true
-            } else if (likeVideo == KEY_N) {
-                exoBtnDislike.setImageDrawable(BindingUtils.drawable(R.drawable.ic_thumb_down_checked))
-                isUnlikeClick = true
-            } else {
-                exoBtnLike.setImageDrawable(BindingUtils.drawable(R.drawable.ic_thumb_up))
-                isLikeClick = false
-                exoBtnDislike.setImageDrawable(BindingUtils.drawable(R.drawable.ic_thumb_down_exo))
-                isUnlikeClick = false
+            when (likeVideo) {
+                KEY_Y -> {
+                    exoBtnLike.setImageDrawable(BindingUtils.drawable(R.drawable.ic_thumb_up_checked))
+                    isLikeClick = true
+                }
+                KEY_N -> {
+                    exoBtnDislike.setImageDrawable(BindingUtils.drawable(R.drawable.ic_thumb_down_checked))
+                    isUnlikeClick = true
+                }
+                else -> {
+                    exoBtnLike.setImageDrawable(BindingUtils.drawable(R.drawable.ic_thumb_up))
+                    isLikeClick = false
+                    exoBtnDislike.setImageDrawable(BindingUtils.drawable(R.drawable.ic_thumb_down_exo))
+                    isUnlikeClick = false
+                }
             }
 
-            if (favouriteVideo == KEY_Y) {
+            addToWishList = if (favouriteVideo == KEY_Y) {
                 exoBtnWishlist.setImageDrawable(BindingUtils.drawable(R.drawable.ic_heart_checked))
-                addToWishList = true
+                true
             } else {
                 exoBtnWishlist.setImageDrawable(BindingUtils.drawable(R.drawable.ic_heart))
-                addToWishList = false
+                false
             }
         }
 
@@ -123,7 +133,7 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
             constraintSet?.clone(mainConstraint)
             mainConstraint?.addView(view1)
 
-            closeComment.setOnClickListener(View.OnClickListener {
+            ivCloseComment.setOnClickListener(View.OnClickListener {
                 mainConstraint?.removeView(view1)
                 constraintSet?.clone(mainConstraint)
                 normalConstrains()
@@ -143,8 +153,8 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
 
             override fun onSwipeTop() {
                 val audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
-                var maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
-                var currentVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC)
+                val maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
+                val currentVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC)
                 if (currentVolume < maxVolume) {
                     audioManager.adjustStreamVolume(
                         AudioManager.STREAM_MUSIC,
@@ -211,7 +221,9 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
                 if (NetworkConnectivity.isConnectedToInternet()) {
                     if (isUnlikeClick) {
                         AppLog.infoLog("BtnLike :: true -- Y")
-                        insertSectionContentLog(it, KEY_LIKE_VIDEO, KEY_Y, KEY_BLANK, mediaId)
+                        insertSectionContentLog(mediaId, mediaInfoModel?.apply {
+                            likeVideo = KEY_Y
+                        }!!)
                         exoBtnLike.setImageDrawable(BindingUtils.drawable(R.drawable.ic_thumb_up_checked))
                         isLikeClick = true
                         exoBtnDislike.setImageDrawable(BindingUtils.drawable(R.drawable.ic_thumb_down_exo))
@@ -219,18 +231,16 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
                     } else {
                         if (isLikeClick) {
                             AppLog.infoLog("BtnLike :: false -- ")
-                            insertSectionContentLog(
-                                it,
-                                KEY_LIKE_VIDEO,
-                                KEY_BLANK,
-                                KEY_BLANK,
-                                mediaId
-                            )
+                            insertSectionContentLog(mediaId, mediaInfoModel?.apply {
+                                likeVideo = KEY_BLANK
+                            }!!)
                             exoBtnLike.setImageDrawable(BindingUtils.drawable(R.drawable.ic_thumb_up))
                             isLikeClick = false
                         } else {
                             AppLog.infoLog("BtnLike :: true -- Y")
-                            insertSectionContentLog(it, KEY_LIKE_VIDEO, KEY_Y, KEY_BLANK, mediaId)
+                            insertSectionContentLog(mediaId, mediaInfoModel?.apply {
+                                likeVideo = KEY_Y
+                            }!!)
                             exoBtnLike.setImageDrawable(BindingUtils.drawable(R.drawable.ic_thumb_up_checked))
                             isLikeClick = true
                         }
@@ -250,7 +260,9 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
 
                     if (isLikeClick) {
                         AppLog.infoLog("BtnUnlike :: true -- N")
-                        insertSectionContentLog(it, KEY_LIKE_VIDEO, KEY_N, KEY_BLANK, mediaId)
+                        insertSectionContentLog(mediaId, mediaInfoModel?.apply {
+                            likeVideo = KEY_N
+                        }!!)
                         exoBtnDislike.setImageResource(R.drawable.ic_thumb_down_checked)
                         isUnlikeClick = true
                         exoBtnLike.setImageDrawable(BindingUtils.drawable(R.drawable.ic_thumb_up))
@@ -258,18 +270,16 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
                     } else {
                         if (isUnlikeClick) {
                             AppLog.infoLog("BtnUnlike :: false -- ")
-                            insertSectionContentLog(
-                                it,
-                                KEY_LIKE_VIDEO,
-                                KEY_BLANK,
-                                KEY_BLANK,
-                                mediaId
-                            )
+                            insertSectionContentLog(mediaId, mediaInfoModel?.apply {
+                                likeVideo = KEY_BLANK
+                            }!!)
                             exoBtnDislike.setImageDrawable(BindingUtils.drawable(R.drawable.ic_thumb_down_exo))
                             isUnlikeClick = false
                         } else {
                             AppLog.infoLog("BtnUnlike :: true -- N")
-                            insertSectionContentLog(it, KEY_LIKE_VIDEO, KEY_N, KEY_BLANK, mediaId)
+                            insertSectionContentLog(mediaId, mediaInfoModel?.apply {
+                                likeVideo = KEY_N
+                            }!!)
                             exoBtnDislike.setImageDrawable(BindingUtils.drawable(R.drawable.ic_thumb_down_checked))
                             isUnlikeClick = true
                         }
@@ -286,18 +296,16 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
                 if (NetworkConnectivity.isConnectedToInternet()) {
                     if (addToWishList) {
                         AppLog.infoLog("BtnWishlist :: false -- ")
-                        insertSectionContentLog(
-                            it,
-                            KEY_FAVOURITE_VIDEO,
-                            KEY_BLANK,
-                            KEY_BLANK,
-                            mediaId
-                        )
+                        insertSectionContentLog(mediaId, mediaInfoModel?.apply {
+                            favouriteVideo = KEY_BLANK
+                        }!!)
                         exoBtnWishlist.setImageDrawable(BindingUtils.drawable(R.drawable.ic_heart))
                         addToWishList = false
                     } else {
                         AppLog.infoLog("BtnWishlist :: true -- Y")
-                        insertSectionContentLog(it, KEY_FAVOURITE_VIDEO, KEY_BLANK, KEY_Y, mediaId)
+                        insertSectionContentLog(mediaId, mediaInfoModel?.apply {
+                            favouriteVideo = KEY_Y
+                        }!!)
                         exoBtnWishlist.setImageDrawable(BindingUtils.drawable(R.drawable.ic_heart_checked))
                         addToWishList = true
                     }
@@ -506,6 +514,11 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
             0
         )
         constraintSet?.applyTo(mainConstraint)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        viewModel.insertAskQuestion()
     }
 
 }

@@ -97,6 +97,8 @@ class ChaptersSectionListFragment :
                                         viewModel.chaptersModel?.chapterName ?: ""
                                     sectionName = viewModel.downloadRequestedSection?.section_Name ?: ""
                                     sectionId = viewModel.downloadRequestedSection?.id ?: 0
+                                    likeVideo = contentModel.isLike ?: ""
+                                    favouriteVideo = contentModel.isFavourite ?: ""
                                 })
                         }
                     }

@@ -1,28 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/commentLayout"
-        android:background="@color/colorBlack"
+        android:background="@color/colorWhite"
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
-        <ImageView
-            android:id="@+id/closeComment"
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/lblCommentTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/dp_10"
+            android:paddingRight="@dimen/dp_10"
+            android:text="@string/title_recently_ask_questions"
+            style="@style/TextViewBoldBlackOnWhite"
+            android:textSize="@dimen/sp_14"
+            app:layout_constraintEnd_toStartOf="@+id/ivCloseComment"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/ivCloseComment"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivCloseComment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:src="@drawable/ic_close_white"
+            android:padding="@dimen/dp_10"
+            android:src="@drawable/ic_close_black"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
-        <EditText
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvComment"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="@dimen/dp_8"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toTopOf="@+id/etText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lblCommentTitle"
+            tools:listitem="@layout/card_recently_ask_questions"/>
+
+        <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/etText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_margin="@dimen/dp_10"
+            android:textSize="@dimen/sp_16"
+            style="@style/EditTextRegularGrayHint"
+            android:imeOptions="actionNext"
+            android:inputType="textCapSentences"
+            android:lines="1"
+            android:drawableEnd="@drawable/ic_send_black"
+            android:maxLength="50"
+            android:singleLine="true"
+            android:hint="@string/ask_questions_with_question_mark"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"/>

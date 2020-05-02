@@ -11,7 +11,9 @@ import com.ramanbyte.emla.data_layer.network.exception.ApiException
 import com.ramanbyte.emla.data_layer.network.exception.NoDataException
 import com.ramanbyte.emla.data_layer.network.exception.NoInternetException
 import com.ramanbyte.emla.data_layer.repositories.ContentRepository
+import com.ramanbyte.emla.data_layer.repositories.QuestionRepository
 import com.ramanbyte.emla.data_layer.repositories.SectionsRepository
+import com.ramanbyte.emla.models.AskQuestionModel
 import com.ramanbyte.emla.models.MediaInfoModel
 import com.ramanbyte.utilities.AppLog
 import com.ramanbyte.utilities.BindingUtils
@@ -21,9 +23,9 @@ import org.kodein.di.generic.instance
 
 class MediaPlaybackViewModel(mContext: Context) : BaseViewModel(mContext) {
 
-    //Repo
     private val contentRepository: ContentRepository by instance()
     private val sectionsRepository: SectionsRepository by instance()
+    private val questionRepository: QuestionRepository by instance()
 
     var mediaInfoModel: MediaInfoModel? = null
 
@@ -38,29 +40,51 @@ class MediaPlaybackViewModel(mContext: Context) : BaseViewModel(mContext) {
 
 
     fun insertSectionContentLog(
-        view: View,
-        whichClick: String,
-        isLikeVideo: String,
-        isFavouriteVideo: String,
-        mediaId: Int
+        mediaId: Int,
+        mediaInfoModel: MediaInfoModel
     ) {
         CoroutineUtils.main {
 
             try {
-                sectionsRepository.insertSectionContentLog(
-                    whichClick,
-                    isLikeVideo,
-                    isFavouriteVideo,
-                    mediaId
-                )
+                //isLoaderShowingLiveData.postValue(true)
+                contentRepository.updateMediaInfo(mediaInfoModel)
+                sectionsRepository.insertSectionContentLog(mediaId)
+
+                //isLoaderShowingLiveData.postValue(false)
             } catch (e: ApiException) {
                 e.printStackTrace()
                 AppLog.errorLog(e.message, e)
-                view.snackbar(BindingUtils.string(R.string.some_thing_went_wrong))
+                //view.snackbar(BindingUtils.string(R.string.some_thing_went_wrong))
             } catch (e: NoInternetException) {
                 e.printStackTrace()
                 AppLog.errorLog(e.message, e)
-                view.snackbar(BindingUtils.string(R.string.no_internet_message))
+                //view.snackbar(BindingUtils.string(R.string.no_internet_message))
+            } catch (e: Exception) {
+                e.printStackTrace()
+                AppLog.errorLog(e.message, e)
+            }
+
+        }
+    }
+
+
+    fun insertAskQuestion() {
+        CoroutineUtils.main {
+
+            try {
+                //isLoaderShowingLiveData.postValue(true)
+                //contentRepository.updateMediaInfo(mediaInfoModel)
+                questionRepository.insertAskQuestion(mediaInfoModel!!)
+
+                //isLoaderShowingLiveData.postValue(false)
+            } catch (e: ApiException) {
+                e.printStackTrace()
+                AppLog.errorLog(e.message, e)
+                //view.snackbar(BindingUtils.string(R.string.some_thing_went_wrong))
+            } catch (e: NoInternetException) {
+                e.printStackTrace()
+                AppLog.errorLog(e.message, e)
+                //view.snackbar(BindingUtils.string(R.string.no_internet_message))
             } catch (e: Exception) {
                 e.printStackTrace()
                 AppLog.errorLog(e.message, e)
