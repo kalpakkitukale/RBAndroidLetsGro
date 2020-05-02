@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcLiveSessinLog"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/dp_5"
+        app:layout_constraintBottom_toTopOf="@+id/cvRequestSession"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:listitem="@layout/card_live_session_log" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvRequestSession"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardElevation="1dp"
+        android:layout_margin="@dimen/dp_5"
+        app:cardBackgroundColor="@color/colorTransparent"
+        app:cardCornerRadius="@dimen/dp_5"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/card_session_log_background"
+            android:padding="@dimen/dp_5">
+
+            <!--drawable is not available fot image view demo  image is used here-->
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imgIconRequestToLiveSession"
+                android:layout_width="@dimen/dp_30"
+                android:layout_height="@dimen/dp_30"
+                android:layout_margin="@dimen/dp_5"
+                android:background="@drawable/ic_date_range"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tvLabeRequstToLiveSession"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvLabeRequstToLiveSession"
+                style="@style/TextViewBoldBlackOnWhite"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:text="@string/request_to_live_session"
+                android:textSize="@dimen/sp_18"
+                android:gravity="center_vertical"
+                android:layout_marginEnd="@dimen/dp_5"
+                app:layout_constraintBottom_toBottomOf="@+id/imgIconRequestToLiveSession"
+                app:layout_constraintEnd_toStartOf="@+id/imgRighArrow"
+                app:layout_constraintStart_toEndOf="@+id/imgIconRequestToLiveSession"
+                app:layout_constraintTop_toTopOf="@+id/imgIconRequestToLiveSession" />
+
+            <!--color is not available in colors for right arrow tempray colot is used here-->
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imgRighArrow"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:background="@drawable/ic_arrow_right_black"
+                app:layout_constraintBottom_toBottomOf="@+id/tvLabeRequstToLiveSession"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tvLabeRequstToLiveSession"
+                app:layout_constraintTop_toTopOf="@+id/tvLabeRequstToLiveSession" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
