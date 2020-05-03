@@ -2,82 +2,117 @@
 <layout xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="mediaPlaybackViewModel"
             type="com.ramanbyte.emla.view_model.MediaPlaybackViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/commentLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/commentLayout"
-        android:background="@color/colorWhite"
-        xmlns:app="http://schemas.android.com/apk/res-auto">
+        android:background="@color/colorWhite">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/lblCommentTitle"
+            style="@style/TextViewBoldBlackOnWhite"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:paddingLeft="@dimen/dp_10"
             android:paddingRight="@dimen/dp_10"
             android:text="@string/title_recently_ask_questions"
-            style="@style/TextViewBoldBlackOnWhite"
             android:textSize="@dimen/sp_14"
+            app:layout_constraintBottom_toBottomOf="@+id/ivCloseComment"
             app:layout_constraintEnd_toStartOf="@+id/ivCloseComment"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="@+id/ivCloseComment"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ivCloseComment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="@dimen/dp_10"
             android:onClick="@{ () -> mediaPlaybackViewModel.onClickCloseComment(ivCloseComment)}"
+            android:padding="@dimen/dp_10"
             android:src="@drawable/ic_close_black"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvComment"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_margin="@dimen/dp_8"
+            android:visibility="@{mediaPlaybackViewModel.viewVisibilityLiveData}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toTopOf="@+id/etAskQuestion"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/lblCommentTitle"
-            tools:listitem="@layout/card_recently_ask_questions"/>
+            tools:listitem="@layout/card_recently_ask_questions" />
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/etAskQuestion"
+            style="@style/EditTextRegularGrayHint"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/dp_10"
-            android:textSize="@dimen/sp_16"
-            style="@style/EditTextRegularGrayHint"
+            android:hint="@string/ask_questions_with_question_mark"
             android:imeOptions="actionNext"
             android:inputType="textCapSentences"
             android:lines="1"
             android:maxLength="50"
             android:singleLine="true"
-            android:hint="@string/ask_questions_with_question_mark"
-            app:layout_constraintStart_toStartOf="parent"
+            android:text="@={mediaPlaybackViewModel.enteredQuestionLiveData}"
+            android:textSize="@dimen/sp_16"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent" />
 
         <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivAskQuestion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_send_black"
-            android:id="@+id/ivAskQuestion"
-            android:padding="@dimen/dp_10"
             android:onClick="@{ () -> mediaPlaybackViewModel.onClickAskQuestion(ivAskQuestion)}"
+            android:padding="@dimen/dp_10"
+            android:src="@drawable/ic_send_black"
+            app:layout_constraintBottom_toBottomOf="@+id/etAskQuestion"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/etAskQuestion" />
+
+        <include
+            android:id="@+id/noInternet"
+            layout="@layout/no_internet"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/etAskQuestion"
-            app:layout_constraintBottom_toBottomOf="@+id/etAskQuestion"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivCloseComment" />
+
+        <include
+            android:id="@+id/somethingWentWrong"
+            layout="@layout/something_went_wrong"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivCloseComment" />
+
+        <include
+            android:id="@+id/noData"
+            layout="@layout/no_data"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/etAskQuestion"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivCloseComment" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

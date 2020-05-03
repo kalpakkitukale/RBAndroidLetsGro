@@ -139,8 +139,11 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
         val exoCommentLayoutBinding: ExoCommentLayoutBinding = ExoCommentLayoutBinding.bind(view1!!)
 
         exoCommentLayoutBinding.apply {
+            lifecycleOwner = this@MediaPlaybackActivity
             mediaPlaybackViewModel = viewModel
-
+            noData.viewModel = viewModel
+            noInternet.viewModel = viewModel
+            somethingWentWrong.viewModel = viewModel
         }
 
         constraintSet = ConstraintSet()
@@ -159,6 +162,7 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
 
                 questionAndAnswerListLiveData.observe(this@MediaPlaybackActivity, Observer {
                     if (it != null){
+                        enteredQuestionLiveData.value = KEY_BLANK
                         exoCommentLayoutBinding.rvComment.apply {
                             videoQuestionReplyAdapter = VideoQuestionReplyAdapter()
                             videoQuestionReplyAdapter?.apply {
@@ -193,7 +197,7 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
                 if (it != null) {
                     if (it == true) {
                         val question = exoCommentLayoutBinding.etAskQuestion.text.toString()
-                        if (question.isNotBlank()) {
+                        if (enteredQuestionLiveData.value?.isNotBlank()!!) {
                             insertAskQuestion(question)
                         } else {
                             AppLog.infoLog("Blank Question not added.")

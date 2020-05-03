@@ -3,9 +3,11 @@ package com.ramanbyte.emla.view_model
 import android.content.Context
 import android.view.View
 import androidx.lifecycle.MutableLiveData
+import com.ramanbyte.R
 import com.ramanbyte.base.BaseViewModel
 import com.ramanbyte.data_layer.CoroutineUtils
 import com.ramanbyte.emla.data_layer.network.exception.ApiException
+import com.ramanbyte.emla.data_layer.network.exception.NoDataException
 import com.ramanbyte.emla.data_layer.network.exception.NoInternetException
 import com.ramanbyte.emla.data_layer.repositories.ContentRepository
 import com.ramanbyte.emla.data_layer.repositories.QuestionRepository
@@ -13,6 +15,8 @@ import com.ramanbyte.emla.data_layer.repositories.SectionsRepository
 import com.ramanbyte.emla.models.AskQuestionModel
 import com.ramanbyte.emla.models.MediaInfoModel
 import com.ramanbyte.utilities.AppLog
+import com.ramanbyte.utilities.BindingUtils
+import com.ramanbyte.utilities.KEY_BLANK
 import org.kodein.di.generic.instance
 
 class MediaPlaybackViewModel(mContext: Context) : BaseViewModel(mContext) {
@@ -29,6 +33,10 @@ class MediaPlaybackViewModel(mContext: Context) : BaseViewModel(mContext) {
 
     var onClickAskQuestionLiveData = MutableLiveData<Boolean>().apply {
         value = false
+    }
+
+    var enteredQuestionLiveData = MutableLiveData<String>().apply {
+        value = KEY_BLANK
     }
 
     var questionAndAnswerListLiveData = MutableLiveData<List<AskQuestionModel>>().apply {
@@ -77,22 +85,24 @@ class MediaPlaybackViewModel(mContext: Context) : BaseViewModel(mContext) {
     fun insertAskQuestion(question:String) {
         CoroutineUtils.main {
             try {
-                //isLoaderShowingLiveData.postValue(true)
-                //contentRepository.updateMediaInfo(mediaInfoModel)
+                isLoaderShowingLiveData.postValue(true)
                 questionRepository.insertAskQuestion(mediaInfoModel!!, question)
-
-                //isLoaderShowingLiveData.postValue(false)
+                getQuestionAndAnswer()
+                isLoaderShowingLiveData.postValue(false)
             } catch (e: ApiException) {
                 e.printStackTrace()
                 AppLog.errorLog(e.message, e)
+                isLoaderShowingLiveData.postValue(false)
                 //view.snackbar(BindingUtils.string(R.string.some_thing_went_wrong))
             } catch (e: NoInternetException) {
                 e.printStackTrace()
                 AppLog.errorLog(e.message, e)
+                isLoaderShowingLiveData.postValue(false)
                 //view.snackbar(BindingUtils.string(R.string.no_internet_message))
             } catch (e: Exception) {
                 e.printStackTrace()
                 AppLog.errorLog(e.message, e)
+                isLoaderShowingLiveData.postValue(false)
             }
 
         }
@@ -101,17 +111,52 @@ class MediaPlaybackViewModel(mContext: Context) : BaseViewModel(mContext) {
     fun getQuestionAndAnswer(){
         CoroutineUtils.main {
             try {
+                coroutineToggleLoader(BindingUtils.string(R.string.getting_questions_list))
+
                 val response = questionRepository.getQuestionAndAnswer(mediaInfoModel?.mediaId!!)
                 questionAndAnswerListLiveData.postValue(response)
+
+                toggleLayoutVisibility(
+                    View.VISIBLE,
+                    View.GONE,
+                    View.GONE,
+                    KEY_BLANK,
+                    View.GONE
+                )
+                coroutineToggleLoader()
             } catch (e: ApiException) {
                 e.printStackTrace()
                 AppLog.errorLog(e.message, e)
+                toggleLayoutVisibility(
+                    View.GONE,
+                    View.GONE,
+                    View.GONE,
+                    BindingUtils.string(R.string.some_thing_went_wrong),
+                    View.VISIBLE
+                )
+                coroutineToggleLoader()
             } catch (e: NoInternetException) {
                 e.printStackTrace()
                 AppLog.errorLog(e.message, e)
-            } catch (e: Exception) {
+                toggleLayoutVisibility(
+                    View.GONE,
+                    View.GONE,
+                    View.VISIBLE,
+                    BindingUtils.string(R.string.no_internet_message),
+                    View.GONE
+                )
+                coroutineToggleLoader()
+            } catch (e: NoDataException) {
                 e.printStackTrace()
                 AppLog.errorLog(e.message, e)
+                toggleLayoutVisibility(
+                    View.GONE,
+                    View.VISIBLE,
+                    View.GONE,
+                    BindingUtils.string(R.string.ask_questions_unavailable),
+                    View.GONE
+                )
+                coroutineToggleLoader()
             }
         }
 
