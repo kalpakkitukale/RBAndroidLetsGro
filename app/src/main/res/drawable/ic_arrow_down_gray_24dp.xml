@@ -6,6 +6,6 @@
     android:width="24dp"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <path
-        android:fillColor="@color/colorPrimary"
-        android:pathData="m275.565,189.451 l223.897,223.897h51.668l-275.565,-275.565 -275.565,275.565h51.668z"/>
+        android:fillColor="@color/colorDividerGrayOnWhiteBackground"
+        android:pathData="M386.258 91.567L203.718 273.512 21.179 91.567 0 112.815 203.718 315.87 407.437 112.815Z"/>
 </vector>
