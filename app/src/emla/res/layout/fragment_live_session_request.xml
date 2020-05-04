@@ -94,7 +94,7 @@
         android:id="@+id/ivSendLSR"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_send_black"
+        android:src="@drawable/ic_send_gray"
         android:padding="@dimen/dp_10"
         app:layout_constraintTop_toTopOf="@+id/etAddReplyLSR"
         app:layout_constraintBottom_toBottomOf="@+id/etAddReplyLSR"
