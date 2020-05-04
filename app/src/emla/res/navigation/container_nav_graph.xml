@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container_nav_graph"
     app:startDestination="@id/coursesFragment">
 
@@ -79,5 +80,10 @@
             android:id="@+id/action_learnerProfileFragment_to_coursesFragment"
             app:destination="@id/coursesFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/myFavouriteVideoFragment"
+        android:name="com.ramanbyte.emla.ui.fragments.MyFavouriteVideoFragment"
+        android:label="@string/my_favourite"
+        tools:layout="@layout/fragment_my_favourite_video" />
 
 </navigation>

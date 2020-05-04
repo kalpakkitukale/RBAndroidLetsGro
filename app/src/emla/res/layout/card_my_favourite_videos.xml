@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.ramanbyte.emla.view_model.MyFavouriteVideoViewModel" />
+
+        <variable
+            name="favouriteVideosModel"
+            type="com.ramanbyte.emla.models.FavouriteVideosModel" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_5"
+        android:layout_marginEnd="@dimen/dp_10"
+        android:layout_marginBottom="@dimen/dp_5"
+        app:cardBackgroundColor="@color/colorTransparent"
+        app:cardCornerRadius="@dimen/dp_5"
+        app:contentPadding="@dimen/dp_5">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/dp_10">
+
+            <TextView
+                android:id="@+id/tvContentTitle"
+                style="@style/TextViewMediumBlackOnWhite"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_5"
+                android:layout_marginStart="@dimen/dp_5"
+                android:layout_marginEnd="@dimen/dp_5"
+                android:text="@{favouriteVideosModel.content_Type}"
+                android:textSize="@dimen/sp_14"
+                app:layout_constraintEnd_toStartOf="@+id/btnFavouriteVideo"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/btnFavouriteVideo"
+                style="@style/exoImageButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/dp_5"
+                android:src="@drawable/ic_heart_checked"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/lblContentSubject"
+                style="@style/TextViewRegularBlackOnWhite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:text='@{@string/course +" : "}'
+                android:textSize="@dimen/sp_12"
+                app:layout_constraintStart_toStartOf="@+id/tvContentTitle"
+                app:layout_constraintTop_toBottomOf="@+id/tvContentTitle" />
+
+            <TextView
+                android:id="@+id/lblContentTopic"
+                style="@style/TextViewRegularBlackOnWhite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_3"
+                android:text='@{@string/chapter +" : "}'
+                android:textSize="@dimen/sp_12"
+                app:layout_constraintStart_toStartOf="@+id/lblContentSubject"
+                app:layout_constraintTop_toBottomOf="@+id/lblContentSubject" />
+
+            <TextView
+                android:id="@+id/lblContentSection"
+                style="@style/TextViewRegularBlackOnWhite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_3"
+                android:text='@{@string/section +" : "}'
+                android:textSize="@dimen/sp_12"
+                app:layout_constraintStart_toStartOf="@+id/lblContentTopic"
+                app:layout_constraintTop_toBottomOf="@+id/lblContentTopic" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</layout>
+
