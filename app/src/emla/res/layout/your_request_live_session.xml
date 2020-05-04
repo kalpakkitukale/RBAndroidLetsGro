@@ -7,7 +7,7 @@
     android:layout_height="wrap_content">
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tvlabelTitleLSR"
+        android:id="@+id/tvLabelTitleLSR"
         style="@style/TextViewBoldBlackOnWhite"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -17,13 +17,13 @@
         android:paddingBottom="@dimen/dp_10"
         android:text="@string/your_request"
         android:textSize="@dimen/sp_16"
-        app:layout_constraintEnd_toStartOf="@+id/imageView2"
+        app:layout_constraintEnd_toStartOf="@+id/imgArrowDownLSR"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/imageView2"
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imgArrowDownLSR"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:background="@color/transparent"
@@ -32,23 +32,23 @@
         android:paddingTop="@dimen/dp_5"
         android:paddingBottom="@dimen/dp_5"
         android:src="@drawable/ic_arrow_up_gray_24dp"
-        app:layout_constraintBottom_toBottomOf="@+id/tvlabelTitleLSR"
+        app:layout_constraintBottom_toBottomOf="@+id/tvLabelTitleLSR"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/tvlabelTitleLSR"
-        app:layout_constraintTop_toTopOf="@+id/tvlabelTitleLSR" />
+        app:layout_constraintStart_toEndOf="@+id/tvLabelTitleLSR"
+        app:layout_constraintTop_toTopOf="@+id/tvLabelTitleLSR" />
 
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tvLableMobieNoRequest"
+        android:id="@+id/tvLabelMobileNoRequest"
         style="@style/TextViewRegularLightGray"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/mobile_number"
         android:textSize="@dimen/sp_10"
         android:layout_marginStart="@dimen/dp_25"
-        app:layout_constraintStart_toStartOf="@+id/tvlabelTitleLSR"
-        app:layout_constraintTop_toBottomOf="@+id/tvlabelTitleLSR" />
+        app:layout_constraintStart_toStartOf="@+id/tvLabelTitleLSR"
+        app:layout_constraintTop_toBottomOf="@+id/tvLabelTitleLSR" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvMobileNoRequest"
@@ -62,11 +62,11 @@
         android:textSize="@dimen/sp_16"
         android:layout_marginEnd="@dimen/dp_20"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/tvLableMobieNoRequest"
-        app:layout_constraintTop_toBottomOf="@+id/tvLableMobieNoRequest" />
+        app:layout_constraintStart_toStartOf="@+id/tvLabelMobileNoRequest"
+        app:layout_constraintTop_toBottomOf="@+id/tvLabelMobileNoRequest" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tvLableAlternateMobieNoRequest"
+        android:id="@+id/tvLabelAlternateMobileNoRequest"
         style="@style/TextViewRegularLightGray"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -87,11 +87,11 @@
         android:text="8140404044"
         android:textSize="@dimen/sp_16"
         app:layout_constraintEnd_toEndOf="@+id/tvMobileNoRequest"
-        app:layout_constraintStart_toStartOf="@+id/tvLableAlternateMobieNoRequest"
-        app:layout_constraintTop_toBottomOf="@+id/tvLableAlternateMobieNoRequest" />
+        app:layout_constraintStart_toStartOf="@+id/tvLabelAlternateMobileNoRequest"
+        app:layout_constraintTop_toBottomOf="@+id/tvLabelAlternateMobileNoRequest" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tvLableTimeToCOntact"
+        android:id="@+id/tvLabelTimeToContact"
         style="@style/TextViewRegularLightGray"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -112,11 +112,11 @@
         android:text="9:30 AM To 10:30 AM"
         android:textSize="@dimen/sp_16"
         app:layout_constraintEnd_toEndOf="@+id/tvAlternateMobileNoRequest"
-        app:layout_constraintStart_toStartOf="@+id/tvLableTimeToCOntact"
-        app:layout_constraintTop_toBottomOf="@+id/tvLableTimeToCOntact" />
+        app:layout_constraintStart_toStartOf="@+id/tvLabelTimeToContact"
+        app:layout_constraintTop_toBottomOf="@+id/tvLabelTimeToContact" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tvLableLearnSession"
+        android:id="@+id/tvLabelLearnSession"
         style="@style/TextViewRegularLightGray"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -127,7 +127,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tvRequestTime" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tvTextLearnsession"
+        android:id="@+id/tvTextLearnSession"
         style="@style/TextViewBoldBlackOnWhite"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -137,7 +137,7 @@
         android:layout_marginBottom="@dimen/dp_20"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/tvRequestTime"
-        app:layout_constraintStart_toStartOf="@+id/tvLableLearnSession"
-        app:layout_constraintTop_toBottomOf="@+id/tvLableLearnSession" />
+        app:layout_constraintStart_toStartOf="@+id/tvLabelLearnSession"
+        app:layout_constraintTop_toBottomOf="@+id/tvLabelLearnSession" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
