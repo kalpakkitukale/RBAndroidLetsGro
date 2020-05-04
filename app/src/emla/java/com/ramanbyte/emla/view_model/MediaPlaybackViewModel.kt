@@ -50,7 +50,9 @@ class MediaPlaybackViewModel(mContext: Context) : BaseViewModel(mContext) {
     fun updateMediaInfo(mediaInfoModel: MediaInfoModel) =
         contentRepository.updateMediaInfo(mediaInfoModel)
 
-    override var noInternetTryAgain: () -> Unit = {}
+    override var noInternetTryAgain: () -> Unit = {
+        getQuestionAndAnswer()
+    }
 
 
     fun insertSectionContentLog(

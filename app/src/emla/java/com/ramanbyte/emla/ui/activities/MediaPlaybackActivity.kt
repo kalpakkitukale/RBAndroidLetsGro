@@ -161,13 +161,17 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
                 getQuestionAndAnswer()
 
                 questionAndAnswerListLiveData.observe(this@MediaPlaybackActivity, Observer {
-                    if (it != null){
+                    if (it != null) {
                         enteredQuestionLiveData.value = KEY_BLANK
                         exoCommentLayoutBinding.rvComment.apply {
                             videoQuestionReplyAdapter = VideoQuestionReplyAdapter()
                             videoQuestionReplyAdapter?.apply {
                                 layoutManager =
-                                    LinearLayoutManager(this@MediaPlaybackActivity, RecyclerView.VERTICAL, false)
+                                    LinearLayoutManager(
+                                        this@MediaPlaybackActivity,
+                                        RecyclerView.VERTICAL,
+                                        false
+                                    )
                                 mediaPlaybackViewModel = viewModel
                                 askQuestionList = it
                                 adapter = this
@@ -196,12 +200,6 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
             onClickAskQuestionLiveData.observe(this@MediaPlaybackActivity, Observer {
                 if (it != null) {
                     if (it == true) {
-
-                Log.d("BtnClick","value1>>"+it)
-                if (it != null){
-                    Log.d("BtnClick","value2>>"+it)
-                    if (it == true){
-                        Log.d("BtnClick","value3>>"+it)
                         val question = exoCommentLayoutBinding.etAskQuestion.text.toString()
                         if (enteredQuestionLiveData.value?.isNotBlank()!!) {
                             insertAskQuestion(question)
