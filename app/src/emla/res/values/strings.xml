@@ -224,4 +224,19 @@ Content
     <string name="ask_questions_with_question_mark">Ask questions?</string>
     <string name="title_recently_ask_questions">Recently Ask Questions?</string>
 
+    <string name="like">Like</string>
+    <string name="dislike">Dislike</string>
+    <string name="wishlist">Wishlist</string>
+    <string name="do_you_have_any_questions">Do you have any questions?</string>
+    <string name="mobile_number">Mobile Number</string>
+    <string name="alternate_mobile_number">Alternate Mobile Number</string>
+    <string name="time_to_contact">Good Time to Contact</string>
+    <string name="send">Send</string>
+    <string name="cancel">Cancel</string>
+    <string name="what_you_want_to_learn_in_live_session">What you want to learn in Live Session?</string>
+    <string name="today">Today</string>
+    <string name="request_to_live_session">Request to Live Session</string>
+    <string name="your_request">Your Request</string>
+    <string name="add_reply">Add Reply</string>
+
 </resources>

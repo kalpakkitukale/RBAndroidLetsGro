@@ -192,19 +192,18 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
             onClickAskQuestionLiveData.observe(this@MediaPlaybackActivity, Observer {
                 if (it != null) {
                     if (it == true) {
-
-                Log.d("BtnClick","value1>>"+it)
-                if (it != null){
-                    Log.d("BtnClick","value2>>"+it)
-                    if (it == true){
-                        Log.d("BtnClick","value3>>"+it)
-                        val question = exoCommentLayoutBinding.etAskQuestion.text.toString()
-                        if (question.isNotBlank()) {
-                            insertAskQuestion(question)
-                        } else {
-                            AppLog.infoLog("Blank Question not added.")
+                        if (it != null) {
+                            if (it == true) {
+                                val question = exoCommentLayoutBinding.etAskQuestion.text.toString()
+                                if (question.isNotBlank()) {
+                                    insertAskQuestion(question)
+                                } else {
+                                    AppLog.infoLog("Blank Question not added.")
+                                }
+                                onClickAskQuestionLiveData.value = false
+                            }
                         }
-                        onClickAskQuestionLiveData.value = false
+
                     }
                 }
             })

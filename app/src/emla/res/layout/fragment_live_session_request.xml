@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_10"
         app:cardCornerRadius="@dimen/dp_5"
+        app:cardElevation="2dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -20,8 +21,8 @@
             android:layout_height="wrap_content"
             android:background="@drawable/card_session_log_background">
 
-         <!--   <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tvlabelTitleLSR"
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvLabelTitleLSR"
                 style="@style/TextViewBoldBlackOnWhite"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -30,35 +31,35 @@
                 android:text="@string/your_request"
                 android:textSize="@dimen/sp_16"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/imageView2"
+                app:layout_constraintEnd_toStartOf="@+id/imgArrowDownLSR"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/imageView2"
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imgArrowDownLSR"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_marginEnd="@dimen/dp_10"
                 android:background="@color/transparent"
                 android:padding="@dimen/dp_5"
                 android:src="@drawable/ic_arrow_down_gray"
-                app:layout_constraintBottom_toBottomOf="@+id/tvlabelTitleLSR"
+                app:layout_constraintBottom_toBottomOf="@+id/tvLabelTitleLSR"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/tvlabelTitleLSR"
-                app:layout_constraintTop_toTopOf="@+id/tvlabelTitleLSR" />-->
+                app:layout_constraintStart_toEndOf="@+id/tvLabelTitleLSR"
+                app:layout_constraintTop_toTopOf="@+id/tvLabelTitleLSR" />
 
 
             <include
                 android:id="@+id/requestSessionLayout"
+                android:visibility="gone"
                 layout="@layout/your_request_live_session"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintVertical_bias="0.075" />
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -81,13 +82,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/dp_10"
-        android:background="@drawable/edittext_backgroung_gray_border"
-        android:drawableEnd="@drawable/ic_send_gray"
+        android:background="@drawable/edittext_background_gray_border"
         android:hint="@string/add_reply"
-        android:textSize="@dimen/sp_16"
+        android:textSize="@dimen/sp_18"
         android:padding="@dimen/dp_10"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivSendLSR"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_send_black"
+        android:padding="@dimen/dp_10"
+        app:layout_constraintTop_toTopOf="@+id/etAddReplyLSR"
+        app:layout_constraintBottom_toBottomOf="@+id/etAddReplyLSR"
+        app:layout_constraintEnd_toEndOf="@+id/etAddReplyLSR"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.appcompat.widget.AppCompatCheckedTextView
-        android:id="@+id/tvDate"
+        android:id="@+id/tvDateLiveSessionLog"
         style="@style/TextViewLightBlackOnWhite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -17,16 +17,16 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rcLiveSessinLogDate"
+        android:id="@+id/rcLiveSessionLogDate"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dp_22"
         android:layout_marginEnd="@dimen/dp_22"
         android:layout_marginTop="@dimen/dp_10"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvDate"
-        tools:listitem="@layout/card__live_sessionnn_log_date" />
+        app:layout_constraintTop_toBottomOf="@+id/tvDateLiveSessionLog"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:listitem="@layout/card_live_session_log_date" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
