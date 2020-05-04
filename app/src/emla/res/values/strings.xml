@@ -245,5 +245,6 @@ Content
     <string name="request_to_live_session">Request to Live Session</string>
     <string name="your_request">Your Request</string>
     <string name="add_reply">Add Reply</string>
+    <string name="message_remove_favourite">You want to remove favourite ?</string>
 
 </resources>

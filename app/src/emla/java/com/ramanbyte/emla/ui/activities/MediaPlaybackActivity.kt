@@ -31,7 +31,6 @@ import com.ramanbyte.R
 import com.ramanbyte.base.BaseActivity
 import com.ramanbyte.databinding.ActivityMediaPlaybackBinding
 import com.ramanbyte.databinding.ExoCommentLayoutBinding
-import com.ramanbyte.emla.adapters.JumpToQueAdapter
 import com.ramanbyte.emla.adapters.VideoQuestionReplyAdapter
 import com.ramanbyte.emla.base.di.authModuleDependency
 import com.ramanbyte.emla.content.ExoMediaDownloadUtil

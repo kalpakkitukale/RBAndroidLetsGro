@@ -10,10 +10,7 @@ import com.ramanbyte.base.BaseFragment
 import com.ramanbyte.databinding.FragmentMyFavouriteVideoBinding
 import com.ramanbyte.emla.adapters.MyFavouriteVideosListAdapter
 import com.ramanbyte.emla.view_model.MyFavouriteVideoViewModel
-import com.ramanbyte.utilities.AlertDialog
-import com.ramanbyte.utilities.AppLog
-import com.ramanbyte.utilities.BindingUtils
-import com.ramanbyte.utilities.ProgressLoader
+import com.ramanbyte.utilities.*
 import kotlinx.android.synthetic.emla.exo_playback_control_view.*
 
 /**
@@ -59,9 +56,12 @@ class MyFavouriteVideoFragment : BaseFragment<FragmentMyFavouriteVideoBinding,My
 
                 onClickFavouriteVideosLiveData.observe(this@MyFavouriteVideoFragment, Observer {
                     if (it != null){
-                        if (it == true){
-                            AppLog.infoLog("onClickFavouriteVideosLiveData")
-                            onClickFavouriteVideosLiveData.value = false
+                        if (it > 0){
+                            getMediaInfo(it)
+                            insertSectionContentLog(it, mediaInfoModel?.apply {
+                                favouriteVideo = KEY_BLANK
+                            }!!)
+                            onClickFavouriteVideosLiveData.value = 0
                         }
                     }
                 })

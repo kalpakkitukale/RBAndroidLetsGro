@@ -10,6 +10,7 @@ import com.ramanbyte.databinding.CardMyFavouriteVideosBinding
 import com.ramanbyte.emla.models.FavouriteVideosModel
 import com.ramanbyte.emla.view_model.MyFavouriteVideoViewModel
 import com.ramanbyte.utilities.BindingUtils
+import com.ramanbyte.utilities.NetworkConnectivity
 import kotlinx.android.synthetic.emla.exo_playback_control_view.*
 
 class MyFavouriteVideosListAdapter(
@@ -50,8 +51,30 @@ class MyFavouriteVideosListAdapter(
                 this.favouriteVideosModel = favouriteVideosModel
 
                 btnFavouriteVideo.setOnClickListener(View.OnClickListener {
-                    btnFavouriteVideo.setImageDrawable(BindingUtils.drawable(R.drawable.ic_heart_with_black_border))
-                    favouriteViewModel.onClickFavouriteVideosLiveData.value = true
+
+                    favouriteViewModel.apply {
+                        if (NetworkConnectivity.isConnectedToInternet()) {
+                            setAlertDialogResourceModelMutableLiveData(
+                                BindingUtils.string(R.string.message_remove_favourite),
+                                null,
+                                false,
+                                positiveButtonText = BindingUtils.string(R.string.strYes),
+                                positiveButtonClickFunctionality = {
+                                    btnFavouriteVideo.setImageDrawable(BindingUtils.drawable(R.drawable.ic_heart_with_black_border))
+                                    favouriteViewModel.onClickFavouriteVideosLiveData.value = favouriteVideosModel.content_Id
+                                    isAlertDialogShown.value = false
+                                },
+                                negativeButtonText = BindingUtils.string(R.string.strNo),
+                                negativeButtonClickFunctionality = {
+                                    isAlertDialogShown.value = false
+                                })
+
+                            isAlertDialogShown.value = true
+                        }else{
+                            showNoInternetDialog()
+                        }
+                    }
+
                 })
             }
         }
