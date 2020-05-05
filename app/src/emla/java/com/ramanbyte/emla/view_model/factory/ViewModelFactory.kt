@@ -76,6 +76,9 @@ class ViewModelFactory(private val mContext: Context) : BaseViewModelFactory(mCo
             modelClass.isAssignableFrom(SettingViewModel::class.java) -> {
                 return SettingViewModel(mContext) as T
             }
+            modelClass.isAssignableFrom(MyFavouriteVideoViewModel::class.java) -> {
+                return MyFavouriteVideoViewModel(mContext) as T
+            }
             else -> super.create(modelClass)
         }
 

@@ -43,20 +43,6 @@
     <string name="unable_to_fetch_dependencie">Unable to fetch some dependencies. Kindly contact support!</string>
     <string name="no_profile_data_found">No profile data found</string>
     <string name="invalid_city_selected">Invalid city selected</string>
-    <string name="like">Like</string>
-    <string name="dislike">Dislike</string>
-    <string name="wishlist">Wishlist</string>
-    <string name="do_you_have_any_questions">Do you have any questions?</string>
-    <string name="mobile_number">Mobile Number</string>
-    <string name="alternate_mobile_number">Alternate Mobile Number</string>
-    <string name="time_to_contact">Good Time to Contact</string>
-    <string name="send">Send</string>
-    <string name="cancel">Cancel</string>
-    <string name="what_you_want_to_learn_in_live_session">What you want to learn in Live Session?</string>
-    <string name="today">Today</string>
-    <string name="indentification_mesearment">Indentification, Mesearment</string>
-    <string name="understanding_sales_cycle">Understanding Sales Cycle</string>
-    <string name="request_to_live_session">Request to Live Session</string>
-    <string name="_12_16_pm">12:16 PM</string>
+
 
 </resources>

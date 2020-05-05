@@ -2,14 +2,16 @@
 <layout xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="askQuestionModel"
+            type="com.ramanbyte.emla.models.AskQuestionModel" />
     </data>
 
     <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/cardLayoutMain"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         app:cardBackgroundColor="@color/colorTransparent"
         app:cardCornerRadius="@dimen/dp_5"
         app:cardElevation="2dp"
@@ -24,7 +26,6 @@
                 android:id="@+id/rivUserPic"
                 android:layout_width="@dimen/dp_30"
                 android:layout_height="@dimen/dp_30"
-                android:layout_marginStart="@dimen/dp_10"
                 android:src="@drawable/ic_camera"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -48,11 +49,22 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_5"
-                android:text="This is question is to ask"
+                android:text="@{askQuestionModel.question}"
                 android:textSize="@dimen/sp_12"
                 app:layout_constraintEnd_toEndOf="@+id/tvUserName"
                 app:layout_constraintStart_toEndOf="@+id/rivUserPic"
                 app:layout_constraintTop_toBottomOf="@+id/tvUserName" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvDateTime"
+                style="@style/TextViewBoldLightGray"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@{askQuestionModel.created_Date}"
+                android:textSize="@dimen/sp_10"
+                app:layout_constraintEnd_toEndOf="@+id/tvQuestion"
+                app:layout_constraintStart_toStartOf="@+id/tvQuestion"
+                app:layout_constraintTop_toBottomOf="@+id/tvQuestion" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvReply"
@@ -63,7 +75,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/tvUserName"
                 app:layout_constraintStart_toStartOf="@+id/rivUserPic"
-                app:layout_constraintTop_toBottomOf="@+id/tvQuestion"
+                app:layout_constraintTop_toBottomOf="@+id/tvDateTime"
                 tools:listitem="@layout/card_recently_ask_questions_reply" />
 
             <TextView
@@ -76,11 +88,8 @@
                 android:textAllCaps="true"
                 android:textSize="@dimen/sp_12"
                 app:layout_constraintStart_toStartOf="@+id/tvUserName"
-                app:layout_constraintTop_toBottomOf="@id/tvQuestion" />
-
+                app:layout_constraintTop_toBottomOf="@id/tvDateTime" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
     </androidx.cardview.widget.CardView>
-
 </layout>

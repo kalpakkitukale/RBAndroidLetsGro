@@ -134,6 +134,7 @@
     <string name="failed_to_download_content">Downloading failed…</string>
     <string name="downloading">Downloading…</string>
     <string name="downloads">Downloads</string>
+    <string name="my_favourite">My Favourite</string>
     <string name="no_data">No Data</string>
     <!--<string name="lost_attempt_message">Sorry! You have expired all your attempts, contact your HR admin to continue with the test..</string>-->
     <string name="lost_attempt_message">Sorry! You have no attempts left, contact your HR admin to continue with the test..</string>
@@ -179,6 +180,7 @@
 
     <string name="course">Course</string>
     <string name="chapter">Chapter</string>
+    <string name="section">Section</string>
 
     <!--
 Content
@@ -223,5 +225,26 @@ Content
     <string name="reply">Reply</string>
     <string name="ask_questions_with_question_mark">Ask questions?</string>
     <string name="title_recently_ask_questions">Recently Ask Questions?</string>
+    <string name="ask_questions_unavailable">Questions are not available yet!</string>
+    <string name="getting_questions_list">Getting questions list…</string>
+
+    <!--Favourite Video-->
+    <string name="favourite_videos_unavailable">Favourite videos are not available yet!</string>
+
+    <string name="like">Like</string>
+    <string name="dislike">Dislike</string>
+    <string name="wishlist">Wishlist</string>
+    <string name="do_you_have_any_questions">Do you have any questions?</string>
+    <string name="mobile_number">Mobile Number</string>
+    <string name="alternate_mobile_number">Alternate Mobile Number</string>
+    <string name="time_to_contact">Good Time to Contact</string>
+    <string name="send">Send</string>
+    <string name="cancel">Cancel</string>
+    <string name="what_you_want_to_learn_in_live_session">What you want to learn in Live Session?</string>
+    <string name="today">Today</string>
+    <string name="request_to_live_session">Request to Live Session</string>
+    <string name="your_request">Your Request</string>
+    <string name="add_reply">Add Reply</string>
+    <string name="message_remove_favourite">You want to remove favourite ?</string>
 
 </resources>

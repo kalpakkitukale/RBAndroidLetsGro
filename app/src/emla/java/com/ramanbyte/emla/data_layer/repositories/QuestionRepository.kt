@@ -1,13 +1,15 @@
 package com.ramanbyte.emla.data_layer.repositories
 
 import android.content.Context
-import com.ramanbyte.data_layer.SharedPreferencesDatabase
 import com.ramanbyte.data_layer.SharedPreferencesDatabase.getIntPref
 import com.ramanbyte.data_layer.base.BaseRepository
 import com.ramanbyte.emla.data_layer.network.api_layer.QuestionController
+import com.ramanbyte.emla.data_layer.network.api_layer.SectionsController
 import com.ramanbyte.emla.models.AskQuestionModel
+import com.ramanbyte.emla.models.FavouriteVideosModel
+import com.ramanbyte.emla.models.request.AskQuestionRequestModel
 import com.ramanbyte.emla.models.MediaInfoModel
-import com.ramanbyte.emla.models.QuizResultModel
+import com.ramanbyte.utilities.AppLog
 import com.ramanbyte.utilities.KEY_BLANK
 import com.ramanbyte.utilities.KEY_DEVICE_ID
 import org.kodein.di.generic.instance
@@ -15,27 +17,87 @@ import org.kodein.di.generic.instance
 class QuestionRepository(mContext: Context) : BaseRepository(mContext) {
 
     private val questionController: QuestionController by instance()
+    private val sectionsController: SectionsController by instance()
 
-    suspend fun insertAskQuestion(mediaInfoModel: MediaInfoModel): AskQuestionModel? {
+    suspend fun insertAskQuestion(
+        mediaInfoModel: MediaInfoModel,
+        question: String
+    ): AskQuestionRequestModel? {
 
         val userId = applicationDatabase.getUserDao().getCurrentUser()?.userId!!
 
-        val askQuestionModel = AskQuestionModel().apply {
-            student_Id = userId
-            course_Id = mediaInfoModel.courseId
-            chpater_Id = mediaInfoModel.chapterId
-            section_Id = mediaInfoModel.sectionId
-            content_Id = mediaInfoModel.mediaId
-            faculty_Id = 0
-            content_Type = mediaInfoModel.mediaType
-            device_Id = getIntPref(KEY_DEVICE_ID).toString()
-            question = KEY_BLANK
-            answer = KEY_BLANK
-        }
+        val askQuestionModel = AskQuestionRequestModel()
+            .apply {
+                student_Id = userId
+                course_Id = mediaInfoModel.courseId
+                chpater_Id = mediaInfoModel.chapterId
+                section_Id = mediaInfoModel.sectionId
+                content_Id = mediaInfoModel.mediaId
+                faculty_Id = 0
+                content_Type = mediaInfoModel.mediaType
+                device_Id = getIntPref(KEY_DEVICE_ID).toString()
+                this.question = question
+                answer = KEY_BLANK
+            }
 
         return apiRequest {
             questionController.insertAskQuestion(askQuestionModel)
         }
+    }
+
+    suspend fun getQuestionAndAnswer(contentId: Int): ArrayList<AskQuestionModel>? {
+        val userId = applicationDatabase.getUserDao().getCurrentUser()?.userId!!
+        val questionAndAnswerModel = apiRequest {
+            questionController.getQuestionAndAnswer(userId, contentId)
+        }
+        return questionAndAnswerModel
+    }
+
+    suspend fun getFavouriteVideos(contentId: Int): ArrayList<FavouriteVideosModel>? {
+        val userId = applicationDatabase.getUserDao().getCurrentUser()?.userId!!
+        return apiRequest {
+            questionController.getFavouriteVideos(userId, contentId)
+        }
+    }
+
+    fun getMediaInfo(mediaId: Int): MediaInfoModel? {
+        val userId = applicationDatabase.getUserDao()?.getCurrentUser()?.userId ?: 0
+        return applicationDatabase.getMediaInfoDao().getMediaInfo(mediaId, userId)
+    }
+
+    fun updateMediaInfo(mediaInfoModel: MediaInfoModel) {
+        applicationDatabase.getMediaInfoDao().update(mediaInfoModel)
+    }
+
+    /*
+    * call the api to insert SectionContentLog to the server
+    * */
+    suspend fun insertSectionContentLog(
+        mediaId: Int
+    ): Int {
+        val userId = applicationDatabase.getUserDao().getCurrentUser()?.userId!!
+        var result: Int? = 0
+
+        /*
+        * get all the record from local database which is not sync to server
+        * */
+        val allMediaInfo = applicationDatabase.getMediaInfoDao().getMediaInfo(mediaId, userId)
+
+        allMediaInfo?.apply {
+            this.createdBy = userId
+            this.modifiedBy = userId
+            this.device_Id = getIntPref(KEY_DEVICE_ID)
+            result = apiRequest {
+                sectionsController.insertSectionContentLog(allMediaInfo)
+            }!!
+            if (result!! > 0) {
+                /*
+                * if data is inserted to server then change then result!! > 0
+                * */
+                AppLog.infoLog("dataInserted")
+            }
+        }
+        return result!!
     }
 
 }

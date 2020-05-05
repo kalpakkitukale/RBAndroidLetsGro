@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="myFavouriteVideoViewModel"
+            type="com.ramanbyte.emla.view_model.MyFavouriteVideoViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".myFavouriteVideoFragment">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvMyFavourite"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/dp_8"
+            android:visibility="@{myFavouriteVideoViewModel.viewVisibilityLiveData}"
+            tools:listitem="@layout/card_my_favourite_videos" />
+
+        <include
+            android:id="@+id/noData"
+            layout="@layout/no_data"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone" />
+
+        <include
+            android:id="@+id/noInternet"
+            layout="@layout/no_internet"
+            android:visibility="gone" />
+
+        <include
+            android:id="@+id/somethingWentWrong"
+            layout="@layout/something_went_wrong"
+            android:visibility="gone" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

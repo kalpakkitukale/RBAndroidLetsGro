@@ -1,27 +1,21 @@
 package com.ramanbyte.emla.models
 
 import com.ramanbyte.utilities.DateUtils
-import com.ramanbyte.utilities.KEY_APP
+import com.ramanbyte.utilities.DateUtils.DATE_TIME_PATTERN
+import com.ramanbyte.utilities.DateUtils.DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS
 import com.ramanbyte.utilities.KEY_BLANK
-import com.ramanbyte.utilities.KEY_N
 
 class AskQuestionModel {
 
-    var id: Int? = 0
-    var student_Id: Int? = 0
-    var course_Id: Int? = 0
-    var chpater_Id: Int? = 0
-    var section_Id: Int? = 0
-    var content_Id: Int? = 0
-    var faculty_Id: Int? = 0
-    var content_Type: String? = KEY_BLANK
-    var device_Id: String? = KEY_BLANK
-    var question: String? = KEY_BLANK
-    var answer: String? = KEY_BLANK
-    var created_Date: String? = DateUtils.getCurDate()
-    var app_status: String? = KEY_APP
-    var del_Status: String? = KEY_N
-    var isPublic: String? = KEY_N
-    var isApproved: String? = KEY_N
+    var id = 0
+    var question = KEY_BLANK
+    var created_Date = KEY_BLANK
+        get() = DateUtils.getDisplayDateFromDate(
+            field,
+            DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS,
+            DATE_TIME_PATTERN
+        )
+
+    var isPublic = KEY_BLANK
 
 }

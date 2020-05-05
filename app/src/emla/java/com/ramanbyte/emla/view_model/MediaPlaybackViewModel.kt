@@ -2,7 +2,6 @@ package com.ramanbyte.emla.view_model
 
 import android.content.Context
 import android.view.View
-import androidx.constraintlayout.widget.ConstraintSet
 import androidx.lifecycle.MutableLiveData
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseViewModel
@@ -18,7 +17,6 @@ import com.ramanbyte.emla.models.MediaInfoModel
 import com.ramanbyte.utilities.AppLog
 import com.ramanbyte.utilities.BindingUtils
 import com.ramanbyte.utilities.KEY_BLANK
-import com.ramanbyte.utilities.snackbar
 import org.kodein.di.generic.instance
 
 class MediaPlaybackViewModel(mContext: Context) : BaseViewModel(mContext) {
@@ -29,6 +27,22 @@ class MediaPlaybackViewModel(mContext: Context) : BaseViewModel(mContext) {
 
     var mediaInfoModel: MediaInfoModel? = null
 
+    var onClickCloseCommentLiveData = MutableLiveData<Boolean>().apply {
+        value = false
+    }
+
+    var onClickAskQuestionLiveData = MutableLiveData<Boolean>().apply {
+        value = false
+    }
+
+    var enteredQuestionLiveData = MutableLiveData<String>().apply {
+        value = KEY_BLANK
+    }
+
+    var questionAndAnswerListLiveData = MutableLiveData<List<AskQuestionModel>>().apply {
+        value = arrayListOf()
+    }
+
     fun getMediaInfo(mediaId: Int) {
         mediaInfoModel = contentRepository.getMediaInfo(mediaId)
     }
@@ -36,7 +50,9 @@ class MediaPlaybackViewModel(mContext: Context) : BaseViewModel(mContext) {
     fun updateMediaInfo(mediaInfoModel: MediaInfoModel) =
         contentRepository.updateMediaInfo(mediaInfoModel)
 
-    override var noInternetTryAgain: () -> Unit = {}
+    override var noInternetTryAgain: () -> Unit = {
+        getQuestionAndAnswer()
+    }
 
 
     fun insertSectionContentLog(
@@ -68,29 +84,93 @@ class MediaPlaybackViewModel(mContext: Context) : BaseViewModel(mContext) {
     }
 
 
-    fun insertAskQuestion() {
+    fun insertAskQuestion(question:String) {
         CoroutineUtils.main {
-
             try {
-                //isLoaderShowingLiveData.postValue(true)
-                //contentRepository.updateMediaInfo(mediaInfoModel)
-                questionRepository.insertAskQuestion(mediaInfoModel!!)
-
-                //isLoaderShowingLiveData.postValue(false)
+                isLoaderShowingLiveData.postValue(true)
+                questionRepository.insertAskQuestion(mediaInfoModel!!, question)
+                getQuestionAndAnswer()
+                isLoaderShowingLiveData.postValue(false)
             } catch (e: ApiException) {
                 e.printStackTrace()
                 AppLog.errorLog(e.message, e)
+                isLoaderShowingLiveData.postValue(false)
                 //view.snackbar(BindingUtils.string(R.string.some_thing_went_wrong))
             } catch (e: NoInternetException) {
                 e.printStackTrace()
                 AppLog.errorLog(e.message, e)
+                isLoaderShowingLiveData.postValue(false)
                 //view.snackbar(BindingUtils.string(R.string.no_internet_message))
             } catch (e: Exception) {
                 e.printStackTrace()
                 AppLog.errorLog(e.message, e)
+                isLoaderShowingLiveData.postValue(false)
             }
 
         }
+    }
+
+    fun getQuestionAndAnswer(){
+        CoroutineUtils.main {
+            try {
+                coroutineToggleLoader(BindingUtils.string(R.string.getting_questions_list))
+
+                val response = questionRepository.getQuestionAndAnswer(mediaInfoModel?.mediaId!!)
+                questionAndAnswerListLiveData.postValue(response)
+
+                toggleLayoutVisibility(
+                    View.VISIBLE,
+                    View.GONE,
+                    View.GONE,
+                    KEY_BLANK,
+                    View.GONE
+                )
+                coroutineToggleLoader()
+            } catch (e: ApiException) {
+                e.printStackTrace()
+                AppLog.errorLog(e.message, e)
+                toggleLayoutVisibility(
+                    View.GONE,
+                    View.GONE,
+                    View.GONE,
+                    BindingUtils.string(R.string.some_thing_went_wrong),
+                    View.VISIBLE
+                )
+                coroutineToggleLoader()
+            } catch (e: NoInternetException) {
+                e.printStackTrace()
+                AppLog.errorLog(e.message, e)
+                toggleLayoutVisibility(
+                    View.GONE,
+                    View.GONE,
+                    View.VISIBLE,
+                    BindingUtils.string(R.string.no_internet_message),
+                    View.GONE
+                )
+                coroutineToggleLoader()
+            } catch (e: NoDataException) {
+                e.printStackTrace()
+                AppLog.errorLog(e.message, e)
+                toggleLayoutVisibility(
+                    View.GONE,
+                    View.VISIBLE,
+                    View.GONE,
+                    BindingUtils.string(R.string.ask_questions_unavailable),
+                    View.GONE
+                )
+                coroutineToggleLoader()
+            }
+        }
+
+    }
+
+    fun onClickCloseComment(view: View) {
+        onClickCloseCommentLiveData.value = true
+    }
+
+
+    fun onClickAskQuestion(view: View) {
+        onClickAskQuestionLiveData.value = true
     }
 
 }
