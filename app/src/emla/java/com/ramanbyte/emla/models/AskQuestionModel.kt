@@ -7,9 +7,12 @@ import com.ramanbyte.utilities.KEY_BLANK
 
 class AskQuestionModel {
 
-    var id = 0
+    var questionId = 0
+    var totalReplyCount = 0
     var question = KEY_BLANK
-    var created_Date = KEY_BLANK
+    var userName = KEY_BLANK
+    var userPic = KEY_BLANK
+    var createdDateTime = KEY_BLANK
         get() = DateUtils.getDisplayDateFromDate(
             field,
             DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS,
@@ -17,5 +20,16 @@ class AskQuestionModel {
         )
 
     var isPublic = KEY_BLANK
+    var isApproved = KEY_BLANK
+    var qnaArrayList = ArrayList<ReplyModel>()
 
+
+}
+
+class ReplyModel{
+    var userId = 0
+    var createdDateTime = KEY_BLANK
+    var answer = KEY_BLANK
+    var userName = KEY_BLANK
+    var userPic = KEY_BLANK
 }

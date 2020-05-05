@@ -35,6 +35,10 @@ class MediaPlaybackViewModel(mContext: Context) : BaseViewModel(mContext) {
         value = false
     }
 
+    var onClickReplyLiveData = MutableLiveData<AskQuestionModel>().apply {
+        value = null
+    }
+
     var enteredQuestionLiveData = MutableLiveData<String>().apply {
         value = KEY_BLANK
     }
@@ -84,7 +88,7 @@ class MediaPlaybackViewModel(mContext: Context) : BaseViewModel(mContext) {
     }
 
 
-    fun insertAskQuestion(question:String) {
+    fun insertAskQuestion(question: String) {
         CoroutineUtils.main {
             try {
                 isLoaderShowingLiveData.postValue(true)
@@ -110,7 +114,33 @@ class MediaPlaybackViewModel(mContext: Context) : BaseViewModel(mContext) {
         }
     }
 
-    fun getQuestionAndAnswer(){
+    fun insertQuestionsReply(questionId: Int, reply: String) {
+        CoroutineUtils.main {
+            try {
+                isLoaderShowingLiveData.postValue(true)
+                questionRepository.insertQuestionsReply(questionId, reply)
+                //getQuestionAndAnswer()
+                isLoaderShowingLiveData.postValue(false)
+            } catch (e: ApiException) {
+                e.printStackTrace()
+                AppLog.errorLog(e.message, e)
+                isLoaderShowingLiveData.postValue(false)
+                //view.snackbar(BindingUtils.string(R.string.some_thing_went_wrong))
+            } catch (e: NoInternetException) {
+                e.printStackTrace()
+                AppLog.errorLog(e.message, e)
+                isLoaderShowingLiveData.postValue(false)
+                //view.snackbar(BindingUtils.string(R.string.no_internet_message))
+            } catch (e: Exception) {
+                e.printStackTrace()
+                AppLog.errorLog(e.message, e)
+                isLoaderShowingLiveData.postValue(false)
+            }
+
+        }
+    }
+
+    fun getQuestionAndAnswer() {
         CoroutineUtils.main {
             try {
                 coroutineToggleLoader(BindingUtils.string(R.string.getting_questions_list))
@@ -172,5 +202,36 @@ class MediaPlaybackViewModel(mContext: Context) : BaseViewModel(mContext) {
     fun onClickAskQuestion(view: View) {
         onClickAskQuestionLiveData.value = true
     }
+
+    fun onClickReply(view: View, askQuestionModel: AskQuestionModel) {
+        onClickReplyLiveData.value = askQuestionModel
+    }
+
+    /*
+    * Add Reply Page started ---
+    * */
+
+    var onClickBackLiveData = MutableLiveData<Boolean>().apply {
+        value = false
+    }
+    var onClickAddReplyLiveData = MutableLiveData<Int>().apply {
+        value = 0
+    }
+
+    var enteredReplyLiveData = MutableLiveData<String>().apply {
+        value = KEY_BLANK
+    }
+
+    fun onClickBack(view: View){
+        onClickBackLiveData.value = true
+    }
+
+    fun onClickAddReply(view: View, questionId:Int) {
+        onClickAddReplyLiveData.value = questionId
+    }
+
+    /*
+    * Add Reply Page Ended ---
+    * */
 
 }

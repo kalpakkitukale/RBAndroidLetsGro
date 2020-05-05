@@ -223,6 +223,7 @@ Content
 
     <!--Recently ask questions-->
     <string name="reply">Reply</string>
+    <string name="view_reply">View reply</string>
     <string name="ask_questions_with_question_mark">Ask questions?</string>
     <string name="title_recently_ask_questions">Recently Ask Questions?</string>
     <string name="ask_questions_unavailable">Questions are not available yet!</string>

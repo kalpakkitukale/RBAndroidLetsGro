@@ -101,13 +101,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-
     <ImageButton
         android:id="@+id/exoBtnWishlist"
         style="@style/exoImageButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingLeft="@dimen/dp_10"
+        android:paddingStart="@dimen/dp_10"
         android:paddingTop="@dimen/dp_10"
         android:paddingBottom="@dimen/dp_10"
         android:src="@drawable/ic_heart"
@@ -128,7 +127,6 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/exoBtnWishlist"
         app:layout_constraintTop_toTopOf="@+id/exoBtnWishlist" />
-
 
     <ImageButton
         android:id="@+id/exoBtnDislike"
@@ -188,6 +186,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_comment"
+        android:paddingStart="@dimen/dp_10"
+        android:paddingTop="@dimen/dp_10"
+        android:paddingBottom="@dimen/dp_10"
         app:layout_constraintBottom_toBottomOf="@+id/exoBtnWishlist"
         app:layout_constraintEnd_toStartOf="@+id/tvLabelComment"
         app:layout_constraintHorizontal_bias="0.5"

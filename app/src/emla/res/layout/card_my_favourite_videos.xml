@@ -37,7 +37,7 @@
                 android:layout_marginTop="@dimen/dp_5"
                 android:layout_marginStart="@dimen/dp_5"
                 android:layout_marginEnd="@dimen/dp_5"
-                android:text="@{favouriteVideosModel.content_Type}"
+                android:text="@{favouriteVideosModel.videoLink}"
                 android:textSize="@dimen/sp_14"
                 app:layout_constraintEnd_toStartOf="@+id/btnFavouriteVideo"
                 app:layout_constraintStart_toStartOf="parent"
@@ -65,6 +65,15 @@
                 app:layout_constraintTop_toBottomOf="@+id/tvContentTitle" />
 
             <TextView
+                android:id="@+id/tvContentSubject"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text='@{favouriteVideosModel.courseName}'
+                android:textSize="@dimen/sp_12"
+                app:layout_constraintStart_toEndOf="@+id/lblContentSubject"
+                app:layout_constraintTop_toTopOf="@+id/lblContentSubject" />
+
+            <TextView
                 android:id="@+id/lblContentTopic"
                 style="@style/TextViewRegularBlackOnWhite"
                 android:layout_width="wrap_content"
@@ -72,8 +81,17 @@
                 android:layout_marginTop="@dimen/dp_3"
                 android:text='@{@string/chapter +" : "}'
                 android:textSize="@dimen/sp_12"
-                app:layout_constraintStart_toStartOf="@+id/lblContentSubject"
-                app:layout_constraintTop_toBottomOf="@+id/lblContentSubject" />
+                app:layout_constraintStart_toStartOf="@+id/tvContentTitle"
+                app:layout_constraintTop_toBottomOf="@+id/tvContentSubject" />
+
+            <TextView
+                android:id="@+id/tvContentTopic"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text='@{favouriteVideosModel.chapterName}'
+                android:textSize="@dimen/sp_12"
+                app:layout_constraintStart_toEndOf="@+id/lblContentTopic"
+                app:layout_constraintTop_toTopOf="@+id/lblContentTopic" />
 
             <TextView
                 android:id="@+id/lblContentSection"
@@ -83,8 +101,17 @@
                 android:layout_marginTop="@dimen/dp_3"
                 android:text='@{@string/section +" : "}'
                 android:textSize="@dimen/sp_12"
-                app:layout_constraintStart_toStartOf="@+id/lblContentTopic"
-                app:layout_constraintTop_toBottomOf="@+id/lblContentTopic" />
+                app:layout_constraintStart_toStartOf="@+id/tvContentTitle"
+                app:layout_constraintTop_toBottomOf="@+id/tvContentTopic" />
+
+            <TextView
+                android:id="@+id/tvContentSection"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text='@{favouriteVideosModel.chapterName}'
+                android:textSize="@dimen/sp_12"
+                app:layout_constraintStart_toEndOf="@+id/lblContentSection"
+                app:layout_constraintTop_toTopOf="@+id/lblContentSection" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -9,6 +9,7 @@ import com.ramanbyte.emla.models.AskQuestionModel
 import com.ramanbyte.emla.models.FavouriteVideosModel
 import com.ramanbyte.emla.models.request.AskQuestionRequestModel
 import com.ramanbyte.emla.models.MediaInfoModel
+import com.ramanbyte.emla.models.request.QuestionsReplyRequestModel
 import com.ramanbyte.utilities.AppLog
 import com.ramanbyte.utilities.KEY_BLANK
 import com.ramanbyte.utilities.KEY_DEVICE_ID
@@ -45,18 +46,36 @@ class QuestionRepository(mContext: Context) : BaseRepository(mContext) {
         }
     }
 
-    suspend fun getQuestionAndAnswer(contentId: Int): ArrayList<AskQuestionModel>? {
+    suspend fun insertQuestionsReply(
+        currentQuestionId: Int,
+        userAnswer: String
+    ): QuestionsReplyRequestModel? {
+
         val userId = applicationDatabase.getUserDao().getCurrentUser()?.userId!!
-        val questionAndAnswerModel = apiRequest {
-            questionController.getQuestionAndAnswer(userId, contentId)
+
+        val questionsReplyRequestModel = QuestionsReplyRequestModel()
+            .apply {
+                question_Id = currentQuestionId
+                this.userId = userId
+                answer = userAnswer
+            }
+
+        return apiRequest {
+            questionController.insertQuestionsReply(questionsReplyRequestModel)
         }
-        return questionAndAnswerModel
     }
 
-    suspend fun getFavouriteVideos(contentId: Int): ArrayList<FavouriteVideosModel>? {
+    suspend fun getQuestionAndAnswer(contentId: Int): ArrayList<AskQuestionModel>? {
         val userId = applicationDatabase.getUserDao().getCurrentUser()?.userId!!
         return apiRequest {
-            questionController.getFavouriteVideos(userId, contentId)
+            questionController.getQuestionAndAnswer(userId, contentId)
+        }
+    }
+
+    suspend fun getFavouriteVideos(): ArrayList<FavouriteVideosModel>? {
+        val userId = applicationDatabase.getUserDao().getCurrentUser()?.userId!!
+        return apiRequest {
+            questionController.getFavouriteVideos(userId)
         }
     }
 

@@ -45,6 +45,7 @@ import kotlinx.android.synthetic.emla.exo_comment_layout.*
 import kotlinx.android.synthetic.emla.exo_playback_control_view.*
 import org.kodein.di.On
 import com.ramanbyte.utilities.*
+import kotlinx.android.synthetic.emla.exo_reply_layout.view.*
 
 class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPlaybackViewModel>(
     authModuleDependency,
@@ -90,6 +91,8 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
 
         url = viewModel.mediaInfoModel?.mediaUrl ?: ""
 
+        observerForAddReplyScreen()
+
         /*
         * Set selection for like unlike and add to wish list
         * */
@@ -112,6 +115,7 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
             }
 
             addToWishList = if (favouriteVideo == KEY_Y) {
+                // textView6.setCompoundDrawables(BindingUtils.drawable(R.drawable.ic_heart_checked),null,null,null)
                 exoBtnWishlist.setImageDrawable(BindingUtils.drawable(R.drawable.ic_heart_checked))
                 true
             } else {
@@ -145,6 +149,7 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
             noData.viewModel = viewModel
             noInternet.viewModel = viewModel
             somethingWentWrong.viewModel = viewModel
+            replyLayout.mediaPlaybackViewModel = viewModel
         }
 
         constraintSet = ConstraintSet()
@@ -211,7 +216,21 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
                     }
                 }
             })
+
+            onClickReplyLiveData.observe(this@MediaPlaybackActivity, Observer {
+                if (it != null) {
+                    exoCommentLayoutBinding.apply {
+                        questionLayout.visibility = View.GONE
+                        replyLayout.replyContainerLayout.visibility = View.VISIBLE
+                        replyLayout.askQuestionModel = it
+                    }
+
+                    onClickReplyLiveData.value = null
+                }
+            })
         }
+
+
 
         doubleTapBackward.setOnTouchListener(object :
             OnSwipeTouchListener(this@MediaPlaybackActivity) {
@@ -383,6 +402,43 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
                 }
             })
 
+        }
+    }
+
+    private fun observerForAddReplyScreen() {
+
+        viewModel.apply {
+            onClickBackLiveData.observe(this@MediaPlaybackActivity, Observer {
+                if (it != null) {
+                    if (it == true) {
+
+                        layoutBinding.apply {
+                            questionLayout.visibility = View.VISIBLE
+                            replyLayout.visibility = View.GONE
+                        }
+                        onClickBackLiveData.value = false
+
+                    }
+                }
+            })
+
+            /*
+            * Add Reply for the question
+            * */
+            onClickAddReplyLiveData.observe(this@MediaPlaybackActivity, Observer { questionId ->
+                if (questionId != null) {
+                    if (questionId > 0) {
+                        //val question = exoCommentLayoutBinding.etAskQuestion.text.toString()
+                        val enteredReply = enteredReplyLiveData.value.toString()
+                        if (enteredReply.isNotBlank()) {
+                            insertQuestionsReply(questionId, enteredReply)
+                        } else {
+                            AppLog.infoLog("Blank Reply not added.")
+                        }
+                        onClickAddReplyLiveData.value = 0
+                    }
+                }
+            })
         }
     }
 

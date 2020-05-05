@@ -2,6 +2,7 @@ package com.ramanbyte.emla.data_layer.network.api_layer
 
 import com.ramanbyte.emla.models.*
 import com.ramanbyte.emla.models.request.AskQuestionRequestModel
+import com.ramanbyte.emla.models.request.QuestionsReplyRequestModel
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -51,10 +52,13 @@ interface QuestionController {
     @POST("InsertQNA")
     suspend fun insertAskQuestion(@Body askQuestionRequestModel: AskQuestionRequestModel): Response<AskQuestionRequestModel>
 
+    @POST("InsertQNADetails")
+    suspend fun insertQuestionsReply(@Body questionsReplyRequestModel: QuestionsReplyRequestModel): Response<QuestionsReplyRequestModel>
+
     @GET("GetQNA/{studentId}/{contentId}")
     suspend fun getQuestionAndAnswer(@Path("studentId") studentId: Int, @Path("contentId") contentId: Int): Response<ArrayList<AskQuestionModel>>
 
-    @GET("GetFavouriteVideos/{userId}/{contentId}")
-    suspend fun getFavouriteVideos(@Path("userId") userId: Int, @Path("contentId") contentId: Int): Response<ArrayList<FavouriteVideosModel>>
+    @GET("GetFavouriteVideos/{userId}")
+    suspend fun getFavouriteVideos(@Path("userId") userId: Int): Response<ArrayList<FavouriteVideosModel>>
 
 }
