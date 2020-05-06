@@ -34,7 +34,6 @@ class VideoQuestionReplyAdapter: RecyclerView.Adapter<VideoQuestionReplyAdapter.
         holder: VideoQuestionReplyAdapter.VideoQuestionReplyViewHolder,
         position: Int
     ) {
-
         holder.bindData(askQuestionList!![position])
     }
 
@@ -47,22 +46,18 @@ class VideoQuestionReplyAdapter: RecyclerView.Adapter<VideoQuestionReplyAdapter.
                 this.askQuestionModel = askQuestionModel
                 viewModel = mediaPlaybackViewModel
 
-                AppLog.infoLog("sixeee  ${askQuestionModel.qnaArrayList.size}")
-
-                if (askQuestionModel.qnaArrayList.size >= 1){
+                if (askQuestionModel.qnaArrayList.size >= 2){
                     btnReply.text = BindingUtils.string(R.string.view_reply)
                 }else{
                     btnReply.text = BindingUtils.string(R.string.reply)
                 }
 
-                rvReply?.apply {
+                rvReply.apply {
                     layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
                     val videoReplyAdapter = VideoReplyAdapter(askQuestionModel.qnaArrayList)
                     adapter = videoReplyAdapter
                 }
             }
-
-            AppLog.infoLog("bindData")
         }
 
     }

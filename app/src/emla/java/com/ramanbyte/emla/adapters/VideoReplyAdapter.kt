@@ -6,9 +6,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ramanbyte.R
 import com.ramanbyte.databinding.CardRecentlyAskQuestionsReplyBinding
-import com.ramanbyte.emla.models.ReplyModel
+import com.ramanbyte.emla.models.AskQuestionReplyModel
 
-class VideoReplyAdapter(private var qnaArrayList: ArrayList<ReplyModel>) :
+class VideoReplyAdapter(private var qnaArrayList: ArrayList<AskQuestionReplyModel>) :
     RecyclerView.Adapter<VideoReplyAdapter.VideoReplyViewHolder>() {
 
 
@@ -34,9 +34,18 @@ class VideoReplyAdapter(private var qnaArrayList: ArrayList<ReplyModel>) :
         var dataBinding: CardRecentlyAskQuestionsReplyBinding =
             CardRecentlyAskQuestionsReplyBinding.bind(itemView)
 
-        fun bind(replyModel: ReplyModel) {
+        fun bind(replyModel: AskQuestionReplyModel) {
             dataBinding.apply {
                 this.replyModel = replyModel
+
+                replyModel.apply {
+                    if (createDateTime?.isEmpty()!!){
+                        tvDateTime.text = replyModel.createdDateTime
+                    }else{
+                        tvDateTime.text = replyModel.createDateTime
+                    }
+                }
+
             }
         }
 

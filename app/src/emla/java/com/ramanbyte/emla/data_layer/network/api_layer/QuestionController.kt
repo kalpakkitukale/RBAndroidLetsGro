@@ -58,6 +58,9 @@ interface QuestionController {
     @GET("GetQNA/{studentId}/{contentId}")
     suspend fun getQuestionAndAnswer(@Path("studentId") studentId: Int, @Path("contentId") contentId: Int): Response<ArrayList<AskQuestionModel>>
 
+    @GET("GetConversationData/{questionId}")
+    suspend fun getConversationData(@Path("questionId") questionId: Int): Response<ArrayList<AskQuestionReplyModel>>
+
     @GET("GetFavouriteVideos/{userId}")
     suspend fun getFavouriteVideos(@Path("userId") userId: Int): Response<ArrayList<FavouriteVideosModel>>
 

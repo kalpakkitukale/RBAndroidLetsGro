@@ -4,7 +4,7 @@
     <data>
         <variable
             name="replyModel"
-            type="com.ramanbyte.emla.models.ReplyModel" />
+            type="com.ramanbyte.emla.models.AskQuestionReplyModel" />
     </data>
 
 
@@ -34,11 +34,13 @@
 
             <com.ramanbyte.views.RoundedImageView
                 android:id="@+id/rivUserPic"
-                android:layout_width="@dimen/dp_30"
-                android:layout_height="@dimen/dp_30"
-                android:src="@drawable/ic_camera"
+                android:layout_width="@dimen/dp_25"
+                android:layout_height="@dimen/dp_25"
+                app:imageUrl="@{replyModel.userPic}"
+                app:placeholder="@{replyModel.setCharacterDrawable}"
                 app:layout_constraintStart_toEndOf="@+id/ivReply"
                 app:layout_constraintTop_toTopOf="parent" />
+            <!--android:src="@drawable/ic_camera"-->
 
             <TextView
                 android:id="@+id/tvUserName"
@@ -70,11 +72,11 @@
                 style="@style/TextViewBoldLightGray"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@{replyModel.createdDateTime}"
                 android:textSize="@dimen/sp_10"
                 app:layout_constraintStart_toStartOf="@+id/tvUserName"
                 app:layout_constraintEnd_toEndOf="@+id/tvUserName"
                 app:layout_constraintTop_toBottomOf="@+id/tvReply" />
+            <!--android:text="@{replyModel.createdDateTime}"-->
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:layout_width="0dp"

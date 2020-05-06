@@ -32,6 +32,7 @@ import com.ramanbyte.base.BaseActivity
 import com.ramanbyte.databinding.ActivityMediaPlaybackBinding
 import com.ramanbyte.databinding.ExoCommentLayoutBinding
 import com.ramanbyte.emla.adapters.VideoQuestionReplyAdapter
+import com.ramanbyte.emla.adapters.VideoReplyAdapter
 import com.ramanbyte.emla.base.di.authModuleDependency
 import com.ramanbyte.emla.content.ExoMediaDownloadUtil
 import com.ramanbyte.emla.view.OnSwipeTouchListener
@@ -61,7 +62,9 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
     var addToWishList: Boolean = false
 
     var videoQuestionReplyAdapter: VideoQuestionReplyAdapter? = null
+    var videoReplyAdapter: VideoReplyAdapter? = null
 
+    var exoCommentLayoutBinding: ExoCommentLayoutBinding? = null
 
     override val viewModelClass: Class<MediaPlaybackViewModel> = MediaPlaybackViewModel::class.java
 
@@ -141,15 +144,20 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
         view1 = layoutInflaterr?.inflate(R.layout.exo_comment_layout, null, false)
 
         //val dataBinding: ExoCommentLayoutBinding = DataBindingUtil.setContentView(this, R.layout.exo_comment_layout)
-        val exoCommentLayoutBinding: ExoCommentLayoutBinding = ExoCommentLayoutBinding.bind(view1!!)
+        exoCommentLayoutBinding = ExoCommentLayoutBinding.bind(view1!!)
 
-        exoCommentLayoutBinding.apply {
+        exoCommentLayoutBinding?.apply {
             lifecycleOwner = this@MediaPlaybackActivity
             mediaPlaybackViewModel = viewModel
             noData.viewModel = viewModel
             noInternet.viewModel = viewModel
             somethingWentWrong.viewModel = viewModel
-            replyLayout.mediaPlaybackViewModel = viewModel
+            replyLayout.apply {
+                mediaPlaybackViewModel = viewModel
+                noData.viewModel = viewModel
+                noInternet.viewModel = viewModel
+                somethingWentWrong.viewModel = viewModel
+            }
         }
 
         constraintSet = ConstraintSet()
@@ -168,8 +176,12 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
 
                 questionAndAnswerListLiveData.observe(this@MediaPlaybackActivity, Observer {
                     if (it != null) {
+                        exoCommentLayoutBinding?.apply {
+                            questionLayout.visibility = View.VISIBLE
+                            replyLayout.replyContainerLayout.visibility = View.GONE
+                        }
                         enteredQuestionLiveData.value = KEY_BLANK
-                        exoCommentLayoutBinding.rvComment.apply {
+                        exoCommentLayoutBinding?.rvComment?.apply {
                             videoQuestionReplyAdapter = VideoQuestionReplyAdapter()
                             videoQuestionReplyAdapter?.apply {
                                 layoutManager =
@@ -206,7 +218,7 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
             onClickAskQuestionLiveData.observe(this@MediaPlaybackActivity, Observer {
                 if (it != null) {
                     if (it == true) {
-                        val question = exoCommentLayoutBinding.etAskQuestion.text.toString()
+                        val question = exoCommentLayoutBinding?.etAskQuestion?.text.toString()
                         if (enteredQuestionLiveData.value?.isNotBlank()!!) {
                             insertAskQuestion(question)
                         } else {
@@ -219,10 +231,15 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
 
             onClickReplyLiveData.observe(this@MediaPlaybackActivity, Observer {
                 if (it != null) {
-                    exoCommentLayoutBinding.apply {
+                    exoCommentLayoutBinding?.apply {
                         questionLayout.visibility = View.GONE
                         replyLayout.replyContainerLayout.visibility = View.VISIBLE
                         replyLayout.askQuestionModel = it
+
+                        /*
+                        * call API for the question
+                        * */
+                        getConversationData(it.questionId)
                     }
 
                     onClickReplyLiveData.value = null
@@ -408,14 +425,33 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
     private fun observerForAddReplyScreen() {
 
         viewModel.apply {
+
+            questionsReplyListLiveData.observe(this@MediaPlaybackActivity, Observer {
+                if (it != null) {
+                    enteredReplyLiveData.value = KEY_BLANK
+                    exoCommentLayoutBinding?.replyLayout?.rvReply?.apply {
+                        videoReplyAdapter = VideoReplyAdapter(it)
+                        videoReplyAdapter?.apply {
+                            layoutManager =
+                                LinearLayoutManager(
+                                    this@MediaPlaybackActivity,
+                                    RecyclerView.VERTICAL,
+                                    false
+                                )
+                            adapter = this
+                        }
+                    }
+                }
+            })
+
             onClickBackLiveData.observe(this@MediaPlaybackActivity, Observer {
                 if (it != null) {
                     if (it == true) {
-
-                        layoutBinding.apply {
+                        exoCommentLayoutBinding?.apply {
                             questionLayout.visibility = View.VISIBLE
-                            replyLayout.visibility = View.GONE
+                            replyLayout.replyContainerLayout.visibility = View.GONE
                         }
+                        getQuestionAndAnswer()
                         onClickBackLiveData.value = false
 
                     }

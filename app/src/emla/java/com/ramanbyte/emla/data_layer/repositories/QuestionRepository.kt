@@ -6,6 +6,7 @@ import com.ramanbyte.data_layer.base.BaseRepository
 import com.ramanbyte.emla.data_layer.network.api_layer.QuestionController
 import com.ramanbyte.emla.data_layer.network.api_layer.SectionsController
 import com.ramanbyte.emla.models.AskQuestionModel
+import com.ramanbyte.emla.models.AskQuestionReplyModel
 import com.ramanbyte.emla.models.FavouriteVideosModel
 import com.ramanbyte.emla.models.request.AskQuestionRequestModel
 import com.ramanbyte.emla.models.MediaInfoModel
@@ -69,6 +70,12 @@ class QuestionRepository(mContext: Context) : BaseRepository(mContext) {
         val userId = applicationDatabase.getUserDao().getCurrentUser()?.userId!!
         return apiRequest {
             questionController.getQuestionAndAnswer(userId, contentId)
+        }
+    }
+
+    suspend fun getConversationData(questionId: Int): ArrayList<AskQuestionReplyModel>? {
+        return apiRequest {
+            questionController.getConversationData(questionId)
         }
     }
 
