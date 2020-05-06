@@ -11,6 +11,12 @@
         <variable
             name="askQuestionModel"
             type="com.ramanbyte.emla.models.AskQuestionModel" />
+        <!--<variable
+            name="strUserPic"
+            type="String" />
+        <variable
+            name="characterDrawable"
+            type="android.graphics.drawable.Drawable" />-->
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -57,11 +63,16 @@
             android:id="@+id/rivUserPic"
             android:layout_width="@dimen/dp_30"
             android:layout_height="@dimen/dp_30"
-            android:src="@drawable/ic_camera"
             android:layout_marginTop="@dimen/dp_5"
             android:layout_marginStart="@dimen/dp_10"
+            android:src="@drawable/ic_camera"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/ivBack" />
+        <!-- android:src="@drawable/ic_camera"
+        app:imageUrl="@{askQuestionModel.userPic}"
+        app:placeholder="@{askQuestionModel.setCharacterDrawable}"
+        app:imageUrl="@{strUserPic}"
+            app:placeholder="@{characterDrawable}"-->
 
         <TextView
             android:id="@+id/tvUserName"

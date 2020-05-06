@@ -7,7 +7,6 @@
             type="com.ramanbyte.emla.models.AskQuestionReplyModel" />
     </data>
 
-
     <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/cardLayoutMain"
@@ -40,7 +39,6 @@
                 app:placeholder="@{replyModel.setCharacterDrawable}"
                 app:layout_constraintStart_toEndOf="@+id/ivReply"
                 app:layout_constraintTop_toTopOf="parent" />
-            <!--android:src="@drawable/ic_camera"-->
 
             <TextView
                 android:id="@+id/tvUserName"

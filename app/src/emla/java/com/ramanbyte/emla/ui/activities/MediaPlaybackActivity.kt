@@ -3,6 +3,7 @@ package com.ramanbyte.emla.ui.activities
 import android.content.Context
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
+import android.graphics.drawable.Drawable
 import android.media.AudioManager
 import android.net.Uri
 import android.os.Build
@@ -13,6 +14,7 @@ import android.view.View
 import android.view.WindowManager
 import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintSet
+import androidx.core.net.toUri
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
@@ -118,7 +120,7 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
             }
 
             addToWishList = if (favouriteVideo == KEY_Y) {
-                // textView6.setCompoundDrawables(BindingUtils.drawable(R.drawable.ic_heart_checked),null,null,null)
+                // lblWishList.setCompoundDrawables(BindingUtils.drawable(R.drawable.ic_heart_checked),null,null,null)
                 exoBtnWishlist.setImageDrawable(BindingUtils.drawable(R.drawable.ic_heart_checked))
                 true
             } else {
@@ -162,9 +164,9 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
 
         constraintSet = ConstraintSet()
 
-        exoBtnComment.setOnClickListener(View.OnClickListener {
-            exoBtnComment.visibility = View.INVISIBLE
-            tvLabelComment.visibility = View.INVISIBLE
+        userCommentLayout.setOnClickListener(View.OnClickListener {
+            exoBtnComment.visibility = View.GONE
+            lblComment.visibility = View.GONE
             constraintSet?.clone(mainConstraint)
             mainConstraint?.addView(view1)
 
@@ -209,7 +211,7 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
                         constraintSet?.clone(mainConstraint)
                         normalConstrains()
                         exoBtnComment.visibility = View.VISIBLE
-                        tvLabelComment.visibility = View.VISIBLE
+                        lblComment.visibility = View.VISIBLE
                         onClickCloseCommentLiveData.value = false
                     }
                 }
@@ -233,8 +235,12 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
                 if (it != null) {
                     exoCommentLayoutBinding?.apply {
                         questionLayout.visibility = View.GONE
-                        replyLayout.replyContainerLayout.visibility = View.VISIBLE
-                        replyLayout.askQuestionModel = it
+                        replyLayout.apply {
+                            replyContainerLayout.visibility = View.VISIBLE
+                            askQuestionModel = it
+                            /*strUserPic = it.userPic
+                            characterDrawable = it.setCharacterDrawable*/
+                        }
 
                         /*
                         * call API for the question
@@ -322,7 +328,7 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
             /*
             * Click event for the Like
             * */
-            exoBtnLike.setOnClickListener(View.OnClickListener {
+            likeLayout.setOnClickListener(View.OnClickListener {
                 if (NetworkConnectivity.isConnectedToInternet()) {
                     if (isUnlikeClick) {
                         AppLog.infoLog("BtnLike :: true -- Y")
@@ -359,7 +365,7 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
             /*
             * Click event for the Unlike
             * */
-            exoBtnDislike.setOnClickListener(View.OnClickListener {
+            disLikeLayout.setOnClickListener(View.OnClickListener {
 
                 if (NetworkConnectivity.isConnectedToInternet()) {
 
@@ -397,7 +403,7 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
             /*
             * Click event for the Add to wish list
             * */
-            exoBtnWishlist.setOnClickListener(View.OnClickListener {
+            wishListLayout.setOnClickListener(View.OnClickListener {
                 if (NetworkConnectivity.isConnectedToInternet()) {
                     if (addToWishList) {
                         AppLog.infoLog("BtnWishlist :: false -- ")
@@ -609,7 +615,7 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
         )
 
         constraintSet?.connect(
-            R.id.textView6,
+            R.id.lblWishList,
             ConstraintSet.END,
             R.id.player_view,
             ConstraintSet.END,
