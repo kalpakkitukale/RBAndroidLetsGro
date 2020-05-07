@@ -2,9 +2,10 @@
 <layout>
 
     <data>
-
+        <variable
+            name="replyModel"
+            type="com.ramanbyte.emla.models.AskQuestionReplyModel" />
     </data>
-
 
     <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -25,7 +26,6 @@
                 android:id="@+id/ivReply"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dp_10"
                 android:src="@drawable/ic_arrow_right_black"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/rivUserPic"
@@ -33,10 +33,10 @@
 
             <com.ramanbyte.views.RoundedImageView
                 android:id="@+id/rivUserPic"
-                android:layout_width="@dimen/dp_30"
-                android:layout_height="@dimen/dp_30"
-                android:layout_marginStart="@dimen/dp_5"
-                android:src="@drawable/ic_camera"
+                android:layout_width="@dimen/dp_25"
+                android:layout_height="@dimen/dp_25"
+                app:imageUrl="@{replyModel.userPic}"
+                app:placeholder="@{replyModel.setCharacterDrawable}"
                 app:layout_constraintStart_toEndOf="@+id/ivReply"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_5"
                 android:layout_marginEnd="@dimen/dp_10"
-                android:text="Niraj Naware"
+                android:text="@{replyModel.userName}"
                 android:textSize="@dimen/sp_12"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/rivUserPic"
@@ -59,15 +59,27 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_5"
-                android:text="This is question is to ask"
+                android:text="@{replyModel.answer}"
                 android:textSize="@dimen/sp_12"
                 app:layout_constraintEnd_toEndOf="@+id/tvUserName"
                 app:layout_constraintStart_toEndOf="@+id/rivUserPic"
                 app:layout_constraintTop_toBottomOf="@+id/tvUserName" />
 
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvDateTime"
+                style="@style/TextViewBoldLightGray"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/sp_10"
+                app:layout_constraintStart_toStartOf="@+id/tvUserName"
+                app:layout_constraintEnd_toEndOf="@+id/tvUserName"
+                app:layout_constraintTop_toBottomOf="@+id/tvReply" />
+            <!--android:text="@{replyModel.createdDateTime}"-->
+
             <androidx.appcompat.widget.AppCompatEditText
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 app:layout_constraintStart_toStartOf="@+id/tvUserName"
                 app:layout_constraintEnd_toEndOf="@+id/tvUserName"
                 app:layout_constraintTop_toBottomOf="@+id/tvReply" />

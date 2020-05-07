@@ -3,12 +3,14 @@ package com.ramanbyte.emla.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ramanbyte.R
 import com.ramanbyte.databinding.CardRecentlyAskQuestionsBinding
 import com.ramanbyte.emla.models.AskQuestionModel
 import com.ramanbyte.emla.view_model.MediaPlaybackViewModel
 import com.ramanbyte.utilities.AppLog
+import com.ramanbyte.utilities.BindingUtils
 
 class VideoQuestionReplyAdapter: RecyclerView.Adapter<VideoQuestionReplyAdapter.VideoQuestionReplyViewHolder>() {
 
@@ -32,7 +34,6 @@ class VideoQuestionReplyAdapter: RecyclerView.Adapter<VideoQuestionReplyAdapter.
         holder: VideoQuestionReplyAdapter.VideoQuestionReplyViewHolder,
         position: Int
     ) {
-
         holder.bindData(askQuestionList!![position])
     }
 
@@ -43,9 +44,20 @@ class VideoQuestionReplyAdapter: RecyclerView.Adapter<VideoQuestionReplyAdapter.
         fun bindData(askQuestionModel: AskQuestionModel) {
             dataBinding.apply {
                 this.askQuestionModel = askQuestionModel
-            }
+                viewModel = mediaPlaybackViewModel
 
-            AppLog.infoLog("bindData")
+                if (askQuestionModel.qnaArrayList.size >= 2){
+                    btnReply.text = BindingUtils.string(R.string.view_reply)
+                }else{
+                    btnReply.text = BindingUtils.string(R.string.reply)
+                }
+
+                rvReply.apply {
+                    layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+                    val videoReplyAdapter = VideoReplyAdapter(askQuestionModel.qnaArrayList)
+                    adapter = videoReplyAdapter
+                }
+            }
         }
 
     }

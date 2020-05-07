@@ -51,7 +51,7 @@ class MyFavouriteVideoViewModel(mContext:Context) : BaseViewModel(mContext) {
             try {
                 coroutineToggleLoader(BindingUtils.string(R.string.getting_questions_list))
 
-                val response = questionRepository.getFavouriteVideos(14)
+                val response = questionRepository.getFavouriteVideos()
                 favouriteVideosListLiveData.postValue(response)
 
                 toggleLayoutVisibility(
