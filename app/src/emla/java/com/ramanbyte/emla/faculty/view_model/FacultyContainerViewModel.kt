@@ -1,4 +1,9 @@
 package com.ramanbyte.emla.faculty.view_model
 
-class FacultyContainerViewModel {
+import com.ramanbyte.base.BaseViewModel
+
+class FacultyContainerViewModel : BaseViewModel(){
+    override var noInternetTryAgain: () -> Unit = {
+
+    }
 }
