@@ -65,7 +65,12 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(authMod
                             BaseAppController.setEnterPageAnimation(this@LoginActivity)
                       //  }
 
+                    }else if (it.userType.equals(KEY_FACULTY, true)) {
+                        startActivity(ContainerActivity.intent(this@LoginActivity))
+                        finish()
+                        BaseAppController.setEnterPageAnimation(this@LoginActivity)
                     }
+
                 }
 
             })

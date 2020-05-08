@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.ramanbyte">
 
-
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -21,6 +20,7 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".emla.faculty.ui.activities.FacultyContainerActivity"></activity>
         <activity android:name=".emla.ui.activities.LauncherActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,12 +37,10 @@
         <activity android:name=".emla.ui.activities.ContainerActivity" />
         <activity android:name=".emla.ui.activities.ForgotPasswordActivity" />
         <activity android:name=".emla.ui.activities.FileViewerActivity" />
-
         <activity
             android:name=".emla.ui.activities.MediaPlaybackActivity"
             android:screenOrientation="landscape"
             tools:ignore="LockedOrientationActivity" />
-
         <activity android:name=".emla.ui.activities.CertificateViewerActivity" />
 
         <service
@@ -50,10 +48,10 @@
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.android.exoplayer.downloadService.action.RESTART" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </service>
-
         <service
             android:name="com.google.android.exoplayer2.scheduler.PlatformScheduler$PlatformSchedulerService"
             android:exported="true"
