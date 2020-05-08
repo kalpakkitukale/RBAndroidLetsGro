@@ -37,9 +37,10 @@ class LoginViewModel(var mContext: Context) : BaseViewModel(mContext) {
     var isPledgeConfirm: MutableLiveData<Boolean?> = MutableLiveData(null)
     var navigateToNextScreen: MutableLiveData<Boolean?> = MutableLiveData(null)
 
-   init {
-       loaderMessageLiveData.set(BindingUtils.string(R.string.str_loading))
-   }
+    init {
+        loaderMessageLiveData.set(BindingUtils.string(R.string.str_loading))
+    }
+
     val loginRequestValidation =
         ObservableValidator(userLoginRequestLiveData.value!!, BR::class.java).apply {
 
@@ -75,7 +76,7 @@ class LoginViewModel(var mContext: Context) : BaseViewModel(mContext) {
 
     val forgotPasswordClick = MutableLiveData<Boolean?>(null)
 
-    fun doLogin(view:View) {
+    fun doLogin(view: View) {
         /*view.snack(BindingUtils.string(R.string.please_agree_the_instruction),
             Snackbar.LENGTH_LONG,{})*/
         if (loginRequestValidation.validateAll()) {
@@ -87,6 +88,8 @@ class LoginViewModel(var mContext: Context) : BaseViewModel(mContext) {
                 val apiCallFunction: suspend () -> Unit = {
                     val response = masterRepository.doLogin(userLoginRequestLiveData.value!!)
                     if (response?.userType == KEY_STUDENT) {
+                        userModelLiveData.postValue(response)
+                    } else if (response?.userType == KEY_FACULTY) {
                         userModelLiveData.postValue(response)
                     } else {
                         setAlertDialogResourceModelMutableLiveData(
@@ -132,9 +135,9 @@ class LoginViewModel(var mContext: Context) : BaseViewModel(mContext) {
         }
     }
 
-    fun createAccount(view:View) {
+    fun createAccount(view: View) {
         (mContext as Activity).apply {
-            val intent = Intent(this,CreateAccountActivity::class.java)
+            val intent = Intent(this, CreateAccountActivity::class.java)
             startActivity(intent)
             BaseAppController.setEnterPageAnimation(this)
         }

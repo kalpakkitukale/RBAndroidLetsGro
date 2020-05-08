@@ -42,6 +42,11 @@ class MasterRepository(val mContext: Context) : BaseRepository(mContext) {
                     delete()
                     insert(userModel.replicate<UserModel, UserEntity>()!!)
                 }
+            }else if (userModel.userType == KEY_FACULTY) {
+                applicationDatabase.getUserDao().apply {
+                    delete()
+                    insert(userModel.replicate<UserModel, UserEntity>()!!)
+                }
             }
         }
         return userModel
