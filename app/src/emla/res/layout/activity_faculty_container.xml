@@ -32,23 +32,34 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="@color/colorPrimary"
+                app:title="@{facultyContainerViewModel.toolbarTitleLiveData}"
                 app:popupTheme="@style/AppTheme.PopupOverlay" />
-            <!--app:title="@{facultyContainerViewModel.toolbarTitleLiveData}"-->
 
         </com.google.android.material.appbar.AppBarLayout>
 
         <fragment
-            android:id="@+id/containerNavHost"
+            android:id="@+id/facultyContainerNavHost"
             android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
             android:layout_height="0dip"
             app:defaultNavHost="true"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/main_appbar"
             app:navGraph="@navigation/faculty_container_nav_graph"
             tools:ignore="FragmentTagUsage" />
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNavigationView"
+            style="@style/Widget.MaterialComponents.BottomNavigationView.Colored"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            app:itemIconSize="@dimen/dp_20"
+            app:labelVisibilityMode="labeled"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:menu="@menu/menu_faculty_container_nav" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
