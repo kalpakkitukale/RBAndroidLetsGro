@@ -68,7 +68,10 @@ class FacultyCoursesFragment : BaseFragment<FragmentFacultyCoursesBinding,Facult
 
     private fun setViewModelOp() {
         viewModel.apply {
-
+            initPaginationResponseHandler()
+            coursesPagedList()?.observe(this@FacultyCoursesFragment, androidx.lifecycle.Observer {
+                it?.let { coursesAdapter?.apply { submitList(it) } }
+            })
         }
     }
 

@@ -3,6 +3,8 @@ package com.ramanbyte.emla.base.di
 import com.ramanbyte.data_layer.network.init.RetrofitInitializer
 import com.ramanbyte.emla.data_layer.network.api_layer.*
 import com.ramanbyte.emla.data_layer.repositories.*
+import com.ramanbyte.emla.faculty.data_layer.network.api_layer.FacultyCoursesController
+import com.ramanbyte.emla.faculty.data_layer.repositories.FacultyCoursesRepository
 import org.kodein.di.Kodein
 import org.kodein.di.generic.bind
 import org.kodein.di.generic.instance
@@ -47,6 +49,10 @@ val repositoryDependencies = Kodein.Module("", true) {
 
     bind<QuestionRepository>() with singleton {
         QuestionRepository(instance())
+    }
+
+    bind<FacultyCoursesRepository>() with singleton {
+        FacultyCoursesRepository(instance())
     }
 
 }
@@ -97,6 +103,14 @@ private val controllersDependencies = Kodein.Module("controllers_dependencies", 
             instance(),//db
             QuestionController::class.java,
             DOMAIN + EMLA + CLIENT_BASE + API + QUESTION
+        )
+    }
+
+    bind<FacultyCoursesController>() with singleton {
+        RetrofitInitializer.invoke(
+            instance(),//db
+            FacultyCoursesController::class.java,
+            DOMAIN + EMLA + CLIENT_BASE + API + COURSE
         )
     }
 }

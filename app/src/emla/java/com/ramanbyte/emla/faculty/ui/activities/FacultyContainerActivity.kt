@@ -55,14 +55,18 @@ class FacultyContainerActivity : BaseActivity<ActivityFacultyContainerBinding,Fa
             visibilityNavElements(navController)
 
             viewModel.apply {
-                /*userModelLiveData.observe(this@FacultyContainerActivity, Observer {
-                    it?.let {
+                userModelLiveData.observe(this@FacultyContainerActivity, Observer {
+                    /*it?.let {
                         isUserLoggedIn = it.loggedId == KEY_Y
                         AppLog.infoLog("isUserLoggedIjjjj $isUserLoggedIn")
 
+                    }*/
+
+                    if (it != null){
+                        AppLog.infoLog("isUserLoggedIjjjj ${it.userType}")
                     }
-                    //AppLog.infoLog("isUserLoggedIjjjj ${it.userType}")
-                })*/
+
+                })
             }
         }
     }

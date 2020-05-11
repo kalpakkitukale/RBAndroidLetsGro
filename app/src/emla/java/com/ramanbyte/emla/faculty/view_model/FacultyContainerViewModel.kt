@@ -15,11 +15,11 @@ class FacultyContainerViewModel (mContext: Context) : BaseViewModel(mContext = m
 
     private val masterRepository: MasterRepository by instance()
 
-    /*var userModelLiveData = MutableLiveData<UserModel>().apply {
+    var userModelLiveData = MutableLiveData<UserModel>().apply {
         value = null
     }
 
     init {
         userModelLiveData.postValue(masterRepository.getCurrentUser())
-    }*/
+    }
 }

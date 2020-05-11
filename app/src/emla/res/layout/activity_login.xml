@@ -22,7 +22,7 @@
             android:id="@+id/layoutMain"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/ic_login_background"
+            android:background="@drawable/ic_login_background2"
             tools:context=".ui.activities.LoginActivity">
 
             <ImageView
