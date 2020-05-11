@@ -22,7 +22,8 @@
         android:layout_marginBottom="@dimen/dp_5"
         app:cardBackgroundColor="@color/colorTransparent"
         app:cardCornerRadius="@dimen/dp_5"
-        app:contentPadding="@dimen/dp_5">
+        app:contentPadding="@dimen/dp_5"
+        android:onClick="@{()->viewModel.playMedia(favouriteVideosModel)}">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

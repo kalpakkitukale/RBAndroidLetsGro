@@ -10,6 +10,8 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.ramanbyte.emla.faculty.view_model.FacultyContainerViewModel
+import com.ramanbyte.emla.ui.activities.ContainerActivity
 import com.ramanbyte.emla.view_model.ContainerViewModel
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
@@ -30,6 +32,7 @@ abstract class BaseFragment<LayoutBinding : ViewDataBinding, VM : ViewModel>(
     lateinit var viewModel: VM
 
     var containerViewModel: ContainerViewModel? = null
+    var facultyContainerViewModel: FacultyContainerViewModel? = null
 
     private val viewModelFactory: ViewModelProvider.Factory by instance()
 
@@ -84,8 +87,13 @@ abstract class BaseFragment<LayoutBinding : ViewDataBinding, VM : ViewModel>(
     fun setToolbarTitle(strTitle: String) {
         activity?.apply {
 
-            ViewModelProvider(this).get(ContainerViewModel::class.java).toolbarTitleLiveData.value =
-                strTitle
+            if (activity is ContainerActivity) {
+                ViewModelProvider(this).get(ContainerViewModel::class.java).toolbarTitleLiveData.value =
+                    strTitle
+            }else{
+                ViewModelProvider(this).get(FacultyContainerViewModel::class.java).toolbarTitleLiveData.value =
+                    strTitle
+            }
 
         }
     }
@@ -93,11 +101,16 @@ abstract class BaseFragment<LayoutBinding : ViewDataBinding, VM : ViewModel>(
     fun initializeContainerViewModel() {
 
         activity?.run {
+            if (activity is ContainerActivity) {
+                containerViewModel = ViewModelProvider(this).get(ContainerViewModel::class.java)
+            }else{
+                facultyContainerViewModel = ViewModelProvider(this).get(FacultyContainerViewModel::class.java)
+            }
 
-            containerViewModel = ViewModelProvider(this).get(ContainerViewModel::class.java)
         }
 
     }
+
 
     abstract val viewModelClass: Class<VM>
 

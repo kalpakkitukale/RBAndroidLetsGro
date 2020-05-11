@@ -24,6 +24,8 @@ class MyFavouriteVideoViewModel(mContext:Context) : BaseViewModel(mContext) {
     private val questionRepository: QuestionRepository by instance()
     private val sectionsRepository: SectionsRepository by instance()
 
+    val playOrPreviewLiveData = MutableLiveData<MediaInfoModel>(null)
+
     var favouriteVideosListLiveData = MutableLiveData<List<FavouriteVideosModel>>().apply {
         value = arrayListOf()
     }
@@ -141,6 +143,16 @@ class MyFavouriteVideoViewModel(mContext:Context) : BaseViewModel(mContext) {
             })
 
         isAlertDialogShown.value = true
+    }
+
+    fun playMedia(favouriteVideosModel: FavouriteVideosModel) {
+
+        playOrPreviewLiveData.value =  MediaInfoModel().apply {
+            mediaId = favouriteVideosModel.contentId
+            contentLink = favouriteVideosModel.videoLink
+        }
+
+        //playOrPreviewLiveData.value = mediaInfoModel
     }
 
 }

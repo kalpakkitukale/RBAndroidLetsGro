@@ -9,6 +9,7 @@ import com.ramanbyte.R
 import com.ramanbyte.base.BaseFragment
 import com.ramanbyte.databinding.FragmentMyFavouriteVideoBinding
 import com.ramanbyte.emla.adapters.MyFavouriteVideosListAdapter
+import com.ramanbyte.emla.content.ContentViewer
 import com.ramanbyte.emla.view_model.MyFavouriteVideoViewModel
 import com.ramanbyte.utilities.*
 import kotlinx.android.synthetic.emla.exo_playback_control_view.*
@@ -42,14 +43,14 @@ class MyFavouriteVideoFragment : BaseFragment<FragmentMyFavouriteVideoBinding,My
 
                 favouriteVideosListLiveData.observe(this@MyFavouriteVideoFragment, Observer {
                     if (it != null) {
-                        val downloadsListAdapter =
+                        val favouriteVideosListAdapter =
                             MyFavouriteVideosListAdapter(viewModel, it)
 
                         rvMyFavourite?.apply {
 
                             layoutManager = LinearLayoutManager(context!!, RecyclerView.VERTICAL, false)
 
-                            adapter = downloadsListAdapter
+                            adapter = favouriteVideosListAdapter
                         }
                     }
                 })
@@ -63,6 +64,17 @@ class MyFavouriteVideoFragment : BaseFragment<FragmentMyFavouriteVideoBinding,My
                             }!!)
                             onClickFavouriteVideosLiveData.value = 0
                         }
+                    }
+                })
+
+                playOrPreviewLiveData.observe(viewLifecycleOwner, Observer { mediaInfoModel ->
+
+                    if (mediaInfoModel != null) {
+
+                        ContentViewer(activity!!).preview(mediaInfoModel)
+
+                        playOrPreviewLiveData.value = null
+
                     }
                 })
 

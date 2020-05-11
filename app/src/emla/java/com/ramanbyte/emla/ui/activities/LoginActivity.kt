@@ -19,6 +19,7 @@ import com.ramanbyte.base.BaseActivity
 import com.ramanbyte.databinding.ActivityLoginBinding
 import com.ramanbyte.databinding.PledgeDialogBinding
 import com.ramanbyte.emla.base.di.authModuleDependency
+import com.ramanbyte.emla.faculty.ui.activities.FacultyContainerActivity
 import com.ramanbyte.emla.view_model.LoginViewModel
 import com.ramanbyte.services.MangeUserDevice
 import com.ramanbyte.utilities.*
@@ -66,7 +67,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(authMod
                       //  }
 
                     }else if (it.userType.equals(KEY_FACULTY, true)) {
-                        startActivity(ContainerActivity.intent(this@LoginActivity))
+                        startActivity(FacultyContainerActivity.intent(this@LoginActivity))
                         finish()
                         BaseAppController.setEnterPageAnimation(this@LoginActivity)
                     }

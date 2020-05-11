@@ -10,4 +10,10 @@
         android:name="com.ramanbyte.emla.faculty.ui.fragments.FacultyCoursesFragment"
         android:label="fragment_faculty_courses"
         tools:layout="@layout/fragment_faculty_courses" />
+
+    <fragment
+        android:id="@+id/facultySettingFragment"
+        android:name="com.ramanbyte.emla.faculty.ui.fragments.FacultySettingFragment"
+        android:label="@string/action_settings"
+        tools:layout="@layout/fragment_faculty_setting" />
 </navigation>

@@ -12,6 +12,7 @@ import com.ramanbyte.base.BaseActivity
 import com.ramanbyte.databinding.ActivityLauncherBinding
 import com.ramanbyte.emla.base.di.authModuleDependency
 import com.ramanbyte.emla.view_model.LauncherViewModel
+import com.ramanbyte.utilities.AppLog
 import com.ramanbyte.utilities.KEY_Y
 import com.ramanbyte.utilities.makeStatusBarTransparent
 
@@ -51,6 +52,7 @@ class LauncherActivity :
             userModelLiveData.observe(this@LauncherActivity, Observer {
                 it?.let {
                     isUserLoggedIn = it.loggedId == KEY_Y
+                    AppLog.infoLog("isUserLoggedInmmm $isUserLoggedIn")
 
                 }
             })
