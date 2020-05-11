@@ -9,6 +9,7 @@ import com.ramanbyte.data_layer.CoroutineUtils
 import com.ramanbyte.emla.data_layer.network.exception.ApiException
 import com.ramanbyte.emla.data_layer.network.exception.NoDataException
 import com.ramanbyte.emla.data_layer.network.exception.NoInternetException
+import com.ramanbyte.emla.data_layer.network.init.NetworkConnectionInterceptor
 import com.ramanbyte.emla.data_layer.repositories.QuestionRepository
 import com.ramanbyte.emla.data_layer.repositories.SectionsRepository
 import com.ramanbyte.emla.models.AskQuestionModel
@@ -17,9 +18,11 @@ import com.ramanbyte.emla.models.MediaInfoModel
 import com.ramanbyte.utilities.AppLog
 import com.ramanbyte.utilities.BindingUtils
 import com.ramanbyte.utilities.KEY_BLANK
+import com.ramanbyte.utilities.NetworkConnectivity
+import kotlinx.coroutines.delay
 import org.kodein.di.generic.instance
 
-class MyFavouriteVideoViewModel(mContext:Context) : BaseViewModel(mContext) {
+class MyFavouriteVideoViewModel(var mContext: Context) : BaseViewModel(mContext) {
 
     private val questionRepository: QuestionRepository by instance()
     private val sectionsRepository: SectionsRepository by instance()
@@ -48,7 +51,7 @@ class MyFavouriteVideoViewModel(mContext:Context) : BaseViewModel(mContext) {
         getFavouriteVideos()
     }
 
-    fun getFavouriteVideos(){
+    fun getFavouriteVideos() {
         CoroutineUtils.main {
             try {
                 coroutineToggleLoader(BindingUtils.string(R.string.getting_questions_list))
@@ -146,13 +149,51 @@ class MyFavouriteVideoViewModel(mContext:Context) : BaseViewModel(mContext) {
     }
 
     fun playMedia(favouriteVideosModel: FavouriteVideosModel) {
-
-        playOrPreviewLiveData.value =  MediaInfoModel().apply {
-            mediaId = favouriteVideosModel.contentId
-            contentLink = favouriteVideosModel.videoLink
+        if (NetworkConnectionInterceptor(mContext).isInternetAvailable()) {
+            playOrPreviewLiveData.value = MediaInfoModel().apply {
+                mediaId = favouriteVideosModel.contentId
+                contentLink = favouriteVideosModel.videoLink
+            }
+        } else {
+            setAlertDialogResourceModelMutableLiveData(
+                BindingUtils.string(R.string.no_internet_message),
+                BindingUtils.drawable(R.drawable.ic_no_internet)!!,
+                false,
+                BindingUtils.string(R.string.try_again), {
+                    playMedia(favouriteVideosModel)
+                    isAlertDialogShown.postValue(false)
+                },
+                negativeButtonClickFunctionality = {
+                    isAlertDialogShown.postValue(false)
+                }
+            )
+            isAlertDialogShown.postValue(true)
         }
 
         //playOrPreviewLiveData.value = mediaInfoModel
+    }
+
+    fun removeFavourite(view: View, favouriteVideosModel: FavouriteVideosModel) {
+        if (NetworkConnectivity.isConnectedToInternet()) {
+            setAlertDialogResourceModelMutableLiveData(
+                BindingUtils.string(R.string.message_remove_favourite),
+                null,
+                false,
+                positiveButtonText = BindingUtils.string(R.string.strYes),
+                positiveButtonClickFunctionality = {
+                    //btnFavouriteVideo.setImageDrawable(BindingUtils.drawable(R.drawable.ic_heart_with_black_border))
+                    onClickFavouriteVideosLiveData.value = favouriteVideosModel.contentId
+                    isAlertDialogShown.value = false
+                },
+                negativeButtonText = BindingUtils.string(R.string.strNo),
+                negativeButtonClickFunctionality = {
+                    isAlertDialogShown.value = false
+                })
+
+            isAlertDialogShown.value = true
+        }else{
+            showNoInternetDialog()
+        }
     }
 
 }

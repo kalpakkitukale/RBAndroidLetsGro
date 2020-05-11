@@ -17,6 +17,7 @@ import com.ramanbyte.BaseAppController
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseActivity
 import com.ramanbyte.databinding.ActivityLoginBinding
+import com.ramanbyte.databinding.FacultyPledgeDialogBinding
 import com.ramanbyte.databinding.PledgeDialogBinding
 import com.ramanbyte.emla.base.di.authModuleDependency
 import com.ramanbyte.emla.faculty.ui.activities.FacultyContainerActivity
@@ -67,9 +68,15 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(authMod
                       //  }
 
                     }else if (it.userType.equals(KEY_FACULTY, true)) {
-                        startActivity(FacultyContainerActivity.intent(this@LoginActivity))
-                        finish()
-                        BaseAppController.setEnterPageAnimation(this@LoginActivity)
+                        if (it.loggedId != KEY_Y)
+                            showPledgeDialog()
+                        else {
+                            callWorkerToMangeUserDevice()
+                            startActivity(FacultyContainerActivity.intent(this@LoginActivity))
+                            finish()
+                            BaseAppController.setEnterPageAnimation(this@LoginActivity)
+                        }
+
                     }
 
                 }
@@ -92,23 +99,26 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(authMod
 
     private fun showPledgeDialog() {
         val dialog = Dialog(this)
-        val pledgeBinding: PledgeDialogBinding =
-            PledgeDialogBinding.inflate(LayoutInflater.from(this))
+        val pledgeBinding: FacultyPledgeDialogBinding =
+            FacultyPledgeDialogBinding.inflate(LayoutInflater.from(this))
         dialog.setContentView(pledgeBinding.root)
         dialog.window?.setDimAmount(0.2F)
-       // pledgeBinding.loginViewModel = viewModel
+        pledgeBinding.loginViewModel = viewModel
         dialog.setCanceledOnTouchOutside(false)
 
         viewModel.apply {
             navigateToNextScreen.observe(this@LoginActivity, Observer {
                 if (it != null) {
                     if (it == true) {
-                        callWorkerToMangeUserDevice()
-                        startActivity(ContainerActivity.intent(this@LoginActivity))
-                        dialog.dismiss()
-                        navigateToNextScreen.value = null
-                        finish()
-
+                        if (NetworkConnectivity.isConnectedToInternet()) {
+                            callWorkerToMangeUserDevice()
+                            startActivity(FacultyContainerActivity.intent(this@LoginActivity))
+                            dialog.dismiss()
+                            navigateToNextScreen.value = null
+                            finish()
+                        }else{
+                            dialog.dismiss()
+                        }
                     } else {
                         layoutBinding.layoutMain.snack(BindingUtils.string(R.string.please_agree_the_instruction),Snackbar.LENGTH_LONG,{})
                         navigateToNextScreen.value = null

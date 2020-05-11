@@ -50,6 +50,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/dp_5"
+                android:onClick="@{()->viewModel.removeFavourite(btnFavouriteVideo,favouriteVideosModel)}"
                 android:src="@drawable/ic_heart_checked"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

@@ -50,7 +50,7 @@ class MyFavouriteVideosListAdapter(
                 viewModel = favouriteViewModel
                 this.favouriteVideosModel = favouriteVideosModel
 
-                btnFavouriteVideo.setOnClickListener(View.OnClickListener {
+                /*btnFavouriteVideo.setOnClickListener(View.OnClickListener {
 
                     favouriteViewModel.apply {
                         if (NetworkConnectivity.isConnectedToInternet()) {
@@ -75,7 +75,7 @@ class MyFavouriteVideosListAdapter(
                         }
                     }
 
-                })
+                })*/
             }
         }
 

@@ -11,10 +11,9 @@ import com.ramanbyte.aws_s3_android.accessor.AppS3Client
 import com.ramanbyte.base.BaseActivity
 import com.ramanbyte.databinding.ActivityLauncherBinding
 import com.ramanbyte.emla.base.di.authModuleDependency
+import com.ramanbyte.emla.faculty.ui.activities.FacultyContainerActivity
 import com.ramanbyte.emla.view_model.LauncherViewModel
-import com.ramanbyte.utilities.AppLog
-import com.ramanbyte.utilities.KEY_Y
-import com.ramanbyte.utilities.makeStatusBarTransparent
+import com.ramanbyte.utilities.*
 
 /**
  * @AddedBy Vinay Kumbhar <vinay.k@ramanbyte.com>
@@ -29,6 +28,7 @@ class LauncherActivity :
     override fun layoutId(): Int = R.layout.activity_launcher
 
     var isUserLoggedIn: Boolean = false
+    var currentUser: String = KEY_BLANK
 
     override fun initiate() {
 
@@ -38,7 +38,10 @@ class LauncherActivity :
         setViewModelOps()
         Handler().postDelayed({
             if (isUserLoggedIn) {
-                startActivity(ContainerActivity.intent(this@LauncherActivity))
+                if (currentUser == KEY_STUDENT)
+                    startActivity(ContainerActivity.intent(this@LauncherActivity))
+                else
+                    startActivity(FacultyContainerActivity.intent(this@LauncherActivity))
             } else {
                 startActivity(LoginActivity.intent(this@LauncherActivity))
             }
@@ -52,8 +55,7 @@ class LauncherActivity :
             userModelLiveData.observe(this@LauncherActivity, Observer {
                 it?.let {
                     isUserLoggedIn = it.loggedId == KEY_Y
-                    AppLog.infoLog("isUserLoggedInmmm $isUserLoggedIn")
-
+                    currentUser = it.userType
                 }
             })
         }

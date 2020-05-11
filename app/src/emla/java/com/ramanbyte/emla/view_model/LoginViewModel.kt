@@ -12,6 +12,10 @@ import com.google.android.material.snackbar.Snackbar
 import com.ramanbyte.BaseAppController
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseViewModel
+import com.ramanbyte.data_layer.CoroutineUtils
+import com.ramanbyte.emla.data_layer.network.exception.ApiException
+import com.ramanbyte.emla.data_layer.network.exception.NoDataException
+import com.ramanbyte.emla.data_layer.network.exception.NoInternetException
 import com.ramanbyte.emla.data_layer.repositories.MasterRepository
 import com.ramanbyte.emla.models.UserModel
 import com.ramanbyte.emla.models.request.LoginRequest
@@ -122,13 +126,30 @@ class LoginViewModel(var mContext: Context) : BaseViewModel(mContext) {
 
     fun onPledgeTaken(view: View) {
         if (isPledgeConfirm.value == true) {
-            val pledgeStatusRequest = PledgeStatusRequest()
-            pledgeStatusRequest.status = "Y"
-            val apiCallFunction: suspend () -> Unit = {
-                masterRepository.updatePledgeStatus(pledgeStatusRequest)
+            CoroutineUtils.main {
+                try {
+                    val pledgeStatusRequest = PledgeStatusRequest()
+                    pledgeStatusRequest.status = KEY_Y
+                    val apiCallFunction: suspend () -> Unit = {
+                        masterRepository.updatePledgeStatus(pledgeStatusRequest)
+                    }
+                    invokeApiCall(apiCallFunction = apiCallFunction)
+                    coroutineToggleLoader()
+                    navigateToNextScreen.value = true
+                } catch (e: ApiException) {
+                    e.printStackTrace()
+                    AppLog.errorLog(e.message, e)
+                    coroutineToggleLoader()
+                } catch (e: NoDataException) {
+                    e.printStackTrace()
+                    AppLog.errorLog(e.message, e)
+                    coroutineToggleLoader()
+                } catch (e: NoInternetException) {
+                    e.printStackTrace()
+                    AppLog.errorLog(e.message, e)
+                    coroutineToggleLoader()
+                }
             }
-            invokeApiCall(apiCallFunction = apiCallFunction)
-            navigateToNextScreen.value = true
         } else {
             navigateToNextScreen.value = false
             //show error
