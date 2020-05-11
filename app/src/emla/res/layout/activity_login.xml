@@ -190,7 +190,7 @@
                 android:paddingTop="@dimen/dp_10"
                 android:paddingEnd="@dimen/dp_50"
                 android:paddingBottom="@dimen/dp_10"
-                android:text="@string/signup"
+                android:text="@string/log_in"
                 android:textAllCaps="true"
                 android:textSize="@dimen/sp_16"
                 app:layout_constraintBottom_toTopOf="@+id/lblSignup"
