@@ -33,14 +33,6 @@ class MyFavouriteVideoViewModel(var mContext: Context) : BaseViewModel(mContext)
         value = arrayListOf()
     }
 
-    var onClickFavouriteVideosLiveData = MutableLiveData<Int>().apply {
-        value = 0
-    }
-
-    var insertedFavouriteStatus = MutableLiveData<Int>().apply {
-        value = 0
-    }
-
     var mediaInfoModel: MediaInfoModel? = null
 
     fun getMediaInfo(mediaId: Int) {
@@ -105,30 +97,52 @@ class MyFavouriteVideoViewModel(var mContext: Context) : BaseViewModel(mContext)
 
     }
 
-    fun insertSectionContentLog(
-        mediaId: Int,
-        mediaInfoModel: MediaInfoModel
+    fun insertFavouriteVideoStatus(
+        favouriteVideosModel: FavouriteVideosModel
     ) {
         CoroutineUtils.main {
 
             try {
-                //isLoaderShowingLiveData.postValue(true)
-                questionRepository.updateMediaInfo(mediaInfoModel)
-                val response = questionRepository.insertSectionContentLog(mediaId)
+                isLoaderShowingLiveData.postValue(true)
+                val response = questionRepository.insertFavouriteVideoStatus(favouriteVideosModel)
                 getFavouriteVideos()
                 //insertedFavouriteStatus.postValue(response)
-                //isLoaderShowingLiveData.postValue(false)
+                isLoaderShowingLiveData.postValue(false)
             } catch (e: ApiException) {
                 e.printStackTrace()
                 AppLog.errorLog(e.message, e)
-                //view.snackbar(BindingUtils.string(R.string.some_thing_went_wrong))
+                setAlertDialogResourceModelMutableLiveData(
+                    BindingUtils.string(R.string.some_thing_went_wrong),
+                    BindingUtils.drawable(R.drawable.ic_something_went_wrong)!!,
+                    true,
+                    BindingUtils.string(R.string.strOk), {
+                        isAlertDialogShown.postValue(false)
+                    }
+                )
+                isAlertDialogShown.postValue(true)
+                isLoaderShowingLiveData.postValue(false)
             } catch (e: NoInternetException) {
                 e.printStackTrace()
                 AppLog.errorLog(e.message, e)
-                //view.snackbar(BindingUtils.string(R.string.no_internet_message))
+                setAlertDialogResourceModelMutableLiveData(
+                    BindingUtils.string(R.string.no_internet_message),
+                    BindingUtils.drawable(R.drawable.ic_no_internet)!!,
+                    false,
+                    BindingUtils.string(R.string.try_again), {
+                        isAlertDialogShown.postValue(false)
+                        insertFavouriteVideoStatus(favouriteVideosModel)
+                    },
+                    negativeButtonClickFunctionality = {
+                        isAlertDialogShown.postValue(false)
+                    }
+                )
+                delay(200)
+                isAlertDialogShown.postValue(true)
+                isLoaderShowingLiveData.postValue(false)
             } catch (e: Exception) {
                 e.printStackTrace()
                 AppLog.errorLog(e.message, e)
+                isLoaderShowingLiveData.postValue(false)
             }
 
         }
@@ -174,26 +188,25 @@ class MyFavouriteVideoViewModel(var mContext: Context) : BaseViewModel(mContext)
     }
 
     fun removeFavourite(view: View, favouriteVideosModel: FavouriteVideosModel) {
-        if (NetworkConnectivity.isConnectedToInternet()) {
-            setAlertDialogResourceModelMutableLiveData(
-                BindingUtils.string(R.string.message_remove_favourite),
-                null,
-                false,
-                positiveButtonText = BindingUtils.string(R.string.strYes),
-                positiveButtonClickFunctionality = {
-                    //btnFavouriteVideo.setImageDrawable(BindingUtils.drawable(R.drawable.ic_heart_with_black_border))
-                    onClickFavouriteVideosLiveData.value = favouriteVideosModel.contentId
-                    isAlertDialogShown.value = false
-                },
-                negativeButtonText = BindingUtils.string(R.string.strNo),
-                negativeButtonClickFunctionality = {
-                    isAlertDialogShown.value = false
+
+        setAlertDialogResourceModelMutableLiveData(
+            BindingUtils.string(R.string.message_remove_favourite),
+            null,
+            false,
+            positiveButtonText = BindingUtils.string(R.string.strYes),
+            positiveButtonClickFunctionality = {
+                insertFavouriteVideoStatus(favouriteVideosModel.apply {
+                    isFavouriteVideo = KEY_BLANK
                 })
 
-            isAlertDialogShown.value = true
-        }else{
-            showNoInternetDialog()
-        }
+                isAlertDialogShown.value = false
+            },
+            negativeButtonText = BindingUtils.string(R.string.strNo),
+            negativeButtonClickFunctionality = {
+                isAlertDialogShown.value = false
+            })
+
+        isAlertDialogShown.value = true
     }
 
 }

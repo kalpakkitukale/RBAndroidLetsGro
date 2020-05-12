@@ -1,25 +1,16 @@
 package com.ramanbyte.emla.faculty.ui.fragments
 
 import android.content.Context
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.navigation.NavController
-import androidx.navigation.ui.AppBarConfiguration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseFragment
 import com.ramanbyte.databinding.FragmentFacultyCoursesBinding
-import com.ramanbyte.emla.adapters.CoursesAdapter
 import com.ramanbyte.emla.faculty.adapter.FacultyCoursesAdapter
 import com.ramanbyte.emla.faculty.view_model.FacultyCoursesViewModel
 import com.ramanbyte.utilities.AlertDialog
 import com.ramanbyte.utilities.BindingUtils
 import com.ramanbyte.utilities.ProgressLoader
-import com.ramanbyte.utilities.displayMetrics
 
 /**
  * @author Niraj Naware <niraj.n@ramanbyte.com>
@@ -56,7 +47,7 @@ class FacultyCoursesFragment : BaseFragment<FragmentFacultyCoursesBinding,Facult
     private fun setAdapter() {
         layoutBinding.apply {
             rvCoursesFragment.apply {
-                coursesAdapter = FacultyCoursesAdapter()
+                coursesAdapter = FacultyCoursesAdapter(mContext)
                 layoutManager = LinearLayoutManager(mContext, RecyclerView.VERTICAL, false)
                 adapter = coursesAdapter?.apply {
                     this.context = mContext

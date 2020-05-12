@@ -126,4 +126,45 @@ class QuestionRepository(mContext: Context) : BaseRepository(mContext) {
         return result!!
     }
 
+
+    /*
+    * call the api to insert Favourite Video Status to the server
+    * */
+    suspend fun insertFavouriteVideoStatus(
+        favouriteVideosModel: FavouriteVideosModel
+    ): Int {
+        val userId = applicationDatabase.getUserDao().getCurrentUser()?.userId!!
+        var result: Int? = 0
+
+        val allMediaInfo = MediaInfoModel().apply {
+            mediaId = favouriteVideosModel.contentId
+            courseId = favouriteVideosModel.courseId
+            chapterId = favouriteVideosModel.chapterId
+            sectionId = favouriteVideosModel.sectionId
+            mediaType = favouriteVideosModel.contentType
+            mediaStatus = favouriteVideosModel.status.toInt()
+            device_Id = favouriteVideosModel.deviceId
+            seekPosition = favouriteVideosModel.seekPosition.toLong()
+            likeVideo = favouriteVideosModel.isLikeVideo
+            favouriteVideo = favouriteVideosModel.isFavouriteVideo
+            this.createdBy = userId
+            this.modifiedBy = userId
+            this.userId = userId
+            this.device_Id = getIntPref(KEY_DEVICE_ID)
+        }
+
+
+        result = apiRequest {
+            sectionsController.insertSectionContentLog(allMediaInfo)
+        }!!
+        if (result!! > 0) {
+            /*
+            * if data is inserted to server then change then result!! > 0
+            * */
+            AppLog.infoLog("dataInserted")
+        }
+
+        return result!!
+    }
+
 }

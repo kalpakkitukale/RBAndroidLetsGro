@@ -55,18 +55,6 @@ class MyFavouriteVideoFragment : BaseFragment<FragmentMyFavouriteVideoBinding,My
                     }
                 })
 
-                onClickFavouriteVideosLiveData.observe(this@MyFavouriteVideoFragment, Observer {
-                    if (it != null){
-                        if (it > 0){
-                            getMediaInfo(it)
-                            insertSectionContentLog(it, mediaInfoModel?.apply {
-                                favouriteVideo = KEY_BLANK
-                            }!!)
-                            onClickFavouriteVideosLiveData.value = 0
-                        }
-                    }
-                })
-
                 playOrPreviewLiveData.observe(viewLifecycleOwner, Observer { mediaInfoModel ->
 
                     if (mediaInfoModel != null) {

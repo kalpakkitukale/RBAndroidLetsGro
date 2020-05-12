@@ -13,7 +13,7 @@ import com.ramanbyte.databinding.CardFacultyCourseBinding
 import com.ramanbyte.emla.faculty.view_model.FacultyCoursesViewModel
 import com.ramanbyte.emla.models.CoursesModel
 
-class FacultyCoursesAdapter : PagedListAdapter<CoursesModel, FacultyCoursesAdapter.FacultyCoursesViewHolder>(DIFF_CALLBACK) {
+class FacultyCoursesAdapter(var mContext: Context?) : PagedListAdapter<CoursesModel, FacultyCoursesAdapter.FacultyCoursesViewHolder>(DIFF_CALLBACK) {
 
     var coursesViewModel: FacultyCoursesViewModel? = null
     var context: Context? = null

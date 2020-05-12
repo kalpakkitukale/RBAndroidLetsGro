@@ -49,33 +49,6 @@ class MyFavouriteVideosListAdapter(
             cardMyFavouriteVideosBinding.apply {
                 viewModel = favouriteViewModel
                 this.favouriteVideosModel = favouriteVideosModel
-
-                /*btnFavouriteVideo.setOnClickListener(View.OnClickListener {
-
-                    favouriteViewModel.apply {
-                        if (NetworkConnectivity.isConnectedToInternet()) {
-                            setAlertDialogResourceModelMutableLiveData(
-                                BindingUtils.string(R.string.message_remove_favourite),
-                                null,
-                                false,
-                                positiveButtonText = BindingUtils.string(R.string.strYes),
-                                positiveButtonClickFunctionality = {
-                                    btnFavouriteVideo.setImageDrawable(BindingUtils.drawable(R.drawable.ic_heart_with_black_border))
-                                    favouriteViewModel.onClickFavouriteVideosLiveData.value = favouriteVideosModel.contentId
-                                    isAlertDialogShown.value = false
-                                },
-                                negativeButtonText = BindingUtils.string(R.string.strNo),
-                                negativeButtonClickFunctionality = {
-                                    isAlertDialogShown.value = false
-                                })
-
-                            isAlertDialogShown.value = true
-                        }else{
-                            showNoInternetDialog()
-                        }
-                    }
-
-                })*/
             }
         }
 
