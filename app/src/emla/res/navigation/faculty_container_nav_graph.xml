@@ -9,11 +9,20 @@
         android:id="@+id/facultyCoursesFragment"
         android:name="com.ramanbyte.emla.faculty.ui.fragments.FacultyCoursesFragment"
         android:label="fragment_faculty_courses"
-        tools:layout="@layout/fragment_faculty_courses" />
+        tools:layout="@layout/fragment_faculty_courses">
+        <action
+            android:id="@+id/action_facultyCoursesFragment_to_studentAskedQuestionsFragment"
+            app:destination="@id/studentAskedQuestionsFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/facultySettingFragment"
         android:name="com.ramanbyte.emla.faculty.ui.fragments.FacultySettingFragment"
         android:label="@string/action_settings"
         tools:layout="@layout/fragment_faculty_setting" />
+    <fragment
+        android:id="@+id/studentAskedQuestionsFragment"
+        android:name="com.ramanbyte.emla.faculty.ui.fragments.StudentAskedQuestionsFragment"
+        android:label="fragment_student_asked_questions"
+        tools:layout="@layout/fragment_student_asked_questions" />
 </navigation>

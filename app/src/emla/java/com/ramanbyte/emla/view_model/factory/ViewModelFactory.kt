@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import com.ramanbyte.emla.faculty.view_model.FacultyContainerViewModel
 import com.ramanbyte.emla.faculty.view_model.FacultyCoursesViewModel
+import com.ramanbyte.emla.faculty.view_model.StudentAskedQuestionsViewModel
 import com.ramanbyte.emla.view_model.*
 import com.ramanbyte.emla.view_model.ChangePasswordViewModel
 import com.ramanbyte.emla.view_model.ContainerViewModel
@@ -87,6 +88,9 @@ class ViewModelFactory(private val mContext: Context) : BaseViewModelFactory(mCo
             }
             modelClass.isAssignableFrom(FacultyCoursesViewModel::class.java) -> {
                 return FacultyCoursesViewModel(mContext) as T
+            }
+            modelClass.isAssignableFrom(StudentAskedQuestionsViewModel::class.java) -> {
+                return StudentAskedQuestionsViewModel(mContext) as T
             }
 
             else -> super.create(modelClass)

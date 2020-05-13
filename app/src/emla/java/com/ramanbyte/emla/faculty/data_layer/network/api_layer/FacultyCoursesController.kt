@@ -7,6 +7,5 @@ import retrofit2.http.Body
 import retrofit2.http.POST
 
 interface FacultyCoursesController {
-    @POST("getrecomdedcourselist")
-    suspend fun getCourses(@Body coursesRequest: CoursesRequest): Response<List<CoursesModel>>
+
 }

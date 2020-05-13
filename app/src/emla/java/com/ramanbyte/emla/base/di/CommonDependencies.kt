@@ -4,6 +4,7 @@ import com.ramanbyte.data_layer.network.init.RetrofitInitializer
 import com.ramanbyte.emla.data_layer.network.api_layer.*
 import com.ramanbyte.emla.data_layer.repositories.*
 import com.ramanbyte.emla.faculty.data_layer.network.api_layer.FacultyCoursesController
+import com.ramanbyte.emla.faculty.data_layer.network.api_layer.FacultyMasterApiController
 import com.ramanbyte.emla.faculty.data_layer.repositories.FacultyCoursesRepository
 import org.kodein.di.Kodein
 import org.kodein.di.generic.bind
@@ -24,6 +25,7 @@ private const val COURSE = "Course/"
 private const val CHAPTER = "Chapter/"
 private const val SECTION = "Section/"
 private const val QUESTION = "Question/"
+private const val MASTER = "Master/"
 
 var CLIENT_BASE = "test"
 
@@ -111,6 +113,14 @@ private val controllersDependencies = Kodein.Module("controllers_dependencies", 
             instance(),//db
             FacultyCoursesController::class.java,
             DOMAIN + EMLA + CLIENT_BASE + API + COURSE
+        )
+    }
+
+    bind<FacultyMasterApiController>() with singleton {
+        RetrofitInitializer.invoke(
+            instance(),//db
+            FacultyMasterApiController::class.java,
+            DOMAIN + EMLA + CLIENT_BASE + API + MASTER
         )
     }
 }

@@ -26,7 +26,6 @@ import org.kodein.di.generic.instance
  */
 class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
     override var noInternetTryAgain: () -> Unit = {
-        AppLog.infoLog("NirajMethod :: noInternetTryAgain")
         coursesRepository.tryAgain()
     }
     private val coursesRepository: CoursesRepository by instance()

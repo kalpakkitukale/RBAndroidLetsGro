@@ -9,10 +9,6 @@
             type="com.ramanbyte.emla.faculty.models.FacultyCoursesModel" />
 
         <variable
-            name="coursesModel1"
-            type="com.ramanbyte.emla.models.CoursesModel" />
-
-        <variable
             name="facultyCoursesViewModel"
             type="com.ramanbyte.emla.faculty.view_model.FacultyCoursesViewModel" />
     </data>
@@ -61,7 +57,7 @@
                 android:layout_marginStart="@dimen/dp_8"
                 android:layout_marginTop="@dimen/dp_2"
                 android:layout_marginEnd="@dimen/dp_5"
-                android:text="@{coursesModel1.courseName}"
+                android:text="@{coursesModel.courseName}"
                 android:textSize="@dimen/sp_18"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/ivCoursePic"
@@ -78,7 +74,7 @@
                 android:lines="1"
                 android:maxLines="1"
                 android:paddingEnd="@dimen/dp_5"
-                android:text="@{coursesModel1.courseDescription}"
+                android:text="@{coursesModel.courseDescription}"
                 android:textSize="@dimen/sp_12"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/tvCourseName"

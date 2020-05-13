@@ -11,15 +11,18 @@ import com.ramanbyte.data_layer.pagination.PaginationResponseHandler
 import com.ramanbyte.emla.data_layer.pagination.PaginationDataSourceFactory
 import com.ramanbyte.emla.data_layer.room.entities.UserEntity
 import com.ramanbyte.emla.faculty.data_layer.network.api_layer.FacultyCoursesController
+import com.ramanbyte.emla.faculty.data_layer.network.api_layer.FacultyMasterApiController
+import com.ramanbyte.emla.faculty.models.FacultyCoursesModel
+import com.ramanbyte.emla.faculty.models.request.FacultyCoursesRequestModel
 import com.ramanbyte.emla.models.CoursesModel
 import com.ramanbyte.emla.models.UserModel
 import com.ramanbyte.emla.models.request.CoursesRequest
 import com.ramanbyte.utilities.replicate
 import org.kodein.di.generic.instance
 
-class FacultyCoursesRepository(mContext: Context) : BaseRepository(mContext) {
+class FacultyCoursesRepository(mContext: Context) : BaseRepository(mContext) { //FacultyMasterRepository
 
-    private val coursesController: FacultyCoursesController by instance()
+    private val masterApiController: FacultyMasterApiController by instance()
 
     fun getCurrentUser(): UserModel? {
         applicationDatabase.getUserDao().apply {
@@ -29,11 +32,11 @@ class FacultyCoursesRepository(mContext: Context) : BaseRepository(mContext) {
 
     private val pageSize = 10
     private val coursesModelObservable =
-        ObservableField<CoursesRequest>().apply { set(CoursesRequest()) }
-    lateinit var coursesPagedDataSourceFactory: PaginationDataSourceFactory<CoursesModel, CoursesRequest>
+        ObservableField<FacultyCoursesRequestModel>().apply { set(FacultyCoursesRequestModel()) }
+    lateinit var coursesPagedDataSourceFactory: PaginationDataSourceFactory<FacultyCoursesModel, FacultyCoursesRequestModel>
     private var paginationResponseHandlerLiveData: MutableLiveData<PaginationResponseHandler?> =
         MutableLiveData(null)
-    var coursesPagedList: LiveData<PagedList<CoursesModel>>? = null
+    var coursesPagedList: LiveData<PagedList<FacultyCoursesModel>>? = null
     private val pageListConfig =
         PagedList.Config.Builder().setEnablePlaceholders(false).setPageSize(pageSize).build()
 
@@ -42,14 +45,14 @@ class FacultyCoursesRepository(mContext: Context) : BaseRepository(mContext) {
         coursesPagedDataSourceFactory = PaginationDataSourceFactory(
             coursesModelObservable.apply {
                 val userModel = getCurrentUser()
-                set(CoursesRequest().apply {
+                set(FacultyCoursesRequestModel().apply {
                     this.userId = userModel?.userId ?: 0
                 })
             },
             paginationResponseHandlerLiveData
         ) {
             apiRequest {
-                coursesController.getCourses(it)
+                masterApiController.getCourses(it)
             } ?: arrayListOf()
         }
 
@@ -60,5 +63,13 @@ class FacultyCoursesRepository(mContext: Context) : BaseRepository(mContext) {
 
     fun getPaginationResponseHandler() = paginationResponseHandlerLiveData
 
+
+    /*
+    * This function is used for to fetch the fresh order history list on try again button
+    * */
+    fun tryAgain() {
+        coursesPagedList?.value?.dataSource?.invalidate()
+        paginationResponseHandlerLiveData.postValue(PaginationResponseHandler.INIT_LOADING)
+    }
 
 }

@@ -1,39 +1,22 @@
 package com.ramanbyte.emla.faculty.view_model
 
 import android.content.Context
-import android.os.Bundle
-import android.view.View
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
-import androidx.navigation.findNavController
 import androidx.paging.PagedList
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseViewModel
 import com.ramanbyte.data_layer.pagination.PaginationMessages
 import com.ramanbyte.emla.faculty.data_layer.repositories.FacultyCoursesRepository
 import com.ramanbyte.emla.faculty.models.FacultyCoursesModel
-import com.ramanbyte.emla.models.CoursesModel
 import com.ramanbyte.utilities.AppLog
 import com.ramanbyte.utilities.BindingUtils
-import com.ramanbyte.utilities.KEY_COURSE_MODEL
 import org.kodein.di.generic.instance
 
-class FacultyCoursesViewModel (mContext: Context) : BaseViewModel(mContext = mContext) {
+class StudentAskedQuestionsViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
 
     private val coursesRepository: FacultyCoursesRepository by instance()
 
-    override var noInternetTryAgain: () -> Unit = {
-        coursesRepository.tryAgain()
-    }
-
-    fun onClickCourse(view: View, coursesModel: FacultyCoursesModel){
-        view.findNavController()
-            .navigate(
-                R.id.action_facultyCoursesFragment_to_studentAskedQuestionsFragment,
-                Bundle().apply {
-                    putParcelable(KEY_COURSE_MODEL, coursesModel)
-                })
-    }
+    override var noInternetTryAgain: () -> Unit = {}
 
     fun initPaginationResponseHandler() {
         coursesRepository.getPaginationResponseHandler().observeForever {

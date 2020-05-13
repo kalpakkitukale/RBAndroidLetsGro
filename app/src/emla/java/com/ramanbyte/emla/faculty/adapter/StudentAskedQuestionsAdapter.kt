@@ -11,27 +11,30 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ramanbyte.R
 import com.ramanbyte.aws_s3_android.accessor.AppS3Client
 import com.ramanbyte.databinding.CardFacultyCourseBinding
+import com.ramanbyte.databinding.CardStudentAskQuestionBinding
 import com.ramanbyte.emla.faculty.models.FacultyCoursesModel
 import com.ramanbyte.emla.faculty.view_model.FacultyCoursesViewModel
-import com.ramanbyte.emla.models.CoursesModel
+import com.ramanbyte.emla.faculty.view_model.StudentAskedQuestionsViewModel
 import com.ramanbyte.utilities.KEY_BLANK
 
-class FacultyCoursesAdapter(var mContext: Context?) : PagedListAdapter<FacultyCoursesModel, FacultyCoursesAdapter.FacultyCoursesViewHolder>(DIFF_CALLBACK) {
+class StudentAskedQuestionsAdapter()  : PagedListAdapter<FacultyCoursesModel, StudentAskedQuestionsAdapter.StudentAskedQuestionsViewHolder>(
+    StudentAskedQuestionsAdapter.DIFF_CALLBACK
+)  {
 
-    var coursesViewModel: FacultyCoursesViewModel? = null
+    var studentAskedQuestionsViewModel: StudentAskedQuestionsViewModel? = null
     var context: Context? = null
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): FacultyCoursesAdapter.FacultyCoursesViewHolder {
+    ): StudentAskedQuestionsAdapter.StudentAskedQuestionsViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.card_faculty_course, parent, false)
-        return FacultyCoursesViewHolder(view)
+            .inflate(R.layout.card_student_ask_question, parent, false)
+        return StudentAskedQuestionsViewHolder(view)
     }
 
     override fun onBindViewHolder(
-        holder: FacultyCoursesAdapter.FacultyCoursesViewHolder,
+        holder: StudentAskedQuestionsAdapter.StudentAskedQuestionsViewHolder,
         position: Int
     ) {
         val coursesModel: FacultyCoursesModel = getItem(position)!!
@@ -41,17 +44,16 @@ class FacultyCoursesAdapter(var mContext: Context?) : PagedListAdapter<FacultyCo
         })
     }
 
-    inner class FacultyCoursesViewHolder(itemview: View) : RecyclerView.ViewHolder(itemview) {
-
-        var dataBinding: CardFacultyCourseBinding = CardFacultyCourseBinding.bind(itemView)
+    inner class StudentAskedQuestionsViewHolder(itemView: View) :
+        RecyclerView.ViewHolder(itemView) {
+        var dataBinding: CardStudentAskQuestionBinding = CardStudentAskQuestionBinding.bind(itemView)
 
         fun bind(coursesModel: FacultyCoursesModel) {
             dataBinding.apply {
-                facultyCoursesViewModel = coursesViewModel
-                this.coursesModel = coursesModel
+                viewModel = studentAskedQuestionsViewModel
+                //this.coursesModel = coursesModel
             }
         }
-
     }
 
     companion object {
