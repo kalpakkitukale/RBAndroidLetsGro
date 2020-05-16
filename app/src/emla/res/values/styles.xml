@@ -263,6 +263,13 @@
         <item name="android:textColor">@color/colorTransparent</item>
     </style>
 
+    <!--Chips style-->
+    <style name="CustomChipChoice" parent="@style/Widget.MaterialComponents.Chip.Choice">
+        <item name="chipBackgroundColor">@color/chip_state_background_color</item>
+        <item name="android:textColor">@color/chip_state_text_color</item>
+        <item name="chipIconSize">@dimen/dp_15</item>
+    </style>
+
 
 
 </resources>

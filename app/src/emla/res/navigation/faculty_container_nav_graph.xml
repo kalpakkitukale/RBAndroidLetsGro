@@ -24,5 +24,14 @@
         android:id="@+id/studentAskedQuestionsFragment"
         android:name="com.ramanbyte.emla.faculty.ui.fragments.StudentAskedQuestionsFragment"
         android:label="fragment_student_asked_questions"
-        tools:layout="@layout/fragment_student_asked_questions" />
+        tools:layout="@layout/fragment_student_asked_questions" >
+        <action
+            android:id="@+id/action_studentAskedQuestionsFragment_to_facultyQuestionAnswerFragment"
+            app:destination="@id/facultyQuestionAnswerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/facultyQuestionAnswerFragment"
+        android:name="com.ramanbyte.emla.faculty.ui.fragments.FacultyQuestionAnswerFragment"
+        android:label="fragment_faculty_question_answer"
+        tools:layout="@layout/fragment_faculty_question_answer" />
 </navigation>

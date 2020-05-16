@@ -5,6 +5,9 @@
         <variable
             name="viewModel"
             type="com.ramanbyte.emla.faculty.view_model.StudentAskedQuestionsViewModel" />
+        <variable
+            name="studentAskedQuestionsModel"
+            type="com.ramanbyte.emla.faculty.models.StudentAskedQuestionsModel" />
     </data>
 
     <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -15,6 +18,7 @@
         app:cardBackgroundColor="@color/colorTransparent"
         app:cardCornerRadius="@dimen/dp_5"
         app:cardElevation="2dp"
+        android:onClick="@{() -> viewModel.onClickCard(cardLayoutMain)}"
         app:cardUseCompatPadding="true"
         app:contentPadding="@dimen/dp_5">
 
@@ -38,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_5"
                 android:layout_marginEnd="@dimen/dp_10"
-                android:text="{replyModel.userName}"
+                android:text="{studentAskedQuestionsModel.userName}"
                 android:textSize="@dimen/sp_12"
                 app:layout_constraintEnd_toStartOf="@+id/tvDateTime"
                 app:layout_constraintStart_toEndOf="@+id/rivUserPic"
@@ -51,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_5"
                 android:layout_marginEnd="@dimen/dp_10"
-                android:text="{replyModel.userName}"
+                android:text="{studentAskedQuestionsModel.userName}"
                 android:textSize="@dimen/sp_12"
                 app:layout_constraintEnd_toStartOf="@+id/ivDot"
                 app:layout_constraintTop_toTopOf="@+id/rivUserPic" />
@@ -71,7 +75,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_5"
-                android:text="{replyModel.answer}"
+                android:text="{studentAskedQuestionsModel.answer}"
                 android:textSize="@dimen/sp_12"
                 app:layout_constraintEnd_toEndOf="@+id/ivDot"
                 app:layout_constraintStart_toEndOf="@+id/rivUserPic"
@@ -110,7 +114,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_5"
-                android:text="{replyModel.answer}"
+                android:text="{studentAskedQuestionsModel.question}"
                 android:textSize="@dimen/sp_12"
                 android:layout_marginTop="@dimen/dp_5"
                 app:layout_constraintEnd_toEndOf="@+id/ivDot"

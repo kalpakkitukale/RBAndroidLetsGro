@@ -2,6 +2,7 @@
 <layout>
 
     <data>
+
         <variable
             name="replyModel"
             type="com.ramanbyte.emla.models.AskQuestionReplyModel" />
@@ -16,29 +17,30 @@
         app:cardCornerRadius="@dimen/dp_5"
         app:cardElevation="2dp"
         app:cardUseCompatPadding="true"
-        app:contentPadding="@dimen/dp_5">
+        android:layout_marginStart="@dimen/dp_60">
 
         <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <View
-                android:layout_width="@dimen/dp_2"
+                android:layout_width="@dimen/dp_3"
                 android:layout_height="0dp"
                 android:id="@+id/view"
-                android:background="@color/colorTeal"
+                android:background="@color/textColorRegOnWhite"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                app:layout_constraintBottom_toBottomOf="parent" />
 
             <com.ramanbyte.views.RoundedImageView
                 android:id="@+id/rivUserPic"
                 android:layout_width="@dimen/dp_25"
                 android:layout_height="@dimen/dp_25"
+                android:layout_margin="@dimen/dp_5"
+                app:imageUrl="@{replyModel.userPic}"
+                app:placeholder="@{replyModel.setCharacterDrawable}"
                 app:layout_constraintStart_toStartOf="@+id/view"
                 app:layout_constraintTop_toTopOf="parent" />
-            <!--app:imageUrl="@{replyModel.userPic}"
-            app:placeholder="@{replyModel.setCharacterDrawable}"-->
 
             <TextView
                 android:id="@+id/tvUserName"
@@ -47,9 +49,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_5"
                 android:layout_marginEnd="@dimen/dp_10"
-                android:text="{replyModel.userName}"
+                android:text="@{replyModel.userName}"
                 android:textSize="@dimen/sp_12"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tvDateTime"
                 app:layout_constraintStart_toEndOf="@+id/rivUserPic"
                 app:layout_constraintTop_toTopOf="@+id/rivUserPic" />
 
@@ -59,21 +61,23 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_5"
-                android:text="{replyModel.answer}"
+                android:text="@{replyModel.answer}"
                 android:textSize="@dimen/sp_12"
-                app:layout_constraintEnd_toEndOf="@+id/tvUserName"
+                app:layout_constraintEnd_toEndOf="@+id/tvDateTime"
                 app:layout_constraintStart_toEndOf="@+id/rivUserPic"
                 app:layout_constraintTop_toBottomOf="@+id/tvUserName" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvDateTime"
                 style="@style/TextViewBoldLightGray"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_10"
-                app:layout_constraintStart_toStartOf="@+id/tvUserName"
-                app:layout_constraintEnd_toEndOf="@+id/tvUserName"
-                app:layout_constraintTop_toBottomOf="@+id/tvReply" />
+                android:layout_marginEnd="@dimen/dp_10"
+                android:text="@{replyModel.createDateTime}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tvUserName"
+                app:layout_constraintBottom_toBottomOf="@+id/tvUserName" />
             <!--android:text="@{replyModel.createdDateTime}"-->
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -81,9 +85,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_reply_teal"
+                android:layout_margin="@dimen/dp_5"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvDateTime"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                app:layout_constraintTop_toBottomOf="@+id/tvReply"
+                app:layout_constraintBottom_toBottomOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

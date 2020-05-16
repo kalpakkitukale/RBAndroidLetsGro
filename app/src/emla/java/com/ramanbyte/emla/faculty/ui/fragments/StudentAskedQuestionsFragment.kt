@@ -2,11 +2,12 @@ package com.ramanbyte.emla.faculty.ui.fragments
 
 import android.content.Context
 import android.os.Bundle
+import android.text.TextUtils
+import android.view.*
+import android.widget.EditText
+import android.widget.ImageView
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,7 +17,9 @@ import com.ramanbyte.databinding.FragmentStudentAskedQuestionsBinding
 import com.ramanbyte.emla.faculty.adapter.FacultyCoursesAdapter
 import com.ramanbyte.emla.faculty.adapter.StudentAskedQuestionsAdapter
 import com.ramanbyte.emla.faculty.models.FacultyCoursesModel
+import com.ramanbyte.emla.faculty.view.StudentAskedQuestionsBottomSheet
 import com.ramanbyte.emla.faculty.view_model.StudentAskedQuestionsViewModel
+import com.ramanbyte.emla.view.RecommendedCourseFilterBottomSheet
 import com.ramanbyte.utilities.*
 
 /**
@@ -28,6 +31,7 @@ class StudentAskedQuestionsFragment :
     var mContext: Context? = null
     private var courseModel: FacultyCoursesModel? = null
     private var studentAskedQuestionsAdapter: StudentAskedQuestionsAdapter? = null
+    private var studentAskedQuestionsBottomSheet: StudentAskedQuestionsBottomSheet? = null
 
     override val viewModelClass: Class<StudentAskedQuestionsViewModel> =
         StudentAskedQuestionsViewModel::class.java
@@ -63,6 +67,19 @@ class StudentAskedQuestionsFragment :
                 findNavController().navigateUp()
                 true
             }
+            R.id.action_search_key -> {
+                mSearchView!!.setQuery(
+                    KEY_BLANK, false
+                )
+                mSearchView!!.clearFocus()
+                mSearchView!!.isIconified = true
+                true
+            }
+            R.id.action_filter -> {
+                studentAskedQuestionsBottomSheet = StudentAskedQuestionsBottomSheet()
+                studentAskedQuestionsBottomSheet?.show(childFragmentManager, "student_ask_question_filter")
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
@@ -86,6 +103,89 @@ class StudentAskedQuestionsFragment :
             coursesPagedList()?.observe(this@StudentAskedQuestionsFragment, androidx.lifecycle.Observer {
                 it?.let { studentAskedQuestionsAdapter?.apply { submitList(it) } }
             })
+        }
+    }
+
+    var menu: Menu? = null
+    private var mSearchView: SearchView? = null
+    var searchItem: MenuItem? = null
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_student_asked_questions, menu)
+
+        val menuItem = menu.findItem(R.id.action_filter)
+
+        val actionView = menuItem.actionView
+        badgeView = actionView.findViewById(R.id.filter_badge) as View
+        setupBadge()
+        actionView.setOnClickListener {
+            onOptionsItemSelected(menuItem)
+        }
+
+
+        searchItem = menu.findItem(R.id.action_search_key)
+
+        mSearchView = searchItem?.actionView as SearchView
+
+        val searchEditText = mSearchView!!.findViewById(R.id.search_src_text) as EditText
+
+        searchEditText.setTextColor(BindingUtils.color(R.color.colorWhite))
+        searchEditText.setHintTextColor(BindingUtils.color(R.color.colorTransparent))
+        searchEditText.hint = BindingUtils.string(R.string.search_by_student)
+
+        val searchClose = mSearchView?.findViewById(R.id.search_close_btn) as ImageView
+        searchClose.apply {
+            setImageResource(R.drawable.ic_close_white)
+            setOnClickListener {
+                if (TextUtils.isEmpty(searchEditText.text.toString())) {
+                    if (mSearchView?.isIconified == false) {
+                        mSearchView?.isIconified = true
+                    }
+                } else {
+                    searchEditText.setText("")
+                    viewModel.searchQuery.postValue("")
+                    mSearchView!!.clearFocus()
+                }
+            }
+        }
+        val searchImgId = R.id.search_button
+        val searchIcon = mSearchView?.findViewById(searchImgId) as ImageView
+        searchIcon.setImageResource(R.drawable.ic_search)
+
+
+
+        mSearchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                // api call
+                viewModel.searchQuery.postValue(query.toString())
+                mSearchView!!.clearFocus()
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+//                viewModel.searchQuery.postValue(newText.toString())
+                return false
+            }
+        })
+        super.onCreateOptionsMenu(menu, inflater)
+        this.menu = menu
+
+
+    }
+
+
+    var badgeView: View? = null
+    private fun setupBadge(showCount: Boolean? = false) {
+        if (badgeView != null) {
+            if (showCount == true) {
+                if (badgeView?.visibility != View.VISIBLE) {
+                    badgeView?.visibility = View.VISIBLE
+                }
+            } else {
+                if (badgeView?.visibility != View.GONE) {
+                    badgeView?.visibility = View.GONE
+                }
+            }
         }
     }
 

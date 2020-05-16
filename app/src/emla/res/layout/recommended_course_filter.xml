@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
@@ -131,9 +132,10 @@
                 android:id="@+id/viewFilterAboveDeleteButton"
                 android:layout_width="match_parent"
                 android:layout_height="0.7dp"
-                android:layout_marginTop="@dimen/dp_10"
+                android:layout_marginTop="12dp"
                 android:background="@color/colorDividerGrayOnWhiteBackground"
-                app:layout_constraintTop_toBottomOf="@id/tvSpecialisation" />
+                app:layout_constraintTop_toBottomOf="@id/tvSpecialisation"
+                tools:layout_editor_absoluteX="5dp" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnApplyFilter"

@@ -1,7 +1,11 @@
 package com.ramanbyte.emla.faculty.view_model
 
 import android.content.Context
+import android.os.Bundle
+import android.view.View
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.navigation.findNavController
 import androidx.paging.PagedList
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseViewModel
@@ -10,11 +14,32 @@ import com.ramanbyte.emla.faculty.data_layer.repositories.FacultyCoursesReposito
 import com.ramanbyte.emla.faculty.models.FacultyCoursesModel
 import com.ramanbyte.utilities.AppLog
 import com.ramanbyte.utilities.BindingUtils
+import com.ramanbyte.utilities.KEY_BLANK
+import com.ramanbyte.utilities.KEY_COURSE_MODEL
 import org.kodein.di.generic.instance
 
 class StudentAskedQuestionsViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
 
     private val coursesRepository: FacultyCoursesRepository by instance()
+
+    var searchQuery = MutableLiveData<String>().apply {
+        value = KEY_BLANK
+    }
+
+    var onClickCloseBottomSheetLiveData = MutableLiveData<Boolean>().apply {
+        value = false
+    }
+
+    var onClickApplyFilterLiveData = MutableLiveData<Boolean>().apply {
+        value = false
+    }
+
+    var onClickClearFilterLiveData = MutableLiveData<Boolean>().apply {
+        value = false
+    }
+    var onClickCardLiveData = MutableLiveData<Boolean>().apply {
+        value = false
+    }
 
     override var noInternetTryAgain: () -> Unit = {}
 
@@ -40,6 +65,26 @@ class StudentAskedQuestionsViewModel(mContext: Context) : BaseViewModel(mContext
 
     fun coursesPagedList(): LiveData<PagedList<FacultyCoursesModel>>? {
         return coursesRepository.coursesPagedList
+    }
+
+    fun onClickCloseBottomSheet(view: View){
+        onClickCloseBottomSheetLiveData.value = true
+    }
+    fun onClickApplyFilter(view: View){
+        onClickApplyFilterLiveData.value = true
+    }
+    fun onClickClearFilter(view: View){
+        onClickClearFilterLiveData.value = true
+    }
+
+    fun onClickCard(view: View){
+        view.findNavController()
+            .navigate(
+                R.id.action_studentAskedQuestionsFragment_to_facultyQuestionAnswerFragment
+                /*Bundle().apply {
+                    putParcelable(KEY_COURSE_MODEL, coursesModel)
+                }*/)
+        //onClickCardLiveData.value = true
     }
 
 }
