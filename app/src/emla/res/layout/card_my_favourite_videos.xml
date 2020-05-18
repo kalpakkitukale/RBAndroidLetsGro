@@ -110,7 +110,7 @@
                 android:id="@+id/tvContentSection"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text='@{favouriteVideosModel.chapterName}'
+                android:text='@{favouriteVideosModel.sectionName}'
                 android:textSize="@dimen/sp_12"
                 app:layout_constraintStart_toEndOf="@+id/lblContentSection"
                 app:layout_constraintTop_toTopOf="@+id/lblContentSection" />

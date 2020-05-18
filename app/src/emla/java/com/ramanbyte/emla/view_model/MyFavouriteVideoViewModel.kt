@@ -46,7 +46,7 @@ class MyFavouriteVideoViewModel(var mContext: Context) : BaseViewModel(mContext)
     fun getFavouriteVideos() {
         CoroutineUtils.main {
             try {
-                coroutineToggleLoader(BindingUtils.string(R.string.getting_questions_list))
+                coroutineToggleLoader(BindingUtils.string(R.string.getting_my_favourite_video_list))
 
                 val response = questionRepository.getFavouriteVideos()
                 favouriteVideosListLiveData.postValue(response)
