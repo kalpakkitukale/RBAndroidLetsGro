@@ -17,10 +17,12 @@ import com.ramanbyte.emla.faculty.models.StudentAskedQuestionsModel
 import com.ramanbyte.emla.faculty.view_model.FacultyCoursesViewModel
 import com.ramanbyte.emla.faculty.view_model.StudentAskedQuestionsViewModel
 import com.ramanbyte.utilities.KEY_BLANK
+import com.ramanbyte.utilities.KEY_NA_WITHOUT_SPACE
 
-class StudentAskedQuestionsAdapter()  : PagedListAdapter<StudentAskedQuestionsModel, StudentAskedQuestionsAdapter.StudentAskedQuestionsViewHolder>(
-    StudentAskedQuestionsAdapter.DIFF_CALLBACK
-)  {
+class StudentAskedQuestionsAdapter() :
+    PagedListAdapter<StudentAskedQuestionsModel, StudentAskedQuestionsAdapter.StudentAskedQuestionsViewHolder>(
+        StudentAskedQuestionsAdapter.DIFF_CALLBACK
+    ) {
 
     var studentAskedQuestionsViewModel: StudentAskedQuestionsViewModel? = null
     var context: Context? = null
@@ -47,12 +49,20 @@ class StudentAskedQuestionsAdapter()  : PagedListAdapter<StudentAskedQuestionsMo
 
     inner class StudentAskedQuestionsViewHolder(itemView: View) :
         RecyclerView.ViewHolder(itemView) {
-        var dataBinding: CardStudentAskQuestionBinding = CardStudentAskQuestionBinding.bind(itemView)
+        var dataBinding: CardStudentAskQuestionBinding =
+            CardStudentAskQuestionBinding.bind(itemView)
 
         fun bind(questionsModel: StudentAskedQuestionsModel) {
             dataBinding.apply {
                 viewModel = studentAskedQuestionsViewModel
                 this.studentAskedQuestionsModel = questionsModel
+
+                if (questionsModel.question.isBlank()) {
+                    tvQuestion.text = KEY_NA_WITHOUT_SPACE
+                } else {
+                    tvQuestion.text = questionsModel.question
+                }
+
             }
         }
     }

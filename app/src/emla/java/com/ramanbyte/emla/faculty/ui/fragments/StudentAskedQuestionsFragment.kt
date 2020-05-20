@@ -1,26 +1,23 @@
 package com.ramanbyte.emla.faculty.ui.fragments
 
 import android.content.Context
-import android.os.Bundle
 import android.text.TextUtils
 import android.view.*
 import android.widget.EditText
 import android.widget.ImageView
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseFragment
 import com.ramanbyte.databinding.FragmentStudentAskedQuestionsBinding
-import com.ramanbyte.emla.faculty.adapter.FacultyCoursesAdapter
 import com.ramanbyte.emla.faculty.adapter.StudentAskedQuestionsAdapter
 import com.ramanbyte.emla.faculty.models.FacultyCoursesModel
-import com.ramanbyte.emla.faculty.models.StudentAskedQuestionsModel
-import com.ramanbyte.emla.faculty.view.StudentAskedQuestionsBottomSheet
+import com.ramanbyte.emla.faculty.view.StudentAskedQuestionsFilterBottomSheet
 import com.ramanbyte.emla.faculty.view_model.StudentAskedQuestionsViewModel
-import com.ramanbyte.emla.view.RecommendedCourseFilterBottomSheet
 import com.ramanbyte.utilities.*
 
 /**
@@ -32,7 +29,7 @@ class StudentAskedQuestionsFragment :
     var mContext: Context? = null
     private var courseModel: FacultyCoursesModel? = null
     private var studentAskedQuestionsAdapter: StudentAskedQuestionsAdapter? = null
-    private var studentAskedQuestionsBottomSheet: StudentAskedQuestionsBottomSheet? = null
+    private var studentAskedQuestionsFilterBottomSheet: StudentAskedQuestionsFilterBottomSheet? = null
 
     override val viewModelClass: Class<StudentAskedQuestionsViewModel> =
         StudentAskedQuestionsViewModel::class.java
@@ -77,8 +74,8 @@ class StudentAskedQuestionsFragment :
                 true
             }
             R.id.action_filter -> {
-                studentAskedQuestionsBottomSheet = StudentAskedQuestionsBottomSheet()
-                studentAskedQuestionsBottomSheet?.show(childFragmentManager, "student_ask_question_filter")
+                studentAskedQuestionsFilterBottomSheet = StudentAskedQuestionsFilterBottomSheet()
+                studentAskedQuestionsFilterBottomSheet?.show(childFragmentManager, "student_ask_question_filter")
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -101,6 +98,26 @@ class StudentAskedQuestionsFragment :
     private fun setViewModelOp() {
         viewModel.apply {
             courseId.value = courseModel?.courseId
+
+            /*
+               * Check, is filter apply or not
+               * if apply then set badge
+               * else don't set badge
+               * */
+            questionsRequestModelLiveData.observe(this@StudentAskedQuestionsFragment,
+                Observer {
+                    it?.apply {
+                        if (isQuestionAnswered == KEY_N) {
+                            setupBadge(false)
+                        } else {
+                            setupBadge(true)
+                        }
+                    }
+                })
+
+            /*
+            * API call to get question related courseID
+            * */
             initPaginationResponseHandler()
             coursesPagedList()?.observe(this@StudentAskedQuestionsFragment, androidx.lifecycle.Observer {
                 it?.let { studentAskedQuestionsAdapter?.apply { submitList(it) } }

@@ -14,10 +14,8 @@ import com.ramanbyte.emla.faculty.data_layer.repositories.FacultyCoursesReposito
 import com.ramanbyte.emla.faculty.data_layer.repositories.FacultyQuestionRepository
 import com.ramanbyte.emla.faculty.models.FacultyCoursesModel
 import com.ramanbyte.emla.faculty.models.StudentAskedQuestionsModel
-import com.ramanbyte.utilities.AppLog
-import com.ramanbyte.utilities.BindingUtils
-import com.ramanbyte.utilities.KEY_BLANK
-import com.ramanbyte.utilities.KEY_COURSE_MODEL
+import com.ramanbyte.emla.faculty.models.request.StudentAskedQuestionsRequestModel
+import com.ramanbyte.utilities.*
 import org.kodein.di.generic.instance
 
 class StudentAskedQuestionsViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
@@ -76,24 +74,56 @@ class StudentAskedQuestionsViewModel(mContext: Context) : BaseViewModel(mContext
         return questionRepository.questionPagedList
     }
 
+    fun onClickCard(view: View, questionId:Int){
+        view.findNavController()
+            .navigate(
+                R.id.action_studentAskedQuestionsFragment_to_facultyQuestionAnswerFragment,
+                Bundle().apply {
+                    putInt(keyQuestionId, questionId)
+                })
+        //onClickCardLiveData.value = true
+    }
+
+    //------------- Filter Code --- Start ------------------------
+
+    var questionsRequestModelLiveData =
+        MutableLiveData<StudentAskedQuestionsRequestModel>().apply {
+            value = StudentAskedQuestionsRequestModel()
+        }
+    var questionsRequestModel = StudentAskedQuestionsRequestModel()
+
+    var ansTypeLiveData = MutableLiveData<String>().apply {
+        value = KEY_N
+    }
+
+    fun  onClickAnswerChip(selectedAnsType : String){
+        when (selectedAnsType) {
+            KEY_ANSWERED -> {
+                ansTypeLiveData.value = KEY_Y
+            }
+            KEY_UNANSWERED -> {
+                ansTypeLiveData.value = KEY_N
+            }
+            else -> ansTypeLiveData.value = KEY_BLANK
+        }
+    }
+
     fun onClickCloseBottomSheet(view: View){
         onClickCloseBottomSheetLiveData.value = true
     }
     fun onClickApplyFilter(view: View){
+
+        questionsRequestModelLiveData.value = questionsRequestModel.apply {
+            isQuestionAnswered = ansTypeLiveData.value!!
+        }
+        questionRepository.applyFilter(questionsRequestModelLiveData.value!!)
+
         onClickApplyFilterLiveData.value = true
     }
     fun onClickClearFilter(view: View){
         onClickClearFilterLiveData.value = true
     }
 
-    fun onClickCard(view: View){
-        view.findNavController()
-            .navigate(
-                R.id.action_studentAskedQuestionsFragment_to_facultyQuestionAnswerFragment
-                /*Bundle().apply {
-                    putParcelable(KEY_COURSE_MODEL, coursesModel)
-                }*/)
-        //onClickCardLiveData.value = true
-    }
+    //------------- Filter Code --- End ------------------------
 
 }

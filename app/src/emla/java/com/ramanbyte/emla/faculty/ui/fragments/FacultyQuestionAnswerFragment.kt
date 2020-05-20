@@ -26,6 +26,7 @@ class FacultyQuestionAnswerFragment :
 
     var mContext: Context? = null
     var questionAnswerAdapter: FacultyQuestionAnswerAdapter? = null
+    //var questionId: Int? =null
 
     override val viewModelClass: Class<FacultyQuestionAnswerViewModel> =
         FacultyQuestionAnswerViewModel::class.java
@@ -34,6 +35,8 @@ class FacultyQuestionAnswerFragment :
 
     override fun initiate() {
         setToolbarTitle(BindingUtils.string(R.string.questions_and_answer))
+
+
 
         ProgressLoader(mContext!!, viewModel)
         AlertDialog(mContext!!, viewModel)
@@ -48,7 +51,12 @@ class FacultyQuestionAnswerFragment :
 
             viewModel.apply {
 
-                questionId = 4 // remove
+                arguments?.apply {
+                    questionId = getInt(keyQuestionId)
+                    AppLog.infoLog("questionId $questionId")
+                }
+
+                //questionId = 4 // remove
 
                 /*
                 * call API to get conversation data

@@ -263,4 +263,5 @@ Content
     <string name="unanswered">Unanswered</string>
     <string name="asc">Asc</string>
     <string name="desc">Desc</string>
+    <string name="video_id">Video ID</string>
 </resources>

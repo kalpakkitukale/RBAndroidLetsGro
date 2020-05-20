@@ -33,6 +33,7 @@ const val KEY_LOGIN_STATUS_NO = "N"
 const val KEY_DEVICE_ID = "deviceId"
 
 const val KEY_NA = "N/A"
+const val KEY_NA_WITHOUT_SPACE = "NA"
 const val KEY_BLANK = ""
 const val KEY_OK = "Ok"
 const val KEY_NAME_PATTERN = "((?=.*[a-z])(?=.*[A-Z]))"
@@ -353,6 +354,10 @@ const val KEY_MEDIA_TYPE_AUDIO = "video"
 const val KEY_MEDIA_TYPE_FILE = "file"
 const val KEY_FILE_NAME = "keyFileName"
 const val KEY_FILE_DOWNLOAD = "File Download"
+
+/*Faculty Side*/
+const val KEY_ANSWERED = "answered"
+const val KEY_UNANSWERED = "unanswered"
 
 fun skipTrailingZeroes(number: Double?): String {
     var trimmedNumber = "0"

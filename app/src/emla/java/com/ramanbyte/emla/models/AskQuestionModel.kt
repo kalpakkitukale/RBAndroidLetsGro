@@ -2,17 +2,16 @@ package com.ramanbyte.emla.models
 
 import android.graphics.drawable.Drawable
 import androidx.room.Ignore
-import com.ramanbyte.utilities.DateUtils
+import com.ramanbyte.utilities.*
 import com.ramanbyte.utilities.DateUtils.DATE_TIME_PATTERN
 import com.ramanbyte.utilities.DateUtils.DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS
-import com.ramanbyte.utilities.KEY_BLANK
-import com.ramanbyte.utilities.ViewUtils
 
 class AskQuestionModel {
 
     var questionId = 0
     var totalReplyCount = 0
     var question = KEY_BLANK
+        get() = field ?: KEY_NA_WITHOUT_SPACE
     var userName = KEY_BLANK
     var userPic: String? = KEY_BLANK
         get() = field ?: KEY_BLANK

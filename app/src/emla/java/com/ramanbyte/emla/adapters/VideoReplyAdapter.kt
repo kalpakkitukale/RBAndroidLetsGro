@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ramanbyte.R
 import com.ramanbyte.databinding.CardRecentlyAskQuestionsReplyBinding
 import com.ramanbyte.emla.models.AskQuestionReplyModel
+import com.ramanbyte.utilities.BindingUtils
+import com.ramanbyte.utilities.KEY_FACULTY
 
 class VideoReplyAdapter(private var qnaArrayList: ArrayList<AskQuestionReplyModel>) :
     RecyclerView.Adapter<VideoReplyAdapter.VideoReplyViewHolder>() {
@@ -44,6 +46,11 @@ class VideoReplyAdapter(private var qnaArrayList: ArrayList<AskQuestionReplyMode
                     }else{
                         tvDateTime.text = replyModel.createDateTime
                     }
+
+                    if (userType == KEY_FACULTY)
+                        verticalView.setBackgroundColor(BindingUtils.color(R.color.colorTeal))
+                    else
+                        verticalView.setBackgroundColor(BindingUtils.color(R.color.textColorRegOnWhite))
                 }
 
             }

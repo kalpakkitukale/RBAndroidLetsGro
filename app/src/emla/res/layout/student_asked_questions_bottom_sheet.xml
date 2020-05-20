@@ -8,6 +8,9 @@
         <variable
             name="studentAskedQuestionsViewModel"
             type="com.ramanbyte.emla.faculty.view_model.StudentAskedQuestionsViewModel" />
+        <variable
+            name="staticHelper"
+            type="com.ramanbyte.utilities.StaticHelpersKt" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -16,14 +19,15 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/dp_5">
 
-        <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="@dimen/dp_5">
 
             <TextView
                 android:id="@+id/lblFilter"
-                style="@style/TextViewMediumBlackOnWhite"
+                style="@style/TextViewBoldBlackOnWhite"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_10"
@@ -47,7 +51,7 @@
 
             <TextView
                 android:id="@+id/lblSortByDate"
-                style="@style/TextViewMediumBlackOnWhite"
+                style="@style/TextViewBoldBlackOnWhite"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_10"
@@ -94,7 +98,7 @@
 
             <TextView
                 android:id="@+id/lblAnsAndUnAns"
-                style="@style/TextViewMediumBlackOnWhite"
+                style="@style/TextViewBoldBlackOnWhite"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_10"
@@ -106,7 +110,7 @@
                 app:layout_constraintTop_toBottomOf="@id/cgSortByDate" />
 
             <com.google.android.material.chip.ChipGroup
-                android:id="@+id/cgAnsAndUnAns"
+                android:id="@+id/cgAnsType"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/dp_5"
@@ -123,8 +127,8 @@
                     android:text="@string/answered"
                     android:textAllCaps="true"
                     android:textAlignment="center"
-                    android:textSize="@dimen/sp_12" />
-                <!--android:onClick="@{() -> studentAskedQuestionsViewModel.onChipClickedStatus(staticHelper.KEY_STATUS_ALLOWED)}"-->
+                    android:textSize="@dimen/sp_12"
+                    android:onClick="@{() -> studentAskedQuestionsViewModel.onClickAnswerChip(staticHelper.KEY_ANSWERED)}"/>
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/cpUnanswered"
@@ -134,8 +138,8 @@
                     android:text="@string/unanswered"
                     android:textAllCaps="true"
                     android:textAlignment="center"
-                    android:textSize="@dimen/sp_12" />
-                <!--android:onClick="@{() -> studentAskedQuestionsViewModel.onChipClickedStatus(staticHelper.KEY_STATUS_DENIED)}"-->
+                    android:textSize="@dimen/sp_12"
+                    android:onClick="@{() -> studentAskedQuestionsViewModel.onClickAnswerChip(staticHelper.KEY_UNANSWERED)}"/>
             </com.google.android.material.chip.ChipGroup>
 
             <View
@@ -144,7 +148,7 @@
                 android:layout_height="0.7dp"
                 android:layout_marginTop="12dp"
                 android:background="@color/colorDividerGrayOnWhiteBackground"
-                app:layout_constraintTop_toBottomOf="@id/cgAnsAndUnAns"
+                app:layout_constraintTop_toBottomOf="@id/cgAnsType"
                 tools:layout_editor_absoluteX="5dp" />
 
             <androidx.appcompat.widget.AppCompatButton

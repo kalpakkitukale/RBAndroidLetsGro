@@ -15,8 +15,8 @@
         app:cardBackgroundColor="@color/colorTransparent"
         app:cardCornerRadius="@dimen/dp_5"
         app:cardElevation="2dp"
-        app:cardUseCompatPadding="true"
-        app:contentPadding="@dimen/dp_5">
+        app:cardUseCompatPadding="true">
+        <!--app:contentPadding="@dimen/dp_5"-->
 
         <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
@@ -25,8 +25,7 @@
             <View
                 android:layout_width="@dimen/dp_2"
                 android:layout_height="0dp"
-                android:id="@+id/view"
-                android:background="@color/colorTeal"
+                android:id="@+id/verticalView"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"/>
@@ -35,10 +34,11 @@
                 android:id="@+id/rivUserPic"
                 android:layout_width="@dimen/dp_25"
                 android:layout_height="@dimen/dp_25"
-                app:layout_constraintStart_toStartOf="@+id/view"
-                app:layout_constraintTop_toTopOf="parent" />
-            <!--app:imageUrl="@{replyModel.userPic}"
-            app:placeholder="@{replyModel.setCharacterDrawable}"-->
+                app:layout_constraintStart_toStartOf="@+id/verticalView"
+                app:layout_constraintTop_toTopOf="parent"
+                app:imageUrl="@{replyModel.userPic}"
+                android:layout_margin="@dimen/dp_5"
+                app:placeholder="@{replyModel.setCharacterDrawable}"/>
 
             <TextView
                 android:id="@+id/tvUserName"
@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_5"
                 android:layout_marginEnd="@dimen/dp_10"
-                android:text="{replyModel.userName}"
+                android:text="@{replyModel.userName}"
                 android:textSize="@dimen/sp_12"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/rivUserPic"
@@ -59,7 +59,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_5"
-                android:text="{replyModel.answer}"
+                android:text="@{replyModel.answer}"
                 android:textSize="@dimen/sp_12"
                 app:layout_constraintEnd_toEndOf="@+id/tvUserName"
                 app:layout_constraintStart_toEndOf="@+id/rivUserPic"
@@ -82,6 +82,7 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_reply_teal"
                 app:layout_constraintEnd_toEndOf="parent"
+                android:layout_margin="@dimen/dp_5"
                 app:layout_constraintTop_toBottomOf="@+id/tvDateTime"
                 app:layout_constraintBottom_toBottomOf="parent"/>
 

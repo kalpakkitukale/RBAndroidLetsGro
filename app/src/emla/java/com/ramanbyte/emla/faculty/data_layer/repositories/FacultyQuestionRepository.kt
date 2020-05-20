@@ -63,6 +63,18 @@ class FacultyQuestionRepository(mContext: Context) : BaseRepository(mContext) {
 
     fun getPaginationResponseHandler() = paginationResponseHandlerLiveData
 
+    /*Filter*/
+    fun applyFilter(questionsRequestModel: StudentAskedQuestionsRequestModel) {
+
+        val userDetails = getCurrentUser()
+        questionModelObservable.set(questionsRequestModel.apply {
+            userId = userDetails?.userId!!
+            courseId = this@FacultyQuestionRepository.courseId
+        })
+
+        questionPagedList?.value?.dataSource?.invalidate()
+        paginationResponseHandlerLiveData.postValue(PaginationResponseHandler.INIT_LOADING)
+    }
 
     /*
     * This function is used for to fetch the fresh order history list on try again button

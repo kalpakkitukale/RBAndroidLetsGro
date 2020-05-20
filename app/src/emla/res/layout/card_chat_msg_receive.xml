@@ -27,15 +27,15 @@
                 android:id="@+id/view"
                 android:layout_width="@dimen/dp_3"
                 android:layout_height="0dp"
-                android:background="@color/colorTeal"
+                android:background="@color/textColorRegOnWhite"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.ramanbyte.views.RoundedImageView
                 android:id="@+id/rivUserPic"
-                android:layout_width="@dimen/dp_25"
-                android:layout_height="@dimen/dp_25"
+                android:layout_width="@dimen/dp_35"
+                android:layout_height="@dimen/dp_35"
                 android:layout_margin="@dimen/dp_5"
                 app:imageUrl="@{replyModel.userPic}"
                 app:layout_constraintStart_toStartOf="@+id/view"
