@@ -13,11 +13,12 @@ import com.ramanbyte.aws_s3_android.accessor.AppS3Client
 import com.ramanbyte.databinding.CardFacultyCourseBinding
 import com.ramanbyte.databinding.CardStudentAskQuestionBinding
 import com.ramanbyte.emla.faculty.models.FacultyCoursesModel
+import com.ramanbyte.emla.faculty.models.StudentAskedQuestionsModel
 import com.ramanbyte.emla.faculty.view_model.FacultyCoursesViewModel
 import com.ramanbyte.emla.faculty.view_model.StudentAskedQuestionsViewModel
 import com.ramanbyte.utilities.KEY_BLANK
 
-class StudentAskedQuestionsAdapter()  : PagedListAdapter<FacultyCoursesModel, StudentAskedQuestionsAdapter.StudentAskedQuestionsViewHolder>(
+class StudentAskedQuestionsAdapter()  : PagedListAdapter<StudentAskedQuestionsModel, StudentAskedQuestionsAdapter.StudentAskedQuestionsViewHolder>(
     StudentAskedQuestionsAdapter.DIFF_CALLBACK
 )  {
 
@@ -37,10 +38,10 @@ class StudentAskedQuestionsAdapter()  : PagedListAdapter<FacultyCoursesModel, St
         holder: StudentAskedQuestionsAdapter.StudentAskedQuestionsViewHolder,
         position: Int
     ) {
-        val coursesModel: FacultyCoursesModel = getItem(position)!!
-        holder.bind(coursesModel.apply {
-            courseImageUrl =
-                AppS3Client.createInstance(context!!).getFileAccessUrl(courseImage ?: KEY_BLANK)
+        val questionsModel: StudentAskedQuestionsModel = getItem(position)!!
+        holder.bind(questionsModel.apply {
+            /*courseImageUrl =
+                AppS3Client.createInstance(context!!).getFileAccessUrl(courseImage ?: KEY_BLANK)*/
         })
     }
 
@@ -48,27 +49,27 @@ class StudentAskedQuestionsAdapter()  : PagedListAdapter<FacultyCoursesModel, St
         RecyclerView.ViewHolder(itemView) {
         var dataBinding: CardStudentAskQuestionBinding = CardStudentAskQuestionBinding.bind(itemView)
 
-        fun bind(coursesModel: FacultyCoursesModel) {
+        fun bind(questionsModel: StudentAskedQuestionsModel) {
             dataBinding.apply {
                 viewModel = studentAskedQuestionsViewModel
-                //this.coursesModel = coursesModel
+                this.studentAskedQuestionsModel = questionsModel
             }
         }
     }
 
     companion object {
-        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<FacultyCoursesModel>() {
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<StudentAskedQuestionsModel>() {
             override fun areItemsTheSame(
-                oldItem: FacultyCoursesModel,
-                newItem: FacultyCoursesModel
+                oldItem: StudentAskedQuestionsModel,
+                newItem: StudentAskedQuestionsModel
             ): Boolean {
                 return oldItem.courseId == newItem.courseId
             }
 
             @SuppressLint("DiffUtilEquals")
             override fun areContentsTheSame(
-                oldItem: FacultyCoursesModel,
-                newItem: FacultyCoursesModel
+                oldItem: StudentAskedQuestionsModel,
+                newItem: StudentAskedQuestionsModel
             ): Boolean {
                 return oldItem == newItem
             }

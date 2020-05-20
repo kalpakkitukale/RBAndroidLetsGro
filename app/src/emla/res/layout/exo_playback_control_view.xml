@@ -186,7 +186,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="@string/wishlist"
+            android:text="@string/favourite"
             android:textSize="@dimen/sp_10" />
 
     </LinearLayout>
@@ -198,7 +198,7 @@
         android:orientation="horizontal"
         android:gravity="center"
         android:padding="@dimen/dp_5"
-        android:visibility="gone"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/wishListLayout"

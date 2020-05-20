@@ -9,6 +9,7 @@ import com.ramanbyte.R
 import com.ramanbyte.databinding.CardChatMsgReceiveBinding
 import com.ramanbyte.databinding.CardChatMsgSendBinding
 import com.ramanbyte.emla.models.AskQuestionReplyModel
+import com.ramanbyte.utilities.KEY_FACULTY
 
 class FacultyQuestionAnswerAdapter :
     RecyclerView.Adapter<FacultyQuestionAnswerAdapter.FacultyQuestionAnswerViewHolder>() {
@@ -71,9 +72,9 @@ class FacultyQuestionAnswerAdapter :
     override fun getItemViewType(position: Int): Int {
         //return super.getItemViewType(position)
 
-        val userId = questionReplyList!![position].userId
+        val userType = questionReplyList!![position].userType
 
-        return if (userId == 2021) {
+        return if (userType == KEY_FACULTY) {
             VIEW_TYPE_MESSAGE_SENT
         } else {
             VIEW_TYPE_MESSAGE_RECEIVED

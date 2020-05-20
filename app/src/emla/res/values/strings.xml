@@ -240,7 +240,7 @@ Content
 
     <string name="like">Like</string>
     <string name="dislike">Dislike</string>
-    <string name="wishlist">Wishlist</string>
+    <string name="favourite">Favourite</string>
     <string name="do_you_have_any_questions">Do you have any questions?</string>
     <string name="mobile_number">Mobile Number</string>
     <string name="alternate_mobile_number">Alternate Mobile Number</string>
@@ -257,6 +257,8 @@ Content
     <!--Faculty Side Courses List-->
     <string name="faculty_no_courses">No Courses added yet...</string>
     <string name="faculty_no_more_courses">No more courses added yet...</string>
+    <string name="faculty_no_questions">No Questions added yet...</string>
+    <string name="faculty_no_more_questions">No more questions added yet...</string>
     <string name="answered">Answered</string>
     <string name="unanswered">Unanswered</string>
     <string name="asc">Asc</string>

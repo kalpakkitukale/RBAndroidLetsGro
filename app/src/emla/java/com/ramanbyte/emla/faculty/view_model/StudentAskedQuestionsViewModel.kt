@@ -11,7 +11,9 @@ import com.ramanbyte.R
 import com.ramanbyte.base.BaseViewModel
 import com.ramanbyte.data_layer.pagination.PaginationMessages
 import com.ramanbyte.emla.faculty.data_layer.repositories.FacultyCoursesRepository
+import com.ramanbyte.emla.faculty.data_layer.repositories.FacultyQuestionRepository
 import com.ramanbyte.emla.faculty.models.FacultyCoursesModel
+import com.ramanbyte.emla.faculty.models.StudentAskedQuestionsModel
 import com.ramanbyte.utilities.AppLog
 import com.ramanbyte.utilities.BindingUtils
 import com.ramanbyte.utilities.KEY_BLANK
@@ -20,10 +22,14 @@ import org.kodein.di.generic.instance
 
 class StudentAskedQuestionsViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
 
-    private val coursesRepository: FacultyCoursesRepository by instance()
+    private val questionRepository: FacultyQuestionRepository by instance()
 
     var searchQuery = MutableLiveData<String>().apply {
         value = KEY_BLANK
+    }
+
+    var courseId = MutableLiveData<Int>().apply {
+        value = 0
     }
 
     var onClickCloseBottomSheetLiveData = MutableLiveData<Boolean>().apply {
@@ -41,17 +47,20 @@ class StudentAskedQuestionsViewModel(mContext: Context) : BaseViewModel(mContext
         value = false
     }
 
-    override var noInternetTryAgain: () -> Unit = {}
+    override var noInternetTryAgain: () -> Unit = {
+        questionRepository.tryAgain()
+    }
 
     fun initPaginationResponseHandler() {
-        coursesRepository.getPaginationResponseHandler().observeForever {
+        questionRepository.courseId = courseId.value!!
+        questionRepository.getPaginationResponseHandler().observeForever {
             if (it != null) {
                 paginationResponse(
                     it,
                     //PaginationMessages("No Data", "No More data", "No Internet", "Something Wrong")
                     PaginationMessages(
-                        BindingUtils.string(R.string.faculty_no_courses),
-                        BindingUtils.string(R.string.faculty_no_more_courses),
+                        BindingUtils.string(R.string.faculty_no_questions),
+                        BindingUtils.string(R.string.faculty_no_more_questions),
                         BindingUtils.string(R.string.please_make_sure_you_are_connected_to_internet),
                         BindingUtils.string(R.string.some_thing_went_wrong)
                     )
@@ -60,11 +69,11 @@ class StudentAskedQuestionsViewModel(mContext: Context) : BaseViewModel(mContext
             }
         }
 
-        coursesRepository.initiatePagination()
+        questionRepository.initiatePagination()
     }
 
-    fun coursesPagedList(): LiveData<PagedList<FacultyCoursesModel>>? {
-        return coursesRepository.coursesPagedList
+    fun coursesPagedList(): LiveData<PagedList<StudentAskedQuestionsModel>>? {
+        return questionRepository.questionPagedList
     }
 
     fun onClickCloseBottomSheet(view: View){

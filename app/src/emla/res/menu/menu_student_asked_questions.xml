@@ -8,6 +8,7 @@
         android:title="@string/search"
         app:actionViewClass="androidx.appcompat.widget.SearchView"
         app:showAsAction="ifRoom"
+        android:visible="false"
         tools:targetApi="O" />
 
     <item

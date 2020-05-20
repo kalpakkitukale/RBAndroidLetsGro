@@ -5,7 +5,9 @@ import com.ramanbyte.emla.data_layer.network.api_layer.*
 import com.ramanbyte.emla.data_layer.repositories.*
 import com.ramanbyte.emla.faculty.data_layer.network.api_layer.FacultyCoursesController
 import com.ramanbyte.emla.faculty.data_layer.network.api_layer.FacultyMasterApiController
+import com.ramanbyte.emla.faculty.data_layer.network.api_layer.FacultyQuestionController
 import com.ramanbyte.emla.faculty.data_layer.repositories.FacultyCoursesRepository
+import com.ramanbyte.emla.faculty.data_layer.repositories.FacultyQuestionRepository
 import org.kodein.di.Kodein
 import org.kodein.di.generic.bind
 import org.kodein.di.generic.instance
@@ -55,6 +57,9 @@ val repositoryDependencies = Kodein.Module("", true) {
 
     bind<FacultyCoursesRepository>() with singleton {
         FacultyCoursesRepository(instance())
+    }
+    bind<FacultyQuestionRepository>() with singleton {
+        FacultyQuestionRepository(instance())
     }
 
 }
@@ -116,6 +121,10 @@ private val controllersDependencies = Kodein.Module("controllers_dependencies", 
         )
     }
 
+
+    /*
+    * Faculty Side API Controller ---- Start ----
+    * */
     bind<FacultyMasterApiController>() with singleton {
         RetrofitInitializer.invoke(
             instance(),//db
@@ -123,4 +132,15 @@ private val controllersDependencies = Kodein.Module("controllers_dependencies", 
             DOMAIN + EMLA + CLIENT_BASE + API + MASTER
         )
     }
+
+    bind<FacultyQuestionController>() with singleton {
+        RetrofitInitializer.invoke(
+            instance(),//db
+            FacultyQuestionController::class.java,
+            DOMAIN + EMLA + CLIENT_BASE + API + QUESTION
+        )
+    }
+    /*
+   * Faculty Side API Controller ---- End ----
+   * */
 }

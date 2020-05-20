@@ -31,6 +31,7 @@ class AskQuestionReplyModel {
 
     var answer = KEY_BLANK
     var userName = KEY_BLANK
+    var userType = KEY_BLANK
     var userPic: String? = KEY_BLANK
         get() = field ?: KEY_BLANK
 

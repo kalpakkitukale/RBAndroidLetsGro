@@ -17,6 +17,7 @@ import com.ramanbyte.databinding.FragmentStudentAskedQuestionsBinding
 import com.ramanbyte.emla.faculty.adapter.FacultyCoursesAdapter
 import com.ramanbyte.emla.faculty.adapter.StudentAskedQuestionsAdapter
 import com.ramanbyte.emla.faculty.models.FacultyCoursesModel
+import com.ramanbyte.emla.faculty.models.StudentAskedQuestionsModel
 import com.ramanbyte.emla.faculty.view.StudentAskedQuestionsBottomSheet
 import com.ramanbyte.emla.faculty.view_model.StudentAskedQuestionsViewModel
 import com.ramanbyte.emla.view.RecommendedCourseFilterBottomSheet
@@ -99,6 +100,7 @@ class StudentAskedQuestionsFragment :
 
     private fun setViewModelOp() {
         viewModel.apply {
+            courseId.value = courseModel?.courseId
             initPaginationResponseHandler()
             coursesPagedList()?.observe(this@StudentAskedQuestionsFragment, androidx.lifecycle.Observer {
                 it?.let { studentAskedQuestionsAdapter?.apply { submitList(it) } }

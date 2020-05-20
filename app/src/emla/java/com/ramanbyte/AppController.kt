@@ -10,6 +10,7 @@ import com.ramanbyte.emla.data_layer.repositories.RegistrationRepository
 import com.ramanbyte.emla.view_model.factory.ViewModelFactory
 import com.ramanbyte.emla.data_layer.room.ApplicationDatabase
 import com.ramanbyte.emla.faculty.data_layer.repositories.FacultyCoursesRepository
+import com.ramanbyte.emla.faculty.data_layer.repositories.FacultyQuestionRepository
 import com.ramanbyte.utilities.AppLog
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -60,6 +61,7 @@ class AppController : BaseAppController(), KodeinAware {
         bind() from singleton { RegistrationRepository(this@AppController) }
 
         bind() from singleton { FacultyCoursesRepository(this@AppController) }
+        bind() from singleton { FacultyQuestionRepository(this@AppController) }
 
         bind() from singleton { ViewModelFactory(instance()) }
     }

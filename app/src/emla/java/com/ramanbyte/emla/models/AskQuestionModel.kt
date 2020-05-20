@@ -26,6 +26,7 @@ class AskQuestionModel {
 
     var isPublic = KEY_BLANK
     var isApproved = KEY_BLANK
+    var isConversionOpen = KEY_BLANK
     var qnaArrayList = ArrayList<AskQuestionReplyModel>()
 
     @Ignore
