@@ -12,6 +12,7 @@ import com.ramanbyte.R
 import com.ramanbyte.base.BaseFragment
 import com.ramanbyte.databinding.FragmentFacultyQuestionAnswerBinding
 import com.ramanbyte.emla.faculty.adapter.FacultyQuestionAnswerAdapter
+import com.ramanbyte.emla.faculty.models.StudentAskedQuestionsModel
 import com.ramanbyte.emla.faculty.view_model.FacultyQuestionAnswerViewModel
 import com.ramanbyte.emla.models.AskQuestionReplyModel
 import com.ramanbyte.utilities.*
@@ -26,6 +27,7 @@ class FacultyQuestionAnswerFragment :
 
     var mContext: Context? = null
     var questionAnswerAdapter: FacultyQuestionAnswerAdapter? = null
+    var questionsModel: StudentAskedQuestionsModel? = null
     //var questionId: Int? =null
 
     override val viewModelClass: Class<FacultyQuestionAnswerViewModel> =
@@ -52,7 +54,8 @@ class FacultyQuestionAnswerFragment :
             viewModel.apply {
 
                 arguments?.apply {
-                    questionId = getInt(keyQuestionId)
+                    questionsModel = getParcelable(KEY_QUESTION_MODEL)!!
+                    questionId = questionsModel?.questionId!!
                     AppLog.infoLog("questionId $questionId")
                 }
 
@@ -65,7 +68,17 @@ class FacultyQuestionAnswerFragment :
 
                 questionsReplyListLiveData.observe(this@FacultyQuestionAnswerFragment, Observer {
                     if (it != null){
-                        setAdapter(it)
+
+                        val askQuestionReplyList = ArrayList<AskQuestionReplyModel>()
+                        askQuestionReplyList.add(0,AskQuestionReplyModel().apply {
+                            createDateTime = questionsModel?.questionRaisedDateTime
+                            answer = questionsModel?.question!!
+                            userName = questionsModel?.studentName!!
+                            userType = KEY_STUDENT
+                        })
+                        askQuestionReplyList.addAll(1,it)
+
+                        setAdapter(askQuestionReplyList)
                     }
                 })
 

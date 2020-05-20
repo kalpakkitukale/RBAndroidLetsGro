@@ -57,7 +57,7 @@ class StudentAskedQuestionsAdapter() :
                 viewModel = studentAskedQuestionsViewModel
                 this.studentAskedQuestionsModel = questionsModel
 
-                if (questionsModel.question.isBlank()) {
+                if (questionsModel.question?.isBlank()!!) {
                     tvQuestion.text = KEY_NA_WITHOUT_SPACE
                 } else {
                     tvQuestion.text = questionsModel.question

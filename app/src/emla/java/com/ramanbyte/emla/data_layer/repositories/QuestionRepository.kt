@@ -10,6 +10,7 @@ import com.ramanbyte.emla.models.AskQuestionReplyModel
 import com.ramanbyte.emla.models.FavouriteVideosModel
 import com.ramanbyte.emla.models.request.AskQuestionRequestModel
 import com.ramanbyte.emla.models.MediaInfoModel
+import com.ramanbyte.emla.models.request.ConversationCloseRequestModel
 import com.ramanbyte.emla.models.request.QuestionsReplyRequestModel
 import com.ramanbyte.utilities.AppLog
 import com.ramanbyte.utilities.KEY_BLANK
@@ -76,6 +77,21 @@ class QuestionRepository(mContext: Context) : BaseRepository(mContext) {
     suspend fun getConversationData(questionId: Int): ArrayList<AskQuestionReplyModel>? {
         return apiRequest {
             questionController.getConversationData(questionId)
+        }
+    }
+
+    /*
+    * Insert or Update the Conversation status
+    * */
+    suspend fun updateConversationCloseStatus(
+        questionId: Int
+    ): ConversationCloseRequestModel? {
+        val conversationCloseRequestModel = ConversationCloseRequestModel()
+            .apply {
+                this.questionId = questionId
+            }
+        return apiRequest {
+            questionController.updateConversationCloseStatus(conversationCloseRequestModel)
         }
     }
 
@@ -166,5 +182,8 @@ class QuestionRepository(mContext: Context) : BaseRepository(mContext) {
 
         return result!!
     }
+
+
+
 
 }

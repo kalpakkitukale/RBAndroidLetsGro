@@ -2,6 +2,7 @@ package com.ramanbyte.emla.data_layer.network.api_layer
 
 import com.ramanbyte.emla.models.*
 import com.ramanbyte.emla.models.request.AskQuestionRequestModel
+import com.ramanbyte.emla.models.request.ConversationCloseRequestModel
 import com.ramanbyte.emla.models.request.QuestionsReplyRequestModel
 import retrofit2.Response
 import retrofit2.http.Body
@@ -63,5 +64,8 @@ interface QuestionController {
 
     @GET("GetFavouriteVideos/{userId}")
     suspend fun getFavouriteVideos(@Path("userId") userId: Int): Response<ArrayList<FavouriteVideosModel>>
+
+    @POST("UpdateConversationCloseStatus")
+    suspend fun updateConversationCloseStatus(@Body conversationCloseRequestModel: ConversationCloseRequestModel): Response<ConversationCloseRequestModel>
 
 }

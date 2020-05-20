@@ -1,8 +1,10 @@
 package com.ramanbyte.emla.view_model
 
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.view.View
 import androidx.lifecycle.MutableLiveData
+import androidx.navigation.fragment.findNavController
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseViewModel
 import com.ramanbyte.data_layer.CoroutineUtils
@@ -15,6 +17,7 @@ import com.ramanbyte.emla.data_layer.repositories.SectionsRepository
 import com.ramanbyte.emla.models.AskQuestionModel
 import com.ramanbyte.emla.models.AskQuestionReplyModel
 import com.ramanbyte.emla.models.MediaInfoModel
+import com.ramanbyte.emla.models.request.ConversationCloseRequestModel
 import com.ramanbyte.utilities.AppLog
 import com.ramanbyte.utilities.BindingUtils
 import com.ramanbyte.utilities.KEY_BLANK
@@ -32,7 +35,7 @@ class MediaPlaybackViewModel(mContext: Context) : BaseViewModel(mContext) {
         value = false
     }
 
-    var onClickAskQuestionLiveData = MutableLiveData<Boolean>().apply {
+    var onClickSendQuestionLiveData = MutableLiveData<Boolean>().apply {
         value = false
     }
 
@@ -54,6 +57,10 @@ class MediaPlaybackViewModel(mContext: Context) : BaseViewModel(mContext) {
 
     fun updateMediaInfo(mediaInfoModel: MediaInfoModel) =
         contentRepository.updateMediaInfo(mediaInfoModel)
+
+    var conversationCloseLiveData = MutableLiveData<ConversationCloseRequestModel>().apply {
+        value = null
+    }
 
     override var noInternetTryAgain: () -> Unit = {
         getQuestionAndAnswer()
@@ -174,8 +181,67 @@ class MediaPlaybackViewModel(mContext: Context) : BaseViewModel(mContext) {
     }
 
 
-    fun onClickAskQuestion(view: View) {
-        onClickAskQuestionLiveData.value = true
+    fun onClickAskNewQuestion(view: View, questionId: Int) {
+        //onClickAskNQuestionLiveData.value = true
+        setAlertDialogResourceModelMutableLiveData(
+            BindingUtils.string(R.string.conversation_close_message),
+            BindingUtils.drawable(R.drawable.ic_submit_confirmation)!!,
+            false,
+            BindingUtils.string(R.string.yes), {
+                isAlertDialogShown.postValue(false)
+                AppLog.infoLog("questionId=== $questionId")
+                updateConversationCloseStatus(questionId)
+                //findNavController().navigateUp()
+            },
+            BindingUtils.string(R.string.no), {
+                isAlertDialogShown.postValue(false)
+            }
+        )
+        isAlertDialogShown.postValue(true)
+    }
+
+    private fun updateConversationCloseStatus(questionId: Int) {
+        CoroutineUtils.main {
+            try {
+                isLoaderShowingLiveData.postValue(true)
+                val response = questionRepository.updateConversationCloseStatus(questionId)
+                conversationCloseLiveData.postValue(response)
+                isLoaderShowingLiveData.postValue(false)
+            } catch (e: ApiException) {
+                e.printStackTrace()
+                AppLog.errorLog(e.message, e)
+                isLoaderShowingLiveData.postValue(false)
+                alertMediaPlayBack(BindingUtils.string(R.string.some_thing_went_wrong),BindingUtils.drawable(R.drawable.ic_something_went_wrong)!!,BindingUtils.string(R.string.strOk))
+            } catch (e: NoInternetException) {
+                e.printStackTrace()
+                AppLog.errorLog(e.message, e)
+                isLoaderShowingLiveData.postValue(false)
+
+                setAlertDialogResourceModelMutableLiveData(
+                    BindingUtils.string(R.string.no_internet_message),
+                    BindingUtils.drawable(R.drawable.ic_no_internet)!!,
+                    false,
+                    BindingUtils.string(R.string.yes), {
+                        isAlertDialogShown.postValue(false)
+                        updateConversationCloseStatus(questionId)
+                    },
+                    BindingUtils.string(R.string.no), {
+                        isAlertDialogShown.postValue(false)
+                    }
+                )
+                isAlertDialogShown.postValue(true)
+            } catch (e: Exception) {
+                e.printStackTrace()
+                AppLog.errorLog(e.message, e)
+                isLoaderShowingLiveData.postValue(false)
+                alertMediaPlayBack(BindingUtils.string(R.string.some_thing_went_wrong),BindingUtils.drawable(R.drawable.ic_something_went_wrong)!!,BindingUtils.string(R.string.strOk))
+            }
+
+        }
+    }
+
+    fun onClickSendQuestion(view: View) {
+        onClickSendQuestionLiveData.value = true
     }
 
     fun onClickReply(view: View, askQuestionModel: AskQuestionModel) {
@@ -292,5 +358,20 @@ class MediaPlaybackViewModel(mContext: Context) : BaseViewModel(mContext) {
     /*
     * Add Reply Page Ended ---
     * */
+
+    fun alertMediaPlayBack(message:String,image:Drawable,btnName:String){
+        setAlertDialogResourceModelMutableLiveData(
+            message,
+            image,
+            true,
+            btnName, {
+                isAlertDialogShown.postValue(false)
+            }/*,
+            BindingUtils.string(R.string.no), {
+                isAlertDialogShown.postValue(false)
+            }*/
+        )
+        isAlertDialogShown.postValue(true)
+    }
 
 }

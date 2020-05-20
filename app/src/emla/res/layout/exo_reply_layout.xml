@@ -59,6 +59,18 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/lblAskNewQuestion"
+            style="@style/TextViewRegularTeal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dp_5"
+            android:onClick="@{ () -> mediaPlaybackViewModel.onClickAskNewQuestion(lblAskNewQuestion,askQuestionModel.questionId)}"
+            android:text="@string/ask_questions_with_question_mark"
+            android:textSize="@dimen/sp_14"
+            app:layout_constraintEnd_toEndOf="@+id/ivCloseComment"
+            app:layout_constraintTop_toBottomOf="@+id/ivCloseComment" />
+
         <com.ramanbyte.views.RoundedImageView
             android:id="@+id/rivUserPic"
             android:layout_width="@dimen/dp_30"
@@ -67,7 +79,7 @@
             android:layout_marginStart="@dimen/dp_10"
             android:src="@drawable/ic_camera"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ivBack" />
+            app:layout_constraintTop_toBottomOf="@id/lblAskNewQuestion" />
         <!-- android:src="@drawable/ic_camera"
         app:imageUrl="@{askQuestionModel.userPic}"
         app:placeholder="@{askQuestionModel.setCharacterDrawable}"

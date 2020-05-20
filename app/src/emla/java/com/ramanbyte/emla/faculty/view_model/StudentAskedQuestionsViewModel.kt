@@ -74,12 +74,12 @@ class StudentAskedQuestionsViewModel(mContext: Context) : BaseViewModel(mContext
         return questionRepository.questionPagedList
     }
 
-    fun onClickCard(view: View, questionId:Int){
+    fun onClickCard(view: View, questionsModel:StudentAskedQuestionsModel){
         view.findNavController()
             .navigate(
                 R.id.action_studentAskedQuestionsFragment_to_facultyQuestionAnswerFragment,
                 Bundle().apply {
-                    putInt(keyQuestionId, questionId)
+                    putParcelable(KEY_QUESTION_MODEL, questionsModel)
                 })
         //onClickCardLiveData.value = true
     }

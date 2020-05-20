@@ -18,7 +18,7 @@
         app:cardBackgroundColor="@color/colorTransparent"
         app:cardCornerRadius="@dimen/dp_5"
         app:cardElevation="2dp"
-        android:onClick="@{() -> viewModel.onClickCard(cardLayoutMain,studentAskedQuestionsModel.questionId)}"
+        android:onClick="@{() -> viewModel.onClickCard(cardLayoutMain,studentAskedQuestionsModel)}"
         app:cardUseCompatPadding="true"
         app:contentPadding="@dimen/dp_5">
 

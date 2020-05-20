@@ -199,6 +199,15 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
                         }
                     }
                 })
+
+                conversationCloseLiveData.observe(this@MediaPlaybackActivity, Observer {
+                    if (it != null) {
+                        exoCommentLayoutBinding?.apply {
+                            questionLayout.visibility = View.VISIBLE
+                            replyLayout.replyContainerLayout.visibility = View.GONE
+                        }
+                    }
+                })
             }
 
         })
@@ -217,7 +226,7 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
                 }
             })
 
-            onClickAskQuestionLiveData.observe(this@MediaPlaybackActivity, Observer {
+            onClickSendQuestionLiveData.observe(this@MediaPlaybackActivity, Observer {
                 if (it != null) {
                     if (it == true) {
                         val question = exoCommentLayoutBinding?.etAskQuestion?.text.toString()
@@ -226,11 +235,14 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
                         } else {
                             AppLog.infoLog("Blank Question not added.")
                         }
-                        onClickAskQuestionLiveData.value = false
+                        onClickSendQuestionLiveData.value = false
                     }
                 }
             })
 
+            /*
+            * This is for Reply or ViewReply
+            * */
             onClickReplyLiveData.observe(this@MediaPlaybackActivity, Observer {
                 if (it != null) {
                     exoCommentLayoutBinding?.apply {
@@ -238,6 +250,19 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
                         replyLayout.apply {
                             replyContainerLayout.visibility = View.VISIBLE
                             askQuestionModel = it
+
+                            /*
+                            * Conversation is close for the particular question the set GONE
+                            * */
+                            if (it.isConversionOpen == KEY_N){
+                                lblAskNewQuestion.visibility = View.GONE
+                                etAddReply.visibility = View.GONE
+                                ivAddReply.visibility = View.GONE
+                            }else{
+                                lblAskNewQuestion.visibility = View.VISIBLE
+                                etAddReply.visibility = View.VISIBLE
+                                ivAddReply.visibility = View.VISIBLE
+                            }
                             /*strUserPic = it.userPic
                             characterDrawable = it.setCharacterDrawable*/
                         }
