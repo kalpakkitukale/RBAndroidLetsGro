@@ -47,6 +47,10 @@ class MediaPlaybackViewModel(mContext: Context) : BaseViewModel(mContext) {
         value = KEY_BLANK
     }
 
+    var visibilityAddQuestionBtnLiveData = MutableLiveData<Int>().apply {
+        value = View.GONE
+    }
+
     var questionAndAnswerListLiveData = MutableLiveData<List<AskQuestionModel>>().apply {
         value = arrayListOf()
     }
@@ -261,6 +265,10 @@ class MediaPlaybackViewModel(mContext: Context) : BaseViewModel(mContext) {
 
     var enteredReplyLiveData = MutableLiveData<String>().apply {
         value = KEY_BLANK
+    }
+
+    var visibilityAddReplyBtnLiveData = MutableLiveData<Int>().apply {
+        value = View.GONE
     }
 
     var questionsReplyListLiveData = MutableLiveData<ArrayList<AskQuestionReplyModel>>().apply {

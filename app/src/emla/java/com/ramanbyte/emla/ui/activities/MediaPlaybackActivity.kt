@@ -238,6 +238,15 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
                 }
             })
 
+            enteredQuestionLiveData.observe(this@MediaPlaybackActivity, Observer {
+                if (it != null){
+                    if (it.isNullOrBlank())
+                        visibilityAddQuestionBtnLiveData.value = View.GONE
+                    else
+                        visibilityAddQuestionBtnLiveData.value = View.VISIBLE
+                }
+            })
+
             /*
             * This is for Reply or ViewReply
             * */
@@ -521,6 +530,18 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
                         }
                         onClickAddReplyLiveData.value = 0
                     }
+                }
+            })
+
+            /*
+            * validation : if the string is not black then only disply reply button
+            * */
+            enteredReplyLiveData.observe(this@MediaPlaybackActivity, Observer {
+                if (it != null){
+                    if (it.isNullOrBlank())
+                        visibilityAddReplyBtnLiveData.value = View.GONE
+                    else
+                        visibilityAddReplyBtnLiveData.value = View.VISIBLE
                 }
             })
         }
