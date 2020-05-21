@@ -9,6 +9,6 @@ import retrofit2.http.Body
 import retrofit2.http.POST
 
 interface FacultyMasterApiController {
-    @POST("GetCourseListMobile")
+    @POST("getAllocatedCourses")
     suspend fun getCourses(@Body coursesRequest: FacultyCoursesRequestModel): Response<List<FacultyCoursesModel>>
 }
