@@ -234,7 +234,7 @@ Content
     <string name="getting_questions_list">Getting questions list…</string>
     <string name="getting_my_favourite_video_list">Getting my favourite video list…</string>
     <string name="getting_reply_list">Getting reply list…</string>
-    <string name="conversation_close_message">Are you sure, You want to ask new question?</string>
+    <string name="conversation_close_message">Are you sure, you want to close the recent conversation and ask new question?</string>
 
     <!--Favourite Video-->
     <string name="favourite_videos_unavailable">Favourite videos are not available yet!</string>

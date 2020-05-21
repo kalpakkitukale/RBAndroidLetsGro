@@ -56,6 +56,7 @@ class FacultyQuestionRepository(mContext: Context) : BaseRepository(mContext) {
             } ?: arrayListOf()
         }
 
+        questionPagedList?.value?.dataSource?.invalidate()
         questionPagedList =
             LivePagedListBuilder(questionPagedDataSourceFactory, pageListConfig).build()
 

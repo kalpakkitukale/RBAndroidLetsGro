@@ -55,8 +55,10 @@ class StudentAskedQuestionsFragment :
             noData.viewModel = viewModel
             somethingWentWrong.viewModel = viewModel
         }
-        setAdapter()
+
         setViewModelOp()
+        setAdapter()
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -136,7 +138,15 @@ class StudentAskedQuestionsFragment :
 
         val actionView = menuItem.actionView
         badgeView = actionView.findViewById(R.id.filter_badge) as View
-        setupBadge()
+
+        /*
+        * Set the batch if the filter is set.
+        * */
+        if (viewModel.getFilterState())
+            setupBadge(true)
+        else
+            setupBadge()
+
         actionView.setOnClickListener {
             onOptionsItemSelected(menuItem)
         }

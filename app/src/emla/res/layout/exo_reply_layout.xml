@@ -71,57 +71,6 @@
             app:layout_constraintEnd_toEndOf="@+id/ivCloseComment"
             app:layout_constraintTop_toBottomOf="@+id/ivCloseComment" />
 
-        <com.ramanbyte.views.RoundedImageView
-            android:id="@+id/rivUserPic"
-            android:layout_width="@dimen/dp_30"
-            android:layout_height="@dimen/dp_30"
-            android:layout_marginTop="@dimen/dp_5"
-            android:layout_marginStart="@dimen/dp_10"
-            android:src="@drawable/ic_camera"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/lblAskNewQuestion" />
-        <!-- android:src="@drawable/ic_camera"
-        app:imageUrl="@{askQuestionModel.userPic}"
-        app:placeholder="@{askQuestionModel.setCharacterDrawable}"
-        app:imageUrl="@{strUserPic}"
-            app:placeholder="@{characterDrawable}"-->
-
-        <TextView
-            android:id="@+id/tvUserName"
-            style="@style/TextViewRegularLightGray"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp_5"
-            android:layout_marginEnd="@dimen/dp_10"
-            android:text="@{askQuestionModel.userName}"
-            android:textSize="@dimen/sp_12"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/rivUserPic"
-            app:layout_constraintTop_toTopOf="@+id/rivUserPic" />
-
-        <TextView
-            android:id="@+id/tvQuestion"
-            style="@style/TextViewMediumBlackOnWhite"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp_5"
-            android:text="@{askQuestionModel.question}"
-            android:textSize="@dimen/sp_12"
-            app:layout_constraintEnd_toEndOf="@+id/tvUserName"
-            app:layout_constraintStart_toEndOf="@+id/rivUserPic"
-            app:layout_constraintTop_toBottomOf="@+id/tvUserName" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvDateTime"
-            style="@style/TextViewBoldLightGray"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@{askQuestionModel.createdDateTime}"
-            android:textSize="@dimen/sp_10"
-            app:layout_constraintEnd_toEndOf="@+id/tvQuestion"
-            app:layout_constraintStart_toStartOf="@+id/tvQuestion"
-            app:layout_constraintTop_toBottomOf="@+id/tvQuestion" />
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvReply"
             android:layout_width="0dp"
@@ -131,9 +80,9 @@
             android:visibility="@{mediaPlaybackViewModel.viewVisibilityLiveData}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toTopOf="@+id/etAddReply"
-            app:layout_constraintEnd_toEndOf="@+id/tvUserName"
-            app:layout_constraintStart_toStartOf="@+id/rivUserPic"
-            app:layout_constraintTop_toBottomOf="@+id/tvDateTime"
+            app:layout_constraintEnd_toEndOf="@+id/ivCloseComment"
+            app:layout_constraintStart_toStartOf="@+id/ivBack"
+            app:layout_constraintTop_toBottomOf="@+id/lblAskNewQuestion"
             tools:listitem="@layout/card_recently_ask_questions_reply" />
 
         <androidx.appcompat.widget.AppCompatEditText
@@ -202,7 +151,7 @@
             app:layout_constraintBottom_toTopOf="@+id/etAddReply"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvDateTime" />
+            app:layout_constraintTop_toBottomOf="@+id/lblAskNewQuestion" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

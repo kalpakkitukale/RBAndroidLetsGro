@@ -51,23 +51,28 @@ class StudentAskedQuestionsViewModel(mContext: Context) : BaseViewModel(mContext
 
     fun initPaginationResponseHandler() {
         questionRepository.courseId = courseId.value!!
-        questionRepository.getPaginationResponseHandler().observeForever {
-            if (it != null) {
-                paginationResponse(
-                    it,
-                    //PaginationMessages("No Data", "No More data", "No Internet", "Something Wrong")
-                    PaginationMessages(
-                        BindingUtils.string(R.string.faculty_no_questions),
-                        BindingUtils.string(R.string.faculty_no_more_questions),
-                        BindingUtils.string(R.string.please_make_sure_you_are_connected_to_internet),
-                        BindingUtils.string(R.string.some_thing_went_wrong)
+
+        if (getFilterState()){
+            questionRepository.applyFilter(questionsRequestModelLiveData.value!!)
+        }else{
+            questionRepository.getPaginationResponseHandler().observeForever {
+                if (it != null) {
+                    paginationResponse(
+                        it,
+                        //PaginationMessages("No Data", "No More data", "No Internet", "Something Wrong")
+                        PaginationMessages(
+                            BindingUtils.string(R.string.faculty_no_questions),
+                            BindingUtils.string(R.string.faculty_no_more_questions),
+                            BindingUtils.string(R.string.please_make_sure_you_are_connected_to_internet),
+                            BindingUtils.string(R.string.some_thing_went_wrong)
+                        )
                     )
-                )
-                AppLog.infoLog("Pagination :: ${it.msg} :: ${it.status}")
+                    AppLog.infoLog("Pagination :: ${it.msg} :: ${it.status}")
+                }
             }
+            questionRepository.initiatePagination()
         }
 
-        questionRepository.initiatePagination()
     }
 
     fun coursesPagedList(): LiveData<PagedList<StudentAskedQuestionsModel>>? {
@@ -122,6 +127,10 @@ class StudentAskedQuestionsViewModel(mContext: Context) : BaseViewModel(mContext
     }
     fun onClickClearFilter(view: View){
         onClickClearFilterLiveData.value = true
+    }
+
+    fun getFilterState(): Boolean {
+        return (questionsRequestModelLiveData.value?.isQuestionAnswered == KEY_Y)
     }
 
     //------------- Filter Code --- End ------------------------

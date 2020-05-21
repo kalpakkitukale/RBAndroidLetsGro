@@ -84,11 +84,6 @@ class FacultyQuestionAnswerFragment :
 
                 enteredReplyLiveData.observe(this@FacultyQuestionAnswerFragment, Observer {
                     if (it != null){
-
-                        val pattern: Pattern = Pattern.compile("[^A-Za-z0-9]")
-                        val match: Matcher = pattern.matcher(it)
-                        val isReplyBlank: Boolean = match.find()
-
                         if (it.isNullOrBlank())
                             visibilityReplyBtnLiveData.value = View.GONE
                         else

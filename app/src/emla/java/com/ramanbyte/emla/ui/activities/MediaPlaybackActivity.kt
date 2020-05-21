@@ -1,9 +1,6 @@
 package com.ramanbyte.emla.ui.activities
 
 import android.content.Context
-import android.content.pm.ActivityInfo
-import android.content.res.Configuration
-import android.graphics.drawable.Drawable
 import android.media.AudioManager
 import android.net.Uri
 import android.os.Build
@@ -14,10 +11,7 @@ import android.view.View
 import android.view.WindowManager
 import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintSet
-import androidx.core.net.toUri
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.exoplayer2.ExoPlayerFactory
@@ -28,7 +22,6 @@ import com.google.android.exoplayer2.ui.AspectRatioFrameLayout
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
 import com.google.android.exoplayer2.upstream.cache.CacheDataSourceFactory
 import com.google.android.exoplayer2.util.Util
-import com.google.android.material.snackbar.Snackbar
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseActivity
 import com.ramanbyte.databinding.ActivityMediaPlaybackBinding
@@ -37,6 +30,8 @@ import com.ramanbyte.emla.adapters.VideoQuestionReplyAdapter
 import com.ramanbyte.emla.adapters.VideoReplyAdapter
 import com.ramanbyte.emla.base.di.authModuleDependency
 import com.ramanbyte.emla.content.ExoMediaDownloadUtil
+import com.ramanbyte.emla.models.AskQuestionModel
+import com.ramanbyte.emla.models.AskQuestionReplyModel
 import com.ramanbyte.emla.view.OnSwipeTouchListener
 import com.ramanbyte.emla.view_model.MediaPlaybackViewModel
 import com.ramanbyte.utilities.AppLog
@@ -44,11 +39,8 @@ import com.ramanbyte.utilities.BindingUtils
 import com.ramanbyte.utilities.KEY_IS_MEDIA_OFFLINE
 import com.ramanbyte.utilities.KEY_MEDIA_ID
 import kotlinx.android.synthetic.emla.activity_media_playback.*
-import kotlinx.android.synthetic.emla.exo_comment_layout.*
 import kotlinx.android.synthetic.emla.exo_playback_control_view.*
-import org.kodein.di.On
 import com.ramanbyte.utilities.*
-import kotlinx.android.synthetic.emla.exo_reply_layout.view.*
 
 class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPlaybackViewModel>(
     authModuleDependency,
@@ -95,8 +87,6 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
         viewModel.getMediaInfo(mediaId)
 
         url = viewModel.mediaInfoModel?.mediaUrl ?: ""
-
-        observerForAddReplyScreen()
 
         /*
         * Set selection for like unlike and add to wish list
@@ -174,8 +164,14 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
 
             viewModel.apply {
 
+                /*
+                * Call the API to get the question list from server.
+                * */
                 getQuestionAndAnswer()
 
+                /*
+                * Set the Question List Adapter
+                * */
                 questionAndAnswerListLiveData.observe(this@MediaPlaybackActivity, Observer {
                     if (it != null) {
                         exoCommentLayoutBinding?.apply {
@@ -194,6 +190,8 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
                                     )
                                 mediaPlaybackViewModel = viewModel
                                 askQuestionList = it
+                                (layoutManager as LinearLayoutManager).isSmoothScrollbarEnabled = true
+                                (layoutManager as LinearLayoutManager).scrollToPosition(itemCount - 1)
                                 adapter = this
                             }
                         }
@@ -272,6 +270,8 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
                         * */
                         getConversationData(it.questionId)
                     }
+
+                    observerForAddReplyScreen(it)
 
                     onClickReplyLiveData.value = null
                 }
@@ -453,15 +453,30 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
         }
     }
 
-    private fun observerForAddReplyScreen() {
+    private fun observerForAddReplyScreen(questionsModel: AskQuestionModel) {
 
         viewModel.apply {
 
+            /*
+            * Set the Reply list Adapter
+            * */
             questionsReplyListLiveData.observe(this@MediaPlaybackActivity, Observer {
                 if (it != null) {
+                    /*
+                    * Add on 0th position, student ask question
+                    * */
+                    val askQuestionReplyList = ArrayList<AskQuestionReplyModel>()
+                    askQuestionReplyList.add(0, AskQuestionReplyModel().apply {
+                        createDateTime = questionsModel.createdDateTime
+                        answer = questionsModel.question
+                        userName = questionsModel.userName
+                        userType = KEY_STUDENT
+                    })
+                    askQuestionReplyList.addAll(1,it)
+
                     enteredReplyLiveData.value = KEY_BLANK
                     exoCommentLayoutBinding?.replyLayout?.rvReply?.apply {
-                        videoReplyAdapter = VideoReplyAdapter(it)
+                        videoReplyAdapter = VideoReplyAdapter(askQuestionReplyList)
                         videoReplyAdapter?.apply {
                             layoutManager =
                                 LinearLayoutManager(
@@ -469,6 +484,8 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
                                     RecyclerView.VERTICAL,
                                     false
                                 )
+                            (layoutManager as LinearLayoutManager).isSmoothScrollbarEnabled = true
+                            (layoutManager as LinearLayoutManager).scrollToPosition(itemCount - 1)
                             adapter = this
                         }
                     }
