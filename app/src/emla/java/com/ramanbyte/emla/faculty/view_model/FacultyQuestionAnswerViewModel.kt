@@ -81,13 +81,13 @@ class FacultyQuestionAnswerViewModel(mContext: Context) : BaseViewModel(mContext
             } catch (e: NoDataException) {
                 e.printStackTrace()
                 AppLog.errorLog(e.message, e)
-                toggleLayoutVisibility(
+                /*toggleLayoutVisibility(
                     View.GONE,
                     View.VISIBLE,
                     View.GONE,
                     BindingUtils.string(R.string.reply_unavailable),
                     View.GONE
-                )
+                )*/
                 coroutineToggleLoader()
             }
         }

@@ -2,9 +2,8 @@ package com.ramanbyte.emla.models
 
 import android.graphics.drawable.Drawable
 import androidx.room.Ignore
-import com.ramanbyte.utilities.DateUtils
-import com.ramanbyte.utilities.KEY_BLANK
-import com.ramanbyte.utilities.ViewUtils
+import com.ramanbyte.R
+import com.ramanbyte.utilities.*
 
 class AskQuestionReplyModel {
     var userId = 0
@@ -38,7 +37,10 @@ class AskQuestionReplyModel {
     @Ignore
     var setCharacterDrawable: Drawable? = null
         get() {
-            field = ViewUtils.getCharacterDrawable(userName.substring(0, 1))
+            field = if (userType == KEY_FACULTY)
+                ViewUtils.getCharacterDrawable(userName.substring(0, 1))
+            else
+                ViewUtils.getCharacterDrawable(BindingUtils.string(R.string.self).substring(0, 1))
             return field
         }
 }

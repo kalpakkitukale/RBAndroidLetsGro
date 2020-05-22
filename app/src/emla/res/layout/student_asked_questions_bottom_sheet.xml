@@ -8,6 +8,7 @@
         <variable
             name="studentAskedQuestionsViewModel"
             type="com.ramanbyte.emla.faculty.view_model.StudentAskedQuestionsViewModel" />
+
         <variable
             name="staticHelper"
             type="com.ramanbyte.utilities.StaticHelpersKt" />
@@ -19,8 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/dp_5">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
+        <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="@dimen/dp_5">
@@ -42,8 +42,8 @@
                 android:id="@+id/ivCloseFilter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/dp_5"
                 android:onClick="@{studentAskedQuestionsViewModel::onClickCloseBottomSheet}"
+                android:padding="@dimen/dp_5"
                 android:src="@drawable/ic_close_black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -55,9 +55,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_10"
                 android:text="Select Date as"
                 android:textSize="@dimen/sp_16"
-                android:layout_marginTop="@dimen/dp_10"
                 app:layout_constraintEnd_toEndOf="@+id/ivCloseFilter"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/ivCloseFilter" />
@@ -78,10 +78,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/asc"
-                    android:textAllCaps="true"
+                    android:onClick="@{() -> studentAskedQuestionsViewModel.onClickSortByDateChip(staticHelper.KEY_ASCENDING)}"
                     android:textAlignment="center"
+                    android:textAllCaps="true"
                     android:textSize="@dimen/sp_12" />
-                <!--android:onClick="@{() -> studentAskedQuestionsViewModel.onChipClickedStatus(staticHelper.KEY_STATUS_ALLOWED)}"-->
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/cpDesc"
@@ -89,10 +89,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/desc"
-                    android:textAllCaps="true"
+                    android:onClick="@{() -> studentAskedQuestionsViewModel.onClickSortByDateChip(staticHelper.KEY_DESCENDING)}"
                     android:textAlignment="center"
+                    android:textAllCaps="true"
                     android:textSize="@dimen/sp_12" />
-                <!--android:onClick="@{() -> studentAskedQuestionsViewModel.onChipClickedStatus(staticHelper.KEY_STATUS_DENIED)}"-->
             </com.google.android.material.chip.ChipGroup>
 
 
@@ -102,9 +102,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_10"
                 android:text="Select Answer as"
                 android:textSize="@dimen/sp_16"
-                android:layout_marginTop="@dimen/dp_10"
                 app:layout_constraintEnd_toEndOf="@+id/ivCloseFilter"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/cgSortByDate" />
@@ -124,22 +124,22 @@
                     style="@style/CustomChipChoice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:onClick="@{() -> studentAskedQuestionsViewModel.onClickAnswerChip(staticHelper.KEY_ANSWERED)}"
                     android:text="@string/answered"
-                    android:textAllCaps="true"
                     android:textAlignment="center"
-                    android:textSize="@dimen/sp_12"
-                    android:onClick="@{() -> studentAskedQuestionsViewModel.onClickAnswerChip(staticHelper.KEY_ANSWERED)}"/>
+                    android:textAllCaps="true"
+                    android:textSize="@dimen/sp_12" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/cpUnanswered"
                     style="@style/CustomChipChoice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:onClick="@{() -> studentAskedQuestionsViewModel.onClickAnswerChip(staticHelper.KEY_UNANSWERED)}"
                     android:text="@string/unanswered"
-                    android:textAllCaps="true"
                     android:textAlignment="center"
-                    android:textSize="@dimen/sp_12"
-                    android:onClick="@{() -> studentAskedQuestionsViewModel.onClickAnswerChip(staticHelper.KEY_UNANSWERED)}"/>
+                    android:textAllCaps="true"
+                    android:textSize="@dimen/sp_12" />
             </com.google.android.material.chip.ChipGroup>
 
             <View
@@ -157,9 +157,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_15"
+                android:onClick="@{studentAskedQuestionsViewModel::onClickApplyFilter}"
                 android:text="@string/apply"
                 android:textSize="@dimen/sp_14"
-                android:onClick="@{studentAskedQuestionsViewModel::onClickApplyFilter}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/viewFilterAboveDeleteButton"
                 app:layout_constraintWidth_percent="0.19" />
@@ -169,8 +169,8 @@
                 android:layout_width="@dimen/dp_30"
                 android:layout_height="@dimen/dp_30"
                 android:layout_marginEnd="@dimen/dp_15"
-                android:padding="@dimen/dp_5"
                 android:onClick="@{studentAskedQuestionsViewModel::onClickClearFilter}"
+                android:padding="@dimen/dp_5"
                 android:src="@drawable/ic_delete_button"
                 app:layout_constraintBottom_toBottomOf="@id/btnApplyFilter"
                 app:layout_constraintEnd_toStartOf="@+id/btnApplyFilter"

@@ -28,7 +28,6 @@ class StudentAskedQuestionsFilterBottomSheet: BaseBottomSheetFragment<StudentAsk
 
             viewModel.apply {
 
-
                 onClickCloseBottomSheetLiveData.observe(this@StudentAskedQuestionsFilterBottomSheet, Observer {
                     if (it != null){
                         if (it == true){
@@ -54,6 +53,10 @@ class StudentAskedQuestionsFilterBottomSheet: BaseBottomSheetFragment<StudentAsk
                             cpUnanswered.isChecked = true
                             ansTypeLiveData.value = KEY_N
 
+                            //-------- Sort Date Type
+                            cpAsc.isChecked = true
+                            sortByDateLiveData.value = KEY_ASCENDING
+
                             onClickClearFilterLiveData.value = false
                         }
                     }
@@ -71,6 +74,18 @@ class StudentAskedQuestionsFilterBottomSheet: BaseBottomSheetFragment<StudentAsk
                         }
                     })
 
+                sortByDateLiveData.observe(this@StudentAskedQuestionsFilterBottomSheet,
+                    Observer {
+                        it?.apply {
+                            if (sortByDateLiveData.value != KEY_BLANK) {
+                                if (cgSortByDate.checkedChipId == -1) {
+                                    sortByDateLiveData.value = KEY_ASCENDING
+                                    cpAsc.isChecked = true
+                                }
+                            }
+                        }
+                    })
+
             }
 
         }
@@ -80,8 +95,10 @@ class StudentAskedQuestionsFilterBottomSheet: BaseBottomSheetFragment<StudentAsk
 
         viewModel.apply {
             layoutBinding.apply {
-                //----------- Evaluation Status filter
+
                 questionsRequestModelLiveData.value = questionsRequestModel.apply {
+
+                    //----------- Answer type filter
                     when (isQuestionAnswered) {
                         KEY_Y -> {
                             cpAnswered.isChecked = true
@@ -93,7 +110,21 @@ class StudentAskedQuestionsFilterBottomSheet: BaseBottomSheetFragment<StudentAsk
                         }
                         else -> cgAnsType.clearCheck()
                     }
+
+                    //----------- Sort by date type filter
+                    when (dateWiseSort) {
+                        KEY_ASCENDING -> {
+                            cpAsc.isChecked = true
+                            sortByDateLiveData.value = KEY_ASCENDING
+                        }
+                        KEY_DESCENDING -> {
+                            cpDesc.isChecked = true
+                            sortByDateLiveData.value = KEY_DESCENDING
+                        }
+                        else -> cgSortByDate.clearCheck()
+                    }
                 }
+
             }
         }
 

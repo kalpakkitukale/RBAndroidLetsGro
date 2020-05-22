@@ -16,7 +16,10 @@ import com.ramanbyte.emla.faculty.view_model.FacultyCoursesViewModel
 import com.ramanbyte.emla.models.CoursesModel
 import com.ramanbyte.utilities.KEY_BLANK
 
-class FacultyCoursesAdapter(var mContext: Context?) : PagedListAdapter<FacultyCoursesModel, FacultyCoursesAdapter.FacultyCoursesViewHolder>(DIFF_CALLBACK) {
+class FacultyCoursesAdapter(var mContext: Context?) :
+    PagedListAdapter<FacultyCoursesModel, FacultyCoursesAdapter.FacultyCoursesViewHolder>(
+        DIFF_CALLBACK
+    ) {
 
     var coursesViewModel: FacultyCoursesViewModel? = null
     var context: Context? = null
@@ -49,6 +52,16 @@ class FacultyCoursesAdapter(var mContext: Context?) : PagedListAdapter<FacultyCo
             dataBinding.apply {
                 facultyCoursesViewModel = coursesViewModel
                 this.coursesModel = coursesModel
+
+                /*coursesModel.totalNumberOfQuestionCount.apply {
+                    if (this.toString().length == 1) {
+                        tvQuestionCount.text = "0${this.toString()}"
+                    } else {
+                        tvQuestionCount.text = this.toString()
+                    }
+                }*/
+
+
             }
         }
 

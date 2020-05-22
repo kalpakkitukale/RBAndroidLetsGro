@@ -90,6 +90,7 @@
                 android:gravity="center"
                 android:drawablePadding="@dimen/dp_5"
                 android:text="@{studentAskedQuestionsModel.studentPhoneNo}"
+                android:onClick="@{() -> viewModel.onClickMobile(tvMobile,studentAskedQuestionsModel.studentPhoneNo)}"
                 android:drawableStart="@drawable/ic_call"
                 app:layout_constraintStart_toStartOf="@+id/tvUserName"
                 app:layout_constraintTop_toBottomOf="@+id/tvChapterName" />
@@ -98,16 +99,16 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvEmail"
                 style="@style/TextViewRegularLightGray"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_10"
                 android:gravity="left|center"
                 android:drawablePadding="@dimen/dp_5"
                 android:layout_marginStart="@dimen/dp_10"
                 android:text="@{studentAskedQuestionsModel.studentEmail}"
+                android:onClick="@{() -> viewModel.onClickEmail(tvEmail,studentAskedQuestionsModel.studentEmail)}"
                 android:drawableStart="@drawable/ic_mail"
                 app:layout_constraintStart_toEndOf="@+id/tvMobile"
-                app:layout_constraintEnd_toEndOf="@+id/ivDot"
                 app:layout_constraintTop_toBottomOf="@+id/tvChapterName" />
 
             <TextView

@@ -357,6 +357,7 @@ class MediaPlaybackViewModel(mContext: Context) : BaseViewModel(mContext) {
                     BindingUtils.string(R.string.reply_unavailable),
                     View.GONE
                 )
+                //questionsReplyListLiveData.postValue(arrayListOf())
                 coroutineToggleLoader()
             }
         }

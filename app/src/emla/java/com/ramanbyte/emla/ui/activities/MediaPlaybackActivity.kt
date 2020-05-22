@@ -56,7 +56,7 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
     var addToWishList: Boolean = false
 
     var videoQuestionReplyAdapter: VideoQuestionReplyAdapter? = null
-    var videoReplyAdapter: VideoReplyAdapter? = null
+    //var videoReplyAdapter: VideoReplyAdapter? = null
 
     var exoCommentLayoutBinding: ExoCommentLayoutBinding? = null
 
@@ -190,7 +190,8 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
                                     )
                                 mediaPlaybackViewModel = viewModel
                                 askQuestionList = it
-                                (layoutManager as LinearLayoutManager).isSmoothScrollbarEnabled = true
+                                (layoutManager as LinearLayoutManager).isSmoothScrollbarEnabled =
+                                    true
                                 (layoutManager as LinearLayoutManager).scrollToPosition(itemCount - 1)
                                 adapter = this
                             }
@@ -239,7 +240,7 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
             })
 
             enteredQuestionLiveData.observe(this@MediaPlaybackActivity, Observer {
-                if (it != null){
+                if (it != null) {
                     if (it.isNullOrBlank())
                         visibilityAddQuestionBtnLiveData.value = View.GONE
                     else
@@ -261,11 +262,11 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
                             /*
                             * Conversation is close for the particular question the set GONE
                             * */
-                            if (it.isConversionOpen == KEY_N){
+                            if (it.isConversionOpen == KEY_N) {
                                 lblAskNewQuestion.visibility = View.GONE
                                 etAddReply.visibility = View.GONE
                                 ivAddReply.visibility = View.GONE
-                            }else{
+                            } else {
                                 lblAskNewQuestion.visibility = View.VISIBLE
                                 etAddReply.visibility = View.VISIBLE
                                 ivAddReply.visibility = View.VISIBLE
@@ -470,23 +471,25 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
             * Set the Reply list Adapter
             * */
             questionsReplyListLiveData.observe(this@MediaPlaybackActivity, Observer {
+                /*
+                * Add on 0th position, student ask question
+                * */
+                /*val askQuestionReplyList = ArrayList<AskQuestionReplyModel>()
+                askQuestionReplyList.add(0, AskQuestionReplyModel().apply {
+                    createDateTime = questionsModel.createdDateTime
+                    answer = questionsModel.question
+                    userName = questionsModel.userName
+                    userType = KEY_STUDENT
+                })
                 if (it != null) {
-                    /*
-                    * Add on 0th position, student ask question
-                    * */
-                    val askQuestionReplyList = ArrayList<AskQuestionReplyModel>()
-                    askQuestionReplyList.add(0, AskQuestionReplyModel().apply {
-                        createDateTime = questionsModel.createdDateTime
-                        answer = questionsModel.question
-                        userName = questionsModel.userName
-                        userType = KEY_STUDENT
-                    })
-                    askQuestionReplyList.addAll(1,it)
+                    askQuestionReplyList.addAll(1, it)
+                }*/
 
+                if (it != null) {
                     enteredReplyLiveData.value = KEY_BLANK
                     exoCommentLayoutBinding?.replyLayout?.rvReply?.apply {
-                        videoReplyAdapter = VideoReplyAdapter(askQuestionReplyList)
-                        videoReplyAdapter?.apply {
+                        val videoReplyAdapter = VideoReplyAdapter(it)
+                        videoReplyAdapter.apply {
                             layoutManager =
                                 LinearLayoutManager(
                                     this@MediaPlaybackActivity,
@@ -499,6 +502,7 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
                         }
                     }
                 }
+
             })
 
             onClickBackLiveData.observe(this@MediaPlaybackActivity, Observer {
@@ -537,7 +541,7 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
             * validation : if the string is not black then only disply reply button
             * */
             enteredReplyLiveData.observe(this@MediaPlaybackActivity, Observer {
-                if (it != null){
+                if (it != null) {
                     if (it.isNullOrBlank())
                         visibilityAddReplyBtnLiveData.value = View.GONE
                     else

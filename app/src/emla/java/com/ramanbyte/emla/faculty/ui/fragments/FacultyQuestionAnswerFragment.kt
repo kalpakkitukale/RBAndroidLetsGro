@@ -38,8 +38,6 @@ class FacultyQuestionAnswerFragment :
     override fun initiate() {
         setToolbarTitle(BindingUtils.string(R.string.questions_and_answer))
 
-
-
         ProgressLoader(mContext!!, viewModel)
         AlertDialog(mContext!!, viewModel)
 
@@ -56,10 +54,7 @@ class FacultyQuestionAnswerFragment :
                 arguments?.apply {
                     questionsModel = getParcelable(KEY_QUESTION_MODEL)!!
                     questionId = questionsModel?.questionId!!
-                    AppLog.infoLog("questionId $questionId")
                 }
-
-                //questionId = 4 // remove
 
                 /*
                 * call API to get conversation data
@@ -67,23 +62,24 @@ class FacultyQuestionAnswerFragment :
                 getConversationData()
 
                 questionsReplyListLiveData.observe(this@FacultyQuestionAnswerFragment, Observer {
-                    if (it != null){
 
-                        val askQuestionReplyList = ArrayList<AskQuestionReplyModel>()
-                        askQuestionReplyList.add(0,AskQuestionReplyModel().apply {
-                            createDateTime = questionsModel?.questionRaisedDateTime
-                            answer = questionsModel?.question!!
-                            userName = questionsModel?.studentName!!
-                            userType = KEY_STUDENT
-                        })
-                        askQuestionReplyList.addAll(1,it)
-
-                        setAdapter(askQuestionReplyList)
+                    val askQuestionReplyList = ArrayList<AskQuestionReplyModel>()
+                    askQuestionReplyList.add(0, AskQuestionReplyModel().apply {
+                        createDateTime = questionsModel?.questionRaisedDateTime
+                        answer = questionsModel?.question!!
+                        userName = questionsModel?.studentName!!
+                        userType = KEY_STUDENT
+                    })
+                    if (it != null) {
+                        askQuestionReplyList.addAll(1, it)
                     }
+
+                    setAdapter(askQuestionReplyList)
+
                 })
 
                 enteredReplyLiveData.observe(this@FacultyQuestionAnswerFragment, Observer {
-                    if (it != null){
+                    if (it != null) {
                         if (it.isNullOrBlank())
                             visibilityReplyBtnLiveData.value = View.GONE
                         else
@@ -92,8 +88,8 @@ class FacultyQuestionAnswerFragment :
                 })
 
                 onClickAddReplyLiveData.observe(this@FacultyQuestionAnswerFragment, Observer {
-                    if (it != null){
-                        if (it == true){
+                    if (it != null) {
+                        if (it == true) {
                             val enteredReply = enteredReplyLiveData.value.toString()
                             if (enteredReply.isNotBlank()) {
                                 insertQuestionsReply(enteredReply)
@@ -105,7 +101,6 @@ class FacultyQuestionAnswerFragment :
                     }
                 })
             }
-
 
 
         }

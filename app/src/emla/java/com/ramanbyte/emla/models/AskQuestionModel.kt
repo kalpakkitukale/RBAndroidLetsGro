@@ -2,6 +2,7 @@ package com.ramanbyte.emla.models
 
 import android.graphics.drawable.Drawable
 import androidx.room.Ignore
+import com.ramanbyte.R
 import com.ramanbyte.utilities.*
 import com.ramanbyte.utilities.DateUtils.DATE_TIME_PATTERN
 import com.ramanbyte.utilities.DateUtils.DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS
@@ -31,7 +32,8 @@ class AskQuestionModel {
     @Ignore
     var setCharacterDrawable: Drawable? = null
         get() {
-            field = ViewUtils.getCharacterDrawable(userName.substring(0, 1))
+            field = ViewUtils.getCharacterDrawable(BindingUtils.string(R.string.self).substring(0, 1))
+                    //ViewUtils.getCharacterDrawable(userName.substring(0, 1))
             return field
         }
 

@@ -358,6 +358,8 @@ const val KEY_FILE_DOWNLOAD = "File Download"
 /*Faculty Side*/
 const val KEY_ANSWERED = "answered"
 const val KEY_UNANSWERED = "unanswered"
+const val KEY_ASCENDING = "ascending"
+const val KEY_DESCENDING = "descending"
 
 fun skipTrailingZeroes(number: Double?): String {
     var trimmedNumber = "0"
