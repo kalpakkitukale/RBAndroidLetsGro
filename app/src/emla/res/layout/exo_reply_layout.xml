@@ -70,12 +70,12 @@
             android:text="@string/ask_questions_with_question_mark"
             android:textSize="@dimen/sp_14"
             app:layout_constraintEnd_toEndOf="@+id/ivCloseComment"
-            app:layout_constraintTop_toBottomOf="@+id/ivCloseComment" />
+            app:layout_constraintTop_toBottomOf="@+id/lblReplyTitle" />
 
         <com.ramanbyte.views.RoundedImageView
             android:id="@+id/rivUserPic"
-            android:layout_width="@dimen/dp_30"
-            android:layout_height="@dimen/dp_30"
+            android:layout_width="@dimen/dp_32"
+            android:layout_height="@dimen/dp_32"
             android:layout_marginStart="@dimen/dp_10"
             android:layout_marginTop="@dimen/dp_5"
             android:src="@drawable/ic_camera"
@@ -93,17 +93,17 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dp_5"
-            android:layout_marginEnd="@dimen/dp_5"
+            android:layout_marginEnd="@dimen/dp_10"
             android:text="@string/self"
             android:textSize="@dimen/sp_12"
-            app:layout_constraintEnd_toStartOf="@+id/tvDateTime"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/rivUserPic"
             app:layout_constraintTop_toTopOf="@+id/rivUserPic" />
         <!--android:text="@{askQuestionModel.userName}"-->
 
         <TextView
             android:id="@+id/tvQuestion"
-            style="@style/TextViewMediumBlackOnWhite"
+            style="@style/TextViewBoldBlackOnWhite"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dp_5"
@@ -111,18 +111,18 @@
             android:textSize="@dimen/sp_12"
             app:layout_constraintEnd_toEndOf="@+id/tvDateTime"
             app:layout_constraintStart_toEndOf="@+id/rivUserPic"
-            app:layout_constraintTop_toBottomOf="@+id/tvUserName" />
+            app:layout_constraintTop_toBottomOf="@+id/tvDateTime" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvDateTime"
-            style="@style/TextViewBoldLightGray"
-            android:layout_width="wrap_content"
+            style="@style/TextViewRegularLightGray"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/dp_10"
+            app:layout_constraintStart_toStartOf="@+id/tvUserName"
             android:text="@{askQuestionModel.createdDateTime}"
-            android:textSize="@dimen/sp_10"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tvUserName" />
+            android:textSize="@dimen/sp_9"
+            app:layout_constraintEnd_toEndOf="@+id/tvUserName"
+            app:layout_constraintTop_toBottomOf="@+id/tvUserName" />
 
 
         <androidx.recyclerview.widget.RecyclerView
