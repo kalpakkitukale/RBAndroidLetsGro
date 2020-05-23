@@ -67,6 +67,7 @@ abstract class ApplicationDatabase : RoomDatabase() {
             override fun migrate(database: SupportSQLiteDatabase) {
                 database.execSQL("ALTER TABLE MediaInfoModel ADD likeVideo VARCHAR DEFAULT '' NOT NULL")
                 database.execSQL("ALTER TABLE MediaInfoModel ADD favouriteVideo VARCHAR DEFAULT '' NOT NULL")
+                database.execSQL("ALTER TABLE MediaInfoModel ADD contentTitle VARCHAR DEFAULT '' NOT NULL")
                 AppLog.infoLog("Application Database: AlterMediaInfoModelTable")
             }
         }

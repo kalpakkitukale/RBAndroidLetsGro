@@ -10,6 +10,7 @@ import com.ramanbyte.BR
 import com.ramanbyte.R
 import com.ramanbyte.utilities.BindingUtils
 import com.ramanbyte.utilities.KEY_BLANK
+import com.ramanbyte.utilities.KEY_NA_WITHOUT_SPACE
 
 class ContentModel() : Parcelable, BaseObservable() {
 
@@ -34,6 +35,8 @@ class ContentModel() : Parcelable, BaseObservable() {
     * */
     var isLike: String = KEY_BLANK
     var isFavourite: String = KEY_BLANK
+    var contentTitle: String? = KEY_BLANK
+        get() = field ?: KEY_NA_WITHOUT_SPACE
 
     @Bindable
     var downloadVisibility: Int = View.GONE

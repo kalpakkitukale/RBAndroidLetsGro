@@ -7,9 +7,15 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LifecycleRegistry
 import androidx.recyclerview.widget.RecyclerView
+import com.ramanbyte.R
 import com.ramanbyte.databinding.CardContentBinding
 import com.ramanbyte.emla.models.ContentModel
 import com.ramanbyte.emla.view_model.ContentViewModel
+import com.ramanbyte.utilities.AppLog
+import com.ramanbyte.utilities.BindingUtils
+import com.ramanbyte.utilities.FileUtils.KEY_PRESENTATION_PPTX_EXTENSION
+import com.ramanbyte.utilities.FileUtils.KEY_PRESENTATION_PPT_EXTENSION
+import kotlinx.android.synthetic.emla.exo_playback_control_view.*
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -72,6 +78,15 @@ class ContentListAdapter(
                 lifecycleOwner = this@ContentListViewHolder
                 contentViewModel = viewModel
                 this@apply.contentModel = contentModel
+
+                contentModel.apply {
+                    if (content_Type == KEY_PRESENTATION_PPTX_EXTENSION || content_Type == KEY_PRESENTATION_PPT_EXTENSION)
+                        IvVideo.setImageDrawable(BindingUtils.drawable(R.drawable.ic_ppt_document))
+                    else
+                        IvVideo.setImageDrawable(BindingUtils.drawable(R.drawable.ic_play))  // .mp4  .mpeg
+                }
+
+
             }
 
         }

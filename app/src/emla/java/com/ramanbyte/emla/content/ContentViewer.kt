@@ -261,6 +261,7 @@ class ContentViewer(
             contentLink = contentModel.content_link
             likeVideo = contentModel.isLike ?: KEY_BLANK
             favouriteVideo = contentModel.isFavourite ?: KEY_BLANK
+            contentTitle = contentModel.contentTitle ?: KEY_BLANK
             /* createdDateTime = courseContentModel.createdDateTime
              modifiedDateTime = courseContentModel.modifiedDateTime*/
 

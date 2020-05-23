@@ -99,6 +99,7 @@ class ChaptersSectionListFragment :
                                     sectionId = viewModel.downloadRequestedSection?.id ?: 0
                                     likeVideo = contentModel.isLike ?: ""
                                     favouriteVideo = contentModel.isFavourite ?: ""
+                                    contentTitle = contentModel.contentTitle ?: ""
                                 })
                         }
                     }

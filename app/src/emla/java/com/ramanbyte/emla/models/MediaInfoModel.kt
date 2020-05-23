@@ -60,6 +60,8 @@ class MediaInfoModel : BaseObservable() {
     @SerializedName("isFavouriteVideo")
     var favouriteVideo: String = KEY_BLANK
 
+    var contentTitle: String = KEY_BLANK
+
     var mimeType = ""
 
     @Bindable

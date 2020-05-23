@@ -92,6 +92,7 @@ class ContentListFragment : BaseFragment<FragmentContentListBinding, ContentView
                                 sectionId = viewModel.sectionId
                                 likeVideo = contentModel.isLike ?: ""
                                 favouriteVideo = contentModel.isFavourite ?: ""
+                                contentTitle = contentModel.contentTitle ?: ""
                             })
 
                         playOrPreviewLiveData.value = null
@@ -119,6 +120,7 @@ class ContentListFragment : BaseFragment<FragmentContentListBinding, ContentView
                                 sectionId = viewModel.sectionId
                                 likeVideo = contentModel.isLike ?: ""
                                 favouriteVideo = contentModel.isFavourite ?: ""
+                                contentTitle = contentModel.contentTitle ?: ""
                             })
 
                         downloadLiveData.value = null
