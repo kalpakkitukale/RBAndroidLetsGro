@@ -138,6 +138,9 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
         //val dataBinding: ExoCommentLayoutBinding = DataBindingUtil.setContentView(this, R.layout.exo_comment_layout)
         exoCommentLayoutBinding = ExoCommentLayoutBinding.bind(view1!!)
 
+        /*
+        * Ask Question XML binding
+        * */
         exoCommentLayoutBinding?.apply {
             lifecycleOwner = this@MediaPlaybackActivity
             mediaPlaybackViewModel = viewModel
@@ -149,6 +152,11 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
                 noData.viewModel = viewModel
                 noInternet.viewModel = viewModel
                 somethingWentWrong.viewModel = viewModel
+                replyLayout.apply {
+                    questionModel = AskQuestionModel().apply {
+                        userPic = KEY_BLANK
+                    }
+                }
             }
         }
 
@@ -201,9 +209,14 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
 
                 conversationCloseLiveData.observe(this@MediaPlaybackActivity, Observer {
                     if (it != null) {
-                        exoCommentLayoutBinding?.apply {
-                            questionLayout.visibility = View.VISIBLE
-                            replyLayout.replyContainerLayout.visibility = View.GONE
+                        if (it == KEY_N) {
+                            AppLog.infoLog("niurrrrr $it")
+                            exoCommentLayoutBinding?.apply {
+                                questionLayout.visibility = View.VISIBLE
+                                replyLayout.replyContainerLayout.visibility = View.GONE
+                            }
+                        }else{
+                            AppLog.infoLog("niurrrrr $it")
                         }
                     }
                 })
@@ -248,13 +261,18 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
                 }
             })
 
+
             /*
             * This is for Reply or ViewReply
             * */
             onClickReplyLiveData.observe(this@MediaPlaybackActivity, Observer {
                 if (it != null) {
+                    /*
+                    * Reply or ViewReply XML binding
+                    * */
                     exoCommentLayoutBinding?.apply {
                         questionLayout.visibility = View.GONE
+                        visibilityAddQuestionBtnLiveData.value = View.GONE
                         replyLayout.apply {
                             replyContainerLayout.visibility = View.VISIBLE
                             askQuestionModel = it
@@ -271,8 +289,6 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
                                 etAddReply.visibility = View.VISIBLE
                                 ivAddReply.visibility = View.VISIBLE
                             }
-                            /*strUserPic = it.userPic
-                            characterDrawable = it.setCharacterDrawable*/
                         }
 
                         /*

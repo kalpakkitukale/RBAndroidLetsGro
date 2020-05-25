@@ -9,10 +9,10 @@ class ConversationCloseRequestModel {
     /*
     * response
     * */
-    var student_Id: Int? = 0
+    /*var student_Id: Int? = 0
     var course_Id: Int? = 0
     var chpater_Id: Int? = 0
     var section_Id: Int? = 0
     var content_Id: Int? = 0
-    var faculty_Id: Int? = 0
+    var faculty_Id: Int? = 0*/
 }

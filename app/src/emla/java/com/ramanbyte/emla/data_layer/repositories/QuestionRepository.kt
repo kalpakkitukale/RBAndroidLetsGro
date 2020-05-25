@@ -85,7 +85,7 @@ class QuestionRepository(mContext: Context) : BaseRepository(mContext) {
     * */
     suspend fun updateConversationCloseStatus(
         questionId: Int
-    ): ConversationCloseRequestModel? {
+    ): String? {
         val conversationCloseRequestModel = ConversationCloseRequestModel()
             .apply {
                 this.questionId = questionId

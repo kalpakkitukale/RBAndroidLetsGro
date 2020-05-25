@@ -66,6 +66,6 @@ interface QuestionController {
     suspend fun getFavouriteVideos(@Path("userId") userId: Int): Response<ArrayList<FavouriteVideosModel>>
 
     @POST("UpdateConversationCloseStatus")
-    suspend fun updateConversationCloseStatus(@Body conversationCloseRequestModel: ConversationCloseRequestModel): Response<ConversationCloseRequestModel>
+    suspend fun updateConversationCloseStatus(@Body conversationCloseRequestModel: ConversationCloseRequestModel): Response<String>
 
 }

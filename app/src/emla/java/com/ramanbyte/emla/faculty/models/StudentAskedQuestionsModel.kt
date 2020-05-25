@@ -25,6 +25,10 @@ class StudentAskedQuestionsModel() : Parcelable {
     var videoId: Int = 0
     var studentEmail: String? = KEY_BLANK
     var questionId: Int = 0
+    var isQuestionAnswered: String? = KEY_BLANK
+    var facultyReply: String? = KEY_BLANK
+    var contentTitle: String? = KEY_BLANK
+        get() = field ?: KEY_NA_WITHOUT_SPACE
     var questionRaisedDateTime: String = KEY_BLANK
         get() = DateUtils.getDisplayDateFromDate(
             field,

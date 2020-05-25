@@ -75,7 +75,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_5"
-                android:text='@{studentAskedQuestionsModel.chapterName +" | "+ studentAskedQuestionsModel.sectionName +" | "+ @string/video_id +" : "+  String.valueOf(studentAskedQuestionsModel.videoId)}'
+                android:text='@{studentAskedQuestionsModel.chapterName +" | "+ studentAskedQuestionsModel.sectionName +" | "+ @string/video_title +" : "+  studentAskedQuestionsModel.contentTitle}'
                 android:textSize="@dimen/sp_12"
                 app:layout_constraintEnd_toEndOf="@+id/ivDot"
                 app:layout_constraintStart_toEndOf="@+id/rivUserPic"

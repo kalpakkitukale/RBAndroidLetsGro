@@ -1,11 +1,14 @@
 package com.ramanbyte.emla.models
 
 import com.ramanbyte.utilities.KEY_BLANK
+import com.ramanbyte.utilities.KEY_NA_WITHOUT_SPACE
 
 class FavouriteVideosModel {
     var userId: Int = 0
     var contentId: Int = 0
     var lengthOfVideo: Int = 0
+    var contentTitle: String = KEY_BLANK
+        get() = field ?: KEY_NA_WITHOUT_SPACE
     var contentType: String = KEY_BLANK
     var courseName: String = KEY_BLANK
     var chapterName: String = KEY_BLANK

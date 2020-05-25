@@ -62,7 +62,7 @@ class MediaPlaybackViewModel(mContext: Context) : BaseViewModel(mContext) {
     fun updateMediaInfo(mediaInfoModel: MediaInfoModel) =
         contentRepository.updateMediaInfo(mediaInfoModel)
 
-    var conversationCloseLiveData = MutableLiveData<ConversationCloseRequestModel>().apply {
+    var conversationCloseLiveData = MutableLiveData<String>().apply {
         value = null
     }
 
