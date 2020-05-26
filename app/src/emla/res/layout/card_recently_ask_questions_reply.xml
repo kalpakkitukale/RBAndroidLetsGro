@@ -71,10 +71,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_9"
+                android:text="@{replyModel.createdDateTime}"
                 app:layout_constraintStart_toStartOf="@+id/tvUserName"
                 app:layout_constraintEnd_toEndOf="@+id/tvUserName"
                 app:layout_constraintTop_toBottomOf="@+id/tvUserName" />
-            <!--android:text="@{replyModel.createdDateTime}"-->
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/ivReply"

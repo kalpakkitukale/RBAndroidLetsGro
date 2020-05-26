@@ -31,6 +31,8 @@ class MediaPlaybackViewModel(mContext: Context) : BaseViewModel(mContext) {
 
     var mediaInfoModel: MediaInfoModel? = null
 
+    var questionList :List<AskQuestionModel>? = null
+
     var onClickCloseCommentLiveData = MutableLiveData<Boolean>().apply {
         value = false
     }
@@ -167,6 +169,7 @@ class MediaPlaybackViewModel(mContext: Context) : BaseViewModel(mContext) {
             } catch (e: NoDataException) {
                 e.printStackTrace()
                 AppLog.errorLog(e.message, e)
+                questionList = arrayListOf()
                 toggleLayoutVisibility(
                     View.GONE,
                     View.VISIBLE,
@@ -184,6 +187,7 @@ class MediaPlaybackViewModel(mContext: Context) : BaseViewModel(mContext) {
         onClickCloseCommentLiveData.value = true
     }
 
+    var isNewQuestionAsked : Boolean = false
 
     fun onClickAskNewQuestion(view: View, questionId: Int) {
         //onClickAskNQuestionLiveData.value = true
@@ -194,6 +198,7 @@ class MediaPlaybackViewModel(mContext: Context) : BaseViewModel(mContext) {
             BindingUtils.string(R.string.yes), {
                 isAlertDialogShown.postValue(false)
                 AppLog.infoLog("questionId=== $questionId")
+                isNewQuestionAsked = true
                 updateConversationCloseStatus(questionId)
                 //findNavController().navigateUp()
             },
@@ -204,7 +209,7 @@ class MediaPlaybackViewModel(mContext: Context) : BaseViewModel(mContext) {
         isAlertDialogShown.postValue(true)
     }
 
-    private fun updateConversationCloseStatus(questionId: Int) {
+    fun updateConversationCloseStatus(questionId: Int) {
         CoroutineUtils.main {
             try {
                 isLoaderShowingLiveData.postValue(true)

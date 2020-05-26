@@ -65,7 +65,7 @@ class FacultyQuestionAnswerFragment :
 
                     val askQuestionReplyList = ArrayList<AskQuestionReplyModel>()
                     askQuestionReplyList.add(0, AskQuestionReplyModel().apply {
-                        createDateTime = questionsModel?.questionRaisedDateTime
+                        createdDateTime = questionsModel?.questionRaisedDateTime
                         answer = questionsModel?.question!!
                         userName = questionsModel?.studentName!!
                         userType = KEY_STUDENT

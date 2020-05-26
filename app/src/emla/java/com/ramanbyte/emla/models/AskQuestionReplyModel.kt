@@ -18,16 +18,6 @@ class AskQuestionReplyModel {
             DateUtils.DATE_TIME_PATTERN
         )
 
-    /*
-    * this is for reply list
-    * */
-    var createDateTime: String? = KEY_BLANK
-        get() = DateUtils.getDisplayDateFromDate(
-            field!!,
-            DateUtils.DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS,
-            DateUtils.DATE_TIME_PATTERN
-        )
-
     var answer = KEY_BLANK
     var userName = KEY_BLANK
     var userType = KEY_BLANK

@@ -45,12 +45,6 @@ class VideoReplyAdapter(private var qnaArrayList: ArrayList<AskQuestionReplyMode
                 this.replyModel = replyModel
 
                 replyModel.apply {
-                    if (createDateTime?.isEmpty()!!){
-                        tvDateTime.text = replyModel.createdDateTime
-                    }else{
-                        tvDateTime.text = replyModel.createDateTime
-                    }
-
                     if (userType == KEY_FACULTY) {
                         tvUserName.text = replyModel.userName
                         verticalView.setBackgroundColor(BindingUtils.color(R.color.colorTeal))

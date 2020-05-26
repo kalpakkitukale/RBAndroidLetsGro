@@ -58,6 +58,7 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
     var videoQuestionReplyAdapter: VideoQuestionReplyAdapter? = null
     //var videoReplyAdapter: VideoReplyAdapter? = null
 
+
     var exoCommentLayoutBinding: ExoCommentLayoutBinding? = null
 
     override val viewModelClass: Class<MediaPlaybackViewModel> = MediaPlaybackViewModel::class.java
@@ -197,6 +198,7 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
                                         false
                                     )
                                 mediaPlaybackViewModel = viewModel
+                                questionList = it
                                 askQuestionList = it
                                 (layoutManager as LinearLayoutManager).isSmoothScrollbarEnabled =
                                     true
@@ -210,13 +212,18 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
                 conversationCloseLiveData.observe(this@MediaPlaybackActivity, Observer {
                     if (it != null) {
                         if (it == KEY_N) {
-                            AppLog.infoLog("niurrrrr $it")
-                            exoCommentLayoutBinding?.apply {
-                                questionLayout.visibility = View.VISIBLE
-                                replyLayout.replyContainerLayout.visibility = View.GONE
+                            if (isNewQuestionAsked){
+                                getQuestionAndAnswer()
+                                exoCommentLayoutBinding?.apply {
+                                    questionLayout.visibility = View.VISIBLE
+                                    replyLayout.replyContainerLayout.visibility = View.GONE
+                                }
+                                isNewQuestionAsked = false
+                            }else{
+                                if (enteredQuestionLiveData.value?.isNotBlank()!!) {
+                                    insertAskQuestion(enteredQuestionLiveData.value!!)
+                                }
                             }
-                        }else{
-                            AppLog.infoLog("niurrrrr $it")
                         }
                     }
                 })
@@ -241,11 +248,32 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
             onClickSendQuestionLiveData.observe(this@MediaPlaybackActivity, Observer {
                 if (it != null) {
                     if (it == true) {
-                        val question = exoCommentLayoutBinding?.etAskQuestion?.text.toString()
+
                         if (enteredQuestionLiveData.value?.isNotBlank()!!) {
-                            insertAskQuestion(question)
+
+                            if (questionList?.isNotEmpty()!!){
+                                AppLog.infoLog("questionListsize ${questionList?.size}  ${questionList?.get(0)?.questionId}")
+                                setAlertDialogResourceModelMutableLiveData(
+                                    BindingUtils.string(R.string.conversation_close_message),
+                                    BindingUtils.drawable(R.drawable.ic_submit_confirmation)!!,
+                                    false,
+                                    BindingUtils.string(R.string.yes), {
+                                        isAlertDialogShown.postValue(false)
+                                        updateConversationCloseStatus(questionList?.get(0)?.questionId!!)
+                                    },
+                                    BindingUtils.string(R.string.no), {
+                                        isAlertDialogShown.postValue(false)
+                                    }
+                                )
+                                isAlertDialogShown.postValue(true)
+                            }else{
+                                if (enteredQuestionLiveData.value?.isNotBlank()!!) {
+                                    insertAskQuestion(enteredQuestionLiveData.value!!)
+                                }
+                            }
+
                         } else {
-                            AppLog.infoLog("Blank Question not added.")
+                            AppLog.infoLog("Blank Question not added. ")
                         }
                         onClickSendQuestionLiveData.value = false
                     }

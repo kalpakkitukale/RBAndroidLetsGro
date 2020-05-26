@@ -1,9 +1,6 @@
 package com.ramanbyte.emla.models.request
 
-import com.ramanbyte.utilities.DateUtils
-import com.ramanbyte.utilities.KEY_APP
-import com.ramanbyte.utilities.KEY_BLANK
-import com.ramanbyte.utilities.KEY_N
+import com.ramanbyte.utilities.*
 
 class AskQuestionRequestModel {
 
@@ -23,5 +20,6 @@ class AskQuestionRequestModel {
     var del_Status: String? = KEY_N
     var isPublic: String? = KEY_N
     var isApproved: String? = KEY_N
+    var isConversationOpen: String? = KEY_Y
 
 }

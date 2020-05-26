@@ -43,7 +43,7 @@ class StudentAskedQuestionsFragment :
             AppLog.infoLog("courseModel ${courseModel?.courseId}")
         }
 
-        setToolbarTitle(BindingUtils.string(R.string.questions))
+        setToolbarTitle(courseModel?.courseName!!)
 
         ProgressLoader(mContext!!, viewModel)
         AlertDialog(mContext!!, viewModel)
