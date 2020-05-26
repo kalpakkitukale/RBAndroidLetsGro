@@ -20,6 +20,7 @@ class StudentAskedQuestionsModel() : Parcelable {
     var studentName: String? = KEY_BLANK
     var studentPic: String? = KEY_BLANK
     var studentPhoneNo: String? = KEY_BLANK
+        get() = field ?: KEY_NA_WITHOUT_SPACE
     var question: String? = KEY_BLANK
         get() = field ?: KEY_NA_WITHOUT_SPACE
     var videoId: Int = 0

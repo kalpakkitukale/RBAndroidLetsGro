@@ -57,11 +57,20 @@ class StudentAskedQuestionsAdapter() :
                 viewModel = studentAskedQuestionsViewModel
                 this.studentAskedQuestionsModel = questionsModel
 
-                if (questionsModel.question?.isBlank()!!) {
-                    tvQuestion.text = KEY_NA_WITHOUT_SPACE
-                } else {
-                    tvQuestion.text = questionsModel.question
+                questionsModel.apply {
+                    if (question?.isBlank()!!) {
+                        tvQuestion.text = KEY_NA_WITHOUT_SPACE
+                    } else {
+                        tvQuestion.text = question
+                    }
+
+                    if (studentPhoneNo?.isBlank()!!) {
+                        tvMobile.text = KEY_NA_WITHOUT_SPACE
+                    } else {
+                        tvMobile.text = studentPhoneNo
+                    }
                 }
+
 
             }
         }

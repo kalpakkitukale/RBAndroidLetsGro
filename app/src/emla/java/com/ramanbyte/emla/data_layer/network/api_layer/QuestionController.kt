@@ -56,8 +56,8 @@ interface QuestionController {
     @POST("InsertQNADetails")
     suspend fun insertQuestionsReply(@Body questionsReplyRequestModel: QuestionsReplyRequestModel): Response<QuestionsReplyRequestModel>
 
-    @GET("GetQNA/{studentId}/{contentId}")
-    suspend fun getQuestionAndAnswer(@Path("studentId") studentId: Int, @Path("contentId") contentId: Int): Response<ArrayList<AskQuestionModel>>
+    @GET("GetQNA/{studentId}/{contentId}/{courseId}")
+    suspend fun getQuestionAndAnswer(@Path("studentId") studentId: Int, @Path("contentId") contentId: Int, @Path("courseId") courseId: Int): Response<ArrayList<AskQuestionModel>>
 
     @GET("GetConversationData/{questionId}")
     suspend fun getConversationData(@Path("questionId") questionId: Int): Response<ArrayList<AskQuestionReplyModel>>

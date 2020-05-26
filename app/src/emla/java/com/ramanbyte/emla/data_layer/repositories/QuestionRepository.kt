@@ -67,10 +67,10 @@ class QuestionRepository(mContext: Context) : BaseRepository(mContext) {
         }
     }
 
-    suspend fun getQuestionAndAnswer(contentId: Int): ArrayList<AskQuestionModel>? {
+    suspend fun getQuestionAndAnswer(contentId: Int,courseId:Int): ArrayList<AskQuestionModel>? {
         val userId = applicationDatabase.getUserDao().getCurrentUser()?.userId!!
         return apiRequest {
-            questionController.getQuestionAndAnswer(userId, contentId)
+            questionController.getQuestionAndAnswer(userId, contentId, courseId)
         }
     }
 

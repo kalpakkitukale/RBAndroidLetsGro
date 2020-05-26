@@ -131,7 +131,7 @@ class MediaPlaybackViewModel(mContext: Context) : BaseViewModel(mContext) {
             try {
                 coroutineToggleLoader(BindingUtils.string(R.string.getting_questions_list))
 
-                val response = questionRepository.getQuestionAndAnswer(mediaInfoModel?.mediaId!!)
+                val response = questionRepository.getQuestionAndAnswer(mediaInfoModel?.mediaId!!, mediaInfoModel?.courseId!!)
                 questionAndAnswerListLiveData.postValue(response)
 
                 toggleLayoutVisibility(
