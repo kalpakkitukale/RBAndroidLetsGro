@@ -172,6 +172,11 @@
         <item name="android:textColor">@color/textColorGrayOnWhiteBackground</item>
     </style>
 
+    <style name="TextViewLightItalic">
+        <item name="android:textAppearance">@style/AppTheme.Font.Italic</item>
+        <item name="android:textColor">@color/textColorGrayOnWhiteBackground</item>
+    </style>
+
     <style name="CustomCapsuleButtonBgTealWhiteText">
         <item name="android:background">@drawable/button_capsule_with_tin_color</item>
         <item name="android:gravity">center</item>
