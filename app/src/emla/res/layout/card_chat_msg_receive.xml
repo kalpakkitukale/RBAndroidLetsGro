@@ -40,7 +40,7 @@
                 app:imageUrl="@{replyModel.userPic}"
                 app:layout_constraintStart_toStartOf="@+id/verticalView"
                 app:layout_constraintTop_toTopOf="parent"
-                app:placeholder="@{replyModel.setCharacterDrawable}" />
+                app:placeholder="@{replyModel.setCharacterDrawableForFaculty}" />
 
             <TextView
                 android:id="@+id/tvUserName"
@@ -69,7 +69,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvDateTime"
-                style="@style/TextViewBoldLightGray"
+                style="@style/TextViewRegularLightGray"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/dp_10"

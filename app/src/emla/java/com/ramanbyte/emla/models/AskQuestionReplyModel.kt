@@ -33,4 +33,11 @@ class AskQuestionReplyModel {
                 ViewUtils.getCharacterDrawable(BindingUtils.string(R.string.self).substring(0, 1))
             return field
         }
+
+    @Ignore
+    var setCharacterDrawableForFaculty: Drawable? = null
+        get() {
+            field = ViewUtils.getCharacterDrawable(userName.substring(0, 1))
+            return field
+        }
 }

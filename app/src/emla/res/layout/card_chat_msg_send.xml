@@ -13,24 +13,24 @@
         android:id="@+id/cardLayoutMain"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_60"
         app:cardBackgroundColor="@color/colorTransparent"
         app:cardCornerRadius="@dimen/dp_5"
         app:cardElevation="2dp"
-        app:cardUseCompatPadding="true"
-        android:layout_marginStart="@dimen/dp_60">
+        app:cardUseCompatPadding="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <View
+                android:id="@+id/verticalView"
                 android:layout_width="@dimen/dp_3"
                 android:layout_height="0dp"
-                android:id="@+id/verticalView"
                 android:background="@color/colorTeal"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <com.ramanbyte.views.RoundedImageView
                 android:id="@+id/rivUserPic"
@@ -38,9 +38,9 @@
                 android:layout_height="@dimen/dp_35"
                 android:layout_margin="@dimen/dp_5"
                 app:imageUrl="@{replyModel.userPic}"
-                app:placeholder="@{replyModel.setCharacterDrawable}"
                 app:layout_constraintStart_toStartOf="@+id/verticalView"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:placeholder="@{replyModel.setCharacterDrawableForFaculty}" />
 
             <TextView
                 android:id="@+id/tvUserName"
@@ -69,26 +69,26 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvDateTime"
-                style="@style/TextViewBoldLightGray"
+                style="@style/TextViewRegularLightGray"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/sp_10"
                 android:layout_marginEnd="@dimen/dp_10"
                 android:text="@{replyModel.createdDateTime}"
+                android:textSize="@dimen/sp_10"
+                app:layout_constraintBottom_toBottomOf="@+id/tvUserName"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/tvUserName"
-                app:layout_constraintBottom_toBottomOf="@+id/tvUserName" />
+                app:layout_constraintTop_toTopOf="@+id/tvUserName" />
             <!--android:text="@{replyModel.createdDateTime}"-->
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/ivReply"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_reply_teal"
                 android:layout_margin="@dimen/dp_5"
+                android:src="@drawable/ic_reply_teal"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvReply"
-                app:layout_constraintBottom_toBottomOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/tvReply" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

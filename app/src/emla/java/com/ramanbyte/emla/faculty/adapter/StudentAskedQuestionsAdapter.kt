@@ -70,8 +70,6 @@ class StudentAskedQuestionsAdapter() :
                         tvMobile.text = studentPhoneNo
                     }
                 }
-
-
             }
         }
     }
