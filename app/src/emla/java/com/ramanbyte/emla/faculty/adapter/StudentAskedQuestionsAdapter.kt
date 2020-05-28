@@ -16,6 +16,7 @@ import com.ramanbyte.emla.faculty.models.FacultyCoursesModel
 import com.ramanbyte.emla.faculty.models.StudentAskedQuestionsModel
 import com.ramanbyte.emla.faculty.view_model.FacultyCoursesViewModel
 import com.ramanbyte.emla.faculty.view_model.StudentAskedQuestionsViewModel
+import com.ramanbyte.utilities.DateUtils
 import com.ramanbyte.utilities.KEY_BLANK
 import com.ramanbyte.utilities.KEY_NA_WITHOUT_SPACE
 
@@ -69,6 +70,18 @@ class StudentAskedQuestionsAdapter() :
                     } else {
                         tvMobile.text = studentPhoneNo
                     }
+
+                    tvDateTime.text = DateUtils.getFreeFormatDateTime(
+                        DateUtils.getTimeFormDate(
+                            questionRaisedDateTime!!,
+                            DateUtils.DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS
+                        ),
+                        DateUtils.getCalendarByCustomDate(
+                            questionRaisedDateTime!!,
+                            DateUtils.DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS
+                        )!!
+                    )
+
                 }
             }
         }

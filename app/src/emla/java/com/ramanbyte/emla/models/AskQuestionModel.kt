@@ -17,12 +17,22 @@ class AskQuestionModel {
     var userPic: String? = KEY_BLANK
         get() = field ?: KEY_BLANK
 
-    var createdDateTime = KEY_BLANK
-        get() = DateUtils.getDisplayDateFromDate(
+    var createdDateTime: String? = KEY_BLANK
+        get() = DateUtils.getFreeFormatDateTime(
+            DateUtils.getTimeFormDate(
+                field!!,
+                DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS
+            ),
+            DateUtils.getCalendarByCustomDate(
+                field!!,
+                DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS
+            )!!
+        )
+        /*get() = DateUtils.getDisplayDateFromDate(
             field,
             DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS,
             DATE_TIME_PATTERN
-        )
+        )*/
 
     var isPublic = KEY_BLANK
     var isApproved = KEY_BLANK

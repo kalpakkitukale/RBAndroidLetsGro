@@ -4,6 +4,7 @@ import android.graphics.drawable.Drawable
 import androidx.room.Ignore
 import com.ramanbyte.R
 import com.ramanbyte.utilities.*
+import com.ramanbyte.utilities.DateUtils.getFreeFormatDateTime
 
 class AskQuestionReplyModel {
     var userId = 0
@@ -12,11 +13,21 @@ class AskQuestionReplyModel {
     * this is for question list
     * */
     var createdDateTime: String? = KEY_BLANK
-        get() = DateUtils.getDisplayDateFromDate(
+        get() = getFreeFormatDateTime(
+            DateUtils.getTimeFormDate(
+                field!!,
+                DateUtils.DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS
+            ),
+            DateUtils.getCalendarByCustomDate(
+                field!!,
+                DateUtils.DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS
+            )!!
+        )
+        /*get() = DateUtils.getDisplayDateFromDate(
             field!!,
             DateUtils.DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS,
             DateUtils.DATE_TIME_PATTERN
-        )
+        )*/
 
     var answer = KEY_BLANK
     var userName = KEY_BLANK

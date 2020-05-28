@@ -16,6 +16,9 @@ import com.ramanbyte.emla.faculty.models.StudentAskedQuestionsModel
 import com.ramanbyte.emla.faculty.view_model.FacultyQuestionAnswerViewModel
 import com.ramanbyte.emla.models.AskQuestionReplyModel
 import com.ramanbyte.utilities.*
+import com.ramanbyte.utilities.DateUtils.DATE_TIME_PATTERN
+import com.ramanbyte.utilities.DateUtils.DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS
+import com.ramanbyte.utilities.DateUtils.getDisplayDateFromDate
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
@@ -65,7 +68,11 @@ class FacultyQuestionAnswerFragment :
 
                     val askQuestionReplyList = ArrayList<AskQuestionReplyModel>()
                     askQuestionReplyList.add(0, AskQuestionReplyModel().apply {
-                        createdDateTime = questionsModel?.questionRaisedDateTime
+                        createdDateTime = questionsModel?.questionRaisedDateTime!! /*getDisplayDateFromDate(
+                            questionsModel?.questionRaisedDateTime!!,
+                            DATE_TIME_PATTERN,
+                            DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS
+                        )*/
                         answer = questionsModel?.question!!
                         userName = questionsModel?.studentName!!
                         userType = KEY_STUDENT

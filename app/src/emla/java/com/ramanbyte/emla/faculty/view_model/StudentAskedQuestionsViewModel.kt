@@ -133,7 +133,7 @@ class StudentAskedQuestionsViewModel(var mContext: Context) : BaseViewModel(mCon
     }
 
     var sortByDateLiveData = MutableLiveData<String>().apply {
-        value = KEY_ASCENDING
+        value = KEY_DESCENDING
     }
 
     fun onClickAnswerChip(selectedAnsType: String) {
@@ -180,7 +180,7 @@ class StudentAskedQuestionsViewModel(var mContext: Context) : BaseViewModel(mCon
     }
 
     fun getFilterState(): Boolean {
-        return (questionsRequestModelLiveData.value?.isQuestionAnswered == KEY_Y || questionsRequestModelLiveData.value?.dateWiseSort == KEY_DESCENDING)
+        return (questionsRequestModelLiveData.value?.isQuestionAnswered == KEY_Y || questionsRequestModelLiveData.value?.dateWiseSort == KEY_ASCENDING)
     }
 
     //------------- Filter Code --- End ------------------------

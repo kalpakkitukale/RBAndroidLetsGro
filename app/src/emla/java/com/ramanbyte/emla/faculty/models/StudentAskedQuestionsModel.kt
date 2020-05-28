@@ -30,12 +30,13 @@ class StudentAskedQuestionsModel() : Parcelable {
     var facultyReply: String? = KEY_BLANK
     var contentTitle: String? = KEY_BLANK
         get() = field ?: KEY_NA_WITHOUT_SPACE
-    var questionRaisedDateTime: String = KEY_BLANK
-        get() = DateUtils.getDisplayDateFromDate(
+    var questionRaisedDateTime: String? = KEY_BLANK
+
+        /*get() = DateUtils.getDisplayDateFromDate(
             field,
             DateUtils.DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS,
             DateUtils.DATE_TIME_PATTERN
-        )
+        )*/
 
     @Ignore
     var setCharacterDrawable: Drawable? = null

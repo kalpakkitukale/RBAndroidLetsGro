@@ -55,7 +55,7 @@ class StudentAskedQuestionsFilterBottomSheet: BaseBottomSheetFragment<StudentAsk
 
                             //-------- Sort Date Type
                             cpAsc.isChecked = true
-                            sortByDateLiveData.value = KEY_ASCENDING
+                            sortByDateLiveData.value = KEY_DESCENDING
 
                             onClickClearFilterLiveData.value = false
                         }
@@ -79,8 +79,8 @@ class StudentAskedQuestionsFilterBottomSheet: BaseBottomSheetFragment<StudentAsk
                         it?.apply {
                             if (sortByDateLiveData.value != KEY_BLANK) {
                                 if (cgSortByDate.checkedChipId == -1) {
-                                    sortByDateLiveData.value = KEY_ASCENDING
-                                    cpAsc.isChecked = true
+                                    sortByDateLiveData.value = KEY_DESCENDING
+                                    cpDesc.isChecked = true
                                 }
                             }
                         }
