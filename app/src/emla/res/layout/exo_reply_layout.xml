@@ -120,7 +120,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvDateTime"
-            style="@style/TextViewRegularLightGray"
+            style="@style/TextViewLightItalic"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="@+id/tvUserName"
