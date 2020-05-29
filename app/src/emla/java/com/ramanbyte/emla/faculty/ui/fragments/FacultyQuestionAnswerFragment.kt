@@ -31,7 +31,6 @@ class FacultyQuestionAnswerFragment :
     var mContext: Context? = null
     var questionAnswerAdapter: FacultyQuestionAnswerAdapter? = null
     var questionsModel: StudentAskedQuestionsModel? = null
-    //var questionId: Int? =null
 
     override val viewModelClass: Class<FacultyQuestionAnswerViewModel> =
         FacultyQuestionAnswerViewModel::class.java
@@ -58,6 +57,14 @@ class FacultyQuestionAnswerFragment :
                     questionsModel = getParcelable(KEY_QUESTION_MODEL)!!
                     questionId = questionsModel?.questionId!!
                 }
+
+                /*
+                * Faculty can be able to reply for the question.
+                * */
+                if (questionsModel?.facultyReply == KEY_Y)
+                    etAddReply.visibility = View.VISIBLE
+                else
+                    etAddReply.visibility = View.GONE
 
                 /*
                 * call API to get conversation data

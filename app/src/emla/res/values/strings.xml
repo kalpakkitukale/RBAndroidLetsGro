@@ -270,4 +270,6 @@ Content
     <string name="desc">Desc</string>
     <string name="video_title">Video Title</string>
     <string name="self">Self</string>
+    <string name="select_date_as">Select Date as</string>
+    <string name="select_answer_as">Select Answer as</string>
 </resources>

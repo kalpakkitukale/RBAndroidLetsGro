@@ -25,6 +25,10 @@ class CourseSyllabusModel {
         set(value) {
             field = value.checkValues()
         }
+    var allocatedFacultys: String? = ""
+        set(value) {
+            field = value.checkValues()
+        }
     var whtILern: String? = ""
         set(value) {
             field = value.checkValues()

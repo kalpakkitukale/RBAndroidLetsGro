@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/dp_5">
 
-        <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="@dimen/dp_5">
@@ -48,7 +48,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-
             <TextView
                 android:id="@+id/lblSortByDate"
                 style="@style/TextViewBoldBlackOnWhite"
@@ -56,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_10"
                 android:layout_marginTop="@dimen/dp_10"
-                android:text="Select Date as"
+                android:text="@string/select_date_as"
                 android:textSize="@dimen/sp_16"
                 app:layout_constraintEnd_toEndOf="@+id/ivCloseFilter"
                 app:layout_constraintStart_toStartOf="parent"
@@ -77,8 +76,8 @@
                     style="@style/CustomChipChoice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/asc"
                     android:onClick="@{() -> studentAskedQuestionsViewModel.onClickSortByDateChip(staticHelper.KEY_ASCENDING)}"
+                    android:text="@string/asc"
                     android:textAlignment="center"
                     android:textAllCaps="true"
                     android:textSize="@dimen/sp_12" />
@@ -88,13 +87,12 @@
                     style="@style/CustomChipChoice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/desc"
                     android:onClick="@{() -> studentAskedQuestionsViewModel.onClickSortByDateChip(staticHelper.KEY_DESCENDING)}"
+                    android:text="@string/desc"
                     android:textAlignment="center"
                     android:textAllCaps="true"
                     android:textSize="@dimen/sp_12" />
             </com.google.android.material.chip.ChipGroup>
-
 
             <TextView
                 android:id="@+id/lblAnsAndUnAns"
@@ -103,7 +101,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_10"
                 android:layout_marginTop="@dimen/dp_10"
-                android:text="Select Answer as"
+                android:text="@string/select_answer_as"
                 android:textSize="@dimen/sp_16"
                 app:layout_constraintEnd_toEndOf="@+id/ivCloseFilter"
                 app:layout_constraintStart_toStartOf="parent"

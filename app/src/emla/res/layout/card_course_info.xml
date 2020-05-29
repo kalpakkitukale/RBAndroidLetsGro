@@ -236,10 +236,10 @@
                 android:layout_height="wrap_content"
                 android:padding="@dimen/dp_5"
                 android:textSize="@dimen/sp_12"
+                android:text="@{coursesDetailViewModel.courseSyllabusModelLiveData.allocatedFacultys}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/verticalGuideLine"
                 app:layout_constraintTop_toBottomOf="@+id/txtViewLanguage" />
-            <!--android:text="@{coursesDetailViewModel.courseSyllabusModelLiveData.language}"-->
 
             <androidx.constraintlayout.widget.Group
                 android:id="@+id/courseInfoGroup"
