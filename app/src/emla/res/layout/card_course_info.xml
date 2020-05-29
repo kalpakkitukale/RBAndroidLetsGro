@@ -215,6 +215,31 @@
                 app:layout_constraintStart_toStartOf="@+id/verticalGuideLine"
                 app:layout_constraintTop_toBottomOf="@+id/LevelView" />
 
+            <TextView
+                android:id="@+id/labelAllocatedFaculty"
+                style="@style/TextViewMediumBlackOnWhite"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_10"
+                android:padding="@dimen/dp_5"
+                android:text="@string/allocated_faculty"
+                android:textSize="@dimen/sp_12"
+                app:layout_constraintBottom_toBottomOf="@+id/txtAllocatedFaculty"
+                app:layout_constraintEnd_toEndOf="@+id/verticalGuideLine"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/txtAllocatedFaculty" />
+
+            <TextView
+                android:id="@+id/txtAllocatedFaculty"
+                style="@style/TextViewLightBlackOnWhite"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/dp_5"
+                android:textSize="@dimen/sp_12"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/verticalGuideLine"
+                app:layout_constraintTop_toBottomOf="@+id/txtViewLanguage" />
+            <!--android:text="@{coursesDetailViewModel.courseSyllabusModelLiveData.language}"-->
 
             <androidx.constraintlayout.widget.Group
                 android:id="@+id/courseInfoGroup"

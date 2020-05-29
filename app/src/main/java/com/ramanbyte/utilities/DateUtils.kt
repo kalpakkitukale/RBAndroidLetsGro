@@ -26,7 +26,7 @@ object DateUtils {
     const val ANDROID_DATE_FORMAT_UTC_DATE_TIME = "MMM dd, yyyy hh:mm:ss a"
     const val DATE_TIME_PATTERN = "dd MMM, yyyy | hh:mm a"
     const val TIME_DISPLAY_PATTERN = "h:mma"
-    const val TIME_DISPLAY_PATTERN_WITH_SPACE = "h:mm a"
+    const val TIME_DISPLAY_PATTERN_WITH_SPACE = "hh:mm a"
     const val TIME_DISPLAY_PATTERN_12HRS_FORMAT = "hh:mm:aa"
     const val DATE_TIME_SECONDS_PATTERN_FOR_LOCAL_FILE = "ddyyHHssSSS"
     const val DATE_TIME_SECONDS_PATTERN_FOR_FILE = "yyyyMMddHHmmss"
@@ -311,25 +311,25 @@ object DateUtils {
         return if (neededTime[Calendar.YEAR] == nowTime[Calendar.YEAR]) {
             if (neededTime[Calendar.MONTH] == nowTime[Calendar.MONTH]) {
                 if (neededTime[Calendar.DATE] - nowTime[Calendar.DATE] == 1) {
-                    //here return like "Tomorrow at 12:00 p.m."
-                    "Tomorrow at " + android.text.format.DateFormat.format("hh:mm a", neededTime)
+                    //here return like "Tomorrow, 12:00PM"
+                    "Tomorrow, " + getTimeFormat(neededTime[Calendar.HOUR],neededTime[Calendar.MINUTE])
                 } else if (nowTime[Calendar.DATE] == neededTime[Calendar.DATE]) {
-                    //here return like "Today at 12:00 p.m."
-                    "Today at " + android.text.format.DateFormat.format(TIME_DISPLAY_PATTERN_WITH_SPACE, neededTime)
+                    //here return like "Today, at 12:00PM"
+                    "Today, " + getTimeFormat(neededTime[Calendar.HOUR],neededTime[Calendar.MINUTE])
                 } else if (nowTime[Calendar.DATE] - neededTime[Calendar.DATE] == 1) {
-                    //here return like "Yesterday at 12:00 p.m."
-                    "Yesterday at " + android.text.format.DateFormat.format(TIME_DISPLAY_PATTERN_WITH_SPACE, neededTime)
+                    //here return like "Yesterday, 12:00PM"
+                    "Yesterday, " + getTimeFormat(neededTime[Calendar.HOUR],neededTime[Calendar.MINUTE])
                 } else {
-                    //here return like "May 31, 12:00 p.m."
-                    android.text.format.DateFormat.format("MMMM d, $TIME_DISPLAY_PATTERN_WITH_SPACE", neededTime).toString()
+                    //here return like "31 May, 12:00PM"
+                    android.text.format.DateFormat.format("dd MMM, ", neededTime).toString() + getTimeFormat(neededTime[Calendar.HOUR],neededTime[Calendar.MINUTE])
                 }
             } else {
-                //here return like "May 31, 12:00 p.m."
-                android.text.format.DateFormat.format("MMMM d, $TIME_DISPLAY_PATTERN_WITH_SPACE", neededTime).toString()
+                //here return like "31 May, 12:00PM"
+                android.text.format.DateFormat.format("dd MMM, ", neededTime).toString() + getTimeFormat(neededTime[Calendar.HOUR],neededTime[Calendar.MINUTE])
             }
-        } else {
-            //here return like "May 31 2010, 12:00 p.m." - it's a different year we need to show it
-            android.text.format.DateFormat.format("MMMM dd yyyy, $TIME_DISPLAY_PATTERN_WITH_SPACE", neededTime).toString()
+        } else { // dd MMM, yyyy | hh:mm a
+            //here return like "31 May 2010, 12:00PM" - it's a different year we need to show it
+            android.text.format.DateFormat.format("$DATE_DISPLAY_PATTERN, ", neededTime).toString() + getTimeFormat(neededTime[Calendar.HOUR],neededTime[Calendar.MINUTE])
         }
     }
 

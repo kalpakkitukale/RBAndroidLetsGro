@@ -7,6 +7,6 @@ class StudentAskedQuestionsRequestModel : BaseRequestModel(){
     var userId: Int = 0
     var courseId: Int = 0
     var searchString: Int = 0
-    var isQuestionAnswered: String = KEY_N
+    var isQuestionAnswered: String = KEY_ALL
     var dateWiseSort: String = KEY_DESCENDING
 }

@@ -129,7 +129,7 @@ class StudentAskedQuestionsViewModel(var mContext: Context) : BaseViewModel(mCon
     var questionsRequestModel = StudentAskedQuestionsRequestModel()
 
     var ansTypeLiveData = MutableLiveData<String>().apply {
-        value = KEY_N
+        value = KEY_ALL
     }
 
     var sortByDateLiveData = MutableLiveData<String>().apply {
@@ -138,6 +138,9 @@ class StudentAskedQuestionsViewModel(var mContext: Context) : BaseViewModel(mCon
 
     fun onClickAnswerChip(selectedAnsType: String) {
         when (selectedAnsType) {
+            KEY_ALL -> {
+                ansTypeLiveData.value = KEY_ALL
+            }
             KEY_ANSWERED -> {
                 ansTypeLiveData.value = KEY_Y
             }
@@ -180,12 +183,12 @@ class StudentAskedQuestionsViewModel(var mContext: Context) : BaseViewModel(mCon
     }
 
     fun getFilterState(): Boolean {
-        return (questionsRequestModelLiveData.value?.isQuestionAnswered == KEY_Y || questionsRequestModelLiveData.value?.dateWiseSort == KEY_ASCENDING)
+        return (questionsRequestModelLiveData.value?.isQuestionAnswered != KEY_ALL || questionsRequestModelLiveData.value?.dateWiseSort == KEY_ASCENDING)
     }
 
     //------------- Filter Code --- End ------------------------
 
-    fun showAlertDialog(message: String = BindingUtils.string(R.string.no_internet_message)) {
+    private fun showAlertDialog(message: String = BindingUtils.string(R.string.no_internet_message)) {
 
         setAlertDialogResourceModelMutableLiveData(
             message,

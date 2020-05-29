@@ -41,7 +41,6 @@
             android:paddingBottom="@dimen/dp_10"
             android:paddingEnd="@dimen/dp_50"
             android:background="@drawable/edittext_background_gray_border"
-            android:maxLength="250"
             android:text="@={facultyQuestionAnswerViewModel.enteredReplyLiveData}"
             android:textSize="@dimen/sp_14"
             app:layout_constraintBottom_toBottomOf="parent"

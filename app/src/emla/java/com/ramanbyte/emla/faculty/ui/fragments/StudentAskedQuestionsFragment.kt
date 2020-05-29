@@ -109,7 +109,7 @@ class StudentAskedQuestionsFragment :
             questionsRequestModelLiveData.observe(this@StudentAskedQuestionsFragment,
                 Observer {
                     it?.apply {
-                        if (isQuestionAnswered == KEY_N && dateWiseSort == KEY_DESCENDING) {
+                        if (isQuestionAnswered == KEY_ALL && dateWiseSort == KEY_DESCENDING) {
                             setupBadge(false)
                         } else {
                             setupBadge(true)

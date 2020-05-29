@@ -50,8 +50,8 @@ class StudentAskedQuestionsFilterBottomSheet: BaseBottomSheetFragment<StudentAsk
                     if (it != null){
                         if (it == true){
                             //-------- Ans Type
-                            cpUnanswered.isChecked = true
-                            ansTypeLiveData.value = KEY_N
+                            cpAllAns.isChecked = true
+                            ansTypeLiveData.value = KEY_ALL
 
                             //-------- Sort Date Type
                             cpAsc.isChecked = true
@@ -67,8 +67,8 @@ class StudentAskedQuestionsFilterBottomSheet: BaseBottomSheetFragment<StudentAsk
                         it?.apply {
                             if (ansTypeLiveData.value != KEY_BLANK) {
                                 if (cgAnsType.checkedChipId == -1) {
-                                    ansTypeLiveData.value = KEY_N
-                                    cpUnanswered.isChecked = true
+                                    ansTypeLiveData.value = KEY_ALL
+                                    cpAllAns.isChecked = true
                                 }
                             }
                         }
@@ -100,6 +100,10 @@ class StudentAskedQuestionsFilterBottomSheet: BaseBottomSheetFragment<StudentAsk
 
                     //----------- Answer type filter
                     when (isQuestionAnswered) {
+                        KEY_ALL -> {
+                            cpAllAns.isChecked = true
+                            ansTypeLiveData.value = KEY_ALL
+                        }
                         KEY_Y -> {
                             cpAnswered.isChecked = true
                             ansTypeLiveData.value = KEY_Y
