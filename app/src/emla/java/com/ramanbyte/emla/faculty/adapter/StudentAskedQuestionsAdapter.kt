@@ -18,6 +18,7 @@ import com.ramanbyte.emla.faculty.view_model.FacultyCoursesViewModel
 import com.ramanbyte.emla.faculty.view_model.StudentAskedQuestionsViewModel
 import com.ramanbyte.utilities.DateUtils
 import com.ramanbyte.utilities.KEY_BLANK
+import com.ramanbyte.utilities.KEY_N
 import com.ramanbyte.utilities.KEY_NA_WITHOUT_SPACE
 
 class StudentAskedQuestionsAdapter() :
@@ -69,6 +70,12 @@ class StudentAskedQuestionsAdapter() :
                         tvMobile.text = KEY_NA_WITHOUT_SPACE
                     } else {
                         tvMobile.text = studentPhoneNo
+                    }
+
+                    if (isQuestionAnswered == KEY_N) {
+                        ivDot.visibility = View.VISIBLE
+                    } else {
+                        ivDot.visibility = View.GONE
                     }
 
                     tvDateTime.text = DateUtils.getFreeFormatDateTime(

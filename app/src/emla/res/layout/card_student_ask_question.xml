@@ -72,6 +72,7 @@
                 android:onClick="@{() -> viewModel.onClickMobile(tvMobile,studentAskedQuestionsModel.studentPhoneNo)}"
                 android:padding="@dimen/dp_2"
                 android:textSize="@dimen/sp_12"
+                android:visibility="gone"
                 app:layout_constraintStart_toStartOf="@+id/tvUserName"
                 app:layout_constraintTop_toBottomOf="@+id/tvUserName" />
 
@@ -84,6 +85,7 @@
                 android:drawableStart="@drawable/ic_mail"
                 android:drawablePadding="@dimen/dp_5"
                 android:gravity="left|center"
+                android:visibility="gone"
                 android:onClick="@{() -> viewModel.onClickEmail(tvEmail,studentAskedQuestionsModel.studentEmail)}"
                 android:padding="@dimen/dp_2"
                 android:text="@{studentAskedQuestionsModel.studentEmail}"
@@ -102,7 +104,7 @@
                 android:textSize="@dimen/sp_18"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/rivUserPic"
-                app:layout_constraintTop_toBottomOf="@+id/tvEmail" />
+                app:layout_constraintTop_toBottomOf="@+id/rivUserPic" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvDateTime"
@@ -115,7 +117,6 @@
                 android:textSize="@dimen/sp_12"
                 app:layout_constraintStart_toStartOf="@+id/tvQuestion"
                 app:layout_constraintTop_toBottomOf="@+id/tvQuestion" />
-            <!--android:text="@{studentAskedQuestionsModel.questionRaisedDateTime}"-->
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvChapterName"
