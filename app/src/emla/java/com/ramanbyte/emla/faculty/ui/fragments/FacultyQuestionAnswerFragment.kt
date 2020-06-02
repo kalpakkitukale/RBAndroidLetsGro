@@ -61,10 +61,10 @@ class FacultyQuestionAnswerFragment :
                 /*
                 * Faculty can be able to reply for the question.
                 * */
-                /*if (questionsModel?.facultyReply == KEY_Y)
+                if (questionsModel?.facultyReply == KEY_Y)
                     etAddReply.visibility = View.VISIBLE
                 else
-                    etAddReply.visibility = View.GONE*/
+                    etAddReply.visibility = View.GONE
 
                 /*
                 * call API to get conversation data

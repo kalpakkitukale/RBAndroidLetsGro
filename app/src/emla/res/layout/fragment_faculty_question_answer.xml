@@ -35,7 +35,7 @@
             android:layout_margin="@dimen/dp_10"
             android:hint="@string/add_reply"
             android:imeOptions="actionGo"
-            android:inputType="textMultiLine"
+            android:inputType="textCapSentences|textMultiLine"
             android:paddingStart="@dimen/dp_10"
             android:paddingTop="@dimen/dp_10"
             android:paddingBottom="@dimen/dp_10"
