@@ -22,7 +22,6 @@
             android:id="@+id/layoutMain"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/ic_login_background2"
             tools:context=".ui.activities.LoginActivity">
 
             <ImageView
@@ -41,7 +40,7 @@
 
             <TextView
                 android:id="@+id/lblLets"
-                style="@style/TextViewRegularBlackOnWhite"
+                style="@style/TextViewRegularLightGray"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/dp_2"
@@ -68,6 +67,16 @@
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintStart_toEndOf="@+id/lblLets"
                 app:layout_constraintTop_toTopOf="@+id/lblLets" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:alpha="0.6"
+                app:layout_constraintHeight_percent="0.35"
+                app:srcCompat="@drawable/ic_login_background"
+                app:layout_constraintTop_toBottomOf="@+id/conImageElement"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardLayoutMain"
@@ -97,6 +106,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_10"
                         android:text="@string/log_in"
+                        android:textColor="@color/colorLightGray"
                         android:textSize="@dimen/sp_22"
                         app:layout_constraintStart_toStartOf="@+id/tilUserName"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -217,7 +227,7 @@
 
             <TextView
                 android:id="@+id/ivClientLogo"
-                style="@style/TextViewBoldBlackOnWhite"
+                style="@style/TextViewRegularTeal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="@{loginViewModel::createAccount}"
