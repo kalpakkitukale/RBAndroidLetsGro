@@ -55,6 +55,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:paddingBottom="@dimen/dp_10"
                 android:background="@color/colorTransparent">
 
                 <include
@@ -69,8 +70,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_20"
-                    app:cardCornerRadius="@dimen/dp_8"
+                    app:cardCornerRadius="@dimen/dp_5"
                     app:cardElevation="2dp"
+                    app:cardUseCompatPadding="true"
                     app:contentPadding="@dimen/dp_5"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -127,8 +129,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_20"
-                    app:cardCornerRadius="@dimen/dp_8"
+                    app:cardCornerRadius="@dimen/dp_5"
                     app:cardElevation="2dp"
+                    app:cardUseCompatPadding="true"
                     app:contentPadding="@dimen/dp_5"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -182,8 +185,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_20"
-                    app:cardCornerRadius="@dimen/dp_8"
+                    app:cardCornerRadius="@dimen/dp_5"
                     app:cardElevation="2dp"
+                    app:cardUseCompatPadding="true"
                     app:contentPadding="@dimen/dp_5"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -236,13 +240,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_20"
-                    android:layout_marginBottom="@dimen/dp_10"
-                    app:cardCornerRadius="@dimen/dp_8"
+                    app:cardCornerRadius="@dimen/dp_5"
                     app:cardElevation="2dp"
+                    app:cardUseCompatPadding="true"
                     app:contentPadding="@dimen/dp_5"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/cardWhatIWillLearn">
 
                     <androidx.constraintlayout.widget.ConstraintLayout

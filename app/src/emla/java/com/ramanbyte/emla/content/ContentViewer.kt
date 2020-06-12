@@ -300,6 +300,8 @@ class ContentViewer(
                 }
             }
 
+            AppLog.debugLog("Media URL -------- $mediaUrl")
+
             this.mimeType = mimeType ?: ""
         }
 

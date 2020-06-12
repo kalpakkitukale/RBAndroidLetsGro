@@ -95,7 +95,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvQuestion"
-                style="@style/TextViewBoldBlackOnWhite"
+                style="@style/TextViewMediumBlackOnWhite"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_5"
