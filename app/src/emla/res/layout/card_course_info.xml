@@ -247,7 +247,7 @@
                 android:id="@+id/courseInfoGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:constraint_referenced_ids="labelLanguage,txtViewLength,txtViewLanguage,labelLevel,labelSpecialization,labelLength,txtViewEfforts,txtViewSpecialization,labelEfforts,txtViewLevel" />
+                app:constraint_referenced_ids="labelAllocatedFaculty,txtAllocatedFaculty,labelLanguage,txtViewLength,txtViewLanguage,labelLevel,labelSpecialization,labelLength,txtViewEfforts,txtViewSpecialization,labelEfforts,txtViewLevel" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
