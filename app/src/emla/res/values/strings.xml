@@ -234,7 +234,7 @@ Content
     <string name="reply_unavailable">Reply are not available yet!</string>
     <string name="getting_questions_list">Getting questions list…</string>
     <string name="getting_my_favourite_video_list">Getting my favourite video list…</string>
-    <string name="getting_reply_list">Getting reply list…</string>
+    <string name="getting_reply_list">Please wait for a moment, we are bringing data for you…!</string>
     <string name="conversation_close_message">Are you sure, you want to close the recent conversation and ask new question?</string>
     <string name="invalid_mobile">Not a valid Mobile Number...!</string>
     <string name="invalid_email">Not a valid EmailID...!</string>
