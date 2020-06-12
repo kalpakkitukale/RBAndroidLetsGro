@@ -8,8 +8,8 @@
     <color name="colorWhite">#ffffff</color>
     <color name="colorTransparent">#E6ffffff</color>
     <color name="transparent">#00000000</color>
-    <color name="colorTeal">#50bdc1</color>
-    <color name="colorTealTransparent">#9950bdc1</color>
+    <color name="colorTeal">#82b9fb</color><!--82b9fb-->
+    <color name="colorTealTransparent">#9982b9fb</color>
     <color name="textHintColor">#9391a4</color>
     <color name="textColorGrayOnWhiteBackground">#6a6879</color>
     <color name="textColorBackOnWhiteBackground">#605575</color>
