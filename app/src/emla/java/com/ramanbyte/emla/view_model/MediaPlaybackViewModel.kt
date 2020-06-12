@@ -72,6 +72,15 @@ class MediaPlaybackViewModel(mContext: Context) : BaseViewModel(mContext) {
         getQuestionAndAnswer()
     }
 
+    init {
+        toggleLayoutVisibility(
+            View.GONE,
+            View.GONE,
+            View.GONE,
+            KEY_BLANK
+        )
+    }
+
 
     fun insertSectionContentLog(
         mediaId: Int,

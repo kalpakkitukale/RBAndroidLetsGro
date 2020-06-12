@@ -11,6 +11,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:id="@+id/mainConstraintLayout"
         tools:context=".StudentAskedQuestionsFragment">
 
         <androidx.recyclerview.widget.RecyclerView
@@ -26,15 +27,18 @@
 
         <include
             android:id="@+id/noInternet"
-            layout="@layout/no_internet"/>
+            layout="@layout/no_internet"
+            android:visibility="gone"/>
 
         <include
             android:id="@+id/somethingWentWrong"
-            layout="@layout/something_went_wrong" />
+            layout="@layout/something_went_wrong"
+            android:visibility="gone"/>
 
         <include
             android:id="@+id/noData"
             layout="@layout/no_data"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

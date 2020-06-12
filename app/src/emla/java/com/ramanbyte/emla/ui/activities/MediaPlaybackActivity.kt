@@ -317,6 +317,7 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
                                 etAddReply.visibility = View.VISIBLE
                                 ivAddReply.visibility = View.VISIBLE
                             }
+                            //rvReply.visibility = View.GONE
                         }
 
                         /*
@@ -543,6 +544,7 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
                             (layoutManager as LinearLayoutManager).isSmoothScrollbarEnabled = true
                             (layoutManager as LinearLayoutManager).scrollToPosition(itemCount - 1)
                             adapter = this
+                            //visibility = View.VISIBLE
                         }
                     }
                 }

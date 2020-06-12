@@ -272,4 +272,7 @@ Content
     <string name="self">Self</string>
     <string name="select_date_as">Select Date as</string>
     <string name="select_answer_as">Select Answer as</string>
+    <string name="tomorrow">Tomorrow</string>
+
+    <string name="yesterday">Yesterday</string>
 </resources>
