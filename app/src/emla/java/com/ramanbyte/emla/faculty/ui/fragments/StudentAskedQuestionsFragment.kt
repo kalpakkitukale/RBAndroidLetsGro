@@ -89,6 +89,7 @@ class StudentAskedQuestionsFragment :
             rvAskQuestion.apply {
                 studentAskedQuestionsAdapter = StudentAskedQuestionsAdapter()
                 layoutManager = LinearLayoutManager(mContext, RecyclerView.VERTICAL, false)
+
                 adapter = studentAskedQuestionsAdapter?.apply {
                     this.context = mContext
                     this.studentAskedQuestionsViewModel = viewModel
@@ -99,6 +100,7 @@ class StudentAskedQuestionsFragment :
 
     private fun setViewModelOp() {
         viewModel.apply {
+
             courseId.value = courseModel?.courseId
 
             /*
@@ -122,7 +124,8 @@ class StudentAskedQuestionsFragment :
             * */
             initPaginationResponseHandler()
             coursesPagedList()?.observe(this@StudentAskedQuestionsFragment, androidx.lifecycle.Observer {
-                it?.let { studentAskedQuestionsAdapter?.apply { submitList(it) } }
+                it?.let {
+                    studentAskedQuestionsAdapter?.apply { submitList(it) } }
             })
         }
     }

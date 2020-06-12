@@ -50,7 +50,17 @@ class StudentAskedQuestionsViewModel(var mContext: Context) : BaseViewModel(mCon
         questionRepository.tryAgain()
     }
 
+    init {
+        toggleLayoutVisibility(
+            View.GONE,
+            View.GONE,
+            View.GONE,
+            KEY_BLANK
+        )
+    }
+
     fun initPaginationResponseHandler() {
+
         questionRepository.courseId = courseId.value!!
 
         if (getFilterState()) {
