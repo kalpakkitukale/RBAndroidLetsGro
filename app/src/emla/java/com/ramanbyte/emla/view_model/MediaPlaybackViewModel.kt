@@ -77,7 +77,8 @@ class MediaPlaybackViewModel(mContext: Context) : BaseViewModel(mContext) {
             View.GONE,
             View.GONE,
             View.GONE,
-            KEY_BLANK
+            KEY_BLANK,
+            View.GONE
         )
     }
 
@@ -141,7 +142,13 @@ class MediaPlaybackViewModel(mContext: Context) : BaseViewModel(mContext) {
         CoroutineUtils.main {
             try {
                 coroutineToggleLoader(BindingUtils.string(R.string.getting_questions_list))
-
+                toggleLayoutVisibility(
+                    View.GONE,
+                    View.GONE,
+                    View.GONE,
+                    KEY_BLANK,
+                    View.GONE
+                )
                 val response = questionRepository.getQuestionAndAnswer(mediaInfoModel?.mediaId!!, mediaInfoModel?.courseId!!)
                 questionAndAnswerListLiveData.postValue(response)
 
@@ -327,6 +334,14 @@ class MediaPlaybackViewModel(mContext: Context) : BaseViewModel(mContext) {
         CoroutineUtils.main {
             try {
                 coroutineToggleLoader(BindingUtils.string(R.string.getting_reply_list))
+
+                toggleLayoutVisibility(
+                    View.GONE,
+                    View.GONE,
+                    View.GONE,
+                    KEY_BLANK,
+                    View.GONE
+                )
 
                 val response = questionRepository.getConversationData(questionId)
                 questionsReplyListLiveData.postValue(response)
