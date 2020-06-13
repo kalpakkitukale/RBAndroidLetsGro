@@ -30,7 +30,7 @@ private const val SECTION = "Section/"
 private const val QUESTION = "Question/"
 private const val MASTER = "Master/"
 
-var CLIENT_BASE = "prod"
+var CLIENT_BASE = "test"
 
 val repositoryDependencies = Kodein.Module("", true) {
 
