@@ -206,6 +206,7 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
                                 adapter = this
                             }
                         }
+                        questionAndAnswerListLiveData.value = null
                     }
                 })
 
@@ -214,6 +215,7 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
                         if (it == KEY_N) {
                             if (isNewQuestionAsked){
                                 getQuestionAndAnswer()
+                                isLoaderShowingLiveData.postValue(false)
                                 exoCommentLayoutBinding?.apply {
                                     questionLayout.visibility = View.VISIBLE
                                     replyLayout.replyContainerLayout.visibility = View.GONE
@@ -224,6 +226,7 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
                                     insertAskQuestion(enteredQuestionLiveData.value!!)
                                 }
                             }
+                            conversationCloseLiveData.value = null
                         }
                     }
                 })
@@ -275,7 +278,7 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
                         } else {
                             AppLog.infoLog("Blank Question not added. ")
                         }
-                        onClickSendQuestionLiveData.value = false
+                        onClickSendQuestionLiveData.value = null
                     }
                 }
             })
@@ -317,7 +320,6 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
                                 etAddReply.visibility = View.VISIBLE
                                 ivAddReply.visibility = View.VISIBLE
                             }
-                            //rvReply.visibility = View.GONE
                         }
 
                         /*
@@ -544,9 +546,9 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
                             (layoutManager as LinearLayoutManager).isSmoothScrollbarEnabled = true
                             (layoutManager as LinearLayoutManager).scrollToPosition(itemCount - 1)
                             adapter = this
-                            //visibility = View.VISIBLE
                         }
                     }
+                    questionsReplyListLiveData.value = null
                 }
 
             })
