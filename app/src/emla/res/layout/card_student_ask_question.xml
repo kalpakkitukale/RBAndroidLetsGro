@@ -126,7 +126,7 @@
                 android:layout_marginTop="@dimen/dp_5"
                 android:layout_marginEnd="@dimen/dp_5"
                 android:gravity="start"
-                android:text='@{studentAskedQuestionsModel.chapterName +"  ->  "+ studentAskedQuestionsModel.sectionName +"  ->  "+ @string/video_title +" : "+  studentAskedQuestionsModel.contentTitle}'
+                android:text='@{studentAskedQuestionsModel.chapterName +"  ->  "+ studentAskedQuestionsModel.sectionName +"  ->  "+  studentAskedQuestionsModel.contentTitle}'
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/sp_14"
                 app:layout_constraintEnd_toEndOf="parent"
