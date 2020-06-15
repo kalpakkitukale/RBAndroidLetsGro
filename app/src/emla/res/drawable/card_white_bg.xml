@@ -1,8 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?><!--<shape xmlns:android="http://schemas.android.com/apk/res/android"
+android:shape="rectangle">
+
+<solid android:color="@color/cardBackgroundColor" />
+<stroke android:width="0dp" android:color="@color/colorLightGray"/>
+
+
+<corners android:radius="@dimen/dp_10" />
+
+
+</shape>-->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+
+            <gradient
+                android:angle="180" android:startColor="#0870cacd"
+                android:centerColor="#9970cacd"
+                android:endColor="#0870cacd"
+                />
+
+            <corners android:radius="5dp" />
+        </shape>
+    </item>
+
+    <item
+        android:bottom="5dp"
+        android:left="2dp"
+        android:right="2dp"
+        android:top="2dp">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/cardBackgroundColor" />
+            <corners android:radius="5dp" />
+        </shape>
+    </item>
+</layer-list>
+
+
+<!--
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
         <shape android:shape="rectangle">
-            <solid android:color="@color/colorCardBackground" />  <!--#10000000-->
+            <solid android:color="@color/colorCardBackground" />  &lt;!&ndash;#10000000&ndash;&gt;
             <corners android:radius="10dp" />
         </shape>
     </item>
@@ -17,4 +56,6 @@
             <corners android:radius="10dp" />
         </shape>
     </item>
-</layer-list>
+</layer-list>-->
+
+

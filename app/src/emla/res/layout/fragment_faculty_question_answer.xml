@@ -16,25 +16,31 @@
         android:fitsSystemWindows="true">
         <!--android:fitsSystemWindows="true"-->
 
-        <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
+        <androidx.constraintlayout.widget.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:context=".FacultyQuestionAnswerFragment">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvCoursesFragment"
+                android:id="@+id/rvQnA"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_marginBottom="@dimen/dp_10"
                 android:padding="@dimen/dp_5"
-                app:layout_constraintBottom_toTopOf="@+id/etAddReply"
+                app:layout_constraintBottom_toTopOf="@+id/bottomView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:listitem="@layout/card_recently_ask_questions_reply" />
-            <!-- app:stackFromEnd="false"
-            android:visibility="@{facultyCoursesViewModel.viewVisibilityLiveData}"-->
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/bottomView"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="@dimen/dp_10"
+                android:background="@color/colorDividerGrayOnWhiteBackground"
+                app:layout_constraintBottom_toTopOf="@+id/etAddReply"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/etAddReply"
@@ -89,7 +95,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

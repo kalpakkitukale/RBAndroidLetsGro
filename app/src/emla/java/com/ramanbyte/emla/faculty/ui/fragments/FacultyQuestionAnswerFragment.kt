@@ -132,7 +132,7 @@ class FacultyQuestionAnswerFragment :
 
     private fun setAdapter(questionReplyList: ArrayList<AskQuestionReplyModel>) {
         layoutBinding.apply {
-            rvCoursesFragment?.apply {
+            rvQnA.apply {
                 questionAnswerAdapter = FacultyQuestionAnswerAdapter()
                 questionAnswerAdapter?.apply {
                     layoutManager =
