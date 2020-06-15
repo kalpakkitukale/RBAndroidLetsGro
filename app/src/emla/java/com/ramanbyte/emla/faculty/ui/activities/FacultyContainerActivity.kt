@@ -2,6 +2,7 @@ package com.ramanbyte.emla.faculty.ui.activities
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.PorterDuff
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -16,9 +17,7 @@ import com.ramanbyte.base.BaseActivity
 import com.ramanbyte.databinding.ActivityFacultyContainerBinding
 import com.ramanbyte.emla.base.di.authModuleDependency
 import com.ramanbyte.emla.faculty.view_model.FacultyContainerViewModel
-import com.ramanbyte.utilities.AlertDialog
-import com.ramanbyte.utilities.AppLog
-import com.ramanbyte.utilities.KEY_Y
+import com.ramanbyte.utilities.*
 import com.ramanbyte.utilities.StaticMethodUtilitiesKtx.changeStatusBarColor
 
 class FacultyContainerActivity : BaseActivity<ActivityFacultyContainerBinding,FacultyContainerViewModel>(
@@ -37,10 +36,14 @@ class FacultyContainerActivity : BaseActivity<ActivityFacultyContainerBinding,Fa
 
         AlertDialog(this, viewModel)
 
-        changeStatusBarColor(window, R.color.colorPrimaryDark)
+        makeStatusBarTransparent()
+        //changeStatusBarColor(window, R.color.colorTransparent)
         layoutBinding.apply {
             lifecycleOwner = this@FacultyContainerActivity
             facultyContainerViewModel = viewModel
+
+            //mainToolbar.navigationIcon?.setColorFilter(resources.getColor(R.color.blue_gray_15), PorterDuff.Mode.SRC_ATOP);
+            mainToolbar.navigationIcon?.setColorFilter(BindingUtils.color(R.color.colorIcon), PorterDuff.Mode.SRC_ATOP)
 
             navController = findNavController(R.id.facultyContainerNavHost)
             appBarConfiguration = AppBarConfiguration.Builder(

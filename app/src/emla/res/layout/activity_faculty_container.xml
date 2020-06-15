@@ -21,8 +21,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:animateLayoutChanges="true"
-            android:theme="@style/AppTheme.AppBarOverlay"
+            android:theme="@style/AppTheme.AppBarOverlayFaculty"
             app:elevation="@dimen/dp_0"
+            android:layout_marginTop="@dimen/dp_15"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -31,11 +32,21 @@
                 android:id="@+id/main_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="@color/colorPrimary"
                 app:title="@{facultyContainerViewModel.toolbarTitleLiveData}"
+                app:titleTextColor="@color/textColorBlueOnWhiteBackground"
+                android:background="@color/colorWhite"
                 app:popupTheme="@style/AppTheme.PopupOverlay" />
 
         </com.google.android.material.appbar.AppBarLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.7dp"
+            android:background="@color/colorCardBackground"
+            android:id="@+id/toolbarView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/main_appbar"/>
 
         <fragment
             android:id="@+id/facultyContainerNavHost"
@@ -43,12 +54,21 @@
             android:layout_width="match_parent"
             android:layout_height="0dip"
             app:defaultNavHost="true"
-            app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+            app:layout_constraintBottom_toTopOf="@+id/toolbarBottomView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/main_appbar"
+            app:layout_constraintTop_toBottomOf="@id/toolbarView"
             app:navGraph="@navigation/faculty_container_nav_graph"
             tools:ignore="FragmentTagUsage" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.7dp"
+            android:background="@color/colorCardBackground"
+            android:id="@+id/toolbarBottomView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"/>
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomNavigationView"
@@ -58,6 +78,9 @@
             android:layout_gravity="bottom"
             app:itemIconSize="@dimen/dp_20"
             app:labelVisibilityMode="labeled"
+            android:background="@color/colorWhite"
+            app:itemIconTint="@color/menu_text_color_selector"
+            app:itemTextColor="@color/menu_text_color_selector"
             app:layout_constraintBottom_toBottomOf="parent"
             app:menu="@menu/menu_faculty_container_nav" />
 

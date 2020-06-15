@@ -13,7 +13,7 @@
             type="com.ramanbyte.emla.faculty.models.StudentAskedQuestionsModel" />
     </data>
 
-    <androidx.cardview.widget.CardView
+    <!--<androidx.cardview.widget.CardView
         android:id="@+id/cardLayoutMain"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -22,11 +22,18 @@
         app:cardCornerRadius="@dimen/dp_5"
         app:cardElevation="2dp"
         app:cardUseCompatPadding="true"
-        app:contentPadding="@dimen/dp_5">
+        app:contentPadding="@dimen/dp_5">-->
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_5"
+            android:layout_marginEnd="@dimen/dp_5"
+            android:layout_marginBottom="@dimen/dp_5"
+            android:id="@+id/mainConstraintLayout"
+            android:background="@drawable/card_white_bg"
+            android:padding="@dimen/dp_5"
+            android:onClick="@{() -> viewModel.onClickCard(mainConstraintLayout,studentAskedQuestionsModel)}">
 
             <com.ramanbyte.views.RoundedImageView
                 android:id="@+id/rivUserPic"
@@ -48,12 +55,11 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvUserName"
-                style="@style/TextViewMediumLightGray"
+                style="@style/TextViewMediumLightBlue"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_5"
                 android:ellipsize="end"
-                android:padding="@dimen/dp_3"
                 android:singleLine="true"
                 android:text="@{studentAskedQuestionsModel.studentName}"
                 android:textSize="@dimen/sp_14"
@@ -95,20 +101,18 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvQuestion"
-                style="@style/TextViewMediumBlackOnWhite"
+                style="@style/TextViewRegularLightBlueOnWhite"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dp_5"
-                android:layout_marginTop="@dimen/dp_10"
                 android:gravity="start"
-                android:textSize="@dimen/sp_18"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/rivUserPic"
-                app:layout_constraintTop_toBottomOf="@+id/rivUserPic" />
+                android:textSize="@dimen/sp_14"
+                app:layout_constraintEnd_toEndOf="@id/ivDot"
+                app:layout_constraintStart_toStartOf="@+id/tvUserName"
+                app:layout_constraintTop_toBottomOf="@+id/tvUserName" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvDateTime"
-                style="@style/TextViewLightItalic"
+                style="@style/TextViewBackOnWhiteBackgroundItalic"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_3"
@@ -125,14 +129,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_5"
                 android:layout_marginEnd="@dimen/dp_5"
+                android:layout_marginStart="@dimen/dp_5"
                 android:gravity="start"
-                android:text='@{studentAskedQuestionsModel.chapterName +"  ->  "+ studentAskedQuestionsModel.sectionName +"  ->  "+  studentAskedQuestionsModel.contentTitle}'
-                android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/sp_14"
+                android:text='@{studentAskedQuestionsModel.chapterName +"  |  "+ studentAskedQuestionsModel.sectionName +"  |  "+  studentAskedQuestionsModel.contentTitle}'
+                android:textSize="@dimen/sp_12"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/tvDateTime"
+                app:layout_constraintStart_toStartOf="@id/rivUserPic"
                 app:layout_constraintTop_toBottomOf="@+id/tvDateTime" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
+    <!--</androidx.cardview.widget.CardView>-->
 </layout>

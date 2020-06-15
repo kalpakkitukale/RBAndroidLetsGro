@@ -50,7 +50,7 @@
 
             <TextView
                 android:id="@+id/lblSortByDate"
-                style="@style/TextViewBoldBlackOnWhite"
+                style="@style/TextViewMediumBlackOnWhite"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_10"
@@ -96,7 +96,7 @@
 
             <TextView
                 android:id="@+id/lblAnsAndUnAns"
-                style="@style/TextViewBoldBlackOnWhite"
+                style="@style/TextViewMediumBlackOnWhite"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_10"
@@ -162,7 +162,7 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnApplyFilter"
-                style="@style/CustomCapsuleButtonGradientBgWhiteText"
+                style="@style/CustomCapsuleButtonBlueBgWhiteText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_15"
@@ -180,7 +180,7 @@
                 android:layout_marginEnd="@dimen/dp_15"
                 android:onClick="@{studentAskedQuestionsViewModel::onClickClearFilter}"
                 android:padding="@dimen/dp_5"
-                android:src="@drawable/ic_delete_button"
+                android:src="@drawable/ic_delete_button_blue"
                 app:layout_constraintBottom_toBottomOf="@id/btnApplyFilter"
                 app:layout_constraintEnd_toStartOf="@+id/btnApplyFilter"
                 app:layout_constraintTop_toTopOf="@id/btnApplyFilter" />
