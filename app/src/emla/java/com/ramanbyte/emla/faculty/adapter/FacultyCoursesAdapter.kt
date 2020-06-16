@@ -57,14 +57,14 @@ class FacultyCoursesAdapter(var mContext: Context?) :
 
                 ivCoursePic.clipToOutline = true
 
-                /*Glide.with(context!!)
+                Glide.with(context!!)
                     .load(coursesModel.courseImageUrl)
                     .placeholder(R.drawable.ic_course_dummy)
                     .error(R.drawable.ic_course_dummy)
                     .diskCacheStrategy(DiskCacheStrategy.NONE)
                     .skipMemoryCache(true)
                     .centerCrop()
-                    .into(ivCoursePic)*/
+                    .into(ivCoursePic)
 
             }
         }

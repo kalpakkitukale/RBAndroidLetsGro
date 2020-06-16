@@ -16,6 +16,6 @@
         android:icon="@drawable/ic_filter_teal"
         android:title="@string/filter"
         app:actionLayout="@layout/custom_action_badge_layout"
-        app:showAsAction="always"></item>
+        app:showAsAction="ifRoom"/>
 
 </menu>
