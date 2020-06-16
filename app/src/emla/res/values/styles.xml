@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
@@ -14,6 +14,15 @@
         <!--<item name="android:textViewStyle">@style/AppTheme.Font</item>-->
     </style>
 
+    <!-- Base application theme. -->
+    <style name="AppThemeFaculty" parent="AppTheme">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorIcon</item>
+       <!-- <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="android:textAppearance">@style/AppTheme.Font</item>-->
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+    </style>
+
 
     <!--toolbar style -->
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" >
@@ -26,6 +35,8 @@
     <style name="AppTheme.AppBarOverlayFaculty" parent="ThemeOverlay.AppCompat.Light" >
         <item name="android:textAppearance">@style/AppTheme.Font</item>
         <item name="android:textViewStyle">@style/AppTheme.Font</item>
+        <item name="android:textColorSecondary">@color/colorIcon</item>
+        <item name="android:tint">@color/colorIcon</item>
         <item name="button_style">@style/AppTheme.Font</item>
     </style>
 

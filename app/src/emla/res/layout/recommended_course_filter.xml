@@ -143,9 +143,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_15"
+                android:layout_marginBottom="@dimen/dp_15"
                 android:text="@string/apply"
                 android:textSize="@dimen/sp_14"
                 android:onClick="@{courseViewModel::onApplyFilterClick}"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/viewFilterAboveDeleteButton"
                 app:layout_constraintWidth_percent="0.19" />

@@ -20,7 +20,10 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".emla.faculty.ui.activities.FacultyContainerActivity"/>
+        <activity android:name=".emla.faculty.ui.activities.FacultyContainerActivity"
+            android:theme="@style/AppThemeFaculty"
+            android:windowSoftInputMode="adjustResize|stateHidden"/>
+
         <activity android:name=".emla.ui.activities.LauncherActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
