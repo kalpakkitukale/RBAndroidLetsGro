@@ -24,7 +24,6 @@
         app:cardCornerRadius="@dimen/dp_8"
         app:cardElevation="2dp">
 
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/mainConstraintLayout"
             android:layout_width="match_parent"
@@ -45,12 +44,12 @@
                 android:layout_marginTop="@dimen/dp_10"
                 android:layout_marginBottom="@dimen/dp_10"
                 android:background="@drawable/rounded_background"
-                android:scaleType="fitXY"
-                app:imageUrl="@{coursesModel.courseImageUrl}"
+                android:scaleType="centerCrop"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-            <!--android:background="@drawable/ic_course_dummy"-->
+            <!--android:background="@drawable/ic_course_dummy"
+            app:imageUrl="@{coursesModel.courseImageUrl}"-->
 
             <TextView
                 android:id="@+id/tvQuestionCount"

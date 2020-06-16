@@ -3,6 +3,7 @@ package com.ramanbyte.emla.faculty.ui.fragments
 import android.content.Context
 import android.view.MenuItem
 import android.view.View
+import android.view.WindowManager
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -16,11 +17,6 @@ import com.ramanbyte.emla.faculty.models.StudentAskedQuestionsModel
 import com.ramanbyte.emla.faculty.view_model.FacultyQuestionAnswerViewModel
 import com.ramanbyte.emla.models.AskQuestionReplyModel
 import com.ramanbyte.utilities.*
-import com.ramanbyte.utilities.DateUtils.DATE_TIME_PATTERN
-import com.ramanbyte.utilities.DateUtils.DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS
-import com.ramanbyte.utilities.DateUtils.getDisplayDateFromDate
-import java.util.regex.Matcher
-import java.util.regex.Pattern
 
 /**
  * A simple [Fragment] subclass.
@@ -39,6 +35,9 @@ class FacultyQuestionAnswerFragment :
 
     override fun initiate() {
         setToolbarTitle(BindingUtils.string(R.string.questions_and_answer))
+
+        //activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
+        //activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN or WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
 
         ProgressLoader(mContext!!, viewModel)
         AlertDialog(mContext!!, viewModel)

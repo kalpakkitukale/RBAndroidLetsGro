@@ -9,17 +9,16 @@
             type="com.ramanbyte.emla.faculty.view_model.FacultyQuestionAnswerViewModel" />
     </data>
 
-    <androidx.core.widget.NestedScrollView
+    <!--<androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true"
-        android:fitsSystemWindows="true">
+        android:fillViewport="true">-->
         <!--android:fitsSystemWindows="true"-->
 
         <androidx.constraintlayout.widget.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".FacultyQuestionAnswerFragment">
+            android:fitsSystemWindows="true">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvQnA"
@@ -97,5 +96,5 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.core.widget.NestedScrollView>
+    <!--</androidx.core.widget.NestedScrollView>-->
 </layout>
