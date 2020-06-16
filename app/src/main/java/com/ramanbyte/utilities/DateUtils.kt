@@ -1,5 +1,6 @@
 package com.ramanbyte.utilities
 
+import com.ramanbyte.R
 import com.ramanbyte.utilities.AppLog.errorLog
 import org.joda.time.DateTime
 import org.joda.time.Minutes
@@ -304,6 +305,28 @@ object DateUtils {
         return null
     }
 
+    /**
+     * @author Niraj Naware
+     * @since 11 June 2020
+     * get display date from Calendar
+     */
+    @JvmStatic
+    fun getDisplayDateFromCalender(calendar: Calendar, outputFormat: String): String? {
+        try {
+            val simpleDateFormat = SimpleDateFormat(outputFormat, Locale.US)
+            return simpleDateFormat.format(calendar.timeInMillis)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            AppLog.errorLog(e.message, e)
+        }
+        return null
+    }
+
+    /**
+     * @author Niraj Naware
+     * @since 01 June 2020
+     * display date time as in chat
+     */
     fun getFreeFormatDateTime(neededTimeMilis: Long, neededTime: Calendar): String? {
         val nowTime = Calendar.getInstance()
         //val neededTime = Calendar.getInstance()
@@ -312,24 +335,24 @@ object DateUtils {
             if (neededTime[Calendar.MONTH] == nowTime[Calendar.MONTH]) {
                 if (neededTime[Calendar.DATE] - nowTime[Calendar.DATE] == 1) {
                     //here return like "Tomorrow, 12:00PM"
-                    "Tomorrow, " + getTimeFormat(neededTime[Calendar.HOUR],neededTime[Calendar.MINUTE])
+                    "${BindingUtils.string(R.string.tomorrow)}, " + getTimeFormat(neededTime[Calendar.HOUR],neededTime[Calendar.MINUTE])
                 } else if (nowTime[Calendar.DATE] == neededTime[Calendar.DATE]) {
                     //here return like "Today, at 12:00PM"
-                    "Today, " + getTimeFormat(neededTime[Calendar.HOUR],neededTime[Calendar.MINUTE])
+                    "${BindingUtils.string(R.string.today)}, " + getDisplayDateFromCalender(neededTime,TIME_DISPLAY_PATTERN)
                 } else if (nowTime[Calendar.DATE] - neededTime[Calendar.DATE] == 1) {
                     //here return like "Yesterday, 12:00PM"
-                    "Yesterday, " + getTimeFormat(neededTime[Calendar.HOUR],neededTime[Calendar.MINUTE])
+                    "${BindingUtils.string(R.string.yesterday)}, " + getDisplayDateFromCalender(neededTime,TIME_DISPLAY_PATTERN)
                 } else {
                     //here return like "31 May, 12:00PM"
-                    android.text.format.DateFormat.format("dd MMM, ", neededTime).toString() + getTimeFormat(neededTime[Calendar.HOUR],neededTime[Calendar.MINUTE])
+                    getDisplayDateFromCalender(neededTime,"dd MMM, ") + getDisplayDateFromCalender(neededTime,TIME_DISPLAY_PATTERN)
                 }
             } else {
                 //here return like "31 May, 12:00PM"
-                android.text.format.DateFormat.format("dd MMM, ", neededTime).toString() + getTimeFormat(neededTime[Calendar.HOUR],neededTime[Calendar.MINUTE])
+                getDisplayDateFromCalender(neededTime,"dd MMM, ") + getDisplayDateFromCalender(neededTime,TIME_DISPLAY_PATTERN)
             }
         } else { // dd MMM, yyyy | hh:mm a
             //here return like "31 May 2010, 12:00PM" - it's a different year we need to show it
-            android.text.format.DateFormat.format("$DATE_DISPLAY_PATTERN, ", neededTime).toString() + getTimeFormat(neededTime[Calendar.HOUR],neededTime[Calendar.MINUTE])
+            getDisplayDateFromCalender(neededTime,"$DATE_DISPLAY_PATTERN, ") + getDisplayDateFromCalender(neededTime,TIME_DISPLAY_PATTERN)
         }
     }
 

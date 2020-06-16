@@ -128,6 +128,12 @@ abstract class BaseViewModel(
 
             PaginationResponseHandler.INIT_LOADING -> {
                 isLoaderShowingLiveData.postValue(true)
+                toggleLayoutVisibility(
+                    View.GONE,
+                    View.GONE,
+                    View.GONE,
+                    KEY_BLANK
+                )
             }
             PaginationResponseHandler.INIT_LOADED -> {
                 isLoaderShowingLiveData.postValue(false)

@@ -11,6 +11,7 @@ import com.ramanbyte.emla.faculty.data_layer.repositories.FacultyQuestionReposit
 import org.kodein.di.Kodein
 import org.kodein.di.generic.bind
 import org.kodein.di.generic.instance
+import org.kodein.di.generic.provider
 import org.kodein.di.generic.singleton
 
 /**
@@ -58,7 +59,7 @@ val repositoryDependencies = Kodein.Module("", true) {
     bind<FacultyCoursesRepository>() with singleton {
         FacultyCoursesRepository(instance())
     }
-    bind<FacultyQuestionRepository>() with singleton {
+    bind<FacultyQuestionRepository>() with provider {
         FacultyQuestionRepository(instance())
     }
 

@@ -39,7 +39,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvTextAddReviewCardAddReply"
-            style="@style/TextViewBoldBlackOnWhite"
+            style="@style/TextViewMediumBlackOnWhite"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Android is a mobile operating system based on a modified version of the Linux kernel and other open source software"

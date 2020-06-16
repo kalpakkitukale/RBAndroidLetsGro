@@ -38,7 +38,7 @@ class MediaPlaybackViewModel(mContext: Context) : BaseViewModel(mContext) {
     }
 
     var onClickSendQuestionLiveData = MutableLiveData<Boolean>().apply {
-        value = false
+        value = null
     }
 
     var onClickReplyLiveData = MutableLiveData<AskQuestionModel>().apply {
@@ -70,6 +70,16 @@ class MediaPlaybackViewModel(mContext: Context) : BaseViewModel(mContext) {
 
     override var noInternetTryAgain: () -> Unit = {
         getQuestionAndAnswer()
+    }
+
+    init {
+        toggleLayoutVisibility(
+            View.GONE,
+            View.GONE,
+            View.GONE,
+            KEY_BLANK,
+            View.GONE
+        )
     }
 
 
@@ -107,8 +117,8 @@ class MediaPlaybackViewModel(mContext: Context) : BaseViewModel(mContext) {
             try {
                 isLoaderShowingLiveData.postValue(true)
                 questionRepository.insertAskQuestion(mediaInfoModel!!, question)
-                getQuestionAndAnswer()
                 isLoaderShowingLiveData.postValue(false)
+                getQuestionAndAnswer()
             } catch (e: ApiException) {
                 e.printStackTrace()
                 AppLog.errorLog(e.message, e)
@@ -132,7 +142,13 @@ class MediaPlaybackViewModel(mContext: Context) : BaseViewModel(mContext) {
         CoroutineUtils.main {
             try {
                 coroutineToggleLoader(BindingUtils.string(R.string.getting_questions_list))
-
+                toggleLayoutVisibility(
+                    View.GONE,
+                    View.GONE,
+                    View.GONE,
+                    KEY_BLANK,
+                    View.GONE
+                )
                 val response = questionRepository.getQuestionAndAnswer(mediaInfoModel?.mediaId!!, mediaInfoModel?.courseId!!)
                 questionAndAnswerListLiveData.postValue(response)
 
@@ -190,7 +206,6 @@ class MediaPlaybackViewModel(mContext: Context) : BaseViewModel(mContext) {
     var isNewQuestionAsked : Boolean = false
 
     fun onClickAskNewQuestion(view: View, questionId: Int) {
-        //onClickAskNQuestionLiveData.value = true
         setAlertDialogResourceModelMutableLiveData(
             BindingUtils.string(R.string.conversation_close_message),
             BindingUtils.drawable(R.drawable.ic_submit_confirmation)!!,
@@ -200,7 +215,6 @@ class MediaPlaybackViewModel(mContext: Context) : BaseViewModel(mContext) {
                 AppLog.infoLog("questionId=== $questionId")
                 isNewQuestionAsked = true
                 updateConversationCloseStatus(questionId)
-                //findNavController().navigateUp()
             },
             BindingUtils.string(R.string.no), {
                 isAlertDialogShown.postValue(false)
@@ -212,6 +226,7 @@ class MediaPlaybackViewModel(mContext: Context) : BaseViewModel(mContext) {
     fun updateConversationCloseStatus(questionId: Int) {
         CoroutineUtils.main {
             try {
+                coroutineToggleLoader(BindingUtils.string(R.string.conversation_close_loader_message))
                 isLoaderShowingLiveData.postValue(true)
                 val response = questionRepository.updateConversationCloseStatus(questionId)
                 conversationCloseLiveData.postValue(response)
@@ -318,6 +333,14 @@ class MediaPlaybackViewModel(mContext: Context) : BaseViewModel(mContext) {
         CoroutineUtils.main {
             try {
                 coroutineToggleLoader(BindingUtils.string(R.string.getting_reply_list))
+
+                toggleLayoutVisibility(
+                    View.GONE,
+                    View.GONE,
+                    View.GONE,
+                    KEY_BLANK,
+                    View.GONE
+                )
 
                 val response = questionRepository.getConversationData(questionId)
                 questionsReplyListLiveData.postValue(response)

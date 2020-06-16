@@ -21,6 +21,16 @@
         <item name="android:textViewStyle">@style/AppTheme.Font</item>
         <item name="button_style">@style/AppTheme.Font</item>
     </style>
+
+    <!--toolbar style for faculty-->
+    <style name="AppTheme.AppBarOverlayFaculty" parent="ThemeOverlay.AppCompat.Light" >
+        <item name="android:textAppearance">@style/AppTheme.Font</item>
+        <item name="android:textViewStyle">@style/AppTheme.Font</item>
+        <item name="button_style">@style/AppTheme.Font</item>
+    </style>
+    <!--<item name="colorControlNormal">@color/colorDividerGrayOnWhiteBackground</item>-->
+
+
     <!--<style name="AppTheme.AppBarOverlay" parent="Theme.Design.NoActionBar" />-->
 
     <!-- START Font Style-->
@@ -122,9 +132,24 @@
         <item name="android:textColor">@color/textColorBackOnWhiteBackground</item>
     </style>
 
+    <style name="TextViewMediumBlueOnWhite">
+        <item name="android:textAppearance">@style/AppTheme.Font.Medium</item>
+        <item name="android:textColor">@color/textColorBlueOnWhiteBackground</item>
+    </style>
+
     <style name="TextViewRegularBlackOnWhite">
         <item name="android:textAppearance">@style/AppTheme.Font</item>
         <item name="android:textColor">@color/textColorBackOnWhiteBackground</item>
+    </style>
+
+    <style name="TextViewRegularBlueOnWhite">
+        <item name="android:textAppearance">@style/AppTheme.Font</item>
+        <item name="android:textColor">@color/textColorBlueOnWhiteBackground</item>
+    </style>
+
+    <style name="TextViewRegularLightBlueOnWhite">
+        <item name="android:textAppearance">@style/AppTheme.Font</item>
+        <item name="android:textColor">@color/textColorLightBlueOnWhiteBackground</item>
     </style>
 
     <style name="TextViewLightBlackOnWhite">
@@ -162,6 +187,11 @@
         <item name="android:textColor">@color/textColorGrayOnWhiteBackground</item>
     </style>
 
+    <style name="TextViewMediumLightBlue">
+        <item name="android:textAppearance">@style/AppTheme.Font.Medium</item>
+        <item name="android:textColor">@color/textColorLightBlueOnWhiteBackground</item>
+    </style>
+
     <style name="TextViewRegularLightGray">
         <item name="android:textAppearance">@style/AppTheme.Font</item>
         <item name="android:textColor">@color/textColorGrayOnWhiteBackground</item>z
@@ -175,6 +205,11 @@
     <style name="TextViewLightItalic">
         <item name="android:textAppearance">@style/AppTheme.Font.Italic</item>
         <item name="android:textColor">@color/textColorGrayOnWhiteBackground</item>
+    </style>
+
+    <style name="TextViewBackOnWhiteBackgroundItalic">
+        <item name="android:textAppearance">@style/AppTheme.Font.Italic</item>
+        <item name="android:textColor">@color/textColorBackOnWhiteBackground</item>
     </style>
 
     <style name="CustomCapsuleButtonBgTealWhiteText">
@@ -191,6 +226,18 @@
 
     <style name="CustomCapsuleButtonGradientBgWhiteText">
         <item name="android:background">@drawable/gradient_button_capsule</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:minHeight">@null</item>
+        <item name="android:paddingTop">@dimen/dp_8</item>
+        <item name="android:paddingBottom">@dimen/dp_8</item>
+        <item name="android:paddingStart">@dimen/dp_5</item>
+        <item name="android:paddingEnd">@dimen/dp_5</item>
+        <item name="android:textAppearance">@style/AppTheme.Font</item>
+    </style>
+
+    <style name="CustomCapsuleButtonBlueBgWhiteText">
+        <item name="android:background">@drawable/blue_button_capsule</item>
         <item name="android:gravity">center</item>
         <item name="android:textColor">@color/colorWhite</item>
         <item name="android:minHeight">@null</item>

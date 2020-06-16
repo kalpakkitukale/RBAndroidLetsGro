@@ -54,12 +54,11 @@
 
             <TextView
                 android:id="@+id/lblGro"
-                style="@style/TextViewBoldBlackOnWhite"
+                style="@style/TextViewBoldTealOnWhite"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_2"
                 android:text="@string/gro"
-                android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/sp_20"
                 app:layout_constraintBottom_toBottomOf="@+id/lblLets"
                 app:layout_constraintEnd_toEndOf="parent"
