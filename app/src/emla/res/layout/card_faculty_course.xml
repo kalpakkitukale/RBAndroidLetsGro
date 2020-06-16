@@ -19,10 +19,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dp_5"
         android:layout_marginEnd="@dimen/dp_5"
-        android:layout_marginBottom="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_10"
         android:onClick="@{()->facultyCoursesViewModel.onClickCourse(cardContainer, coursesModel)}"
-        app:cardCornerRadius="@dimen/dp_8"
-        app:cardElevation="2dp">
+        app:cardCornerRadius="@dimen/dp_5"
+        app:cardElevation="@dimen/dp_2">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -74,7 +74,7 @@
                 android:layout_marginTop="@dimen/dp_2"
                 android:layout_marginEnd="@dimen/dp_5"
                 android:text="@{coursesModel.courseName}"
-                android:textSize="@dimen/sp_18"
+                android:textSize="@dimen/sp_14"
                 app:layout_constraintEnd_toStartOf="@+id/tvQuestionCount"
                 app:layout_constraintStart_toEndOf="@+id/ivCoursePic"
                 app:layout_constraintTop_toTopOf="@+id/ivCoursePic" />
@@ -87,7 +87,7 @@
                 android:layout_marginTop="@dimen/dp_2"
                 android:layout_marginBottom="@dimen/dp_10"
                 android:text="@{coursesModel.courseDescription}"
-                android:textSize="@dimen/sp_12"
+                android:textSize="@dimen/sp_11"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/tvCourseName"
                 app:layout_constraintStart_toStartOf="@+id/tvCourseName"
