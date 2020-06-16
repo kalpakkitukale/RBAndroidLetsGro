@@ -35,19 +35,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginBottom="@dimen/dp_10"
-                android:background="@color/colorDividerGrayOnWhiteBackground"
+                android:background="@color/colorLightGray"
                 app:layout_constraintBottom_toTopOf="@+id/etAddReply"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/etAddReply"
-                style="@style/EditTextRegularGrayHint"
+                style="@style/EditTextHintStyleHintLight"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/dp_10"
                 android:background="@drawable/edittext_background_gray_border"
-                android:hint="@string/add_reply"
+                android:hint="@string/type_your_reply"
                 android:imeOptions="actionGo"
                 android:inputType="textCapSentences|textMultiLine"
                 android:paddingStart="@dimen/dp_10"

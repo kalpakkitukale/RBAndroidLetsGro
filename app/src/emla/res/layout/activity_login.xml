@@ -32,7 +32,6 @@
                 android:contentDescription="loginElement"
                 android:scaleType="fitStart"
                 android:src="@drawable/ic_e_learning"
-                app:layout_constraintBottom_toTopOf="@+id/lblLets"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
