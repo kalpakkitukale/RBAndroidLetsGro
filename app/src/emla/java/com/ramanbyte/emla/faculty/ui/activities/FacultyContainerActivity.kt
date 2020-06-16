@@ -36,8 +36,7 @@ class FacultyContainerActivity : BaseActivity<ActivityFacultyContainerBinding,Fa
 
         AlertDialog(this, viewModel)
 
-        makeStatusBarTransparent()
-        //changeStatusBarColor(window, R.color.colorTransparent)
+        //makeStatusBarTransparent()
         layoutBinding.apply {
             lifecycleOwner = this@FacultyContainerActivity
             facultyContainerViewModel = viewModel
