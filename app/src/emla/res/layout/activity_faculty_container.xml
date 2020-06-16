@@ -23,6 +23,7 @@
             android:animateLayoutChanges="true"
             android:theme="@style/AppTheme.AppBarOverlayFaculty"
             app:elevation="@dimen/dp_0"
+            android:background="@color/transparent"
             android:layout_marginTop="@dimen/dp_15"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -34,7 +35,7 @@
                 android:layout_height="?attr/actionBarSize"
                 app:title="@{facultyContainerViewModel.toolbarTitleLiveData}"
                 app:titleTextColor="@color/textColorBlueOnWhiteBackground"
-                android:background="@color/colorWhite"
+                android:background="@color/transparent"
                 app:popupTheme="@style/AppTheme.PopupOverlay" />
 
         </com.google.android.material.appbar.AppBarLayout>

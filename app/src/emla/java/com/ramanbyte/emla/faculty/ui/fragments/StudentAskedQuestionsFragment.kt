@@ -75,7 +75,7 @@ class StudentAskedQuestionsFragment :
                 mSearchView!!.isIconified = true
                 true
             }
-            R.id.action_filter -> {
+            R.id.action_question_filter -> {
                 studentAskedQuestionsFilterBottomSheet = StudentAskedQuestionsFilterBottomSheet()
                 studentAskedQuestionsFilterBottomSheet?.show(childFragmentManager, "student_ask_question_filter")
                 true
@@ -137,7 +137,7 @@ class StudentAskedQuestionsFragment :
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_student_asked_questions, menu)
 
-        val menuItem = menu.findItem(R.id.action_filter)
+        val menuItem = menu.findItem(R.id.action_question_filter)
 
         val actionView = menuItem.actionView
         badgeView = actionView.findViewById(R.id.filter_badge) as View

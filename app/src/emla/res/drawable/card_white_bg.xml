@@ -1,4 +1,28 @@
-<?xml version="1.0" encoding="utf-8"?><!--<shape xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <size
+        android:width="10dp"
+        android:height="10dp" />
+    <corners android:radius="6dp" />
+    <stroke
+        android:width="2dp"
+        android:color="#7ae7de83" />
+    <gradient
+        android:angle="90"
+        android:centerColor="#ffee58"
+        android:endColor="#7ae7de83"
+        android:startColor="#fff" />
+
+
+</shape>-->
+
+
+
+
+
+<!--<shape xmlns:android="http://schemas.android.com/apk/res/android"
 android:shape="rectangle">
 
 <solid android:color="@color/cardBackgroundColor" />
@@ -9,9 +33,17 @@ android:shape="rectangle">
 
 
 </shape>-->
+
+
+
+
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
         <shape android:shape="rectangle">
+
+            <stroke
+                android:width="4dp"
+                android:color="#9970cacd" />
 
             <gradient
                 android:angle="180" android:startColor="#0870cacd"

@@ -28,6 +28,7 @@
         <item name="android:textViewStyle">@style/AppTheme.Font</item>
         <item name="button_style">@style/AppTheme.Font</item>
     </style>
+
     <!--<item name="colorControlNormal">@color/colorDividerGrayOnWhiteBackground</item>-->
 
 

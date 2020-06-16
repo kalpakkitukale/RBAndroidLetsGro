@@ -43,7 +43,7 @@ class FacultyContainerActivity : BaseActivity<ActivityFacultyContainerBinding,Fa
             facultyContainerViewModel = viewModel
 
             //mainToolbar.navigationIcon?.setColorFilter(resources.getColor(R.color.blue_gray_15), PorterDuff.Mode.SRC_ATOP);
-            mainToolbar.navigationIcon?.setColorFilter(BindingUtils.color(R.color.colorIcon), PorterDuff.Mode.SRC_ATOP)
+            //mainToolbar.navigationIcon?.setColorFilter(BindingUtils.color(R.color.colorIcon), PorterDuff.Mode.SRC_ATOP)
 
             navController = findNavController(R.id.facultyContainerNavHost)
             appBarConfiguration = AppBarConfiguration.Builder(
