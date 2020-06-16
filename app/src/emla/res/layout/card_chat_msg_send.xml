@@ -95,7 +95,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/dp_5"
                 android:src="@drawable/ic_reply_teal"
-                android:visibility="gone"
+                android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvReply" />
