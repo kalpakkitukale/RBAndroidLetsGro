@@ -19,11 +19,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/dp_5"
-            android:visibility="@{studentAskedQuestionsViewModel.viewVisibilityLiveData}"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:listitem="@layout/card_student_ask_question"/>
+        <!--android:visibility="@{studentAskedQuestionsViewModel.viewVisibilityLiveData}"-->
 
         <include
             android:id="@+id/noInternet"
