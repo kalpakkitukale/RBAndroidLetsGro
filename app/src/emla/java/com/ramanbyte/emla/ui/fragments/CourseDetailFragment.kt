@@ -71,7 +71,12 @@ class CourseDetailFragment : BaseFragment<FragmentCourseDetailBinding, CoursesDe
 
             getCoursesSyllabus()
 
-            courseSyllabusModelLiveData.observe(this@CourseDetailFragment, Observer {
+            /**
+             * @author Mansi
+             * @since 17 June 2020
+             * Hide Certificate for version 2 release
+             */
+            /*courseSyllabusModelLiveData.observe(this@CourseDetailFragment, Observer {
                 Handler().postDelayed(Runnable {
                     AppLog.debugLog("courseSyllabusModelLiveData called ------- ")
                     if (menu != null) {
@@ -83,7 +88,7 @@ class CourseDetailFragment : BaseFragment<FragmentCourseDetailBinding, CoursesDe
                         }
                     }
                 }, 500)
-            })
+            })*/
 
             viewModel.courseSyllabusModelLiveData.observe(this@CourseDetailFragment, Observer {
                 if (it != null)
