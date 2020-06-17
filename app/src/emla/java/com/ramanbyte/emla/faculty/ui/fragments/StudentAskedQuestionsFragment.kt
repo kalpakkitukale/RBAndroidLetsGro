@@ -125,7 +125,21 @@ class StudentAskedQuestionsFragment :
             initPaginationResponseHandler()
             coursesPagedList()?.observe(this@StudentAskedQuestionsFragment, androidx.lifecycle.Observer {
                 it?.let {
-                    studentAskedQuestionsAdapter?.apply { submitList(it) } }
+                    studentAskedQuestionsAdapter?.apply { submitList(it) }
+
+                    layoutBinding.apply {
+                        if (rvAskQuestion.visibility == View.GONE) {
+                            rvAskQuestion.removeAllViews()
+                            rvAskQuestion.invalidate()
+                            rvAskQuestion.postDelayed({
+                                rvAskQuestion.visibility = View.VISIBLE
+                            }, 400)
+                        }
+                    }
+
+                }
+
+
             })
         }
     }
