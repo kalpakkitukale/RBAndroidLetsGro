@@ -90,7 +90,11 @@ class ChaptersViewModel(mContext: Context) : BaseViewModel(mContext) {
 
     fun takeSummativeTest(buttonView: View) {
 
-        if (courseModel?.summativeAssessmentStatus.equals(
+        /*if (courseModel?.summativeAssessmentStatus.equals(
+                "true",
+                true
+            )
+        )*/if (courseSyllabusModel?.summativeAssessmentStatus.equals(
                 "true",
                 true
             )
