@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -19,72 +19,79 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dp_5"
         android:layout_marginEnd="@dimen/dp_5"
-        android:layout_marginBottom="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_10"
         android:onClick="@{()->facultyCoursesViewModel.onClickCourse(cardContainer, coursesModel)}"
-        app:cardCornerRadius="@dimen/dp_8"
-        app:cardElevation="2dp">
+        app:cardCornerRadius="@dimen/dp_5"
+        app:cardElevation="@dimen/dp_2">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/mainConstraintLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/dp_3">
+            <!--android:layout_marginStart="@dimen/dp_5"
+            android:layout_marginEnd="@dimen/dp_5"
+            android:layout_marginBottom="@dimen/dp_5"
+            android:background="@drawable/card_white_bg"
+            android:onClick="@{()->facultyCoursesViewModel.onClickCourse(mainConstraintLayout, coursesModel)}"-->
+
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/ivCoursePic"
                 android:layout_width="@dimen/dp_60"
                 android:layout_height="@dimen/dp_60"
-                android:background="@drawable/ic_course_dummy"
-                android:scaleType="fitXY"
-                android:layout_marginTop="@dimen/dp_10"
                 android:layout_marginStart="@dimen/dp_10"
-                app:imageUrl="@{coursesModel.courseImageUrl}"
+                android:layout_marginTop="@dimen/dp_10"
+                android:layout_marginBottom="@dimen/dp_10"
+                android:background="@drawable/rounded_background"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <!--android:background="@drawable/ic_course_dummy"
+            app:imageUrl="@{coursesModel.courseImageUrl}"-->
+
+            <TextView
+                android:id="@+id/tvQuestionCount"
+                style="@style/TextViewRegularWhite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_is_live"
+                android:gravity="center"
+                android:padding="@dimen/dp_5"
+                android:text="@{String.valueOf(coursesModel.totalNumberOfQuestionCount)}"
+                android:textSize="@dimen/sp_10"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/tvQuestionCount"
-                android:padding="@dimen/dp_5"
-                android:gravity="center"
-                android:text="@{String.valueOf(coursesModel.totalNumberOfQuestionCount)}"
-                style="@style/TextViewRegularWhite"
-                android:textSize="@dimen/sp_10"
-                android:background="@drawable/ic_is_live"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
-
-            <TextView
                 android:id="@+id/tvCourseName"
-                style="@style/TextViewBoldBlackOnWhite"
+                style="@style/TextViewMediumBlueOnWhite"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dp_8"
+                android:layout_marginStart="@dimen/dp_10"
                 android:layout_marginTop="@dimen/dp_2"
                 android:layout_marginEnd="@dimen/dp_5"
                 android:text="@{coursesModel.courseName}"
-                android:textSize="@dimen/sp_18"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:textSize="@dimen/sp_14"
+                app:layout_constraintEnd_toStartOf="@+id/tvQuestionCount"
                 app:layout_constraintStart_toEndOf="@+id/ivCoursePic"
-                app:layout_constraintTop_toBottomOf="@+id/tvQuestionCount"/>
+                app:layout_constraintTop_toTopOf="@+id/ivCoursePic" />
 
             <TextView
                 android:id="@+id/tvCourseDescription"
-                style="@style/TextViewRegularBlackOnWhite"
+                style="@style/TextViewRegularBlueOnWhite"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_2"
-                android:layout_marginBottom="@dimen/dp_8"
-                android:ellipsize="end"
-                android:lines="1"
-                android:maxLines="1"
-                android:paddingEnd="@dimen/dp_5"
+                android:layout_marginBottom="@dimen/dp_10"
                 android:text="@{coursesModel.courseDescription}"
-                android:textSize="@dimen/sp_12"
+                android:textSize="@dimen/sp_11"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/tvCourseName"
                 app:layout_constraintStart_toStartOf="@+id/tvCourseName"
-                app:layout_constraintTop_toBottomOf="@+id/tvCourseName" />
+                app:layout_constraintTop_toBottomOf="@+id/tvCourseName"
+                app:layout_constraintVertical_bias="0.0" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

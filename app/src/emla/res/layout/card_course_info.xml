@@ -14,7 +14,11 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/colorTransparent"
+        app:cardCornerRadius="@dimen/dp_5"
         app:cardElevation="2dp"
+        app:cardUseCompatPadding="true"
+        app:contentPadding="@dimen/dp_5"
         app:layout_constraintTop_toBottomOf="@+id/guideline">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -245,7 +249,7 @@
                 android:id="@+id/courseInfoGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:constraint_referenced_ids="labelLanguage,txtViewLength,txtViewLanguage,labelLevel,labelSpecialization,labelLength,txtViewEfforts,txtViewSpecialization,labelEfforts,txtViewLevel" />
+                app:constraint_referenced_ids="labelAllocatedFaculty,txtAllocatedFaculty,labelLanguage,txtViewLength,txtViewLanguage,labelLevel,labelSpecialization,labelLength,txtViewEfforts,txtViewSpecialization,labelEfforts,txtViewLevel" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -12,10 +12,10 @@
         tools:targetApi="O" />
 
     <item
-        android:id="@+id/action_filter"
-        android:icon="@drawable/ic_filter"
+        android:id="@+id/action_question_filter"
+        android:icon="@drawable/ic_filter_teal"
         android:title="@string/filter"
         app:actionLayout="@layout/custom_action_badge_layout"
-        app:showAsAction="ifRoom"></item>
+        app:showAsAction="ifRoom"/>
 
 </menu>

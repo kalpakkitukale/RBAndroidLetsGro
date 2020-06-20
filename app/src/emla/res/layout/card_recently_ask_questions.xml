@@ -50,7 +50,7 @@
 
             <TextView
                 android:id="@+id/tvQuestion"
-                style="@style/TextViewBoldBlackOnWhite"
+                style="@style/TextViewMediumBlackOnWhite"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_5"
@@ -81,8 +81,7 @@
                 app:layout_constraintBottom_toTopOf="@+id/btnReply"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/rivUserPic"
-                app:layout_constraintTop_toBottomOf="@+id/tvQuestion"
-                tools:listitem="@layout/card_recently_ask_questions_reply" />
+                app:layout_constraintTop_toBottomOf="@+id/tvQuestion" />
 
             <TextView
                 android:id="@+id/btnReply"

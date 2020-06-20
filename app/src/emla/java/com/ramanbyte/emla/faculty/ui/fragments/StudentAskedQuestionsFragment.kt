@@ -75,7 +75,7 @@ class StudentAskedQuestionsFragment :
                 mSearchView!!.isIconified = true
                 true
             }
-            R.id.action_filter -> {
+            R.id.action_question_filter -> {
                 studentAskedQuestionsFilterBottomSheet = StudentAskedQuestionsFilterBottomSheet()
                 studentAskedQuestionsFilterBottomSheet?.show(childFragmentManager, "student_ask_question_filter")
                 true
@@ -89,6 +89,7 @@ class StudentAskedQuestionsFragment :
             rvAskQuestion.apply {
                 studentAskedQuestionsAdapter = StudentAskedQuestionsAdapter()
                 layoutManager = LinearLayoutManager(mContext, RecyclerView.VERTICAL, false)
+
                 adapter = studentAskedQuestionsAdapter?.apply {
                     this.context = mContext
                     this.studentAskedQuestionsViewModel = viewModel
@@ -99,6 +100,7 @@ class StudentAskedQuestionsFragment :
 
     private fun setViewModelOp() {
         viewModel.apply {
+
             courseId.value = courseModel?.courseId
 
             /*
@@ -122,7 +124,22 @@ class StudentAskedQuestionsFragment :
             * */
             initPaginationResponseHandler()
             coursesPagedList()?.observe(this@StudentAskedQuestionsFragment, androidx.lifecycle.Observer {
-                it?.let { studentAskedQuestionsAdapter?.apply { submitList(it) } }
+                it?.let {
+                    studentAskedQuestionsAdapter?.apply { submitList(it) }
+
+                    layoutBinding.apply {
+                        if (rvAskQuestion.visibility == View.GONE) {
+                            rvAskQuestion.removeAllViews()
+                            rvAskQuestion.invalidate()
+                            rvAskQuestion.postDelayed({
+                                rvAskQuestion.visibility = View.VISIBLE
+                            }, 400)
+                        }
+                    }
+
+                }
+
+
             })
         }
     }
@@ -134,7 +151,7 @@ class StudentAskedQuestionsFragment :
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_student_asked_questions, menu)
 
-        val menuItem = menu.findItem(R.id.action_filter)
+        val menuItem = menu.findItem(R.id.action_question_filter)
 
         val actionView = menuItem.actionView
         badgeView = actionView.findViewById(R.id.filter_badge) as View

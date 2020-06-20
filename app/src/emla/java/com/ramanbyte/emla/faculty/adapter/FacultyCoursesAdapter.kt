@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.ramanbyte.R
 import com.ramanbyte.aws_s3_android.accessor.AppS3Client
 import com.ramanbyte.databinding.CardFacultyCourseBinding
@@ -46,21 +48,23 @@ class FacultyCoursesAdapter(var mContext: Context?) :
 
     inner class FacultyCoursesViewHolder(itemview: View) : RecyclerView.ViewHolder(itemview) {
 
-        var dataBinding: CardFacultyCourseBinding = CardFacultyCourseBinding.bind(itemView)
+        private var dataBinding: CardFacultyCourseBinding = CardFacultyCourseBinding.bind(itemView)
 
         fun bind(coursesModel: FacultyCoursesModel) {
             dataBinding.apply {
                 facultyCoursesViewModel = coursesViewModel
                 this.coursesModel = coursesModel
 
-                /*coursesModel.totalNumberOfQuestionCount.apply {
-                    if (this.toString().length == 1) {
-                        tvQuestionCount.text = "0${this.toString()}"
-                    } else {
-                        tvQuestionCount.text = this.toString()
-                    }
-                }*/
+                ivCoursePic.clipToOutline = true
 
+                Glide.with(context!!)
+                    .load(coursesModel.courseImageUrl)
+                    .placeholder(R.drawable.ic_course_dummy)
+                    .error(R.drawable.ic_course_dummy)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .skipMemoryCache(true)
+                    .centerCrop()
+                    .into(ivCoursePic)
 
             }
         }

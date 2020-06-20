@@ -18,15 +18,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="@{() -> viewModel.onClickCard(cardLayoutMain,studentAskedQuestionsModel)}"
-        app:cardBackgroundColor="@color/colorTransparent"
+        android:layout_marginTop="@dimen/dp_8"
+        android:layout_marginStart="@dimen/dp_5"
+        android:layout_marginEnd="@dimen/dp_5"
         app:cardCornerRadius="@dimen/dp_5"
-        app:cardElevation="2dp"
-        app:cardUseCompatPadding="true"
+        app:cardElevation="@dimen/dp_2"
         app:contentPadding="@dimen/dp_5">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+            <!--android:layout_marginStart="@dimen/dp_5"
+            android:layout_marginEnd="@dimen/dp_5"
+            android:layout_marginBottom="@dimen/dp_5"
+            android:id="@+id/mainConstraintLayout"
+            android:background="@drawable/card_white_bg"
+            android:padding="@dimen/dp_5"
+            android:onClick="@{() -> viewModel.onClickCard(mainConstraintLayout,studentAskedQuestionsModel)}"-->
 
             <com.ramanbyte.views.RoundedImageView
                 android:id="@+id/rivUserPic"
@@ -48,13 +56,10 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvUserName"
-                style="@style/TextViewMediumLightGray"
+                style="@style/TextViewMediumLightBlue"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_5"
-                android:ellipsize="end"
-                android:padding="@dimen/dp_3"
-                android:singleLine="true"
                 android:text="@{studentAskedQuestionsModel.studentName}"
                 android:textSize="@dimen/sp_14"
                 app:layout_constraintEnd_toStartOf="@+id/ivDot"
@@ -85,35 +90,30 @@
                 android:drawableStart="@drawable/ic_mail"
                 android:drawablePadding="@dimen/dp_5"
                 android:gravity="left|center"
-                android:visibility="gone"
                 android:onClick="@{() -> viewModel.onClickEmail(tvEmail,studentAskedQuestionsModel.studentEmail)}"
                 android:padding="@dimen/dp_2"
                 android:text="@{studentAskedQuestionsModel.studentEmail}"
                 android:textSize="@dimen/sp_12"
+                android:visibility="gone"
                 app:layout_constraintStart_toEndOf="@+id/tvMobile"
                 app:layout_constraintTop_toBottomOf="@+id/tvUserName" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvQuestion"
-                style="@style/TextViewBoldBlackOnWhite"
+                style="@style/TextViewRegularLightBlueOnWhite"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dp_5"
-                android:layout_marginTop="@dimen/dp_10"
-                android:gravity="start"
-                android:textSize="@dimen/sp_18"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/rivUserPic"
-                app:layout_constraintTop_toBottomOf="@+id/rivUserPic" />
+                android:textSize="@dimen/sp_14"
+                app:layout_constraintEnd_toEndOf="@id/ivDot"
+                app:layout_constraintStart_toStartOf="@+id/tvUserName"
+                app:layout_constraintTop_toBottomOf="@+id/tvUserName" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvDateTime"
-                style="@style/TextViewLightItalic"
+                style="@style/TextViewBackOnWhiteBackgroundItalic"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_3"
-                android:ellipsize="end"
-                android:singleLine="true"
                 android:textSize="@dimen/sp_12"
                 app:layout_constraintStart_toStartOf="@+id/tvQuestion"
                 app:layout_constraintTop_toBottomOf="@+id/tvQuestion" />
@@ -123,15 +123,14 @@
                 style="@style/TextViewRegularBlackOnWhite"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_5"
                 android:layout_marginTop="@dimen/dp_5"
                 android:layout_marginEnd="@dimen/dp_5"
-                android:gravity="end"
-                android:text='@{studentAskedQuestionsModel.chapterName +"  ->  "+ studentAskedQuestionsModel.sectionName +"  ->  "+ @string/video_title +" : "+  studentAskedQuestionsModel.contentTitle}'
-                android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/sp_14"
+                android:text='@{studentAskedQuestionsModel.chapterName +"  |  "+ studentAskedQuestionsModel.sectionName +"  |  "+  studentAskedQuestionsModel.contentTitle}'
+                android:textSize="@dimen/sp_12"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/rivUserPic"
                 app:layout_constraintTop_toBottomOf="@+id/tvDateTime" />
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

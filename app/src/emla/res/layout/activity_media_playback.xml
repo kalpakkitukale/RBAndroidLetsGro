@@ -8,6 +8,7 @@
         android:layout_height="match_parent"
         android:background="@color/colorBlack"
         android:id="@+id/mainConstraint"
+        android:fitsSystemWindows="true"
         tools:context=".video_tutorials.media_playback.MediaPlaybackActivity">
 
         <com.google.android.exoplayer2.ui.PlayerView

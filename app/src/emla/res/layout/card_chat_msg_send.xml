@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -8,8 +9,7 @@
             type="com.ramanbyte.emla.models.AskQuestionReplyModel" />
     </data>
 
-    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <androidx.cardview.widget.CardView
         android:id="@+id/cardLayoutMain"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -19,7 +19,16 @@
         app:cardElevation="2dp"
         app:cardUseCompatPadding="true">
 
-        <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        <!--<RelativeLayout
+            android:id="@+id/mainConstraintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dp_5"
+            android:layout_marginStart="@dimen/dp_60"
+            android:layout_marginBottom="@dimen/dp_5"
+            android:background="@drawable/card_white_bg">-->
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -27,7 +36,7 @@
                 android:id="@+id/verticalView"
                 android:layout_width="@dimen/dp_3"
                 android:layout_height="0dp"
-                android:background="@color/colorTeal"
+                android:background="@drawable/round_left_background_teal_capsule"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -44,7 +53,7 @@
 
             <TextView
                 android:id="@+id/tvUserName"
-                style="@style/TextViewRegularLightGray"
+                style="@style/TextViewMediumLightBlue"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_5"
@@ -57,12 +66,12 @@
 
             <TextView
                 android:id="@+id/tvReply"
-                style="@style/TextViewBoldBlackOnWhite"
+                style="@style/TextViewRegularLightBlueOnWhite"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_5"
                 android:text="@{replyModel.answer}"
-                android:textSize="@dimen/sp_18"
+                android:textSize="@dimen/sp_14"
                 app:layout_constraintEnd_toEndOf="@+id/tvUserName"
                 app:layout_constraintStart_toEndOf="@+id/rivUserPic"
                 app:layout_constraintTop_toBottomOf="@+id/tvUserName" />
@@ -72,13 +81,13 @@
                 style="@style/TextViewLightItalic"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dp_5"
                 android:layout_marginEnd="@dimen/dp_10"
                 android:text="@{replyModel.createdDateTime}"
                 android:textSize="@dimen/sp_12"
-                android:layout_marginStart="@dimen/dp_5"
-                app:layout_constraintStart_toStartOf="@+id/rivUserPic"
-                app:layout_constraintTop_toTopOf="@+id/ivReply"/>
-            <!--android:text="@{replyModel.createdDateTime}"-->
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvReply" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/ivReply"
@@ -86,10 +95,12 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/dp_5"
                 android:src="@drawable/ic_reply_teal"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvReply" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+        <!--</RelativeLayout>-->
     </androidx.cardview.widget.CardView>
 </layout>

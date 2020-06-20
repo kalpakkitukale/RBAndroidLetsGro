@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -10,8 +12,7 @@
     </data>
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="@dimen/dp_5"
@@ -42,18 +43,19 @@
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.20" />
 
-
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:background="@color/colorTransparent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/guideline">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingBottom="@dimen/dp_10"
                 android:background="@color/colorTransparent">
 
                 <include
@@ -67,8 +69,11 @@
                     android:id="@+id/cardCourseSyllabus"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_3"
-                    android:elevation="2dp"
+                    android:layout_marginTop="@dimen/dp_20"
+                    app:cardCornerRadius="@dimen/dp_5"
+                    app:cardElevation="2dp"
+                    app:cardUseCompatPadding="true"
+                    app:contentPadding="@dimen/dp_5"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/cardCourseLayout">
@@ -123,9 +128,11 @@
                     android:id="@+id/cardAssessmentInstruction"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_3"
-                    android:elevation="2dp"
-                    app:cardCornerRadius="@dimen/dp_2"
+                    android:layout_marginTop="@dimen/dp_20"
+                    app:cardCornerRadius="@dimen/dp_5"
+                    app:cardElevation="2dp"
+                    app:cardUseCompatPadding="true"
+                    app:contentPadding="@dimen/dp_5"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/cardCourseSyllabus">
@@ -177,9 +184,11 @@
                     android:id="@+id/cardWhatIWillLearn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_3"
-                    android:elevation="2dp"
-                    app:cardCornerRadius="@dimen/dp_2"
+                    android:layout_marginTop="@dimen/dp_20"
+                    app:cardCornerRadius="@dimen/dp_5"
+                    app:cardElevation="2dp"
+                    app:cardUseCompatPadding="true"
+                    app:contentPadding="@dimen/dp_5"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/cardAssessmentInstruction">
@@ -230,10 +239,12 @@
                     android:id="@+id/cardHowToUse"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_3"
-                    android:elevation="2dp"
-                    app:cardCornerRadius="@dimen/dp_2"
-                    app:cardMaxElevation="@dimen/dp_8"
+                    android:layout_marginTop="@dimen/dp_20"
+                    app:cardCornerRadius="@dimen/dp_5"
+                    app:cardElevation="2dp"
+                    app:cardUseCompatPadding="true"
+                    app:contentPadding="@dimen/dp_5"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/cardWhatIWillLearn">
@@ -248,10 +259,12 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/dp_5"
+                            android:layout_marginTop="4dp"
                             android:onClick="@{coursesDetailViewModel::onHeaderClick}"
                             android:text="@string/how_to_use"
                             android:textSize="@dimen/sp_16"
                             app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.09"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
