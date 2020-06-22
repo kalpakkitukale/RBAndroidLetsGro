@@ -2,7 +2,6 @@ package com.ramanbyte.emla.ui.fragments
 
 import android.app.Dialog
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.view.LayoutInflater
@@ -16,14 +15,12 @@ import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.viewpager.widget.ViewPager
 import com.ramanbyte.R
-import com.ramanbyte.aws_s3_android.accessor.AppS3Client
 import com.ramanbyte.base.BaseParentFragment
 import com.ramanbyte.databinding.DialogQuizReviewBinding
 import com.ramanbyte.databinding.FragmentShowQuestionBinding
 import com.ramanbyte.emla.adapters.ViewPagerAdapter
 import com.ramanbyte.emla.models.QuestionAndAnswerModel
 import com.ramanbyte.emla.models.QuizResultModel
-import com.ramanbyte.emla.ui.activities.ContainerActivity
 import com.ramanbyte.emla.view_model.ShowQuestionsViewModel
 import com.ramanbyte.utilities.*
 
@@ -75,10 +72,16 @@ class ShowQuestionFragment :
             viewModel.apply {
 
                 parentViewModel.apply {
-                    coursesModelLiveData.value?.courseImageUrl =
+                    /*coursesModelLiveData.value?.courseImageUrl =
                         AppS3Client.createInstance(context!!).getFileAccessUrl(
                             coursesModelLiveData.value?.courseImage ?: KEY_BLANK
-                        ) ?: ""
+                        ) ?: ""*/
+
+                    coursesModelLiveData.value?.courseImageUrl =
+                        StaticMethodUtilitiesKtx.getS3DynamicURL(
+                            coursesModelLiveData.value?.courseImage ?: KEY_BLANK,
+                            context!!
+                        )
 
                     AppLog.infoLog("courseImageUrl :: Show Que Page ${coursesModelLiveData.value?.courseImageUrl}")
 
@@ -197,8 +200,14 @@ class ShowQuestionFragment :
                                             KEY_COURSE_MODEL,
                                             coursesModelLiveData.value
                                         )
-                                        val navOption = NavOptions.Builder().setPopUpTo(R.id.coursesFragment, false).build()
-                                        activity?.let { Navigation.findNavController(it,R.id.containerNavHost).navigate(R.id.courseDetailFragment, bundle, navOption) }
+                                        val navOption = NavOptions.Builder()
+                                            .setPopUpTo(R.id.coursesFragment, false).build()
+                                        activity?.let {
+                                            Navigation.findNavController(
+                                                it,
+                                                R.id.containerNavHost
+                                            ).navigate(R.id.courseDetailFragment, bundle, navOption)
+                                        }
 
                                         isAlertDialogShown.postValue(false)
 
@@ -348,8 +357,14 @@ class ShowQuestionFragment :
                                             KEY_COURSE_MODEL,
                                             parentViewModel.coursesModelLiveData.value
                                         )
-                                        val navOption = NavOptions.Builder().setPopUpTo(R.id.coursesFragment, false).build()
-                                        activity?.let { Navigation.findNavController(it,R.id.containerNavHost).navigate(R.id.courseDetailFragment, bundle, navOption) }
+                                        val navOption = NavOptions.Builder()
+                                            .setPopUpTo(R.id.coursesFragment, false).build()
+                                        activity?.let {
+                                            Navigation.findNavController(
+                                                it,
+                                                R.id.containerNavHost
+                                            ).navigate(R.id.courseDetailFragment, bundle, navOption)
+                                        }
                                     }
                                 )
                                 isAlertDialogShown.postValue(true)
@@ -403,8 +418,12 @@ class ShowQuestionFragment :
                         KEY_COURSE_MODEL,
                         parentViewModel.coursesModelLiveData.value
                     )
-                    val navOption = NavOptions.Builder().setPopUpTo(R.id.coursesFragment, false).build()
-                    activity?.let { Navigation.findNavController(it,R.id.containerNavHost).navigate(R.id.courseDetailFragment, bundle, navOption) }
+                    val navOption =
+                        NavOptions.Builder().setPopUpTo(R.id.coursesFragment, false).build()
+                    activity?.let {
+                        Navigation.findNavController(it, R.id.containerNavHost)
+                            .navigate(R.id.courseDetailFragment, bundle, navOption)
+                    }
                     isAlertDialogShown.postValue(false)
                 }
             )

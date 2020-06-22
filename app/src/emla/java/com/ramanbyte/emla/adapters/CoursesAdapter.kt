@@ -10,12 +10,12 @@ import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.ramanbyte.R
-import com.ramanbyte.aws_s3_android.accessor.AppS3Client
 import com.ramanbyte.databinding.CardCourseBinding
 import com.ramanbyte.emla.models.CoursesModel
 import com.ramanbyte.emla.view_model.CoursesViewModel
 import com.ramanbyte.utilities.BindingUtils
 import com.ramanbyte.utilities.KEY_BLANK
+import com.ramanbyte.utilities.StaticMethodUtilitiesKtx.getS3DynamicURL
 
 
 class CoursesAdapter(private val displayMetrics: DisplayMetrics) :
@@ -54,8 +54,8 @@ class CoursesAdapter(private val displayMetrics: DisplayMetrics) :
                 holder.cardCourseBinding.ivStatus.visibility = View.GONE
             }
 
-            courseImageUrl =
-                AppS3Client.createInstance(context!!).getFileAccessUrl(courseImage ?: KEY_BLANK)
+            courseImageUrl = getS3DynamicURL(courseImage ?: KEY_BLANK, context!!)
+//                AppS3Client.createInstance(context!!).getFileAccessUrl(courseImage ?: KEY_BLANK)
         })
     }
 

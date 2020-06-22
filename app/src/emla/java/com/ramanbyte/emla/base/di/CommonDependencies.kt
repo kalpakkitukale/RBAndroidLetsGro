@@ -1,5 +1,6 @@
 package com.ramanbyte.emla.base.di
 
+import com.ramanbyte.BuildConfig
 import com.ramanbyte.data_layer.network.init.RetrofitInitializer
 import com.ramanbyte.emla.data_layer.network.api_layer.*
 import com.ramanbyte.emla.data_layer.repositories.*
@@ -30,7 +31,7 @@ private const val SECTION = "Section/"
 private const val QUESTION = "Question/"
 private const val MASTER = "Master/"
 
-var CLIENT_BASE = "test"
+var CLIENT_BASE = BuildConfig.CLIENT_BASE
 
 val repositoryDependencies = Kodein.Module("", true) {
 

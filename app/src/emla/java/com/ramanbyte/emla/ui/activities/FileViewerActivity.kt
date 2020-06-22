@@ -78,10 +78,12 @@ class FileViewerActivity : BaseActivity<ActivityFileViewerBinding, FileViewerVie
     private inner class GetS3FileInstance : AsyncTask<String?, Int?, String?>() {
         override fun doInBackground(vararg voids: String?): String? {
             val fileName = voids[0]
-            val s3link = (fileName?.let {
+            /*val s3link = (fileName?.let {
                 AppS3Client.createInstance(mContext!!)
                     .getFileAccessUrl(it).toString()
-            })
+            })*/
+            val s3link =
+                StaticMethodUtilitiesKtx.getS3DynamicURL(fileName!!, mContext!!)
 
             val fileExtension =
                 StaticMethodUtilitiesKtx.getFileExtension(FileUtils.getOriginalFileName(fileName!!))

@@ -19,7 +19,9 @@ import android.view.Window
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.Spinner
+import com.ramanbyte.BuildConfig
 import com.ramanbyte.R
+import com.ramanbyte.aws_s3_android.accessor.AppS3Client
 import com.ramanbyte.data_layer.SharedPreferencesDatabase
 import com.ramanbyte.views.RoundedTextDrawable
 import java.util.*
@@ -274,6 +276,18 @@ object StaticMethodUtilitiesKtx {
             }
         }
         return "txt"
+    }
+
+    fun getS3DynamicURL(fileName: String, context: Context): String? {
+        return if (fileName.isNotEmpty()) {
+            if (AppS3Client.createInstance(context).getDefaultObject().isNullOrBlank()) {
+                AppS3Client.createInstance(context).setDefaultObject(BuildConfig.S3_OBJECT)
+            }
+            AppS3Client.createInstance(context).getFileAccessUrl(fileName)
+        } else {
+            KEY_BLANK
+        }
+
     }
 
     val getRandomString = {

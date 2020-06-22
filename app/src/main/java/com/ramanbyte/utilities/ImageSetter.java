@@ -29,8 +29,8 @@ public class ImageSetter {
                     .load(url)
                     /*.override((int) BindingUtils.dimen(R.dimen.dp_40), (int) BindingUtils.dimen(R.dimen.dp_40))*/
                     .placeholder(drawable)
-                    .diskCacheStrategy(DiskCacheStrategy.NONE)
-                    .skipMemoryCache(true)
+                    /*.diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .skipMemoryCache(true)*/
                     .dontAnimate()
                     .into(imageView);
 
