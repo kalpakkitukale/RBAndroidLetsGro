@@ -1,6 +1,7 @@
 package com.ramanbyte.emla.ui.fragments
 
 import android.content.Context
+import android.os.Build
 import android.text.TextUtils
 import android.view.Menu
 import android.view.MenuInflater
@@ -8,6 +9,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
+import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -93,6 +95,7 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
     var menu: Menu? = null
     private var mSearchView: SearchView? = null
     var searchItem: MenuItem? = null
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_course_search, menu)
 
@@ -112,8 +115,10 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
         val searchEditText = mSearchView!!.findViewById(R.id.search_src_text) as EditText
 
         searchEditText.setTextColor(BindingUtils.color(R.color.colorWhite))
-        searchEditText.setHintTextColor(BindingUtils.color(R.color.colorTransparent))
         searchEditText.hint = BindingUtils.string(R.string.search_by_course)
+
+        searchEditText.setTextAppearance(R.style.AppTheme_Font)
+        searchEditText.setHintTextColor(BindingUtils.color(R.color.colorWhite))
 
         val searchClose = mSearchView?.findViewById(R.id.search_close_btn) as ImageView
         searchClose.apply {
