@@ -33,7 +33,7 @@
     <string name="course_name">Course Name</string>
     <string name="chapter_name">Chapter Name</string>
     <string name="section_name">Section Name</string>
-    <string name="no_courses">No Courses</string>
+    <string name="no_courses">You will see course list once\ncourses are added in system</string>
     <string name="no_more_courses">No more courses</string>
     <string name="no_internet_message">No Internet Connection</string>
     <string name="no_test_found_message">No Test Found</string>
