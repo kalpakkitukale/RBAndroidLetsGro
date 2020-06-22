@@ -6,6 +6,7 @@ import android.os.Handler
 import androidx.lifecycle.Observer
 import com.ramanbyte.AppController
 import com.ramanbyte.BaseAppController
+import com.ramanbyte.BuildConfig
 import com.ramanbyte.R
 import com.ramanbyte.aws_s3_android.accessor.AppS3Client
 import com.ramanbyte.base.BaseActivity
@@ -31,8 +32,7 @@ class LauncherActivity :
     var currentUser: String = KEY_BLANK
 
     override fun initiate() {
-
-        AppS3Client.createInstance(applicationContext).setDefaultObject("test")
+        AppS3Client.createInstance(applicationContext).setDefaultObject(BuildConfig.S3_OBJECT)
 
         makeStatusBarTransparent()
         setViewModelOps()

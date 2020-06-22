@@ -37,6 +37,8 @@ android {
     productFlavors {
         emla {
             dimension "mode"
+            buildConfigField("String", "S3_OBJECT", "\"test\"")
+            buildConfigField("String", "CLIENT_BASE", "\"test\"")
             applicationId "com.ramanbyte.emla"
         }
     }

@@ -74,9 +74,14 @@ class LearnerProfileFragment :
                     if (city != 0)
                         isCityAvailable = true
 
-                    profileImageUrl.value =
+                    /*profileImageUrl.value =
                         AppS3Client.createInstance(context!!)
-                            .getFileAccessUrl(userImageFilename ?: "")
+                            .getFileAccessUrl(userImageFilename ?: "")*/
+                    profileImageUrl.value =
+                        StaticMethodUtilitiesKtx.getS3DynamicURL(
+                            userImageFilename ?: KEY_BLANK,
+                            context!!
+                        )
 
                     setValidation()
                     setupViewPager()

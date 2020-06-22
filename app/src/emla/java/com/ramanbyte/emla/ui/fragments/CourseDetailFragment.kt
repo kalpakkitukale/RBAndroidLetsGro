@@ -45,10 +45,12 @@ class CourseDetailFragment : BaseFragment<FragmentCourseDetailBinding, CoursesDe
 
         setToolbarTitle(courseModel?.courseName!!)
 
-        courseModel?.courseImageUrl =
+        /*courseModel?.courseImageUrl =
             AppS3Client.createInstance(context!!).getFileAccessUrl(
                 courseModel?.courseImage ?: KEY_BLANK
-            ) ?: ""
+            ) ?: ""*/
+
+        courseModel?.courseImageUrl = StaticMethodUtilitiesKtx.getS3DynamicURL(courseModel?.courseImage!!, context!!)
 
         layoutBinding.apply {
 
