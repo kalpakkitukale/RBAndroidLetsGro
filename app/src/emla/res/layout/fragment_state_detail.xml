@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.ramanbyte.utilities.StaticHelpersKt" />
+
+        <variable
+            name="learnerProfileViewModel"
+            type="com.ramanbyte.emla.view_model.LearnerProfileViewModel" />
+
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilState"
+            style="@style/TextInputLayoutWithoutBorder"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_22"
+            android:hint="@string/state"
+            app:endIconDrawable="@drawable/ic_arrow_down_gray"
+            app:endIconMode="custom"
+            app:errorText="@{learnerProfileViewModel.stateDetailsDataValidator.getValidation(StaticHelpersKt.keyState)}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etState"
+                style="@style/EditTextRegularGrayHint"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorTransparent"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:gravity="center_vertical"
+                android:lines="1"
+                android:onClick="@{()->spState.performClick()}"
+                android:singleLine="true"
+                android:text="@={learnerProfileViewModel.registrationModelLiveData.stateName}"
+                android:textSize="@dimen/sp_16" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Spinner
+            android:id="@+id/spState"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@android:color/transparent"
+            app:layout_constraintBottom_toBottomOf="@id/tilState"
+            app:layout_constraintEnd_toEndOf="@id/tilState"
+            app:layout_constraintStart_toStartOf="@id/tilState" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilCity"
+            style="@style/TextInputLayoutWithoutBorder"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_22"
+            android:layout_marginTop="@dimen/dp_15"
+            android:hint="@string/city"
+            app:errorText="@{learnerProfileViewModel.stateDetailsDataValidator.getValidation(StaticHelpersKt.keyCity)}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spState">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etCity"
+                style="@style/EditTextRegularGrayHint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorTransparent"
+                android:digits="@string/alpha_digit_format"
+                android:drawablePadding="@dimen/dp_5"
+                android:imeOptions="actionNext"
+                android:inputType="textCapSentences"
+                android:lines="1"
+                android:maxLength="50"
+                android:singleLine="true"
+                android:text="@={learnerProfileViewModel.citiesQueryLiveData}"
+                android:textSize="@dimen/sp_16"
+                app:hintAnimationEnabled="false" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <AutoCompleteTextView
+            android:id="@+id/actvCity"
+            style="@style/EditTextRegularGrayHint"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="@+id/tilCity"
+            app:layout_constraintEnd_toEndOf="@+id/tilCity"
+            app:layout_constraintStart_toStartOf="@+id/tilCity"
+            tools:ignore="LabelFor" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnNext1"
+            style="@style/CustomCapsuleButtonGradientBgWhiteText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp_22"
+            android:includeFontPadding="false"
+            android:onClick="@{learnerProfileViewModel::saveStateDetails}"
+            android:paddingTop="@dimen/dp_10"
+            android:paddingBottom="@dimen/dp_10"
+            android:text="@string/next"
+            android:textAllCaps="true"
+            android:textSize="@dimen/sp_16"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/tilCity"
+            app:layout_constraintStart_toStartOf="@+id/tilCity" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

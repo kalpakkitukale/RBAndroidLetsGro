@@ -62,7 +62,7 @@
     <string name="offline_download_no_data_message">You have not yet downloaded any videos</string>
     <string name="storage_permission_desc">Due to change in permission strategy of Android 6.0 and above, %1$s needs your permission to access your Storage?</string>
 
-
+<string name="share_course"> could be useful for you – Let’s Gro www.letsgro.in</string>
     <string name="dynamic_required">%1$s Required</string>
     <string name="invalid_email_id">Invalid Email Id</string>
     <string name="courses">Courses</string>
