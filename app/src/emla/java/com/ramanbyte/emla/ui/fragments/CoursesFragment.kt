@@ -1,8 +1,10 @@
 package com.ramanbyte.emla.ui.fragments
 
 import android.content.Context
+import android.content.Intent
 import android.os.Build
 import android.text.TextUtils
+import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -19,6 +21,7 @@ import com.ramanbyte.R
 import com.ramanbyte.base.BaseFragment
 import com.ramanbyte.databinding.FragmentCoursesBinding
 import com.ramanbyte.emla.adapters.CoursesAdapter
+import com.ramanbyte.emla.models.CoursesModel
 import com.ramanbyte.emla.view.RecommendedCourseFilterBottomSheet
 import com.ramanbyte.emla.view_model.CoursesViewModel
 import com.ramanbyte.utilities.*
@@ -89,6 +92,18 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
                     isFilterApplied.postValue(null)
                 }
             })
+            shareLiveData.observe(this@CoursesFragment, Observer {
+                it?.let{
+                Log.d("course_name",it.toString())
+                    val shareIntent = Intent()
+                    shareIntent.action = Intent.ACTION_SEND
+                    shareIntent.putExtra(Intent.EXTRA_TEXT,it.toString()+" "+BindingUtils.string(R.string.share_course))
+                    shareIntent.type = "text/plain"
+                    startActivity(Intent.createChooser(shareIntent,"send to"))
+                }
+
+            })
+
         }
     }
 

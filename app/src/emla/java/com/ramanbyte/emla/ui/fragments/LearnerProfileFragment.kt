@@ -102,6 +102,9 @@ class LearnerProfileFragment :
                 layoutBinding.viewPageLearnerProfile.currentItem = 1
 
             })
+            goToNexttPageLiveData.observe(viewLifecycleOwner,Observer{
+                layoutBinding.viewPageLearnerProfile.currentItem = 2
+            })
 
             showPledgeDialogLiveData.observe(viewLifecycleOwner, Observer {
 
@@ -144,6 +147,7 @@ class LearnerProfileFragment :
             ).apply {
 
                 addFragmentView(PersonalDetailFragment())
+                addFragmentView(StateDetailsFragment())
                 addFragmentView(EducationDetailFragment())
             }
 
