@@ -33,13 +33,27 @@ android {
             jvmTarget = "1.8"
         }
     }
-    flavorDimensions "mode"
+    flavorDimensions "app", "env"
     productFlavors {
         emla {
-            dimension "mode"
+            dimension "app"
+            applicationId "com.ramanbyte.emla"
+        }
+
+        qa {
+            dimension "env"
             buildConfigField("String", "S3_OBJECT", "\"test\"")
             buildConfigField("String", "CLIENT_BASE", "\"test\"")
-            applicationId "com.ramanbyte.emla"
+        }
+        uat {
+            dimension "env"
+            buildConfigField("String", "S3_OBJECT", "\"uat\"")
+            buildConfigField("String", "CLIENT_BASE", "\"uat\"")
+        }
+        prod {
+            dimension "env"
+            buildConfigField("String", "S3_OBJECT", "\"prod\"")
+            buildConfigField("String", "CLIENT_BASE", "\"prod\"")
         }
     }
     compileOptions {
