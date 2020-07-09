@@ -4,23 +4,23 @@ import androidx.fragment.app.Fragment
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseFragment
 import androidx.lifecycle.Observer
-import com.ramanbyte.databinding.FragmentStateDetailBinding
+import com.ramanbyte.databinding.FragmentAddressDetailBinding
 import com.ramanbyte.emla.view_model.LearnerProfileViewModel
 import com.ramanbyte.models.SpinnerModel
 import com.ramanbyte.utilities.*
-import kotlinx.android.synthetic.emla.fragment_state_detail.*
+import kotlinx.android.synthetic.emla.fragment_address_detail.*
 
 /**
  * A simple [Fragment] subclass.
  */
-class StateDetailsFragment :
-    BaseFragment<FragmentStateDetailBinding, LearnerProfileViewModel>(
+class AddressDetailsFragment :
+    BaseFragment<FragmentAddressDetailBinding, LearnerProfileViewModel>(
         useParent = true
     ) {
     override val viewModelClass: Class<LearnerProfileViewModel> =
         LearnerProfileViewModel::class.java
 
-    override fun layoutId(): Int = R.layout.fragment_state_detail
+    override fun layoutId(): Int = R.layout.fragment_address_detail
 
     var statesMasterSpinnerUtil: MasterSpinnerUtil? = null
     var citiesMasterSpinnerUtil: MasterSpinnerUtil? = null
@@ -44,7 +44,7 @@ class StateDetailsFragment :
 
      private fun setupSpinners() {
 
-         statesMasterSpinnerUtil = MasterSpinnerUtil(context!!, this@StateDetailsFragment)
+         statesMasterSpinnerUtil = MasterSpinnerUtil(context!!, this@AddressDetailsFragment)
 
          statesMasterSpinnerUtil?.setup(layoutBinding.spState, defaultSelectAction = {
 
@@ -55,7 +55,7 @@ class StateDetailsFragment :
              }
          }, initialSelection = viewModel?.registrationModelLiveData?.value?.state ?: 0)
 
-         citiesMasterSpinnerUtil = MasterSpinnerUtil(context!!, this@StateDetailsFragment).apply {
+         citiesMasterSpinnerUtil = MasterSpinnerUtil(context!!, this@AddressDetailsFragment).apply {
              setup(layoutBinding.actvCity)
          }
      }
@@ -67,7 +67,7 @@ class StateDetailsFragment :
              isSettingCity = true
              citiesQueryLiveData.value = registrationModelLiveData?.value?.cityName
 
-             statesListLiveData.observe(this@StateDetailsFragment, Observer { statesList ->
+             statesListLiveData.observe(this@AddressDetailsFragment, Observer { statesList ->
 
                  statesList?.apply {
 
@@ -101,7 +101,7 @@ class StateDetailsFragment :
                  }
              })
 
-             citiesQueryLiveData.observe(this@StateDetailsFragment, Observer { query ->
+             citiesQueryLiveData.observe(this@AddressDetailsFragment, Observer { query ->
 
                  if (!isSettingCity) {
 
