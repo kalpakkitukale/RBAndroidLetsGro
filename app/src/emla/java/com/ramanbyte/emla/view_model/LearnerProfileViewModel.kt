@@ -138,14 +138,14 @@ class LearnerProfileViewModel(private val mContext: Context) : BaseViewModel(mCo
                         BindingUtils.string(R.string.first_name)
                     )
                 )
-                addRule(
+               /* addRule(
                     keyMiddleName,
                     ValidationFlags.FIELD_REQUIRED,
                     BindingUtils.string(
                         R.string.dynamic_required,
                         BindingUtils.string(R.string.middleName)
                     )
-                )
+                )*/
                 addRule(
                     keyLastName,
                     ValidationFlags.FIELD_REQUIRED,
