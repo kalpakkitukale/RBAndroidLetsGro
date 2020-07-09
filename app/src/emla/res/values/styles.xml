@@ -335,6 +335,9 @@
         <item name="chipIconSize">@dimen/dp_15</item>
     </style>
 
+    <style name="BottomNavigationViewTextStyle">
+        <item name="android:fontFamily">@font/roboto_regular</item>
+    </style>
 
 
 </resources>

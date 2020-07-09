@@ -11,12 +11,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.ramanbyte.R
-import com.ramanbyte.aws_s3_android.accessor.AppS3Client
 import com.ramanbyte.databinding.CardFacultyCourseBinding
 import com.ramanbyte.emla.faculty.models.FacultyCoursesModel
 import com.ramanbyte.emla.faculty.view_model.FacultyCoursesViewModel
-import com.ramanbyte.emla.models.CoursesModel
 import com.ramanbyte.utilities.KEY_BLANK
+import com.ramanbyte.utilities.StaticMethodUtilitiesKtx
 
 class FacultyCoursesAdapter(var mContext: Context?) :
     PagedListAdapter<FacultyCoursesModel, FacultyCoursesAdapter.FacultyCoursesViewHolder>(
@@ -42,7 +41,8 @@ class FacultyCoursesAdapter(var mContext: Context?) :
         val coursesModel: FacultyCoursesModel = getItem(position)!!
         holder.bind(coursesModel.apply {
             courseImageUrl =
-                AppS3Client.createInstance(context!!).getFileAccessUrl(courseImage ?: KEY_BLANK)
+                StaticMethodUtilitiesKtx.getS3DynamicURL(courseImage ?: KEY_BLANK, context!!)
+            /*AppS3Client.createInstance(context!!).getFileAccessUrl(courseImage ?: KEY_BLANK)*/
         })
     }
 

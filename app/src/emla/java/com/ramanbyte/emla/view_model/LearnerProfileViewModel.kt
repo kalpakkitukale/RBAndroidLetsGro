@@ -49,9 +49,13 @@ class LearnerProfileViewModel(private val mContext: Context) : BaseViewModel(mCo
 
     var personalDetailsDataValidator: ObservableValidator<RegistrationModel>? = null
 
+    var stateDetailsDataValidator:ObservableValidator<RegistrationModel>?=null
+
     var educationDetailsDataValidator: ObservableValidator<RegistrationModel>? = null
 
     var goToNextPageLiveData = MutableLiveData<Boolean>(false)
+
+    var goToNexttPageLiveData = MutableLiveData<Boolean>(false)
 
     var showDatePickerDailogLiveData = MutableLiveData<Boolean>(false)
 
@@ -134,14 +138,14 @@ class LearnerProfileViewModel(private val mContext: Context) : BaseViewModel(mCo
                         BindingUtils.string(R.string.first_name)
                     )
                 )
-                addRule(
+               /* addRule(
                     keyMiddleName,
                     ValidationFlags.FIELD_REQUIRED,
                     BindingUtils.string(
                         R.string.dynamic_required,
                         BindingUtils.string(R.string.middleName)
                     )
-                )
+                )*/
                 addRule(
                     keyLastName,
                     ValidationFlags.FIELD_REQUIRED,
@@ -193,6 +197,45 @@ class LearnerProfileViewModel(private val mContext: Context) : BaseViewModel(mCo
                     limit = 10
                 )
 
+               /* addRule(
+                    keyState,
+                    ValidationFlags.FIELD_SPINNER_SELECTION,
+                    BindingUtils.string(
+                        R.string.dynamic_required,
+                        BindingUtils.string(
+                            R.string.state
+                        )
+                    ),
+                    spinnerSelectPosition = -1
+                )
+
+                *//*   addRule(
+                       keyCity,
+                       ValidationFlags.FIELD_SPINNER_SELECTION,
+                       BindingUtils.string(
+                           R.string.dynamic_required,
+                           BindingUtils.string(
+                               R.string.city
+                           )
+                       ),
+                       spinnerSelectPosition = -1
+                   )*//*
+
+                addRule(
+                    keyCity,
+                    ValidationFlags.FIELD_SPINNER_SELECTION,
+                    BindingUtils.string(
+                        R.string.dynamic_required,
+                        BindingUtils.string(
+                            R.string.city
+                        )
+                    ),
+                    spinnerSelectPosition = -1
+                )*/
+            }
+
+        stateDetailsDataValidator=
+            ObservableValidator(registrationModelLiveData?.value!!, BR::class.java).apply {
                 addRule(
                     keyState,
                     ValidationFlags.FIELD_SPINNER_SELECTION,
@@ -566,6 +609,10 @@ class LearnerProfileViewModel(private val mContext: Context) : BaseViewModel(mCo
 
         if (personalDetailsDataValidator?.validateAll() == true && isCityAvailable)
             goToNextPageLiveData.value = true
+    }
+    fun saveStateDetails(view: View){
+        if (stateDetailsDataValidator?.validateAll() == true && isCityAvailable)
+            goToNexttPageLiveData.value = true
     }
 
     fun saveProfile(view: View) {

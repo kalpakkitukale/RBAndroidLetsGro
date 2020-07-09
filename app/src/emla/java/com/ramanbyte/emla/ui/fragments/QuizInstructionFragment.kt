@@ -49,10 +49,13 @@ class QuizInstructionFragment : BaseFragment<FragmentQuizInstructionBinding, Sho
     private fun setViewModelObservers() {
         viewModel.apply {
 
-            coursesModelLiveData.value?.courseImageUrl =
+            /*coursesModelLiveData.value?.courseImageUrl =
                 AppS3Client.createInstance(context!!).getFileAccessUrl(
                     coursesModelLiveData.value?.courseImage ?: KEY_BLANK
-                ) ?: ""
+                ) ?: ""*/
+
+            coursesModelLiveData.value?.courseImageUrl =
+                StaticMethodUtilitiesKtx.getS3DynamicURL(coursesModelLiveData.value?.courseImage ?: KEY_BLANK, context!!)
 
             AppLog.infoLog("courseImageUrl ${coursesModelLiveData.value?.courseImageUrl}")
 

@@ -271,8 +271,9 @@ class ContentViewer(
                     mediaType = KEY_MEDIA_TYPE_VIDEO
                     if (isDownload)
                         mediaStatus = Download.STATE_DOWNLOADING
-                    AppS3Client.createInstance(context)
-                        .getFileAccessUrl(contentModel.content_link)!!
+                    StaticMethodUtilitiesKtx.getS3DynamicURL(contentModel.content_link, context)!!
+                    /*AppS3Client.createInstance(context)
+                        .getFileAccessUrl(contentModel.content_link)!!*/
 
                 }
                 mimeType?.contains(KEY_MEDIA_TYPE_AUDIO) == true -> {
@@ -280,8 +281,9 @@ class ContentViewer(
                         mediaStatus = Download.STATE_DOWNLOADING
 
                     mediaType = KEY_MEDIA_TYPE_AUDIO
-                    AppS3Client.createInstance(context)
-                        .getFileAccessUrl(contentModel.content_link)!!
+                    StaticMethodUtilitiesKtx.getS3DynamicURL(contentModel.content_link, context)!!
+                    /*AppS3Client.createInstance(context)
+                        .getFileAccessUrl(contentModel.content_link)!!*/
 
                 }
                 else -> {

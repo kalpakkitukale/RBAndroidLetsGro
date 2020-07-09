@@ -2,20 +2,13 @@ package com.ramanbyte.emla.ui.fragments
 
 import android.app.DatePickerDialog
 import android.app.Dialog
-import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
-import android.widget.CalendarView
-import android.widget.DatePicker
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.lifecycle.Observer
-import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.ramanbyte.R
-import com.ramanbyte.aws_s3_android.accessor.AppS3Client
 import com.ramanbyte.base.BaseFragment
 import com.ramanbyte.databinding.FragmentLearnerProfileBinding
 import com.ramanbyte.databinding.PledgeDialogBinding
@@ -74,9 +67,14 @@ class LearnerProfileFragment :
                     if (city != 0)
                         isCityAvailable = true
 
-                    profileImageUrl.value =
+                    /*profileImageUrl.value =
                         AppS3Client.createInstance(context!!)
-                            .getFileAccessUrl(userImageFilename ?: "")
+                            .getFileAccessUrl(userImageFilename ?: "")*/
+                    profileImageUrl.value =
+                        StaticMethodUtilitiesKtx.getS3DynamicURL(
+                            userImageFilename ?: KEY_BLANK,
+                            context!!
+                        )
 
                     setValidation()
                     setupViewPager()
@@ -96,6 +94,9 @@ class LearnerProfileFragment :
 
                 layoutBinding.viewPageLearnerProfile.currentItem = 1
 
+            })
+            goToNexttPageLiveData.observe(viewLifecycleOwner,Observer{
+                layoutBinding.viewPageLearnerProfile.currentItem = 2
             })
 
             showPledgeDialogLiveData.observe(viewLifecycleOwner, Observer {
@@ -139,6 +140,7 @@ class LearnerProfileFragment :
             ).apply {
 
                 addFragmentView(PersonalDetailFragment())
+                addFragmentView(AddressDetailsFragment())
                 addFragmentView(EducationDetailFragment())
             }
 

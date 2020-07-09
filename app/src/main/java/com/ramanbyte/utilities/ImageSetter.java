@@ -27,10 +27,10 @@ public class ImageSetter {
         if (!TextUtils.isEmpty(url))
             GlideApp.with(imageView.getContext())
                     .load(url)
-                    .override((int) BindingUtils.dimen(R.dimen.dp_40), (int) BindingUtils.dimen(R.dimen.dp_40))
+                    /*.override((int) BindingUtils.dimen(R.dimen.dp_40), (int) BindingUtils.dimen(R.dimen.dp_40))*/
                     .placeholder(drawable)
-                    .diskCacheStrategy(DiskCacheStrategy.NONE)
-                    .skipMemoryCache(true)
+                    /*.diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .skipMemoryCache(true)*/
                     .dontAnimate()
                     .into(imageView);
 

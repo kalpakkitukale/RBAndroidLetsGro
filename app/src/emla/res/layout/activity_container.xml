@@ -55,6 +55,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
+            app:itemTextAppearanceActive="@style/BottomNavigationViewTextStyle"
+            app:itemTextAppearanceInactive="@style/BottomNavigationViewTextStyle"
             app:itemIconSize="@dimen/dp_20"
             app:labelVisibilityMode="labeled"
             app:layout_constraintBottom_toBottomOf="parent"

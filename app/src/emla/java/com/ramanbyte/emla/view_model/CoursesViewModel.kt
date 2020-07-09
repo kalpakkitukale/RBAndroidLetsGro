@@ -1,6 +1,7 @@
 package com.ramanbyte.emla.view_model
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.databinding.ObservableField
@@ -9,6 +10,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.navigation.findNavController
 import androidx.paging.PagedList
 import com.ramanbyte.R
+import com.ramanbyte.aws_s3_android.utilities.S3Constant.Companion.mContext
 import com.ramanbyte.base.BaseViewModel
 import com.ramanbyte.data_layer.pagination.PaginationMessages
 import com.ramanbyte.emla.data_layer.repositories.CoursesRepository
@@ -33,6 +35,10 @@ class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
 
     var isFilterApplied = MutableLiveData<Boolean>(null)
 
+    var shareLiveData =  MutableLiveData<String>().apply {
+        value = null
+    }
+
     var tempFilterModel = CoursesRequest()
     var filterRequestModel = CoursesRequest()
     val dismissBottomSheet = MutableLiveData<Boolean>().apply {
@@ -41,6 +47,7 @@ class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
     val clearFilter = MutableLiveData<Boolean>().apply {
         value = null
     }
+
     var programsListMutableLiveData = MutableLiveData<List<CommonDropdownModel>>()
     var patternsListMutableLiveData = MutableLiveData<List<CommonDropdownModel>>()
     var specializationsListMutableLiveData = MutableLiveData<List<CommonDropdownModel>>()
@@ -96,6 +103,7 @@ class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
     /*
  * Go to Course Details or Pre-assessment
  * */
+
     fun courseClick(view: View, coursesModel: CoursesModel) {
         coursesModel.let { model ->
             if (NetworkConnectivity.isConnectedToInternet()) {
@@ -133,6 +141,12 @@ class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
                 isAlertDialogShown.postValue(true)
             }
         }
+    }
+    fun shareClick(view: View,courseName:String){
+
+
+        shareLiveData.value=courseName
+
     }
 
     fun onCloseBottomSheet(view: View) {

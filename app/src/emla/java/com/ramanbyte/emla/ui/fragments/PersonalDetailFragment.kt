@@ -65,12 +65,12 @@ class PersonalDetailFragment :
             ivUserImage.setOnClickListener { openPickerDialog() }
         }
 
-        setupSpinners()
+       /* setupSpinners()
 
-        viewModelOps()
+        viewModelOps()*/
     }
 
-    private fun setupSpinners() {
+   /* private fun setupSpinners() {
 
         statesMasterSpinnerUtil = MasterSpinnerUtil(context!!, this@PersonalDetailFragment)
 
@@ -86,9 +86,9 @@ class PersonalDetailFragment :
         citiesMasterSpinnerUtil = MasterSpinnerUtil(context!!, this@PersonalDetailFragment).apply {
             setup(layoutBinding.actvCity)
         }
-    }
+    }*/
 
-    private fun viewModelOps() {
+   /* private fun viewModelOps() {
 
         viewModel.apply {
 
@@ -220,7 +220,7 @@ class PersonalDetailFragment :
                 }
             })
         }
-    }
+    }*/
 
     private fun openPickerDialog() {
         val builder: android.app.AlertDialog.Builder =

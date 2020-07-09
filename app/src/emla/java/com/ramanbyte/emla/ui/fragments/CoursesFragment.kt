@@ -1,13 +1,17 @@
 package com.ramanbyte.emla.ui.fragments
 
 import android.content.Context
+import android.content.Intent
+import android.os.Build
 import android.text.TextUtils
+import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
+import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -17,6 +21,7 @@ import com.ramanbyte.R
 import com.ramanbyte.base.BaseFragment
 import com.ramanbyte.databinding.FragmentCoursesBinding
 import com.ramanbyte.emla.adapters.CoursesAdapter
+import com.ramanbyte.emla.models.CoursesModel
 import com.ramanbyte.emla.view.RecommendedCourseFilterBottomSheet
 import com.ramanbyte.emla.view_model.CoursesViewModel
 import com.ramanbyte.utilities.*
@@ -87,12 +92,25 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
                     isFilterApplied.postValue(null)
                 }
             })
+            shareLiveData.observe(this@CoursesFragment, Observer {
+                it?.let{
+                Log.d("course_name",it.toString())
+                    val shareIntent = Intent()
+                    shareIntent.action = Intent.ACTION_SEND
+                    shareIntent.putExtra(Intent.EXTRA_TEXT,it.toString()+" "+BindingUtils.string(R.string.share_course))
+                    shareIntent.type = "text/plain"
+                    startActivity(Intent.createChooser(shareIntent,"send to"))
+                }
+
+            })
+
         }
     }
 
     var menu: Menu? = null
     private var mSearchView: SearchView? = null
     var searchItem: MenuItem? = null
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_course_search, menu)
 
@@ -112,8 +130,10 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
         val searchEditText = mSearchView!!.findViewById(R.id.search_src_text) as EditText
 
         searchEditText.setTextColor(BindingUtils.color(R.color.colorWhite))
-        searchEditText.setHintTextColor(BindingUtils.color(R.color.colorTransparent))
         searchEditText.hint = BindingUtils.string(R.string.search_by_course)
+
+        searchEditText.setTextAppearance(R.style.AppTheme_Font)
+        searchEditText.setHintTextColor(BindingUtils.color(R.color.colorWhite))
 
         val searchClose = mSearchView?.findViewById(R.id.search_close_btn) as ImageView
         searchClose.apply {
