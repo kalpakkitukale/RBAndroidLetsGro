@@ -41,6 +41,9 @@ class LoginViewModel(var mContext: Context) : BaseViewModel(mContext) {
     var isPledgeConfirm: MutableLiveData<Boolean?> = MutableLiveData(null)
     var navigateToNextScreen: MutableLiveData<Boolean?> = MutableLiveData(null)
 
+    var btnGoogleLogin = MutableLiveData<Boolean?>(null)
+    var btnFbLogin = MutableLiveData<Boolean?>(null)
+
     init {
         loaderMessageLiveData.set(BindingUtils.string(R.string.str_loading))
     }
@@ -168,6 +171,14 @@ class LoginViewModel(var mContext: Context) : BaseViewModel(mContext) {
         forgotPasswordClick.value = true
     }
 
+    fun googleLogIn(view: View){
+        btnGoogleLogin.value = true
+    }
+
+    fun fbLogIn(view: View){
+        btnFbLogin.value = true
+    }
+
     private fun checkPermission() {
         if (PermissionsManager.checkPermission(
                 mContext as Activity,
@@ -178,5 +189,6 @@ class LoginViewModel(var mContext: Context) : BaseViewModel(mContext) {
             AppLog.infoLog("read phone state not permitted")
         }
     }
+
 
 }

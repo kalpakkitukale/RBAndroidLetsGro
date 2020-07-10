@@ -70,11 +70,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:alpha="0.6"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHeight_percent="0.35"
-                app:srcCompat="@drawable/ic_login_background"
-                app:layout_constraintTop_toBottomOf="@+id/conImageElement"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                app:layout_constraintTop_toBottomOf="@+id/conImageElement"
+                app:srcCompat="@drawable/ic_login_background" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardLayoutMain"
@@ -208,16 +208,58 @@
                 app:layout_constraintVertical_chainStyle="packed"
                 app:layout_constraintWidth_percent="0.8" />
 
+            <Button
+                android:id="@+id/btnGoogleLogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="@dimen/dp_20"
+                android:onClick="@{loginViewModel::googleLogIn}"
+                android:text="Google Sign In"
+                app:layout_constraintBottom_toTopOf="@+id/ivElement1"
+                app:layout_constraintEnd_toStartOf="@+id/btnFbLogin"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lblSignup" />
+
+            <Button
+                android:id="@+id/btnFbLogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="@dimen/dp_20"
+                android:onClick="@{loginViewModel::fbLogIn}"
+                android:text="Facebook Sign In"
+                app:layout_constraintBottom_toBottomOf="@+id/btnGoogleLogin"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/btnGoogleLogin"
+                app:layout_constraintTop_toTopOf="@+id/btnGoogleLogin" />
+
+            <!--<com.facebook.login.widget.LoginButton
+                android:id="@+id/login_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toTopOf="@+id/ivElement1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/sign_in_button"
+                app:layout_constraintTop_toBottomOf="@+id/lblSignup" />
+
+            <com.google.android.gms.common.SignInButton
+                android:id="@+id/sign_in_button"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="@+id/login_button"
+                app:layout_constraintEnd_toStartOf="@+id/login_button"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/login_button"/>-->
+
+
+
             <TextView
                 android:id="@+id/lblSignup"
                 style="@style/TextViewRegularBlackOnWhite"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_20"
-                android:layout_marginBottom="@dimen/dp_30"
+                android:layout_marginTop="@dimen/dp_10"
                 android:text="@string/have_an_account"
                 android:textSize="@dimen/sp_12"
-                app:layout_constraintBottom_toTopOf="@+id/ivElement1"
                 app:layout_constraintEnd_toStartOf="@+id/ivClientLogo"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintStart_toStartOf="parent"

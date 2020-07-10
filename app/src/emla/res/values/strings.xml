@@ -277,4 +277,8 @@ Content
     <string name="tomorrow">Tomorrow</string>
 
     <string name="yesterday">Yesterday</string>
+
+    //login with facebook key
+    <string name="facebook_app_id">256607422269546</string>
+    <string name="fb_login_protocol_scheme">fb256607422269546</string>
 </resources>

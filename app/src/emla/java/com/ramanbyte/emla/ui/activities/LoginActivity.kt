@@ -6,25 +6,36 @@ import android.app.Dialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Bundle
 import android.provider.Settings
+import android.util.Log
 import android.view.LayoutInflater
 import androidx.lifecycle.Observer
 import androidx.work.Data
 import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
+import com.facebook.*
+import com.facebook.login.LoginManager
+import com.facebook.login.LoginResult
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.tasks.Task
 import com.google.android.material.snackbar.Snackbar
 import com.ramanbyte.BaseAppController
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseActivity
 import com.ramanbyte.databinding.ActivityLoginBinding
 import com.ramanbyte.databinding.FacultyPledgeDialogBinding
-import com.ramanbyte.databinding.PledgeDialogBinding
 import com.ramanbyte.emla.base.di.authModuleDependency
 import com.ramanbyte.emla.faculty.ui.activities.FacultyContainerActivity
 import com.ramanbyte.emla.view_model.LoginViewModel
 import com.ramanbyte.services.MangeUserDevice
 import com.ramanbyte.utilities.*
 import com.ramanbyte.utilities.StaticMethodUtilitiesKtx.setIMEINumber
+import org.json.JSONObject
 
 /**
  * @AddedBy Vinay Kumbhar <vinay.k@ramanbyte.com>
@@ -32,6 +43,13 @@ import com.ramanbyte.utilities.StaticMethodUtilitiesKtx.setIMEINumber
  */
 
 class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(authModuleDependency) {
+
+    private var callbackManager: CallbackManager?=null
+    private var accessToken:AccessToken?=null
+    var isLoggedIn:Boolean = false
+    lateinit var mGoogleSignInClient: GoogleSignInClient
+    private val RC_SIGN_IN = 101
+
     override val viewModelClass: Class<LoginViewModel> = LoginViewModel::class.java
 
     override fun layoutId(): Int = R.layout.activity_login
@@ -46,8 +64,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(authMod
             AlertDialog(this@LoginActivity, viewModel)
         }
         setViewModelOps()
+        initGoogleSignInClient()
     }
-
     private fun setViewModelOps() {
         viewModel.apply {
            /* if (userEntity != null)
@@ -83,6 +101,24 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(authMod
 
             })
 
+            btnGoogleLogin.observe(this@LoginActivity, Observer {
+                if (it != null){
+                    if(it == true){
+                        signIn()
+                        btnGoogleLogin.value = null
+                    }
+                }
+            })
+
+            btnFbLogin.observe(this@LoginActivity, Observer {
+                if (it != null){
+                    if(it == true){
+                        initFbLogin()
+                        btnFbLogin.value = null
+                    }
+                }
+            })
+
         }
     }
 
@@ -107,6 +143,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(authMod
         dialog.setCanceledOnTouchOutside(false)
 
         viewModel.apply {
+
             navigateToNextScreen.observe(this@LoginActivity, Observer {
                 if (it != null) {
                     if (it == true) {
@@ -203,6 +240,115 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(authMod
             tvForgetPassword.setOnClickListener {
                 startActivity(ForgotPasswordActivity.intent(this@LoginActivity))
             }
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        callbackManager?.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode === RC_SIGN_IN) {
+
+            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+            handleSignInResult(task)
+        }
+    }
+
+    private fun initFbLogin(){
+
+        accessToken = AccessToken.getCurrentAccessToken()
+        isLoggedIn = accessToken != null && accessToken!!.isExpired
+
+        if(isLoggedIn != true){
+
+            callbackManager = CallbackManager.Factory.create()
+            LoginManager.getInstance().logInWithReadPermissions(this@LoginActivity,
+                arrayListOf("public_profile","email"))
+
+            LoginManager.getInstance().registerCallback(callbackManager,
+                object : FacebookCallback<LoginResult?> {
+
+                    override fun onSuccess(loginResult: LoginResult?) {
+                        Log.d("APPINFO","LoggedIn success :"+loginResult)
+
+                        callWorkerToMangeUserDevice()
+                        startActivity(ContainerActivity.intent(this@LoginActivity))
+                        finish()
+                        BaseAppController.setEnterPageAnimation(this@LoginActivity)
+
+                        val request = GraphRequest.newMeRequest(
+                            loginResult!!.accessToken,
+                            object : GraphRequest.GraphJSONObjectCallback{
+                                override fun onCompleted(jsonObject:JSONObject?, response: GraphResponse?) {
+
+                                    // for email we have to add permissions for email in facebook developer consol
+
+                                    AppLog.infoLog("UserInfo"
+                                            +loginResult.accessToken
+                                            +jsonObject?.getString("id")
+                                            +jsonObject?.getString("name"))
+                                }
+                            })
+
+                        var parameters = Bundle()
+                        parameters.putString("fields","id,name,email,gender")
+                        request.parameters = parameters
+                        request.executeAsync()
+                    }
+                    override fun onCancel() {
+                        Log.d("APPINFO","LoggedIn Cancle :")
+                    }
+                    override fun onError(exception: FacebookException) {
+
+                        Log.d("APPINFO","LoggedIn Error :")
+                    }
+                })
+
+        }
+
+
+    }
+
+    private fun initGoogleSignInClient() {
+        val googleSignInOptions =
+            GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+        mGoogleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions)
+    }
+
+    private fun signIn() {
+        val signInIntent: Intent = mGoogleSignInClient.getSignInIntent()
+        startActivityForResult(signInIntent, RC_SIGN_IN)
+    }
+
+    private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
+
+        if (completedTask.isSuccessful){
+
+            callWorkerToMangeUserDevice()
+            startActivity(ContainerActivity.intent(this@LoginActivity))
+            finish()
+            BaseAppController.setEnterPageAnimation(this@LoginActivity)
+
+            try {
+                val account = completedTask.getResult(ApiException::class.java)
+                // Signed in successfully
+                AppLog.infoLog("USER INFO :"
+                        +"ID"+account?.id
+                        +"First Name"+account?.givenName
+                        +"Last Name"+account?.familyName
+                        +"Email"+account?.email
+                        +"Profile URL"+account?.photoUrl.toString()
+                        +"Token ID"+account?.idToken )
+
+            } catch (e: ApiException) {
+                // Sign in was unsuccessful
+                Log.e("failed code=", e.statusCode.toString())
+            }
+
         }
     }
 }

@@ -13,8 +13,8 @@ android {
         /*applicationId "com.ramanbyte.emla"*/
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 19
-        versionName "2.0.1"
+        versionCode 20
+        versionName "2.0.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -33,13 +33,27 @@ android {
             jvmTarget = "1.8"
         }
     }
-    flavorDimensions "mode"
+    flavorDimensions "app", "env"
     productFlavors {
         emla {
-            dimension "mode"
+            dimension "app"
+            applicationId "com.ramanbyte.emla"
+        }
+
+        qa {
+            dimension "env"
             buildConfigField("String", "S3_OBJECT", "\"test\"")
             buildConfigField("String", "CLIENT_BASE", "\"test\"")
-            applicationId "com.ramanbyte.emla"
+        }
+        uat {
+            dimension "env"
+            buildConfigField("String", "S3_OBJECT", "\"uat\"")
+            buildConfigField("String", "CLIENT_BASE", "\"uat\"")
+        }
+        prod {
+            dimension "env"
+            buildConfigField("String", "S3_OBJECT", "\"prod\"")
+            buildConfigField("String", "CLIENT_BASE", "\"prod\"")
         }
     }
     compileOptions {
@@ -132,4 +146,9 @@ dependencies {
     implementation 'com.google.android.exoplayer:exoplayer:2.10.0'
 
     implementation 'com.github.barteksc:android-pdf-viewer:2.8.2'
+
+    //Login with Google and Facebook
+
+    implementation 'com.facebook.android:facebook-android-sdk:5.15.3'
+    implementation 'com.google.android.gms:play-services-auth:18.0.0'
 }
