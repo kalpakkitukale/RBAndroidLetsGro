@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Build
 import android.text.TextUtils
 import android.util.Log
+import android.util.TypedValue
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -13,11 +14,14 @@ import android.widget.EditText
 import android.widget.ImageView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.SearchView
+import androidx.core.app.ShareCompat
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.ramanbyte.BuildConfig
 import com.ramanbyte.R
+import com.ramanbyte.R.id.search_src_text
 import com.ramanbyte.base.BaseFragment
 import com.ramanbyte.databinding.FragmentCoursesBinding
 import com.ramanbyte.emla.adapters.CoursesAdapter
@@ -97,7 +101,9 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
                 Log.d("course_name",it.toString())
                     val shareIntent = Intent()
                     shareIntent.action = Intent.ACTION_SEND
-                    shareIntent.putExtra(Intent.EXTRA_TEXT,it.toString()+" "+BindingUtils.string(R.string.share_course))
+
+                    val link:String="url=http://www.ramanbyte.com/emla&"+"https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID+"referrer=data#Intent;scheme=market;action=android.intent.action.VIEW;package=com.android.vending;end"
+                    shareIntent.putExtra(Intent.EXTRA_TEXT,it.toString()+" "+BindingUtils.string(R.string.share_course)+" "+link)
                     shareIntent.type = "text/plain"
                     startActivity(Intent.createChooser(shareIntent,"send to"))
                 }
@@ -127,10 +133,13 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
 
         mSearchView = searchItem?.actionView as SearchView
 
-        val searchEditText = mSearchView!!.findViewById(R.id.search_src_text) as EditText
+        val searchEditText = mSearchView!!.findViewById(search_src_text) as EditText
 
         searchEditText.setTextColor(BindingUtils.color(R.color.colorWhite))
-        searchEditText.hint = BindingUtils.string(R.string.search_by_course)
+        searchEditText.hint = BindingUtils.string(R.string.search_by_course_or_keywords)
+        searchEditText.setTextSize(
+            TypedValue.COMPLEX_UNIT_PX,
+            resources.getDimension(R.dimen.sp_12))
 
         searchEditText.setTextAppearance(R.style.AppTheme_Font)
         searchEditText.setHintTextColor(BindingUtils.color(R.color.colorWhite))

@@ -25,7 +25,7 @@
     <string name="questions_and_answer">Questions And Answer</string>
     <string name="save">save</string>
     <string name="next">Next</string>
-    <string name="search_by_course">Search by course name</string>
+    <string name="search_by_course_or_keywords">Search by Course name or keywords</string>
     <string name="search_by_student">Search by student name</string>
     <string name="previous">Previous</string>
     <string name="submit_test">Submit Test</string>
