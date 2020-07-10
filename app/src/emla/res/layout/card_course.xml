@@ -78,18 +78,20 @@
                     android:visibility="visible"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@id/tvTopicDescription" />
+
                 <ImageView
                     android:id="@+id/ivShare"
                     android:layout_width="@dimen/dp_22"
                     android:layout_height="@dimen/dp_22"
+                    android:onClick="@{()->coursesViewModel.shareClick(ivShare, coursesModel.courseName)}"
+                    android:padding="@dimen/dp_3"
                     android:layout_marginTop="@dimen/dp_2"
                     android:layout_marginEnd="@dimen/dp_5"
-                    android:padding="@dimen/dp_3"
-                    android:onClick="@{()->coursesViewModel.shareClick(ivShare, coursesModel.courseName)}"
+                    android:paddingTop="@dimen/dp_3"
+                    android:src="@drawable/ic_share"
                     android:visibility="visible"
-                    android:src="@drawable/ic_share_white"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/tvTopicDescription" />
+                    app:layout_constraintTop_toBottomOf="@+id/ivStatus" />
 
                 <TextView
                     android:id="@+id/tvTopicDetail"
