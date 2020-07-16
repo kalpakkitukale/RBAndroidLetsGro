@@ -35,7 +35,7 @@ class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
 
     var isFilterApplied = MutableLiveData<Boolean>(null)
 
-    var shareLiveData =  MutableLiveData<String>().apply {
+    var shareLiveData =  MutableLiveData<CoursesModel>().apply {
         value = null
     }
 
@@ -142,10 +142,10 @@ class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
             }
         }
     }
-    fun shareClick(view: View,courseName:String){
+    fun shareClick(view: View,coursesModel: CoursesModel){
 
 
-        shareLiveData.value=courseName
+        shareLiveData.value=coursesModel
 
     }
 

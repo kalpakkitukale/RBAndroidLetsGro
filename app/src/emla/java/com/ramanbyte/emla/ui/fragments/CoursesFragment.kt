@@ -81,6 +81,7 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
         }
     }
 
+  //share Course Details through a link
     private fun setViewModelOp() {
         viewModel.apply {
 
@@ -98,12 +99,15 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
             })
             shareLiveData.observe(this@CoursesFragment, Observer {
                 it?.let{
-                Log.d("course_name",it.toString())
                     val shareIntent = Intent()
                     shareIntent.action = Intent.ACTION_SEND
-
-                    val link:String="url=http://www.ramanbyte.com/emla&"+"https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID+"referrer=data#Intent;scheme=market;action=android.intent.action.VIEW;package=com.android.vending;end"
-                    shareIntent.putExtra(Intent.EXTRA_TEXT,it.toString()+" "+BindingUtils.string(R.string.share_course)+" "+link)
+                    val courseName: String? = it.courseName?.replace(" ".toRegex(), "%20")
+                    val courseDescription: String? = it.courseDescription?.replace(" ".toRegex(), "%20")
+                    val courseImage: String? = it.courseImage?.replace(" ".toRegex(), "%20")
+                    Log.d("Course_Image",""+courseImage)
+                    val data:String?=courseName+","+courseDescription+","+it.courseCode+","+courseImage+","+it.totalCount
+                    val link:String=  "details?id=" + BuildConfig.APPLICATION_ID+"&http://www.ramanbyte.com/about&url=&referrer="+it.courseId+","+data+"#Intent;scheme=market;action=android.intent.action.VIEW;package=com.android.vending;end\""
+                    shareIntent.putExtra(Intent.EXTRA_TEXT,it.courseName+" "+BindingUtils.string(R.string.share_course)+" "+link)
                     shareIntent.type = "text/plain"
                     startActivity(Intent.createChooser(shareIntent,"send to"))
                 }

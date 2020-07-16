@@ -24,12 +24,12 @@
             android:theme="@style/AppThemeFaculty"
             android:windowSoftInputMode="adjustResize|stateHidden"/>
 
-        <activity android:name=".emla.ui.activities.LauncherActivity">
+        <activity android:name=".emla.ui.activities.LauncherActivity"
+            android:launchMode ="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-
                 <data android:scheme="https" android:host="www.example.com" />
                 <data android:scheme="app" android:host="open.my.app" />
 
@@ -39,7 +39,8 @@
                 <!-- Accepts URIs that begin with "http://www.example.com/gizmos” -->
                 <data android:scheme="http"
                     android:host="www.ramanbyte.com"
-                    android:pathPrefix="/emla" />
+                    android:pathPrefix="/about" />
+
             </intent-filter>
 
 
@@ -50,7 +51,8 @@
         <activity
             android:name=".emla.ui.activities.CreateAccountActivity"
             android:windowSoftInputMode="adjustResize|stateHidden" />
-        <activity android:name=".emla.ui.activities.ContainerActivity" />
+        <activity android:name=".emla.ui.activities.ContainerActivity"
+           />
         <activity android:name=".emla.ui.activities.ForgotPasswordActivity" />
         <activity android:name=".emla.ui.activities.FileViewerActivity" />
         <activity

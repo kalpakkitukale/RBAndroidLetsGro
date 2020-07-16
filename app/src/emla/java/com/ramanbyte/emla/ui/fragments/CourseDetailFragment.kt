@@ -40,7 +40,7 @@ class CourseDetailFragment : BaseFragment<FragmentCourseDetailBinding, CoursesDe
         ProgressLoader(context!!, viewModel)
 
         arguments?.apply {
-            courseModel = getParcelable(KEY_COURSE_MODEL)!!
+            courseModel = getParcelable<CoursesModel>(KEY_COURSE_MODEL)!!
         }
 
         setToolbarTitle(courseModel?.courseName!!)

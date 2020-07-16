@@ -83,15 +83,14 @@
                     android:id="@+id/ivShare"
                     android:layout_width="@dimen/dp_22"
                     android:layout_height="@dimen/dp_22"
-                    android:onClick="@{()->coursesViewModel.shareClick(ivShare, coursesModel.courseName)}"
-                    android:padding="@dimen/dp_3"
-                    android:layout_marginTop="@dimen/dp_2"
                     android:layout_marginEnd="@dimen/dp_5"
+                    android:onClick="@{()->coursesViewModel.shareClick(ivShare, coursesModel)}"
+                    android:padding="@dimen/dp_3"
                     android:paddingTop="@dimen/dp_3"
                     android:src="@drawable/ic_share"
                     android:visibility="visible"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/ivStatus" />
+                    app:layout_constraintTop_toBottomOf="@+id/tvTopicDescription" />
 
                 <TextView
                     android:id="@+id/tvTopicDetail"
