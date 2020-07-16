@@ -7,15 +7,10 @@ import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
-import android.os.Bundle
 import android.provider.MediaStore
 import android.provider.Settings
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.core.content.FileProvider
-import androidx.lifecycle.Observer
 import com.ramanbyte.BaseAppController
 import com.ramanbyte.BuildConfig
 import com.ramanbyte.R
@@ -23,11 +18,9 @@ import com.ramanbyte.base.BaseFragment
 import com.ramanbyte.cropper.ImageCroppingActivity
 import com.ramanbyte.databinding.FragmentPersonalDetailBinding
 import com.ramanbyte.emla.view_model.LearnerProfileViewModel
-import com.ramanbyte.models.SpinnerModel
 import com.ramanbyte.utilities.*
 import droidninja.filepicker.FilePickerBuilder
 import droidninja.filepicker.FilePickerConst
-import kotlinx.android.synthetic.emla.fragment_personal_detail.*
 import java.io.File
 
 
@@ -44,10 +37,7 @@ class PersonalDetailFragment :
 
     override fun layoutId(): Int = R.layout.fragment_personal_detail
 
-    var statesMasterSpinnerUtil: MasterSpinnerUtil? = null
-    var citiesMasterSpinnerUtil: MasterSpinnerUtil? = null
 
-    var isSettingCity = false
 
     private var imagePath = ""
     private var fileName = ""

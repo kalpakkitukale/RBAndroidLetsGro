@@ -2,14 +2,9 @@ package com.ramanbyte.emla.ui.activities
 
 
 import android.content.Intent
-import android.os.Bundle
 import android.os.Handler
 import android.os.Parcelable
-import android.util.Log
 import androidx.lifecycle.Observer
-import androidx.navigation.NavController
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
 import com.ramanbyte.BaseAppController
 import com.ramanbyte.BuildConfig
 import com.ramanbyte.R
@@ -21,7 +16,7 @@ import com.ramanbyte.emla.faculty.ui.activities.FacultyContainerActivity
 import com.ramanbyte.emla.models.CoursesModel
 import com.ramanbyte.emla.view_model.LauncherViewModel
 import com.ramanbyte.utilities.*
-import java.io.Serializable
+
 
 /**
  * @AddedBy Vinay Kumbhar <vinay.k@ramanbyte.com>
@@ -78,7 +73,6 @@ fun handleIntent():Intent{
             val data: MutableList<String>? =appLinkData.pathSegments
 
             val data1 =data?.joinToString()
-            Log.d("TESTING_1",""+data1)
             var result = data1?.split("=", ",")?.map { it.trim() }
 
             var result1=result?.drop(1)
@@ -91,10 +85,9 @@ fun handleIntent():Intent{
             var image=result2?.get(4)
             var imageurl=result2?.get(5)
             var imageUrl=image+"/"+imageurl
-            Log.d("TESTING_1",""+imageUrl)
+
             var totalCount=result2?.get(6)
 
-            Log.d("TESTING_1",""+courseid+courseName+courseDescription+courseCode+totalCount)
             var courseM: CoursesModel= CoursesModel()
 
             courseM.apply {
@@ -106,8 +99,6 @@ fun handleIntent():Intent{
                 this.totalCount=totalCount?.toInt()!!
 
             }
-            Log.d("TESTING_1",""+courseM?.courseId+courseM?.courseName)
-            //openCourse(courseM)
             launcherIntent.putExtra(KEY_COURSE_MODEL, courseM as Parcelable)
         }else{
             launcherIntent

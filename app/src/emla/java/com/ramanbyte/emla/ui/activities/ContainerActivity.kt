@@ -3,12 +3,9 @@ package com.ramanbyte.emla.ui.activities
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
@@ -21,7 +18,6 @@ import com.ramanbyte.emla.view_model.ContainerViewModel
 import com.ramanbyte.utilities.AlertDialog
 import com.ramanbyte.utilities.BindingUtils
 import com.ramanbyte.utilities.KEY_COURSE_MODEL
-import com.ramanbyte.utilities.NetworkConnectivity
 import com.ramanbyte.utilities.StaticMethodUtilitiesKtx.changeStatusBarColor
 import kotlin.reflect.jvm.internal.impl.metadata.ProtoBuf
 
