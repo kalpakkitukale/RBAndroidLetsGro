@@ -146,4 +146,9 @@ dependencies {
     implementation 'com.google.android.exoplayer:exoplayer:2.10.0'
 
     implementation 'com.github.barteksc:android-pdf-viewer:2.8.2'
+
+    //Login with Google and Facebook
+
+    implementation 'com.facebook.android:facebook-android-sdk:5.15.3'
+    implementation 'com.google.android.gms:play-services-auth:18.0.0'
 }

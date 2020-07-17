@@ -138,14 +138,6 @@ class LearnerProfileViewModel(private val mContext: Context) : BaseViewModel(mCo
                         BindingUtils.string(R.string.first_name)
                     )
                 )
-               /* addRule(
-                    keyMiddleName,
-                    ValidationFlags.FIELD_REQUIRED,
-                    BindingUtils.string(
-                        R.string.dynamic_required,
-                        BindingUtils.string(R.string.middleName)
-                    )
-                )*/
                 addRule(
                     keyLastName,
                     ValidationFlags.FIELD_REQUIRED,
@@ -196,42 +188,6 @@ class LearnerProfileViewModel(private val mContext: Context) : BaseViewModel(mCo
                     ),
                     limit = 10
                 )
-
-               /* addRule(
-                    keyState,
-                    ValidationFlags.FIELD_SPINNER_SELECTION,
-                    BindingUtils.string(
-                        R.string.dynamic_required,
-                        BindingUtils.string(
-                            R.string.state
-                        )
-                    ),
-                    spinnerSelectPosition = -1
-                )
-
-                *//*   addRule(
-                       keyCity,
-                       ValidationFlags.FIELD_SPINNER_SELECTION,
-                       BindingUtils.string(
-                           R.string.dynamic_required,
-                           BindingUtils.string(
-                               R.string.city
-                           )
-                       ),
-                       spinnerSelectPosition = -1
-                   )*//*
-
-                addRule(
-                    keyCity,
-                    ValidationFlags.FIELD_SPINNER_SELECTION,
-                    BindingUtils.string(
-                        R.string.dynamic_required,
-                        BindingUtils.string(
-                            R.string.city
-                        )
-                    ),
-                    spinnerSelectPosition = -1
-                )*/
             }
 
         stateDetailsDataValidator=
@@ -247,19 +203,6 @@ class LearnerProfileViewModel(private val mContext: Context) : BaseViewModel(mCo
                     ),
                     spinnerSelectPosition = -1
                 )
-
-                /*   addRule(
-                       keyCity,
-                       ValidationFlags.FIELD_SPINNER_SELECTION,
-                       BindingUtils.string(
-                           R.string.dynamic_required,
-                           BindingUtils.string(
-                               R.string.city
-                           )
-                       ),
-                       spinnerSelectPosition = -1
-                   )*/
-
                 addRule(
                     keyCity,
                     ValidationFlags.FIELD_SPINNER_SELECTION,

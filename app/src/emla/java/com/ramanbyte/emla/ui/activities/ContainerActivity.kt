@@ -2,10 +2,10 @@ package com.ramanbyte.emla.ui.activities
 
 import android.app.Activity
 import android.content.Intent
+import android.os.Bundle
 import android.view.View
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
@@ -13,10 +13,13 @@ import com.ramanbyte.R
 import com.ramanbyte.base.BaseActivity
 import com.ramanbyte.databinding.ActivityContainerBinding
 import com.ramanbyte.emla.base.di.authModuleDependency
+import com.ramanbyte.emla.models.CoursesModel
 import com.ramanbyte.emla.view_model.ContainerViewModel
 import com.ramanbyte.utilities.AlertDialog
 import com.ramanbyte.utilities.BindingUtils
+import com.ramanbyte.utilities.KEY_COURSE_MODEL
 import com.ramanbyte.utilities.StaticMethodUtilitiesKtx.changeStatusBarColor
+import kotlin.reflect.jvm.internal.impl.metadata.ProtoBuf
 
 
 class ContainerActivity : BaseActivity<ActivityContainerBinding, ContainerViewModel>(
@@ -30,8 +33,7 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding, ContainerViewMo
 
     override fun initiate() {
 
-        //Assigning Loader
-        //ProgressLoader(mContext!!, viewModel)
+
         AlertDialog(this, viewModel)
 
         changeStatusBarColor(window, R.color.colorPrimaryDark)
@@ -42,7 +44,7 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding, ContainerViewMo
 
             navController = findNavController(R.id.containerNavHost)
             appBarConfiguration = AppBarConfiguration.Builder(
-                R.id.coursesFragment, R.id.myDownloadsFragment,R.id.myFavouriteVideoFragment,
+                R.id.coursesFragment, R.id.myDownloadsFragment, R.id.myFavouriteVideoFragment,
                 R.id.settingFragment
             ).build()
             setSupportActionBar(mainToolbar)
@@ -51,8 +53,15 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding, ContainerViewMo
                 appBarConfiguration
             )
             visibilityNavElements(navController)
-        }
 
+        //get model data from intent and Assign to CourseDetailsFragment
+            if (intent.hasExtra(KEY_COURSE_MODEL)) {
+                val intentData  : CoursesModel = intent.getParcelableExtra(KEY_COURSE_MODEL) as CoursesModel
+                navController.navigate(R.id.courseDetailFragment,
+                    Bundle().apply { putParcelable(KEY_COURSE_MODEL, intentData)
+                    })
+            }
+        }
     }
 
     private fun visibilityNavElements(navController: NavController) {
@@ -64,7 +73,7 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding, ContainerViewMo
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 R.id.coursesFragment,
-                R.id.myDownloadsFragment,R.id.myFavouriteVideoFragment,
+                R.id.myDownloadsFragment, R.id.myFavouriteVideoFragment,
                 R.id.settingFragment -> showBottomNavigation()//show bottom nav on these fragments only
                 else -> hideBottomNavigation()//hide bottom navigation
             }
@@ -98,8 +107,9 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding, ContainerViewMo
     }
 
     override fun onBackPressed() {
-       if (navController.currentDestination?.id == R.id.coursesFragment) {
+        if (navController.currentDestination?.id == R.id.coursesFragment) {
             moveTaskToBack(true)
+            finish()
         } else if (navController.currentDestination?.id == R.id.learnerProfileFragment) {
 
             viewModel.apply {
@@ -124,6 +134,4 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding, ContainerViewMo
             super.onBackPressed()
         }
     }
-
-
 }

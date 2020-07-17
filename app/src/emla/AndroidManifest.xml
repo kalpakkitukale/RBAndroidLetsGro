@@ -24,12 +24,26 @@
             android:theme="@style/AppThemeFaculty"
             android:windowSoftInputMode="adjustResize|stateHidden"/>
 
-        <activity android:name=".emla.ui.activities.LauncherActivity">
+        <activity android:name=".emla.ui.activities.LauncherActivity"
+            android:launchMode ="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+                <data android:scheme="https" android:host="www.example.com" />
+                <data android:scheme="app" android:host="open.my.app" />
+
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <!-- Accepts URIs that begin with "http://www.example.com/gizmos” -->
+                <data android:scheme="http"
+                    android:host="www.ramanbyte.com"
+                    android:pathPrefix="/about" />
+
             </intent-filter>
+
+
         </activity>
         <activity
             android:name=".emla.ui.activities.LoginActivity"
@@ -37,7 +51,8 @@
         <activity
             android:name=".emla.ui.activities.CreateAccountActivity"
             android:windowSoftInputMode="adjustResize|stateHidden" />
-        <activity android:name=".emla.ui.activities.ContainerActivity" />
+        <activity android:name=".emla.ui.activities.ContainerActivity"
+           />
         <activity android:name=".emla.ui.activities.ForgotPasswordActivity" />
         <activity android:name=".emla.ui.activities.FileViewerActivity" />
         <activity
@@ -77,6 +92,25 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
+        <meta-data android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id"/>
+
+        <activity android:name="com.facebook.FacebookActivity"
+            android:configChanges=
+                "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name" />
+        <activity
+            android:name="com.facebook.CustomTabActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="@string/fb_login_protocol_scheme" />
+            </intent-filter>
+        </activity>
+
     </application>
 
 </manifest>
