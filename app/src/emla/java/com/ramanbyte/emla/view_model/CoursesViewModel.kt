@@ -119,6 +119,7 @@ class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
                         Bundle().apply {
                             putParcelable(KEY_COURSE_MODEL, coursesModel)
                         })
+
                 /*} else {
                     val bundle = Bundle()
                     bundle.putParcelable(KEY_COURSE_MODEL, model)
