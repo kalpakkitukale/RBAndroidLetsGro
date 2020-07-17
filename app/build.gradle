@@ -40,6 +40,12 @@ android {
             applicationId "com.ramanbyte.emla"
         }
 
+        dev {
+            dimension "env"
+            buildConfigField("String", "S3_OBJECT", "\"dev\"")
+            buildConfigField("String", "CLIENT_BASE", "\"dev\"")
+        }
+
         qa {
             dimension "env"
             buildConfigField("String", "S3_OBJECT", "\"test\"")
