@@ -114,7 +114,6 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
                 }
 
             })
-
         }
     }
 
