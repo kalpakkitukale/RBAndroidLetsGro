@@ -297,12 +297,12 @@
         <item name="android:textAppearance">@style/AppTheme.Font</item>
     </style>
 
-    <style name="TextViewBlackTextOnGrayBackground">
+    <!--<style name="TextViewBlackTextOnGrayBackground">
         <item name="android:background">@drawable/gray_button_capsule</item>
         <item name="android:gravity">center</item>
         <item name="android:textColor">@color/colorBlack</item>
         <item name="android:textAppearance">@style/AppTheme.Font</item>
-    </style>
+    </style>-->
 
     <style name="FilePickerTheme" parent="LibAppTheme">
         <!-- Customize your theme here. -->
