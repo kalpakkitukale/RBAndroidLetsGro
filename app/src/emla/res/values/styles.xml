@@ -284,6 +284,19 @@
         <item name="android:textAppearance">@style/AppTheme.Font</item>
     </style>
 
+    <style name="CustomCapsuleButtonGradientorderWithBlueText">
+        <item name="android:background">@drawable/white_button_capsule_with_gradient_border</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/textColorBlueOnWhiteBackground</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:minHeight">@null</item>
+        <item name="android:paddingTop">@dimen/dp_8</item>
+        <item name="android:paddingBottom">@dimen/dp_8</item>
+        <item name="android:paddingStart">@dimen/dp_5</item>
+        <item name="android:paddingEnd">@dimen/dp_5</item>
+        <item name="android:textAppearance">@style/AppTheme.Font</item>
+    </style>
+
     <style name="TextViewBlackTextOnGrayBackground">
         <item name="android:background">@drawable/gray_button_capsule</item>
         <item name="android:gravity">center</item>

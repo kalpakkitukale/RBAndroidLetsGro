@@ -30,17 +30,15 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-                <data android:scheme="https" android:host="www.example.com" />
-                <data android:scheme="app" android:host="open.my.app" />
+                <data android:scheme="https" android:host="www.ramanbyte.com" />
+                <data android:scheme="app" android:host="com.ramanbyte" />
 
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <!-- Accepts URIs that begin with "http://www.example.com/gizmos” -->
                 <data android:scheme="http"
                     android:host="www.ramanbyte.com"
                     android:pathPrefix="/about" />
-
             </intent-filter>
 
 

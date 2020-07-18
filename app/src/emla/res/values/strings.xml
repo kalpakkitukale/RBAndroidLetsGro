@@ -19,6 +19,7 @@
     <string name="signup">Signup</string>
     <string name="forgot_password">Forgot Password?</string>
     <string name="log_in">Log in</string>
+
     <string name="emailId">Email Id</string>
     <string name="enter_emailId">Please enter valid e-mail ID</string>
     <string name="questions">Questions</string>
@@ -185,6 +186,8 @@
     <string name="course">Course</string>
     <string name="chapter">Chapter</string>
     <string name="section">Section</string>
+    <string name="student">Student</string>
+    <string name="faculty">Faculty</string>
 
     <!--
 Content

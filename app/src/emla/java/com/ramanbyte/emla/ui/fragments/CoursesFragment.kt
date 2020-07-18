@@ -106,7 +106,7 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
                     val courseImage: String? = it.courseImage?.replace(" ".toRegex(), "%20")
                     Log.d("Course_Image",""+courseImage)
                     val data:String?=courseName+","+courseDescription+","+it.courseCode+","+courseImage+","+it.totalCount
-                    val link:String=  "details?id=" + BuildConfig.APPLICATION_ID+"&http://www.ramanbyte.com/about&url=&referrer="+it.courseId+","+data+"#Intent;scheme=market;action=android.intent.action.VIEW;package=com.android.vending;end\""
+                    val link:String=  "&http://www.ramanbyte.com/about&url=&referrer="+it.courseId+","+data+"#Intent;scheme=market;action=android.intent.action.VIEW;package=com.android.vending;end\""
                     shareIntent.putExtra(Intent.EXTRA_TEXT,it.courseName+" "+BindingUtils.string(R.string.share_course)+" "+link)
                     shareIntent.type = "text/plain"
                     startActivity(Intent.createChooser(shareIntent,"send to"))
