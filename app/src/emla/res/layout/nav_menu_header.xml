@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/listPreferredItemHeightSmall"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:weightSum="1">
+    <!--android:background="@color/drawer_item_selector"-->
+
+    <LinearLayout
+        android:layout_width="0dip"
+        android:layout_height="match_parent"
+        android:layout_weight="0.15"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/imgNavHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dp_10" />
+        <!--android:tint="@color/time_table_text_selector"
+        app:srcCompat="@drawable/ic_home"-->
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/lblNavHeader"
+        android:layout_width="0dip"
+        android:layout_height="match_parent"
+        android:layout_weight="0.7"
+        android:gravity="start|center_vertical"
+        android:paddingVertical="@dimen/dp_10"
+        android:textAppearance="@style/AppTheme.Font"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/sp_12" /><!--
+    android:textColor="@color/time_table_text_selector"-->
+    <LinearLayout
+        android:layout_width="0dip"
+        android:layout_height="match_parent"
+        android:layout_weight="0.15"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/imgNavArrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dp_10"
+            app:srcCompat="@drawable/ic_arrow_up" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

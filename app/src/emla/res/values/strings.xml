@@ -201,6 +201,7 @@ Content
     <string name="content_not_available_at_source">Content not available at source. Try downloading again.</string>
     <string name="preview">Preview</string>
     <string name="file_download_msg">Please check notification bar for downloading status</string>
+    <string name="illegal_arg_message">Argument Must be one of the Following:\n{\n MaterialNavigationView.ITEM_STYLE_ROUND_RIGHT or\n MaterialNavigationView.ITEM_STYLE_ROUND_RECTANGLE\n}</string>
 
     <!--
     Content Ends

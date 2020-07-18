@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="containerViewModel"
+            type="com.ramanbyte.emla.view_model.ContainerViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/cardBackgroundColor"
+        android:minHeight="@dimen/dp_100"
+        android:paddingStart="@dimen/dp_8"
+        android:paddingTop="@dimen/dp_8"
+        android:paddingEnd="@dimen/dp_8">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/profileImage"
+            android:layout_width="@dimen/dp_43"
+            android:layout_height="@dimen/dp_43"
+            app:civ_border="false"
+            app:srcCompat="@drawable/ic_default_profile"
+            app:civ_border_width="1dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/llName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_5"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/profileImage"
+            app:layout_constraintBottom_toBottomOf="@+id/profileImage"
+            app:layout_constraintTop_toTopOf="@+id/profileImage">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtStudentName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_5"
+                android:layout_marginEnd="@dimen/dp_5"
+                android:ellipsize="end"
+                android:gravity="bottom"
+                android:maxLines="2"
+                android:text="Niraj Naware"
+                android:textAppearance="@style/AppTheme.Font.Medium"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/sp_14" />
+<!--
+            android:text='@{dashboardViewModel.currentLoggedUser.user_firstname +" "+ dashboardViewModel.currentLoggedUser.user_surname}'
+-->
+
+
+            <!--  android:text="@{dashboardViewModel.currentLoggedUser.user_Email}"-->
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtStudentEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_5"
+                android:layout_marginEnd="@dimen/dp_5"
+                android:maxLines="2"
+                android:textAppearance="@style/AppTheme.Font"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/sp_12"
+                android:text="Naware"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/txtStudentName"
+                app:layout_constraintStart_toStartOf="@id/txtStudentName"
+                app:layout_constraintTop_toBottomOf="@id/txtStudentName" /><!--
+            android:text="@{dashboardViewModel.currentLoggedUser.user_Email}"-->
+
+        </LinearLayout>
+
+
+        <ImageView
+            android:id="@+id/icAppSetting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/action_settings"
+            android:padding="@dimen/dp_8"
+            android:src="@drawable/ic_close_black"
+            app:layout_constraintBottom_toTopOf="@id/llName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/colorLightGray"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
