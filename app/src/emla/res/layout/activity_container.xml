@@ -36,7 +36,8 @@
                     android:id="@+id/main_toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
-                    android:background="@color/colorPrimary"
+                    app:titleTextColor="@color/textColorBlueOnWhiteBackground"
+                    android:background="@color/colorToolbarBackground"
                     app:popupTheme="@style/AppTheme.PopupOverlay"
                     app:title="@{containerViewModel.toolbarTitleLiveData}" />
 
@@ -48,28 +49,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dip"
                 app:defaultNavHost="true"
-                app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/main_appbar"
                 app:navGraph="@navigation/container_nav_graph"
                 tools:ignore="FragmentTagUsage" />
-
-            <com.google.android.material.bottomnavigation.BottomNavigationView
-                android:id="@+id/bottomNavigationView"
-                style="@style/Widget.MaterialComponents.BottomNavigationView.Colored"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:visibility="gone"
-                app:itemIconSize="@dimen/dp_20"
-                app:itemTextAppearanceActive="@style/BottomNavigationViewTextStyle"
-                app:itemTextAppearanceInactive="@style/BottomNavigationViewTextStyle"
-                app:labelVisibilityMode="labeled"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:menu="@menu/menu_container_nav" />
-
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <com.google.android.material.navigation.NavigationView
@@ -77,25 +62,24 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="start"
-            android:theme="@style/AppTheme.Drawer"
-            app:headerLayout="@layout/nav_header_main"><!--
-            app:itemShapeAppearanceOverlay="@style/ShapeAppearanceOverlay.Nav"-->
+            android:background="@android:color/transparent"
+            app:headerLayout="@layout/nav_header_main"
+            app:theme="@style/AppTheme.Drawer">
+
             <ExpandableListView
                 android:id="@+id/navigationListView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="@dimen/dp_100"
-                android:paddingStart="@dimen/dp_10"
+                android:background="@color/colorWhite"
                 android:childDivider="@color/colorTransparent"
                 android:childIndicator="@null"
                 android:choiceMode="singleChoice"
                 android:divider="@color/colorTransparent"
                 android:dividerHeight="0dp"
                 android:groupIndicator="@null"
+                android:paddingStart="@dimen/dp_10"
                 tools:listitem="@layout/nav_menu_header" />
-
         </com.google.android.material.navigation.NavigationView>
-
     </androidx.drawerlayout.widget.DrawerLayout>
-
 </layout>

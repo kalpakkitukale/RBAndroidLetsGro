@@ -12,6 +12,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.internal.NavigationMenuView
@@ -24,10 +25,7 @@ import com.ramanbyte.emla.base.di.authModuleDependency
 import com.ramanbyte.emla.models.CoursesModel
 import com.ramanbyte.emla.models.MenuPojo
 import com.ramanbyte.emla.view_model.ContainerViewModel
-import com.ramanbyte.utilities.AlertDialog
-import com.ramanbyte.utilities.AppLog
-import com.ramanbyte.utilities.BindingUtils
-import com.ramanbyte.utilities.KEY_COURSE_MODEL
+import com.ramanbyte.utilities.*
 import com.ramanbyte.utilities.StaticMethodUtilitiesKtx.changeStatusBarColor
 import kotlinx.android.synthetic.emla.activity_container.*
 import kotlin.reflect.jvm.internal.impl.metadata.ProtoBuf
@@ -36,11 +34,6 @@ import kotlin.reflect.jvm.internal.impl.metadata.ProtoBuf
 class ContainerActivity : BaseActivity<ActivityContainerBinding, ContainerViewModel>(
     authModuleDependency
 ) {
-
-    override val viewModelClass: Class<ContainerViewModel> get() = ContainerViewModel::class.java
-    //private lateinit var appBarConfiguration: AppBarConfiguration
-    //private lateinit var navController: NavController
-
     private var navigationDrawerExpandableListAdapter: NavigationDrawerExpandableListAdapter? = null
     private var childList = HashMap<MenuPojo, ArrayList<MenuPojo>>()
     private var headerList = ArrayList<MenuPojo>()
@@ -51,51 +44,45 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding, ContainerViewMo
     private var lastView: View? = null
     private var actionBar: ActionBar? = null
 
+    override val viewModelClass: Class<ContainerViewModel> get() = ContainerViewModel::class.java
+
     override fun layoutId(): Int = R.layout.activity_container
 
     override fun initiate() {
 
-
         AlertDialog(this, viewModel)
 
-        changeStatusBarColor(window, R.color.colorPrimaryDark)
         layoutBinding.apply {
             lifecycleOwner = this@ContainerActivity
-
             containerViewModel = viewModel
 
-            //navController = findNavController(R.id.containerNavHost)
-            /*appBarConfiguration = AppBarConfiguration.Builder(
-                R.id.coursesFragment, R.id.myDownloadsFragment, R.id.myFavouriteVideoFragment,
-                R.id.settingFragment
-            ).build()*/
             setSupportActionBar(mainToolbar)
             actionBar = supportActionBar
-
+            setUpNavigationHeader()
+            prepareStudentMenu()
 
             setupActionBarWithNavController(
                 navController,
                 appBarConfiguration
             )
+
             setMenuToNavigationDrawer()
             /** Handle nav drawer item clicks and navigation backpress handle
              * */
-            nav_view.setNavigationItemSelectedListener { menuItem ->
+            layoutBinding.navView.setNavigationItemSelectedListener { menuItem ->
                 //menuItem.isChecked = true
                 drawer_layout.closeDrawers()
                 true
             }
             layoutBinding.navView.setupWithNavController(navController)
-            //visibilityNavElements(navController)
 
-            setUpNavigationHeader()
-            prepareStudentMenu()
-
-        //get model data from intent and Assign to CourseDetailsFragment
+            //get model data from intent and Assign to CourseDetailsFragment
             if (intent.hasExtra(KEY_COURSE_MODEL)) {
-                val intentData  : CoursesModel = intent.getParcelableExtra(KEY_COURSE_MODEL) as CoursesModel
+                val intentData: CoursesModel =
+                    intent.getParcelableExtra(KEY_COURSE_MODEL) as CoursesModel
                 navController.navigate(R.id.courseDetailFragment,
-                    Bundle().apply { putParcelable(KEY_COURSE_MODEL, intentData)
+                    Bundle().apply {
+                        putParcelable(KEY_COURSE_MODEL, intentData)
                     })
             }
         }
@@ -105,8 +92,7 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding, ContainerViewMo
         headerMainBinding?.apply {
             containerViewModel = viewModel
 
-            icAppSetting.setOnClickListener {
-                //clickedNavItem = NAV_SETTING
+            icDrawerClose.setOnClickListener {
                 isDrawerItemClicked = true
                 layoutBinding.drawerLayout.closeDrawer(GravityCompat.START)
             }
@@ -152,10 +138,9 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding, ContainerViewMo
             }
 
             override fun onDrawerOpened(drawerView: View) {
-
+                layoutBinding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_OPEN)
             }
         })
-
     }
 
     /**Lazy init Navigation host controller*/
@@ -186,44 +171,44 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding, ContainerViewMo
     }
 
     override fun onBackPressed() {
-        if (navController.currentDestination?.id == R.id.coursesFragment) {
-            moveTaskToBack(true)
-            finish()
-        } else if (navController.currentDestination?.id == R.id.learnerProfileFragment) {
 
-            viewModel.apply {
+        when {
+            layoutBinding.drawerLayout.isDrawerOpen(GravityCompat.START) -> {
+                layoutBinding.drawerLayout.closeDrawer(GravityCompat.START)
+            }
+            else -> {
+                if (navController.currentDestination?.id == R.id.coursesFragment) {
+                    moveTaskToBack(true)
+                    finish()
+                } else if (navController.currentDestination?.id == R.id.learnerProfileFragment) {
 
-                setAlertDialogResourceModelMutableLiveData(
-                    BindingUtils.string(R.string.profile_changes_discarded),
-                    BindingUtils.drawable(R.drawable.ic_submit_confirmation)!!,
-                    false,
-                    BindingUtils.string(R.string.yes), {
-                        isAlertDialogShown.postValue(false)
-                        navController.navigateUp()
-                    },
-                    BindingUtils.string(R.string.no), {
-                        isAlertDialogShown.postValue(false)
+                    viewModel.apply {
+
+                        setAlertDialogResourceModelMutableLiveData(
+                            BindingUtils.string(R.string.profile_changes_discarded),
+                            BindingUtils.drawable(R.drawable.ic_submit_confirmation)!!,
+                            false,
+                            BindingUtils.string(R.string.yes), {
+                                isAlertDialogShown.postValue(false)
+                                navController.navigateUp()
+                            },
+                            BindingUtils.string(R.string.no), {
+                                isAlertDialogShown.postValue(false)
+                            }
+                        )
+                        isAlertDialogShown.postValue(true)
                     }
-                )
-                isAlertDialogShown.postValue(true)
-
-            }
-
-        } else {
-            when {
-                layoutBinding.drawerLayout.isDrawerOpen(GravityCompat.START) -> {
-                    layoutBinding.drawerLayout.closeDrawer(GravityCompat.START)
+                } else {
+                    super.onBackPressed()
                 }
-                else -> super.onBackPressed()
             }
-            //super.onBackPressed()
         }
     }
 
     /**
      * onSupportNavigateUp used to handle backpress for fragments other than the navigation menus*/
     override fun onSupportNavigateUp(): Boolean {
-        return navController.navigateUp() || super.onSupportNavigateUp()
+        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
     /**Set up navigation drawer header layout*/
@@ -266,7 +251,13 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding, ContainerViewMo
             childList = java.util.HashMap()
 
             var menuPojo =
-                MenuPojo(NAV_COURSES, R.drawable.ic_download, BindingUtils.string(R.string.course), false, 0)
+                MenuPojo(
+                    NAV_COURSES,
+                    R.drawable.ic_open_book,
+                    BindingUtils.string(R.string.course),
+                    false,
+                    0
+                )
             headerList.add(menuPojo)
 
             menuPojo = MenuPojo(
@@ -304,13 +295,14 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding, ContainerViewMo
         }
     }
 
-    //@Suppress("DEPRECATION")
     private fun setMenuClickEvents(menuId: Int, view: View?) {
         try {
-            var setCheckedBackground = true
             val navOption = NavOptions.Builder().setPopUpTo(R.id.coursesFragment, false).build()
-            val bundle = Bundle()
             when (menuId) {
+                NAV_COURSES -> {
+                    if (navController.currentDestination?.id != R.id.coursesFragment)
+                        navController.navigate(R.id.coursesFragment, null, navOption)
+                }
                 NAV_DOWNLOADS -> {
                     if (navController.currentDestination?.id != R.id.myDownloadsFragment)
                         navController.navigate(R.id.myDownloadsFragment, null, navOption)
@@ -330,13 +322,6 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding, ContainerViewMo
                     lastView?.setBackgroundColor(Color.TRANSPARENT)
                     lastView = view
                 } else lastView = view
-
-                /*if (setCheckedBackground) {
-                    lastView?.apply {
-                        setBackgroundDrawable(BindingUtils.drawable(R.drawable.round_left_background_teal_capsule))
-                        isSelected = true
-                    }
-                }*/
             }
         } catch (e: Exception) {
             e.printStackTrace()
@@ -347,6 +332,4 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding, ContainerViewMo
             isDrawerItemClicked = false
         }
     }
-
-
 }
