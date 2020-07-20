@@ -201,36 +201,37 @@
                 android:text="@string/log_in"
                 android:textAllCaps="true"
                 android:textSize="@dimen/sp_16"
-                app:layout_constraintBottom_toTopOf="@+id/lblSignup"
+                app:layout_constraintBottom_toTopOf="@+id/lblLoginWith"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardLayoutMain"
                 app:layout_constraintVertical_chainStyle="packed"
                 app:layout_constraintWidth_percent="0.8" />
 
-            <Button
-                android:id="@+id/btnGoogleLogin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:minHeight="@dimen/dp_20"
-                android:onClick="@{loginViewModel::googleLogIn}"
-                android:text="Google Sign In"
-                app:layout_constraintBottom_toTopOf="@+id/ivElement1"
-                app:layout_constraintEnd_toStartOf="@+id/btnFbLogin"
+            <View
+                android:id="@+id/view5"
+                android:layout_width="@dimen/dp_50"
+                android:layout_height="1dp"
+                android:background="@color/textColorGrayOnWhiteBackground"
+                app:layout_constraintBottom_toBottomOf="@+id/lblLoginWith"
+                app:layout_constraintEnd_toStartOf="@+id/lblLoginWith"
+                app:layout_constraintHorizontal_bias="0.892"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/lblSignup" />
+                app:layout_constraintTop_toTopOf="@+id/lblLoginWith" />
 
-            <Button
-                android:id="@+id/btnFbLogin"
+            <TextView
+                android:id="@+id/lblLoginWith"
+                style="@style/TextViewLightGray"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:minHeight="@dimen/dp_20"
-                android:onClick="@{loginViewModel::fbLogIn}"
-                android:text="Facebook Sign In"
-                app:layout_constraintBottom_toBottomOf="@+id/btnGoogleLogin"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/btnGoogleLogin"
-                app:layout_constraintTop_toTopOf="@+id/btnGoogleLogin" />
+                android:layout_marginTop="@dimen/dp_10"
+                android:text="@string/login_with"
+                android:textSize="@dimen/sp_12"
+                app:layout_constraintEnd_toEndOf="@+id/btnLogin"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="@+id/btnLogin"
+                app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
+
 
             <!--<com.facebook.login.widget.LoginButton
                 android:id="@+id/login_button"
@@ -251,19 +252,30 @@
                 app:layout_constraintTop_toTopOf="@+id/login_button"/>-->
 
 
+            <View
+                android:id="@+id/view6"
+                android:layout_width="@dimen/dp_50"
+                android:layout_height="1dp"
+                android:background="@color/textColorGrayOnWhiteBackground"
+                app:layout_constraintBottom_toBottomOf="@+id/lblLoginWith"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.116"
+                app:layout_constraintStart_toEndOf="@+id/lblLoginWith"
+                app:layout_constraintTop_toTopOf="@+id/lblLoginWith"
+                app:layout_constraintVertical_bias="0.444" />
 
             <TextView
                 android:id="@+id/lblSignup"
                 style="@style/TextViewRegularBlackOnWhite"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_10"
                 android:text="@string/have_an_account"
                 android:textSize="@dimen/sp_12"
+                app:layout_constraintBottom_toTopOf="@+id/ivElement1"
                 app:layout_constraintEnd_toStartOf="@+id/ivClientLogo"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
+                app:layout_constraintTop_toBottomOf="@+id/btnGoogleLogin" />
 
             <TextView
                 android:id="@+id/ivClientLogo"
@@ -279,6 +291,47 @@
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintStart_toEndOf="@+id/lblSignup"
                 app:layout_constraintTop_toTopOf="@+id/lblSignup" />
+
+            <ImageView
+                android:id="@+id/btnCRLogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_5"
+                android:minHeight="@dimen/dp_20"
+                android:onClick="@{loginViewModel::googleLogIn}"
+                android:padding="@dimen/dp_5"
+                android:src="@drawable/ic_google_plus"
+                app:layout_constraintEnd_toStartOf="@+id/lblLoginWith"
+                app:layout_constraintStart_toStartOf="@+id/btnLogin"
+                app:layout_constraintTop_toBottomOf="@+id/lblLoginWith" />
+
+
+            <ImageView
+                android:id="@+id/btnGoogleLogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_5"
+                android:minHeight="@dimen/dp_20"
+                android:onClick="@{loginViewModel::googleLogIn}"
+                android:padding="@dimen/dp_5"
+                android:src="@drawable/ic_google_plus"
+                app:layout_constraintBottom_toBottomOf="@+id/btnCRLogin"
+                app:layout_constraintEnd_toStartOf="@+id/btnFbLogin"
+                app:layout_constraintStart_toEndOf="@+id/btnCRLogin"
+                app:layout_constraintTop_toTopOf="@+id/btnCRLogin" />
+
+            <ImageView
+                android:id="@+id/btnFbLogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_5"
+                android:minHeight="@dimen/dp_20"
+                android:onClick="@{loginViewModel::fbLogIn}"
+                android:padding="@dimen/dp_5"
+                android:src="@drawable/ic_facebook"
+                app:layout_constraintBottom_toBottomOf="@+id/btnGoogleLogin"
+                app:layout_constraintStart_toEndOf="@+id/lblLoginWith"
+                app:layout_constraintTop_toTopOf="@+id/btnGoogleLogin" />
 
             <ImageView
                 android:id="@+id/ivElement1"

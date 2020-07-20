@@ -26,8 +26,10 @@
     <string name="lets">Let’s</string>
     <string name="gro">GRO</string>
     <string name="register">Register</string>
-    <string name="signup_here">Signup as student</string>
+    <string name="Register_as">Register as</string>
+    <string name="signup_here">Register Here</string>
     <string name="have_an_account">Dont have an account?</string>
+    <string name="login_with">or login with</string>
     <string name="old_password">Old password</string>
     <string name="new_password">New Password</string>
     <string name="repeat_new_password">Repeat New Password</string>

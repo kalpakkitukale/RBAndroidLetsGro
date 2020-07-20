@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.text.TextUtils
-import android.util.Log
 import android.util.TypedValue
 import android.view.Menu
 import android.view.MenuInflater
@@ -14,7 +13,6 @@ import android.widget.EditText
 import android.widget.ImageView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.SearchView
-import androidx.core.app.ShareCompat
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -25,11 +23,9 @@ import com.ramanbyte.R.id.search_src_text
 import com.ramanbyte.base.BaseFragment
 import com.ramanbyte.databinding.FragmentCoursesBinding
 import com.ramanbyte.emla.adapters.CoursesAdapter
-import com.ramanbyte.emla.models.CoursesModel
 import com.ramanbyte.emla.view.RecommendedCourseFilterBottomSheet
 import com.ramanbyte.emla.view_model.CoursesViewModel
 import com.ramanbyte.utilities.*
-import kotlinx.android.synthetic.emla.exo_playback_control_view.*
 
 /**
  * @author Vinay Kumbhar <vinay.k@ramanbyte.com>
@@ -81,7 +77,7 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
         }
     }
 
-  //share Course Details through a link
+    //share Course Details through a link
     private fun setViewModelOp() {
         viewModel.apply {
 
@@ -98,28 +94,33 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
                 }
             })
             shareLiveData.observe(this@CoursesFragment, Observer {
-                it?.let{
+                it?.let {
                     val shareIntent = Intent()
                     shareIntent.action = Intent.ACTION_SEND
                     val courseName: String? = it.courseName?.replace(" ".toRegex(), "%20")
-                    val courseDescription: String? = it.courseDescription?.replace(" ".toRegex(), "%20")
+                    val courseDescription: String? =
+                        it.courseDescription?.replace(" ".toRegex(), "%20")
                     val courseImage: String? = it.courseImage?.replace(" ".toRegex(), "%20")
-                    Log.d("Course_Image",""+courseImage)
-                    val data:String?=courseName+","+courseDescription+","+it.courseCode+","+courseImage+","+it.totalCount
-                    val link:String=  "details?id=" + BuildConfig.APPLICATION_ID+"&http://www.ramanbyte.com/about&url=&referrer="+it.courseId+","+data+"#Intent;scheme=market;action=android.intent.action.VIEW;package=com.android.vending;end\""
-                    shareIntent.putExtra(Intent.EXTRA_TEXT,it.courseName+" "+BindingUtils.string(R.string.share_course)+" "+link)
+                    val data: String? =
+                        courseName + "," + courseDescription + "," + it.courseCode + "," + courseImage + "," + it.totalCount
+                    val link: String =
+                        "details?id=" + BuildConfig.APPLICATION_ID + "&http://www.letsgro.in/course&url=&referrer=" + it.courseId + "," + data + "#Intent;scheme=market;action=android.intent.action.VIEW;package=com.android.vending;end\""
+                    shareIntent.putExtra(
+                        Intent.EXTRA_TEXT,
+                        it.courseName + " " + BindingUtils.string(R.string.share_course) + " " + link
+                    )
                     shareIntent.type = "text/plain"
-                    startActivity(Intent.createChooser(shareIntent,"send to"))
+                    startActivity(Intent.createChooser(shareIntent, "send to"))
                 }
 
             })
-
         }
     }
 
     var menu: Menu? = null
     private var mSearchView: SearchView? = null
     var searchItem: MenuItem? = null
+
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_course_search, menu)
@@ -143,7 +144,8 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
         searchEditText.hint = BindingUtils.string(R.string.search_by_course_or_keywords)
         searchEditText.setTextSize(
             TypedValue.COMPLEX_UNIT_PX,
-            resources.getDimension(R.dimen.sp_12))
+            resources.getDimension(R.dimen.sp_12)
+        )
 
         searchEditText.setTextAppearance(R.style.AppTheme_Font)
         searchEditText.setHintTextColor(BindingUtils.color(R.color.colorWhite))

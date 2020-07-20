@@ -13,8 +13,8 @@ android {
         /*applicationId "com.ramanbyte.emla"*/
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 20
-        versionName "2.0.2"
+        versionCode 21
+        versionName "2.0.3"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -38,6 +38,12 @@ android {
         emla {
             dimension "app"
             applicationId "com.ramanbyte.emla"
+        }
+
+        dev {
+            dimension "env"
+            buildConfigField("String", "S3_OBJECT", "\"dev\"")
+            buildConfigField("String", "CLIENT_BASE", "\"dev\"")
         }
 
         qa {
