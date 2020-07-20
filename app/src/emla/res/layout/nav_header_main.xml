@@ -12,86 +12,55 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="@dimen/dp_100"
+        android:minHeight="@dimen/dp_90"
         android:paddingStart="@dimen/dp_8"
         android:paddingTop="@dimen/dp_8"
         android:background="@drawable/background_nav_corner_right_top"
         android:paddingEnd="@dimen/dp_8">
 
-        <com.ramanbyte.views.RoundedImageView
-            android:id="@+id/profileImage"
-            android:layout_width="@dimen/dp_25"
-            android:layout_height="@dimen/dp_25"
-            app:civ_border="false"
-            app:civ_border_width="1dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/viewBottom"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.493"
-            app:srcCompat="@drawable/ic_default_profile" />
-
-        <LinearLayout
-            android:id="@+id/llName"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp_5"
-            android:gravity="center_vertical"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="@+id/viewBottom"
-            app:layout_constraintStart_toEndOf="@+id/profileImage"
-            app:layout_constraintBottom_toBottomOf="@+id/profileImage"
-            app:layout_constraintTop_toTopOf="@+id/profileImage">
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/txtStudentName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dp_5"
-                android:layout_marginEnd="@dimen/dp_5"
-                style="@style/TextViewMediumBlueOnWhite"
-                android:text="@{containerViewModel.userFullName}"
-                android:textSize="@dimen/sp_14" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/txtStudentEmail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dp_5"
-                android:layout_marginEnd="@dimen/dp_5"
-                android:maxLines="2"
-                android:textAppearance="@style/AppTheme.Font"
-                android:textColor="@color/colorBlack"
-                android:textSize="@dimen/sp_12"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@id/txtStudentName"
-                app:layout_constraintStart_toStartOf="@id/txtStudentName"
-                app:layout_constraintTop_toBottomOf="@id/txtStudentName" />
-        </LinearLayout>
-
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/icDrawerClose"
+            android:id="@+id/ivDrawerClose"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/close"
             android:padding="@dimen/dp_8"
             app:srcCompat="@drawable/ic_close_black"
-            app:layout_constraintBottom_toTopOf="@id/llName"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <com.ramanbyte.views.RoundedImageView
+            android:id="@+id/profileImage"
+            android:layout_width="@dimen/dp_20"
+            android:layout_height="@dimen/dp_20"
+            app:civ_border="false"
+            app:civ_border_width="1dp"
+            app:layout_constraintStart_toStartOf="@+id/viewBottom"
+            app:layout_constraintTop_toTopOf="@+id/tvStudentName"
+            app:srcCompat="@drawable/ic_default_profile" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvStudentName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_5"
+            android:layout_marginEnd="@dimen/dp_5"
+            style="@style/TextViewMediumBlueOnWhite"
+            app:layout_constraintEnd_toEndOf="@+id/ivDrawerClose"
+            app:layout_constraintTop_toBottomOf="@+id/ivDrawerClose"
+            app:layout_constraintStart_toEndOf="@+id/profileImage"
+            android:text="@{containerViewModel.userFullName}"
+            android:textSize="@dimen/sp_14" />
 
         <View
             android:id="@+id/viewBottom"
             android:layout_width="0dp"
-            android:layout_height="0.8dp"
-            android:background="@color/colorLightGray"
+            android:layout_height="1dp"
+            android:background="@color/colorDividerGrayOnWhiteBackground"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.508"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/profileImage"
-            app:layout_constraintVertical_bias="0.542"
-            app:layout_constraintWidth_percent="0.9" />
+            app:layout_constraintWidth_percent="0.95" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

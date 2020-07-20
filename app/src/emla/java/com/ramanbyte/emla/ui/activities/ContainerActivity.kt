@@ -92,7 +92,7 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding, ContainerViewMo
         headerMainBinding?.apply {
             containerViewModel = viewModel
 
-            icDrawerClose.setOnClickListener {
+            ivDrawerClose.setOnClickListener {
                 isDrawerItemClicked = true
                 layoutBinding.drawerLayout.closeDrawer(GravityCompat.START)
             }

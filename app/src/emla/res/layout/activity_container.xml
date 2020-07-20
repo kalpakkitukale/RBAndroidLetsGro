@@ -70,7 +70,7 @@
                 android:id="@+id/navigationListView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/dp_100"
+                android:layout_marginTop="@dimen/dp_80"
                 android:background="@color/colorWhite"
                 android:childDivider="@color/colorTransparent"
                 android:childIndicator="@null"
@@ -78,7 +78,7 @@
                 android:divider="@color/colorTransparent"
                 android:dividerHeight="0dp"
                 android:groupIndicator="@null"
-                android:paddingStart="@dimen/dp_10"
+                android:paddingStart="@dimen/dp_7"
                 tools:listitem="@layout/nav_menu_header" />
         </com.google.android.material.navigation.NavigationView>
     </androidx.drawerlayout.widget.DrawerLayout>
