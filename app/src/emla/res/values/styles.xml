@@ -154,6 +154,11 @@
         <item name="android:textColor">@color/textColorBlueOnWhiteBackground</item>
     </style>
 
+    <style name="TextViewBoldBlueOnWhite">
+        <item name="android:textAppearance">@style/AppTheme.Font.Bold</item>
+        <item name="android:textColor">@color/textColorBlueOnWhiteBackground</item>
+    </style>
+
     <style name="TextViewRegularBlackOnWhite">
         <item name="android:textAppearance">@style/AppTheme.Font</item>
         <item name="android:textColor">@color/textColorBackOnWhiteBackground</item>

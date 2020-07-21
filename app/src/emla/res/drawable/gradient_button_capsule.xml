@@ -2,13 +2,9 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
         <shape android:shape="rectangle">
-            <gradient android:angle="0"
-                android:endColor="?colorPrimary"
-                android:gradientRadius="0"
-                android:startColor="?colorPrimary"
-                android:type="linear" />
+            <gradient android:angle="0" android:endColor="?colorPrimary" android:gradientRadius="0" android:startColor="?colorPrimary" android:type="linear" />
             <!-- make the button corners rounded-->
-            <corners android:radius="@dimen/dp_10" />
+            <corners android:radius="@dimen/dp_5" />
         </shape>
     </item>
 </selector>
