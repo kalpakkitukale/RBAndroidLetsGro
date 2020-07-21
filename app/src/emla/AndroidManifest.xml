@@ -51,7 +51,8 @@
         <activity
             android:name=".emla.ui.activities.CreateAccountActivity"
             android:windowSoftInputMode="adjustResize|stateHidden" />
-        <activity android:name=".emla.ui.activities.ContainerActivity" />
+        <activity android:name=".emla.ui.activities.ContainerActivity"
+            android:theme="@style/AppThemeStudent"/>
         <activity android:name=".emla.ui.activities.ForgotPasswordActivity" />
         <activity android:name=".emla.ui.activities.FileViewerActivity" />
         <activity

@@ -23,12 +23,19 @@
         <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
     </style>
 
+    <!-- Base application theme for student -->
+    <style name="AppThemeStudent" parent="AppTheme">
+        <item name="colorPrimary">@color/colorStudentIcon</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+    </style>
 
     <!--toolbar style -->
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" >
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Light" >
         <item name="android:textAppearance">@style/AppTheme.Font</item>
         <item name="android:textViewStyle">@style/AppTheme.Font</item>
         <item name="button_style">@style/AppTheme.Font</item>
+        <item name="android:tint">@color/colorStudentIcon</item>
+        <item name="colorControlNormal">@color/colorStudentIcon</item>
     </style>
 
     <!--toolbar style for faculty-->
@@ -41,8 +48,6 @@
     </style>
 
     <!--<item name="colorControlNormal">@color/colorDividerGrayOnWhiteBackground</item>-->
-
-
     <!--<style name="AppTheme.AppBarOverlay" parent="Theme.Design.NoActionBar" />-->
 
     <!-- START Font Style-->
@@ -357,5 +362,9 @@
         <item name="android:fontFamily">@font/roboto_regular</item>
     </style>
 
+    <style name="AppTheme.Drawer" parent="Widget.AppCompat.DrawerArrowToggle">
+        <item name="android:textSize">@dimen/sp_14</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+    </style>
 
 </resources>

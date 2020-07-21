@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="containerViewModel"
+            type="com.ramanbyte.emla.view_model.ContainerViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/dp_90"
+        android:paddingStart="@dimen/dp_8"
+        android:paddingTop="@dimen/dp_8"
+        android:background="@drawable/background_nav_corner_right_top"
+        android:paddingEnd="@dimen/dp_8">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivDrawerClose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/close"
+            android:padding="@dimen/dp_8"
+            app:srcCompat="@drawable/ic_close_black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.ramanbyte.views.RoundedImageView
+            android:id="@+id/profileImage"
+            android:layout_width="@dimen/dp_20"
+            android:layout_height="@dimen/dp_20"
+            app:civ_border="false"
+            app:civ_border_width="1dp"
+            app:layout_constraintStart_toStartOf="@+id/viewBottom"
+            app:layout_constraintTop_toTopOf="@+id/tvStudentName"
+            app:srcCompat="@drawable/ic_default_profile" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvStudentName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_5"
+            android:layout_marginEnd="@dimen/dp_5"
+            style="@style/TextViewMediumBlueOnWhite"
+            app:layout_constraintEnd_toEndOf="@+id/ivDrawerClose"
+            app:layout_constraintTop_toBottomOf="@+id/ivDrawerClose"
+            app:layout_constraintStart_toEndOf="@+id/profileImage"
+            android:text="@{containerViewModel.userFullName}"
+            android:textSize="@dimen/sp_14" />
+
+        <View
+            android:id="@+id/viewBottom"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="@color/colorDividerGrayOnWhiteBackground"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profileImage"
+            app:layout_constraintWidth_percent="0.95" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
