@@ -1,6 +1,8 @@
 package com.ramanbyte.emla.view
 
 import android.content.Context
+import android.os.Bundle
+import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseBottomSheetFragment
@@ -23,6 +25,11 @@ class RecommendedCourseFilterBottomSheet :
     override val viewModelClass: Class<CoursesViewModel> = CoursesViewModel::class.java
 
     override fun layoutId(): Int = R.layout.recommended_course_filter
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setStyle(DialogFragment.STYLE_NO_FRAME, 0)
+    }
 
     private var programsSpinnerUtil: MasterSpinnerUtil? = null
     private var patternsSpinnerUtil: MasterSpinnerUtil? = null
@@ -73,7 +80,7 @@ class RecommendedCourseFilterBottomSheet :
                     setup(spinnerProgram, defaultSelectAction = {
                         viewModel.apply {
                             tempFilterModel.programId = 0
-                            programName.set(BindingUtils.string(R.string.program_level))
+                            programName.set(BindingUtils.string(R.string.program))
                         }
                         StaticMethodUtilitiesKtx.hideSpinnerDropDown(layoutBinding.spinnerProgram)
 
@@ -191,7 +198,7 @@ class RecommendedCourseFilterBottomSheet :
                 it?.let {
                     if (it) {
                         layoutBinding.apply {
-                            programName.set(BindingUtils.string(R.string.program_level))
+                            programName.set(BindingUtils.string(R.string.program))
                             patternName.set(BindingUtils.string(R.string.pattern))
                             specializationName.set(BindingUtils.string(R.string.specialisation))
                         }

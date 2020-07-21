@@ -25,11 +25,11 @@
 
     <!-- Base application theme for student -->
     <style name="AppThemeStudent" parent="AppTheme">
-        <item name="colorPrimary">@color/colorStudentIcon</item>
         <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
     </style>
+    <!--<item name="colorPrimary">@color/colorStudentIcon</item>-->
 
-    <!--toolbar style -->
+    <!--toolbar style for student-->
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Light" >
         <item name="android:textAppearance">@style/AppTheme.Font</item>
         <item name="android:textViewStyle">@style/AppTheme.Font</item>

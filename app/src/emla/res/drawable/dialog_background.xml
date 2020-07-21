@@ -4,11 +4,6 @@
         android:color="@color/colorWhite"/>
     <stroke android:width="2dp" android:color="#20000000"/>
     <corners
-        android:topLeftRadius="20dp"
-        android:topRightRadius="20dp" />
-    <padding
-        android:left="10dp"
-        android:top="10dp"
-        android:right="10dp"
-        android:bottom="10dp" />
+        android:topLeftRadius="10dp"
+        android:topRightRadius="10dp" />
 </shape>

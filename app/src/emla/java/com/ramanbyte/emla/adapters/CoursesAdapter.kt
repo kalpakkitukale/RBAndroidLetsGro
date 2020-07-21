@@ -39,7 +39,7 @@ class CoursesAdapter(private val displayMetrics: DisplayMetrics) :
                 )) && (coursesModel.summativeAssessmentStatus.equals("true", true))
             ) {
                 holder.cardCourseBinding.ivStatus.visibility = View.VISIBLE
-                holder.cardCourseBinding.ivStatus.setImageDrawable(BindingUtils.drawable(R.drawable.ic_tick_checked))
+                holder.cardCourseBinding.ivStatus.setImageDrawable(BindingUtils.drawable(R.drawable.ic_tick_circle))
             } else if (coursesModel.preAssessmentStatus.equals(
                     "true",
                     true

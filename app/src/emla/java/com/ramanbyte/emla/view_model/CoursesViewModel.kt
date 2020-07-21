@@ -52,7 +52,7 @@ class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
     var patternsListMutableLiveData = MutableLiveData<List<CommonDropdownModel>>()
     var specializationsListMutableLiveData = MutableLiveData<List<CommonDropdownModel>>()
     var programName =
-        ObservableField<String>().apply { set(BindingUtils.string(R.string.program_level)) }
+        ObservableField<String>().apply { set(BindingUtils.string(R.string.program)) }
     var patternName = ObservableField<String>().apply { set(BindingUtils.string(R.string.pattern)) }
     var specializationName =
         ObservableField<String>().apply { set(BindingUtils.string(R.string.specialisation)) }
