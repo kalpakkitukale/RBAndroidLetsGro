@@ -2,7 +2,10 @@ package com.ramanbyte.emla.faculty.ui.fragments
 
 import android.content.Context
 import android.text.TextUtils
-import android.view.*
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
 import androidx.appcompat.widget.SearchView
@@ -181,7 +184,7 @@ class StudentAskedQuestionsFragment :
 
         val searchClose = mSearchView?.findViewById(R.id.search_close_btn) as ImageView
         searchClose.apply {
-            setImageResource(R.drawable.ic_close_white)
+            setImageResource(R.drawable.ic_close_black)
             setOnClickListener {
                 if (TextUtils.isEmpty(searchEditText.text.toString())) {
                     if (mSearchView?.isIconified == false) {

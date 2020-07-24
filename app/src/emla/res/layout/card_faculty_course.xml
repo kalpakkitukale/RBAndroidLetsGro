@@ -15,26 +15,14 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardContainer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dp_5"
-        android:layout_marginEnd="@dimen/dp_5"
-        android:layout_marginTop="@dimen/dp_10"
-        android:onClick="@{()->facultyCoursesViewModel.onClickCourse(cardContainer, coursesModel)}"
-        app:cardCornerRadius="@dimen/dp_5"
-        app:cardElevation="@dimen/dp_2">
+        style="@style/customCard"
+        android:onClick="@{()->facultyCoursesViewModel.onClickCourse(cardContainer, coursesModel)}">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/mainConstraintLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/dp_3">
-            <!--android:layout_marginStart="@dimen/dp_5"
-            android:layout_marginEnd="@dimen/dp_5"
-            android:layout_marginBottom="@dimen/dp_5"
-            android:background="@drawable/card_white_bg"
-            android:onClick="@{()->facultyCoursesViewModel.onClickCourse(mainConstraintLayout, coursesModel)}"-->
-
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/ivCoursePic"
@@ -51,9 +39,9 @@
             <!--android:background="@drawable/ic_course_dummy"
             app:imageUrl="@{coursesModel.courseImageUrl}"-->
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvQuestionCount"
-                style="@style/TextViewRegularWhite"
+                style="@style/TextViewRegularNavyBlueOnLightNWhiteOnDark"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/ic_is_live"
@@ -64,9 +52,9 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvCourseName"
-                style="@style/TextViewMediumBlueOnWhite"
+                style="@style/TextViewMediumNavyBlueOnLightNWhiteOnDark"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_10"
@@ -78,9 +66,9 @@
                 app:layout_constraintStart_toEndOf="@+id/ivCoursePic"
                 app:layout_constraintTop_toTopOf="@+id/ivCoursePic" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvCourseDescription"
-                style="@style/TextViewRegularBlueOnWhite"
+                style="@style/TextViewRegularNavyBlueOnLightNWhiteOnDark"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_2"

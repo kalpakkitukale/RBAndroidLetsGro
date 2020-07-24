@@ -42,7 +42,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/lblReplyTitle"
-            style="@style/TextViewBoldBlackOnWhite"
+            style="@style/TextViewBoldNavyBlueOnLightNWhiteOnDark"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:paddingLeft="@dimen/dp_10"
@@ -66,7 +66,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/lblAskNewQuestion"
-            style="@style/TextViewRegularTeal"
+            style="@style/TextViewRegularGrayOnLightNDark"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="@{ () -> mediaPlaybackViewModel.onClickAskNewQuestion(lblAskNewQuestion,askQuestionModel.questionId)}"
@@ -92,9 +92,9 @@
         app:imageUrl="@{strUserPic}"
             app:placeholder="@{characterDrawable}"-->
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvUserName"
-            style="@style/TextViewRegularLightGray"
+            style="@style/TextViewRegularGrayOnLightNDark"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dp_5"
@@ -106,9 +106,9 @@
             app:layout_constraintTop_toTopOf="@+id/rivUserPic" />
         <!--android:text="@{askQuestionModel.userName}"-->
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvQuestion"
-            style="@style/TextViewBoldBlackOnWhite"
+            style="@style/TextViewBoldNavyBlueOnLightNWhiteOnDark"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dp_5"
@@ -120,7 +120,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvDateTime"
-            style="@style/TextViewLightItalic"
+            style="@style/TextViewItalicGrayOnLightNDark"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="@+id/tvUserName"

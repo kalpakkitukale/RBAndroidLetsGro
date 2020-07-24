@@ -53,7 +53,7 @@ class FabBottomNavigationView @JvmOverloads constructor(
         }
 
         materialShapeDrawable = MaterialShapeDrawable(shapePathModel).apply {
-            setTint(ContextCompat.getColor(context, R.color.colorLiteGrayLiteWhite))
+            setTint(ContextCompat.getColor(context, R.color.colorLightGray))
             shadowElevation = 4
             shadowRadius = 16
             isShadowEnabled = true

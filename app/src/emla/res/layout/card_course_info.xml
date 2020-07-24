@@ -12,13 +12,7 @@
 
 
     <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardBackgroundColor="@color/colorTransparent"
-        app:cardCornerRadius="@dimen/dp_5"
-        app:cardElevation="2dp"
-        app:cardUseCompatPadding="true"
-        app:contentPadding="@dimen/dp_5"
+       style="@style/customCard"
         app:layout_constraintTop_toBottomOf="@+id/guideline">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -32,10 +26,9 @@
                 android:orientation="vertical"
                 app:layout_constraintGuide_percent="0.50" />
 
-
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/headerCourseInfo"
-                style="@style/TextViewMediumBlackOnWhite"
+                style="@style/TextViewMediumNavyBlueOnLightNWhiteOnDark"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/dp_5"
@@ -46,7 +39,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/imgViewCourseInfo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -56,9 +49,9 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/headerCourseInfo" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/labelLength"
-                style="@style/TextViewMediumBlackOnWhite"
+                style="@style/TextViewMediumNavyBlueOnLightNWhiteOnDark"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_10"
@@ -70,9 +63,9 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/txtViewLength" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/txtViewLength"
-                style="@style/TextViewLightBlackOnWhite"
+                style="@style/TextViewLightNavyBlueOnLightNWhiteOnDark"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/dp_5"
@@ -91,9 +84,9 @@
                 app:layout_constraintTop_toBottomOf="@+id/txtViewLength" />
 
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/labelEfforts"
-                style="@style/TextViewMediumBlackOnWhite"
+                style="@style/TextViewMediumNavyBlueOnLightNWhiteOnDark"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_10"
@@ -105,9 +98,9 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/txtViewEfforts" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/txtViewEfforts"
-                style="@style/TextViewLightBlackOnWhite"
+                style="@style/TextViewLightNavyBlueOnLightNWhiteOnDark"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/dp_5"
@@ -125,9 +118,9 @@
                 android:background="@color/colorLightGray"
                 app:layout_constraintTop_toBottomOf="@+id/txtViewEfforts" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/labelSpecialization"
-                style="@style/TextViewMediumBlackOnWhite"
+                style="@style/TextViewMediumNavyBlueOnLightNWhiteOnDark"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_10"
@@ -139,9 +132,9 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/txtViewSpecialization" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/txtViewSpecialization"
-                style="@style/TextViewLightBlackOnWhite"
+                style="@style/TextViewLightNavyBlueOnLightNWhiteOnDark"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/dp_5"
@@ -159,9 +152,9 @@
                 android:background="@color/colorLightGray"
                 app:layout_constraintTop_toBottomOf="@+id/txtViewSpecialization" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/labelLevel"
-                style="@style/TextViewMediumBlackOnWhite"
+                style="@style/TextViewMediumNavyBlueOnLightNWhiteOnDark"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_10"
@@ -173,9 +166,9 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/txtViewLevel" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/txtViewLevel"
-                style="@style/TextViewLightBlackOnWhite"
+                style="@style/TextViewLightNavyBlueOnLightNWhiteOnDark"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/dp_5"
@@ -193,9 +186,9 @@
                 android:background="@color/colorLightGray"
                 app:layout_constraintTop_toBottomOf="@+id/txtViewLevel" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/labelLanguage"
-                style="@style/TextViewMediumBlackOnWhite"
+                style="@style/TextViewMediumNavyBlueOnLightNWhiteOnDark"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_10"
@@ -207,9 +200,9 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/txtViewLanguage" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/txtViewLanguage"
-                style="@style/TextViewLightBlackOnWhite"
+                style="@style/TextViewLightNavyBlueOnLightNWhiteOnDark"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/dp_5"
@@ -219,9 +212,9 @@
                 app:layout_constraintStart_toStartOf="@+id/verticalGuideLine"
                 app:layout_constraintTop_toBottomOf="@+id/LevelView" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/labelAllocatedFaculty"
-                style="@style/TextViewMediumBlackOnWhite"
+                style="@style/TextViewMediumNavyBlueOnLightNWhiteOnDark"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_10"
@@ -233,9 +226,9 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/txtAllocatedFaculty" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/txtAllocatedFaculty"
-                style="@style/TextViewLightBlackOnWhite"
+                style="@style/TextViewLightNavyBlueOnLightNWhiteOnDark"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/dp_5"

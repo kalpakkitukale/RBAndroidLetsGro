@@ -31,16 +31,11 @@ import com.ramanbyte.emla.adapters.VideoReplyAdapter
 import com.ramanbyte.emla.base.di.authModuleDependency
 import com.ramanbyte.emla.content.ExoMediaDownloadUtil
 import com.ramanbyte.emla.models.AskQuestionModel
-import com.ramanbyte.emla.models.AskQuestionReplyModel
 import com.ramanbyte.emla.view.OnSwipeTouchListener
 import com.ramanbyte.emla.view_model.MediaPlaybackViewModel
-import com.ramanbyte.utilities.AppLog
-import com.ramanbyte.utilities.BindingUtils
-import com.ramanbyte.utilities.KEY_IS_MEDIA_OFFLINE
-import com.ramanbyte.utilities.KEY_MEDIA_ID
+import com.ramanbyte.utilities.*
 import kotlinx.android.synthetic.emla.activity_media_playback.*
 import kotlinx.android.synthetic.emla.exo_playback_control_view.*
-import com.ramanbyte.utilities.*
 
 class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPlaybackViewModel>(
     authModuleDependency,
@@ -112,7 +107,7 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
 
             addToWishList = if (favouriteVideo == KEY_Y) {
                 // lblWishList.setCompoundDrawables(BindingUtils.drawable(R.drawable.ic_heart_checked),null,null,null)
-                exoBtnWishlist.setImageDrawable(BindingUtils.drawable(R.drawable.ic_heart_checked))
+                exoBtnWishlist.setImageDrawable(BindingUtils.drawable(R.drawable.ic_heart))
                 true
             } else {
                 exoBtnWishlist.setImageDrawable(BindingUtils.drawable(R.drawable.ic_heart))
@@ -499,7 +494,7 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
                         insertSectionContentLog(mediaId, mediaInfoModel?.apply {
                             favouriteVideo = KEY_Y
                         }!!)
-                        exoBtnWishlist.setImageDrawable(BindingUtils.drawable(R.drawable.ic_heart_checked))
+                        exoBtnWishlist.setImageDrawable(BindingUtils.drawable(R.drawable.ic_heart))
                         addToWishList = true
                     }
                 } else {

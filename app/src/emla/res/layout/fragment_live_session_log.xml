@@ -18,12 +18,7 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cvRequestSession"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/dp_5"
-        app:cardBackgroundColor="@color/colorTransparent"
-        app:cardCornerRadius="@dimen/dp_5"
-        app:cardElevation="2dp"
+        style="@style/customCard"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -50,7 +45,7 @@
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tvLabelRequestToLiveSession"
-                style="@style/TextViewBoldBlackOnWhite"
+                style="@style/TextViewBoldNavyBlueOnLightNWhiteOnDark"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:text="@string/request_to_live_session"

@@ -7,11 +7,7 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardContainerRequest"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_10"
-        app:cardCornerRadius="@dimen/dp_5"
-        app:cardElevation="2dp"
+      style="@style/customCard"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -23,7 +19,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvLabelTitleLSR"
-                style="@style/TextViewBoldBlackOnWhite"
+                style="@style/TextViewBoldNavyBlueOnLightNWhiteOnDark"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_20"
@@ -49,7 +45,6 @@
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/tvLabelTitleLSR"
                 app:layout_constraintTop_toTopOf="@+id/tvLabelTitleLSR" />
-
 
             <include
                 android:id="@+id/requestSessionLayout"

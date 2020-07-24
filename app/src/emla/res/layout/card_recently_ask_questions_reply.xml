@@ -40,9 +40,9 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:placeholder="@{replyModel.setCharacterDrawable}" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvUserName"
-                style="@style/TextViewRegularLightGray"
+                style="@style/TextViewRegularGrayOnLightNDark"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_5"
@@ -52,9 +52,9 @@
                 app:layout_constraintStart_toEndOf="@+id/rivUserPic"
                 app:layout_constraintTop_toTopOf="@+id/rivUserPic" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvReply"
-                style="@style/TextViewMediumBlackOnWhite"
+                style="@style/TextViewMediumNavyBlueOnLightNWhiteOnDark"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_5"
@@ -68,7 +68,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvDateTime"
-                style="@style/TextViewLightItalic"
+                style="@style/TextViewLightNavyBlueOnLightNWhiteOnDark"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@{replyModel.createdDateTime}"
@@ -82,7 +82,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/dp_5"
-                android:src="@drawable/ic_reply_teal"
+                android:src="@drawable/ic_reply"
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

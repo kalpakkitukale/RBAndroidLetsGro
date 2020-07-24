@@ -27,12 +27,7 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardMainContainer"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/dp_5"
-                android:background="@color/colorTransparent"
-                app:cardCornerRadius="@dimen/dp_15"
-                app:cardElevation="1dp"
+                style="@style/customCard"
                 app:contentPaddingBottom="@dimen/dp_15"
                 app:contentPaddingLeft="@dimen/dp_15"
                 app:contentPaddingRight="@dimen/dp_15"
@@ -48,9 +43,9 @@
                     app:layout_anchor="@+id/cardMainContainer"
                     app:layout_anchorGravity="center">
 
-                    <TextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tvJumpToQuestion"
-                        style="@style/TextViewBoldBlackOnWhite"
+                        style="@style/TextViewBoldNavyBlueOnLightNWhiteOnDark"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:onClick="@{() -> cardShowQuestionsViewModel.onClickJumpToQuestion(tvJumpToQuestion)}"
@@ -82,9 +77,9 @@
                         app:layout_constraintTop_toBottomOf="@+id/tvJumpToQuestion"
                         app:setHtmlText="@{questionAndAnswerModel.question_Title}" />
 
-                    <TextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tvQuestionMarks"
-                        style="@style/TextViewRegularBlackOnWhite"
+                        style="@style/TextViewRegularNavyBlueOnLightNWhiteOnDark"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_10"
@@ -97,7 +92,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_marginTop="@dimen/dp_15"
-                        android:background="@color/colorDividerGrayOnWhiteBackground"
+                        android:background="@color/colorDivider"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="@+id/wvQuestion"
                         app:layout_constraintTop_toBottomOf="@+id/tvQuestionMarks" />
@@ -114,9 +109,9 @@
 
             </androidx.cardview.widget.CardView>
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/ivClearQue"
-                style="@style/TextViewRegularBlackOnWhite"
+                style="@style/TextViewRegularNavyBlueOnLightNWhiteOnDark"
                 android:layout_width="@dimen/dp_50"
                 android:layout_height="@dimen/dp_50"
                 android:background="@drawable/circle_text_view"

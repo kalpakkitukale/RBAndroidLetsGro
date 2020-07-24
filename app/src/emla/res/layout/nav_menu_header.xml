@@ -19,9 +19,9 @@
             android:padding="@dimen/dp_10" />
     </LinearLayout>
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/lblNavHeader"
-        style="@style/TextViewRegularBlueOnWhite"
+        style="@style/TextViewRegularNavyBlueOnLightNWhiteOnDark"
         android:layout_width="0dip"
         android:layout_height="match_parent"
         android:layout_weight="0.7"

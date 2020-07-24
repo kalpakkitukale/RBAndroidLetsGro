@@ -14,13 +14,7 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardLayoutMain"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardBackgroundColor="@color/colorTransparent"
-        app:cardCornerRadius="@dimen/dp_5"
-        app:cardElevation="2dp"
-        app:cardUseCompatPadding="true"
-        app:contentPadding="@dimen/dp_5"
+        style="@style/customCard"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -32,13 +26,13 @@
             app:layout_anchor="@+id/cardMainContainer"
             app:layout_anchorGravity="center">
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvQueNo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                style="@style/TextViewRegularNavyBlueOnLightNWhiteOnDark"
                 android:text='@{queNo + ". "}'
                 android:textSize="@dimen/sp_14"
-                style="@style/TextViewRegularBlackOnWhite"
                 android:layout_marginTop="@dimen/dp_5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

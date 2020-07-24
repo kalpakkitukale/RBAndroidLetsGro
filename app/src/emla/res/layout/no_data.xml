@@ -19,7 +19,7 @@
         <!--android:visibility="@{viewModel.noDataMutableLiveData}"-->
 
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ivNoData"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -29,8 +29,8 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_no_data" />
 
-        <TextView
-            style="@style/TextViewRegularBlackOnWhite"
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/TextViewRegularNavyBlueOnLightNWhiteOnDark"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_marginStart="@dimen/dp_16"

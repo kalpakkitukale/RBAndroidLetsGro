@@ -14,12 +14,7 @@
     </data>
 
     <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/dp_5"
-        app:cardCornerRadius="@dimen/dp_5"
-        app:cardUseCompatPadding="true"
-        app:contentPadding="@dimen/dp_5">
+       style="@style/customCard">
 
         <RelativeLayout
             android:id="@+id/mainLayout"
@@ -31,7 +26,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/IvVideo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -41,9 +36,9 @@
                     app:layout_constraintTop_toTopOf="parent" />
                 <!--android:src="@drawable/ic_play"-->
 
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvTopicName"
-                    style="@style/TextViewBoldBlackOnWhite"
+                    style="@style/TextViewBoldNavyBlueOnLightNWhiteOnDark"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dp_10"
@@ -54,9 +49,9 @@
                     app:layout_constraintTop_toTopOf="@+id/IvVideo" />
                 <!--android:text='@{String.valueOf(contentModel.id) + " " +contentModel.content_link}'-->
 
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvStatus"
-                    style="@style/TextViewLightBlackOnWhite"
+                    style="@style/TextViewLightNavyBlueOnLightNWhiteOnDark"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="@{contentModel.downlaodStatus}"
@@ -66,7 +61,7 @@
                     app:layout_constraintStart_toStartOf="@+id/tvTopicName"
                     app:layout_constraintTop_toBottomOf="@id/tvTopicName" />
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/IvProgress"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -78,7 +73,7 @@
                     app:layout_constraintEnd_toStartOf="@+id/IvDownload"
                     app:layout_constraintTop_toTopOf="@+id/tvTopicName" />
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/IvDownload"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -90,7 +85,7 @@
                     app:layout_constraintEnd_toStartOf="@+id/IvCheck"
                     app:layout_constraintTop_toTopOf="@+id/IvProgress" />
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/IvCheck"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -101,9 +96,9 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/IvDownload" />
 
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvCourseDescription"
-                    style="@style/TextViewRegularBlackOnWhite"
+                    style="@style/TextViewRegularNavyBlueOnLightNWhiteOnDark"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_8"

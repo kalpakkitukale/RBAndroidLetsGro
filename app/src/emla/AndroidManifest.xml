@@ -22,7 +22,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".emla.faculty.ui.activities.FacultyContainerActivity"
-            android:theme="@style/AppThemeFaculty"
+            android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustResize|stateHidden" />
 
         <activity
@@ -52,7 +52,7 @@
             android:name=".emla.ui.activities.CreateAccountActivity"
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity android:name=".emla.ui.activities.ContainerActivity"
-            android:theme="@style/AppThemeStudent"/>
+            android:theme="@style/AppTheme"/>
         <activity android:name=".emla.ui.activities.ForgotPasswordActivity" />
         <activity android:name=".emla.ui.activities.FileViewerActivity" />
         <activity

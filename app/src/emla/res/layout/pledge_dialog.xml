@@ -28,7 +28,7 @@
 
         <androidx.appcompat.widget.AppCompatCheckBox
             android:id="@+id/appCompatCheckBox"
-            style="@style/TextViewRegularBlackOnWhite"
+            style="@style/TextViewRegularNavyBlueOnLightNWhiteOnDark"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_16"
@@ -44,20 +44,14 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnContinue"
-            style="@style/CustomCapsuleButtonGradientBgWhiteText"
+            style="@style/CustomCapsuleButtonBlueBgWhiteText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/dp_15"
             android:layout_marginBottom="@dimen/dp_10"
             android:onClick="@{learnerProfileViewModel::onPledgeTaken}"
-            android:paddingStart="@dimen/dp_50"
-            android:paddingTop="@dimen/dp_15"
-            android:paddingEnd="@dimen/dp_50"
-            android:paddingBottom="@dimen/dp_10"
             android:text="@string/strContinue"
-            android:textAllCaps="true"
-            android:textSize="@dimen/sp_12"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

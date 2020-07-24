@@ -15,24 +15,16 @@
     </data>
 
     <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dp_5"
-        android:layout_marginTop="@dimen/dp_5"
-        android:layout_marginEnd="@dimen/dp_5"
-        android:layout_marginBottom="@dimen/dp_5"
-        app:cardBackgroundColor="@color/colorTransparent"
-        app:cardCornerRadius="@dimen/dp_5"
-        app:contentPadding="@dimen/dp_5">
+        style="@style/customCard">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/dp_5">
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvContentTitle"
-                style="@style/TextViewMediumBlackOnWhite"
+                style="@style/TextViewMediumNavyBlueOnLightNWhiteOnDark"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_5"
@@ -56,7 +48,7 @@
                 app:layout_constraintTop_toTopOf="@id/tvContentTitle"
                 app:srcCompat="@drawable/ic_delete_button" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvContentSubject"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -68,7 +60,7 @@
                 app:layout_constraintStart_toStartOf="@+id/tvContentTitle"
                 app:layout_constraintTop_toBottomOf="@+id/tvContentTitle" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvContentTopic"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -79,7 +71,7 @@
                 app:layout_constraintStart_toStartOf="@+id/tvContentSubject"
                 app:layout_constraintTop_toBottomOf="@+id/tvContentSubject" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvSectionName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -92,7 +84,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvNOFileMsg"
-                style="@style/TextViewRegularBlackOnWhite"
+                style="@style/TextViewRegularNavyBlueOnLightNWhiteOnDark"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_10"
@@ -106,9 +98,9 @@
                 app:layout_constraintStart_toStartOf="@+id/tvSectionName"
                 app:layout_constraintTop_toBottomOf="@+id/tvSectionName" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/btnPreview"
-                style="@style/TextViewRegularBlueOnWhite"
+                style="@style/TextViewRegularNavyBlueOnLightNWhiteOnDark"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_eye"

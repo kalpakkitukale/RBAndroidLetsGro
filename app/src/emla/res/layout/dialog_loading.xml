@@ -40,16 +40,15 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintWidth_percent="0.5"  />-->
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/txtLoaderMessage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="12dip"
+                style="@style/TextViewRegularNavyBlueOnLightNWhiteOnDark"
+                android:layout_margin="@dimen/dp_12"
                 android:gravity="center"
-                android:includeFontPadding="false"
                 android:lines="2"
                 android:text="@{baseViewModel.loaderMessageLiveData}"
-                android:textAppearance="@style/AppTheme.Font"
                 android:textSize="@dimen/sp_14"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

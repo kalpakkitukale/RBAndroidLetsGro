@@ -47,8 +47,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/dp_10"
-                android:background="@drawable/edittext_background_gray_border"
-                android:hint="@string/type_your_reply"
+               android:hint="@string/type_your_reply"
                 android:imeOptions="actionGo"
                 android:inputType="textCapSentences|textMultiLine"
                 android:paddingStart="@dimen/dp_10"
@@ -56,8 +55,7 @@
                 android:paddingEnd="@dimen/dp_50"
                 android:paddingBottom="@dimen/dp_10"
                 android:text="@={facultyQuestionAnswerViewModel.enteredReplyLiveData}"
-                android:textSize="@dimen/sp_14"
-                app:layout_constraintBottom_toBottomOf="parent"
+              app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 

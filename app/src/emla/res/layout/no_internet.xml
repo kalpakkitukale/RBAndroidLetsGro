@@ -19,7 +19,7 @@
         android:visibility="@{viewModel.noInternetMutableLiveData}">
         <!--  android:visibility="@{viewModel.noInternetMutableLiveData}"-->
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ivNoInternet"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -31,9 +31,9 @@
             app:srcCompat="@drawable/ic_no_internet" />
         <!--ic_no_internet_connection-->
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvNoInternetMsg"
-            style="@style/TextViewRegularBlackOnWhite"
+            style="@style/TextViewRegularNavyBlueOnLightNWhiteOnDark"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/dp_22"
@@ -45,16 +45,13 @@
             android:text="@{viewModel.visibilityMessageLiveData}"/>
         <!-- android:text="@{viewModel.visibilityMessageLiveData}"-->
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnTryAgain"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/gradient_button_capsule"
+            style="@style/CustomCapsuleButtonBlueBgWhiteText"
+            android:layout_marginTop="@dimen/dp_16"
             android:text="@string/tryAgain"
-            android:textAppearance="@style/AppTheme.Font.Medium"
-            android:textColor="@color/colorWhite"
-            android:textSize="@dimen/sp_12"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

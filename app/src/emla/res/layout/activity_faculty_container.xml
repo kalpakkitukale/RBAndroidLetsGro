@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:animateLayoutChanges="true"
-            android:theme="@style/AppTheme.AppBarOverlayFaculty"
+            android:theme="@style/AppTheme.AppBarOverlay"
             app:elevation="@dimen/dp_0"
             android:elevation="@dimen/dp_0"
             app:layout_constraintEnd_toEndOf="parent"
@@ -33,8 +33,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:title="@{facultyContainerViewModel.toolbarTitleLiveData}"
-                app:titleTextColor="@color/textColorBlueOnWhiteBackground"
-                android:background="@color/colorWhite"
+                android:background="@color/colorApplicationBackground"
+                app:titleTextColor="@color/colorTextNavyBlueInLightNWhiteInDark"
                 app:popupTheme="@style/AppTheme.PopupOverlay" />
 
         </com.google.android.material.appbar.AppBarLayout>
@@ -42,7 +42,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
-            android:background="@color/colorCardBackground"
+            android:background="@color/cardBackgroundColor"
             android:id="@+id/toolbarView"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -64,7 +64,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="0.7dp"
-            android:background="@color/colorCardBackground"
+            android:background="@color/cardBackgroundColor"
             android:id="@+id/toolbarBottomView"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

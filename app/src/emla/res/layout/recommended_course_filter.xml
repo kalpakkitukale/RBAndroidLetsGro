@@ -14,9 +14,9 @@
         android:layout_height="wrap_content"
         android:background="@drawable/dialog_background">
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/lableFilter"
-            style="@style/TextViewMediumBlackOnWhite"
+            style="@style/TextViewMediumNavyBlueOnLightNWhiteOnDark"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dp_15"
@@ -41,14 +41,14 @@
             android:id="@+id/viewFilter"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/colorDividerGrayOnWhiteBackground"
+            android:background="@color/colorDivider"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/ivCloseFilter" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvProgram"
-            style="@style/TextViewRegularBlackOnWhite"
+            style="@style/TextViewRegularNavyBlueOnLightNWhiteOnDark"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_10"
@@ -63,7 +63,7 @@
             app:layout_constraintStart_toStartOf="@+id/lableFilter"
             app:layout_constraintTop_toBottomOf="@id/viewFilter" />
 
-        <Spinner
+        <androidx.appcompat.widget.AppCompatSpinner
             android:id="@+id/spinnerProgram"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -72,9 +72,9 @@
             app:layout_constraintEnd_toEndOf="@id/tvProgram"
             app:layout_constraintStart_toStartOf="@id/tvProgram" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvPattern"
-            style="@style/TextViewRegularBlackOnWhite"
+            style="@style/TextViewRegularNavyBlueOnLightNWhiteOnDark"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_10"
@@ -88,7 +88,7 @@
             app:layout_constraintStart_toStartOf="@id/tvProgram"
             app:layout_constraintTop_toBottomOf="@id/tvProgram" />
 
-        <Spinner
+        <androidx.appcompat.widget.AppCompatSpinner
             android:id="@+id/spinnerPattern"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -97,9 +97,9 @@
             app:layout_constraintEnd_toEndOf="@id/tvPattern"
             app:layout_constraintStart_toStartOf="@id/tvPattern" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvSpecialisation"
-            style="@style/TextViewRegularBlackOnWhite"
+            style="@style/TextViewRegularNavyBlueOnLightNWhiteOnDark"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_10"
@@ -113,7 +113,7 @@
             app:layout_constraintStart_toStartOf="@id/tvPattern"
             app:layout_constraintTop_toBottomOf="@id/tvPattern" />
 
-        <Spinner
+        <androidx.appcompat.widget.AppCompatSpinner
             android:id="@+id/spinnerSpecialisation"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -127,14 +127,14 @@
             android:layout_width="match_parent"
             android:layout_height="0.8dp"
             android:layout_marginTop="12dp"
-            android:background="@color/colorDividerGrayOnWhiteBackground"
+            android:background="@color/colorDivider"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvSpecialisation" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnApplyFilter"
-            style="@style/CustomCapsuleButtonGradientBgWhiteText"
+            style="@style/CustomCapsuleButtonBlueBgWhiteText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_5"

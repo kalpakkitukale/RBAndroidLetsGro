@@ -25,7 +25,7 @@
             android:layout_alignParentEnd="true"
             android:padding="@dimen/dp_10">
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/imgAlertSuccessFail"
                 android:layout_width="@dimen/dp_35"
                 android:layout_height="@dimen/dp_35"
@@ -37,7 +37,7 @@
                 app:layout_constraintStart_toStartOf="@+id/imgAlert"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/imgAlert"
                 android:layout_width="@dimen/dp_150"
                 android:layout_height="@dimen/dp_150"
@@ -57,9 +57,9 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/imgAlert">
 
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvAlertMessage"
-                    style="@style/TextViewRegularBlackOnWhite"
+                    style="@style/TextViewRegularNavyBlueOnLightNWhiteOnDark"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -75,7 +75,7 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnNo"
-                style="@style/CustomCapsuleButtonGradientBgWhiteText"
+                style="@style/CustomCapsuleButtonBlueBgWhiteText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_8"
@@ -83,8 +83,7 @@
                 android:layout_marginEnd="@dimen/dp_8"
                 android:onClick="@{()->baseViewModel.alertDialogResourceModelMutableLiveData.negativeButtonClickFunctionality.invoke()}"
                 android:text="@{baseViewModel.alertDialogResourceModelMutableLiveData.negativeButtonText}"
-                android:textSize="@dimen/sp_12"
-                android:visibility="@{safeUnbox(baseViewModel.alertDialogResourceModelMutableLiveData.infoAlert) ? View.GONE : View.VISIBLE}"
+               android:visibility="@{safeUnbox(baseViewModel.alertDialogResourceModelMutableLiveData.infoAlert) ? View.GONE : View.VISIBLE}"
                 app:layout_constraintEnd_toStartOf="@+id/btnYes"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintHorizontal_chainStyle="spread"
@@ -95,14 +94,13 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnYes"
-                style="@style/CustomCapsuleButtonGradientBgWhiteText"
+                style="@style/CustomCapsuleButtonBlueBgWhiteText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_8"
                 android:layout_marginEnd="@dimen/dp_8"
                 android:onClick="@{()->baseViewModel.alertDialogResourceModelMutableLiveData.positiveButtonClickFunctionality.invoke()}"
                 android:text="@{baseViewModel.alertDialogResourceModelMutableLiveData.positiveButtonText}"
-                android:textSize="@dimen/sp_12"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintHorizontal_chainStyle="spread"

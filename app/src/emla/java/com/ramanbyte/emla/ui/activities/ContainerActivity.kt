@@ -8,7 +8,6 @@ import android.view.View
 import androidx.appcompat.app.ActionBar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.navigation.NavController
 import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -25,10 +24,11 @@ import com.ramanbyte.emla.base.di.authModuleDependency
 import com.ramanbyte.emla.models.CoursesModel
 import com.ramanbyte.emla.models.MenuPojo
 import com.ramanbyte.emla.view_model.ContainerViewModel
-import com.ramanbyte.utilities.*
-import com.ramanbyte.utilities.StaticMethodUtilitiesKtx.changeStatusBarColor
+import com.ramanbyte.utilities.AlertDialog
+import com.ramanbyte.utilities.AppLog
+import com.ramanbyte.utilities.BindingUtils
+import com.ramanbyte.utilities.KEY_COURSE_MODEL
 import kotlinx.android.synthetic.emla.activity_container.*
-import kotlin.reflect.jvm.internal.impl.metadata.ProtoBuf
 
 
 class ContainerActivity : BaseActivity<ActivityContainerBinding, ContainerViewModel>(
@@ -272,7 +272,7 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding, ContainerViewMo
 
             menuPojo = MenuPojo(
                 NAV_MY_FAVOURATE,
-                R.drawable.ic_heart_checked,
+                R.drawable.ic_heart,
                 BindingUtils.string(R.string.my_favourite),
                 false,
                 0

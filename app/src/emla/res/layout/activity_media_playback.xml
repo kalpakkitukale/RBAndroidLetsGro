@@ -6,7 +6,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorBlack"
+        android:background="@color/colorApplicationBackground"
         android:id="@+id/mainConstraint"
         android:fitsSystemWindows="true"
         tools:context=".video_tutorials.media_playback.MediaPlaybackActivity">

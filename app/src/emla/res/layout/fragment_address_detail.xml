@@ -42,11 +42,10 @@
                 android:lines="1"
                 android:onClick="@{()->spState.performClick()}"
                 android:singleLine="true"
-                android:text="@={learnerProfileViewModel.registrationModelLiveData.stateName}"
-                android:textSize="@dimen/sp_16" />
+                android:text="@={learnerProfileViewModel.registrationModelLiveData.stateName}" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <Spinner
+        <androidx.appcompat.widget.AppCompatSpinner
             android:id="@+id/spState"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -73,16 +72,13 @@
                 style="@style/EditTextRegularGrayHint"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorTransparent"
                 android:digits="@string/alpha_digit_format"
-                android:drawablePadding="@dimen/dp_5"
                 android:imeOptions="actionNext"
                 android:inputType="textCapSentences"
                 android:lines="1"
                 android:maxLength="50"
                 android:singleLine="true"
                 android:text="@={learnerProfileViewModel.citiesQueryLiveData}"
-                android:textSize="@dimen/sp_16"
                 app:hintAnimationEnabled="false" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -99,17 +95,12 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnNext1"
-            style="@style/CustomCapsuleButtonGradientBgWhiteText"
+            style="@style/CustomCapsuleButtonBlueBgWhiteText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/dp_22"
-            android:includeFontPadding="false"
             android:onClick="@{learnerProfileViewModel::saveStateDetails}"
-            android:paddingTop="@dimen/dp_10"
-            android:paddingBottom="@dimen/dp_10"
             android:text="@string/next"
-            android:textAllCaps="true"
-            android:textSize="@dimen/sp_16"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/tilCity"
             app:layout_constraintStart_toStartOf="@+id/tilCity" />

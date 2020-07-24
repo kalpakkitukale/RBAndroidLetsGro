@@ -29,9 +29,9 @@
             app:layout_constraintVertical_bias="0.39" />
 
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvWelcome"
-            style="@style/TextViewBoldBlackOnWhite"
+            style="@style/TextViewBoldNavyBlueOnLightNWhiteOnDark"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/welcome"
@@ -41,7 +41,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ivClientLogo" />
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ivElement1"
             android:layout_width="@dimen/dp_150"
             android:layout_height="@dimen/dp_40"

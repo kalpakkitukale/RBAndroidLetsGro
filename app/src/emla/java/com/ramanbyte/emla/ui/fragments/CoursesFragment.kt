@@ -152,7 +152,7 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
 
         val searchClose = mSearchView?.findViewById(R.id.search_close_btn) as ImageView
         searchClose.apply {
-            setImageResource(R.drawable.ic_close_white)
+            setImageResource(R.drawable.ic_close_black)
             setOnClickListener {
                 if (TextUtils.isEmpty(searchEditText.text.toString())) {
                     if (mSearchView?.isIconified == false) {

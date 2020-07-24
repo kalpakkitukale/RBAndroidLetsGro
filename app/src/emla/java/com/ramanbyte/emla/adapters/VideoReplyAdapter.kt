@@ -3,13 +3,9 @@ package com.ramanbyte.emla.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import com.ramanbyte.R
-import com.ramanbyte.databinding.CardChatMsgReceiveBinding
-import com.ramanbyte.databinding.CardChatMsgSendBinding
 import com.ramanbyte.databinding.CardRecentlyAskQuestionsReplyBinding
-import com.ramanbyte.emla.faculty.adapter.FacultyQuestionAnswerAdapter
 import com.ramanbyte.emla.models.AskQuestionReplyModel
 import com.ramanbyte.utilities.BindingUtils
 import com.ramanbyte.utilities.KEY_FACULTY
@@ -47,11 +43,11 @@ class VideoReplyAdapter(private var qnaArrayList: ArrayList<AskQuestionReplyMode
                 replyModel.apply {
                     if (userType == KEY_FACULTY) {
                         tvUserName.text = replyModel.userName
-                        verticalView.setBackgroundColor(BindingUtils.color(R.color.colorTeal))
+                        verticalView.setBackgroundColor(BindingUtils.color(R.color.colorIconGreen))
                     }
                     else {
                         tvUserName.text = BindingUtils.string(R.string.self)
-                        verticalView.setBackgroundColor(BindingUtils.color(R.color.textColorRegOnWhite))
+                        verticalView.setBackgroundColor(BindingUtils.color(R.color.colorTextNavyBlueInLightNWhiteInDark))
                     }
                 }
 

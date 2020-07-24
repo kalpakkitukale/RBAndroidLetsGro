@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:cardBackgroundColor="@color/colorTransparent"
-    app:cardCornerRadius="@dimen/dp_5"
-    app:cardElevation="2dp"
-    app:cardUseCompatPadding="true"
-    app:contentPadding="@dimen/dp_5">
+    style="@style/customCard">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -26,24 +18,24 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvNameCardAddReply"
-            style="@style/TextViewRegularLightGray"
+            style="@style/TextViewRegularGrayOnLightNDark"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Dr. Sudit Joshi"
-            android:textSize="@dimen/sp_12"
             android:layout_marginStart="@dimen/dp_10"
             android:layout_marginEnd="20dp"
+            android:text="Dr. Sudit Joshi"
+            android:textSize="@dimen/sp_12"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/rivCardAddReply"
             app:layout_constraintTop_toTopOf="@+id/rivCardAddReply" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvTextAddReviewCardAddReply"
-            style="@style/TextViewMediumBlackOnWhite"
+            style="@style/TextViewMediumNavyBlueOnLightNWhiteOnDark"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Android is a mobile operating system based on a modified version of the Linux kernel and other open source software"
             android:layout_marginTop="@dimen/dp_10"
+            android:text="Android is a mobile operating system based on a modified version of the Linux kernel and other open source software"
             android:textSize="@dimen/sp_14"
             app:layout_constraintEnd_toEndOf="@+id/tvNameCardAddReply"
             app:layout_constraintStart_toStartOf="@+id/tvNameCardAddReply"
@@ -51,17 +43,17 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvDateCardAddReply"
-            style="@style/TextViewBoldLightGray"
+            style="@style/TextViewBoldGrayOnLightNDark"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="27 Apr 2020 ! 12:16 AM"
             android:layout_marginTop="@dimen/dp_10"
             android:layout_marginBottom="@dimen/dp_10"
+            android:text="27 Apr 2020 ! 12:16 AM"
             android:textSize="@dimen/sp_10"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/tvTextAddReviewCardAddReply"
             app:layout_constraintStart_toStartOf="@+id/tvTextAddReviewCardAddReply"
-            app:layout_constraintTop_toBottomOf="@+id/tvTextAddReviewCardAddReply"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@+id/tvTextAddReviewCardAddReply" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

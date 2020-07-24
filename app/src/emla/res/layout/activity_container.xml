@@ -36,8 +36,8 @@
                     android:id="@+id/main_toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
-                    app:titleTextColor="@color/textColorBlueOnWhiteBackground"
-                    android:background="@color/colorToolbarBackground"
+                    android:background="@color/colorApplicationBackground"
+                    app:titleTextColor="@color/colorTextNavyBlueInLightNWhiteInDark"
                     app:popupTheme="@style/AppTheme.PopupOverlay"
                     app:title="@{containerViewModel.toolbarTitleLiveData}" />
 
@@ -71,7 +71,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="@dimen/dp_80"
-                android:background="@color/colorWhite"
+                android:background="@color/colorApplicationBackground"
                 android:childDivider="@color/colorTransparent"
                 android:childIndicator="@null"
                 android:choiceMode="singleChoice"

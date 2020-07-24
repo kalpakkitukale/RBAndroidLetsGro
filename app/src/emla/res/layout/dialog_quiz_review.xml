@@ -26,9 +26,9 @@
             android:layout_marginEnd="@dimen/dp_16"
             android:layout_marginBottom="@dimen/dp_16">
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvTitle"
-                style="@style/TextViewBoldBlackOnWhite"
+                style="@style/TextViewBoldNavyBlueOnLightNWhiteOnDark"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -37,9 +37,9 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvScore"
-                style="@style/TextViewRegularBlackOnWhite"
+                style="@style/TextViewRegularNavyBlueOnLightNWhiteOnDark"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_10"
@@ -50,9 +50,9 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/lblCorrectQuestion"
-                style="@style/TextViewRegularBlackOnWhite"
+                style="@style/TextViewRegularNavyBlueOnLightNWhiteOnDark"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_12"
@@ -65,16 +65,16 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvScore" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvCorrectQuestion"
-                style="@style/TextViewRegularBlackOnWhite"
+                style="@style/TextViewRegularNavyBlueOnLightNWhiteOnDark"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:gravity="left"
                 android:text="10"
                 android:layout_marginStart="@dimen/dp_2"
                 android:onClick="@{() -> showQuestionsViewModel.onClickDialogCorrectQuestion(tvCorrectQuestion,staticHelper.keyCorrect)}"
-                android:textColor="@color/approvalInTAT"
+                android:textColor="@color/colorRed"
                 android:textSize="@dimen/sp_14"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -84,9 +84,9 @@
                 app:layout_constraintTop_toTopOf="@+id/lblCorrectQuestion"
                 app:layout_constraintBottom_toBottomOf="@+id/lblCorrectQuestion"/>
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/lblIncorrectQuestion"
-                style="@style/TextViewRegularBlackOnWhite"
+                style="@style/TextViewRegularNavyBlueOnLightNWhiteOnDark"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_12"
@@ -99,15 +99,15 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvCorrectQuestion" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvIncorrectQuestion"
-                style="@style/TextViewRegularBlackOnWhite"
+                style="@style/TextViewRegularNavyBlueOnLightNWhiteOnDark"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:gravity="left"
                 android:text="2"
                 android:onClick="@{() -> showQuestionsViewModel.onClickDialogIncorrectQuestion(tvIncorrectQuestion,staticHelper.keyWrong)}"
-                android:textColor="@color/approvalInTAT"
+                android:textColor="@color/colorRed"
                 android:textSize="@dimen/sp_14"
                 android:layout_marginLeft="@dimen/dp_2"
                 app:layout_constraintHorizontal_chainStyle="packed"
@@ -120,7 +120,7 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnOk"
-                style="@style/CustomCapsuleButtonGradientBgWhiteText"
+                style="@style/CustomCapsuleButtonBlueBgWhiteText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_10"

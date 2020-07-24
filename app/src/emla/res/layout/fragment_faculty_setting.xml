@@ -21,7 +21,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_22"
             android:text="@string/logout"
-            android:textSize="@dimen/sp_14"
             android:onClick="@{settingViewModel::clickOnLogout}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

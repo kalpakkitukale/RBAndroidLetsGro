@@ -15,9 +15,9 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/dp_5">
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvQueNo"
-            style="@style/TextViewRegularBlackOnWhite"
+            style="@style/TextViewRegularNavyBlueOnLightNWhiteOnDark"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/circle_text_view"

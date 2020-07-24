@@ -23,7 +23,7 @@
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.41" />
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/conImageElement"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -34,9 +34,9 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/ivClientLogo"
-            style="@style/TextViewBoldBlackOnWhite"
+            style="@style/TextViewBoldNavyBlueOnLightNWhiteOnDark"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -51,7 +51,7 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnContinue"
-            style="@style/CustomCapsuleButtonGradientBgWhiteText"
+            style="@style/CustomCapsuleButtonBlueBgWhiteText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:includeFontPadding="false"

@@ -12,11 +12,7 @@
     </data>
 
     <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/dp_3"
-        app:cardCornerRadius="@dimen/dp_3"
-        app:contentPadding="@dimen/dp_3">
+       style="@style/customCard">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -28,7 +24,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvNumber"
-                style="@style/TextViewBoldBlackOnWhite"
+                style="@style/TextViewBoldNavyBlueOnLightNWhiteOnDark"
                 android:layout_width="@dimen/dp_25"
                 android:layout_height="@dimen/dp_25"
                 android:background="@drawable/circle_text_view_teal_bg"
@@ -54,7 +50,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/labelMarks"
-                style="@style/TextViewRegularBlackOnWhite"
+                style="@style/TextViewRegularNavyBlueOnLightNWhiteOnDark"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -67,11 +63,11 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvMarks"
-                style="@style/TextViewBoldBlackOnWhite"
+                style="@style/TextViewBoldNavyBlueOnLightNWhiteOnDark"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text='@{StaticHelpersKt.skipTrailingZeroes(courseResultModel.obtainedmarks) + `/` + StaticHelpersKt.skipTrailingZeroes(courseResultModel.totalmarks)w}'
+                android:text='@{StaticHelpersKt.skipTrailingZeroes(courseResultModel.obtainedmarks) + `/` + StaticHelpersKt.skipTrailingZeroes(courseResultModel.totalmarks)}'
                 android:textSize="@dimen/sp_18"
                 app:layout_constraintEnd_toStartOf="@+id/guideline3"
                 app:layout_constraintStart_toStartOf="@+id/guideline2"
@@ -79,7 +75,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvDateLiveSessionLog"
-                style="@style/TextViewRegularTeal"
+                style="@style/TextViewRegularNavyBlueOnLightNWhiteOnDark"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_3"
@@ -92,7 +88,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvTime"
-                style="@style/TextViewRegularBlackOnWhite"
+                style="@style/TextViewRegularNavyBlueOnLightNWhiteOnDark"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_time"

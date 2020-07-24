@@ -13,7 +13,7 @@
 
     <item
         android:id="@+id/action_question_filter"
-        android:icon="@drawable/ic_filter_teal"
+        android:icon="@drawable/ic_filter"
         android:title="@string/filter"
         app:actionLayout="@layout/custom_action_badge_layout"
         app:showAsAction="ifRoom"/>

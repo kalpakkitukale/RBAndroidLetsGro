@@ -16,21 +16,16 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/mainLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/dp_3"
-        android:onClick="@{() -> chaptersSectionViewModel.onCardClicked(mainLayout, sectionsModel)}"
-        app:cardBackgroundColor="@color/colorTransparent"
-        app:cardCornerRadius="@dimen/dp_5"
-        app:contentPadding="@dimen/dp_5">
+        style="@style/customCard"
+        android:onClick="@{() -> chaptersSectionViewModel.onCardClicked(mainLayout, sectionsModel)}">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/IvVideo"
-                style="@style/TextViewBoldBlackOnWhite"
+                style="@style/TextViewBoldNavyBlueOnLightNWhiteOnDark"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_5"
@@ -39,9 +34,9 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvTopicName"
-                style="@style/TextViewBoldBlackOnWhite"
+                style="@style/TextViewBoldNavyBlueOnLightNWhiteOnDark"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_10"
@@ -53,9 +48,9 @@
                 app:layout_constraintStart_toEndOf="@+id/IvVideo"
                 app:layout_constraintTop_toTopOf="@+id/IvVideo" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/IvProgress"
-                style="@style/TextViewRegularBlackOnWhite"
+                style="@style/TextViewRegularNavyBlueOnLightNWhiteOnDark"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="6"
@@ -64,7 +59,7 @@
                 app:layout_constraintEnd_toStartOf="@+id/ivDownload"
                 app:layout_constraintTop_toTopOf="@+id/tvTopicName" />
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/ivDownload"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -76,9 +71,9 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/IvProgress" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvCourseDescription"
-                style="@style/TextViewRegularBlackOnWhite"
+                style="@style/TextViewRegularNavyBlueOnLightNWhiteOnDark"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_8"

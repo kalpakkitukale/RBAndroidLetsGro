@@ -29,14 +29,12 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnAppearFormativeTest"
-            style="@style/CustomCapsuleButtonGradientBgWhiteText"
+            style="@style/CustomCapsuleButtonBlueBgWhiteText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/dp_5"
             android:onClick="@{chaptersSectionViewModel::takeFormativeTest}"
             android:text="@string/appear_formative"
-            android:textAllCaps="true"
-            android:textSize="@dimen/sp_14"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

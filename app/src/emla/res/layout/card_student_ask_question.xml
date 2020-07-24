@@ -15,26 +15,12 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardLayoutMain"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="@{() -> viewModel.onClickCard(cardLayoutMain,studentAskedQuestionsModel)}"
-        android:layout_marginTop="@dimen/dp_8"
-        android:layout_marginStart="@dimen/dp_5"
-        android:layout_marginEnd="@dimen/dp_5"
-        app:cardCornerRadius="@dimen/dp_5"
-        app:cardElevation="@dimen/dp_2"
-        app:contentPadding="@dimen/dp_5">
+       style="@style/customCard"
+        android:onClick="@{() -> viewModel.onClickCard(cardLayoutMain,studentAskedQuestionsModel)}">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <!--android:layout_marginStart="@dimen/dp_5"
-            android:layout_marginEnd="@dimen/dp_5"
-            android:layout_marginBottom="@dimen/dp_5"
-            android:id="@+id/mainConstraintLayout"
-            android:background="@drawable/card_white_bg"
-            android:padding="@dimen/dp_5"
-            android:onClick="@{() -> viewModel.onClickCard(mainConstraintLayout,studentAskedQuestionsModel)}"-->
 
             <com.ramanbyte.views.RoundedImageView
                 android:id="@+id/rivUserPic"
@@ -56,7 +42,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvUserName"
-                style="@style/TextViewMediumLightBlue"
+                style="@style/TextViewLightNavyBlueOnLightNWhiteOnDark"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_5"
@@ -68,7 +54,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvMobile"
-                style="@style/TextViewLightGray"
+                style="@style/TextViewLightGrayOnLightNDark"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_call"
@@ -83,7 +69,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvEmail"
-                style="@style/TextViewLightGray"
+                style="@style/TextViewLightGrayOnLightNDark"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_5"
@@ -100,7 +86,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvQuestion"
-                style="@style/TextViewRegularLightBlueOnWhite"
+                style="@style/TextViewRegularNavyBlueOnLightNWhiteOnDark"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_14"
@@ -110,7 +96,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvDateTime"
-                style="@style/TextViewBackOnWhiteBackgroundItalic"
+                style="@style/TextViewItalicNavyBlueOnLightNWhiteOnDark"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_3"
@@ -120,7 +106,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvChapterName"
-                style="@style/TextViewRegularBlackOnWhite"
+                style="@style/TextViewRegularNavyBlueOnLightNWhiteOnDark"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_5"

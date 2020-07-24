@@ -16,18 +16,16 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/mainContainer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/dp_5">
+        style="@style/customCard">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="@dimen/dp_5">
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/lblFilter"
-                style="@style/TextViewBoldBlackOnWhite"
+                style="@style/TextViewBoldNavyBlueOnLightNWhiteOnDark"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_10"
@@ -53,13 +51,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="0.7dp"
                 android:layout_marginTop="12dp"
-                android:background="@color/colorDividerGrayOnWhiteBackground"
+                android:background="@color/colorDivider"
                 app:layout_constraintTop_toBottomOf="@id/ivCloseFilter"
                 tools:layout_editor_absoluteX="5dp" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/lblSortByDate"
-                style="@style/TextViewMediumBlackOnWhite"
+                style="@style/TextViewMediumNavyBlueOnLightNWhiteOnDark"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_10"
@@ -104,9 +102,9 @@
                     android:textSize="@dimen/sp_12" />
             </com.google.android.material.chip.ChipGroup>
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/lblAnsAndUnAns"
-                style="@style/TextViewMediumBlackOnWhite"
+                style="@style/TextViewMediumNavyBlueOnLightNWhiteOnDark"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_10"
@@ -167,7 +165,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0.7dp"
                 android:layout_marginTop="12dp"
-                android:background="@color/colorDividerGrayOnWhiteBackground"
+                android:background="@color/colorDivider"
                 app:layout_constraintTop_toBottomOf="@id/cgAnsType"
                 tools:layout_editor_absoluteX="5dp" />
 

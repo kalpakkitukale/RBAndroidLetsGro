@@ -1,34 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#82b9fb</color> <!--008577-->
-    <color name="colorPrimaryDark">#82b9fb</color>  <!--00574B-->
-    <color name="colorBlack">#000000</color>
-    <color name="colorLightGray">#d1d1d1</color>
-    <color name="colorDividerGrayOnWhiteBackground">#959595</color>
-    <color name="colorWhite">#ffffff</color>
-    <color name="colorTransparent">#E6ffffff</color>
+    <color name="colorAccent">#3d9df9</color>
+    <color name="colorTransparent">#00000000</color>
+    <color name="colorApplicationBackground">#fcfcfc</color>
+    <color name="cardBackgroundColor">#ffffff</color>
+    <color name="colorIconNavyBlueInLightNGrayInDark">#1d396b</color>
+    <color name="colorTextNavyBlueInLightNWhiteInDark">#1d396b</color>
+    <color name="colorIconGreen">#25ae88</color>
+    <color name="colorButtonBlue">#3d9df9</color>
+    <color name="colorTextHint">#9391a4</color>
+    <color name="colorTextGrayOnLightNDark">#9391a4</color>
+
+    <!--Taken From previous theme-->
     <color name="transparent">#00000000</color>
-    <color name="colorTeal">#82b9fb</color><!--82b9fb-->
-    <color name="colorTealTransparent">#9982b9fb</color>
-    <color name="textHintColor">#9391a4</color>
-    <color name="textColorGrayOnWhiteBackground">#6a6879</color>
-    <color name="textColorBackOnWhiteBackground">#605575</color>    <!--slach color/ text color / date    in btn two content-->
-    <color name="textColorRegOnWhite">#e57373</color>
-    <color name="colorGrayTransparent">#a6aaaaaa</color>
-    <color name="approvalInTAT">#2281c2</color>
     <color name="colorChipUncheck">#F2F2F2</color>
     <color name="colorChipCheck">#50bdc1</color>
     <color name="exoTransparentBlack">#66000000</color>
-
-    <!--Need to discuss-->
-    <color name="colorStudentIcon">#1d396b</color>
-    <color name="colorStudentButton">#3d9bf9</color>
-    <color name="colorToolbarBackground">#fcfcfc</color>
-    <color name="colorStudentIcon1">#25ae88</color>
-
-    <color name="colorIcon">#50bdc1</color>
-    <color name="textColorBlueOnWhiteBackground">#1d396b</color>
-    <color name="colorCardBackground">#70cacd</color>
-    <color name="textColorLightBlueOnWhiteBackground">#6e7a96</color>
+    <color name="colorLightGray">#d1d1d1</color>
+    <color name="colorWhite">#ffffff</color>
+    <color name="colorDivider">#d1d1d1</color>
+    <color name="bg_gray">#9391a4</color>
+    <color name="checkbox_color">#9391a4</color>
+    <color name="checkbox_unchecked_color">#9391a4</color>
+    <color name="colorRed">#ff0000</color>
 
 </resources>

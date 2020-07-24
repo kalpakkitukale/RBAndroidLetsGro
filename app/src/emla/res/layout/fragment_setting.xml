@@ -14,9 +14,9 @@
         android:layout_height="match_parent"
         tools:context=".ui.fragments.LearnerProfileFragment">
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvEditProfile"
-            style="@style/TextViewMediumBlackOnWhite"
+            style="@style/TextViewMediumNavyBlueOnLightNWhiteOnDark"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/dp_22"
@@ -33,14 +33,14 @@
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:layout_marginTop="@dimen/dp_25"
-            android:background="@color/colorDividerGrayOnWhiteBackground"
+            android:background="@color/colorDivider"
             app:layout_constraintStart_toStartOf="@id/tvEditProfile"
             app:layout_constraintEnd_toEndOf="@id/tvEditProfile"
             app:layout_constraintTop_toBottomOf="@id/tvEditProfile"/>
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvChangePassword"
-            style="@style/TextViewMediumBlackOnWhite"
+            style="@style/TextViewMediumNavyBlueOnLightNWhiteOnDark"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_43"
@@ -53,19 +53,17 @@
             app:layout_constraintStart_toStartOf="@id/tvEditProfile"
             app:layout_constraintTop_toBottomOf="@id/tvEditProfile" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnLogout"
-            style="@style/CustomCapsuleButtonGradientBgWhiteText"
+            style="@style/CustomCapsuleButtonBlueBgWhiteText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_22"
             android:text="@string/logout"
-            android:textSize="@dimen/sp_14"
-            android:onClick="@{settingviewModel::clickOnLogout}"
+           android:onClick="@{settingviewModel::clickOnLogout}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvChangePassword"
-            app:layout_constraintWidth_percent="0.4" />
+            app:layout_constraintTop_toBottomOf="@id/tvChangePassword" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

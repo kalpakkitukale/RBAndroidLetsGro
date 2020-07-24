@@ -5,7 +5,6 @@ import android.os.Parcelable
 import android.view.View
 import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
-import com.google.gson.annotations.SerializedName
 import com.ramanbyte.BR
 import com.ramanbyte.R
 import com.ramanbyte.utilities.BindingUtils
@@ -63,7 +62,7 @@ class ContentModel() : Parcelable, BaseObservable() {
         }
 
     @Bindable
-    var downloadStatusColor = BindingUtils.color(R.color.colorTeal)
+    var downloadStatusColor = BindingUtils.color(R.color.colorIconGreen)
         set(value) {
             field = value
             notifyPropertyChanged(BR.downloadStatusColor)

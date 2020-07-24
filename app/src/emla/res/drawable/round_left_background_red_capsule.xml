@@ -6,7 +6,7 @@
         android:topLeftRadius="12dp"
         android:bottomLeftRadius="12dp"/>
 
-    <solid android:color="@color/textColorRegOnWhite" />
+    <solid android:color="@color/colorIconNavyBlueInLightNGrayInDark" />
 
     <padding
         android:bottom="0dp"

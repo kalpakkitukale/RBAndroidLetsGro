@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvLabelTitleLSR"
-        style="@style/TextViewBoldBlackOnWhite"
+        style="@style/TextViewBoldNavyBlueOnLightNWhiteOnDark"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:paddingStart="@dimen/dp_20"
@@ -41,7 +39,7 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvLabelMobileNoRequest"
-        style="@style/TextViewRegularLightGray"
+        style="@style/TextViewRegularNavyBlueOnLightNWhiteOnDark"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/mobile_number"
@@ -52,7 +50,7 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvMobileNoRequest"
-        style="@style/TextViewBoldBlackOnWhite"
+        style="@style/TextViewBoldNavyBlueOnLightNWhiteOnDark"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_5"
@@ -67,7 +65,7 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvLabelAlternateMobileNoRequest"
-        style="@style/TextViewRegularLightGray"
+        style="@style/TextViewRegularNavyBlueOnLightNWhiteOnDark"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/alternate_mobile_number"
@@ -78,7 +76,7 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvAlternateMobileNoRequest"
-        style="@style/TextViewBoldBlackOnWhite"
+        style="@style/TextViewBoldNavyBlueOnLightNWhiteOnDark"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_5"
@@ -92,7 +90,7 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvLabelTimeToContact"
-        style="@style/TextViewRegularLightGray"
+        style="@style/TextViewRegularNavyBlueOnLightNWhiteOnDark"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/time_to_contact"
@@ -103,7 +101,7 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvRequestTime"
-        style="@style/TextViewBoldBlackOnWhite"
+        style="@style/TextViewBoldNavyBlueOnLightNWhiteOnDark"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_5"
@@ -117,7 +115,7 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvLabelLearnSession"
-        style="@style/TextViewRegularLightGray"
+        style="@style/TextViewRegularNavyBlueOnLightNWhiteOnDark"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/what_you_want_to_learn_in_live_session"
@@ -128,7 +126,7 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvTextLearnSession"
-        style="@style/TextViewBoldBlackOnWhite"
+        style="@style/TextViewBoldNavyBlueOnLightNWhiteOnDark"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_10"

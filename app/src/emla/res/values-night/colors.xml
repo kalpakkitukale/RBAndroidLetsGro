@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorTransparent">#00000000</color>
+    <color name="colorApplicationBackground">#060606</color>
+    <color name="cardBackgroundColor">#181818</color>
+    <color name="colorIconNavyBlueInLightNGrayInDark">#919191</color>
+    <color name="colorTextNavyBlueInLightNWhiteInDark">#ffffff</color>
+    <color name="colorTextHint">#9391a4</color>
+    <color name="colorTextGrayOnLightNDark">#9391a4</color>
+</resources>

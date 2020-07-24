@@ -15,11 +15,11 @@
         app:layout_anchor="@+id/cardMainContainer"
         app:layout_anchorGravity="center">
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvOptions"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorBlack"
+            style="@style/TextViewRegularNavyBlueOnLightNWhiteOnDark"
             android:textSize="@dimen/sp_12"
             android:drawablePadding="@dimen/dp_10"
             android:drawableStart="@drawable/circle_attempted"

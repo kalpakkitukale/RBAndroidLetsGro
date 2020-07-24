@@ -22,13 +22,7 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardMainContainer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:elevation="0dp"
-            app:cardCornerRadius="@dimen/dp_15"
-            app:cardElevation="0dp"
-            android:layout_marginLeft="@dimen/dp_5"
-            android:layout_marginRight="@dimen/dp_5"
+          style="@style/customCard"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -61,18 +55,18 @@
             app:layout_constraintStart_toStartOf="@+id/cardMainContainer"
             app:layout_constraintTop_toBottomOf="@+id/guideline">
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvTestTitle"
-                style="@style/TextViewBoldBlackOnWhite"
+                style="@style/TextViewBoldNavyBlueOnLightNWhiteOnDark"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_10"
                 android:textSize="@dimen/sp_16"
                 android:text="@{instructionShowQuestionsViewModel.instructionsModelLiveData.quiz_Title}"/>
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvInstruction"
-                style="@style/TextViewBoldBlackOnWhite"
+                style="@style/TextViewBoldNavyBlueOnLightNWhiteOnDark"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/instruction"
@@ -86,20 +80,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:layout_marginTop="@dimen/dp_10"
-                android:background="@color/colorDividerGrayOnWhiteBackground" />
+                android:background="@color/colorDivider" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/lblTotalNoOfQue"
-                style="@style/TextViewRegularBlackOnWhite"
+                style="@style/TextViewRegularNavyBlueOnLightNWhiteOnDark"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_10"
                 android:text="@string/total_number_of_questions"
                 android:textSize="@dimen/sp_12" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvTotalNoOfQue"
-                style="@style/TextViewBoldBlackOnWhite"
+                style="@style/TextViewBoldNavyBlueOnLightNWhiteOnDark"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_16"
@@ -138,7 +132,7 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnStartQuiz"
-            style="@style/CustomCapsuleButtonGradientBgWhiteText"
+            style="@style/CustomCapsuleButtonBlueBgWhiteText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:onClick="@{() -> instructionShowQuestionsViewModel.onClickStartQuiz(btnStartQuiz)}"

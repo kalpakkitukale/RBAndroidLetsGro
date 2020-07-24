@@ -14,25 +14,17 @@
     </data>
 
     <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dp_5"
-        android:layout_marginTop="@dimen/dp_5"
-        android:layout_marginEnd="@dimen/dp_5"
-        android:layout_marginBottom="@dimen/dp_5"
-        android:onClick="@{()->viewModel.playMedia(favouriteVideosModel)}"
-        app:cardBackgroundColor="@color/colorTransparent"
-        app:cardCornerRadius="@dimen/dp_5"
-        app:contentPadding="@dimen/dp_5">
+       style="@style/customCard"
+        android:onClick="@{()->viewModel.playMedia(favouriteVideosModel)}">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/dp_5">
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvContentTitle"
-                style="@style/TextViewMediumBlackOnWhite"
+                style="@style/TextViewMediumNavyBlueOnLightNWhiteOnDark"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_5"
@@ -51,10 +43,11 @@
                 android:padding="@dimen/dp_5"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/tvContentTitle"
-                app:srcCompat="@drawable/ic_heart_checked" />
+                app:srcCompat="@drawable/ic_heart" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvContentSubject"
+                style="@style/TextViewRegularNavyBlueOnLightNWhiteOnDark"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_5"
@@ -65,10 +58,11 @@
                 app:layout_constraintStart_toStartOf="@+id/tvContentTitle"
                 app:layout_constraintTop_toBottomOf="@+id/tvContentTitle" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvContentTopic"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                style="@style/TextViewRegularNavyBlueOnLightNWhiteOnDark"
                 android:layout_marginTop="@dimen/dp_5"
                 android:text='@{favouriteVideosModel.chapterName}'
                 android:textSize="@dimen/sp_12"
@@ -76,10 +70,11 @@
                 app:layout_constraintStart_toStartOf="@+id/tvContentSubject"
                 app:layout_constraintTop_toBottomOf="@+id/tvContentSubject" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvContentSection"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                style="@style/TextViewRegularNavyBlueOnLightNWhiteOnDark"
                 android:layout_marginTop="@dimen/dp_5"
                 android:layout_marginBottom="@dimen/dp_5"
                 android:text='@{favouriteVideosModel.sectionName}'

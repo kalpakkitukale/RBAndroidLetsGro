@@ -12,10 +12,6 @@
 
     </data>
 
-    <!--  <androidx.core.widget.NestedScrollView
-          android:layout_width="match_parent"
-          android:layout_height="match_parent">-->
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -40,18 +36,16 @@
                 style="@style/EditTextRegularGrayHint"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/colorTransparent"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
                 android:gravity="center_vertical"
                 android:lines="1"
                 android:onClick="@{()->spinnerProgram.performClick()}"
                 android:singleLine="true"
-                android:text="@={learnerProfileViewModel.registrationModelLiveData.educationLevlName}"
-                android:textSize="@dimen/sp_16" />
+                android:text="@={learnerProfileViewModel.registrationModelLiveData.educationLevlName}" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <Spinner
+        <androidx.appcompat.widget.AppCompatSpinner
             android:id="@+id/spinnerProgram"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -77,8 +71,6 @@
                 style="@style/EditTextRegularGrayHint"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorTransparent"
-                android:drawablePadding="@dimen/dp_5"
                 android:imeOptions="actionNext"
                 android:inputType="numberSigned"
                 android:lines="1"
@@ -109,18 +101,16 @@
                 style="@style/EditTextRegularGrayHint"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/colorTransparent"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
                 android:gravity="center_vertical"
                 android:lines="1"
                 android:onClick="@{()->spinnerPattern.performClick()}"
                 android:singleLine="true"
-                android:text="@={learnerProfileViewModel.registrationModelLiveData.pattern}"
-                android:textSize="@dimen/sp_16" />
+                android:text="@={learnerProfileViewModel.registrationModelLiveData.pattern}" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <Spinner
+        <androidx.appcompat.widget.AppCompatSpinner
             android:id="@+id/spinnerPattern"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -149,15 +139,13 @@
                 style="@style/EditTextRegularGrayHint"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/colorTransparent"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
                 android:gravity="center_vertical"
                 android:lines="1"
                 android:onClick="@{()->spinnerSpecialisation.performClick()}"
                 android:singleLine="true"
-                android:text="@={learnerProfileViewModel.registrationModelLiveData.specializationName}"
-                android:textSize="@dimen/sp_16" />
+                android:text="@={learnerProfileViewModel.registrationModelLiveData.specializationName}" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Spinner
@@ -186,8 +174,6 @@
                 style="@style/EditTextRegularGrayHint"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorTransparent"
-                android:drawablePadding="@dimen/dp_5"
                 android:imeOptions="actionNext"
                 android:inputType="textCapSentences"
                 android:lines="1"
@@ -215,31 +201,23 @@
                 style="@style/EditTextRegularGrayHint"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorTransparent"
-                android:drawablePadding="@dimen/dp_5"
                 android:imeOptions="actionDone"
                 android:inputType="textCapSentences"
                 android:lines="1"
                 android:maxLength="50"
                 android:singleLine="true"
                 android:text="@={learnerProfileViewModel.registrationModelLiveData.instituteName}"
-                android:textSize="@dimen/sp_16"
                 app:hintAnimationEnabled="false" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnSave"
-            style="@style/CustomCapsuleButtonGradientBgWhiteText"
+            style="@style/CustomCapsuleButtonBlueBgWhiteText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/dp_22"
-            android:includeFontPadding="false"
             android:onClick="@{learnerProfileViewModel::saveProfile}"
-            android:paddingTop="@dimen/dp_10"
-            android:paddingBottom="@dimen/dp_10"
             android:text="@string/save"
-            android:textAllCaps="true"
-            android:textSize="@dimen/sp_16"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/tilInstitute"
             app:layout_constraintStart_toStartOf="@+id/tilInstitute" />

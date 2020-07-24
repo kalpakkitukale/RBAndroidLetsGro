@@ -1,8 +1,6 @@
 package droidninja.filepicker.adapters
 
 import android.content.Context
-import androidx.recyclerview.widget.RecyclerView
-import android.text.format.Formatter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,14 +8,13 @@ import android.widget.Filter
 import android.widget.Filterable
 import android.widget.ImageView
 import android.widget.TextView
-
-import java.util.ArrayList
-
+import androidx.recyclerview.widget.RecyclerView
 import droidninja.filepicker.FilePickerConst
 import droidninja.filepicker.PickerManager
 import droidninja.filepicker.R
 import droidninja.filepicker.models.Document
 import droidninja.filepicker.views.SmoothCheckBox
+import java.util.*
 
 /**
  * Created by droidNinja on 29/07/16.
@@ -56,13 +53,13 @@ class FileListAdapter(private val context: Context, private var mFilteredList: L
         holder.checkBox.isChecked = isSelected(document)
 
         holder.itemView.setBackgroundResource(
-                if (isSelected(document)) R.color.bg_gray else android.R.color.white)
+                if (isSelected(document)) R.color.colorPrimary else android.R.color.white)
         holder.checkBox.visibility = if (isSelected(document)) View.VISIBLE else View.GONE
 
         holder.checkBox.setOnCheckedChangeListener(object : SmoothCheckBox.OnCheckedChangeListener {
             override fun onCheckedChanged(checkBox: SmoothCheckBox, isChecked: Boolean) {
                 toggleSelection(document)
-                holder.itemView.setBackgroundResource(if (isChecked) R.color.bg_gray else android.R.color.white)
+                holder.itemView.setBackgroundResource(if (isChecked) R.color.colorPrimary else android.R.color.white)
             }
         })
     }

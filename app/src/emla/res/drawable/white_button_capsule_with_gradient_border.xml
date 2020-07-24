@@ -3,7 +3,7 @@
     <solid android:color="@android:color/white" />
     <stroke
         android:width="1dip"
-        android:color="@color/colorTeal" />
+        android:color="@color/colorIconNavyBlueInLightNGrayInDark" />
 
     <!-- <corners
          android:bottomLeftRadius="30dp"

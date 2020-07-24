@@ -15,9 +15,8 @@
         android:onClick="@{()->spinnerModel.onNameSelected.invoke()}">
 
         <!--style="@style/TextViewRegularBlackTextOnWhiteAndWhiteTextOnDark"-->
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvSpinnerItem"
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dp_8"
@@ -39,7 +38,7 @@
             android:layout_marginStart="@dimen/dp_10"
             android:layout_marginTop="@dimen/dp_5"
             android:layout_marginEnd="@dimen/dp_10"
-            android:background="?android:attr/listDivider"
+            android:background="@color/colorDivider"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvSpinnerItem" />
