@@ -63,7 +63,7 @@
         <item name="android:textViewStyle">@style/AppTheme.Font</item>
         <item name="button_style">@style/AppTheme.Font</item>
         <item name="boxStrokeWidthFocused">1dp</item>
-        <item name="backgroundColor">@color/transparent</item>
+        <item name="boxBackgroundColor">@color/transparent</item>
     </style>
 
 <!--
