@@ -1,28 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-   <data>
-       <variable
-           name="instructionShowQuestionsViewModel"
-           type="com.ramanbyte.emla.view_model.ShowQuestionsViewModel" />
-       <variable
-           name="instructionsModel"
-           type="com.ramanbyte.emla.models.InstructionsModel" />
-   </data>
+    <data>
+
+        <variable
+            name="instructionShowQuestionsViewModel"
+            type="com.ramanbyte.emla.view_model.ShowQuestionsViewModel" />
+
+        <variable
+            name="instructionsModel"
+            type="com.ramanbyte.emla.models.InstructionsModel" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/mainConstraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingBottom="@dimen/dp_15"
         android:layout_marginTop="@dimen/dp_5"
+        android:paddingBottom="@dimen/dp_15"
         tools:context=".ui.fragments.QuizInstructionFragment">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardMainContainer"
-          style="@style/customCard"
+            style="@style/customCard"
+            android:layout_height="@dimen/dp_150"
+            app:cardElevation="0dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -31,9 +35,9 @@
                 android:id="@+id/ivQuestion"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/ic_course_dummy"
                 android:scaleType="fitXY"
-                app:imageUrl="@{instructionShowQuestionsViewModel.coursesModelLiveData.courseImageUrl}"
-                android:background="@drawable/ic_course_dummy" />
+                app:imageUrl="@{instructionShowQuestionsViewModel.coursesModelLiveData.courseImageUrl}" />
         </androidx.cardview.widget.CardView>
 
         <androidx.constraintlayout.widget.Guideline
@@ -61,8 +65,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_10"
-                android:textSize="@dimen/sp_16"
-                android:text="@{instructionShowQuestionsViewModel.instructionsModelLiveData.quiz_Title}"/>
+                android:text="@{instructionShowQuestionsViewModel.instructionsModelLiveData.quiz_Title}"
+                android:textSize="@dimen/sp_16" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvInstruction"
@@ -96,8 +100,8 @@
                 style="@style/TextViewBoldNavyBlueOnLightNWhiteOnDark"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/sp_16"
                 android:text="@{instructionShowQuestionsViewModel.instructionsModelLiveData.total_Questions}"
+                android:textSize="@dimen/sp_16"
                 app:layout_constraintEnd_toEndOf="@+id/cardMainContainer"
                 app:layout_constraintStart_toStartOf="@+id/cardMainContainer"
                 app:layout_constraintTop_toBottomOf="@+id/lblTotalNoOfQue" />
@@ -108,38 +112,38 @@
             android:id="@+id/wvCommonInstruction"
             android:layout_width="0dp"
             android:layout_height="@dimen/dp_100"
-            android:layout_marginTop="@dimen/dp_10"
-            android:textSize="@dimen/sp_14"
             android:layout_marginLeft="@dimen/dp_5"
+            android:layout_marginTop="@dimen/dp_10"
             android:layout_marginRight="@dimen/dp_5"
-            app:setHtmlText="@{instructionShowQuestionsViewModel.instructionsModelLiveData.common_Instruction}"
+            android:textSize="@dimen/sp_14"
             app:layout_constraintEnd_toEndOf="@+id/cardMainContainer"
             app:layout_constraintStart_toStartOf="@+id/cardMainContainer"
-            app:layout_constraintTop_toBottomOf="@+id/mainLinear" />
+            app:layout_constraintTop_toBottomOf="@+id/mainLinear"
+            app:setHtmlText="@{instructionShowQuestionsViewModel.instructionsModelLiveData.common_Instruction}" />
 
 
         <com.ramanbyte.emla.view.NestedWebView
             android:id="@+id/wvStaticInstructions"
             android:layout_width="0dp"
             android:layout_height="@dimen/dp_100"
-            android:textSize="@dimen/sp_14"
             android:layout_marginLeft="@dimen/dp_5"
             android:layout_marginRight="@dimen/dp_5"
-            app:setHtmlText="@{instructionShowQuestionsViewModel.instructionsModelLiveData.static_Instructions}"
+            android:textSize="@dimen/sp_14"
             app:layout_constraintEnd_toEndOf="@+id/cardMainContainer"
             app:layout_constraintStart_toStartOf="@+id/cardMainContainer"
-            app:layout_constraintTop_toBottomOf="@+id/wvCommonInstruction" />
+            app:layout_constraintTop_toBottomOf="@+id/wvCommonInstruction"
+            app:setHtmlText="@{instructionShowQuestionsViewModel.instructionsModelLiveData.static_Instructions}" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnStartQuiz"
             style="@style/CustomCapsuleButtonBlueBgWhiteText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dp_15"
             android:onClick="@{() -> instructionShowQuestionsViewModel.onClickStartQuiz(btnStartQuiz)}"
             android:text="@string/next"
             android:textColor="@color/colorWhite"
             android:textSize="@dimen/sp_12"
-            android:layout_marginEnd="@dimen/dp_15"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintWidth_percent="0.3" />

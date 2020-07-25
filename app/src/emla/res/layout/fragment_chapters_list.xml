@@ -24,8 +24,9 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/cardViewImage"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_150"
             style="@style/customCard"
+            android:layout_height="@dimen/dp_150"
+            app:cardElevation="0dp"
             android:visibility="@{chaptersViewModel.viewVisibilityLiveData}"
             app:layout_constraintTop_toTopOf="parent">
 

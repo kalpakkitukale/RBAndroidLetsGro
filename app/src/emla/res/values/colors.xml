@@ -10,6 +10,8 @@
     <color name="colorButtonBlue">#3d9df9</color>
     <color name="colorTextHint">#9391a4</color>
     <color name="colorTextGrayOnLightNDark">#9391a4</color>
+    <color name="colorSelectedTab">#1d396b</color>
+    <color name="colorNotSelectedTab">#9391a4</color>
 
     <!--Taken From previous theme-->
     <color name="transparent">#00000000</color>

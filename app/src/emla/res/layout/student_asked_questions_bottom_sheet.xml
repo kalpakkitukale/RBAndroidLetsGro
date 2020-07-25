@@ -182,7 +182,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/viewFilterAboveDeleteButton"
-                app:layout_constraintWidth_percent="0.19" />
+                app:layout_constraintWidth_percent="0.27" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/ivDelete"

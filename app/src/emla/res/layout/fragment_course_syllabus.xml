@@ -21,6 +21,8 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/cardViewImage"
             style="@style/customCard"
+            android:layout_height="@dimen/dp_150"
+            app:cardElevation="0dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -53,8 +55,8 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingBottom="@dimen/dp_10"
-                android:background="@color/colorTransparent">
+                android:background="@color/colorTransparent"
+                android:paddingBottom="@dimen/dp_10">
 
                 <include
                     android:id="@+id/cardCourseLayout"

@@ -26,6 +26,8 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/cardMainContainer"
            style="@style/customCard"
+            app:cardElevation="0dp"
+            android:layout_height="@dimen/dp_150"
             android:layout_marginBottom="@dimen/dp_5"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -68,7 +70,7 @@
            app:layout_constraintBottom_toBottomOf="@+id/btnNext"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/btnNext"
-            app:layout_constraintWidth_percent="0.3" />
+            app:layout_constraintWidth_percent="0.34" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnNext"
@@ -79,7 +81,7 @@
             android:onClick="@{() -> showQuestionsViewModel.onClickNext(btnNext)}"
             android:text="@string/next"
              app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintWidth_percent="0.3"
+            app:layout_constraintWidth_percent="0.34"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
         <androidx.constraintlayout.widget.Group
