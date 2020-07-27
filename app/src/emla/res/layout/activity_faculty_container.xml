@@ -34,6 +34,7 @@
                 android:layout_height="?attr/actionBarSize"
                 app:title="@{facultyContainerViewModel.toolbarTitleLiveData}"
                 android:background="@color/colorApplicationBackground"
+                app:contentInsetStartWithNavigation="0dp"
                 app:titleTextColor="@color/colorTextNavyBlueInLightNWhiteInDark"
                 app:popupTheme="@style/AppTheme.PopupOverlay" />
 
