@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/login_nav_graph"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.ramanbyte.emla.ui.fragments.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_loginFragment_to_registerAsFragment"
+            app:destination="@id/registerAsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerAsFragment"
+        android:name="com.ramanbyte.emla.ui.fragments.RegisterAsFragment"
+        android:label="fragment_register_as"
+        tools:layout="@layout/fragment_register_as">
+        <action
+            android:id="@+id/action_registerAsFragment_to_facultyRegistationFragment"
+            app:destination="@id/facultyRegistrationFragment" />
+        <action
+            android:id="@+id/action_registerAsFragment_to_studentRegistationFragment"
+            app:destination="@id/studentRegistrationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/facultyRegistrationFragment"
+        android:name="com.ramanbyte.emla.ui.fragments.FacultyRegistrationFragment"
+        android:label="fragment_faculty_registation"
+        tools:layout="@layout/fragment_faculty_registration" />
+    <fragment
+        android:id="@+id/studentRegistrationFragment"
+        android:name="com.ramanbyte.emla.ui.fragments.StudentRegistrationFragment"
+        android:label="fragment_student_registation"
+        tools:layout="@layout/fragment_student_registration" />
+</navigation>

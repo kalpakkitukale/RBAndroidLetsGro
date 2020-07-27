@@ -4,10 +4,12 @@ import android.Manifest
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
 import android.view.View
 import android.widget.CompoundButton
 import androidx.databinding.library.baseAdapters.BR
 import androidx.lifecycle.MutableLiveData
+import androidx.navigation.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.ramanbyte.BaseAppController
 import com.ramanbyte.R
@@ -35,6 +37,7 @@ class LoginViewModel(var mContext: Context) : BaseViewModel(mContext) {
 
     override var noInternetTryAgain: () -> Unit = {}
 
+    val toolbarTitleLiveData = MutableLiveData<String>()
     val userLoginRequestLiveData = MutableLiveData(LoginRequest())
     private val masterRepository: MasterRepository by instance()
     var userEntity = masterRepository.getCurrentUser()
@@ -160,11 +163,7 @@ class LoginViewModel(var mContext: Context) : BaseViewModel(mContext) {
     }
 
     fun createAccount(view: View) {
-        (mContext as Activity).apply {
-            val intent = Intent(this, CreateAccountActivity::class.java)
-            startActivity(intent)
-            BaseAppController.setEnterPageAnimation(this)
-        }
+        view.findNavController().navigate(R.id.action_loginFragment_to_registerAsFragment, null)
     }
 
     fun forgotPassword(view: View) {
@@ -190,5 +189,21 @@ class LoginViewModel(var mContext: Context) : BaseViewModel(mContext) {
         }
     }
 
+    //******************************* Register As ***************************************
+
+    fun onClickContinue(view: View){
+        AppLog.infoLog("onClickContinue")
+    }
+    fun onClickStudent(view: View){
+        //view.findNavController().navigate(R.id.action_registerAsFragment_to_studentRegistationFragment, null)
+        (mContext as Activity).apply {
+            val intent = Intent(this, CreateAccountActivity::class.java)
+            startActivity(intent)
+            BaseAppController.setEnterPageAnimation(this)
+        }
+    }
+    fun onClickFaculty(view: View){
+        view.findNavController().navigate(R.id.action_registerAsFragment_to_facultyRegistationFragment, null)
+    }
 
 }

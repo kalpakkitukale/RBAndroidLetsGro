@@ -1,9 +1,6 @@
 package com.ramanbyte.emla.data_layer.network.api_layer
 
-import com.ramanbyte.emla.models.CityModel
-import com.ramanbyte.emla.models.CountryModel
-import com.ramanbyte.emla.models.RegistrationModel
-import com.ramanbyte.emla.models.StateModel
+import com.ramanbyte.emla.models.*
 import com.ramanbyte.emla.models.response.MasterDataResponseModel
 import com.ramanbyte.emla.models.response.CommonDropdownModel
 import retrofit2.Response
@@ -31,10 +28,10 @@ interface RegistrationController {
     suspend fun getAllSpecializations(): Response<List<CommonDropdownModel>>
 
     @GET("GetProfileDetails/{userReffId}")
-    suspend fun getProfile(@Path("userReffId") userReffId: Int): Response<RegistrationModel>
+    suspend fun getProfile(@Path("userReffId") userReffId: Int): Response<UserDetailsModel>
 
     @POST("InsertUpdateProfileDetails")
-    suspend fun updateLearnerProfile(@Body registrationModel: RegistrationModel): Response<Int>
+    suspend fun updateLearnerProfile(@Body registrationModel: UserDetailsModel): Response<Int>
 
     @GET("GetAllCountrys")
     suspend fun getCountries(): Response<ArrayList<CountryModel>>
@@ -53,4 +50,7 @@ interface RegistrationController {
 
     @GET("GetSpecializationDetails")
     suspend fun getSpecializations(): Response<ArrayList<MasterDataResponseModel>>
+
+    @GET("getFacultyAreaOfExperties/{searchKey}")
+    suspend fun getAreaOfExpertise(@Path("searchKey") searchKey: String): Response<ArrayList<AreaOfExpertiseResponseModel>>
 }

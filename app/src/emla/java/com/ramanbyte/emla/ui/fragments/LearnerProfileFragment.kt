@@ -165,7 +165,7 @@ class LearnerProfileFragment :
         }
 
         val datePickerDialog = DatePickerDialog(
-            context!!,
+            context!!, R.style.DatePickerDialogTheme,
             DatePickerDialog.OnDateSetListener { datePicker, sYear, sMonth, sDay ->
 
                 val selectedDate = "$sYear-${sMonth + 1}-$sDay"
@@ -183,6 +183,7 @@ class LearnerProfileFragment :
             month,
             day
         )
+        //datePickerDialog.setActivityTheme
         datePickerDialog.datePicker.maxDate = DateTime.now().millis
         datePickerDialog.show()
     }

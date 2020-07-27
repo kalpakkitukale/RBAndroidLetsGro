@@ -8,8 +8,14 @@ import androidx.lifecycle.MutableLiveData
 import com.ramanbyte.R
 import com.ramanbyte.aws_s3_android.accessor.AppS3Client
 import com.ramanbyte.base.BaseViewModel
+import com.ramanbyte.data_layer.CoroutineUtils
+import com.ramanbyte.emla.data_layer.network.exception.ApiException
+import com.ramanbyte.emla.data_layer.network.exception.NoDataException
+import com.ramanbyte.emla.data_layer.network.exception.NoInternetException
 import com.ramanbyte.emla.data_layer.repositories.RegistrationRepository
+import com.ramanbyte.emla.models.AreaOfExpertiseResponseModel
 import com.ramanbyte.emla.models.RegistrationModel
+import com.ramanbyte.emla.models.StateModel
 import com.ramanbyte.utilities.*
 import com.ramanbyte.validation.ObservableValidator
 import com.ramanbyte.validation.ValidationFlags
@@ -44,8 +50,8 @@ class CreateAccountViewModel(var mContext: Context) : BaseViewModel(mContext = m
             val apiCallFunction: suspend () -> Unit = {
                 val response = registrationRepository.register(
                     registrationMutableLiveData.value!!.apply {
-                        userType = KEY_STUDENT
-                        userImageFilename =
+                        userDetails.userType = KEY_STUDENT
+                        userDetails.userImageFilename =
                             if (uploadFileName.value?.isNotEmpty()!! && uploadFilePath.value?.isNotEmpty()!!) {
                                 /*AppS3Client.createInstance(mContext)
                                     .upload(
@@ -83,7 +89,7 @@ class CreateAccountViewModel(var mContext: Context) : BaseViewModel(mContext = m
     }
 
     val registrationValidator =
-        ObservableValidator(registrationMutableLiveData.value!!, BR::class.java).apply {
+        ObservableValidator(registrationMutableLiveData.value!!.userDetails, BR::class.java).apply {
 
             addRule(
                 keyFirstName,
@@ -175,4 +181,65 @@ class CreateAccountViewModel(var mContext: Context) : BaseViewModel(mContext = m
             )
         }
 
+
+    //********************************* Register as Faculty *********************************
+
+    var onClickUploadResumeLiveData = MutableLiveData<Boolean>().apply { value = null }
+    val areaOfExpertiseListLiveData = MutableLiveData<ArrayList<AreaOfExpertiseResponseModel>>()
+
+    fun onClickUploadResume(view: View) {
+        onClickUploadResumeLiveData.value = true
+        AppLog.infoLog("onClickUploadResume")
+    }
+
+    fun onClickFacultyRegister(view: View) {
+        AppLog.infoLog("onClickFacultyRegister")
+    }
+
+    fun getAreaOfExpertise() {
+        CoroutineUtils.main {
+
+            try {
+
+                coroutineToggleLoader(BindingUtils.string(R.string.getting_states))
+                areaOfExpertiseListLiveData.postValue(
+                    registrationRepository.getAreaOfExpertise("java")
+                )
+                coroutineToggleLoader()
+            } catch (e: ApiException) {
+                e.printStackTrace()
+                AppLog.errorLog(e.message, e)
+                coroutineToggleLoader()
+                toggleLayoutVisibility(
+                    View.GONE,
+                    View.GONE,
+                    View.GONE,
+                    BindingUtils.string(R.string.error_occured_while_getting_profile),
+                    View.VISIBLE
+                )
+            } catch (e: NoDataException) {
+                e.printStackTrace()
+                AppLog.errorLog(e.message, e)
+                coroutineToggleLoader()
+                toggleLayoutVisibility(
+                    View.GONE,
+                    View.VISIBLE,
+                    View.GONE,
+                    BindingUtils.string(R.string.unable_to_fetch_dependencie),
+                    View.GONE
+                )
+            } catch (e: NoInternetException) {
+                e.printStackTrace()
+                AppLog.errorLog(e.message, e)
+                coroutineToggleLoader()
+                toggleLayoutVisibility(
+                    View.GONE,
+                    View.GONE,
+                    View.VISIBLE,
+                    BindingUtils.string(R.string.please_make_sure_you_are_connected_to_internet),
+                    View.GONE
+                )
+            }
+        }
+    }
 }

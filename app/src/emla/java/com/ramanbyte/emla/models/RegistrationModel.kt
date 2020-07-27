@@ -4,14 +4,22 @@ import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
 import com.google.gson.annotations.SerializedName
 import com.ramanbyte.BR
-import com.ramanbyte.utilities.DateUtils
-import com.ramanbyte.utilities.KEY_STUDENT
+import com.ramanbyte.utilities.*
 
 /**
  * @author Vinay Kumbhar <vinay.pkumbhar@gmail.com>
  * @since 15-04-2020
  */
 class RegistrationModel : BaseObservable() {
+    var userDetails = UserDetailsModel()
+    var areaofExperties = ArrayList<AreaOfExpertiesModel>()
+}
+
+class AreaOfExpertiesModel  {
+    var id: Int? = 0
+}
+
+class UserDetailsModel : BaseObservable() {
     @Bindable
     var firstName: String? = ""
         set(value) {
@@ -47,6 +55,13 @@ class RegistrationModel : BaseObservable() {
             field = value
             notifyPropertyChanged(BR.emailUsername)
         }
+
+    var user_username: String? = ""
+    var user_anonymousname: String? = ""
+    var countryName: String? = ""
+    var app_Status: String? = KEY_APP
+    var del_Status: String? = KEY_N
+    var ipAddress: String? = IpUtility.getIpAddress()
 
     var address: String? = ""
 
@@ -200,4 +215,10 @@ class RegistrationModel : BaseObservable() {
         }
 
     var specializationName = ""
+    var filePath = ""
+    var fileName = ""
+    var extension = ""
+    var thumbnail :Int =0
+
 }
+

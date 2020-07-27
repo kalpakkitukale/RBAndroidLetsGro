@@ -20,6 +20,15 @@
     <string name="forgot_password">Forgot Password?</string>
     <string name="log_in">Log in</string>
 
+
+    <string name="allow_access_phone_storage">Allow to access the phone storage</string>
+    <string name="pdf">PDF</string>
+    <string name="please_select_resume">Please select resume</string>
+    <string name="resume">Resume</string>
+    <string name="upload_resume">Upload Resume</string>
+    <string name="linkedin_profile">Linkedin Profile</string>
+    <string name="message">Message</string>
+    <string name="resume_note">Supported file formats PDF, EXCEL, DOC Maximum file size 2 MB</string>
     <string name="emailId">Email Id</string>
     <string name="enter_emailId">Please enter valid e-mail ID</string>
     <string name="questions">Questions</string>
@@ -63,7 +72,7 @@
     <string name="offline_download_no_data_message">You have not yet downloaded any videos</string>
     <string name="storage_permission_desc">Due to change in permission strategy of Android 6.0 and above, %1$s needs your permission to access your Storage?</string>
 
-<string name="share_course"> could be useful for you – Let’s Gro www.letsgro.in</string>
+    <string name="share_course"> could be useful for you – Let’s Gro www.letsgro.in</string>
     <string name="dynamic_required">%1$s Required</string>
     <string name="invalid_email_id">Invalid Email Id</string>
     <string name="courses">Courses</string>

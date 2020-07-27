@@ -3,10 +3,7 @@ package com.ramanbyte.emla.data_layer.repositories
 import android.content.Context
 import com.ramanbyte.data_layer.base.BaseRepository
 import com.ramanbyte.emla.data_layer.network.api_layer.RegistrationController
-import com.ramanbyte.emla.models.CityModel
-import com.ramanbyte.emla.models.CountryModel
-import com.ramanbyte.emla.models.RegistrationModel
-import com.ramanbyte.emla.models.StateModel
+import com.ramanbyte.emla.models.*
 import com.ramanbyte.emla.models.response.MasterDataResponseModel
 import com.ramanbyte.emla.models.response.CommonDropdownModel
 import com.ramanbyte.utilities.KEY_Y
@@ -32,7 +29,7 @@ class RegistrationRepository(val mContext: Context) : BaseRepository(mContext) {
         }
     }
 
-    suspend fun getProfile(): RegistrationModel? {
+    suspend fun getProfile(): UserDetailsModel? {
 
         val userReffId = applicationDatabase.getUserDao().getCurrentUser()?.user_Reff_Id ?: 0
 
@@ -44,7 +41,7 @@ class RegistrationRepository(val mContext: Context) : BaseRepository(mContext) {
 
     }
 
-    suspend fun updateLearnerProfile(registrationModel: RegistrationModel): Int {
+    suspend fun updateLearnerProfile(registrationModel: UserDetailsModel): Int {
         return apiRequest {
             registrationController.updateLearnerProfile(registrationModel)
         } ?: 0
@@ -60,6 +57,12 @@ class RegistrationRepository(val mContext: Context) : BaseRepository(mContext) {
     suspend fun getStates(countryId: Int = 1): ArrayList<StateModel> {
         return apiRequest {
             registrationController.getStates(countryId)
+        } ?: arrayListOf()
+    }
+
+    suspend fun getAreaOfExpertise(searchKey: String): ArrayList<AreaOfExpertiseResponseModel> {
+        return apiRequest {
+            registrationController.getAreaOfExpertise(searchKey)
         } ?: arrayListOf()
     }
 

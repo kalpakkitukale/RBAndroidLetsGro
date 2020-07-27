@@ -59,7 +59,7 @@
                     android:lines="1"
                     android:maxLength="50"
                     android:singleLine="true"
-                    android:text="@={createAccountViewModel.registrationMutableLiveData.firstName}" />
+                    android:text="@={createAccountViewModel.registrationMutableLiveData.userDetails.firstName}" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -85,7 +85,7 @@
                     android:lines="1"
                     android:maxLength="50"
                     android:singleLine="true"
-                    android:text="@={createAccountViewModel.registrationMutableLiveData.lastName}" />
+                    android:text="@={createAccountViewModel.registrationMutableLiveData.userDetails.lastName}" />
             </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -111,7 +111,7 @@
                     android:lines="1"
                     android:maxLength="50"
                     android:singleLine="true"
-                    android:text="@={createAccountViewModel.registrationMutableLiveData.emailUsername}" />
+                    android:text="@={createAccountViewModel.registrationMutableLiveData.userDetails.emailUsername}" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -137,7 +137,7 @@
                     android:lines="1"
                     android:maxLength="30"
                     android:singleLine="true"
-                    android:text="@={createAccountViewModel.registrationMutableLiveData.password}" />
+                    android:text="@={createAccountViewModel.registrationMutableLiveData.userDetails.password}" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -163,7 +163,7 @@
                     android:lines="1"
                     android:maxLength="30"
                     android:singleLine="true"
-                    android:text="@={createAccountViewModel.registrationMutableLiveData.confirmPassword}" />
+                    android:text="@={createAccountViewModel.registrationMutableLiveData.userDetails.confirmPassword}" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <androidx.appcompat.widget.AppCompatButton

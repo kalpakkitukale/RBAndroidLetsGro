@@ -21,6 +21,7 @@ import com.ramanbyte.emla.data_layer.repositories.RegistrationRepository
 import com.ramanbyte.emla.models.CityModel
 import com.ramanbyte.emla.models.RegistrationModel
 import com.ramanbyte.emla.models.StateModel
+import com.ramanbyte.emla.models.UserDetailsModel
 import com.ramanbyte.emla.models.request.PledgeStatusRequest
 import com.ramanbyte.emla.models.response.MasterDataResponseModel
 import com.ramanbyte.utilities.*
@@ -42,16 +43,16 @@ class LearnerProfileViewModel(private val mContext: Context) : BaseViewModel(mCo
     val educationPatternsListLiveData = MutableLiveData<ArrayList<MasterDataResponseModel>>()
     val specializationsListLiveData = MutableLiveData<ArrayList<MasterDataResponseModel>>()
 
-    val registrationModelLiveData: MutableLiveData<RegistrationModel>? =
-        MutableLiveData<RegistrationModel>(null)
+    val registrationModelLiveData: MutableLiveData<UserDetailsModel>? =
+        MutableLiveData<UserDetailsModel>(null)!!
 
     val citiesQueryLiveData = MutableLiveData<String>()
 
-    var personalDetailsDataValidator: ObservableValidator<RegistrationModel>? = null
+    var personalDetailsDataValidator: ObservableValidator<UserDetailsModel>? = null
 
-    var stateDetailsDataValidator:ObservableValidator<RegistrationModel>?=null
+    var stateDetailsDataValidator:ObservableValidator<UserDetailsModel>?=null
 
-    var educationDetailsDataValidator: ObservableValidator<RegistrationModel>? = null
+    var educationDetailsDataValidator: ObservableValidator<UserDetailsModel>? = null
 
     var goToNextPageLiveData = MutableLiveData<Boolean>(false)
 
