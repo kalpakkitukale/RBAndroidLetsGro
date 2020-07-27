@@ -39,6 +39,7 @@
                     android:background="@color/colorPrimary"
                     app:titleTextColor="@color/colorTextNavyBlueInLightNWhiteInDark"
                     app:popupTheme="@style/AppTheme.PopupOverlay"
+                    app:contentInsetStartWithNavigation="0dp"
                     app:title="@{containerViewModel.toolbarTitleLiveData}" />
 
             </com.google.android.material.appbar.AppBarLayout>
