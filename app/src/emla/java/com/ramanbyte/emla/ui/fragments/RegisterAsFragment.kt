@@ -6,12 +6,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseFragment
 import com.ramanbyte.databinding.FragmentRegisterAsBinding
 import com.ramanbyte.emla.view_model.CreateAccountViewModel
 import com.ramanbyte.emla.view_model.LoginViewModel
 import com.ramanbyte.utilities.AlertDialog
+import com.ramanbyte.utilities.BindingUtils
 import com.ramanbyte.utilities.ProgressLoader
 
 class RegisterAsFragment : BaseFragment<FragmentRegisterAsBinding,LoginViewModel>() {
@@ -29,8 +31,48 @@ class RegisterAsFragment : BaseFragment<FragmentRegisterAsBinding,LoginViewModel
             ProgressLoader(mContext!!, viewModel)
             AlertDialog(mContext!!, viewModel)
 
-            viewModel.apply {
+            btnStudent.apply {
+                background = BindingUtils.drawable(R.drawable.light_blue_button_capsule)
+                setTextColor(BindingUtils.color(R.color.colorTextNavyBlueInLightNWhiteInDark))
+            }
+            btnFaculty.apply {
+                background = BindingUtils.drawable(R.drawable.light_blue_button_capsule)
+                setTextColor(BindingUtils.color(R.color.colorTextNavyBlueInLightNWhiteInDark))
+            }
 
+
+            viewModel.apply {
+                onClickStudentLiveData.observe(this@RegisterAsFragment, Observer {
+                    if (it != null){
+                        if (it == true){
+                            btnStudent.apply {
+                                background = BindingUtils.drawable(R.drawable.blue_button_capsule)
+                                setTextColor(BindingUtils.color(R.color.colorWhite))
+                            }
+                            btnFaculty.apply {
+                                background = BindingUtils.drawable(R.drawable.light_blue_button_capsule)
+                                setTextColor(BindingUtils.color(R.color.colorTextNavyBlueInLightNWhiteInDark))
+                            }
+                            onClickStudentLiveData.value = null
+                        }
+                    }
+                })
+
+                onClickFacultyLiveData.observe(this@RegisterAsFragment, Observer {
+                    if (it != null){
+                        if (it == true){
+                            btnStudent.apply {
+                                background = BindingUtils.drawable(R.drawable.light_blue_button_capsule)
+                                setTextColor(BindingUtils.color(R.color.colorTextNavyBlueInLightNWhiteInDark))
+                            }
+                            btnFaculty.apply {
+                                background = BindingUtils.drawable(R.drawable.blue_button_capsule)
+                                setTextColor(BindingUtils.color(R.color.colorWhite))
+                            }
+                            onClickFacultyLiveData.value = null
+                        }
+                    }
+                })
             }
         }
     }

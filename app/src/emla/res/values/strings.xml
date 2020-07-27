@@ -74,6 +74,7 @@
 
     <string name="share_course"> could be useful for you – Let’s Gro www.letsgro.in</string>
     <string name="dynamic_required">%1$s Required</string>
+    <string name="required">Required</string>
     <string name="invalid_email_id">Invalid Email Id</string>
     <string name="courses">Courses</string>
     <string name="profile">Profile</string>
@@ -110,7 +111,7 @@
     <string name="attempts_Allowed">Attempts Allowed</string>
     <string name="grading_method">Grading Method</string>
     <string name="no_more_attempts">No more attempts are allowed</string>
-    <string name="confirmation_method">I hereby affirm that I will not be involved in any unauthorized and/or illegal activities in the course i will be undertaking.I will maintain the utmost honesty and integrity while taking assessments associated with the learning content.</string>
+    <string name="confirmation_method">I hereby affirm that I will not be involved in any unauthorized and/or illegal activities in the course I will be undertaking.I will maintain the utmost honesty and integrity while taking assessments associated with the learning content.</string>
     <string name="please_agree_the_instruction">Please affirm to the pledge in order to proceed!</string>
     <string name="not_attempted_any_question">Ooh! It seems like you have not attempted any of question in the test.</string>
     <string name="not_valid_user">You are not allow to login with this credentials</string>
@@ -221,6 +222,7 @@ Content
 
     <string name="logout_message">Are you sure to logout?</string>
 
+    <string name="getting_area_of_expertise">Getting area of expertise…</string>
     <string name="getting_content_for">Fetching content data for</string>
     <string name="getting_states">Getting states…</string>
     <string name="getting_cities">Getting cities…</string>
@@ -236,6 +238,7 @@ Content
     <string name="profile_updated_successfully">Profile updated successfully!</string>
     <string name="profile_update_failed">Failed to update your profile! Try again?</string>
     <string name="profile_changes_discarded">Any made changes will be discarded! Are you sure?</string>
+    <string name="error_occured_while_getting_area_of_expertise">Some error occurred while getting area of expertise. Try again after sometime.</string>
 
 
     <!--Recently ask questions-->

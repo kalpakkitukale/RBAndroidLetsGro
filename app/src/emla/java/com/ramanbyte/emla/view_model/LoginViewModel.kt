@@ -170,11 +170,11 @@ class LoginViewModel(var mContext: Context) : BaseViewModel(mContext) {
         forgotPasswordClick.value = true
     }
 
-    fun googleLogIn(view: View){
+    fun googleLogIn(view: View) {
         btnGoogleLogin.value = true
     }
 
-    fun fbLogIn(view: View){
+    fun fbLogIn(view: View) {
         btnFbLogin.value = true
     }
 
@@ -191,19 +191,35 @@ class LoginViewModel(var mContext: Context) : BaseViewModel(mContext) {
 
     //******************************* Register As ***************************************
 
-    fun onClickContinue(view: View){
-        AppLog.infoLog("onClickContinue")
-    }
-    fun onClickStudent(view: View){
+    var onClickStudentLiveData: MutableLiveData<Boolean?> = MutableLiveData(null)
+    var onClickFacultyLiveData: MutableLiveData<Boolean?> = MutableLiveData(null)
+    var isRegisterAsSelected: MutableLiveData<Boolean?> = MutableLiveData(null)
+    var selectedAs: MutableLiveData<String?> = MutableLiveData(KEY_BLANK)
+
+    fun onClickStudent(view: View) {
         //view.findNavController().navigate(R.id.action_registerAsFragment_to_studentRegistationFragment, null)
-        (mContext as Activity).apply {
-            val intent = Intent(this, CreateAccountActivity::class.java)
-            startActivity(intent)
-            BaseAppController.setEnterPageAnimation(this)
-        }
+        selectedAs.value = BindingUtils.string(R.string.student)
+        isRegisterAsSelected.value = true
+        onClickStudentLiveData.value = true
     }
-    fun onClickFaculty(view: View){
-        view.findNavController().navigate(R.id.action_registerAsFragment_to_facultyRegistationFragment, null)
+
+    fun onClickFaculty(view: View) {
+        selectedAs.value = BindingUtils.string(R.string.faculty)
+        isRegisterAsSelected.value = true
+        onClickFacultyLiveData.value = true
+    }
+
+    fun onClickContinue(view: View) {
+        if (selectedAs.value == BindingUtils.string(R.string.student)) {
+            (mContext as Activity).apply {
+                val intent = Intent(this, CreateAccountActivity::class.java)
+                startActivity(intent)
+                BaseAppController.setEnterPageAnimation(this)
+            }
+        } else {
+            view.findNavController()
+                .navigate(R.id.action_registerAsFragment_to_facultyRegistationFragment, null)
+        }
     }
 
 }

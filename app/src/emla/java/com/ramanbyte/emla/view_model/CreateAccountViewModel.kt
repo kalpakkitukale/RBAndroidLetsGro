@@ -189,19 +189,12 @@ class CreateAccountViewModel(var mContext: Context) : BaseViewModel(mContext = m
 
     fun onClickUploadResume(view: View) {
         onClickUploadResumeLiveData.value = true
-        AppLog.infoLog("onClickUploadResume")
-    }
-
-    fun onClickFacultyRegister(view: View) {
-        AppLog.infoLog("onClickFacultyRegister")
     }
 
     fun getAreaOfExpertise() {
         CoroutineUtils.main {
-
             try {
-
-                coroutineToggleLoader(BindingUtils.string(R.string.getting_states))
+                coroutineToggleLoader(BindingUtils.string(R.string.getting_area_of_expertise))
                 areaOfExpertiseListLiveData.postValue(
                     registrationRepository.getAreaOfExpertise("java")
                 )
@@ -214,7 +207,7 @@ class CreateAccountViewModel(var mContext: Context) : BaseViewModel(mContext = m
                     View.GONE,
                     View.GONE,
                     View.GONE,
-                    BindingUtils.string(R.string.error_occured_while_getting_profile),
+                    BindingUtils.string(R.string.error_occured_while_getting_area_of_expertise),
                     View.VISIBLE
                 )
             } catch (e: NoDataException) {
@@ -242,4 +235,65 @@ class CreateAccountViewModel(var mContext: Context) : BaseViewModel(mContext = m
             }
         }
     }
+
+    val facultyRegistrationValidator =
+        ObservableValidator(registrationMutableLiveData.value!!.userDetails, BR::class.java).apply {
+
+            addRule(
+                keyFirstName,
+                ValidationFlags.FIELD_REQUIRED,
+                BindingUtils.string(
+                    R.string.required,
+                    BindingUtils.string(R.string.first_name)
+                )
+            )
+            addRule(
+                keyLastName,
+                ValidationFlags.FIELD_REQUIRED,
+                BindingUtils.string(
+                    R.string.required,
+                    BindingUtils.string(R.string.last_name)
+                )
+            )
+            addRule(
+                keyEmailUsername,
+                ValidationFlags.FIELD_REQUIRED,
+                BindingUtils.string(
+                    R.string.required,
+                    BindingUtils.string(R.string.emailId)
+                )
+            )
+            addRule(
+                keyEmailUsername,
+                ValidationFlags.FIELD_EMAIL,
+                BindingUtils.string(R.string.enter_emailId)
+            )
+            addRule(
+                keyContactNo,
+                ValidationFlags.FIELD_REQUIRED,
+                BindingUtils.string(
+                    R.string.required,
+                    BindingUtils.string(
+                        R.string.mobileNumber
+                    )
+                )
+            )
+            addRule(
+                keyContactNo,
+                ValidationFlags.FIELD_MIN,
+                BindingUtils.string(
+                    R.string.invalid_mobile_no
+                ),
+                limit = 10
+            )
+        }
+
+    fun onClickFacultyRegister(view: View) {
+        if (facultyRegistrationValidator.validateAll()) {
+            AppLog.infoLog("onClickFacultyRegister  :: true")
+        }else{
+            AppLog.infoLog("onClickFacultyRegister  :: false")
+        }
+    }
+
 }

@@ -121,6 +121,10 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/viewVertical" />
 
+
+
+
+
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnStudent"
                     style="@style/CustomCapsuleButtonBlueBgWhiteText"
@@ -136,6 +140,8 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/ivStudent"
                     app:layout_constraintWidth_percent="0.30" />
+                <!--android:background="@drawable/register_as_selector"
+                android:textColor="@color/register_as_text_color_selector"-->
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/ivFaculty"
@@ -172,6 +178,8 @@
             android:layout_marginTop="@dimen/dp_20"
             android:onClick="@{loginViewModel::onClickContinue}"
             android:text="@string/strContinue"
+            android:alpha="@{(loginViewModel.isRegisterAsSelected == true)? 1f : 0.3f}"
+            android:enabled="@{loginViewModel.isRegisterAsSelected}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cardLayoutMain"

@@ -215,6 +215,11 @@ class UserDetailsModel : BaseObservable() {
         }
 
     var specializationName = ""
+    var resumeFileName = ""
+    var linkedInProfile = ""
+    var message = ""
+
+
     var filePath = ""
     var fileName = ""
     var extension = ""
