@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -173,21 +173,21 @@
                 app:layout_constraintTop_toBottomOf="@+id/lblResume" />
 
             <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivThumbnail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/ivThumbnail"
                 android:layout_marginTop="@dimen/dp_15"
                 app:layout_constraintStart_toStartOf="@+id/btnUploadResume"
-                app:layout_constraintTop_toBottomOf="@+id/btnUploadResume"/>
+                app:layout_constraintTop_toBottomOf="@+id/btnUploadResume" />
 
             <TextView
                 android:id="@+id/lblResumeNote"
                 style="@style/TextViewLightGrayOnLightNDark"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_10"
                 android:text="@string/resume_note"
                 android:textSize="@dimen/sp_12"
-                android:layout_marginStart="@dimen/dp_10"
                 app:layout_constraintEnd_toEndOf="@+id/tilUserMobile"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="@+id/btnUploadResume"
