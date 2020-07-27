@@ -46,8 +46,7 @@
 
         </activity>
         <activity
-            android:name=".emla.ui.activities.LoginActivity"
-            android:windowSoftInputMode="stateHidden" />
+            android:name=".emla.ui.activities.LoginActivity"/>
         <activity
             android:name=".emla.ui.activities.CreateAccountActivity"
             android:windowSoftInputMode="adjustResize|stateHidden" />

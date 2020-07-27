@@ -56,7 +56,7 @@
 
     <!--Font End-->
 
-    <style name="TextInputLayoutWithoutBorder" parent="Widget.MaterialComponents.TextInputLayout.FilledBox.Dense">
+    <style name="TextInputLayoutWithoutBorder" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
         <item name="android:textColorHint">@color/colorTextHint</item>
         <item name="hintTextColor">@color/colorTextHint</item>
         <item name="boxStrokeWidth">0.1dp</item>
@@ -64,6 +64,7 @@
         <item name="android:textViewStyle">@style/AppTheme.Font</item>
         <item name="button_style">@style/AppTheme.Font</item>
         <item name="boxStrokeWidthFocused">1dp</item>
+        <item name="boxStrokeColor">@color/colorTextGrayOnLightNDark</item>
         <item name="boxBackgroundColor">@color/transparent</item>
     </style>
 
@@ -86,6 +87,7 @@
         <item name="background">@color/colorTransparent</item>
         <item name="android:textSize">@dimen/sp_16</item>
         <item name="hintAnimationEnabled">false</item>
+        <item name="android:textCursorDrawable">@color/colorTextNavyBlueInLightNWhiteInDark</item>
     </style>
 
     <style name="EditTextHintStyleHintLight">
