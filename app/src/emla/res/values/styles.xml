@@ -172,7 +172,7 @@
         <item name="android:paddingEnd">@dimen/dp_20</item>
         <item name="android:textAppearance">@style/AppTheme.Font</item>
         <item name="android:textAllCaps">true</item>
-        <item name="android:textSize">@dimen/sp_12</item>
+        <item name="android:textSize">@dimen/sp_14</item>
     </style>
 
     <style name="FilePickerTheme" parent="LibAppTheme">
@@ -245,7 +245,6 @@
         <item name="cardElevation">@dimen/dp_2</item>
         <item name="cardUseCompatPadding">true</item>
         <item name="contentPadding">@dimen/dp_5</item>
-        <item name="android:layout_margin">@dimen/dp_5</item>
     </style>
 
 </resources>

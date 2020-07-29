@@ -8,7 +8,7 @@
                 android:startColor="@color/colorButtonBlue"
                 android:type="linear" />
             <!-- make the button corners rounded-->
-            <corners android:radius="@dimen/dp_10" />
+            <corners android:radius="@dimen/dp_5" />
         </shape>
     </item>
 </selector>

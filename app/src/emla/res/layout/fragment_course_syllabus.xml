@@ -67,15 +67,16 @@
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardCourseSyllabus"
-                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_20"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/dp_10"
                     app:cardCornerRadius="@dimen/dp_5"
-                    app:cardElevation="2dp"
+                    app:cardBackgroundColor="@color/cardBackgroundColor"
                     app:cardUseCompatPadding="true"
-                    app:contentPadding="@dimen/dp_5"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:cardElevation="@dimen/dp_2"
+                    app:contentPadding="@dimen/dp_8"
+                    app:layout_constraintEnd_toEndOf="@+id/cardCourseLayout"
+                    app:layout_constraintStart_toStartOf="@+id/cardCourseLayout"
                     app:layout_constraintTop_toBottomOf="@+id/cardCourseLayout">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -91,6 +92,7 @@
                             android:onClick="@{coursesDetailViewModel::onHeaderClick}"
                             android:text="@string/course_syllabus"
                             android:textSize="@dimen/sp_16"
+                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -126,15 +128,16 @@
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardAssessmentInstruction"
-                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_20"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/dp_10"
                     app:cardCornerRadius="@dimen/dp_5"
-                    app:cardElevation="2dp"
+                    app:cardBackgroundColor="@color/cardBackgroundColor"
                     app:cardUseCompatPadding="true"
-                    app:contentPadding="@dimen/dp_5"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:cardElevation="@dimen/dp_2"
+                    app:contentPadding="@dimen/dp_8"
+                    app:layout_constraintEnd_toEndOf="@+id/cardCourseLayout"
+                    app:layout_constraintStart_toStartOf="@+id/cardCourseLayout"
                     app:layout_constraintTop_toBottomOf="@+id/cardCourseSyllabus">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -150,6 +153,7 @@
                             android:onClick="@{coursesDetailViewModel::onHeaderClick}"
                             android:text="@string/assessment_instruction"
                             android:textSize="@dimen/sp_16"
+                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -182,10 +186,16 @@
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardWhatIWillLearn"
-                    style="@style/customCard"
-                    android:layout_marginTop="@dimen/dp_20"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_10"
+                    app:cardBackgroundColor="@color/cardBackgroundColor"
+                    app:cardCornerRadius="@dimen/dp_5"
+                    app:cardElevation="@dimen/dp_2"
+                    app:cardUseCompatPadding="true"
+                    app:contentPadding="@dimen/dp_8"
+                    app:layout_constraintEnd_toEndOf="@+id/cardCourseLayout"
+                    app:layout_constraintStart_toStartOf="@+id/cardCourseLayout"
                     app:layout_constraintTop_toBottomOf="@+id/cardAssessmentInstruction">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -201,6 +211,7 @@
                             android:onClick="@{coursesDetailViewModel::onHeaderClick}"
                             android:text="@string/what_i_ll_learn"
                             android:textSize="@dimen/sp_16"
+                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -232,11 +243,17 @@
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardHowToUse"
-                    style="@style/customCard"
-                    android:layout_marginTop="@dimen/dp_20"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_10"
+                    app:cardBackgroundColor="@color/cardBackgroundColor"
+                    app:cardCornerRadius="@dimen/dp_5"
+                    app:cardElevation="@dimen/dp_2"
+                    app:cardUseCompatPadding="true"
+                    app:contentPadding="@dimen/dp_8"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/cardCourseLayout"
+                    app:layout_constraintStart_toStartOf="@+id/cardCourseLayout"
                     app:layout_constraintTop_toBottomOf="@+id/cardWhatIWillLearn">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -253,6 +270,7 @@
                             android:onClick="@{coursesDetailViewModel::onHeaderClick}"
                             android:text="@string/how_to_use"
                             android:textSize="@dimen/sp_16"
+                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.09"
                             app:layout_constraintStart_toStartOf="parent"

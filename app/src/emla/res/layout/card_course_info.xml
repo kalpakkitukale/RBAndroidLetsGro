@@ -12,7 +12,8 @@
 
 
     <androidx.cardview.widget.CardView
-       style="@style/customCard"
+        style="@style/customCard"
+        android:layout_margin="@dimen/dp_5"
         app:layout_constraintTop_toBottomOf="@+id/guideline">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -35,7 +36,7 @@
                 android:onClick="@{coursesDetailViewModel::onHeaderClick}"
                 android:text="@string/course_information"
                 android:textSize="@dimen/sp_16"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/imgViewCourseInfo"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -44,6 +45,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/dp_8"
+                android:padding="@dimen/dp_5"
                 android:src="@drawable/ic_down_arrow"
                 app:layout_constraintBottom_toBottomOf="@+id/headerCourseInfo"
                 app:layout_constraintRight_toRightOf="parent"
@@ -54,14 +56,13 @@
                 style="@style/TextViewMediumNavyBlueOnLightNWhiteOnDark"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_8"
                 android:padding="@dimen/dp_5"
                 android:text="@string/length"
                 android:textSize="@dimen/sp_12"
-                app:layout_constraintBottom_toBottomOf="@id/txtViewLength"
-                app:layout_constraintEnd_toEndOf="@+id/verticalGuideLine"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/txtViewLength" />
+                app:layout_constraintEnd_toStartOf="@+id/verticalGuideLine"
+                app:layout_constraintStart_toStartOf="@+id/headerCourseInfo"
+                app:layout_constraintTop_toBottomOf="@+id/headerCourseInfo" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/txtViewLength"
@@ -72,16 +73,8 @@
                 android:text='@{coursesDetailViewModel.courseSyllabusModelLiveData.length +" ("+ coursesDetailViewModel.courseSyllabusModelLiveData.durationType+")"}'
                 android:textSize="@dimen/sp_12"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/verticalGuideLine"
-                app:layout_constraintTop_toBottomOf="@+id/headerCourseInfo" />
-
-            <View
-                android:id="@+id/lengthView"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/sp_1"
-                android:visibility="gone"
-                android:background="@color/colorLightGray"
-                app:layout_constraintTop_toBottomOf="@+id/txtViewLength" />
+                app:layout_constraintStart_toEndOf="@+id/labelLength"
+                app:layout_constraintTop_toTopOf="@+id/labelLength" />
 
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -89,14 +82,13 @@
                 style="@style/TextViewMediumNavyBlueOnLightNWhiteOnDark"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_8"
                 android:padding="@dimen/dp_5"
                 android:text="@string/efforts"
                 android:textSize="@dimen/sp_12"
-                app:layout_constraintBottom_toBottomOf="@+id/txtViewEfforts"
-                app:layout_constraintEnd_toEndOf="@+id/verticalGuideLine"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/txtViewEfforts" />
+                app:layout_constraintEnd_toEndOf="@+id/labelLength"
+                app:layout_constraintStart_toStartOf="@+id/labelLength"
+                app:layout_constraintTop_toBottomOf="@+id/labelLength" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/txtViewEfforts"
@@ -106,31 +98,23 @@
                 android:padding="@dimen/dp_5"
                 android:text="@{coursesDetailViewModel.courseSyllabusModelLiveData.efforts}"
                 android:textSize="@dimen/sp_12"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/verticalGuideLine"
-                app:layout_constraintTop_toBottomOf="@+id/lengthView" />
+                app:layout_constraintEnd_toEndOf="@id/txtViewLength"
+                app:layout_constraintStart_toStartOf="@id/txtViewLength"
+                app:layout_constraintTop_toTopOf="@id/labelEfforts" />
 
-            <View
-                android:id="@+id/effortsView"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/sp_1"
-                android:visibility="gone"
-                android:background="@color/colorLightGray"
-                app:layout_constraintTop_toBottomOf="@+id/txtViewEfforts" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/labelSpecialization"
                 style="@style/TextViewMediumNavyBlueOnLightNWhiteOnDark"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_8"
                 android:padding="@dimen/dp_5"
                 android:text="@string/specialization"
                 android:textSize="@dimen/sp_12"
-                app:layout_constraintBottom_toBottomOf="@+id/txtViewSpecialization"
-                app:layout_constraintEnd_toEndOf="@+id/verticalGuideLine"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/txtViewSpecialization" />
+                app:layout_constraintEnd_toEndOf="@+id/labelEfforts"
+                app:layout_constraintStart_toStartOf="@+id/labelEfforts"
+                app:layout_constraintTop_toBottomOf="@+id/labelEfforts" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/txtViewSpecialization"
@@ -140,31 +124,22 @@
                 android:padding="@dimen/dp_5"
                 android:text="@{coursesDetailViewModel.courseSyllabusModelLiveData.specialization}"
                 android:textSize="@dimen/sp_12"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/verticalGuideLine"
-                app:layout_constraintTop_toBottomOf="@+id/effortsView" />
-
-            <View
-                android:id="@+id/specializationView"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/sp_1"
-                android:visibility="gone"
-                android:background="@color/colorLightGray"
-                app:layout_constraintTop_toBottomOf="@+id/txtViewSpecialization" />
+                app:layout_constraintEnd_toEndOf="@id/txtViewEfforts"
+                app:layout_constraintStart_toStartOf="@id/txtViewEfforts"
+                app:layout_constraintTop_toTopOf="@id/labelSpecialization" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/labelLevel"
                 style="@style/TextViewMediumNavyBlueOnLightNWhiteOnDark"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_8"
                 android:padding="@dimen/dp_5"
                 android:text="@string/level"
                 android:textSize="@dimen/sp_12"
-                app:layout_constraintBottom_toBottomOf="@+id/txtViewLevel"
-                app:layout_constraintEnd_toEndOf="@+id/verticalGuideLine"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/txtViewLevel" />
+                app:layout_constraintEnd_toEndOf="@+id/labelSpecialization"
+                app:layout_constraintStart_toStartOf="@+id/labelSpecialization"
+                app:layout_constraintTop_toBottomOf="@+id/labelSpecialization" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/txtViewLevel"
@@ -174,31 +149,22 @@
                 android:padding="@dimen/dp_5"
                 android:text="@{coursesDetailViewModel.courseSyllabusModelLiveData.level}"
                 android:textSize="@dimen/sp_12"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/verticalGuideLine"
-                app:layout_constraintTop_toBottomOf="@+id/specializationView" />
-
-            <View
-                android:id="@+id/LevelView"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/sp_1"
-                android:visibility="gone"
-                android:background="@color/colorLightGray"
-                app:layout_constraintTop_toBottomOf="@+id/txtViewLevel" />
+                app:layout_constraintEnd_toEndOf="@id/txtViewSpecialization"
+                app:layout_constraintStart_toStartOf="@id/txtViewSpecialization"
+                app:layout_constraintTop_toTopOf="@id/labelLevel" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/labelLanguage"
                 style="@style/TextViewMediumNavyBlueOnLightNWhiteOnDark"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_8"
                 android:padding="@dimen/dp_5"
                 android:text="@string/language"
                 android:textSize="@dimen/sp_12"
-                app:layout_constraintBottom_toBottomOf="@+id/txtViewLanguage"
-                app:layout_constraintEnd_toEndOf="@+id/verticalGuideLine"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/txtViewLanguage" />
+                app:layout_constraintEnd_toStartOf="@+id/verticalGuideLine"
+                app:layout_constraintStart_toStartOf="@+id/labelLevel"
+                app:layout_constraintTop_toBottomOf="@+id/labelLevel" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/txtViewLanguage"
@@ -208,35 +174,35 @@
                 android:padding="@dimen/dp_5"
                 android:text="@{coursesDetailViewModel.courseSyllabusModelLiveData.language}"
                 android:textSize="@dimen/sp_12"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/verticalGuideLine"
-                app:layout_constraintTop_toBottomOf="@+id/LevelView" />
+                app:layout_constraintEnd_toEndOf="@id/txtViewLevel"
+                app:layout_constraintStart_toStartOf="@id/txtViewLevel"
+                app:layout_constraintTop_toTopOf="@id/labelLanguage" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/labelAllocatedFaculty"
                 style="@style/TextViewMediumNavyBlueOnLightNWhiteOnDark"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_8"
                 android:padding="@dimen/dp_5"
                 android:text="@string/allocated_faculty"
                 android:textSize="@dimen/sp_12"
-                app:layout_constraintBottom_toBottomOf="@+id/txtAllocatedFaculty"
-                app:layout_constraintEnd_toEndOf="@+id/verticalGuideLine"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/txtAllocatedFaculty" />
+                app:layout_constraintEnd_toStartOf="@+id/verticalGuideLine"
+                app:layout_constraintStart_toStartOf="@+id/labelLanguage"
+                app:layout_constraintTop_toBottomOf="@+id/labelLanguage" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/txtAllocatedFaculty"
                 style="@style/TextViewLightNavyBlueOnLightNWhiteOnDark"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dp_5"
                 android:padding="@dimen/dp_5"
-                android:textSize="@dimen/sp_12"
                 android:text="@{coursesDetailViewModel.courseSyllabusModelLiveData.allocatedFacultys}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/verticalGuideLine"
-                app:layout_constraintTop_toBottomOf="@+id/txtViewLanguage" />
+                android:textSize="@dimen/sp_12"
+                app:layout_constraintEnd_toEndOf="@id/txtViewLanguage"
+                app:layout_constraintStart_toStartOf="@id/txtViewLanguage"
+                app:layout_constraintTop_toTopOf="@id/labelAllocatedFaculty" />
 
             <androidx.constraintlayout.widget.Group
                 android:id="@+id/courseInfoGroup"
