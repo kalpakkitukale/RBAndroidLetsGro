@@ -22,7 +22,6 @@ import com.ramanbyte.emla.data_layer.repositories.MasterRepository
 import com.ramanbyte.emla.models.UserModel
 import com.ramanbyte.emla.models.request.LoginRequest
 import com.ramanbyte.emla.models.request.PledgeStatusRequest
-import com.ramanbyte.emla.ui.activities.CreateAccountActivity
 import com.ramanbyte.utilities.*
 import com.ramanbyte.validation.ObservableValidator
 import com.ramanbyte.validation.ValidationFlags
@@ -196,8 +195,10 @@ class LoginViewModel(var mContext: Context) : BaseViewModel(mContext) {
     var isRegisterAsSelected: MutableLiveData<Boolean?> = MutableLiveData(null)
     var selectedAs: MutableLiveData<String?> = MutableLiveData(KEY_BLANK)
 
+    var toolbarVisibilityLiveData: MutableLiveData<Int?> = MutableLiveData(null)
+    //var onClickFacultyLiveData: MutableLiveData<Boolean?> = MutableLiveData(null)
+
     fun onClickStudent(view: View) {
-        //view.findNavController().navigate(R.id.action_registerAsFragment_to_studentRegistationFragment, null)
         selectedAs.value = BindingUtils.string(R.string.student)
         isRegisterAsSelected.value = true
         onClickStudentLiveData.value = true
@@ -211,15 +212,23 @@ class LoginViewModel(var mContext: Context) : BaseViewModel(mContext) {
 
     fun onClickContinue(view: View) {
         if (selectedAs.value == BindingUtils.string(R.string.student)) {
-            (mContext as Activity).apply {
+            view.findNavController()
+                .navigate(R.id.action_registerAsFragment_to_studentRegistationFragment, null)
+            /*(mContext as Activity).apply {
                 val intent = Intent(this, CreateAccountActivity::class.java)
                 startActivity(intent)
                 BaseAppController.setEnterPageAnimation(this)
-            }
+            }*/
         } else {
             view.findNavController()
                 .navigate(R.id.action_registerAsFragment_to_facultyRegistationFragment, null)
         }
     }
+
+    fun setToolbarTitle(visibility : Int,title: String){
+        toolbarTitleLiveData.postValue(title)
+        toolbarVisibilityLiveData.postValue(visibility)
+    }
+
 
 }

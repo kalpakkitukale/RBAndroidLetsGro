@@ -11,6 +11,7 @@ import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import androidx.lifecycle.Observer
 import androidx.work.Data
 import androidx.work.OneTimeWorkRequest
@@ -67,7 +68,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding,LoginViewModel>(true,tru
             AlertDialog(mContext!!, viewModel)
 
             viewModel.apply {
-
+                setToolbarTitle(View.GONE, KEY_BLANK)
             }
             setViewModelOps()
             initGoogleSignInClient()

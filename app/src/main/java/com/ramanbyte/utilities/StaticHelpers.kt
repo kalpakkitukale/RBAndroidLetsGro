@@ -35,6 +35,7 @@ const val KEY_DEVICE_ID = "deviceId"
 const val KEY_NA = "N/A"
 const val KEY_NA_WITHOUT_SPACE = "NA"
 const val KEY_BLANK = ""
+const val KEY_BLANK_TEXT = "Blank"
 const val KEY_OK = "Ok"
 const val KEY_NAME_PATTERN = "((?=.*[a-z])(?=.*[A-Z]))"
 const val KEY_PASSWORD_PATTERN =
@@ -182,6 +183,8 @@ const val KEY_SKIP = "S"
 const val KEY_STUDENT = "STF"
 const val KEY_FACULTY = "FTL"
 const val KEY_APP = "APP"
+const val KEY_BLOCK = "BLK"
+const val KEY_DEFAULT_PASSWORD = "Letsgro@1"
 const val keyContentUrl = "contentUrl"
 const val KEY_QUIZ_TYPE_ASSESSMENT = 1
 const val KEY_QUIZ_TYPE_FORMATIVE = 3

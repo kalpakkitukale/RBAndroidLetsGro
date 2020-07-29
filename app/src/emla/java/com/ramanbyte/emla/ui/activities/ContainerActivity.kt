@@ -3,6 +3,7 @@ package com.ramanbyte.emla.ui.activities
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.ActionBar
@@ -14,6 +15,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import androidx.webkit.WebViewCompat
 import com.google.android.material.internal.NavigationMenuView
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseActivity
@@ -141,6 +143,8 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding, ContainerViewMo
                 layoutBinding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_OPEN)
             }
         })
+
+        checkSystemWebViewVersion()
     }
 
     /**Lazy init Navigation host controller*/
@@ -332,4 +336,41 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding, ContainerViewMo
             isDrawerItemClicked = false
         }
     }
+
+    private fun checkSystemWebViewVersion() {
+
+        if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.N) {
+            val webViewPackageInfo = WebViewCompat.getCurrentWebViewPackage(this)
+
+            val webViewPackageInfoStr = webViewPackageInfo?.versionName.toString()
+            val convert = webViewPackageInfoStr.split("\\.".toRegex()).toTypedArray()
+            val webViewVersion = convert[0].toInt()
+            AppLog.infoLog("webViewVersion :: $webViewVersion")
+
+            if (webViewVersion < 83) {
+                viewModel.apply {
+                    setAlertDialogResourceModelMutableLiveData(
+                        message = BindingUtils.string(R.string.webview_update_message),
+                        alertDrawableResource = BindingUtils.drawable(R.drawable.ic_warning),
+                        isInfoAlert = false,
+                        positiveButtonText = BindingUtils.string(R.string.str_update),
+                        negativeButtonText = BindingUtils.string(R.string.strCancel),
+                        positiveButtonClickFunctionality = {
+                            val intent = Intent(Intent.ACTION_VIEW)
+                            intent.data =
+                                Uri.parse("https://play.google.com/store/apps/details?id=com.google.android.webview")
+                            startActivity(intent)
+
+                        }, negativeButtonClickFunctionality = {
+                            isAlertDialogShown.postValue(false)
+
+                        }
+                    )
+                    isAlertDialogShown.postValue(true)
+                }
+            }
+        }
+
+    }
+
 }

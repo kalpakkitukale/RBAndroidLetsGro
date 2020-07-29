@@ -25,10 +25,13 @@
     <string name="pdf">PDF</string>
     <string name="please_select_resume">Please select resume</string>
     <string name="resume">Resume</string>
+    <string name="area_of_expertise_required">Area of expertise required</string>
     <string name="upload_resume">Upload Resume</string>
     <string name="linkedin_profile">Linkedin Profile</string>
     <string name="message">Message</string>
     <string name="resume_note">Supported file formats PDF, EXCEL, DOC Maximum file size 2 MB</string>
+    <string name="resume_error">More than 2 MB file not allowed.</string>
+    <string name="resume_required">Resume required.</string>
     <string name="emailId">Email Id</string>
     <string name="enter_emailId">Please enter valid e-mail ID</string>
     <string name="questions">Questions</string>
@@ -160,8 +163,12 @@
     <string name="correct_question">Correct Question - </string>
     <string name="android">Android</string>
     <string name="phone_state_permission_desc">Due to change in permission strategy of Android 6.0 and above, %1$s needs your permission to read your device info. We only use this data to secure your account. Allow to read Phone state?</string>
+    <string name="webview_update_message">You are using outdated version of "Android System Webview" that is no longer supported. Please
+            update to the newest app version to use "Let's Gro". Thanks!</string>
 
     <string name="successAccountCreation">Your registration is successful please login to continue.</string>
+    <string name="faculty_register_success">Registration is successful, upon approval you will receive Email notification.</string>
+    <string name="select_max_5_courses">You can select max. 5 courses</string>
     <string name="oldPassword">Old password</string>
     <string name="newPassword">New password</string>
     <string name="confirmPassword1">Confirm password</string>
@@ -188,6 +195,8 @@
     <string name="pattern">Pattern</string>
     <string name="university">University</string>
     <string name="institute">Institute</string>
+    <string name="register_as_faculty">Register as Faculty</string>
+    <string name="register_as_student">Register as Student</string>
 
     <string name="filter">Filters</string>
     <string name="specialisation">Specialisation</string>
@@ -255,6 +264,7 @@ Content
     <string name="conversation_close_loader_message">Closing the recent conversation.</string>
     <string name="invalid_mobile">Not a valid Mobile Number...!</string>
     <string name="invalid_email">Not a valid EmailID...!</string>
+    <string name="uploading_resume">Uploading resume...</string>
 
     <!--Favourite Video-->
     <string name="favourite_videos_unavailable">Favourite videos are not available yet!</string>
@@ -264,6 +274,7 @@ Content
     <string name="favourite">Favourite</string>
     <string name="do_you_have_any_questions">Do you have any questions?</string>
     <string name="mobile_number">Mobile Number</string>
+    <string name="area_of_expertise">Area of expertise</string>
     <string name="alternate_mobile_number">Alternate Mobile Number</string>
     <string name="time_to_contact">Good Time to Contact</string>
     <string name="send">Send</string>

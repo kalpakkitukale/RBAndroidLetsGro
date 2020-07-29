@@ -30,4 +30,8 @@
         <attr name="bullt_visible" format="boolean" />
     </declare-styleable>
 
+    <declare-styleable name="CustomWebView">
+        <attr name="cwv_background_color" format="color"/>
+    </declare-styleable>
+
 </resources>

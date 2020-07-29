@@ -3,9 +3,9 @@
     <item>
         <shape android:shape="rectangle">
             <gradient android:angle="0"
-                android:endColor="@color/colorTextGrayOnLightNDark"
+                android:endColor="@color/colorLightGray"
                 android:gradientRadius="0"
-                android:startColor="@color/colorTextGrayOnLightNDark"
+                android:startColor="@color/colorLightGray"
                 android:type="linear" />
             <!-- make the button corners rounded-->
             <corners android:radius="@dimen/dp_10" />
