@@ -157,4 +157,7 @@ dependencies {
 
     implementation 'com.facebook.android:facebook-android-sdk:5.15.3'
     implementation 'com.google.android.gms:play-services-auth:18.0.0'
+
+    // Used for custom webview
+    implementation "androidx.webkit:webkit:1.2.0"
 }

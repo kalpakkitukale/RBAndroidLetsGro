@@ -4,9 +4,11 @@ import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseFragment
 import com.ramanbyte.databinding.FragmentRegisterAsBinding
@@ -14,6 +16,7 @@ import com.ramanbyte.emla.view_model.CreateAccountViewModel
 import com.ramanbyte.emla.view_model.LoginViewModel
 import com.ramanbyte.utilities.AlertDialog
 import com.ramanbyte.utilities.BindingUtils
+import com.ramanbyte.utilities.KEY_BLANK
 import com.ramanbyte.utilities.ProgressLoader
 
 class RegisterAsFragment : BaseFragment<FragmentRegisterAsBinding,LoginViewModel>() {
@@ -40,8 +43,9 @@ class RegisterAsFragment : BaseFragment<FragmentRegisterAsBinding,LoginViewModel
                 setTextColor(BindingUtils.color(R.color.colorTextNavyBlueInLightNWhiteInDark))
             }
 
-
             viewModel.apply {
+                setToolbarTitle(View.GONE, KEY_BLANK)
+                isRegisterAsSelected.value = false
                 onClickStudentLiveData.observe(this@RegisterAsFragment, Observer {
                     if (it != null){
                         if (it == true){

@@ -1,18 +1,24 @@
 package com.ramanbyte.emla.ui.fragments
 
+import android.app.Activity
 import android.app.DatePickerDialog
 import android.app.Dialog
+import android.content.Intent
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MenuItem
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.lifecycle.Observer
+import androidx.navigation.NavOptions
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseFragment
 import com.ramanbyte.databinding.FragmentLearnerProfileBinding
 import com.ramanbyte.databinding.PledgeDialogBinding
 import com.ramanbyte.emla.adapters.ViewPagerAdapter
+import com.ramanbyte.emla.ui.activities.CertificateViewerActivity
+import com.ramanbyte.emla.ui.activities.LoginActivity
 import com.ramanbyte.emla.view_model.LearnerProfileViewModel
 import com.ramanbyte.utilities.*
 import org.joda.time.DateTime
@@ -216,6 +222,16 @@ class LearnerProfileFragment :
                         BindingUtils.string(R.string.yes), {
                             isAlertDialogShown.postValue(false)
                             findNavController().navigateUp()
+                            /*val intent = Intent(context!!, LoginActivity::class.java)
+                            startActivity(intent)
+                            Activity().finish()*/
+                            /*val navOption =
+                                NavOptions.Builder().setPopUpTo(R.id.loginFragment, false)
+                                    .build()
+                            activity?.let {
+                                Navigation.findNavController(it, R.id.containerNavHost)
+                                    .navigate(R.id.loginFragment, null, navOption)
+                            }*/
                         },
                         BindingUtils.string(R.string.no), {
                             isAlertDialogShown.postValue(false)

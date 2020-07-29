@@ -105,7 +105,7 @@
                             app:layout_constraintRight_toRightOf="parent"
                             app:layout_constraintTop_toTopOf="@+id/headerCourseSyllabus" />
 
-                        <com.ramanbyte.emla.view.NestedWebView
+                        <com.ramanbyte.emla.view.CustomWebView
                             android:id="@+id/rvCourseSyllabus"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/dp_150"
@@ -165,7 +165,7 @@
                             app:layout_constraintRight_toRightOf="parent"
                             app:layout_constraintTop_toTopOf="@+id/headerAssessmentInstruction" />
 
-                        <com.ramanbyte.emla.view.NestedWebView
+                        <com.ramanbyte.emla.view.CustomWebView
                             android:id="@+id/webViewAssessmentInstruction"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/dp_150"
@@ -215,7 +215,7 @@
                             app:layout_constraintRight_toRightOf="parent"
                             app:layout_constraintTop_toTopOf="@+id/headerWhatIWillLearn" />
 
-                        <com.ramanbyte.emla.view.NestedWebView
+                        <com.ramanbyte.emla.view.CustomWebView
                             android:id="@+id/webViewWhatIWillLearn"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/dp_150"
@@ -268,7 +268,7 @@
                             app:layout_constraintRight_toRightOf="parent"
                             app:layout_constraintTop_toTopOf="@+id/headerHowToUse" />
 
-                        <com.ramanbyte.emla.view.NestedWebView
+                        <com.ramanbyte.emla.view.CustomWebView
                             android:id="@+id/webViewHowToUse"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/dp_150"

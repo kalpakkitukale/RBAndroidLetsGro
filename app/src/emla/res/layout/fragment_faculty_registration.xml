@@ -13,6 +13,7 @@
     </data>
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/mainScrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fillViewport="true"
@@ -125,31 +126,36 @@
                     android:text="@={createAccountViewModel.registrationMutableLiveData.userDetails.contactNo}" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tilAreaOfExpertise"
-                style="@style/TextInputLayoutWithoutBorder"
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/cgAreaOfExpertise"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_15"
+                android:layout_marginTop="@dimen/dp_16"
                 app:layout_constraintEnd_toEndOf="@+id/tilUserMobile"
                 app:layout_constraintStart_toStartOf="@+id/tilUserMobile"
-                app:layout_constraintTop_toBottomOf="@id/tilUserMobile">
-                <!-- android:hint="@string/emailId"
-                app:errorText="@{createAccountViewModel.facultyRegistrationValidator.getValidation(StaticHelpersKt.keyEmailUsername)}"-->
+                app:layout_constraintTop_toBottomOf="@id/tilUserMobile"
+                app:singleSelection="false" />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etAreaOfExpertise"
-                    style="@style/EditTextRegularGrayHint"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:imeOptions="actionNext"
-                    android:inputType="textEmailAddress"
-                    android:lines="1"
-                    android:maxLength="50"
-                    android:singleLine="true"
-                    />
-                <!--android:text="@={createAccountViewModel.registrationMutableLiveData.userDetails.emailUsername}"-->
-            </com.google.android.material.textfield.TextInputLayout>
+            <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                android:id="@+id/tvAreaOfExpertise"
+                style="@style/EditTextHintStyleHintLight"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorTextGrayOnLightNDark"
+                android:completionThreshold="1"
+                android:ems="10"
+                android:hint="@string/area_of_expertise"
+                android:lines="1"
+                android:textSize="@dimen/sp_16"
+                android:popupElevation="5dp"
+                android:singleLine="true"
+                android:paddingStart="@dimen/dp_10"
+                app:layout_constraintEnd_toEndOf="@+id/cgAreaOfExpertise"
+                app:layout_constraintStart_toStartOf="@+id/cgAreaOfExpertise"
+                app:layout_constraintTop_toBottomOf="@id/cgAreaOfExpertise"
+                app:singleLine="true" />
+            <!--android:focusable="false"
+            android:focusableInTouchMode="false"-->
 
             <TextView
                 android:id="@+id/lblResume"
@@ -159,8 +165,8 @@
                 android:layout_marginTop="@dimen/dp_15"
                 android:text="@string/resume"
                 android:textSize="@dimen/sp_12"
-                app:layout_constraintStart_toStartOf="@+id/tilAreaOfExpertise"
-                app:layout_constraintTop_toBottomOf="@+id/tilAreaOfExpertise" />
+                app:layout_constraintStart_toStartOf="@+id/tvAreaOfExpertise"
+                app:layout_constraintTop_toBottomOf="@+id/tvAreaOfExpertise" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnUploadResume"
@@ -224,6 +230,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_15"
                 android:hint="@string/message"
+                app:counterEnabled="true"
+                app:counterMaxLength="150"
                 app:layout_constraintEnd_toEndOf="@+id/tilLinkedinProfile"
                 app:layout_constraintStart_toStartOf="@+id/tilLinkedinProfile"
                 app:layout_constraintTop_toBottomOf="@id/tilLinkedinProfile">

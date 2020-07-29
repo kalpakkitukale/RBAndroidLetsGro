@@ -55,7 +55,7 @@ object FileUtils {
     const val KEY_UNIQUE_FILE_NAME_ADDITION_STRING = "_5_6_9"
     const val KEY_LOCAL_FILE_INITIALS = "CPM"
     private const val KEY_BUFFER = 2048
-    private const val PATH_SEPARATOR = "/"
+     const val PATH_SEPARATOR = "/"
 
     fun getNewCreatedFilePath(fileName: String): String {
         return try {

@@ -13,6 +13,7 @@ import com.ramanbyte.emla.data_layer.network.exception.ApiException
 import com.ramanbyte.emla.data_layer.network.exception.NoDataException
 import com.ramanbyte.emla.data_layer.network.exception.NoInternetException
 import com.ramanbyte.emla.data_layer.repositories.RegistrationRepository
+import com.ramanbyte.emla.models.AreaOfExpertiesModel
 import com.ramanbyte.emla.models.AreaOfExpertiseResponseModel
 import com.ramanbyte.emla.models.RegistrationModel
 import com.ramanbyte.emla.models.StateModel
@@ -20,6 +21,7 @@ import com.ramanbyte.utilities.*
 import com.ramanbyte.validation.ObservableValidator
 import com.ramanbyte.validation.ValidationFlags
 import org.kodein.di.generic.instance
+import java.util.HashSet
 
 /**
  * @author Vinay Kumbhar <vinay.pkumbhar@gmail.com>
@@ -186,23 +188,26 @@ class CreateAccountViewModel(var mContext: Context) : BaseViewModel(mContext = m
 
     var onClickUploadResumeLiveData = MutableLiveData<Boolean>().apply { value = null }
     val areaOfExpertiseListLiveData = MutableLiveData<ArrayList<AreaOfExpertiseResponseModel>>()
+    var areaOfExpertiseSet = HashSet<Int>()
+    var uploadResumeFileName = MutableLiveData<String>().apply { value = KEY_BLANK }
+    var uploadResumeFilePath = MutableLiveData<String>().apply { value = KEY_BLANK }
 
     fun onClickUploadResume(view: View) {
         onClickUploadResumeLiveData.value = true
     }
 
-    fun getAreaOfExpertise() {
+    fun getAreaOfExpertise(searchKey: String) {
         CoroutineUtils.main {
             try {
-                coroutineToggleLoader(BindingUtils.string(R.string.getting_area_of_expertise))
+                //coroutineToggleLoader(BindingUtils.string(R.string.getting_area_of_expertise))
                 areaOfExpertiseListLiveData.postValue(
-                    registrationRepository.getAreaOfExpertise("java")
+                    registrationRepository.getAreaOfExpertise(searchKey)
                 )
-                coroutineToggleLoader()
+                //coroutineToggleLoader()
             } catch (e: ApiException) {
                 e.printStackTrace()
                 AppLog.errorLog(e.message, e)
-                coroutineToggleLoader()
+                //coroutineToggleLoader()
                 toggleLayoutVisibility(
                     View.GONE,
                     View.GONE,
@@ -213,7 +218,7 @@ class CreateAccountViewModel(var mContext: Context) : BaseViewModel(mContext = m
             } catch (e: NoDataException) {
                 e.printStackTrace()
                 AppLog.errorLog(e.message, e)
-                coroutineToggleLoader()
+                //coroutineToggleLoader()
                 toggleLayoutVisibility(
                     View.GONE,
                     View.VISIBLE,
@@ -224,7 +229,7 @@ class CreateAccountViewModel(var mContext: Context) : BaseViewModel(mContext = m
             } catch (e: NoInternetException) {
                 e.printStackTrace()
                 AppLog.errorLog(e.message, e)
-                coroutineToggleLoader()
+                //coroutineToggleLoader()
                 toggleLayoutVisibility(
                     View.GONE,
                     View.GONE,
@@ -290,9 +295,67 @@ class CreateAccountViewModel(var mContext: Context) : BaseViewModel(mContext = m
 
     fun onClickFacultyRegister(view: View) {
         if (facultyRegistrationValidator.validateAll()) {
-            AppLog.infoLog("onClickFacultyRegister  :: true")
-        }else{
-            AppLog.infoLog("onClickFacultyRegister  :: false")
+            if (areaOfExpertiseSet.size != 0) {
+                val areaOfExpertiseList = ArrayList<AreaOfExpertiesModel>()
+                areaOfExpertiseSet.forEach {
+                    areaOfExpertiseList.add(AreaOfExpertiesModel().apply {
+                        id = it
+                    })
+                }
+
+                if (uploadResumeFileName.value?.isNotEmpty()!!) {
+                    val apiCallFunction: suspend () -> Unit = {
+                        val response = registrationRepository.register(
+                            registrationMutableLiveData.value!!.apply {
+                                userDetails.apply {
+                                    userType = KEY_FACULTY
+                                    user_userDelStatus = KEY_Y
+                                    user_userStatus = KEY_BLOCK
+                                    user_userIsActive = KEY_N
+                                    password = KEY_DEFAULT_PASSWORD
+                                    resumeFileName = uploadResumeFileName.value
+                                }
+                                areaofExperties = areaOfExpertiseList
+                            }
+                        )
+                        if (response?.isNotEmpty()!!) {
+                            if (uploadResumeFileName.value?.isNotEmpty()!!) {
+                                AppS3Client.createInstance(mContext)
+                                    .upload(
+                                        uploadResumeFileName.value!!,
+                                        uploadResumeFilePath.value!!,
+                                        BindingUtils.string(R.string.uploading_resume),
+                                        AppS3Client.TAG_UPLOAD,
+                                        0X100
+                                    )
+                            }
+                        }
+                        registrationSuccessMutableLiveData.postValue(response)
+                    }
+                    invokeApiCall(apiCallFunction = apiCallFunction)
+
+                } else {
+                    setAlertDialogResourceModelMutableLiveData(
+                        BindingUtils.string(R.string.resume_required),
+                        BindingUtils.drawable(R.drawable.ic_warning)!!,
+                        true,
+                        BindingUtils.string(R.string.strOk), {
+                            isAlertDialogShown.postValue(false)
+                        }
+                    )
+                    isAlertDialogShown.postValue(true)
+                }
+            } else {
+                setAlertDialogResourceModelMutableLiveData(
+                    BindingUtils.string(R.string.area_of_expertise_required),
+                    BindingUtils.drawable(R.drawable.ic_warning)!!,
+                    true,
+                    BindingUtils.string(R.string.strOk), {
+                        isAlertDialogShown.postValue(false)
+                    }
+                )
+                isAlertDialogShown.postValue(true)
+            }
         }
     }
 

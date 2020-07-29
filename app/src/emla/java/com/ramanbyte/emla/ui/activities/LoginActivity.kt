@@ -65,8 +65,9 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(authMod
 
             setSupportActionBar(mainToolbar)
 
-            mainAppbar.visibility = View.GONE
-
+            actionBar?.hide()
+            supportActionBar?.setDisplayHomeAsUpEnabled(true)
+            supportActionBar!!.setDisplayShowHomeEnabled(true)
         }
     }
 

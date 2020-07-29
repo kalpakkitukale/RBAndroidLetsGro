@@ -215,15 +215,12 @@ class UserDetailsModel : BaseObservable() {
         }
 
     var specializationName = ""
-    var resumeFileName = ""
+    var resumeFileName: String? = ""
     var linkedInProfile = ""
     var message = ""
 
-
-    var filePath = ""
-    var fileName = ""
-    var extension = ""
-    var thumbnail :Int =0
-
+    var user_userDelStatus = KEY_N
+    var user_userStatus = KEY_APP
+    var user_userIsActive = KEY_Y
 }
 

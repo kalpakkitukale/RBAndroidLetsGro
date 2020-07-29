@@ -108,7 +108,7 @@
 
         </LinearLayout>
 
-        <com.ramanbyte.emla.view.NestedWebView
+        <com.ramanbyte.emla.view.CustomWebView
             android:id="@+id/wvCommonInstruction"
             android:layout_width="0dp"
             android:layout_height="@dimen/dp_100"
@@ -122,7 +122,7 @@
             app:setHtmlText="@{instructionShowQuestionsViewModel.instructionsModelLiveData.common_Instruction}" />
 
 
-        <com.ramanbyte.emla.view.NestedWebView
+        <com.ramanbyte.emla.view.CustomWebView
             android:id="@+id/wvStaticInstructions"
             android:layout_width="0dp"
             android:layout_height="@dimen/dp_100"
