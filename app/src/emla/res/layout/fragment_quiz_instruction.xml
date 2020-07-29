@@ -24,6 +24,7 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardMainContainer"
+            android:layout_width="match_parent"
             style="@style/customCard"
             android:layout_height="@dimen/dp_150"
             app:cardElevation="0dp"
