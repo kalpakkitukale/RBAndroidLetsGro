@@ -58,7 +58,7 @@ class FacultyRegistrationFragment :
                 shareViewModel = ViewModelProvider(this)[LoginViewModel::class.java]
                 shareViewModel?.setToolbarTitle(
                     View.VISIBLE,
-                    BindingUtils.string(R.string.register_as_student)
+                    BindingUtils.string(R.string.register_as_faculty)
                 )
             }
 

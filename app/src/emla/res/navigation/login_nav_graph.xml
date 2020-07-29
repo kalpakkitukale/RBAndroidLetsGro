@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_loginFragment_to_registerAsFragment"
             app:destination="@id/registerAsFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_learnerProfileFragment"
+            app:destination="@id/learnerProfileFragment" />
     </fragment>
     <fragment
         android:id="@+id/registerAsFragment"
@@ -36,4 +39,10 @@
         android:name="com.ramanbyte.emla.ui.fragments.StudentRegistrationFragment"
         android:label="fragment_student_registation"
         tools:layout="@layout/fragment_student_registration" />
+
+    <fragment
+        android:id="@+id/learnerProfileFragment"
+        android:name="com.ramanbyte.emla.ui.fragments.LearnerProfileFragment"
+        android:label="LearnerProfileFragment" >
+    </fragment>
 </navigation>
