@@ -94,11 +94,11 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/lableSignIn"
-                    style="@style/TextViewMediumGrayOnLightNDark14sp"
+                    style="@style/TextViewLabelMediumGrayOnLightNDark28sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/log_in"
-                    android:textColor="@color/colorLightGray"
+                    android:textColor="@color/labelColorBig"
                     app:layout_constraintStart_toStartOf="@+id/tilUserName"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -195,7 +195,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/lblLoginWith"
-            style="@style/TextViewMediumGrayOnLightNDark14sp"
+            style="@style/TextViewLabelMediumGrayOnLightNDark28sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_15"

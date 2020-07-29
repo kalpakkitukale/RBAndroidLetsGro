@@ -4,8 +4,6 @@ import android.os.Build
 import androidx.annotation.NonNull
 import androidx.appcompat.app.AppCompatDelegate
 
-import androidx.core.os.BuildCompat
-
 
 /**
  * @author Vinay Kumbhar <vinay.k@ramanbyte.com>
@@ -29,12 +27,12 @@ object ThemeHelper {
 
             DEFAULT_MODE -> {
                 //set default dark mode below android 10
-                /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {*/
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                     // Above android version P(API 28)
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
-               /* } else {
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                }*/
+                } else {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                }
             }
         }
     }
