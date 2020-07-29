@@ -17,6 +17,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.webkit.WebViewCompat
 import com.google.android.material.internal.NavigationMenuView
+import com.ramanbyte.BaseAppController
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseActivity
 import com.ramanbyte.databinding.ActivityContainerBinding
@@ -195,6 +196,12 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding, ContainerViewMo
                             BindingUtils.string(R.string.yes), {
                                 isAlertDialogShown.postValue(false)
                                 navController.navigateUp()
+
+                               /* val intent = Intent(this@ContainerActivity, LoginActivity::class.java)
+                                startActivity(intent)
+                                finish()
+                                BaseAppController.setEnterPageAnimation(this@ContainerActivity)
+*/
                             },
                             BindingUtils.string(R.string.no), {
                                 isAlertDialogShown.postValue(false)
