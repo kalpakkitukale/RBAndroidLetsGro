@@ -76,4 +76,11 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(authMod
             return Intent(activity, LoginActivity::class.java)
         }
     }
+
+    override fun onBackPressed() {
+        if (navController.currentDestination?.id == R.id.facultyRegistrationFragment || navController.currentDestination?.id == R.id.studentRegistrationFragment) {
+            viewModel.setToolbarTitle(View.GONE, KEY_BLANK)
+        }
+        super.onBackPressed()
+    }
 }
