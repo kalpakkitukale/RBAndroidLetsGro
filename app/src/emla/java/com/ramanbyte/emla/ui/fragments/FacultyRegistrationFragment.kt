@@ -111,7 +111,18 @@ class FacultyRegistrationFragment :
                             onClickUploadResumeLiveData.value = null
                         }
                     }
+                })
 
+                onClickRemoveResumeLiveData.observe(this@FacultyRegistrationFragment, Observer {
+                    it?.let {
+                        uploadResumeFileName.value = KEY_BLANK
+                        uploadResumeFilePath.value = KEY_BLANK
+                        btnUploadResume.visibility = View.VISIBLE
+                        lblResumeNote.visibility = View.VISIBLE
+                        lblResumeFileName.visibility = View.GONE
+                        ivRemoveResume.visibility = View.GONE
+                        onClickRemoveResumeLiveData.value = null
+                    }
                 })
             }
         }
@@ -136,7 +147,7 @@ class FacultyRegistrationFragment :
             .setSelectedFiles(docPaths)
             .setActivityTheme(R.style.FilePickerTheme)
             .setActivityTitle(BindingUtils.string(R.string.please_select_resume))
-            .addFileSupport(BindingUtils.string(R.string.pdf), pdfs, R.drawable.ic_pdf)
+            .addFileSupport(BindingUtils.string(R.string.pdf), pdfs, R.drawable.icon_file_unknown)
             .enableDocSupport(true)
             .enableSelectAll(true)
             .setMaxCount(1)
@@ -168,11 +179,17 @@ class FacultyRegistrationFragment :
 
                         AppLog.infoLog("fileName size :: $fileSizeKB     $fileSizeMB      $fileSize      $selectedFilePath    ")
                         if (fileSizeMB <= 2) {
-                            layoutBinding.lblResumeNote.text = fileName
+                            layoutBinding.apply {
+                                lblResumeFileName.text = fileName
+                                btnUploadResume.visibility = View.GONE
+                                lblResumeNote.visibility = View.GONE
+                                lblResumeFileName.visibility = View.VISIBLE
+                                ivRemoveResume.visibility = View.VISIBLE
+                            }
                             AppLog.infoLog("fileNamePath  :: $fileName     $filePath")
                             extension =
                                 selectedFilePath.substring(selectedFilePath.lastIndexOf(".")) ?: ""
-                            thumbnail = setThumbNail(extension ?: "")
+                            //thumbnail = setThumbNail(extension ?: "")
 
                             viewModel.apply {
                                 uploadResumeFileName.value =
@@ -182,9 +199,6 @@ class FacultyRegistrationFragment :
                                 uploadResumeFilePath.value = selectedFilePath
                             }
                         } else {
-                            layoutBinding.lblResumeNote.text =
-                                BindingUtils.string(R.string.resume_note)
-
                             viewModel.apply {
                                 setAlertDialogResourceModelMutableLiveData(
                                     BindingUtils.string(R.string.resume_error),
@@ -197,69 +211,9 @@ class FacultyRegistrationFragment :
                                 isAlertDialogShown.postValue(true)
                             }
                         }
-
-
-                        if (extension.equals(FileUtils.KEY_PDF_DOCUMENT_EXTENSION, true)) {
-                            thumbnail = R.drawable.ic_pdf
-                        } else if (extension.equals(
-                                FileUtils.KEY_DOCUMENT_DOC_EXTENSION,
-                                true
-                            ) || extension.equals(FileUtils.KEY_DOCUMENT_DOCX_EXTENSION, true)
-                        ) {
-                            thumbnail = R.drawable.ic_word
-                        } else if (extension.equals(
-                                FileUtils.KEY_SPREADSHEET_XLSX_EXTENSION,
-                                true
-                            ) || extension.equals(
-                                FileUtils.KEY_SPREADSHEET_ODS_EXTENSION,
-                                true
-                            ) || extension.equals(FileUtils.KEY_SPREADSHEET_XLS_EXTENSION, true)
-                        ) {
-                            thumbnail = R.drawable.ic_excel
-                        } else if (extension.equals(
-                                FileUtils.KEY_TEXT_EXTENSION,
-                                true
-                            ) || extension.equals(FileUtils.KEY_RICH_TEXT_EXTENSION, true)
-                        ) {
-                            thumbnail = R.drawable.ic_text_document
-                        } else {
-                            thumbnail = R.drawable.icon_file_unknown
-                        }
-
-                        //layoutBinding.ivThumbnail.setImageResource(thumbnail ?: 0)
                     }
                 }
             }
-        }
-    }
-
-    fun setThumbNail(extension: String): Int {
-
-        if (extension.equals(FileUtils.KEY_PDF_DOCUMENT_EXTENSION, true)) {
-            return R.drawable.ic_pdf
-        } else if (extension.equals(
-                FileUtils.KEY_DOCUMENT_DOC_EXTENSION,
-                true
-            ) || extension.equals(FileUtils.KEY_DOCUMENT_DOCX_EXTENSION, true)
-        ) {
-            return R.drawable.ic_word
-        } else if (extension.equals(
-                FileUtils.KEY_SPREADSHEET_XLSX_EXTENSION,
-                true
-            ) || extension.equals(
-                FileUtils.KEY_SPREADSHEET_ODS_EXTENSION,
-                true
-            ) || extension.equals(FileUtils.KEY_SPREADSHEET_XLS_EXTENSION, true)
-        ) {
-            return R.drawable.ic_excel
-        } else if (extension.equals(
-                FileUtils.KEY_TEXT_EXTENSION,
-                true
-            ) || extension.equals(FileUtils.KEY_RICH_TEXT_EXTENSION, true)
-        ) {
-            return R.drawable.ic_text_document
-        } else {
-            return R.drawable.icon_file_unknown
         }
     }
 
@@ -293,7 +247,7 @@ class FacultyRegistrationFragment :
         viewModel.apply {
             setAlertDialogResourceModelMutableLiveData(
                 message,
-                alertDrawableResource = BindingUtils.drawable(R.drawable.ic_pdf),
+                alertDrawableResource = BindingUtils.drawable(R.drawable.icon_file_unknown),
                 isInfoAlert = false,
                 positiveButtonText = BindingUtils.string(R.string.strOk),
                 positiveButtonClickFunctionality = {

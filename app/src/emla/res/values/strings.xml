@@ -31,6 +31,7 @@
     <string name="message">Message</string>
     <string name="resume_note">Supported file formats PDF, EXCEL, DOC Maximum file size 2 MB</string>
     <string name="resume_error">More than 2 MB file not allowed.</string>
+    <string name="remove_resume_alert">Do you want to remove resume file?</string>
     <string name="resume_required">Resume required.</string>
     <string name="emailId">Email Id</string>
     <string name="enter_emailId">Please enter valid e-mail ID</string>

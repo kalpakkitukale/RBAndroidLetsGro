@@ -168,37 +168,58 @@
                 app:layout_constraintStart_toStartOf="@+id/tvAreaOfExpertise"
                 app:layout_constraintTop_toBottomOf="@+id/tvAreaOfExpertise" />
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnUploadResume"
-                style="@style/CustomCapsuleButtonBlueBgWhiteText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_22"
-                android:onClick="@{createAccountViewModel::onClickUploadResume}"
-                android:text="@string/upload_resume"
-                app:layout_constraintStart_toStartOf="@+id/lblResume"
-                app:layout_constraintTop_toBottomOf="@+id/lblResume" />
-
             <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/ivThumbnail"
+                android:id="@+id/ivRemoveResume"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_15"
-                app:layout_constraintStart_toStartOf="@+id/btnUploadResume"
-                app:layout_constraintTop_toBottomOf="@+id/btnUploadResume" />
+                app:srcCompat="@drawable/ic_delete_button"
+                android:padding="@dimen/dp_10"
+                android:visibility="gone"
+                android:onClick="@{createAccountViewModel::onClickRemoveResume}"
+                app:layout_constraintEnd_toEndOf="@+id/tvAreaOfExpertise"
+                app:layout_constraintTop_toTopOf="@+id/lblResume" />
 
-            <TextView
-                android:id="@+id/lblResumeNote"
-                style="@style/TextViewLightGrayOnLightNDark"
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dp_10"
-                android:text="@string/resume_note"
-                android:textSize="@dimen/sp_12"
-                app:layout_constraintEnd_toEndOf="@+id/tilUserMobile"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="@+id/btnUploadResume"
-                app:layout_constraintTop_toTopOf="@+id/ivThumbnail" />
+                android:orientation="vertical"
+                android:id="@+id/llResume"
+                android:layout_marginTop="@dimen/dp_15"
+                app:layout_constraintStart_toStartOf="@+id/lblResume"
+                app:layout_constraintTop_toBottomOf="@+id/lblResume"
+                app:layout_constraintEnd_toEndOf="@+id/tvAreaOfExpertise">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnUploadResume"
+                    style="@style/CustomCapsuleButtonBlueBgWhiteText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{createAccountViewModel::onClickUploadResume}"
+                    android:text="@string/upload_resume"
+                    android:visibility="visible" />
+
+                <TextView
+                    android:id="@+id/lblResumeNote"
+                    style="@style/TextViewLightGrayOnLightNDark"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/resume_note"
+                    android:textSize="@dimen/sp_12"
+                    android:visibility="visible"
+                    android:layout_marginTop="@dimen/dp_10" />
+
+                <TextView
+                    android:id="@+id/lblResumeFileName"
+                    style="@style/TextViewLightGrayOnLightNDark"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:textSize="@dimen/sp_12"
+                    android:gravity="center|start"
+                    android:drawablePadding="@dimen/dp_10"
+                    android:drawableStart="@drawable/icon_file_unknown" />
+
+            </LinearLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilLinkedinProfile"
@@ -207,9 +228,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_15"
                 android:hint="@string/linkedin_profile"
-                app:layout_constraintEnd_toEndOf="@+id/lblResumeNote"
-                app:layout_constraintStart_toStartOf="@+id/lblResumeNote"
-                app:layout_constraintTop_toBottomOf="@id/lblResumeNote">
+                app:layout_constraintEnd_toEndOf="@+id/llResume"
+                app:layout_constraintStart_toStartOf="@+id/llResume"
+                app:layout_constraintTop_toBottomOf="@id/llResume">
                 <!--app:errorText="@{createAccountViewModel.facultyRegistrationValidator.getValidation(StaticHelpersKt.keyEmailUsername)}"-->
 
                 <com.google.android.material.textfield.TextInputEditText

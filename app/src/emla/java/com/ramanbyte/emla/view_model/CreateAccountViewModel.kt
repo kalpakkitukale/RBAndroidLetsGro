@@ -187,6 +187,7 @@ class CreateAccountViewModel(var mContext: Context) : BaseViewModel(mContext = m
     //********************************* Register as Faculty *********************************
 
     var onClickUploadResumeLiveData = MutableLiveData<Boolean>().apply { value = null }
+    var onClickRemoveResumeLiveData = MutableLiveData<Boolean>().apply { value = null }
     val areaOfExpertiseListLiveData = MutableLiveData<ArrayList<AreaOfExpertiseResponseModel>>()
     var areaOfExpertiseSet = HashSet<Int>()
     var uploadResumeFileName = MutableLiveData<String>().apply { value = KEY_BLANK }
@@ -194,6 +195,22 @@ class CreateAccountViewModel(var mContext: Context) : BaseViewModel(mContext = m
 
     fun onClickUploadResume(view: View) {
         onClickUploadResumeLiveData.value = true
+    }
+
+    fun onClickRemoveResume(view: View) {
+        setAlertDialogResourceModelMutableLiveData(
+            BindingUtils.string(R.string.remove_resume_alert),
+            BindingUtils.drawable(R.drawable.ic_warning)!!,
+            false,
+            BindingUtils.string(R.string.yes), {
+                onClickRemoveResumeLiveData.value = true
+                isAlertDialogShown.postValue(false)
+            },
+            BindingUtils.string(R.string.no), {
+                isAlertDialogShown.postValue(false)
+            }
+        )
+        isAlertDialogShown.postValue(true)
     }
 
     fun getAreaOfExpertise(searchKey: String) {

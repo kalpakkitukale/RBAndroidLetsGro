@@ -232,6 +232,13 @@ class LearnerProfileFragment :
                                 Navigation.findNavController(it, R.id.containerNavHost)
                                     .navigate(R.id.loginFragment, null, navOption)
                             }*/
+
+                            /*(context as Activity).apply {
+                                val intent = Intent(this, LoginActivity::class.java)
+                                startActivity(intent)
+                                finish()
+                                //BaseAppController.setEnterPageAnimation(this)
+                            }*/
                         },
                         BindingUtils.string(R.string.no), {
                             isAlertDialogShown.postValue(false)
