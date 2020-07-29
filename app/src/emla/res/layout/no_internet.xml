@@ -15,7 +15,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="@dimen/dp_10"
-        android:background="@color/colorWhite"
+        android:background="@color/colorApplicationBackground"
         android:visibility="@{viewModel.noInternetMutableLiveData}">
         <!--  android:visibility="@{viewModel.noInternetMutableLiveData}"-->
 

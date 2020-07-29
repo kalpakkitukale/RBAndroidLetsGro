@@ -130,9 +130,9 @@
         <item name="android:textSize">@dimen/sp_14</item>
     </style>
 
-    <style name="TextViewMediumGrayOnLightNDark14sp">
+    <style name="TextViewLabelMediumGrayOnLightNDark28sp">
         <item name="android:textColor">@color/colorTextGrayOnLightNDark</item>
-        <item name="android:textSize">@dimen/sp_14</item>
+        <item name="android:textSize">@dimen/sp_28</item>
         <item name="android:textAppearance">@style/AppTheme.Font.Medium</item>
     </style>
 
