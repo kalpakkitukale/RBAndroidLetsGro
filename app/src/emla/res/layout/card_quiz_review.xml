@@ -14,6 +14,8 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardLayoutMain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         style="@style/customCard"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

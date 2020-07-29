@@ -68,6 +68,8 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardLayoutMain"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                style="@style/customCard"
                 android:layout_marginTop="@dimen/dp_50"
                 android:layout_marginBottom="@dimen/dp_20"

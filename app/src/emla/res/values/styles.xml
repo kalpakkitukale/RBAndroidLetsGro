@@ -238,8 +238,6 @@
 
 
     <style name="customCard" parent="Widget.MaterialComponents.CardView">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
         <item name="cardBackgroundColor">@color/cardBackgroundColor</item>
         <item name="cardCornerRadius">@dimen/dp_5</item>
         <item name="cardElevation">@dimen/dp_2</item>

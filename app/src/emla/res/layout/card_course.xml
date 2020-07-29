@@ -19,6 +19,8 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         style="@style/customCard"
         android:onClick="@{()->coursesViewModel.courseClick(cardContainer, coursesModel)}">
 
@@ -43,7 +45,7 @@
                 android:id="@+id/llDetails"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorTransparent"
+                android:background="@color/cardBackgroundColor"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
