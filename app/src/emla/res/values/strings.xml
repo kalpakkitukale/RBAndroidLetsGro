@@ -179,6 +179,7 @@
     <string name="invalid_old_password">Enter a valid old password</string>
     <string name="enter_valid_confirm_new_password">Enter a valid confirm new password</string>
     <string name="not_same_new_and_confirm_password">Password does not match.</string>
+    <string name="password_mismatch">Password Mismatch.</string>
     <!--<string name="not_valid_password_pattern">Password should be as per password policy.Please refer to the password policy.</string>-->
     <string name="not_valid_password_pattern">Password must contain min. 6 characters with 1 uppercase, 1 lowercase, 1 number and 1 special character.</string>
     <string name="same_old_and_new_password">The new password you have entered is similar to the old one! Please try entering a new password.</string>

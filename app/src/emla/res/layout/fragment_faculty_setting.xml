@@ -23,7 +23,7 @@
             android:drawableEnd="@drawable/ic_arrow_right_black"
             android:drawablePadding="@dimen/dp_10"
             android:layout_margin="@dimen/dp_22"
-            android:onClick="@{settingViewModel::onClickChangePassword}"
+            android:onClick="@{settingViewModel::onClickFacultyChangePassword}"
             android:text="@string/change_password"
             android:textSize="@dimen/sp_16"
             app:layout_constraintEnd_toEndOf="parent"

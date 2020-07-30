@@ -19,7 +19,17 @@
         android:id="@+id/facultySettingFragment"
         android:name="com.ramanbyte.emla.faculty.ui.fragments.FacultySettingFragment"
         android:label="@string/action_settings"
-        tools:layout="@layout/fragment_faculty_setting" />
+        tools:layout="@layout/fragment_faculty_setting" >
+        <action
+            android:id="@+id/action_facultySettingFragment_to_changePasswordFragment"
+            app:destination="@id/changePasswordFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/changePasswordFragment"
+        android:name="com.ramanbyte.emla.ui.fragments.ChangePasswordFragment"
+        android:label="@string/change_password" />
+
     <fragment
         android:id="@+id/studentAskedQuestionsFragment"
         android:name="com.ramanbyte.emla.faculty.ui.fragments.StudentAskedQuestionsFragment"
