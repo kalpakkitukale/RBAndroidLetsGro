@@ -12,7 +12,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.ramanbyte.emla.faculty.view_model.FacultyContainerViewModel
 import com.ramanbyte.emla.ui.activities.ContainerActivity
+import com.ramanbyte.emla.ui.activities.LoginActivity
 import com.ramanbyte.emla.view_model.ContainerViewModel
+import com.ramanbyte.emla.view_model.LoginViewModel
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
@@ -90,11 +92,14 @@ abstract class BaseFragment<LayoutBinding : ViewDataBinding, VM : ViewModel>(
             if (activity is ContainerActivity) {
                 ViewModelProvider(this).get(ContainerViewModel::class.java).toolbarTitleLiveData.value =
                     strTitle
-            }else{
+            } else if (activity is LoginActivity) {
+                ViewModelProvider(this).get(LoginViewModel::class.java).apply {
+                    setToolbarTitle(View.VISIBLE, strTitle)
+                }
+            } else {
                 ViewModelProvider(this).get(FacultyContainerViewModel::class.java).toolbarTitleLiveData.value =
                     strTitle
             }
-
         }
     }
 
@@ -103,8 +108,9 @@ abstract class BaseFragment<LayoutBinding : ViewDataBinding, VM : ViewModel>(
         activity?.run {
             if (activity is ContainerActivity) {
                 containerViewModel = ViewModelProvider(this).get(ContainerViewModel::class.java)
-            }else{
-                facultyContainerViewModel = ViewModelProvider(this).get(FacultyContainerViewModel::class.java)
+            } else {
+                facultyContainerViewModel =
+                    ViewModelProvider(this).get(FacultyContainerViewModel::class.java)
             }
 
         }

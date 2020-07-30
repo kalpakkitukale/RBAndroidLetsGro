@@ -97,24 +97,21 @@ class CreateAccountViewModel(var mContext: Context) : BaseViewModel(mContext = m
                 keyFirstName,
                 ValidationFlags.FIELD_REQUIRED,
                 BindingUtils.string(
-                    R.string.dynamic_required,
-                    BindingUtils.string(R.string.first_name)
+                    R.string.required
                 )
             )
             addRule(
                 keyLastName,
                 ValidationFlags.FIELD_REQUIRED,
                 BindingUtils.string(
-                    R.string.dynamic_required,
-                    BindingUtils.string(R.string.last_name)
+                    R.string.required
                 )
             )
             addRule(
                 keyEmailUsername,
                 ValidationFlags.FIELD_REQUIRED,
                 BindingUtils.string(
-                    R.string.dynamic_required,
-                    BindingUtils.string(R.string.emailId)
+                    R.string.required
                 )
             )
             addRule(
@@ -126,16 +123,14 @@ class CreateAccountViewModel(var mContext: Context) : BaseViewModel(mContext = m
                 keyPassword,
                 ValidationFlags.FIELD_REQUIRED,
                 BindingUtils.string(
-                    R.string.dynamic_required,
-                    BindingUtils.string(R.string.password)
+                    R.string.required
                 )
             )
             addRule(
                 keyConfirmPassword,
                 ValidationFlags.FIELD_REQUIRED,
                 BindingUtils.string(
-                    R.string.dynamic_required,
-                    BindingUtils.string(R.string.confirmPassword1)
+                    R.string.required
                 )
             )
             addRule(
@@ -265,24 +260,21 @@ class CreateAccountViewModel(var mContext: Context) : BaseViewModel(mContext = m
                 keyFirstName,
                 ValidationFlags.FIELD_REQUIRED,
                 BindingUtils.string(
-                    R.string.required,
-                    BindingUtils.string(R.string.first_name)
+                    R.string.required
                 )
             )
             addRule(
                 keyLastName,
                 ValidationFlags.FIELD_REQUIRED,
                 BindingUtils.string(
-                    R.string.required,
-                    BindingUtils.string(R.string.last_name)
+                    R.string.required
                 )
             )
             addRule(
                 keyEmailUsername,
                 ValidationFlags.FIELD_REQUIRED,
                 BindingUtils.string(
-                    R.string.required,
-                    BindingUtils.string(R.string.emailId)
+                    R.string.required
                 )
             )
             addRule(
@@ -294,10 +286,7 @@ class CreateAccountViewModel(var mContext: Context) : BaseViewModel(mContext = m
                 keyContactNo,
                 ValidationFlags.FIELD_REQUIRED,
                 BindingUtils.string(
-                    R.string.required,
-                    BindingUtils.string(
-                        R.string.mobileNumber
-                    )
+                    R.string.required
                 )
             )
             addRule(
@@ -353,7 +342,7 @@ class CreateAccountViewModel(var mContext: Context) : BaseViewModel(mContext = m
 
                 } else {
                     setAlertDialogResourceModelMutableLiveData(
-                        BindingUtils.string(R.string.resume_required),
+                        BindingUtils.string(R.string.dynamic_required,BindingUtils.string(R.string.resume)),
                         BindingUtils.drawable(R.drawable.ic_warning)!!,
                         true,
                         BindingUtils.string(R.string.strOk), {
@@ -364,7 +353,7 @@ class CreateAccountViewModel(var mContext: Context) : BaseViewModel(mContext = m
                 }
             } else {
                 setAlertDialogResourceModelMutableLiveData(
-                    BindingUtils.string(R.string.area_of_expertise_required),
+                    BindingUtils.string(R.string.dynamic_required,BindingUtils.string(R.string.area_of_expertise)),
                     BindingUtils.drawable(R.drawable.ic_warning)!!,
                     true,
                     BindingUtils.string(R.string.strOk), {

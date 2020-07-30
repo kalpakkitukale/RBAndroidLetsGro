@@ -80,7 +80,26 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(authMod
     override fun onBackPressed() {
         if (navController.currentDestination?.id == R.id.facultyRegistrationFragment || navController.currentDestination?.id == R.id.studentRegistrationFragment) {
             viewModel.setToolbarTitle(View.GONE, KEY_BLANK)
+            super.onBackPressed()
+        } else if (navController.currentDestination?.id == R.id.learnerProfileFragment) {
+            viewModel.apply {
+                setAlertDialogResourceModelMutableLiveData(
+                    BindingUtils.string(R.string.profile_changes_discarded),
+                    BindingUtils.drawable(R.drawable.ic_submit_confirmation)!!,
+                    false,
+                    BindingUtils.string(R.string.yes), {
+                        isAlertDialogShown.postValue(false)
+                        navController.navigateUp()
+                    },
+                    BindingUtils.string(R.string.no), {
+                        isAlertDialogShown.postValue(false)
+                    }
+                )
+                isAlertDialogShown.postValue(true)
+            }
+        }else{
+            super.onBackPressed()
         }
-        super.onBackPressed()
+
     }
 }

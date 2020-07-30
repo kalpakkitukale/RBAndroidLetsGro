@@ -36,8 +36,7 @@ class ForgetPasswordViewModel(var mContext: Context) : BaseViewModel(mContext) {
                 KEY_EMAIL,
                 ValidationFlags.FIELD_REQUIRED,
                 BindingUtils.string(
-                    R.string.dynamic_required,
-                    BindingUtils.string(R.string.emailId)
+                    R.string.required
                 )
             )
 

@@ -18,6 +18,7 @@ import com.ramanbyte.databinding.FragmentLearnerProfileBinding
 import com.ramanbyte.databinding.PledgeDialogBinding
 import com.ramanbyte.emla.adapters.ViewPagerAdapter
 import com.ramanbyte.emla.ui.activities.CertificateViewerActivity
+import com.ramanbyte.emla.ui.activities.ContainerActivity
 import com.ramanbyte.emla.ui.activities.LoginActivity
 import com.ramanbyte.emla.view_model.LearnerProfileViewModel
 import com.ramanbyte.utilities.*
@@ -101,7 +102,7 @@ class LearnerProfileFragment :
                 layoutBinding.viewPageLearnerProfile.currentItem = 1
 
             })
-            goToNexttPageLiveData.observe(viewLifecycleOwner,Observer{
+            goToNexttPageLiveData.observe(viewLifecycleOwner, Observer {
                 layoutBinding.viewPageLearnerProfile.currentItem = 2
             })
 
@@ -118,23 +119,24 @@ class LearnerProfileFragment :
                         showPledgeDialogLiveData.value = null
                     }
                 }
-
-
             })
 
             navigateToCoursePage.observe(viewLifecycleOwner, Observer {
 
                 it?.apply {
-
                     if (this) {
-                        findNavController()
-                            .navigate(R.id.action_learnerProfileFragment_to_coursesFragment)
-                        navigateToCoursePage.value = null
+                        if (activity is ContainerActivity) {
+                            findNavController()
+                                .navigate(R.id.action_learnerProfileFragment_to_coursesFragment)
+                            navigateToCoursePage.value = null
+                        } else {
+                            startActivity(ContainerActivity.intent(context as Activity))
+                            activity?.finish()
+                        }
                     }
                 }
             })
         }
-
     }
 
     private fun setupViewPager() {
@@ -154,7 +156,6 @@ class LearnerProfileFragment :
             setSwipeEnabled(false)
             adapter = pagerAdapter
         }
-
     }
 
     private fun showDOBPickerDialog() {
@@ -205,7 +206,6 @@ class LearnerProfileFragment :
             window?.setDimAmount(0.2F)
             pledgeBinding.learnerProfileViewModel = viewModel
             setCanceledOnTouchOutside(false)
-
             show()
         }
     }
@@ -222,23 +222,6 @@ class LearnerProfileFragment :
                         BindingUtils.string(R.string.yes), {
                             isAlertDialogShown.postValue(false)
                             findNavController().navigateUp()
-                            /*val intent = Intent(context!!, LoginActivity::class.java)
-                            startActivity(intent)
-                            Activity().finish()*/
-                            /*val navOption =
-                                NavOptions.Builder().setPopUpTo(R.id.loginFragment, false)
-                                    .build()
-                            activity?.let {
-                                Navigation.findNavController(it, R.id.containerNavHost)
-                                    .navigate(R.id.loginFragment, null, navOption)
-                            }*/
-
-                            /*(context as Activity).apply {
-                                val intent = Intent(this, LoginActivity::class.java)
-                                startActivity(intent)
-                                finish()
-                                //BaseAppController.setEnterPageAnimation(this)
-                            }*/
                         },
                         BindingUtils.string(R.string.no), {
                             isAlertDialogShown.postValue(false)
