@@ -22,6 +22,10 @@ import com.ramanbyte.emla.ui.activities.ContainerActivity
 import com.ramanbyte.emla.ui.activities.LoginActivity
 import com.ramanbyte.emla.view_model.LearnerProfileViewModel
 import com.ramanbyte.utilities.*
+import com.ramanbyte.utilities.DateUtils.DATE_DISPLAY_PATTERN_SEP
+import com.ramanbyte.utilities.DateUtils.DATE_PICKER_PATTERN
+import com.ramanbyte.utilities.DateUtils.getCurrentDateTime
+import com.ramanbyte.utilities.DateUtils.getDaysDifference
 import org.joda.time.DateTime
 import java.util.*
 
@@ -177,13 +181,17 @@ class LearnerProfileFragment :
 
                 val selectedDate = "$sYear-${sMonth + 1}-$sDay"
 
-                viewModel.registrationModelLiveData?.value?.dateofBirthstring =
-                    DateUtils.getDisplayDateFromDate(
-                        selectedDate,
-                        DateUtils.DATE_PICKER_PATTERN,
-                        DateUtils.DATE_DISPLAY_PATTERN_SEP
-                    )
-
+                val days = getDaysDifference(selectedDate,getCurrentDateTime(DATE_PICKER_PATTERN),DATE_PICKER_PATTERN,DATE_PICKER_PATTERN)
+                if (days < 0){
+                    viewModel.registrationModelLiveData?.value?.dateofBirthstring = getCurrentDateTime(DATE_DISPLAY_PATTERN_SEP)
+                }else{
+                    viewModel.registrationModelLiveData?.value?.dateofBirthstring =
+                        DateUtils.getDisplayDateFromDate(
+                            selectedDate,
+                            DATE_PICKER_PATTERN,
+                            DATE_DISPLAY_PATTERN_SEP
+                        )
+                }
                 AppLog.infoLog("DAte ::: $year - $sMonth - $sDay")
             },
             year,
