@@ -68,6 +68,7 @@
             android:layout_marginStart="@dimen/dp_5"
             android:onClick="@{() -> showQuestionsViewModel.onClickPrevious(btnPrevious)}"
             android:text="@string/previous"
+            android:textSize="@dimen/sp_12"
            app:layout_constraintBottom_toBottomOf="@+id/btnNext"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/btnNext"
@@ -81,6 +82,7 @@
             android:layout_marginEnd="@dimen/dp_5"
             android:onClick="@{() -> showQuestionsViewModel.onClickNext(btnNext)}"
             android:text="@string/next"
+            android:textSize="@dimen/sp_12"
              app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintWidth_percent="0.34"
             app:layout_constraintBottom_toBottomOf="parent"/>

@@ -12,11 +12,12 @@
     <color name="colorTextGrayOnLightNDark">#9391a4</color>
     <color name="colorSelectedTab">#1d396b</color>
     <color name="colorNotSelectedTab">#9391a4</color>
+    <color name="colorCourseCardWithOpacity">#B3ffffff</color>
 
     <!--Taken From previous theme-->
     <color name="transparent">#00000000</color>
     <color name="colorChipUncheck">#F2F2F2</color>
-    <color name="colorChipCheck">#50bdc1</color>
+    <color name="colorChipCheck">#1d396b</color>
     <color name="exoTransparentBlack">#66000000</color>
     <color name="colorLightGray">#d1d1d1</color>
     <color name="colorWhite">#ffffff</color>

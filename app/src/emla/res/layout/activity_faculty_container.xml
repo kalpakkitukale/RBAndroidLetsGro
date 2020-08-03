@@ -79,7 +79,7 @@
             android:layout_gravity="bottom"
             app:itemIconSize="@dimen/dp_20"
             app:labelVisibilityMode="labeled"
-            android:background="@color/colorWhite"
+            android:background="@color/colorApplicationBackground"
             app:itemIconTint="@color/menu_text_color_selector"
             app:itemTextColor="@color/menu_text_color_selector"
             app:layout_constraintBottom_toBottomOf="parent"

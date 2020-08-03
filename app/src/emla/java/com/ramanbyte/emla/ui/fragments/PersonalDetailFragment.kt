@@ -9,8 +9,8 @@ import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
 import android.provider.Settings
-import androidx.fragment.app.Fragment
 import androidx.core.content.FileProvider
+import androidx.fragment.app.Fragment
 import com.ramanbyte.BaseAppController
 import com.ramanbyte.BuildConfig
 import com.ramanbyte.R
@@ -281,7 +281,7 @@ class PersonalDetailFragment :
 
         viewModel.apply {
             setAlertDialogResourceModelMutableLiveData(
-                message, BindingUtils.drawable(R.drawable.ic_something_went_wrong),
+                message, BindingUtils.drawable(R.drawable.something_went_wrong),
                 false, BindingUtils.string(R.string.strOk), {
                     try {
                         isAlertDialogShown.postValue(false)

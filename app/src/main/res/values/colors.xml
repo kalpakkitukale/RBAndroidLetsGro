@@ -2,6 +2,6 @@
 <resources>
     <color name="colorPrimary">#ffffff</color>
     <color name="colorPrimaryDark">#ffffff</color>
-
+    <color name="colorIconNavyBlueInLightNGrayInDark">#1d396b</color>
     <color name="bg_gray">#9391a4</color>
 </resources>

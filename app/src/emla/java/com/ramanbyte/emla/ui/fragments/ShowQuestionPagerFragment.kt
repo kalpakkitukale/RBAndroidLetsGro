@@ -169,7 +169,7 @@ class ShowQuestionPagerFragment : BaseFragment<CardShowQuestionsBinding, ShowQue
 
                 val spannableStringQuestionNo =
                     SpannableString(queCountString + " of " + totalQueCount.toString())
-                val foregroundSpan = ForegroundColorSpan(BindingUtils.color(R.color.colorIconGreen))
+                val foregroundSpan = ForegroundColorSpan(BindingUtils.color(R.color.colorButtonBlue))
                 val foregroundSpanTotalQuestion =
                     ForegroundColorSpan(BindingUtils.color(R.color.colorLightGray))
                 val backgroundSpan = BackgroundColorSpan(Color.YELLOW)
@@ -199,7 +199,7 @@ class ShowQuestionPagerFragment : BaseFragment<CardShowQuestionsBinding, ShowQue
                         "$marksStr ${BindingUtils.string(R.string.marks)}"
                     )
                 val foregroundSpanQuestionMarks =
-                    ForegroundColorSpan(BindingUtils.color(R.color.colorIconGreen))
+                    ForegroundColorSpan(BindingUtils.color(R.color.colorIconNavyBlueInLightNGrayInDark))
                 if (marksStr.length == 3) {
                     spannableStringQuestionMarks.setSpan(
                         foregroundSpanQuestionMarks,

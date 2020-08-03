@@ -66,6 +66,7 @@
         <item name="boxStrokeWidthFocused">1dp</item>
         <item name="boxStrokeColor">@color/colorTextGrayOnLightNDark</item>
         <item name="boxBackgroundColor">@color/transparent</item>
+        <item name="android:textCursorDrawable">@color/colorTextNavyBlueInLightNWhiteInDark</item>
     </style>
 
 <!--
@@ -235,14 +236,16 @@
         <item name="android:fontFamily">@font/roboto_regular</item>
     </style>
 
-
-
     <style name="customCard" parent="Widget.MaterialComponents.CardView">
         <item name="cardBackgroundColor">@color/cardBackgroundColor</item>
         <item name="cardCornerRadius">@dimen/dp_5</item>
         <item name="cardElevation">@dimen/dp_2</item>
         <item name="cardUseCompatPadding">true</item>
         <item name="contentPadding">@dimen/dp_5</item>
+        <item name="android:layout_marginTop">@dimen/dp_3</item>
+        <item name="android:layout_marginBottom">@dimen/dp_3</item>
+        <item name="android:layout_marginStart">@dimen/dp_8</item>
+        <item name="android:layout_marginEnd">@dimen/dp_8</item>
     </style>
 
 </resources>
