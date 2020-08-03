@@ -77,8 +77,7 @@ class LoginViewModel(var mContext: Context) : BaseViewModel(mContext) {
                 keyPassword,
                 ValidationFlags.FIELD_REQUIRED,
                 BindingUtils.string(
-                    R.string.dynamic_required,
-                    BindingUtils.string(R.string.password)
+                    R.string.required
                 )
             )
         }

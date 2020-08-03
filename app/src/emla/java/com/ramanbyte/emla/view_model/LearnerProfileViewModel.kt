@@ -135,16 +135,14 @@ class LearnerProfileViewModel(private val mContext: Context) : BaseViewModel(mCo
                     keyFirstName,
                     ValidationFlags.FIELD_REQUIRED,
                     BindingUtils.string(
-                        R.string.dynamic_required,
-                        BindingUtils.string(R.string.first_name)
+                        R.string.required
                     )
                 )
                 addRule(
                     keyLastName,
                     ValidationFlags.FIELD_REQUIRED,
                     BindingUtils.string(
-                        R.string.dynamic_required,
-                        BindingUtils.string(R.string.last_name)
+                        R.string.required
                     )
                 )
 
@@ -152,8 +150,7 @@ class LearnerProfileViewModel(private val mContext: Context) : BaseViewModel(mCo
                     keyDateOfBirth,
                     ValidationFlags.FIELD_REQUIRED,
                     BindingUtils.string(
-                        R.string.dynamic_required,
-                        BindingUtils.string(R.string.date_of_birth)
+                        R.string.required
                     )
                 )
 
@@ -161,8 +158,7 @@ class LearnerProfileViewModel(private val mContext: Context) : BaseViewModel(mCo
                     keyEmailUsername,
                     ValidationFlags.FIELD_REQUIRED,
                     BindingUtils.string(
-                        R.string.dynamic_required,
-                        BindingUtils.string(R.string.emailId)
+                        R.string.required
                     )
                 )
                 addRule(
@@ -175,10 +171,7 @@ class LearnerProfileViewModel(private val mContext: Context) : BaseViewModel(mCo
                     keyContactNo,
                     ValidationFlags.FIELD_REQUIRED,
                     BindingUtils.string(
-                        R.string.dynamic_required,
-                        BindingUtils.string(
-                            R.string.mobileNumber
-                        )
+                        R.string.required
                     )
                 )
                 addRule(
@@ -197,10 +190,7 @@ class LearnerProfileViewModel(private val mContext: Context) : BaseViewModel(mCo
                     keyState,
                     ValidationFlags.FIELD_SPINNER_SELECTION,
                     BindingUtils.string(
-                        R.string.dynamic_required,
-                        BindingUtils.string(
-                            R.string.state
-                        )
+                        R.string.required
                     ),
                     spinnerSelectPosition = -1
                 )
@@ -208,10 +198,7 @@ class LearnerProfileViewModel(private val mContext: Context) : BaseViewModel(mCo
                     keyCity,
                     ValidationFlags.FIELD_SPINNER_SELECTION,
                     BindingUtils.string(
-                        R.string.dynamic_required,
-                        BindingUtils.string(
-                            R.string.city
-                        )
+                        R.string.required
                     ),
                     spinnerSelectPosition = -1
                 )
@@ -224,10 +211,7 @@ class LearnerProfileViewModel(private val mContext: Context) : BaseViewModel(mCo
                     keyProgramLevel,
                     ValidationFlags.FIELD_SPINNER_SELECTION,
                     BindingUtils.string(
-                        R.string.dynamic_required,
-                        BindingUtils.string(
-                            R.string.program_level
-                        )
+                        R.string.required
                     ),
                     spinnerSelectPosition = -1
                 )
@@ -236,10 +220,7 @@ class LearnerProfileViewModel(private val mContext: Context) : BaseViewModel(mCo
                     keyBatchYear,
                     ValidationFlags.FIELD_REQUIRED,
                     BindingUtils.string(
-                        R.string.dynamic_required,
-                        BindingUtils.string(
-                            R.string.batchYear
-                        )
+                        R.string.required
                     )
                 )
 
@@ -247,10 +228,7 @@ class LearnerProfileViewModel(private val mContext: Context) : BaseViewModel(mCo
                     keyPattern,
                     ValidationFlags.FIELD_SPINNER_SELECTION,
                     BindingUtils.string(
-                        R.string.dynamic_required,
-                        BindingUtils.string(
-                            R.string.pattern
-                        )
+                        R.string.required
                     ),
                     spinnerSelectPosition = -1
                 )
@@ -260,10 +238,7 @@ class LearnerProfileViewModel(private val mContext: Context) : BaseViewModel(mCo
                     keySpecialization,
                     ValidationFlags.FIELD_SPINNER_SELECTION,
                     BindingUtils.string(
-                        R.string.dynamic_required,
-                        BindingUtils.string(
-                            R.string.specialization
-                        )
+                        R.string.required
                     ),
                     spinnerSelectPosition = -1
                 )
@@ -272,10 +247,7 @@ class LearnerProfileViewModel(private val mContext: Context) : BaseViewModel(mCo
                     keyUniversity,
                     ValidationFlags.FIELD_REQUIRED,
                     BindingUtils.string(
-                        R.string.dynamic_required,
-                        BindingUtils.string(
-                            R.string.university
-                        )
+                        R.string.required
                     )
                 )
 
@@ -283,16 +255,10 @@ class LearnerProfileViewModel(private val mContext: Context) : BaseViewModel(mCo
                     keyInstitute,
                     ValidationFlags.FIELD_REQUIRED,
                     BindingUtils.string(
-                        R.string.dynamic_required,
-                        BindingUtils.string(
-                            R.string.institute
-                        )
+                        R.string.required
                     )
                 )
-
             }
-
-
     }
 
     fun getStates() {

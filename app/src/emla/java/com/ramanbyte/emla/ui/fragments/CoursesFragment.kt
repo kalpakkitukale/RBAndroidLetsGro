@@ -43,10 +43,10 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
 
     override fun initiate() {
 
-        if (!viewModel.isUserActive()) {
+        /*if (!viewModel.isUserActive()) {
             findNavController().navigate(R.id.action_coursesFragment_to_learnerProfileFragment)
             return
-        }
+        }*/
 
         layoutBinding.apply {
             setToolbarTitle(BindingUtils.string(R.string.courses))

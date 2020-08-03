@@ -18,9 +18,14 @@ import com.ramanbyte.databinding.FragmentLearnerProfileBinding
 import com.ramanbyte.databinding.PledgeDialogBinding
 import com.ramanbyte.emla.adapters.ViewPagerAdapter
 import com.ramanbyte.emla.ui.activities.CertificateViewerActivity
+import com.ramanbyte.emla.ui.activities.ContainerActivity
 import com.ramanbyte.emla.ui.activities.LoginActivity
 import com.ramanbyte.emla.view_model.LearnerProfileViewModel
 import com.ramanbyte.utilities.*
+import com.ramanbyte.utilities.DateUtils.DATE_DISPLAY_PATTERN_SEP
+import com.ramanbyte.utilities.DateUtils.DATE_PICKER_PATTERN
+import com.ramanbyte.utilities.DateUtils.getCurrentDateTime
+import com.ramanbyte.utilities.DateUtils.getDaysDifference
 import org.joda.time.DateTime
 import java.util.*
 
@@ -101,7 +106,7 @@ class LearnerProfileFragment :
                 layoutBinding.viewPageLearnerProfile.currentItem = 1
 
             })
-            goToNexttPageLiveData.observe(viewLifecycleOwner,Observer{
+            goToNexttPageLiveData.observe(viewLifecycleOwner, Observer {
                 layoutBinding.viewPageLearnerProfile.currentItem = 2
             })
 
@@ -118,23 +123,24 @@ class LearnerProfileFragment :
                         showPledgeDialogLiveData.value = null
                     }
                 }
-
-
             })
 
             navigateToCoursePage.observe(viewLifecycleOwner, Observer {
 
                 it?.apply {
-
                     if (this) {
-                        findNavController()
-                            .navigate(R.id.action_learnerProfileFragment_to_coursesFragment)
-                        navigateToCoursePage.value = null
+                        if (activity is ContainerActivity) {
+                            findNavController()
+                                .navigate(R.id.action_learnerProfileFragment_to_coursesFragment)
+                            navigateToCoursePage.value = null
+                        } else {
+                            startActivity(ContainerActivity.intent(context as Activity))
+                            activity?.finish()
+                        }
                     }
                 }
             })
         }
-
     }
 
     private fun setupViewPager() {
@@ -154,7 +160,6 @@ class LearnerProfileFragment :
             setSwipeEnabled(false)
             adapter = pagerAdapter
         }
-
     }
 
     private fun showDOBPickerDialog() {
@@ -176,13 +181,17 @@ class LearnerProfileFragment :
 
                 val selectedDate = "$sYear-${sMonth + 1}-$sDay"
 
-                viewModel.registrationModelLiveData?.value?.dateofBirthstring =
-                    DateUtils.getDisplayDateFromDate(
-                        selectedDate,
-                        DateUtils.DATE_PICKER_PATTERN,
-                        DateUtils.DATE_DISPLAY_PATTERN_SEP
-                    )
-
+                val days = getDaysDifference(selectedDate,getCurrentDateTime(DATE_PICKER_PATTERN),DATE_PICKER_PATTERN,DATE_PICKER_PATTERN)
+                if (days < 0){
+                    viewModel.registrationModelLiveData?.value?.dateofBirthstring = getCurrentDateTime(DATE_DISPLAY_PATTERN_SEP)
+                }else{
+                    viewModel.registrationModelLiveData?.value?.dateofBirthstring =
+                        DateUtils.getDisplayDateFromDate(
+                            selectedDate,
+                            DATE_PICKER_PATTERN,
+                            DATE_DISPLAY_PATTERN_SEP
+                        )
+                }
                 AppLog.infoLog("DAte ::: $year - $sMonth - $sDay")
             },
             year,
@@ -205,7 +214,6 @@ class LearnerProfileFragment :
             window?.setDimAmount(0.2F)
             pledgeBinding.learnerProfileViewModel = viewModel
             setCanceledOnTouchOutside(false)
-
             show()
         }
     }
@@ -222,23 +230,6 @@ class LearnerProfileFragment :
                         BindingUtils.string(R.string.yes), {
                             isAlertDialogShown.postValue(false)
                             findNavController().navigateUp()
-                            /*val intent = Intent(context!!, LoginActivity::class.java)
-                            startActivity(intent)
-                            Activity().finish()*/
-                            /*val navOption =
-                                NavOptions.Builder().setPopUpTo(R.id.loginFragment, false)
-                                    .build()
-                            activity?.let {
-                                Navigation.findNavController(it, R.id.containerNavHost)
-                                    .navigate(R.id.loginFragment, null, navOption)
-                            }*/
-
-                            /*(context as Activity).apply {
-                                val intent = Intent(this, LoginActivity::class.java)
-                                startActivity(intent)
-                                finish()
-                                //BaseAppController.setEnterPageAnimation(this)
-                            }*/
                         },
                         BindingUtils.string(R.string.no), {
                             isAlertDialogShown.postValue(false)
