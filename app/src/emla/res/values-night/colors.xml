@@ -9,4 +9,5 @@
     <color name="colorTextGrayOnLightNDark">#9391a4</color>
     <color name="colorSelectedTab">#ffffff</color>
     <color name="colorNotSelectedTab">#9391a4</color>
+    <color name="colorExoControl">#E6FFFFFF</color>
 </resources>

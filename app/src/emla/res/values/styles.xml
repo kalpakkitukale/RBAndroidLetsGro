@@ -220,7 +220,7 @@
     <style name="exoTextViewStyles">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">@color/colorTransparent</item>
+        <item name="android:textColor">@color/colorExoControl</item>
     </style>
 
     <!--Chips style-->

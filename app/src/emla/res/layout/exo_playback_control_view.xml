@@ -73,7 +73,7 @@
         app:layout_constraintEnd_toStartOf="@+id/exo_duration"
         app:layout_constraintStart_toEndOf="@+id/exo_position"
         app:layout_constraintTop_toTopOf="@+id/exo_position"
-        app:played_color="@color/colorTransparent" />
+        app:played_color="@color/colorExoControl" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@id/exo_duration"
@@ -96,7 +96,7 @@
         android:layout_height="1dp"
         android:layout_marginBottom="@dimen/dp_16"
         app:layout_constraintBottom_toTopOf="@+id/likeLayout"
-        android:background="@color/colorTransparent"
+        android:background="@color/colorExoControl"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
