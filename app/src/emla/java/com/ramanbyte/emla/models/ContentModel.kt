@@ -62,7 +62,7 @@ class ContentModel() : Parcelable, BaseObservable() {
         }
 
     @Bindable
-    var downloadStatusColor = BindingUtils.color(R.color.colorIconGreen)
+    var downloadStatusColor = BindingUtils.color(R.color.colorIconNavyBlueInLightNGrayInDark)
         set(value) {
             field = value
             notifyPropertyChanged(BR.downloadStatusColor)

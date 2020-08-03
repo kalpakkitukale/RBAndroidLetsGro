@@ -43,7 +43,7 @@ class VideoReplyAdapter(private var qnaArrayList: ArrayList<AskQuestionReplyMode
                 replyModel.apply {
                     if (userType == KEY_FACULTY) {
                         tvUserName.text = replyModel.userName
-                        verticalView.setBackgroundColor(BindingUtils.color(R.color.colorIconGreen))
+                        verticalView.setBackgroundColor(BindingUtils.color(R.color.colorIconNavyBlueInLightNGrayInDark))
                     }
                     else {
                         tvUserName.text = BindingUtils.string(R.string.self)

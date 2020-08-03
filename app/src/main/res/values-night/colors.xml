@@ -2,4 +2,5 @@
 <resources>
     <color name="colorPrimary">#060606</color>
     <color name="colorPrimaryDark">#060606</color>
+    <color name="colorIconNavyBlueInLightNGrayInDark">#919191</color>
 </resources>

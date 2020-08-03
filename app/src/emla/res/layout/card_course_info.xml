@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         style="@style/customCard"
-        android:layout_margin="@dimen/dp_5"
+        app:contentPadding="@dimen/dp_8"
         app:layout_constraintTop_toBottomOf="@+id/guideline">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -38,6 +38,7 @@
                 android:onClick="@{coursesDetailViewModel::onHeaderClick}"
                 android:text="@string/course_information"
                 android:textSize="@dimen/sp_16"
+                app:layout_constraintBottom_toBottomOf="@id/imgViewCourseInfo"
                 app:layout_constraintEnd_toStartOf="@+id/imgViewCourseInfo"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -49,7 +50,6 @@
                 android:layout_marginEnd="@dimen/dp_8"
                 android:padding="@dimen/dp_5"
                 android:src="@drawable/ic_down_arrow"
-                app:layout_constraintBottom_toBottomOf="@+id/headerCourseInfo"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/headerCourseInfo" />
 

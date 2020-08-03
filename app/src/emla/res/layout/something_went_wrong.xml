@@ -27,7 +27,7 @@
             app:layout_constraintHeight_percent="0.6"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_something_went_wrong" />
+            app:srcCompat="@drawable/something_went_wrong" />
 
         <androidx.appcompat.widget.AppCompatTextView
             style="@style/TextViewRegularNavyBlueOnLightNWhiteOnDark"

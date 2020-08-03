@@ -2,21 +2,21 @@ package com.ramanbyte.emla.view_model
 
 import android.content.Context
 import android.view.View
+import androidx.databinding.library.baseAdapters.BR
 import androidx.lifecycle.MutableLiveData
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseViewModel
-import com.ramanbyte.emla.models.request.ForgetPasswordModel
-import com.ramanbyte.utilities.BindingUtils
-import com.ramanbyte.utilities.KEY_EMAIL
-import com.ramanbyte.validation.ObservableValidator
-import com.ramanbyte.validation.ValidationFlags
-import androidx.databinding.library.baseAdapters.BR
 import com.ramanbyte.data_layer.CoroutineUtils
 import com.ramanbyte.emla.data_layer.network.exception.ApiException
 import com.ramanbyte.emla.data_layer.network.exception.NoDataException
 import com.ramanbyte.emla.data_layer.network.exception.NoInternetException
 import com.ramanbyte.emla.data_layer.repositories.MasterRepository
+import com.ramanbyte.emla.models.request.ForgetPasswordModel
 import com.ramanbyte.utilities.AppLog
+import com.ramanbyte.utilities.BindingUtils
+import com.ramanbyte.utilities.KEY_EMAIL
+import com.ramanbyte.validation.ObservableValidator
+import com.ramanbyte.validation.ValidationFlags
 import org.kodein.di.generic.instance
 
 class ForgetPasswordViewModel(var mContext: Context) : BaseViewModel(mContext) {
@@ -77,7 +77,7 @@ class ForgetPasswordViewModel(var mContext: Context) : BaseViewModel(mContext) {
                 setAlertDialogResourceModelMutableLiveData(
                     e.message.toString(),
                     BindingUtils.drawable(
-                        R.drawable.ic_something_went_wrong
+                        R.drawable.something_went_wrong
                     )!!,
                     true,
                     BindingUtils.string(R.string.strOk), {

@@ -20,7 +20,6 @@
             android:id="@+id/rvSectionList"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_margin="@dimen/dp_8"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toTopOf="@+id/btnAppearFormativeTest"
             app:layout_constraintEnd_toEndOf="parent"
@@ -30,14 +29,15 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnAppearFormativeTest"
             style="@style/CustomCapsuleButtonBlueBgWhiteText"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/dp_5"
+            android:layout_marginTop="@dimen/dp_5"
+            android:layout_marginBottom="@dimen/dp_5"
             android:onClick="@{chaptersSectionViewModel::takeFormativeTest}"
             android:text="@string/appear_formative"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintEnd_toEndOf="@+id/rvSectionList"
+            app:layout_constraintStart_toStartOf="@+id/rvSectionList" />
 
         <include
             android:id="@+id/noInternet"

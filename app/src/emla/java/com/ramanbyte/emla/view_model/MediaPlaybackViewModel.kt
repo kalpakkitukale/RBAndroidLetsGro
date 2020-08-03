@@ -4,7 +4,6 @@ import android.content.Context
 import android.graphics.drawable.Drawable
 import android.view.View
 import androidx.lifecycle.MutableLiveData
-import androidx.navigation.fragment.findNavController
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseViewModel
 import com.ramanbyte.data_layer.CoroutineUtils
@@ -17,7 +16,6 @@ import com.ramanbyte.emla.data_layer.repositories.SectionsRepository
 import com.ramanbyte.emla.models.AskQuestionModel
 import com.ramanbyte.emla.models.AskQuestionReplyModel
 import com.ramanbyte.emla.models.MediaInfoModel
-import com.ramanbyte.emla.models.request.ConversationCloseRequestModel
 import com.ramanbyte.utilities.AppLog
 import com.ramanbyte.utilities.BindingUtils
 import com.ramanbyte.utilities.KEY_BLANK
@@ -235,7 +233,7 @@ class MediaPlaybackViewModel(mContext: Context) : BaseViewModel(mContext) {
                 e.printStackTrace()
                 AppLog.errorLog(e.message, e)
                 isLoaderShowingLiveData.postValue(false)
-                alertMediaPlayBack(BindingUtils.string(R.string.some_thing_went_wrong),BindingUtils.drawable(R.drawable.ic_something_went_wrong)!!,BindingUtils.string(R.string.strOk))
+                alertMediaPlayBack(BindingUtils.string(R.string.some_thing_went_wrong),BindingUtils.drawable(R.drawable.something_went_wrong)!!,BindingUtils.string(R.string.strOk))
             } catch (e: NoInternetException) {
                 e.printStackTrace()
                 AppLog.errorLog(e.message, e)
@@ -258,7 +256,7 @@ class MediaPlaybackViewModel(mContext: Context) : BaseViewModel(mContext) {
                 e.printStackTrace()
                 AppLog.errorLog(e.message, e)
                 isLoaderShowingLiveData.postValue(false)
-                alertMediaPlayBack(BindingUtils.string(R.string.some_thing_went_wrong),BindingUtils.drawable(R.drawable.ic_something_went_wrong)!!,BindingUtils.string(R.string.strOk))
+                alertMediaPlayBack(BindingUtils.string(R.string.some_thing_went_wrong),BindingUtils.drawable(R.drawable.something_went_wrong)!!,BindingUtils.string(R.string.strOk))
             }
 
         }

@@ -15,7 +15,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@dimen/dp_5"
         tools:context=".ui.fragments.CourseSyllabusFragment">
 
         <androidx.cardview.widget.CardView
@@ -71,6 +70,8 @@
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
                     android:layout_marginTop="@dimen/dp_10"
+                    android:layout_marginStart="@dimen/dp_8"
+                    android:layout_marginEnd="@dimen/dp_8"
                     app:cardCornerRadius="@dimen/dp_5"
                     app:cardBackgroundColor="@color/cardBackgroundColor"
                     app:cardUseCompatPadding="true"
@@ -93,7 +94,6 @@
                             android:onClick="@{coursesDetailViewModel::onHeaderClick}"
                             android:text="@string/course_syllabus"
                             android:textSize="@dimen/sp_16"
-                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -132,6 +132,8 @@
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
                     android:layout_marginTop="@dimen/dp_10"
+                    android:layout_marginStart="@dimen/dp_8"
+                    android:layout_marginEnd="@dimen/dp_8"
                     app:cardCornerRadius="@dimen/dp_5"
                     app:cardBackgroundColor="@color/cardBackgroundColor"
                     app:cardUseCompatPadding="true"
@@ -154,7 +156,6 @@
                             android:onClick="@{coursesDetailViewModel::onHeaderClick}"
                             android:text="@string/assessment_instruction"
                             android:textSize="@dimen/sp_16"
-                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -190,6 +191,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_10"
+                    android:layout_marginStart="@dimen/dp_8"
+                    android:layout_marginEnd="@dimen/dp_8"
                     app:cardBackgroundColor="@color/cardBackgroundColor"
                     app:cardCornerRadius="@dimen/dp_5"
                     app:cardElevation="@dimen/dp_2"
@@ -212,7 +215,6 @@
                             android:onClick="@{coursesDetailViewModel::onHeaderClick}"
                             android:text="@string/what_i_ll_learn"
                             android:textSize="@dimen/sp_16"
-                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -247,6 +249,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_10"
+                    android:layout_marginStart="@dimen/dp_8"
+                    android:layout_marginEnd="@dimen/dp_8"
                     app:cardBackgroundColor="@color/cardBackgroundColor"
                     app:cardCornerRadius="@dimen/dp_5"
                     app:cardElevation="@dimen/dp_2"
@@ -271,7 +275,6 @@
                             android:onClick="@{coursesDetailViewModel::onHeaderClick}"
                             android:text="@string/how_to_use"
                             android:textSize="@dimen/sp_16"
-                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.09"
                             app:layout_constraintStart_toStartOf="parent"

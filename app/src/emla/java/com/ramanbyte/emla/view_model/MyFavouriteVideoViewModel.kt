@@ -12,13 +12,11 @@ import com.ramanbyte.emla.data_layer.network.exception.NoInternetException
 import com.ramanbyte.emla.data_layer.network.init.NetworkConnectionInterceptor
 import com.ramanbyte.emla.data_layer.repositories.QuestionRepository
 import com.ramanbyte.emla.data_layer.repositories.SectionsRepository
-import com.ramanbyte.emla.models.AskQuestionModel
 import com.ramanbyte.emla.models.FavouriteVideosModel
 import com.ramanbyte.emla.models.MediaInfoModel
 import com.ramanbyte.utilities.AppLog
 import com.ramanbyte.utilities.BindingUtils
 import com.ramanbyte.utilities.KEY_BLANK
-import com.ramanbyte.utilities.NetworkConnectivity
 import kotlinx.coroutines.delay
 import org.kodein.di.generic.instance
 
@@ -113,7 +111,7 @@ class MyFavouriteVideoViewModel(var mContext: Context) : BaseViewModel(mContext)
                 AppLog.errorLog(e.message, e)
                 setAlertDialogResourceModelMutableLiveData(
                     BindingUtils.string(R.string.some_thing_went_wrong),
-                    BindingUtils.drawable(R.drawable.ic_something_went_wrong)!!,
+                    BindingUtils.drawable(R.drawable.something_went_wrong)!!,
                     true,
                     BindingUtils.string(R.string.strOk), {
                         isAlertDialogShown.postValue(false)

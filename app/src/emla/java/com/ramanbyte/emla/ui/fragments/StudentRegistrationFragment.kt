@@ -336,7 +336,7 @@ class StudentRegistrationFragment :
 
         viewModel.apply {
             setAlertDialogResourceModelMutableLiveData(
-                message, BindingUtils.drawable(R.drawable.ic_something_went_wrong),
+                message, BindingUtils.drawable(R.drawable.something_went_wrong),
                 false, BindingUtils.string(R.string.strOk), {
                     try {
                         isAlertDialogShown.postValue(false)
