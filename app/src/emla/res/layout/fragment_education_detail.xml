@@ -12,216 +12,221 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tilProgramLevel"
-            style="@style/TextInputLayoutWithoutBorder"
-            android:layout_width="@dimen/dp_0"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/dp_22"
-            android:layout_marginTop="@dimen/dp_15"
-            android:hint="@string/program_level"
-            app:endIconDrawable="@drawable/ic_arrow_down_gray"
-            app:endIconMode="custom"
-            app:errorText="@{learnerProfileViewModel.educationDetailsDataValidator.getValidation(StaticHelpersKt.keyProgramLevel)}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etProgramLevel"
-                style="@style/EditTextRegularGrayHint"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:focusable="false"
-                android:focusableInTouchMode="false"
-                android:gravity="center_vertical"
-                android:lines="1"
-                android:onClick="@{()->spinnerProgram.performClick()}"
-                android:singleLine="true"
-                android:text="@={learnerProfileViewModel.registrationModelLiveData.educationLevlName}" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <androidx.appcompat.widget.AppCompatSpinner
-            android:id="@+id/spinnerProgram"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="@android:color/transparent"
-            app:layout_constraintBottom_toBottomOf="@id/tilProgramLevel"
-            app:layout_constraintEnd_toEndOf="@id/tilProgramLevel"
-            app:layout_constraintStart_toStartOf="@id/tilProgramLevel" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tilBatchYear"
-            style="@style/TextInputLayoutWithoutBorder"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/dp_22"
-            android:hint="@string/batchYear"
-            app:errorText="@{learnerProfileViewModel.educationDetailsDataValidator.getValidation(StaticHelpersKt.keyBatchYear)}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinnerProgram">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etBatchYear"
-                style="@style/EditTextRegularGrayHint"
-                android:layout_width="match_parent"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilProgramLevel"
+                style="@style/TextInputLayoutWithoutBorder"
+                android:layout_width="@dimen/dp_0"
                 android:layout_height="wrap_content"
-                android:imeOptions="actionNext"
-                android:inputType="numberSigned"
-                android:lines="1"
-                android:maxLength="50"
-                android:singleLine="true"
-                android:text="@={learnerProfileViewModel.registrationModelLiveData.batchYearId}"
-                android:textSize="@dimen/sp_16"
-                app:hintAnimationEnabled="false" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_margin="@dimen/dp_22"
+                android:layout_marginTop="@dimen/dp_15"
+                android:hint="@string/program_level"
+                app:endIconDrawable="@drawable/ic_arrow_down_gray"
+                app:endIconMode="custom"
+                app:errorText="@{learnerProfileViewModel.educationDetailsDataValidator.getValidation(StaticHelpersKt.keyProgramLevel)}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tilPattern"
-            style="@style/TextInputLayoutWithoutBorder"
-            android:layout_width="@dimen/dp_0"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/dp_22"
-            android:layout_marginTop="@dimen/dp_15"
-            android:hint="@string/pattern"
-            app:endIconDrawable="@drawable/ic_arrow_down_gray"
-            app:endIconMode="custom"
-            app:errorText="@{learnerProfileViewModel.educationDetailsDataValidator.getValidation(StaticHelpersKt.keyPattern)}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tilBatchYear">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etProgramLevel"
+                    style="@style/EditTextRegularGrayHint"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:gravity="center_vertical"
+                    android:lines="1"
+                    android:onClick="@{()->spinnerProgram.performClick()}"
+                    android:singleLine="true"
+                    android:text="@={learnerProfileViewModel.registrationModelLiveData.educationLevlName}" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etPattern"
-                style="@style/EditTextRegularGrayHint"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:focusable="false"
-                android:focusableInTouchMode="false"
-                android:gravity="center_vertical"
-                android:lines="1"
-                android:onClick="@{()->spinnerPattern.performClick()}"
-                android:singleLine="true"
-                android:text="@={learnerProfileViewModel.registrationModelLiveData.pattern}" />
-        </com.google.android.material.textfield.TextInputLayout>
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/spinnerProgram"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@android:color/transparent"
+                app:layout_constraintBottom_toBottomOf="@id/tilProgramLevel"
+                app:layout_constraintEnd_toEndOf="@id/tilProgramLevel"
+                app:layout_constraintStart_toStartOf="@id/tilProgramLevel" />
 
-        <androidx.appcompat.widget.AppCompatSpinner
-            android:id="@+id/spinnerPattern"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="@android:color/transparent"
-            app:layout_constraintBottom_toBottomOf="@id/tilPattern"
-            app:layout_constraintEnd_toEndOf="@id/tilPattern"
-            app:layout_constraintStart_toStartOf="@id/tilPattern" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tilSpecialization"
-            style="@style/TextInputLayoutWithoutBorder"
-            android:layout_width="@dimen/dp_0"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/dp_22"
-            android:layout_marginTop="@dimen/dp_15"
-            android:hint="@string/specialisation"
-            app:endIconDrawable="@drawable/ic_arrow_down_gray"
-            app:endIconMode="custom"
-            app:errorText="@{learnerProfileViewModel.educationDetailsDataValidator.getValidation(StaticHelpersKt.keySpecialization)}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinnerPattern">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etSpecialization"
-                style="@style/EditTextRegularGrayHint"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:focusable="false"
-                android:focusableInTouchMode="false"
-                android:gravity="center_vertical"
-                android:lines="1"
-                android:onClick="@{()->spinnerSpecialisation.performClick()}"
-                android:singleLine="true"
-                android:text="@={learnerProfileViewModel.registrationModelLiveData.specializationName}" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <Spinner
-            android:id="@+id/spinnerSpecialisation"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="@android:color/transparent"
-            app:layout_constraintBottom_toBottomOf="@id/tilSpecialization"
-            app:layout_constraintEnd_toEndOf="@id/tilSpecialization"
-            app:layout_constraintStart_toStartOf="@id/tilSpecialization" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tilUniversity"
-            style="@style/TextInputLayoutWithoutBorder"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/dp_22"
-            android:hint="@string/university"
-            app:errorText="@{learnerProfileViewModel.educationDetailsDataValidator.getValidation(StaticHelpersKt.keyUniversity)}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/spinnerSpecialisation">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etUniversity"
-                style="@style/EditTextRegularGrayHint"
-                android:layout_width="match_parent"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilBatchYear"
+                style="@style/TextInputLayoutWithoutBorder"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:imeOptions="actionNext"
-                android:inputType="textCapSentences"
-                android:lines="1"
-                android:maxLength="50"
-                android:singleLine="true"
-                android:text="@={learnerProfileViewModel.registrationModelLiveData.universityName}"
-                android:textSize="@dimen/sp_16"
-                app:hintAnimationEnabled="false" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_margin="@dimen/dp_22"
+                android:hint="@string/batchYear"
+                app:errorText="@{learnerProfileViewModel.educationDetailsDataValidator.getValidation(StaticHelpersKt.keyBatchYear)}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spinnerProgram">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tilInstitute"
-            style="@style/TextInputLayoutWithoutBorder"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/dp_22"
-            android:hint="@string/institute"
-            app:errorText="@{learnerProfileViewModel.educationDetailsDataValidator.getValidation(StaticHelpersKt.keyInstitute)}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tilUniversity">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etBatchYear"
+                    style="@style/EditTextRegularGrayHint"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:imeOptions="actionNext"
+                    android:inputType="numberSigned"
+                    android:lines="1"
+                    android:maxLength="50"
+                    android:singleLine="true"
+                    android:text="@={learnerProfileViewModel.registrationModelLiveData.batchYearId}"
+                    android:textSize="@dimen/sp_16"
+                    app:hintAnimationEnabled="false" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etInstitute"
-                style="@style/EditTextRegularGrayHint"
-                android:layout_width="match_parent"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilPattern"
+                style="@style/TextInputLayoutWithoutBorder"
+                android:layout_width="@dimen/dp_0"
                 android:layout_height="wrap_content"
-                android:imeOptions="actionDone"
-                android:inputType="textCapSentences"
-                android:lines="1"
-                android:maxLength="50"
-                android:singleLine="true"
-                android:text="@={learnerProfileViewModel.registrationModelLiveData.instituteName}"
-                app:hintAnimationEnabled="false" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_margin="@dimen/dp_22"
+                android:layout_marginTop="@dimen/dp_15"
+                android:hint="@string/pattern"
+                app:endIconDrawable="@drawable/ic_arrow_down_gray"
+                app:endIconMode="custom"
+                app:errorText="@{learnerProfileViewModel.educationDetailsDataValidator.getValidation(StaticHelpersKt.keyPattern)}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tilBatchYear">
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnSave"
-            style="@style/CustomCapsuleButtonBlueBgWhiteText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/dp_22"
-            android:onClick="@{learnerProfileViewModel::saveProfile}"
-            android:text="@string/save"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/tilInstitute"
-            app:layout_constraintStart_toStartOf="@+id/tilInstitute" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etPattern"
+                    style="@style/EditTextRegularGrayHint"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:gravity="center_vertical"
+                    android:lines="1"
+                    android:onClick="@{()->spinnerPattern.performClick()}"
+                    android:singleLine="true"
+                    android:text="@={learnerProfileViewModel.registrationModelLiveData.pattern}" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-    <!-- </androidx.core.widget.NestedScrollView>-->
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/spinnerPattern"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@android:color/transparent"
+                app:layout_constraintBottom_toBottomOf="@id/tilPattern"
+                app:layout_constraintEnd_toEndOf="@id/tilPattern"
+                app:layout_constraintStart_toStartOf="@id/tilPattern" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilSpecialization"
+                style="@style/TextInputLayoutWithoutBorder"
+                android:layout_width="@dimen/dp_0"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_22"
+                android:layout_marginTop="@dimen/dp_15"
+                android:hint="@string/specialisation"
+                app:endIconDrawable="@drawable/ic_arrow_down_gray"
+                app:endIconMode="custom"
+                app:errorText="@{learnerProfileViewModel.educationDetailsDataValidator.getValidation(StaticHelpersKt.keySpecialization)}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spinnerPattern">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etSpecialization"
+                    style="@style/EditTextRegularGrayHint"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:gravity="center_vertical"
+                    android:lines="1"
+                    android:onClick="@{()->spinnerSpecialisation.performClick()}"
+                    android:singleLine="true"
+                    android:text="@={learnerProfileViewModel.registrationModelLiveData.specializationName}" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Spinner
+                android:id="@+id/spinnerSpecialisation"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@android:color/transparent"
+                app:layout_constraintBottom_toBottomOf="@id/tilSpecialization"
+                app:layout_constraintEnd_toEndOf="@id/tilSpecialization"
+                app:layout_constraintStart_toStartOf="@id/tilSpecialization" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilUniversity"
+                style="@style/TextInputLayoutWithoutBorder"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_22"
+                android:hint="@string/university"
+                app:errorText="@{learnerProfileViewModel.educationDetailsDataValidator.getValidation(StaticHelpersKt.keyUniversity)}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/spinnerSpecialisation">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etUniversity"
+                    style="@style/EditTextRegularGrayHint"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:imeOptions="actionNext"
+                    android:inputType="textCapSentences"
+                    android:lines="1"
+                    android:maxLength="50"
+                    android:singleLine="true"
+                    android:text="@={learnerProfileViewModel.registrationModelLiveData.universityName}"
+                    android:textSize="@dimen/sp_16"
+                    app:hintAnimationEnabled="false" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilInstitute"
+                style="@style/TextInputLayoutWithoutBorder"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_22"
+                android:hint="@string/institute"
+                app:errorText="@{learnerProfileViewModel.educationDetailsDataValidator.getValidation(StaticHelpersKt.keyInstitute)}"
+                app:layout_constraintBottom_toTopOf="@+id/btnSave"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tilUniversity">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etInstitute"
+                    style="@style/EditTextRegularGrayHint"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:imeOptions="actionDone"
+                    android:inputType="textCapSentences"
+                    android:lines="1"
+                    android:maxLength="50"
+                    android:singleLine="true"
+                    android:text="@={learnerProfileViewModel.registrationModelLiveData.instituteName}"
+                    app:hintAnimationEnabled="false" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnSave"
+                style="@style/CustomCapsuleButtonBlueBgWhiteText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dp_22"
+                android:onClick="@{learnerProfileViewModel::saveProfile}"
+                android:text="@string/save"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/tilInstitute"
+                app:layout_constraintStart_toStartOf="@+id/tilInstitute" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 </layout>

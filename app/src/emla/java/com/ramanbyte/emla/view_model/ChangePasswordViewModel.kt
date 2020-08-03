@@ -77,7 +77,7 @@ class ChangePasswordViewModel(var mContext: Context) : BaseViewModel(mContext) {
             addRule(
                 KEY_CONFIRM_RESET_NEW_PASSWORD,
                 ValidationFlags.FIELD_MATCH,
-                BindingUtils.string(R.string.not_same_new_and_confirm_password),
+                BindingUtils.string(R.string.password_mismatch),
                 KEY_NEW_PASSWORD
             )
             addRule(

@@ -19,6 +19,7 @@ import com.ramanbyte.emla.data_layer.network.exception.ApiException
 import com.ramanbyte.emla.data_layer.network.exception.NoDataException
 import com.ramanbyte.emla.data_layer.network.exception.NoInternetException
 import com.ramanbyte.emla.data_layer.repositories.MasterRepository
+import com.ramanbyte.emla.data_layer.repositories.RegistrationRepository
 import com.ramanbyte.emla.models.UserModel
 import com.ramanbyte.emla.models.request.LoginRequest
 import com.ramanbyte.emla.models.request.PledgeStatusRequest
@@ -39,6 +40,7 @@ class LoginViewModel(var mContext: Context) : BaseViewModel(mContext) {
     val toolbarTitleLiveData = MutableLiveData<String>()
     val userLoginRequestLiveData = MutableLiveData(LoginRequest())
     private val masterRepository: MasterRepository by instance()
+    private val registrationRepository: RegistrationRepository by instance()
     var userEntity = masterRepository.getCurrentUser()
     var isPledgeConfirm: MutableLiveData<Boolean?> = MutableLiveData(null)
     var navigateToNextScreen: MutableLiveData<Boolean?> = MutableLiveData(null)
@@ -75,8 +77,7 @@ class LoginViewModel(var mContext: Context) : BaseViewModel(mContext) {
                 keyPassword,
                 ValidationFlags.FIELD_REQUIRED,
                 BindingUtils.string(
-                    R.string.dynamic_required,
-                    BindingUtils.string(R.string.password)
+                    R.string.required
                 )
             )
         }
@@ -84,6 +85,8 @@ class LoginViewModel(var mContext: Context) : BaseViewModel(mContext) {
     val userModelLiveData = MutableLiveData<UserModel?>(null)
 
     val forgotPasswordClick = MutableLiveData<Boolean?>(null)
+
+    fun isUserActive(): Boolean = registrationRepository.isUserActive()
 
     fun doLogin(view: View) {
         /*view.snack(BindingUtils.string(R.string.please_agree_the_instruction),

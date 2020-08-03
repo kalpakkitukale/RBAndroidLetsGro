@@ -33,6 +33,11 @@ class SettingViewModel(var mContext: Context) : BaseViewModel(mContext) {
             .navigate(R.id.action_settingFragment_to_changePasswordFragment)
     }
 
+    fun onClickFacultyChangePassword(view: View) {
+        view.findNavController()
+            .navigate(R.id.action_facultySettingFragment_to_changePasswordFragment)
+    }
+
     fun onClickProfile(view: View) {
         view.findNavController()
             .navigate(R.id.action_settingFragment_to_learnerProfileFragment)
@@ -107,4 +112,5 @@ class SettingViewModel(var mContext: Context) : BaseViewModel(mContext) {
             AppLog.infoLog("read phone state not permitted")
         }
     }
+
 }

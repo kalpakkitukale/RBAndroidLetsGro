@@ -13,6 +13,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.work.Data
 import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
@@ -89,9 +90,14 @@ class LoginFragment : BaseFragment<FragmentLoginBinding,LoginViewModel>(true,tru
                                showPledgeDialog()
                            else {*/
                         callWorkerToMangeUserDevice()
-                        startActivity(ContainerActivity.intent(mContext as Activity))
-                        Activity().finish()
-                        BaseAppController.setEnterPageAnimation(mContext as Activity)
+                        if (!viewModel.isUserActive()) {
+                            findNavController().navigate(R.id.action_loginFragment_to_learnerProfileFragment)
+                        }else{
+                            startActivity(ContainerActivity.intent(mContext as Activity))
+                            Activity().finish()
+                            BaseAppController.setEnterPageAnimation(mContext as Activity)
+                        }
+
                         //  }
 
                     }else if (it.userType.equals(KEY_FACULTY, true)) {
@@ -103,9 +109,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding,LoginViewModel>(true,tru
                             Activity().finish()
                             BaseAppController.setEnterPageAnimation(mContext as Activity)
                         }
-
                     }
-
+                    userModelLiveData.value = null
                 }
 
             })

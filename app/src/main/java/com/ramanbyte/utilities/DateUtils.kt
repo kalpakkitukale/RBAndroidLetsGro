@@ -3,6 +3,7 @@ package com.ramanbyte.utilities
 import com.ramanbyte.R
 import com.ramanbyte.utilities.AppLog.errorLog
 import org.joda.time.DateTime
+import org.joda.time.Days
 import org.joda.time.Minutes
 import java.text.DateFormat
 import java.text.SimpleDateFormat
@@ -233,6 +234,26 @@ object DateUtils {
             val nextDateTime =
                 DateTime(SimpleDateFormat(secondTimeFormat, Locale.US).parse(secondTime))
             return Minutes.minutesBetween(previousDateTime, nextDateTime).minutes
+        } catch (e: Exception) {
+            e.printStackTrace()
+            AppLog.errorLog(e.message, e)
+        }
+        return 0
+    }
+
+    fun getDaysDifference(
+        firstTime: String,
+        secondTime: String,
+        firstTimeFormat: String,
+        secondTimeFormat: String
+    ): Int {
+        try {
+            val previousDateTime =
+                DateTime(SimpleDateFormat(firstTimeFormat, Locale.US).parse(firstTime))
+            val nextDateTime =
+                DateTime(SimpleDateFormat(secondTimeFormat, Locale.US).parse(secondTime))
+
+            return Days.daysBetween(previousDateTime, nextDateTime).getDays()
         } catch (e: Exception) {
             e.printStackTrace()
             AppLog.errorLog(e.message, e)

@@ -18,6 +18,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavOptions
 import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.chip.Chip
 import com.ramanbyte.R
@@ -58,7 +59,7 @@ class FacultyRegistrationFragment :
                 shareViewModel = ViewModelProvider(this)[LoginViewModel::class.java]
                 shareViewModel?.setToolbarTitle(
                     View.VISIBLE,
-                    BindingUtils.string(R.string.register_as_student)
+                    BindingUtils.string(R.string.register_as_faculty)
                 )
             }
 
@@ -78,12 +79,10 @@ class FacultyRegistrationFragment :
                                 true,
                                 BindingUtils.string(R.string.strOk), {
                                     val navOption =
-                                        NavOptions.Builder().setPopUpTo(R.id.loginFragment, false)
+                                        NavOptions.Builder().setPopUpTo(R.id.loginFragment, true)
                                             .build()
-                                    activity?.let {
-                                        Navigation.findNavController(it, R.id.loginNavHost)
-                                            .navigate(R.id.loginFragment, null, navOption)
-                                    }
+                                    layoutBinding.root.findNavController()
+                                        .navigate(R.id.loginFragment, null, navOption)
                                     isAlertDialogShown.postValue(false)
                                 }
                             )

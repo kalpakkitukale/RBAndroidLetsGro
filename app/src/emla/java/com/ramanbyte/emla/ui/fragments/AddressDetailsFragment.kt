@@ -155,10 +155,7 @@ class AddressDetailsFragment :
 
                                  personalDetailsDataValidator?.updateSpinnerSelection(
                                      -1, keyCity, BindingUtils.string(
-                                         R.string.dynamic_required,
-                                         BindingUtils.string(
-                                             R.string.city
-                                         )
+                                         R.string.required
                                      )
                                  )
 
