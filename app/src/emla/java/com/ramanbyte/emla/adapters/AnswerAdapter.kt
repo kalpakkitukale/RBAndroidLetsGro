@@ -1,6 +1,8 @@
 package com.ramanbyte.emla.adapters
 
 import android.content.Context
+import android.os.Build
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,8 +19,10 @@ import com.ramanbyte.emla.view_model.ShowQuestionsViewModel
 import com.ramanbyte.utilities.*
 import com.ramanbyte.utilities.DateUtils.DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS
 
-class AnswerAdapter(var optionList: ArrayList<OptionsModel>,
-                    private val questionAndAnswerModel: QuestionAndAnswerModel?) :  RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class AnswerAdapter(
+    var optionList: ArrayList<OptionsModel>,
+    private val questionAndAnswerModel: QuestionAndAnswerModel?
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
     var showQuestionsViewModel: ShowQuestionsViewModel? = null
@@ -26,6 +30,7 @@ class AnswerAdapter(var optionList: ArrayList<OptionsModel>,
     var mContext: Context? = null
     var radioGroup: RadioGroup? = null
     var lastSelectedPosition = -1
+
     //var selectedOption : String = KEY_BLANK
     var currentPosition: Int = 0
 
@@ -78,7 +83,11 @@ class AnswerAdapter(var optionList: ArrayList<OptionsModel>,
                 rbAnswer.isChecked =
                     optionList[position].isChecked && (lastSelectedPosition == position)
 
-                rbAnswer.text = optionList[position].options
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    rbAnswer.text = Html.fromHtml(optionList[position].options, 1)
+                } else {
+                    rbAnswer.text = Html.fromHtml(optionList[position].options)
+                }
                 rbAnswer.textAlignment = View.TEXT_ALIGNMENT_TEXT_START
             }
 
@@ -143,7 +152,9 @@ class AnswerAdapter(var optionList: ArrayList<OptionsModel>,
                                 this.options = rbAnswer.text.toString()
                                 this.iscorrect = optionList[adapterPosition].iscorrect
                                 this.answer = optionList[adapterPosition].id
-                                this.createdDate = DateUtils.getCurrentDateTime(DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS)
+                                this.createdDate = DateUtils.getCurrentDateTime(
+                                    DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS
+                                )
                                 this.total_Marks =
                                     if (this.iscorrect == KEY_Y) questionAndAnswerModel?.marks
                                         ?: 0.0 else 0.0
