@@ -43,8 +43,10 @@ class JumpToQueAdapter(
             showQuestionsViewModel?.apply {
                 if (isQuestionAttempted(questionsList[position].id) ?: 0 > 0) {
                     tvQueNo.background = BindingUtils.drawable(R.drawable.circle_text_view_teal_bg)
+                    tvQueNo.setTextColor(BindingUtils.color(R.color.colorTextGrayOnLightNDark))
                 } else {
                     tvQueNo.background = BindingUtils.drawable(R.drawable.circle_text_view)
+                    tvQueNo.setTextColor(BindingUtils.color(R.color.colorTextNavyBlueInLightNWhiteInDark))
                 }
             }
 
