@@ -1,18 +1,18 @@
-
 package com.ramanbyte.views
 
 import android.annotation.SuppressLint
 import android.graphics.drawable.Drawable
+import android.view.View
 import android.webkit.WebView
 import android.widget.ImageView
 import android.widget.RadioButton
+import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.databinding.InverseBindingAdapter
 import androidx.databinding.InverseBindingListener
-import com.google.android.material.textfield.TextInputLayout
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.textfield.TextInputLayout
 import com.ramanbyte.utilities.GlideApp
 
 
@@ -106,7 +106,18 @@ class CustomBindingAdapters {
         @JvmStatic
         @BindingAdapter("app:setHtmlText")
         fun setHtmlText(webView: WebView, htmlText: String?) {
-            webView.loadData(htmlText,"text/html", "utf-8")
+//            webView.loadData(htmlText,"text/html", "utf-8")
+            webView.apply {
+                /**
+                 * Disable text selection
+                 */
+                setOnLongClickListener { true }
+                isLongClickable = false
+                // Below line prevent vibration on Long click
+                isHapticFeedbackEnabled = false
+                setLayerType(View.LAYER_TYPE_SOFTWARE, null)
+                loadDataWithBaseURL("", htmlText, "text/html", "utf-8", "")
+            }
         }
     }
 }
