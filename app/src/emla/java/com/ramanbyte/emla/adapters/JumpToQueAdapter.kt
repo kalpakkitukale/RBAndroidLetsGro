@@ -36,6 +36,7 @@ class JumpToQueAdapter(
         holder.cardJumpToQuestionBinding.apply {
             jumpToQueViewModel = this@JumpToQueAdapter.showQuestionsViewModel
             this.position = position
+
             tvQueNo.text = (position + 1).toString()
             /*
             * is question is attempted
