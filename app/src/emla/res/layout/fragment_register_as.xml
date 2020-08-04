@@ -20,7 +20,7 @@
             android:layout_width="@dimen/dp_70"
             android:layout_height="@dimen/dp_70"
             android:layout_marginTop="@dimen/dp_20"
-            android:src="@drawable/ic_e_learning"
+            android:src="@mipmap/logo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -32,6 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/dp_2"
             android:text="@string/lets"
+            android:visibility="gone"
             app:layout_constraintEnd_toStartOf="@+id/lblGro"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
@@ -45,22 +46,12 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dp_2"
             android:text="@string/gro"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@+id/lblLets"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toEndOf="@+id/lblLets"
             app:layout_constraintTop_toTopOf="@+id/lblLets" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:alpha="0.3"
-            android:scaleType="fitXY"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHeight_percent="0.4"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/conImageElement"
-            app:srcCompat="@drawable/ic_login_background" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ivElement1"
@@ -75,11 +66,8 @@
             android:id="@+id/cardLayoutMain"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            style="@style/customCard"
             android:layout_marginTop="@dimen/dp_30"
-            app:cardCornerRadius="@dimen/dp_5"
-            app:cardElevation="@dimen/dp_2"
-            app:cardUseCompatPadding="true"
-            app:contentPadding="@dimen/dp_8"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/lblGro"
@@ -116,19 +104,15 @@
                     android:layout_width="@dimen/dp_50"
                     android:layout_height="@dimen/dp_50"
                     android:layout_marginTop="@dimen/dp_20"
-                    android:src="@drawable/ic_e_learning"
+                    android:src="@mipmap/logo"
                     app:layout_constraintEnd_toStartOf="@+id/viewVertical"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/viewVertical" />
 
-
-
-
-
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnStudent"
                     style="@style/CustomCapsuleButtonBlueBgWhiteText"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_20"
                     android:layout_marginBottom="@dimen/dp_30"
@@ -138,17 +122,14 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/viewVertical"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/ivStudent"
-                    app:layout_constraintWidth_percent="0.32" />
-                <!--android:background="@drawable/register_as_selector"
-                android:textColor="@color/register_as_text_color_selector"-->
+                    app:layout_constraintTop_toBottomOf="@+id/ivStudent" />
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/ivFaculty"
                     android:layout_width="@dimen/dp_50"
                     android:layout_height="@dimen/dp_50"
                     android:layout_marginTop="@dimen/dp_20"
-                    android:src="@drawable/ic_e_learning"
+                    android:src="@mipmap/logo"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/viewVertical"
                     app:layout_constraintTop_toTopOf="@+id/viewVertical" />
@@ -156,7 +137,7 @@
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnFaculty"
                     style="@style/CustomCapsuleButtonBlueBgWhiteText"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_20"
                     android:onClick="@{loginViewModel::onClickFaculty}"
@@ -164,8 +145,7 @@
                     android:textAllCaps="false"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/viewVertical"
-                    app:layout_constraintTop_toBottomOf="@+id/ivFaculty"
-                    app:layout_constraintWidth_percent="0.32" />
+                    app:layout_constraintTop_toBottomOf="@+id/ivFaculty"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
@@ -173,7 +153,7 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnLogin"
             style="@style/CustomCapsuleButtonBlueBgWhiteText"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_20"
             android:onClick="@{loginViewModel::onClickContinue}"
@@ -182,8 +162,7 @@
             android:enabled="@{loginViewModel.isRegisterAsSelected}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardLayoutMain"
-            app:layout_constraintWidth_percent="0.4" />
+            app:layout_constraintTop_toBottomOf="@+id/cardLayoutMain" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
