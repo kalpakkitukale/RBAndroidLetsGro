@@ -12,7 +12,7 @@
     <color name="colorTextGrayOnLightNDark">#9391a4</color>
     <color name="colorSelectedTab">#1d396b</color>
     <color name="colorNotSelectedTab">#9391a4</color>
-    <color name="colorCourseCardWithOpacity">#B3ffffff</color>
+    <color name="colorCourseCardWithOpacity">#E6ffffff</color>
 
     <!--Taken From previous theme-->
     <color name="transparent">#00000000</color>

@@ -10,5 +10,5 @@
     <color name="colorSelectedTab">#ffffff</color>
     <color name="colorNotSelectedTab">#9391a4</color>
     <color name="colorExoControl">#E6FFFFFF</color>
-    <color name="colorCourseCardWithOpacity">#B3000000</color>
+    <color name="colorCourseCardWithOpacity">#E6000000</color>
 </resources>
