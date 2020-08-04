@@ -20,6 +20,7 @@
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/dp_5"
         android:paddingBottom="@dimen/dp_15"
+        android:background="@color/colorApplicationBackground"
         tools:context=".ui.fragments.QuizInstructionFragment">
 
         <androidx.cardview.widget.CardView
@@ -28,6 +29,7 @@
             style="@style/customCard"
             android:layout_height="@dimen/dp_150"
             app:cardElevation="0dp"
+            app:contentPadding="0dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -54,7 +56,9 @@
             android:layout_height="wrap_content"
             android:background="@color/colorTransparent"
             android:orientation="vertical"
-            android:layout_margin="@dimen/dp_5"
+            android:layout_marginStart="@dimen/dp_8"
+            android:layout_marginTop="@dimen/dp_20"
+            android:layout_marginEnd="@dimen/dp_8"
             android:paddingLeft="@dimen/dp_10"
             android:paddingRight="@dimen/dp_10"
             app:layout_constraintEnd_toEndOf="@+id/cardMainContainer"
@@ -128,11 +132,9 @@
             android:id="@+id/wvStaticInstructions"
             android:layout_width="0dp"
             android:layout_height="@dimen/dp_100"
-            android:layout_marginLeft="@dimen/dp_8"
-            android:layout_marginRight="@dimen/dp_8"
             android:textSize="@dimen/sp_14"
-            app:layout_constraintEnd_toEndOf="@+id/cardMainContainer"
-            app:layout_constraintStart_toStartOf="@+id/cardMainContainer"
+            app:layout_constraintEnd_toEndOf="@+id/wvCommonInstruction"
+            app:layout_constraintStart_toStartOf="@+id/wvCommonInstruction"
             app:layout_constraintTop_toBottomOf="@+id/wvCommonInstruction"
             app:setHtmlText="@{instructionShowQuestionsViewModel.instructionsModelLiveData.static_Instructions}" />
 
