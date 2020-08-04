@@ -101,7 +101,7 @@
                 android:layout_height="wrap_content"
                 android:padding="@dimen/dp_8"
                 android:src="@drawable/ic_tick_checked"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/IvDownload"
                 app:layout_constraintTop_toTopOf="@+id/tvCourseDescription" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
