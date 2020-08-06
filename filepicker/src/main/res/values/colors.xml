@@ -3,5 +3,9 @@
   <color name="row_active">#efefef</color>
   <color name="colorPrimary">#ffffff</color>
   <color name="colorPrimaryDark">#ffffff</color>
-  <color name="transparent_black">#00000000</color>
+
+
+  <color name="colorAccent">#FF4081</color>
+  <color name="checkbox_color">#FB4846</color>
+  <color name="checkbox_unchecked_color">#DFDFDF</color>
 </resources>
