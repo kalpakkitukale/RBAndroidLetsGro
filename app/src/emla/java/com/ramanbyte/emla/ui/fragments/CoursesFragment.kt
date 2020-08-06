@@ -134,7 +134,7 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
         AppLog.infoLog("CoursesFragment value ${viewModel.isFilterApplied.value}}")
         //setupBadge()
 
-            setupBadge(viewModel.getFilterState())
+        setupBadge(viewModel.getFilterState())
 
 
         actionView.setOnClickListener {
@@ -209,6 +209,14 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
                 true
             }
             R.id.action_filter -> {
+                viewModel.apply {
+                    tempFilterModel.apply {
+                        programId = filterRequestModel.programId
+                        specializationId = filterRequestModel.specializationId
+                        patternId = filterRequestModel.patternId
+                        skillId = filterRequestModel.skillId
+                    }
+                }
                 courseFilterBottomSheet = RecommendedCourseFilterBottomSheet()
                 courseFilterBottomSheet?.show(childFragmentManager, "course_filter")
                 true

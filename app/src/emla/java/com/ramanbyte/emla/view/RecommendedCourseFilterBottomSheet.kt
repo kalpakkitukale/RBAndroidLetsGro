@@ -237,10 +237,10 @@ class RecommendedCourseFilterBottomSheet :
                 it?.let {
                     if (it) {
                         layoutBinding.apply {
-                            programName.set(BindingUtils.string(R.string.program))
-                            patternName.set(BindingUtils.string(R.string.pattern))
-                            specializationName.set(BindingUtils.string(R.string.specialisation))
-                            skillName.set(BindingUtils.string(R.string.skill))
+                            tvProgram.text = BindingUtils.string(R.string.program)
+                            tvPattern.text = BindingUtils.string(R.string.pattern)
+                            tvSpecialisation.text = BindingUtils.string(R.string.specialisation)
+                            tvSkill.text = BindingUtils.string(R.string.skill)
                         }
                     }
                     clearFilter.postValue(null)

@@ -178,6 +178,11 @@ class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
             }
 
             isFilterApplied.postValue(isFilterSelected)
+            if(filterRequestModel.programId==0)programName.set(BindingUtils.string(R.string.program))
+            if(filterRequestModel.patternId==0)patternName.set(BindingUtils.string(R.string.pattern))
+            if(filterRequestModel.specializationId==0)specializationName.set(BindingUtils.string(R.string.specialisation))
+            if(filterRequestModel.skillId==0)skillName.set(BindingUtils.string(R.string.skill))
+
             filterCourseList(filterRequestModel)
             dismissBottomSheet.postValue(true)
 
