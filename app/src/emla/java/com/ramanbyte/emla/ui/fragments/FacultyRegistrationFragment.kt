@@ -146,7 +146,7 @@ class FacultyRegistrationFragment :
             .setSelectedFiles(docPaths)
             .setActivityTheme(R.style.FilePickerTheme)
             .setActivityTitle(BindingUtils.string(R.string.please_select_resume))
-            .addFileSupport(BindingUtils.string(R.string.pdf), pdfs, R.drawable.icon_file_unknown)
+            .addFileSupport(BindingUtils.string(R.string.pdf), pdfs, R.drawable.ic_resume)
             .enableDocSupport(true)
             .enableSelectAll(true)
             .setMaxCount(1)
@@ -246,7 +246,7 @@ class FacultyRegistrationFragment :
         viewModel.apply {
             setAlertDialogResourceModelMutableLiveData(
                 message,
-                alertDrawableResource = BindingUtils.drawable(R.drawable.icon_file_unknown),
+                alertDrawableResource = BindingUtils.drawable(R.drawable.ic_resume),
                 isInfoAlert = false,
                 positiveButtonText = BindingUtils.string(R.string.strOk),
                 positiveButtonClickFunctionality = {
@@ -380,7 +380,7 @@ class FacultyRegistrationFragment :
             isCheckable = false
             isCloseIconVisible = true
             chipBackgroundColor =
-                ColorStateList.valueOf(BindingUtils.color(R.color.colorDivider))
+                ColorStateList.valueOf(BindingUtils.color(R.color.colorButtonLightBlue))
             setOnCloseIconClickListener {
                 layoutBinding.cgAreaOfExpertise.removeView(it)
                 tempAreaOfExpertiseList.add(model)

@@ -35,7 +35,7 @@ class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
 
     var isFilterApplied = MutableLiveData<Boolean>(null)
 
-    var shareLiveData =  MutableLiveData<CoursesModel>().apply {
+    var shareLiveData = MutableLiveData<CoursesModel>().apply {
         value = null
     }
 
@@ -49,6 +49,7 @@ class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
     }
 
     var programsListMutableLiveData = MutableLiveData<List<CommonDropdownModel>>()
+    var skillsListMutableLiveData = MutableLiveData<List<CommonDropdownModel>>()
     var patternsListMutableLiveData = MutableLiveData<List<CommonDropdownModel>>()
     var specializationsListMutableLiveData = MutableLiveData<List<CommonDropdownModel>>()
     var programName =
@@ -56,6 +57,8 @@ class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
     var patternName = ObservableField<String>().apply { set(BindingUtils.string(R.string.pattern)) }
     var specializationName =
         ObservableField<String>().apply { set(BindingUtils.string(R.string.specialisation)) }
+    var skillName =
+        ObservableField<String>().apply { set(BindingUtils.string(R.string.skill)) }
 
     var userData: UserModel? = null
     var searchQuery = MutableLiveData<String>().apply {
@@ -143,11 +146,9 @@ class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
             }
         }
     }
-    fun shareClick(view: View,coursesModel: CoursesModel){
 
-
-        shareLiveData.value=coursesModel
-
+    fun shareClick(view: View, coursesModel: CoursesModel) {
+        shareLiveData.value = coursesModel
     }
 
     fun onCloseBottomSheet(view: View) {
@@ -165,6 +166,7 @@ class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
                 programId = tempFilterModel.programId
                 specializationId = tempFilterModel.specializationId
                 patternId = tempFilterModel.patternId
+                skillId = tempFilterModel.skillId
             }
 
             isFilterApplied.postValue(isFilterSelected)
@@ -181,14 +183,16 @@ class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
         return (tempFilterModel.userType.isNotEmpty() ||
                 tempFilterModel.programId != 0 ||
                 tempFilterModel.patternId != 0 ||
-                tempFilterModel.specializationId != 0)
+                tempFilterModel.specializationId != 0 ||
+                tempFilterModel.skillId != 0)
     }
 
     private fun getFilterState(): Boolean {
         return (filterRequestModel.userType.isNotEmpty() ||
                 filterRequestModel.programId != 0 ||
                 filterRequestModel.patternId != 0 ||
-                filterRequestModel.specializationId != 0)
+                filterRequestModel.specializationId != 0 ||
+                filterRequestModel.skillId != 0)
     }
 
     fun onClearFilterClick(view: View) {
@@ -198,6 +202,7 @@ class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
             programId = 0
             specializationId = 0
             patternId = 0
+            skillId = 0
         }
         clearFilter.postValue(true)
     }
@@ -212,7 +217,7 @@ class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
 
     fun getAllPrograms() {
         val apiCallFunction: suspend () -> Unit = {
-            programsListMutableLiveData.postValue(registrationRepository.getAllPrograms())
+            programsListMutableLiveData.postValue(coursesRepository.getAllPrograms())
         }
         invokeApiCall(apiCallFunction = apiCallFunction)
     }
@@ -227,6 +232,13 @@ class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
     fun getAllSpecializations() {
         val apiCallFunction: suspend () -> Unit = {
             specializationsListMutableLiveData.postValue(registrationRepository.getAllSpecializations())
+        }
+        invokeApiCall(apiCallFunction = apiCallFunction)
+    }
+
+    fun getAllSkills() {
+        val apiCallFunction: suspend () -> Unit = {
+            skillsListMutableLiveData.postValue(coursesRepository.getAllSkills())
         }
         invokeApiCall(apiCallFunction = apiCallFunction)
     }

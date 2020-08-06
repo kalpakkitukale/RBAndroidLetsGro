@@ -196,6 +196,7 @@
                     android:layout_height="wrap_content"
                     android:onClick="@{createAccountViewModel::onClickUploadResume}"
                     android:text="@string/upload_resume"
+                    android:textAllCaps="false"
                     android:visibility="visible" />
 
                 <TextView
@@ -210,14 +211,14 @@
 
                 <TextView
                     android:id="@+id/lblResumeFileName"
-                    style="@style/TextViewLightGrayOnLightNDark"
+                    style="@style/TextViewMediumGrayOnLightNDark"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:visibility="gone"
                     android:textSize="@dimen/sp_12"
                     android:gravity="center|start"
                     android:drawablePadding="@dimen/dp_10"
-                    android:drawableStart="@drawable/icon_file_unknown" />
+                    android:drawableStart="@drawable/ic_resume" />
             </LinearLayout>
 
             <com.google.android.material.textfield.TextInputLayout

@@ -122,6 +122,31 @@
             app:layout_constraintEnd_toEndOf="@id/tvSpecialisation"
             app:layout_constraintStart_toStartOf="@id/tvSpecialisation" />
 
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvSkill"
+            style="@style/TextViewRegularNavyBlueOnLightNWhiteOnDark"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:drawableEnd="@drawable/ic_arrow_down_gray"
+            android:drawablePadding="@dimen/dp_10"
+            android:hint="@string/specialisation"
+            android:onClick="@{()->spinnerSkill.performClick()}"
+            android:text="@{courseViewModel.skillName}"
+            android:textSize="@dimen/sp_12"
+            app:layout_constraintEnd_toEndOf="@id/tvSpecialisation"
+            app:layout_constraintStart_toStartOf="@id/tvSpecialisation"
+            app:layout_constraintTop_toBottomOf="@id/tvSpecialisation" />
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/spinnerSkill"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@android:color/transparent"
+            app:layout_constraintBottom_toBottomOf="@id/tvSkill"
+            app:layout_constraintEnd_toEndOf="@id/tvSkill"
+            app:layout_constraintStart_toStartOf="@id/tvSkill" />
+
         <View
             android:id="@+id/viewFilterAboveDeleteButton"
             android:layout_width="match_parent"
@@ -130,7 +155,7 @@
             android:background="@color/colorDivider"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvSpecialisation" />
+            app:layout_constraintTop_toBottomOf="@id/tvSkill" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnApplyFilter"

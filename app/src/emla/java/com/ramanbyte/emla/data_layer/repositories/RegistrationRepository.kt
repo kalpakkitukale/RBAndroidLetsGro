@@ -90,12 +90,6 @@ class RegistrationRepository(val mContext: Context) : BaseRepository(mContext) {
         } ?: arrayListOf()
     }
 
-    suspend fun getAllPrograms(): List<CommonDropdownModel>? {
-        return apiRequest {
-            registrationController.getAllPrograms()
-        }
-    }
-
     suspend fun getAllPatterns(): List<CommonDropdownModel>? {
         return apiRequest {
             registrationController.getAllPatterns()

@@ -28,7 +28,7 @@
     <string name="upload_resume">Upload Resume</string>
     <string name="linkedin_profile">Linkedin Profile</string>
     <string name="message">Message</string>
-    <string name="resume_note">Supported file formats PDF, EXCEL, DOC Maximum file size 2 MB</string>
+    <string name="resume_note">Supported file formats PDF, EXCEL, DOC Maximum file size 2 MB’s</string>
     <string name="resume_error">More than 2 MB file not allowed.</string>
     <string name="remove_resume_alert">Do you want to remove resume file?</string>
     <string name="emailId">Email Id</string>
@@ -200,6 +200,7 @@
 
     <string name="filter">Filters</string>
     <string name="specialisation">Specialisation</string>
+    <string name="skill">Skill</string>
     <string name="apply">Apply</string>
 
     <string name="course">Course</string>
@@ -274,7 +275,7 @@ Content
     <string name="favourite">Favourite</string>
     <string name="do_you_have_any_questions">Do you have any questions?</string>
     <string name="mobile_number">Mobile Number</string>
-    <string name="area_of_expertise">Area of expertise</string>
+    <string name="area_of_expertise">Area of Expertise</string>
     <string name="alternate_mobile_number">Alternate Mobile Number</string>
     <string name="time_to_contact">Good Time to Contact</string>
     <string name="send">Send</string>

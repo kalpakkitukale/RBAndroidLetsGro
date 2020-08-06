@@ -32,6 +32,7 @@ class RecommendedCourseFilterBottomSheet :
     }
 
     private var programsSpinnerUtil: MasterSpinnerUtil? = null
+    private var skillsSpinnerUtil: MasterSpinnerUtil? = null
     private var patternsSpinnerUtil: MasterSpinnerUtil? = null
     private var specializationSpinnerUtil: MasterSpinnerUtil? = null
 
@@ -109,6 +110,18 @@ class RecommendedCourseFilterBottomSheet :
                             specializationName.set(BindingUtils.string(R.string.specialisation))
                         }
                         StaticMethodUtilitiesKtx.hideSpinnerDropDown(layoutBinding.spinnerSpecialisation)
+                    })
+                }
+
+            skillsSpinnerUtil =
+                MasterSpinnerUtil(context!!, this@RecommendedCourseFilterBottomSheet).apply {
+
+                    setup(spinnerSkill, defaultSelectAction = {
+                        viewModel.apply {
+                            tempFilterModel.skillId = 0
+                            skillName.set(BindingUtils.string(R.string.skill))
+                        }
+                        StaticMethodUtilitiesKtx.hideSpinnerDropDown(layoutBinding.spinnerSkill)
                     })
                 }
         }
@@ -194,6 +207,32 @@ class RecommendedCourseFilterBottomSheet :
                     }
                 })
 
+            if (skillsListMutableLiveData.value == null)
+                getAllSkills()
+            skillsListMutableLiveData.observe(this@RecommendedCourseFilterBottomSheet, Observer {
+                it?.let {
+                    skillsSpinnerUtil?.spinnerItemListLiveData?.value =
+                        it.mapIndexed { index, programsModel ->
+
+                            SpinnerModel().apply {
+
+                                id = programsModel.valueField
+                                itemName = programsModel.textField
+
+                                onNameSelected = {
+                                    tempFilterModel.skillId = id
+                                    skillName.set(programsModel.textField)
+                                    StaticMethodUtilitiesKtx.hideSpinnerDropDown(layoutBinding.spinnerSkill)
+                                    skillsSpinnerUtil?.apply {
+                                        selectedItemId = id
+                                        selectedItemPosition = index
+                                    }
+                                }
+                            }
+                        }.toCollection(arrayListOf())
+                }
+            })
+
             clearFilter.observe(this@RecommendedCourseFilterBottomSheet, Observer {
                 it?.let {
                     if (it) {
@@ -201,6 +240,7 @@ class RecommendedCourseFilterBottomSheet :
                             programName.set(BindingUtils.string(R.string.program))
                             patternName.set(BindingUtils.string(R.string.pattern))
                             specializationName.set(BindingUtils.string(R.string.specialisation))
+                            skillName.set(BindingUtils.string(R.string.skill))
                         }
                     }
                     clearFilter.postValue(null)

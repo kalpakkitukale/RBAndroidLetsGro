@@ -18,9 +18,6 @@ interface RegistrationController {
     @POST("InsertRegistrationDetails")
     suspend fun register(@Body registrationModel: RegistrationModel): Response<String>
 
-    @GET("GetProgramLevalDetails")
-    suspend fun getAllPrograms(): Response<List<CommonDropdownModel>>
-
     @GET("GetPatternDetails")
     suspend fun getAllPatterns(): Response<List<CommonDropdownModel>>
 

@@ -8,6 +8,7 @@
     <color name="colorTextNavyBlueInLightNWhiteInDark">#1d396b</color>
     <color name="colorIconGreen">#25ae88</color>
     <color name="colorButtonBlue">#3d9df9</color>
+    <color name="colorButtonLightBlue">#e6f1fe</color>
     <color name="colorTextHint">#9391a4</color>
     <color name="colorTextGrayOnLightNDark">#9391a4</color>
     <color name="colorSelectedTab">#1d396b</color>
