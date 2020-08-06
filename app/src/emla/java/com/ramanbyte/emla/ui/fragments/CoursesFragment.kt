@@ -150,7 +150,7 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
         searchEditText.setTextAppearance(R.style.AppTheme_Font)
         searchEditText.setHintTextColor(BindingUtils.color(R.color.colorTextHint))
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            searchEditText.setTextCursorDrawable(BindingUtils.color(R.color.colorTextNavyBlueInLightNWhiteInDark))
+            //searchEditText.setTextCursorDrawable(BindingUtils.color(R.color.colorTextNavyBlueInLightNWhiteInDark))
         }
 
         val searchClose = mSearchView?.findViewById(R.id.search_close_btn) as ImageView
