@@ -182,7 +182,7 @@ class StudentAskedQuestionsFragment :
         searchEditText.setTextColor(BindingUtils.color(R.color.colorIconNavyBlueInLightNGrayInDark))
         searchEditText.setHintTextColor(BindingUtils.color(R.color.colorTextHint))
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            searchEditText.setTextCursorDrawable(BindingUtils.color(R.color.colorTextNavyBlueInLightNWhiteInDark))
+            //searchEditText.setTextCursorDrawable(BindingUtils.color(R.color.colorTextNavyBlueInLightNWhiteInDark))
         }
         searchEditText.hint = BindingUtils.string(R.string.search_by_student)
 

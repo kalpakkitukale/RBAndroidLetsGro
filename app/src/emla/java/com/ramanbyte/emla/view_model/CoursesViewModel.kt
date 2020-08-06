@@ -75,6 +75,7 @@ class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
     }
 
     fun initPaginationResponseHandler() {
+        AppLog.infoLog("CoursesFragment initPaginationResponseHandler")
         if (getFilterState()) {
             isFilterApplied.postValue(true)
             //filterCourseList(filterRequestModel)
@@ -152,6 +153,13 @@ class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
     }
 
     fun onCloseBottomSheet(view: View) {
+        /*tempFilterModel.apply {
+            userType = filterRequestModel.userType
+            programId = filterRequestModel.programId
+            specializationId = filterRequestModel.specializationId
+            patternId = filterRequestModel.patternId
+            skillId = filterRequestModel.skillId
+        }*/
         dismissBottomSheet.postValue(true)
     }
 
@@ -162,7 +170,7 @@ class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
 
             filterRequestModel = CoursesRequest().apply {
                 userId = /*if (isFilterSelected) 0 else */ userData?.userId!!
-                userType = userData?.userType!!
+                userType = if(isFilterSelected)userData?.userType!! else ""
                 programId = tempFilterModel.programId
                 specializationId = tempFilterModel.specializationId
                 patternId = tempFilterModel.patternId
@@ -180,15 +188,15 @@ class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
     }
 
     private fun hasFilter(): Boolean {
-        return (tempFilterModel.userType.isNotEmpty() ||
+        return (/*tempFilterModel.userType.isNotEmpty() ||*/
                 tempFilterModel.programId != 0 ||
                 tempFilterModel.patternId != 0 ||
                 tempFilterModel.specializationId != 0 ||
                 tempFilterModel.skillId != 0)
     }
 
-    private fun getFilterState(): Boolean {
-        return (filterRequestModel.userType.isNotEmpty() ||
+    fun getFilterState(): Boolean {
+        return (/*filterRequestModel.userType.isNotEmpty() ||*/
                 filterRequestModel.programId != 0 ||
                 filterRequestModel.patternId != 0 ||
                 filterRequestModel.specializationId != 0 ||
