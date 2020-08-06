@@ -140,7 +140,7 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
 
         val searchEditText = mSearchView!!.findViewById(search_src_text) as EditText
 
-        searchEditText.setTextColor(BindingUtils.color(R.color.colorWhite))
+        searchEditText.setTextColor(BindingUtils.color(R.color.colorIconNavyBlueInLightNGrayInDark))
         searchEditText.hint = BindingUtils.string(R.string.search_by_course_or_keywords)
         searchEditText.setTextSize(
             TypedValue.COMPLEX_UNIT_PX,
@@ -148,7 +148,10 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
         )
 
         searchEditText.setTextAppearance(R.style.AppTheme_Font)
-        searchEditText.setHintTextColor(BindingUtils.color(R.color.colorWhite))
+        searchEditText.setHintTextColor(BindingUtils.color(R.color.colorTextHint))
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            searchEditText.setTextCursorDrawable(BindingUtils.color(R.color.colorTextNavyBlueInLightNWhiteInDark))
+        }
 
         val searchClose = mSearchView?.findViewById(R.id.search_close_btn) as ImageView
         searchClose.apply {
@@ -167,7 +170,7 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
         }
         val searchImgId = R.id.search_button
         val searchIcon = mSearchView?.findViewById(searchImgId) as ImageView
-        searchIcon.setImageResource(R.drawable.ic_search)
+        searchIcon.setImageResource(R.drawable.ic_baseline_search)
 
 
 

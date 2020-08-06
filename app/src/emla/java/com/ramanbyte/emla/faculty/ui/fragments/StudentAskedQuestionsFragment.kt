@@ -1,6 +1,7 @@
 package com.ramanbyte.emla.faculty.ui.fragments
 
 import android.content.Context
+import android.os.Build
 import android.text.TextUtils
 import android.view.Menu
 import android.view.MenuInflater
@@ -178,8 +179,11 @@ class StudentAskedQuestionsFragment :
 
         val searchEditText = mSearchView!!.findViewById(R.id.search_src_text) as EditText
 
-        searchEditText.setTextColor(BindingUtils.color(R.color.colorWhite))
-        searchEditText.setHintTextColor(BindingUtils.color(R.color.colorTransparent))
+        searchEditText.setTextColor(BindingUtils.color(R.color.colorIconNavyBlueInLightNGrayInDark))
+        searchEditText.setHintTextColor(BindingUtils.color(R.color.colorTextHint))
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            searchEditText.setTextCursorDrawable(BindingUtils.color(R.color.colorTextNavyBlueInLightNWhiteInDark))
+        }
         searchEditText.hint = BindingUtils.string(R.string.search_by_student)
 
         val searchClose = mSearchView?.findViewById(R.id.search_close_btn) as ImageView
@@ -199,7 +203,7 @@ class StudentAskedQuestionsFragment :
         }
         val searchImgId = R.id.search_button
         val searchIcon = mSearchView?.findViewById(searchImgId) as ImageView
-        searchIcon.setImageResource(R.drawable.ic_search)
+        searchIcon.setImageResource(R.drawable.ic_baseline_search)
 
 
 
