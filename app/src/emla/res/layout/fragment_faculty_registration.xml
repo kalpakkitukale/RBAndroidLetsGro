@@ -149,6 +149,7 @@
                 android:textSize="@dimen/sp_16"
                 android:popupElevation="5dp"
                 android:singleLine="true"
+                android:maxLength="50"
                 android:paddingStart="@dimen/dp_10"
                 app:layout_constraintEnd_toEndOf="@+id/cgAreaOfExpertise"
                 app:layout_constraintStart_toStartOf="@+id/cgAreaOfExpertise"
@@ -240,6 +241,8 @@
                     android:imeOptions="actionNext"
                     android:inputType="text"
                     android:maxLength="100"
+                    android:lines="1"
+                    android:singleLine="true"
                     android:text="@={createAccountViewModel.registrationMutableLiveData.userDetails.linkedInProfile}" />
             </com.google.android.material.textfield.TextInputLayout>
 
