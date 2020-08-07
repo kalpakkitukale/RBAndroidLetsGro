@@ -8,13 +8,15 @@
             name="coursesDetailViewModel"
             type="com.ramanbyte.emla.view_model.CoursesDetailViewModel" />
 
+        <import type="com.ramanbyte.utilities.StaticHelpersKt" />
+
     </data>
 
 
     <androidx.cardview.widget.CardView
+        style="@style/customCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/customCard"
         app:contentPadding="@dimen/dp_8"
         app:layout_constraintTop_toBottomOf="@+id/guideline">
 
@@ -106,6 +108,34 @@
 
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/labelCredits"
+                style="@style/TextViewMediumNavyBlueOnLightNWhiteOnDark"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_8"
+                android:padding="@dimen/dp_5"
+                android:text="@string/credits"
+                android:textSize="@dimen/sp_12"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@+id/labelEfforts"
+                app:layout_constraintStart_toStartOf="@+id/labelEfforts"
+                app:layout_constraintTop_toBottomOf="@+id/labelEfforts" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtViewCredits"
+                style="@style/TextViewLightNavyBlueOnLightNWhiteOnDark"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/dp_5"
+                android:text='@{StaticHelpersKt.skipTrailingZeroes(coursesDetailViewModel.courseSyllabusModelLiveData.credits)}'
+                android:textSize="@dimen/sp_12"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/txtViewEfforts"
+                app:layout_constraintStart_toStartOf="@id/txtViewEfforts"
+                app:layout_constraintTop_toTopOf="@id/labelCredits" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/labelSpecialization"
                 style="@style/TextViewMediumNavyBlueOnLightNWhiteOnDark"
                 android:layout_width="0dp"
@@ -116,7 +146,7 @@
                 android:textSize="@dimen/sp_12"
                 app:layout_constraintEnd_toEndOf="@+id/labelEfforts"
                 app:layout_constraintStart_toStartOf="@+id/labelEfforts"
-                app:layout_constraintTop_toBottomOf="@+id/labelEfforts" />
+                app:layout_constraintTop_toBottomOf="@+id/labelCredits" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/txtViewSpecialization"

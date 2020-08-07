@@ -46,6 +46,13 @@ class CourseSyllabusFragment :
             coursesDetailViewModel = viewModel
             cardCourseLayout.coursesDetailViewModel = viewModel
 
+            if (viewModel.courseSyllabusModelLiveData.value?.credits != 0.0){
+                cardCourseLayout.apply {
+                    labelCredits.visibility = View.VISIBLE
+                    txtViewCredits.visibility = View.VISIBLE
+                }
+            }
+
             rvCourseSyllabus.settings.apply {
                 javaScriptEnabled = true
                 displayZoomControls = false
