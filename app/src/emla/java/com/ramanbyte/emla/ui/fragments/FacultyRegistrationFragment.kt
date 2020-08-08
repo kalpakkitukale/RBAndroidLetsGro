@@ -146,7 +146,7 @@ class FacultyRegistrationFragment :
             .setSelectedFiles(docPaths)
             .setActivityTheme(R.style.FilePickerTheme)
             .setActivityTitle(BindingUtils.string(R.string.please_select_resume))
-            .addFileSupport(BindingUtils.string(R.string.pdf), pdfs, R.drawable.icon_file_unknown)
+            .addFileSupport(BindingUtils.string(R.string.pdf), pdfs, R.drawable.ic_resume)
             .enableDocSupport(true)
             .enableSelectAll(true)
             .setMaxCount(1)
@@ -177,39 +177,51 @@ class FacultyRegistrationFragment :
                         val fileSizeMB = fileSizeKB / 1024
 
                         AppLog.infoLog("fileName size :: $fileSizeKB     $fileSizeMB      $fileSize      $selectedFilePath    ")
-                        if (fileSizeMB <= 2) {
-                            layoutBinding.apply {
-                                lblResumeFileName.text = fileName
-                                btnUploadResume.visibility = View.GONE
-                                lblResumeNote.visibility = View.GONE
-                                lblResumeFileName.visibility = View.VISIBLE
-                                ivRemoveResume.visibility = View.VISIBLE
-                            }
-                            AppLog.infoLog("fileNamePath  :: $fileName     $filePath")
-                            extension =
-                                selectedFilePath.substring(selectedFilePath.lastIndexOf(".")) ?: ""
-                            //thumbnail = setThumbNail(extension ?: "")
 
-                            viewModel.apply {
-                                uploadResumeFileName.value =
-                                    StaticMethodUtilitiesKtx.currentMonthAsS3KeyObject + FileUtils.PATH_SEPARATOR + FileUtils.getFileNameFromPath(
-                                        selectedFilePath
+                        extension =
+                            selectedFilePath.substring(selectedFilePath.lastIndexOf(".")) ?: ""
+
+                        if (extension.equals(FileUtils.KEY_PDF_DOCUMENT_EXTENSION, true) ||
+                            extension.equals(FileUtils.KEY_DOCUMENT_DOC_EXTENSION, true) ||
+                            extension.equals(FileUtils.KEY_DOCUMENT_DOCX_EXTENSION, true) ||
+                            extension.equals(FileUtils.KEY_TEXT_EXTENSION, true) ||
+                            extension.equals(FileUtils.KEY_RICH_TEXT_EXTENSION, true) ||
+                            extension.equals(FileUtils.KEY_PRESENTATION_PPT_EXTENSION, true)) {
+
+                            if (fileSizeMB <= 2) {
+                                layoutBinding.apply {
+                                    lblResumeFileName.text = fileName
+                                    btnUploadResume.visibility = View.GONE
+                                    lblResumeNote.visibility = View.GONE
+                                    lblResumeFileName.visibility = View.VISIBLE
+                                    ivRemoveResume.visibility = View.VISIBLE
+                                }
+                                AppLog.infoLog("fileNamePath  :: $fileName     $filePath")
+
+                                //thumbnail = setThumbNail(extension ?: "")
+
+                                viewModel.apply {
+                                    uploadResumeFileName.value =
+                                        StaticMethodUtilitiesKtx.currentMonthAsS3KeyObject + FileUtils.PATH_SEPARATOR + FileUtils.getFileNameFromPath(
+                                            selectedFilePath
+                                        )
+                                    uploadResumeFilePath.value = selectedFilePath
+                                }
+                            } else {
+                                viewModel.apply {
+                                    setAlertDialogResourceModelMutableLiveData(
+                                        BindingUtils.string(R.string.resume_error),
+                                        BindingUtils.drawable(R.drawable.ic_warning)!!,
+                                        true,
+                                        BindingUtils.string(R.string.strOk), {
+                                            isAlertDialogShown.postValue(false)
+                                        }
                                     )
-                                uploadResumeFilePath.value = selectedFilePath
-                            }
-                        } else {
-                            viewModel.apply {
-                                setAlertDialogResourceModelMutableLiveData(
-                                    BindingUtils.string(R.string.resume_error),
-                                    BindingUtils.drawable(R.drawable.ic_warning)!!,
-                                    true,
-                                    BindingUtils.string(R.string.strOk), {
-                                        isAlertDialogShown.postValue(false)
-                                    }
-                                )
-                                isAlertDialogShown.postValue(true)
+                                    isAlertDialogShown.postValue(true)
+                                }
                             }
                         }
+
                     }
                 }
             }
@@ -246,7 +258,7 @@ class FacultyRegistrationFragment :
         viewModel.apply {
             setAlertDialogResourceModelMutableLiveData(
                 message,
-                alertDrawableResource = BindingUtils.drawable(R.drawable.icon_file_unknown),
+                alertDrawableResource = BindingUtils.drawable(R.drawable.ic_resume),
                 isInfoAlert = false,
                 positiveButtonText = BindingUtils.string(R.string.strOk),
                 positiveButtonClickFunctionality = {
@@ -380,7 +392,7 @@ class FacultyRegistrationFragment :
             isCheckable = false
             isCloseIconVisible = true
             chipBackgroundColor =
-                ColorStateList.valueOf(BindingUtils.color(R.color.colorDivider))
+                ColorStateList.valueOf(BindingUtils.color(R.color.colorButtonLightBlue))
             setOnCloseIconClickListener {
                 layoutBinding.cgAreaOfExpertise.removeView(it)
                 tempAreaOfExpertiseList.add(model)

@@ -149,6 +149,7 @@
                 android:textSize="@dimen/sp_16"
                 android:popupElevation="5dp"
                 android:singleLine="true"
+                android:maxLength="50"
                 android:paddingStart="@dimen/dp_10"
                 app:layout_constraintEnd_toEndOf="@+id/cgAreaOfExpertise"
                 app:layout_constraintStart_toStartOf="@+id/cgAreaOfExpertise"
@@ -196,6 +197,7 @@
                     android:layout_height="wrap_content"
                     android:onClick="@{createAccountViewModel::onClickUploadResume}"
                     android:text="@string/upload_resume"
+                    android:textAllCaps="false"
                     android:visibility="visible" />
 
                 <TextView
@@ -210,14 +212,14 @@
 
                 <TextView
                     android:id="@+id/lblResumeFileName"
-                    style="@style/TextViewLightGrayOnLightNDark"
+                    style="@style/TextViewMediumGrayOnLightNDark"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:visibility="gone"
                     android:textSize="@dimen/sp_12"
                     android:gravity="center|start"
                     android:drawablePadding="@dimen/dp_10"
-                    android:drawableStart="@drawable/icon_file_unknown" />
+                    android:drawableStart="@drawable/ic_resume" />
             </LinearLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -239,6 +241,8 @@
                     android:imeOptions="actionNext"
                     android:inputType="text"
                     android:maxLength="100"
+                    android:lines="1"
+                    android:singleLine="true"
                     android:text="@={createAccountViewModel.registrationMutableLiveData.userDetails.linkedInProfile}" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -261,7 +265,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:imeOptions="actionNext"
-                    android:inputType="textCapSentences"
+                    android:inputType="textCapSentences|textMultiLine"
                     android:maxLength="150"
                     android:text="@={createAccountViewModel.registrationMutableLiveData.userDetails.message}" />
             </com.google.android.material.textfield.TextInputLayout>

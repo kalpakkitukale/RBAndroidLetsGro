@@ -15,6 +15,7 @@ import com.ramanbyte.emla.models.CourseSyllabusModel
 import com.ramanbyte.emla.models.CoursesModel
 import com.ramanbyte.emla.models.UserModel
 import com.ramanbyte.emla.models.request.CoursesRequest
+import com.ramanbyte.emla.models.response.CommonDropdownModel
 import com.ramanbyte.utilities.replicate
 import org.kodein.di.generic.instance
 
@@ -96,6 +97,18 @@ class CoursesRepository(mContext: Context) : BaseRepository(mContext) {
 
         return apiRequest {
             coursesController.getCoursesSyllabus(courseId, userId)
+        }
+    }
+
+    suspend fun getAllPrograms(): List<CommonDropdownModel>? {
+        return apiRequest {
+            coursesController.getAllPrograms()
+        }
+    }
+
+    suspend fun getAllSkills(): List<CommonDropdownModel>? {
+        return apiRequest {
+            coursesController.getAllSkills()
         }
     }
 }

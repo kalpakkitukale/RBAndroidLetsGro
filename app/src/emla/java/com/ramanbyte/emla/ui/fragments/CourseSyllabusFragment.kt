@@ -46,6 +46,13 @@ class CourseSyllabusFragment :
             coursesDetailViewModel = viewModel
             cardCourseLayout.coursesDetailViewModel = viewModel
 
+            if (viewModel.courseSyllabusModelLiveData.value?.credits != 0.0){
+                cardCourseLayout.apply {
+                    labelCredits.visibility = View.VISIBLE
+                    txtViewCredits.visibility = View.VISIBLE
+                }
+            }
+
             rvCourseSyllabus.settings.apply {
                 javaScriptEnabled = true
                 displayZoomControls = false
@@ -138,6 +145,10 @@ class CourseSyllabusFragment :
 
             if (cardCourseLayout.courseInfoGroup.isVisible) {
                 cardCourseLayout.courseInfoGroup.visibility = View.GONE
+                cardCourseLayout.apply {
+                    labelCredits.visibility = View.GONE
+                    txtViewCredits.visibility = View.GONE
+                }
                 ViewAnimationUtils.rotateView(cardCourseLayout.imgViewCourseInfo, 0, 300)
             } else {
                 cardCourseLayout.courseInfoGroup.visibility = courseInfoVisibility

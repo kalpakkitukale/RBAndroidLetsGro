@@ -15,4 +15,5 @@ class CoursesRequest: BaseRequestModel() {
     var programId: Int = 0
     var specializationId: Int = 0
     var patternId: Int = 0
+    var skillId: Int = 0
 }

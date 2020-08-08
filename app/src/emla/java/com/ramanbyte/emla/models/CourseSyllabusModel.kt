@@ -17,6 +17,8 @@ class CourseSyllabusModel {
         set(value) {
             field = value.checkValues()
         }
+    var credits: Double? = 0.0
+
     var level: String? = ""
         set(value) {
             field = value.checkValues()

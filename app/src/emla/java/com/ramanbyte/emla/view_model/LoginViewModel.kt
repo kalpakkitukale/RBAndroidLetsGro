@@ -199,7 +199,6 @@ class LoginViewModel(var mContext: Context) : BaseViewModel(mContext) {
     var selectedAs: MutableLiveData<String?> = MutableLiveData(KEY_BLANK)
 
     var toolbarVisibilityLiveData: MutableLiveData<Int?> = MutableLiveData(null)
-    //var onClickFacultyLiveData: MutableLiveData<Boolean?> = MutableLiveData(null)
 
     fun onClickStudent(view: View) {
         selectedAs.value = BindingUtils.string(R.string.student)
@@ -217,11 +216,6 @@ class LoginViewModel(var mContext: Context) : BaseViewModel(mContext) {
         if (selectedAs.value == BindingUtils.string(R.string.student)) {
             view.findNavController()
                 .navigate(R.id.action_registerAsFragment_to_studentRegistationFragment, null)
-            /*(mContext as Activity).apply {
-                val intent = Intent(this, CreateAccountActivity::class.java)
-                startActivity(intent)
-                BaseAppController.setEnterPageAnimation(this)
-            }*/
         } else {
             view.findNavController()
                 .navigate(R.id.action_registerAsFragment_to_facultyRegistationFragment, null)

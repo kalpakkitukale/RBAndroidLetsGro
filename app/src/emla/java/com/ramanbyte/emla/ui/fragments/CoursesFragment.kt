@@ -89,6 +89,7 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
 
             isFilterApplied.observe(this@CoursesFragment, Observer {
                 it?.let {
+                    AppLog.infoLog("CoursesFragment isFilterApplied ${it}")
                     setupBadge(it)
                     isFilterApplied.postValue(null)
                 }
@@ -129,7 +130,13 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
 
         val actionView = menuItem.actionView
         badgeView = actionView.findViewById(R.id.filter_badge) as View
-        setupBadge()
+        AppLog.infoLog("CoursesFragment onCreateOptionsMenu ${false}")
+        AppLog.infoLog("CoursesFragment value ${viewModel.isFilterApplied.value}}")
+        //setupBadge()
+
+        setupBadge(viewModel.getFilterState())
+
+
         actionView.setOnClickListener {
             onOptionsItemSelected(menuItem)
         }
@@ -150,7 +157,7 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
         searchEditText.setTextAppearance(R.style.AppTheme_Font)
         searchEditText.setHintTextColor(BindingUtils.color(R.color.colorTextHint))
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            searchEditText.setTextCursorDrawable(BindingUtils.color(R.color.colorTextNavyBlueInLightNWhiteInDark))
+            //searchEditText.setTextCursorDrawable(BindingUtils.color(R.color.colorTextNavyBlueInLightNWhiteInDark))
         }
 
         val searchClose = mSearchView?.findViewById(R.id.search_close_btn) as ImageView
@@ -202,6 +209,14 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
                 true
             }
             R.id.action_filter -> {
+                viewModel.apply {
+                    tempFilterModel.apply {
+                        programId = filterRequestModel.programId
+                        specializationId = filterRequestModel.specializationId
+                        patternId = filterRequestModel.patternId
+                        skillId = filterRequestModel.skillId
+                    }
+                }
                 courseFilterBottomSheet = RecommendedCourseFilterBottomSheet()
                 courseFilterBottomSheet?.show(childFragmentManager, "course_filter")
                 true
@@ -214,10 +229,12 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
     private fun setupBadge(showCount: Boolean? = false) {
         if (badgeView != null) {
             if (showCount == true) {
+                AppLog.infoLog("CoursesFragment badgeView VISIBLE")
                 if (badgeView?.visibility != View.VISIBLE) {
                     badgeView?.visibility = View.VISIBLE
                 }
             } else {
+                AppLog.infoLog("CoursesFragment badgeView GONE")
                 if (badgeView?.visibility != View.GONE) {
                     badgeView?.visibility = View.GONE
                 }
