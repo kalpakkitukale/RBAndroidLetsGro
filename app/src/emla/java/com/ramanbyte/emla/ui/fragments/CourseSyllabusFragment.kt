@@ -145,6 +145,10 @@ class CourseSyllabusFragment :
 
             if (cardCourseLayout.courseInfoGroup.isVisible) {
                 cardCourseLayout.courseInfoGroup.visibility = View.GONE
+                cardCourseLayout.apply {
+                    labelCredits.visibility = View.GONE
+                    txtViewCredits.visibility = View.GONE
+                }
                 ViewAnimationUtils.rotateView(cardCourseLayout.imgViewCourseInfo, 0, 300)
             } else {
                 cardCourseLayout.courseInfoGroup.visibility = courseInfoVisibility

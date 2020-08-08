@@ -28,7 +28,7 @@
     <string name="upload_resume">Upload Resume</string>
     <string name="linkedin_profile">Linkedin Profile</string>
     <string name="message">Message</string>
-    <string name="resume_note">Supported file formats PDF, EXCEL, DOC Maximum file size 2 MB’s</string>
+    <string name="resume_note">Supported file formats PDF, PPT, DOC Maximum file size 2 MB’s</string>
     <string name="resume_error">More than 2 MB file not allowed.</string>
     <string name="remove_resume_alert">Do you want to remove resume file?</string>
     <string name="emailId">Email Id</string>

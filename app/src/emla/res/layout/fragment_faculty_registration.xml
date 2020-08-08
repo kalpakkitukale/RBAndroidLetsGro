@@ -265,7 +265,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:imeOptions="actionNext"
-                    android:inputType="textCapSentences"
+                    android:inputType="textCapSentences|textMultiLine"
                     android:maxLength="150"
                     android:text="@={createAccountViewModel.registrationMutableLiveData.userDetails.message}" />
             </com.google.android.material.textfield.TextInputLayout>

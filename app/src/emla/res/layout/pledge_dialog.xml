@@ -37,6 +37,7 @@
             android:padding="@dimen/dp_5"
             android:text="@string/confirmation_method"
             android:textSize="@dimen/sp_14"
+            android:buttonTint="@color/colorButtonBlue"
             app:layout_constraintBottom_toTopOf="@+id/btnContinue"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

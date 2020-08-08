@@ -177,39 +177,51 @@ class FacultyRegistrationFragment :
                         val fileSizeMB = fileSizeKB / 1024
 
                         AppLog.infoLog("fileName size :: $fileSizeKB     $fileSizeMB      $fileSize      $selectedFilePath    ")
-                        if (fileSizeMB <= 2) {
-                            layoutBinding.apply {
-                                lblResumeFileName.text = fileName
-                                btnUploadResume.visibility = View.GONE
-                                lblResumeNote.visibility = View.GONE
-                                lblResumeFileName.visibility = View.VISIBLE
-                                ivRemoveResume.visibility = View.VISIBLE
-                            }
-                            AppLog.infoLog("fileNamePath  :: $fileName     $filePath")
-                            extension =
-                                selectedFilePath.substring(selectedFilePath.lastIndexOf(".")) ?: ""
-                            //thumbnail = setThumbNail(extension ?: "")
 
-                            viewModel.apply {
-                                uploadResumeFileName.value =
-                                    StaticMethodUtilitiesKtx.currentMonthAsS3KeyObject + FileUtils.PATH_SEPARATOR + FileUtils.getFileNameFromPath(
-                                        selectedFilePath
+                        extension =
+                            selectedFilePath.substring(selectedFilePath.lastIndexOf(".")) ?: ""
+
+                        if (extension.equals(FileUtils.KEY_PDF_DOCUMENT_EXTENSION, true) ||
+                            extension.equals(FileUtils.KEY_DOCUMENT_DOC_EXTENSION, true) ||
+                            extension.equals(FileUtils.KEY_DOCUMENT_DOCX_EXTENSION, true) ||
+                            extension.equals(FileUtils.KEY_TEXT_EXTENSION, true) ||
+                            extension.equals(FileUtils.KEY_RICH_TEXT_EXTENSION, true) ||
+                            extension.equals(FileUtils.KEY_PRESENTATION_PPT_EXTENSION, true)) {
+
+                            if (fileSizeMB <= 2) {
+                                layoutBinding.apply {
+                                    lblResumeFileName.text = fileName
+                                    btnUploadResume.visibility = View.GONE
+                                    lblResumeNote.visibility = View.GONE
+                                    lblResumeFileName.visibility = View.VISIBLE
+                                    ivRemoveResume.visibility = View.VISIBLE
+                                }
+                                AppLog.infoLog("fileNamePath  :: $fileName     $filePath")
+
+                                //thumbnail = setThumbNail(extension ?: "")
+
+                                viewModel.apply {
+                                    uploadResumeFileName.value =
+                                        StaticMethodUtilitiesKtx.currentMonthAsS3KeyObject + FileUtils.PATH_SEPARATOR + FileUtils.getFileNameFromPath(
+                                            selectedFilePath
+                                        )
+                                    uploadResumeFilePath.value = selectedFilePath
+                                }
+                            } else {
+                                viewModel.apply {
+                                    setAlertDialogResourceModelMutableLiveData(
+                                        BindingUtils.string(R.string.resume_error),
+                                        BindingUtils.drawable(R.drawable.ic_warning)!!,
+                                        true,
+                                        BindingUtils.string(R.string.strOk), {
+                                            isAlertDialogShown.postValue(false)
+                                        }
                                     )
-                                uploadResumeFilePath.value = selectedFilePath
-                            }
-                        } else {
-                            viewModel.apply {
-                                setAlertDialogResourceModelMutableLiveData(
-                                    BindingUtils.string(R.string.resume_error),
-                                    BindingUtils.drawable(R.drawable.ic_warning)!!,
-                                    true,
-                                    BindingUtils.string(R.string.strOk), {
-                                        isAlertDialogShown.postValue(false)
-                                    }
-                                )
-                                isAlertDialogShown.postValue(true)
+                                    isAlertDialogShown.postValue(true)
+                                }
                             }
                         }
+
                     }
                 }
             }
