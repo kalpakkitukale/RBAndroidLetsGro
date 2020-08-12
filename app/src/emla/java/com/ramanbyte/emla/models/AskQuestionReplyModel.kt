@@ -23,11 +23,6 @@ class AskQuestionReplyModel {
                 DateUtils.DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS
             )!!
         )
-        /*get() = DateUtils.getDisplayDateFromDate(
-            field!!,
-            DateUtils.DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS,
-            DateUtils.DATE_TIME_PATTERN
-        )*/
 
     var answer = KEY_BLANK
     var userName = KEY_BLANK

@@ -13,7 +13,7 @@
         android:id="@+id/cardLayoutMain"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dp_60"
+        android:layout_marginEnd="@dimen/dp_60"
         app:cardBackgroundColor="@color/colorTransparent"
         app:cardCornerRadius="@dimen/dp_5"
         app:cardElevation="2dp"

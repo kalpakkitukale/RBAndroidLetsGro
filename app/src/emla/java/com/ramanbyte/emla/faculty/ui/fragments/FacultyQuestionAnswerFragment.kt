@@ -106,8 +106,6 @@ class FacultyQuestionAnswerFragment :
                             val enteredReply = enteredReplyLiveData.value.toString()
                             if (enteredReply.isNotBlank()) {
                                 insertQuestionsReply(enteredReply)
-                            } else {
-                                AppLog.infoLog("Blank Reply not added.")
                             }
                             onClickAddReplyLiveData.value = false
                         }
