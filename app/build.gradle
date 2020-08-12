@@ -13,8 +13,8 @@ android {
         /*applicationId "com.ramanbyte.emla"*/
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 22
-        versionName "2.0.4"
+        versionCode 23
+        versionName "2.0.5"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
