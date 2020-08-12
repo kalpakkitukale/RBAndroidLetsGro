@@ -106,11 +106,11 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
             }
 
             addToWishList = if (favouriteVideo == KEY_Y) {
-                // lblWishList.setCompoundDrawables(BindingUtils.drawable(R.drawable.ic_heart_checked),null,null,null)
+                // lblWishList.setCompoundDrawables(BindingUtils.drawable(R.drawable.ic_heart_unchecked),null,null,null)
                 exoBtnWishlist.setImageDrawable(BindingUtils.drawable(R.drawable.ic_heart))
                 true
             } else {
-                exoBtnWishlist.setImageDrawable(BindingUtils.drawable(R.drawable.ic_heart))
+                exoBtnWishlist.setImageDrawable(BindingUtils.drawable(R.drawable.ic_heart_unchecked))
                 false
             }
         }
@@ -487,7 +487,7 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
                         insertSectionContentLog(mediaId, mediaInfoModel?.apply {
                             favouriteVideo = KEY_BLANK
                         }!!)
-                        exoBtnWishlist.setImageDrawable(BindingUtils.drawable(R.drawable.ic_heart))
+                        exoBtnWishlist.setImageDrawable(BindingUtils.drawable(R.drawable.ic_heart_unchecked))
                         addToWishList = false
                     } else {
                         AppLog.infoLog("BtnWishlist :: true -- Y")

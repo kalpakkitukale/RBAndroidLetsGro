@@ -75,4 +75,9 @@ class MyFavouriteVideoFragment : BaseFragment<FragmentMyFavouriteVideoBinding,My
         mContext = context
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.getFavouriteVideos()
+    }
+
 }

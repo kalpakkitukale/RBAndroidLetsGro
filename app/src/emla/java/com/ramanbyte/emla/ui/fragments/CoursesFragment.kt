@@ -112,6 +112,7 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
                     )
                     shareIntent.type = "text/plain"
                     startActivity(Intent.createChooser(shareIntent, "send to"))
+                    shareLiveData.value = null
                 }
 
             })

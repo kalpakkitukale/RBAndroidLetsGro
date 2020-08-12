@@ -69,6 +69,9 @@ class FacultyRegistrationFragment :
                 * */
                 setAreaOfExpertise()
 
+                /*
+                * After successful registration show the alert.
+                * */
                 registrationSuccessMutableLiveData.observe(
                     this@FacultyRegistrationFragment,
                     Observer {
@@ -219,6 +222,18 @@ class FacultyRegistrationFragment :
                                     )
                                     isAlertDialogShown.postValue(true)
                                 }
+                            }
+                        }else{
+                            viewModel.apply {
+                                setAlertDialogResourceModelMutableLiveData(
+                                    BindingUtils.string(R.string.file_type_error),
+                                    BindingUtils.drawable(R.drawable.ic_warning)!!,
+                                    true,
+                                    BindingUtils.string(R.string.strOk), {
+                                        isAlertDialogShown.postValue(false)
+                                    }
+                                )
+                                isAlertDialogShown.postValue(true)
                             }
                         }
 

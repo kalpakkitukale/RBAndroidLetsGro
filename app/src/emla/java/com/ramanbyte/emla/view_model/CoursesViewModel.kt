@@ -75,7 +75,6 @@ class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
     }
 
     fun initPaginationResponseHandler() {
-        AppLog.infoLog("CoursesFragment initPaginationResponseHandler")
         if (getFilterState()) {
             isFilterApplied.postValue(true)
             //filterCourseList(filterRequestModel)

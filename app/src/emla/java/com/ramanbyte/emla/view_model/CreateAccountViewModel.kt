@@ -16,7 +16,6 @@ import com.ramanbyte.emla.data_layer.repositories.RegistrationRepository
 import com.ramanbyte.emla.models.AreaOfExpertiesModel
 import com.ramanbyte.emla.models.AreaOfExpertiseResponseModel
 import com.ramanbyte.emla.models.RegistrationModel
-import com.ramanbyte.emla.models.StateModel
 import com.ramanbyte.utilities.*
 import com.ramanbyte.validation.ObservableValidator
 import com.ramanbyte.validation.ValidationFlags
@@ -310,39 +309,27 @@ class CreateAccountViewModel(var mContext: Context) : BaseViewModel(mContext = m
                 }
 
                 if (uploadResumeFileName.value?.isNotEmpty()!!) {
-                    val apiCallFunction: suspend () -> Unit = {
-                        val response = registrationRepository.register(
-                            registrationMutableLiveData.value!!.apply {
-                                userDetails.apply {
-                                    userType = KEY_FACULTY
-                                    user_userDelStatus = KEY_Y
-                                    user_userStatus = KEY_BLOCK
-                                    user_userIsActive = KEY_N
-                                    password = KEY_DEFAULT_PASSWORD
-                                    resumeFileName = uploadResumeFileName.value
-                                }
-                                areaofExperties = areaOfExpertiseList
-                            }
-                        )
-                        if (response?.isNotEmpty()!!) {
-                            if (uploadResumeFileName.value?.isNotEmpty()!!) {
-                                AppS3Client.createInstance(mContext)
-                                    .upload(
-                                        uploadResumeFileName.value!!,
-                                        uploadResumeFilePath.value!!,
-                                        BindingUtils.string(R.string.uploading_resume),
-                                        AppS3Client.TAG_UPLOAD,
-                                        0X100
-                                    )
-                            }
+
+                    setAlertDialogResourceModelMutableLiveData(
+                        BindingUtils.string(R.string.registration_confirmation),
+                        BindingUtils.drawable(R.drawable.ic_submit_confirmation)!!,
+                        false,
+                        BindingUtils.string(R.string.yes), {
+                            registerFaculty(areaOfExpertiseList)
+                            isAlertDialogShown.postValue(false)
+                        },
+                        BindingUtils.string(R.string.no), {
+                            isAlertDialogShown.postValue(false)
                         }
-                        registrationSuccessMutableLiveData.postValue(response)
-                    }
-                    invokeApiCall(apiCallFunction = apiCallFunction)
+                    )
+                    isAlertDialogShown.postValue(true)
 
                 } else {
                     setAlertDialogResourceModelMutableLiveData(
-                        BindingUtils.string(R.string.dynamic_required,BindingUtils.string(R.string.resume)),
+                        BindingUtils.string(
+                            R.string.dynamic_required,
+                            BindingUtils.string(R.string.resume)
+                        ),
                         BindingUtils.drawable(R.drawable.ic_warning)!!,
                         true,
                         BindingUtils.string(R.string.strOk), {
@@ -353,7 +340,10 @@ class CreateAccountViewModel(var mContext: Context) : BaseViewModel(mContext = m
                 }
             } else {
                 setAlertDialogResourceModelMutableLiveData(
-                    BindingUtils.string(R.string.dynamic_required,BindingUtils.string(R.string.area_of_expertise)),
+                    BindingUtils.string(
+                        R.string.dynamic_required,
+                        BindingUtils.string(R.string.area_of_expertise)
+                    ),
                     BindingUtils.drawable(R.drawable.ic_warning)!!,
                     true,
                     BindingUtils.string(R.string.strOk), {
@@ -363,6 +353,38 @@ class CreateAccountViewModel(var mContext: Context) : BaseViewModel(mContext = m
                 isAlertDialogShown.postValue(true)
             }
         }
+    }
+
+    private fun registerFaculty(areaOfExpertiseList: ArrayList<AreaOfExpertiesModel>) {
+        val apiCallFunction: suspend () -> Unit = {
+            val response = registrationRepository.register(
+                registrationMutableLiveData.value!!.apply {
+                    userDetails.apply {
+                        userType = KEY_FACULTY
+                        user_userDelStatus = KEY_Y
+                        user_userStatus = KEY_BLOCK
+                        user_userIsActive = KEY_N
+                        password = KEY_DEFAULT_PASSWORD
+                        resumeFileName = uploadResumeFileName.value
+                    }
+                    areaofExperties = areaOfExpertiseList
+                }
+            )
+            if (response?.isNotEmpty()!!) {
+                if (uploadResumeFileName.value?.isNotEmpty()!!) {
+                    AppS3Client.createInstance(mContext)
+                        .upload(
+                            uploadResumeFileName.value!!,
+                            uploadResumeFilePath.value!!,
+                            BindingUtils.string(R.string.uploading_resume),
+                            AppS3Client.TAG_UPLOAD,
+                            0X100
+                        )
+                }
+            }
+            registrationSuccessMutableLiveData.postValue(response)
+        }
+        invokeApiCall(apiCallFunction = apiCallFunction)
     }
 
 }
