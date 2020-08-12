@@ -43,16 +43,19 @@ class LauncherActivity :
                 if (currentUser == KEY_STUDENT) {
                     //get data from intent filter
                     startActivity(handleIntent())
-                }
-                else
+                } else
                     startActivity(FacultyContainerActivity.intent(this@LauncherActivity))
             } else {
-                startActivity(LoginActivity.intent(this@LauncherActivity))
+                if (currentUser == KEY_FACULTY)
+                    startActivity(FacultyContainerActivity.intent(this@LauncherActivity))
+                else
+                    startActivity(LoginActivity.intent(this@LauncherActivity))
             }
             finish()
             BaseAppController.setEnterPageAnimation(this@LauncherActivity)
         }, 1500)
     }
+
     private fun setViewModelOps() {
         viewModel.apply {
             userModelLiveData.observe(this@LauncherActivity, Observer {
@@ -63,44 +66,45 @@ class LauncherActivity :
             })
         }
     }
+
     //get data from intent and covert into viewModel and share Using intent to ContainerActivity
-fun handleIntent():Intent{
-    val launcherIntent = Intent(this@LauncherActivity,ContainerActivity::class.java)
+    fun handleIntent(): Intent {
+        val launcherIntent = Intent(this@LauncherActivity, ContainerActivity::class.java)
         val appLinkIntent = intent
         val appLinkAction = appLinkIntent.action
         val appLinkData = appLinkIntent.data
-        return if(appLinkData!=null){
-            val data: MutableList<String>? =appLinkData.pathSegments
+        return if (appLinkData != null) {
+            val data: MutableList<String>? = appLinkData.pathSegments
 
-            val data1 =data?.joinToString()
+            val data1 = data?.joinToString()
             var result = data1?.split("=", ",")?.map { it.trim() }
 
-            var result1=result?.drop(1)
-            var result2=result1?.drop(1)
+            var result1 = result?.drop(1)
+            var result2 = result1?.drop(1)
 
-            var courseid= result2?.get(0)
-            var courseName= result2?.get(1)
-            var courseDescription=result2?.get(2)
-            var courseCode=result2?.get(3)
-            var image=result2?.get(4)
-            var imageurl=result2?.get(5)
-            var imageUrl=image+"/"+imageurl
+            var courseid = result2?.get(0)
+            var courseName = result2?.get(1)
+            var courseDescription = result2?.get(2)
+            var courseCode = result2?.get(3)
+            var image = result2?.get(4)
+            var imageurl = result2?.get(5)
+            var imageUrl = image + "/" + imageurl
 
-            var totalCount=result2?.get(6)
+            var totalCount = result2?.get(6)
 
-            var courseM: CoursesModel= CoursesModel()
+            var courseM: CoursesModel = CoursesModel()
 
             courseM.apply {
-                this.courseId= courseid?.toInt()!!
-                this.courseName=courseName
-                this.courseDescription=courseDescription
-                this.courseCode=courseCode
-                this.courseImage=imageUrl
-                this.totalCount=totalCount?.toInt()!!
+                this.courseId = courseid?.toInt()!!
+                this.courseName = courseName
+                this.courseDescription = courseDescription
+                this.courseCode = courseCode
+                this.courseImage = imageUrl
+                this.totalCount = totalCount?.toInt()!!
 
             }
             launcherIntent.putExtra(KEY_COURSE_MODEL, courseM as Parcelable)
-        }else{
+        } else {
             launcherIntent
         }
 

@@ -26,11 +26,9 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
-import com.google.android.material.snackbar.Snackbar
 import com.ramanbyte.BaseAppController
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseFragment
-import com.ramanbyte.databinding.FacultyPledgeDialogBinding
 import com.ramanbyte.databinding.FragmentLoginBinding
 import com.ramanbyte.emla.faculty.ui.activities.FacultyContainerActivity
 import com.ramanbyte.emla.ui.activities.ContainerActivity
@@ -45,14 +43,14 @@ import org.json.JSONObject
  * @author Niraj Naware <niraj.n@ramanbyte.com>
  * @since 27/07/2020
  */
-class LoginFragment : BaseFragment<FragmentLoginBinding,LoginViewModel>(true,true) {
+class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>(true, true) {
 
-    private var callbackManager: CallbackManager?=null
-    private var accessToken: AccessToken?=null
-    var isLoggedIn:Boolean = false
+    private var callbackManager: CallbackManager? = null
+    private var accessToken: AccessToken? = null
+    var isLoggedIn: Boolean = false
     lateinit var mGoogleSignInClient: GoogleSignInClient
     private val RC_SIGN_IN = 101
-    var mContext : Context? = null
+    var mContext: Context? = null
 
     override val viewModelClass: Class<LoginViewModel> = LoginViewModel::class.java
 
@@ -78,37 +76,25 @@ class LoginFragment : BaseFragment<FragmentLoginBinding,LoginViewModel>(true,tru
 
     private fun setViewModelOps() {
         viewModel.apply {
-            /* if (userEntity != null)
-                 if (userEntity?.loggedId != KEY_Y) {
-                     showPledgeDialog()
-                 }*/
+
             userModelLiveData.observe(this@LoginFragment, Observer {
                 it?.let {
                     if (it.userType.equals(KEY_STUDENT, true)) {
 
-                        /*   if (it.loggedId != KEY_Y)
-                               showPledgeDialog()
-                           else {*/
                         callWorkerToMangeUserDevice()
                         if (!viewModel.isUserActive()) {
                             findNavController().navigate(R.id.action_loginFragment_to_learnerProfileFragment)
-                        }else{
+                        } else {
                             startActivity(ContainerActivity.intent(mContext as Activity))
                             Activity().finish()
                             BaseAppController.setEnterPageAnimation(mContext as Activity)
                         }
 
-                        //  }
-
-                    }else if (it.userType.equals(KEY_FACULTY, true)) {
-                        if (it.loggedId != KEY_Y)
-                            showPledgeDialog()
-                        else {
-                            callWorkerToMangeUserDevice()
-                            startActivity(FacultyContainerActivity.intent(mContext as Activity))
-                            Activity().finish()
-                            BaseAppController.setEnterPageAnimation(mContext as Activity)
-                        }
+                    } else if (it.userType.equals(KEY_FACULTY, true)) {
+                        callWorkerToMangeUserDevice()
+                        startActivity(FacultyContainerActivity.intent(mContext as Activity))
+                        Activity().finish()
+                        BaseAppController.setEnterPageAnimation(mContext as Activity)
                     }
                     userModelLiveData.value = null
                 }
@@ -116,8 +102,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding,LoginViewModel>(true,tru
             })
 
             btnGoogleLogin.observe(this@LoginFragment, Observer {
-                if (it != null){
-                    if(it == true){
+                if (it != null) {
+                    if (it == true) {
                         signIn()
                         btnGoogleLogin.value = null
                     }
@@ -125,8 +111,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding,LoginViewModel>(true,tru
             })
 
             btnFbLogin.observe(this@LoginFragment, Observer {
-                if (it != null){
-                    if(it == true){
+                if (it != null) {
+                    if (it == true) {
                         initFbLogin()
                         btnFbLogin.value = null
                     }
@@ -146,39 +132,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding,LoginViewModel>(true,tru
         WorkManager.getInstance(mContext!!).enqueue(simpleRequest)
     }
 
-    private fun showPledgeDialog() {
-        val dialog = Dialog(mContext!!)
-        val pledgeBinding: FacultyPledgeDialogBinding =
-            FacultyPledgeDialogBinding.inflate(LayoutInflater.from(mContext!!))
-        dialog.setContentView(pledgeBinding.root)
-        dialog.window?.setDimAmount(0.2F)
-        pledgeBinding.loginViewModel = viewModel
-        dialog.setCanceledOnTouchOutside(false)
-
-        viewModel.apply {
-
-            navigateToNextScreen.observe(this@LoginFragment, Observer {
-                if (it != null) {
-                    if (it == true) {
-                        if (NetworkConnectivity.isConnectedToInternet()) {
-                            callWorkerToMangeUserDevice()
-                            startActivity(FacultyContainerActivity.intent(mContext as Activity))
-                            dialog.dismiss()
-                            navigateToNextScreen.value = null
-                            Activity().finish()
-                        }else{
-                            dialog.dismiss()
-                        }
-                    } else {
-                        layoutBinding.layoutMain.snack(BindingUtils.string(R.string.please_agree_the_instruction),
-                            Snackbar.LENGTH_LONG,{})
-                        navigateToNextScreen.value = null
-                    }
-                }
-            })
-        }
-        dialog.show()
-    }
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
@@ -270,22 +223,24 @@ class LoginFragment : BaseFragment<FragmentLoginBinding,LoginViewModel>(true,tru
         }
     }
 
-    private fun initFbLogin(){
+    private fun initFbLogin() {
 
         accessToken = AccessToken.getCurrentAccessToken()
         isLoggedIn = accessToken != null && accessToken!!.isExpired
 
-        if(isLoggedIn != true){
+        if (isLoggedIn != true) {
 
             callbackManager = CallbackManager.Factory.create()
-            LoginManager.getInstance().logInWithReadPermissions(mContext as Activity,
-                arrayListOf("public_profile","email"))
+            LoginManager.getInstance().logInWithReadPermissions(
+                mContext as Activity,
+                arrayListOf("public_profile", "email")
+            )
 
             LoginManager.getInstance().registerCallback(callbackManager,
                 object : FacebookCallback<LoginResult?> {
 
                     override fun onSuccess(loginResult: LoginResult?) {
-                        Log.d("APPINFO","LoggedIn success :"+loginResult)
+                        Log.d("APPINFO", "LoggedIn success :" + loginResult)
 
                         callWorkerToMangeUserDevice()
                         startActivity(ContainerActivity.intent(mContext as Activity))
@@ -294,29 +249,36 @@ class LoginFragment : BaseFragment<FragmentLoginBinding,LoginViewModel>(true,tru
 
                         val request = GraphRequest.newMeRequest(
                             loginResult!!.accessToken,
-                            object : GraphRequest.GraphJSONObjectCallback{
-                                override fun onCompleted(jsonObject: JSONObject?, response: GraphResponse?) {
+                            object : GraphRequest.GraphJSONObjectCallback {
+                                override fun onCompleted(
+                                    jsonObject: JSONObject?,
+                                    response: GraphResponse?
+                                ) {
 
                                     // for email we have to add permissions for email in facebook developer consol
 
-                                    AppLog.infoLog("UserInfo"
-                                            +loginResult.accessToken
-                                            +jsonObject?.getString("id")
-                                            +jsonObject?.getString("name"))
+                                    AppLog.infoLog(
+                                        "UserInfo"
+                                                + loginResult.accessToken
+                                                + jsonObject?.getString("id")
+                                                + jsonObject?.getString("name")
+                                    )
                                 }
                             })
 
                         var parameters = Bundle()
-                        parameters.putString("fields","id,name,email,gender")
+                        parameters.putString("fields", "id,name,email,gender")
                         request.parameters = parameters
                         request.executeAsync()
                     }
+
                     override fun onCancel() {
-                        Log.d("APPINFO","LoggedIn Cancle :")
+                        Log.d("APPINFO", "LoggedIn Cancle :")
                     }
+
                     override fun onError(exception: FacebookException) {
 
-                        Log.d("APPINFO","LoggedIn Error :")
+                        Log.d("APPINFO", "LoggedIn Error :")
                     }
                 })
         }
@@ -338,7 +300,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding,LoginViewModel>(true,tru
 
     private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
 
-        if (completedTask.isSuccessful){
+        if (completedTask.isSuccessful) {
 
             callWorkerToMangeUserDevice()
             startActivity(ContainerActivity.intent(mContext as Activity))
@@ -348,13 +310,15 @@ class LoginFragment : BaseFragment<FragmentLoginBinding,LoginViewModel>(true,tru
             try {
                 val account = completedTask.getResult(ApiException::class.java)
                 // Signed in successfully
-                AppLog.infoLog("USER INFO :"
-                        +"ID"+account?.id
-                        +"First Name"+account?.givenName
-                        +"Last Name"+account?.familyName
-                        +"Email"+account?.email
-                        +"Profile URL"+account?.photoUrl.toString()
-                        +"Token ID"+account?.idToken )
+                AppLog.infoLog(
+                    "USER INFO :"
+                            + "ID" + account?.id
+                            + "First Name" + account?.givenName
+                            + "Last Name" + account?.familyName
+                            + "Email" + account?.email
+                            + "Profile URL" + account?.photoUrl.toString()
+                            + "Token ID" + account?.idToken
+                )
 
             } catch (e: ApiException) {
                 // Sign in was unsuccessful

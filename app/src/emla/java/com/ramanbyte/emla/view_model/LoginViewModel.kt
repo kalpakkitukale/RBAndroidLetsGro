@@ -41,9 +41,6 @@ class LoginViewModel(var mContext: Context) : BaseViewModel(mContext) {
     val userLoginRequestLiveData = MutableLiveData(LoginRequest())
     private val masterRepository: MasterRepository by instance()
     private val registrationRepository: RegistrationRepository by instance()
-    var userEntity = masterRepository.getCurrentUser()
-    var isPledgeConfirm: MutableLiveData<Boolean?> = MutableLiveData(null)
-    var navigateToNextScreen: MutableLiveData<Boolean?> = MutableLiveData(null)
 
     var btnGoogleLogin = MutableLiveData<Boolean?>(null)
     var btnFbLogin = MutableLiveData<Boolean?>(null)
@@ -125,42 +122,6 @@ class LoginViewModel(var mContext: Context) : BaseViewModel(mContext) {
             } else {
                 checkPermission()
             }
-        }
-    }
-
-    fun onPledgeConfirmation(button: CompoundButton, check: Boolean) {
-        isPledgeConfirm.value = check
-    }
-
-    fun onPledgeTaken(view: View) {
-        if (isPledgeConfirm.value == true) {
-            CoroutineUtils.main {
-                try {
-                    val pledgeStatusRequest = PledgeStatusRequest()
-                    pledgeStatusRequest.status = KEY_Y
-                    val apiCallFunction: suspend () -> Unit = {
-                        masterRepository.updatePledgeStatus(pledgeStatusRequest)
-                    }
-                    invokeApiCall(apiCallFunction = apiCallFunction)
-                    coroutineToggleLoader()
-                    navigateToNextScreen.value = true
-                } catch (e: ApiException) {
-                    e.printStackTrace()
-                    AppLog.errorLog(e.message, e)
-                    coroutineToggleLoader()
-                } catch (e: NoDataException) {
-                    e.printStackTrace()
-                    AppLog.errorLog(e.message, e)
-                    coroutineToggleLoader()
-                } catch (e: NoInternetException) {
-                    e.printStackTrace()
-                    AppLog.errorLog(e.message, e)
-                    coroutineToggleLoader()
-                }
-            }
-        } else {
-            navigateToNextScreen.value = false
-            //show error
         }
     }
 
