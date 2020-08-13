@@ -7,6 +7,9 @@
         <variable
             name="replyModel"
             type="com.ramanbyte.emla.models.AskQuestionReplyModel" />
+        <variable
+            name="viewModel"
+            type="com.ramanbyte.emla.faculty.view_model.FacultyQuestionAnswerViewModel" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -51,9 +54,19 @@
                 android:layout_marginEnd="@dimen/dp_10"
                 android:text="@{replyModel.userName}"
                 android:textSize="@dimen/sp_14"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/ivMenu"
                 app:layout_constraintStart_toEndOf="@+id/rivUserPic"
                 app:layout_constraintTop_toTopOf="@+id/rivUserPic" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ivMenu"
+                android:onClick="@{ ()-> viewModel.onClickMenu(replyModel)}"
+                app:srcCompat="@drawable/ic_three_dot_menu"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:padding="@dimen/dp_5"/>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvReply"

@@ -14,6 +14,8 @@ import com.ramanbyte.base.BaseFragment
 import com.ramanbyte.databinding.FragmentFacultyQuestionAnswerBinding
 import com.ramanbyte.emla.faculty.adapter.FacultyQuestionAnswerAdapter
 import com.ramanbyte.emla.faculty.models.StudentAskedQuestionsModel
+import com.ramanbyte.emla.faculty.view.ReplyEditBottomSheet
+import com.ramanbyte.emla.faculty.view.StudentAskedQuestionsFilterBottomSheet
 import com.ramanbyte.emla.faculty.view_model.FacultyQuestionAnswerViewModel
 import com.ramanbyte.emla.models.AskQuestionReplyModel
 import com.ramanbyte.utilities.*
@@ -111,9 +113,15 @@ class FacultyQuestionAnswerFragment :
                         }
                     }
                 })
+
+                onClickMenuLiveData.observe(this@FacultyQuestionAnswerFragment, Observer {
+                    it?.let {
+                        val replyEditBottomSheet = ReplyEditBottomSheet.get(it)
+                        replyEditBottomSheet.show(childFragmentManager, BindingUtils.string(R.string.reply_edit))
+                        onClickMenuLiveData.value = null
+                    }
+                })
             }
-
-
         }
     }
 
@@ -140,6 +148,7 @@ class FacultyQuestionAnswerFragment :
                         )
                     //(layoutManager as LinearLayoutManager).stackFromEnd = true
                     this.questionReplyList = questionReplyList
+                    this.questionAnswerViewModel = viewModel
                     (layoutManager as LinearLayoutManager).isSmoothScrollbarEnabled = true
                     (layoutManager as LinearLayoutManager).scrollToPosition(itemCount - 1)
                     adapter = this

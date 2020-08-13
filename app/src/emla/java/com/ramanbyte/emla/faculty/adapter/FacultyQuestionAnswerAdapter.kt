@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ramanbyte.R
 import com.ramanbyte.databinding.CardChatMsgReceiveBinding
 import com.ramanbyte.databinding.CardChatMsgSendBinding
+import com.ramanbyte.emla.faculty.view_model.FacultyQuestionAnswerViewModel
 import com.ramanbyte.emla.models.AskQuestionReplyModel
 import com.ramanbyte.utilities.KEY_FACULTY
 import kotlin.collections.ArrayList
@@ -17,6 +18,7 @@ class FacultyQuestionAnswerAdapter :
 
     private val VIEW_TYPE_MESSAGE_SENT = 1
     private val VIEW_TYPE_MESSAGE_RECEIVED = 2
+    var questionAnswerViewModel: FacultyQuestionAnswerViewModel? = null
 
     var questionReplyList: ArrayList<AskQuestionReplyModel>? = null
 
@@ -50,7 +52,7 @@ class FacultyQuestionAnswerAdapter :
     }
 
     override fun getItemCount(): Int {
-        return questionReplyList?.size!!
+        return questionReplyList?.size ?:0
     }
 
     override fun onBindViewHolder(
@@ -59,15 +61,15 @@ class FacultyQuestionAnswerAdapter :
     ) {
 
         if (holder is SentMessageHolder) {
-            holder.bind(questionReplyList!![position])
+            questionReplyList?.get(position)?.let { holder.bind(it) }
         } else if (holder is ReceivedMessageHolder) {
-            holder.bind(questionReplyList!![position])
+            questionReplyList?.get(position)?.let { holder.bind(it) }
         }
 
     }
 
     override fun getItemViewType(position: Int): Int {
-        val userType = questionReplyList!![position].userType
+        val userType = questionReplyList?.get(position)?.userType
 
         return if (userType == KEY_FACULTY) {
             VIEW_TYPE_MESSAGE_SENT
@@ -93,7 +95,10 @@ class FacultyQuestionAnswerAdapter :
         }
 
         fun bind(askQuestionReplyModel: AskQuestionReplyModel) {
-            sentBinding!!.replyModel = askQuestionReplyModel
+            sentBinding?.apply {
+                replyModel = askQuestionReplyModel
+                viewModel = questionAnswerViewModel
+            }
         }
     }
 
@@ -107,7 +112,7 @@ class FacultyQuestionAnswerAdapter :
         }
 
         fun bind(askQuestionReplyModel: AskQuestionReplyModel) {
-            receivedBinding!!.replyModel = askQuestionReplyModel
+            receivedBinding?.replyModel = askQuestionReplyModel
         }
     }
 }

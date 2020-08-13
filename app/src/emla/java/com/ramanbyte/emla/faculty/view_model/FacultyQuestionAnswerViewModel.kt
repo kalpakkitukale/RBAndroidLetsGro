@@ -1,6 +1,8 @@
 package com.ramanbyte.emla.faculty.view_model
 
+import android.content.ClipData
 import android.content.Context
+import android.content.Context.CLIPBOARD_SERVICE
 import android.view.View
 import androidx.lifecycle.MutableLiveData
 import com.ramanbyte.R
@@ -16,7 +18,7 @@ import com.ramanbyte.utilities.BindingUtils
 import com.ramanbyte.utilities.KEY_BLANK
 import org.kodein.di.generic.instance
 
-class FacultyQuestionAnswerViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
+class FacultyQuestionAnswerViewModel(val mContext: Context) : BaseViewModel(mContext = mContext) {
 
     private val questionRepository: QuestionRepository by instance()
 
@@ -29,6 +31,12 @@ class FacultyQuestionAnswerViewModel(mContext: Context) : BaseViewModel(mContext
     }
     var onClickAddReplyLiveData = MutableLiveData<Boolean>().apply {
         value = false
+    }
+    var onClickMenuLiveData = MutableLiveData<AskQuestionReplyModel>().apply {
+        value = null
+    }
+    var onClickCloseBottomSheetLiveData = MutableLiveData<Boolean>().apply {
+        value = null
     }
     var visibilityReplyBtnLiveData = MutableLiveData<Int>().apply {
         value = View.GONE
@@ -122,7 +130,35 @@ class FacultyQuestionAnswerViewModel(mContext: Context) : BaseViewModel(mContext
         }
     }
 
-    fun onClickAddReply(view: View){
+    fun onClickAddReply(view: View) {
         onClickAddReplyLiveData.value = true
+    }
+
+    fun onClickMenu(replyModel: AskQuestionReplyModel) {
+        onClickMenuLiveData.value = replyModel
+    }
+
+    fun onClickCloseBottomSheet(view: View) {
+        onClickCloseBottomSheetLiveData.value = true
+    }
+
+    fun onClickEdit(view: View, reply: String) {
+        enteredReplyLiveData.value = reply
+        onClickCloseBottomSheet(view)
+    }
+
+    fun onClickCopy(view: View, reply: String) {
+
+        val clipboard =
+            mContext.getSystemService(CLIPBOARD_SERVICE) as android.content.ClipboardManager
+        val clip =
+            ClipData.newPlainText(BindingUtils.string(R.string.copied_reply), reply)
+        clipboard.setPrimaryClip(clip)
+
+        onClickCloseBottomSheet(view)
+    }
+
+    fun onClickDelete(view: View) {
+        AppLog.infoLog("onClickDelete")
     }
 }

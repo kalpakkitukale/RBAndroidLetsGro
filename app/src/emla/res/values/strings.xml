@@ -306,8 +306,12 @@ Content
     <string name="select_date_as">Select Date as</string>
     <string name="select_answer_as">Select Answer as</string>
     <string name="tomorrow">Tomorrow</string>
-
     <string name="yesterday">Yesterday</string>
+
+    <string name="edit">Edit</string>
+    <string name="copy">Copy</string>
+    <string name="reply_edit">Reply Edit</string>
+    <string name="copied_reply">Copied Reply</string>
 
     //login with facebook key
     <string name="facebook_app_id">256607422269546</string>
