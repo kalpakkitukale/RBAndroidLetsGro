@@ -39,6 +39,7 @@
             android:layout_height="1dp"
             android:layout_marginBottom="@dimen/dp_10"
             android:background="@color/colorLightGray"
+            android:visibility="@{facultyQuestionAnswerViewModel.facultyReplyVisibility}"
             app:layout_constraintBottom_toTopOf="@+id/etAddReply"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -57,6 +58,7 @@
             android:paddingEnd="@dimen/dp_50"
             android:paddingBottom="@dimen/dp_10"
             android:text="@={facultyQuestionAnswerViewModel.enteredReplyLiveData}"
+            android:visibility="@{facultyQuestionAnswerViewModel.facultyReplyVisibility}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

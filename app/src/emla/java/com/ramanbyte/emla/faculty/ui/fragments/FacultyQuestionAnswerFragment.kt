@@ -1,10 +1,7 @@
 package com.ramanbyte.emla.faculty.ui.fragments
 
-import android.content.Context
 import android.view.MenuItem
 import android.view.View
-import android.view.WindowManager
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,18 +12,17 @@ import com.ramanbyte.databinding.FragmentFacultyQuestionAnswerBinding
 import com.ramanbyte.emla.faculty.adapter.FacultyQuestionAnswerAdapter
 import com.ramanbyte.emla.faculty.models.StudentAskedQuestionsModel
 import com.ramanbyte.emla.faculty.view.ReplyEditBottomSheet
-import com.ramanbyte.emla.faculty.view.StudentAskedQuestionsFilterBottomSheet
 import com.ramanbyte.emla.faculty.view_model.FacultyQuestionAnswerViewModel
 import com.ramanbyte.emla.models.AskQuestionReplyModel
 import com.ramanbyte.utilities.*
 
 /**
- * A simple [Fragment] subclass.
+ * @author Niraj Naware <niraj.n@ramanbyte.com>
+ *
  */
 class FacultyQuestionAnswerFragment :
     BaseFragment<FragmentFacultyQuestionAnswerBinding, FacultyQuestionAnswerViewModel>() {
 
-    var mContext: Context? = null
     var questionAnswerAdapter: FacultyQuestionAnswerAdapter? = null
     var questionsModel: StudentAskedQuestionsModel? = null
 
@@ -41,8 +37,8 @@ class FacultyQuestionAnswerFragment :
         //activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
         //activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN or WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
 
-        ProgressLoader(mContext!!, viewModel)
-        AlertDialog(mContext!!, viewModel)
+        ProgressLoader(requireContext(), viewModel)
+        AlertDialog(requireContext(), viewModel)
 
         layoutBinding.apply {
             lifecycleOwner = this@FacultyQuestionAnswerFragment
@@ -55,17 +51,15 @@ class FacultyQuestionAnswerFragment :
             viewModel.apply {
 
                 arguments?.apply {
-                    questionsModel = getParcelable(KEY_QUESTION_MODEL)!!
-                    questionId = questionsModel?.questionId!!
+                    questionsModel = getParcelable(KEY_QUESTION_MODEL)
+                    questionId = questionsModel?.questionId ?: 0
                 }
 
                 /*
                 * Faculty can be able to reply for the question.
                 * */
-                if (questionsModel?.facultyReply == KEY_Y)
-                    etAddReply.visibility = View.VISIBLE
-                else
-                    etAddReply.visibility = View.GONE
+                facultyReplyVisibility.postValue(if (questionsModel?.facultyReply == KEY_Y) View.VISIBLE else View.GONE)
+
 
                 /*
                 * call API to get conversation data
@@ -76,13 +70,9 @@ class FacultyQuestionAnswerFragment :
 
                     val askQuestionReplyList = ArrayList<AskQuestionReplyModel>()
                     askQuestionReplyList.add(0, AskQuestionReplyModel().apply {
-                        createdDateTime = questionsModel?.questionRaisedDateTime!! /*getDisplayDateFromDate(
-                            questionsModel?.questionRaisedDateTime!!,
-                            DATE_TIME_PATTERN,
-                            DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS
-                        )*/
-                        answer = questionsModel?.question!!
-                        userName = questionsModel?.studentName!!
+                        createdDateTime = questionsModel?.questionRaisedDateTime
+                        answer = questionsModel?.question
+                        userName = questionsModel?.studentName
                         userType = KEY_STUDENT
                     })
                     if (it != null) {
@@ -95,10 +85,7 @@ class FacultyQuestionAnswerFragment :
 
                 enteredReplyLiveData.observe(this@FacultyQuestionAnswerFragment, Observer {
                     if (it != null) {
-                        if (it.isNullOrBlank())
-                            visibilityReplyBtnLiveData.value = View.GONE
-                        else
-                            visibilityReplyBtnLiveData.value = View.VISIBLE
+                        visibilityReplyBtnLiveData.postValue(if (it.isNullOrBlank()) View.GONE else View.VISIBLE)
                     }
                 })
 
@@ -117,7 +104,10 @@ class FacultyQuestionAnswerFragment :
                 onClickMenuLiveData.observe(this@FacultyQuestionAnswerFragment, Observer {
                     it?.let {
                         val replyEditBottomSheet = ReplyEditBottomSheet.get(it)
-                        replyEditBottomSheet.show(childFragmentManager, BindingUtils.string(R.string.reply_edit))
+                        replyEditBottomSheet.show(
+                            childFragmentManager,
+                            BindingUtils.string(R.string.reply_edit)
+                        )
                         onClickMenuLiveData.value = null
                     }
                 })
@@ -142,7 +132,7 @@ class FacultyQuestionAnswerFragment :
                 questionAnswerAdapter?.apply {
                     layoutManager =
                         LinearLayoutManager(
-                            mContext,
+                            requireContext(),
                             RecyclerView.VERTICAL,
                             false
                         )
@@ -156,11 +146,6 @@ class FacultyQuestionAnswerFragment :
                 //adapter?.itemCount!!-1
             }
         }
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        mContext = context
     }
 
 }

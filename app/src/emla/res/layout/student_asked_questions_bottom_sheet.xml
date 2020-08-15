@@ -14,190 +14,185 @@
             type="com.ramanbyte.utilities.StaticHelpersKt" />
     </data>
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/mainContainer"
-        style="@style/customCard"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:background="@drawable/dialog_background"
+        android:padding="@dimen/dp_5">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/lblFilter"
+            style="@style/TextViewBoldNavyBlueOnLightNWhiteOnDark"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_10"
+            android:text="@string/filter"
+            android:textSize="@dimen/sp_16"
+            app:layout_constraintBottom_toBottomOf="@+id/ivCloseFilter"
+            app:layout_constraintEnd_toStartOf="@+id/ivCloseFilter"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivCloseFilter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{studentAskedQuestionsViewModel::onClickCloseBottomSheet}"
+            android:padding="@dimen/dp_5"
+            android:src="@drawable/ic_close_black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="@dimen/dp_5">
+            android:layout_height="0.7dp"
+            android:layout_marginTop="12dp"
+            android:background="@color/colorDivider"
+            app:layout_constraintTop_toBottomOf="@id/ivCloseFilter"
+            tools:layout_editor_absoluteX="5dp" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/lblFilter"
-                style="@style/TextViewBoldNavyBlueOnLightNWhiteOnDark"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dp_10"
-                android:text="@string/filter"
-                android:textSize="@dimen/sp_16"
-                app:layout_constraintBottom_toBottomOf="@+id/ivCloseFilter"
-                app:layout_constraintEnd_toStartOf="@+id/ivCloseFilter"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/lblSortByDate"
+            style="@style/TextViewMediumNavyBlueOnLightNWhiteOnDark"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_15"
+            android:text="@string/select_date_as"
+            android:textSize="@dimen/sp_16"
+            app:layout_constraintEnd_toEndOf="@+id/view"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view" />
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/ivCloseFilter"
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/cgSortByDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_5"
+            android:padding="@dimen/dp_5"
+            app:layout_constraintEnd_toEndOf="@id/lblSortByDate"
+            app:layout_constraintStart_toStartOf="@id/lblSortByDate"
+            app:layout_constraintTop_toBottomOf="@+id/lblSortByDate"
+            app:singleSelection="true">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/cpAsc"
+                style="@style/CustomChipChoice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="@{studentAskedQuestionsViewModel::onClickCloseBottomSheet}"
-                android:padding="@dimen/dp_5"
-                android:src="@drawable/ic_close_black"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:onClick="@{() -> studentAskedQuestionsViewModel.onClickSortByDateChip(staticHelper.KEY_ASCENDING)}"
+                android:text="@string/asc"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textSize="@dimen/sp_12" />
 
-            <View
-                android:id="@+id/view"
-                android:layout_width="match_parent"
-                android:layout_height="0.7dp"
-                android:layout_marginTop="12dp"
-                android:background="@color/colorDivider"
-                app:layout_constraintTop_toBottomOf="@id/ivCloseFilter"
-                tools:layout_editor_absoluteX="5dp" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/lblSortByDate"
-                style="@style/TextViewMediumNavyBlueOnLightNWhiteOnDark"
-                android:layout_width="0dp"
+            <com.google.android.material.chip.Chip
+                android:id="@+id/cpDesc"
+                style="@style/CustomChipChoice"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dp_10"
-                android:layout_marginTop="@dimen/dp_15"
-                android:text="@string/select_date_as"
-                android:textSize="@dimen/sp_16"
-                app:layout_constraintEnd_toEndOf="@+id/view"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/view" />
+                android:onClick="@{() -> studentAskedQuestionsViewModel.onClickSortByDateChip(staticHelper.KEY_DESCENDING)}"
+                android:text="@string/desc"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textSize="@dimen/sp_12" />
+        </com.google.android.material.chip.ChipGroup>
 
-            <com.google.android.material.chip.ChipGroup
-                android:id="@+id/cgSortByDate"
-                android:layout_width="0dp"
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/lblAnsAndUnAns"
+            style="@style/TextViewMediumNavyBlueOnLightNWhiteOnDark"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_10"
+            android:text="@string/select_answer_as"
+            android:textSize="@dimen/sp_16"
+            app:layout_constraintEnd_toEndOf="@+id/ivCloseFilter"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cgSortByDate" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/cgAnsType"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_5"
+            android:padding="@dimen/dp_5"
+            app:layout_constraintEnd_toEndOf="@id/lblAnsAndUnAns"
+            app:layout_constraintStart_toStartOf="@id/lblAnsAndUnAns"
+            app:layout_constraintTop_toBottomOf="@+id/lblAnsAndUnAns"
+            app:singleSelection="true">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/cpAllAns"
+                style="@style/CustomChipChoice"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/dp_5"
-                android:layout_marginTop="@dimen/dp_5"
-                app:layout_constraintEnd_toEndOf="@id/lblSortByDate"
-                app:layout_constraintStart_toStartOf="@id/lblSortByDate"
-                app:layout_constraintTop_toBottomOf="@+id/lblSortByDate"
-                app:singleSelection="true">
+                android:onClick="@{() -> studentAskedQuestionsViewModel.onClickAnswerChip(staticHelper.KEY_ALL)}"
+                android:text="@string/all"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textSize="@dimen/sp_12" />
 
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/cpAsc"
-                    style="@style/CustomChipChoice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="@{() -> studentAskedQuestionsViewModel.onClickSortByDateChip(staticHelper.KEY_ASCENDING)}"
-                    android:text="@string/asc"
-                    android:textAlignment="center"
-                    android:textAllCaps="true"
-                    android:textSize="@dimen/sp_12" />
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/cpDesc"
-                    style="@style/CustomChipChoice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="@{() -> studentAskedQuestionsViewModel.onClickSortByDateChip(staticHelper.KEY_DESCENDING)}"
-                    android:text="@string/desc"
-                    android:textAlignment="center"
-                    android:textAllCaps="true"
-                    android:textSize="@dimen/sp_12" />
-            </com.google.android.material.chip.ChipGroup>
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/lblAnsAndUnAns"
-                style="@style/TextViewMediumNavyBlueOnLightNWhiteOnDark"
-                android:layout_width="0dp"
+            <com.google.android.material.chip.Chip
+                android:id="@+id/cpAnswered"
+                style="@style/CustomChipChoice"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dp_10"
-                android:layout_marginTop="@dimen/dp_10"
-                android:text="@string/select_answer_as"
-                android:textSize="@dimen/sp_16"
-                app:layout_constraintEnd_toEndOf="@+id/ivCloseFilter"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cgSortByDate" />
+                android:onClick="@{() -> studentAskedQuestionsViewModel.onClickAnswerChip(staticHelper.KEY_ANSWERED)}"
+                android:text="@string/answered"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textSize="@dimen/sp_12" />
 
-            <com.google.android.material.chip.ChipGroup
-                android:id="@+id/cgAnsType"
-                android:layout_width="0dp"
+            <com.google.android.material.chip.Chip
+                android:id="@+id/cpUnanswered"
+                style="@style/CustomChipChoice"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/dp_5"
-                android:layout_marginTop="@dimen/dp_5"
-                app:layout_constraintEnd_toEndOf="@id/lblAnsAndUnAns"
-                app:layout_constraintStart_toStartOf="@id/lblAnsAndUnAns"
-                app:layout_constraintTop_toBottomOf="@+id/lblAnsAndUnAns"
-                app:singleSelection="true">
+                android:onClick="@{() -> studentAskedQuestionsViewModel.onClickAnswerChip(staticHelper.KEY_UNANSWERED)}"
+                android:text="@string/unanswered"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textSize="@dimen/sp_12" />
+        </com.google.android.material.chip.ChipGroup>
 
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/cpAllAns"
-                    style="@style/CustomChipChoice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="@{() -> studentAskedQuestionsViewModel.onClickAnswerChip(staticHelper.KEY_ALL)}"
-                    android:text="@string/all"
-                    android:textAlignment="center"
-                    android:textAllCaps="true"
-                    android:textSize="@dimen/sp_12" />
+        <View
+            android:id="@+id/viewFilterAboveDeleteButton"
+            android:layout_width="match_parent"
+            android:layout_height="0.7dp"
+            android:layout_marginTop="12dp"
+            android:background="@color/colorDivider"
+            app:layout_constraintTop_toBottomOf="@id/cgAnsType"
+            tools:layout_editor_absoluteX="5dp" />
 
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/cpAnswered"
-                    style="@style/CustomChipChoice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="@{() -> studentAskedQuestionsViewModel.onClickAnswerChip(staticHelper.KEY_ANSWERED)}"
-                    android:text="@string/answered"
-                    android:textAlignment="center"
-                    android:textAllCaps="true"
-                    android:textSize="@dimen/sp_12" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnApplyFilter"
+            style="@style/CustomCapsuleButtonBlueBgWhiteText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_15"
+            android:layout_marginBottom="@dimen/dp_10"
+            android:onClick="@{studentAskedQuestionsViewModel::onClickApplyFilter}"
+            android:text="@string/apply"
+            android:textSize="@dimen/sp_14"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/viewFilterAboveDeleteButton"
+            app:layout_constraintWidth_percent="0.27" />
 
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/cpUnanswered"
-                    style="@style/CustomChipChoice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="@{() -> studentAskedQuestionsViewModel.onClickAnswerChip(staticHelper.KEY_UNANSWERED)}"
-                    android:text="@string/unanswered"
-                    android:textAlignment="center"
-                    android:textAllCaps="true"
-                    android:textSize="@dimen/sp_12" />
-            </com.google.android.material.chip.ChipGroup>
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivDelete"
+            android:layout_width="@dimen/dp_30"
+            android:layout_height="@dimen/dp_30"
+            android:layout_marginEnd="@dimen/dp_15"
+            android:onClick="@{studentAskedQuestionsViewModel::onClickClearFilter}"
+            android:padding="@dimen/dp_5"
+            android:src="@drawable/ic_delete_button"
+            app:layout_constraintBottom_toBottomOf="@id/btnApplyFilter"
+            app:layout_constraintEnd_toStartOf="@+id/btnApplyFilter"
+            app:layout_constraintTop_toTopOf="@id/btnApplyFilter" />
 
-            <View
-                android:id="@+id/viewFilterAboveDeleteButton"
-                android:layout_width="match_parent"
-                android:layout_height="0.7dp"
-                android:layout_marginTop="12dp"
-                android:background="@color/colorDivider"
-                app:layout_constraintTop_toBottomOf="@id/cgAnsType"
-                tools:layout_editor_absoluteX="5dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnApplyFilter"
-                style="@style/CustomCapsuleButtonBlueBgWhiteText"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_15"
-                android:layout_marginBottom="@dimen/dp_10"
-                android:onClick="@{studentAskedQuestionsViewModel::onClickApplyFilter}"
-                android:text="@string/apply"
-                android:textSize="@dimen/sp_14"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/viewFilterAboveDeleteButton"
-                app:layout_constraintWidth_percent="0.27" />
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/ivDelete"
-                android:layout_width="@dimen/dp_30"
-                android:layout_height="@dimen/dp_30"
-                android:layout_marginEnd="@dimen/dp_15"
-                android:onClick="@{studentAskedQuestionsViewModel::onClickClearFilter}"
-                android:padding="@dimen/dp_5"
-                android:src="@drawable/ic_delete_button_blue"
-                app:layout_constraintBottom_toBottomOf="@id/btnApplyFilter"
-                app:layout_constraintEnd_toStartOf="@+id/btnApplyFilter"
-                app:layout_constraintTop_toTopOf="@id/btnApplyFilter" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
 </layout>

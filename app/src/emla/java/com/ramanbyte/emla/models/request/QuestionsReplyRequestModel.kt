@@ -10,8 +10,12 @@ class QuestionsReplyRequestModel {
     var question_Id: Int? = 0
     var userId: Int? = 0
     var answer: String? = KEY_BLANK
+    var createdBy: Int? = 0
     var created_Date: String? = DateUtils.getCurDate()
+    var modifiedBy: Int? = 0
+    var modified_Date: String? = DateUtils.getCurDate()
     var app_Status: String? = KEY_APP
     var del_Status: String? = KEY_N
     var isFavourite: String? = KEY_BLANK
+    var isEdited: Int? = 0
 }

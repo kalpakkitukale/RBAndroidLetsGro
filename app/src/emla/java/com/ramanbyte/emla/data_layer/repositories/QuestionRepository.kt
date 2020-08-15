@@ -50,7 +50,9 @@ class QuestionRepository(mContext: Context) : BaseRepository(mContext) {
 
     suspend fun insertQuestionsReply(
         currentQuestionId: Int,
-        userAnswer: String
+        userAnswer: String,
+        replyId: Int,
+        editFlag: Int
     ): QuestionsReplyRequestModel? {
 
         val userId = applicationDatabase.getUserDao().getCurrentUser()?.userId!!
@@ -60,6 +62,10 @@ class QuestionRepository(mContext: Context) : BaseRepository(mContext) {
                 question_Id = currentQuestionId
                 this.userId = userId
                 answer = userAnswer
+                createdBy = userId
+                modifiedBy = userId
+                id = replyId
+                isEdited = editFlag
             }
 
         return apiRequest {

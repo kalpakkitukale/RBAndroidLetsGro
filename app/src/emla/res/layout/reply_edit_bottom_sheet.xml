@@ -8,10 +8,6 @@
     <data>
 
         <variable
-            name="reply"
-            type="String" />
-
-        <variable
             name="facultyQuestionAnswerViewModel"
             type="com.ramanbyte.emla.faculty.view_model.FacultyQuestionAnswerViewModel" />
     </data>
@@ -29,10 +25,9 @@
             android:layout_height="wrap_content"
             android:onClick="@{facultyQuestionAnswerViewModel::onClickCloseBottomSheet}"
             android:padding="@dimen/dp_10"
-            android:src="@drawable/ic_close_black"
+            app:srcCompat="@drawable/ic_close_black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/lblEdit"
@@ -44,7 +39,7 @@
             android:layout_marginEnd="@dimen/dp_10"
             android:drawableStart="@drawable/ic_delete_button"
             android:drawablePadding="@dimen/dp_10"
-            android:onClick="@{ () -> facultyQuestionAnswerViewModel.onClickEdit(lblEdit,reply)}"
+            android:onClick="@{ () -> facultyQuestionAnswerViewModel.onClickEdit(lblEdit)}"
             android:padding="@dimen/dp_5"
             android:text="@string/edit"
             android:textSize="@dimen/sp_14"
@@ -58,7 +53,7 @@
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/ic_delete_button"
             android:drawablePadding="@dimen/dp_10"
-            android:onClick="@{ () -> facultyQuestionAnswerViewModel.onClickCopy(lblCopy,reply)}"
+            android:onClick="@{ () -> facultyQuestionAnswerViewModel.onClickCopy(lblCopy)}"
             android:padding="@dimen/dp_5"
             android:text="@string/copy"
             android:textSize="@dimen/sp_14"

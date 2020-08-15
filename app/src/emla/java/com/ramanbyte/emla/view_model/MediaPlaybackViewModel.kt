@@ -19,6 +19,7 @@ import com.ramanbyte.emla.models.MediaInfoModel
 import com.ramanbyte.utilities.AppLog
 import com.ramanbyte.utilities.BindingUtils
 import com.ramanbyte.utilities.KEY_BLANK
+import com.ramanbyte.utilities.KEY_NOT_EDITED
 import org.kodein.di.generic.instance
 
 class MediaPlaybackViewModel(mContext: Context) : BaseViewModel(mContext) {
@@ -305,7 +306,7 @@ class MediaPlaybackViewModel(mContext: Context) : BaseViewModel(mContext) {
         CoroutineUtils.main {
             try {
                 isLoaderShowingLiveData.postValue(true)
-                questionRepository.insertQuestionsReply(questionId, reply)
+                questionRepository.insertQuestionsReply(questionId, reply,0,KEY_NOT_EDITED)
                 getConversationData(questionId)
                 isLoaderShowingLiveData.postValue(false)
             } catch (e: ApiException) {

@@ -9,15 +9,23 @@ import com.ramanbyte.databinding.ReplyEditBottomSheetBinding
 import com.ramanbyte.emla.faculty.view_model.FacultyQuestionAnswerViewModel
 import com.ramanbyte.emla.models.AskQuestionReplyModel
 import com.ramanbyte.utilities.AppLog
+import com.ramanbyte.utilities.KEY_BLANK
 import com.ramanbyte.utilities.KEY_REPLY_MODEL
 
-
-
-class ReplyEditBottomSheet : BaseBottomSheetFragment<ReplyEditBottomSheetBinding,FacultyQuestionAnswerViewModel>(false,true) {
+/**
+ * @author Niraj Naware <niraj.n@ramanbyte.com>
+ * @since 11/08/20
+ */
+class ReplyEditBottomSheet :
+    BaseBottomSheetFragment<ReplyEditBottomSheetBinding, FacultyQuestionAnswerViewModel>(
+        false,
+        true
+    ) {
 
     var replyModel: AskQuestionReplyModel? = null
 
-    override val viewModelClass: Class<FacultyQuestionAnswerViewModel> = FacultyQuestionAnswerViewModel::class.java
+    override val viewModelClass: Class<FacultyQuestionAnswerViewModel> =
+        FacultyQuestionAnswerViewModel::class.java
 
     override fun layoutId(): Int = R.layout.reply_edit_bottom_sheet
 
@@ -42,15 +50,20 @@ class ReplyEditBottomSheet : BaseBottomSheetFragment<ReplyEditBottomSheetBinding
             lifecycleOwner = this@ReplyEditBottomSheet
             facultyQuestionAnswerViewModel = viewModel
 
-            if (arguments != null) {
-                replyModel = arguments?.getParcelable(KEY_REPLY_MODEL)
-                reply = replyModel?.answer
-            }
-
             viewModel.apply {
+
+                if (arguments != null) {
+                    replyModel = arguments?.getParcelable(KEY_REPLY_MODEL)
+                    reply = replyModel?.answer ?: KEY_BLANK
+                    replyId = replyModel?.replyId ?: 0
+                }
+
+                /*
+                * Observe the variable to close the bottom sheet
+                * */
                 onClickCloseBottomSheetLiveData.observe(this@ReplyEditBottomSheet, Observer {
-                    if (it != null){
-                        if (it == true){
+                    if (it != null) {
+                        if (it == true) {
                             dismiss()
                             onClickCloseBottomSheetLiveData.value = false
                         }

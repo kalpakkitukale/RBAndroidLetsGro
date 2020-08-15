@@ -18,7 +18,8 @@ import com.ramanbyte.emla.view_model.MyDownloadsViewModel
 import com.ramanbyte.utilities.AlertDialog
 
 /**
- * A simple [Fragment] subclass.
+ * @author Niraj Naware <niraj.n@ramanbyte.com>
+ *
  */
 class MyDownloadsFragment : BaseFragment<FragmentMyDownloadsBinding, MyDownloadsViewModel>() {
 
@@ -28,7 +29,7 @@ class MyDownloadsFragment : BaseFragment<FragmentMyDownloadsBinding, MyDownloads
 
     override fun initiate() {
 
-        AlertDialog(context!!, viewModel)
+        AlertDialog(requireContext(), viewModel)
 
         layoutBinding.apply {
 
@@ -38,7 +39,7 @@ class MyDownloadsFragment : BaseFragment<FragmentMyDownloadsBinding, MyDownloads
 
         }
 
-        ExoMediaDownloadUtil.loadDownloads(context!!)
+        ExoMediaDownloadUtil.loadDownloads(requireContext())
 
         setMediaRecycler()
 
@@ -58,9 +59,7 @@ class MyDownloadsFragment : BaseFragment<FragmentMyDownloadsBinding, MyDownloads
                     MyDownloadsListAdapter(downloadsViewModel = viewModel, mediaList = mediaList)
 
                 listDownloads?.apply {
-
-                    layoutManager = LinearLayoutManager(context!!, RecyclerView.VERTICAL, false)
-
+                    layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
                     adapter = downloadsListAdapter
                 }
             }
@@ -75,11 +74,8 @@ class MyDownloadsFragment : BaseFragment<FragmentMyDownloadsBinding, MyDownloads
             playOrPreviewLiveData.observe(viewLifecycleOwner, Observer { mediaInfoModel ->
 
                 if (mediaInfoModel != null) {
-
-                    ContentViewer(activity!!).preview(mediaInfoModel)
-
+                    ContentViewer(requireContext()).preview(mediaInfoModel)
                     playOrPreviewLiveData.value = null
-
                 }
             })
 
@@ -87,7 +83,7 @@ class MyDownloadsFragment : BaseFragment<FragmentMyDownloadsBinding, MyDownloads
 
                 if (mediaInfoModel != null) {
 
-                    if (ContentViewer(activity!!).deleteMediaOrFiles(mediaInfoModel)) {
+                    if (ContentViewer(requireContext()).deleteMediaOrFiles(mediaInfoModel)) {
                         viewModel.deleteMediaInfo(mediaInfoModel.mediaId)
                         viewModel.showDeleteSuccessDialog()
                         setMediaRecycler()

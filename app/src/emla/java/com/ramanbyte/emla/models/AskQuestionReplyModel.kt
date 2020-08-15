@@ -3,13 +3,18 @@ package com.ramanbyte.emla.models
 import android.graphics.drawable.Drawable
 import android.os.Parcel
 import android.os.Parcelable
+import android.view.View
+import androidx.databinding.BaseObservable
+import androidx.databinding.Bindable
 import androidx.room.Ignore
+import com.ramanbyte.BR
 import com.ramanbyte.R
 import com.ramanbyte.utilities.*
 import com.ramanbyte.utilities.DateUtils.getFreeFormatDateTime
 
-class AskQuestionReplyModel() : Parcelable {
+class AskQuestionReplyModel() : Parcelable, BaseObservable() {
     var userId = 0
+    var question_Id = 0
 
     /*
     * this is for question list
@@ -27,6 +32,25 @@ class AskQuestionReplyModel() : Parcelable {
         )
 
     var answer: String? = KEY_BLANK
+    var question: String? = KEY_BLANK
+    var replyId: Int = 0
+
+    @Bindable
+    var isEdited: Int = 0
+        set(value) {
+            field = value
+            notifyPropertyChanged(BR.isEdited)
+        }
+
+    @Bindable
+    var editedLabelVisibility: Int? = 0
+        set(value) {
+            field = value
+            notifyPropertyChanged(BR.editedLabelVisibility)
+        }
+        get() {
+            return if (isEdited == 1) View.VISIBLE else View.GONE
+        }
     var userName: String? = KEY_BLANK
     var userType: String? = KEY_BLANK
     var userPic: String? = KEY_BLANK
@@ -54,6 +78,9 @@ class AskQuestionReplyModel() : Parcelable {
         answer = parcel.readString()
         userName = parcel.readString()
         userType = parcel.readString()
+        question = parcel.readString()
+        isEdited = parcel.readInt()
+        replyId = parcel.readInt()
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -61,6 +88,9 @@ class AskQuestionReplyModel() : Parcelable {
         parcel.writeString(answer)
         parcel.writeString(userName)
         parcel.writeString(userType)
+        parcel.writeString(question)
+        parcel.writeInt(isEdited)
+        parcel.writeInt(replyId)
     }
 
     override fun describeContents(): Int {

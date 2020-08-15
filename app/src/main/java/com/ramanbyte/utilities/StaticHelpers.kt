@@ -201,6 +201,8 @@ const val KEY_QUESTION_STATUS = "questionStatus"
 const val KEY_QUIZ_RESULT_MODEL = "quizResultModel"
 const val KEY_COURSE_IMAGE_URL = "courseImageUrl"
 const val KEY_DEFAULT_MEDIA_STATUS = -1
+const val KEY_EDITED = 1
+const val KEY_NOT_EDITED = 0
 
 
 fun Window.changeStatusBarColor(view: View, colorResourceId: Int) {

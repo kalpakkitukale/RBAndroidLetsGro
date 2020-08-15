@@ -1,6 +1,8 @@
 package com.ramanbyte.emla.faculty.view
 
 import android.content.Context
+import android.os.Bundle
+import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseBottomSheetFragment
@@ -16,6 +18,11 @@ class StudentAskedQuestionsFilterBottomSheet: BaseBottomSheetFragment<StudentAsk
     override val viewModelClass: Class<StudentAskedQuestionsViewModel> = StudentAskedQuestionsViewModel::class.java
 
     override fun layoutId(): Int = R.layout.student_asked_questions_bottom_sheet
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setStyle(DialogFragment.STYLE_NO_FRAME, 0)
+    }
 
     override fun initiate() {
         layoutBinding.apply {

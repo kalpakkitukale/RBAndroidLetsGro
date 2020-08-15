@@ -13,9 +13,7 @@ import com.ramanbyte.emla.data_layer.network.exception.NoDataException
 import com.ramanbyte.emla.data_layer.network.exception.NoInternetException
 import com.ramanbyte.emla.data_layer.repositories.QuestionRepository
 import com.ramanbyte.emla.models.AskQuestionReplyModel
-import com.ramanbyte.utilities.AppLog
-import com.ramanbyte.utilities.BindingUtils
-import com.ramanbyte.utilities.KEY_BLANK
+import com.ramanbyte.utilities.*
 import org.kodein.di.generic.instance
 
 class FacultyQuestionAnswerViewModel(val mContext: Context) : BaseViewModel(mContext = mContext) {
@@ -42,7 +40,14 @@ class FacultyQuestionAnswerViewModel(val mContext: Context) : BaseViewModel(mCon
         value = View.GONE
     }
 
+    var facultyReplyVisibility = MutableLiveData<Int>().apply {
+        value = View.GONE
+    }
+
     var questionId = 0
+    var reply = KEY_BLANK
+    var replyId = 0
+    var isEdit = false
 
     override var noInternetTryAgain: () -> Unit = {
         getConversationData()
@@ -107,8 +112,14 @@ class FacultyQuestionAnswerViewModel(val mContext: Context) : BaseViewModel(mCon
         CoroutineUtils.main {
             try {
                 isLoaderShowingLiveData.postValue(true)
-                questionRepository.insertQuestionsReply(questionId, reply)
+
+                if (isEdit)
+                    questionRepository.insertQuestionsReply(questionId, reply, replyId, KEY_EDITED)
+                else
+                    questionRepository.insertQuestionsReply(questionId, reply, 0, KEY_NOT_EDITED)
+
                 enteredReplyLiveData.postValue(KEY_BLANK)
+                isEdit = false
                 getConversationData()
                 isLoaderShowingLiveData.postValue(false)
             } catch (e: ApiException) {
@@ -142,12 +153,19 @@ class FacultyQuestionAnswerViewModel(val mContext: Context) : BaseViewModel(mCon
         onClickCloseBottomSheetLiveData.value = true
     }
 
-    fun onClickEdit(view: View, reply: String) {
+    /*
+    * Edit the selected reply
+    * */
+    fun onClickEdit(view: View) {
         enteredReplyLiveData.value = reply
+        isEdit = true
         onClickCloseBottomSheet(view)
     }
 
-    fun onClickCopy(view: View, reply: String) {
+    /*
+    * Copy the selected reply into the clipboard
+    * */
+    fun onClickCopy(view: View) {
 
         val clipboard =
             mContext.getSystemService(CLIPBOARD_SERVICE) as android.content.ClipboardManager
@@ -155,10 +173,15 @@ class FacultyQuestionAnswerViewModel(val mContext: Context) : BaseViewModel(mCon
             ClipData.newPlainText(BindingUtils.string(R.string.copied_reply), reply)
         clipboard.setPrimaryClip(clip)
 
+        isEdit = false
         onClickCloseBottomSheet(view)
     }
 
+    /*
+    * To delete the selected reply (for now there no functionality)
+    * */
     fun onClickDelete(view: View) {
+        isEdit = false
         AppLog.infoLog("onClickDelete")
     }
 }

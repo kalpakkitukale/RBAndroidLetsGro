@@ -312,6 +312,7 @@ Content
     <string name="copy">Copy</string>
     <string name="reply_edit">Reply Edit</string>
     <string name="copied_reply">Copied Reply</string>
+    <string name="edited_note">This message has been edited</string>
 
     //login with facebook key
     <string name="facebook_app_id">256607422269546</string>
