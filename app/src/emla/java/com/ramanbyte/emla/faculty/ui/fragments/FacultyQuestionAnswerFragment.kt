@@ -104,10 +104,13 @@ class FacultyQuestionAnswerFragment :
                 onClickMenuLiveData.observe(this@FacultyQuestionAnswerFragment, Observer {
                     it?.let {
                         val replyEditBottomSheet = ReplyEditBottomSheet.get(it)
-                        replyEditBottomSheet.show(
-                            childFragmentManager,
-                            BindingUtils.string(R.string.reply_edit)
-                        )
+
+                        if (!replyEditBottomSheet.isAdded) {
+                            replyEditBottomSheet.show(
+                                childFragmentManager,
+                                BindingUtils.string(R.string.reply_edit)
+                            )
+                        }
                         onClickMenuLiveData.value = null
                     }
                 })
