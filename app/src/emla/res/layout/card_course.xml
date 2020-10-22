@@ -76,6 +76,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@id/tvTopicDescription" />
 
+                <!--As Discuss with mansi hide share cource icon for release-->
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/ivShare"
                     android:layout_width="@dimen/dp_22"
@@ -85,7 +86,7 @@
                     android:padding="@dimen/dp_3"
                     android:paddingTop="@dimen/dp_3"
                     android:src="@drawable/ic_share"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tvTopicDescription" />
 

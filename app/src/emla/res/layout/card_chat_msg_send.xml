@@ -81,6 +81,7 @@
                     app:layout_constraintStart_toEndOf="@+id/rivUserPic"
                     app:layout_constraintTop_toTopOf="@+id/rivUserPic" />
 
+                <!--As Discuss with mansi hide Edit reply menu icon for release-->
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/ivMenu"
                     android:layout_width="wrap_content"
@@ -89,6 +90,7 @@
                     android:paddingStart="@dimen/dp_5"
                     android:paddingTop="@dimen/dp_5"
                     android:paddingBottom="@dimen/dp_5"
+                    android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/ic_three_dot_menu" />
