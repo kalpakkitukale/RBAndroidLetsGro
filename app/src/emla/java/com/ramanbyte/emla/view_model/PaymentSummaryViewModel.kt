@@ -17,10 +17,8 @@ import com.ramanbyte.emla.data_layer.network.exception.ApiException
 import com.ramanbyte.emla.data_layer.network.exception.NoInternetException
 import com.ramanbyte.emla.data_layer.repositories.MasterRepository
 import com.ramanbyte.emla.models.PayuGatewayModel
-import com.ramanbyte.utilities.AppLog
-import com.ramanbyte.utilities.BindingUtils
-import com.ramanbyte.utilities.DateUtils
-import com.ramanbyte.utilities.NetworkConnectivity
+import com.ramanbyte.emla.models.request.InsertTransactionRequestModel
+import com.ramanbyte.utilities.*
 import com.ramanbyte.utilities.StaticMethodUtilitiesKtx.getRandomAlphaNumericString
 import org.kodein.di.generic.instance
 
@@ -31,7 +29,7 @@ import org.kodein.di.generic.instance
 class PaymentSummaryViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
 
     val masterRepository: MasterRepository by instance()
-  //  val transactionRepository: TransactionRepository by instance()
+   // val transactionRepository: TransactionRepository by instance()
     val payuGatewayModel = PayuGatewayModel()
     var payuGatewayModelLiveData: MutableLiveData<PayuGatewayModel?> = MutableLiveData(null)
 
@@ -60,13 +58,13 @@ class PaymentSummaryViewModel(mContext: Context) : BaseViewModel(mContext = mCon
 
     val loggedInUserModel = masterRepository.getCurrentUser()
 
-  //  var insertTransactionRequestModel = InsertTransactionRequestModel()
+    var insertTransactionRequestModel = InsertTransactionRequestModel()
 
     override var noInternetTryAgain: () -> Unit = {
         AppLog.errorLog("No Internet. Try Again")
     }
 
-    /*@SuppressLint("DefaultLocale")
+    @SuppressLint("DefaultLocale")
     fun addTransaction(
         initiateTransaction: Boolean,
         showLoader: Boolean,
@@ -84,10 +82,10 @@ class PaymentSummaryViewModel(mContext: Context) : BaseViewModel(mContext = mCon
                     programId = this@PaymentSummaryViewModel.programId
 
                     if (initiateTransaction) {
-                        transactionStatus = StaticHelpers.Constants.KEY_PENDING_TRANSACTION_STATUS
-                        paymentGateway = StaticHelpers.Constants.KEY_BLANK
+                        transactionStatus = KEY_PENDING_TRANSACTION_STATUS
+                        paymentGateway = KEY_BLANK
                         createdDate = DateUtils.getCurDate(
-                            StaticHelpers.Constants.DATE_TIME_SECONDS_PATTERN
+                           DATE_TIME_SECONDS_PATTERN
                         )!!
                     }
                     paymentStepIntegration = this@PaymentSummaryViewModel.paymentStepIntegration
@@ -99,7 +97,7 @@ class PaymentSummaryViewModel(mContext: Context) : BaseViewModel(mContext = mCon
                         this@PaymentSummaryViewModel.amountLiveData.value.toString().toUpperCase()
                     )
                 }
-                val id = transactionRepository.insertTransaction(
+                val id = masterRepository.insertTransaction(
                     insertTransactionRequestModel
                 )
 
@@ -123,7 +121,7 @@ class PaymentSummaryViewModel(mContext: Context) : BaseViewModel(mContext = mCon
 
 
             } catch (e: ApiException) {
-                AppLog.errorLog(e.message)
+                AppLog.errorLog(e.message.toString())
                 e.printStackTrace()
                 isLoaderShowingLiveData.postValue(false)
 
@@ -138,7 +136,7 @@ class PaymentSummaryViewModel(mContext: Context) : BaseViewModel(mContext = mCon
 
                 isAlertDialogShown.postValue(true)
             } catch (e: NoInternetException) {
-                AppLog.errorLog(e.message)
+                AppLog.errorLog(e.message.toString())
                 e.printStackTrace()
                 isLoaderShowingLiveData.postValue(false)
 
@@ -152,7 +150,7 @@ class PaymentSummaryViewModel(mContext: Context) : BaseViewModel(mContext = mCon
                        })
                 isAlertDialogShown.postValue(true)
             } catch (e: Exception) {
-                AppLog.errorLog(e.message)
+                AppLog.errorLog(e.message.toString())
                 e.printStackTrace()
                 isLoaderShowingLiveData.postValue(false)
 
@@ -170,9 +168,9 @@ class PaymentSummaryViewModel(mContext: Context) : BaseViewModel(mContext = mCon
                 isAlertDialogShown.postValue(true)
             }
         }
-    }*/
+    }
 
-   /* fun onPaymentProceed() {
+    fun onPaymentProceed() {
         try {
             if (!NetworkConnectivity.isConnectedToInternet())
                 throw NoInternetException(BindingUtils.string(R.string.please_make_sure_you_are_connected_to_internet))
@@ -188,7 +186,7 @@ class PaymentSummaryViewModel(mContext: Context) : BaseViewModel(mContext = mCon
             }
         } catch (e: NoInternetException) {
             e.printStackTrace()
-            AppLog.errorLog(e.message)
+            AppLog.errorLog(e.message.toString())
             isLoaderShowingLiveData.postValue(false)
             setAlertDialogResourceModelMutableLiveData(
                 e.message.toString(),
@@ -200,7 +198,7 @@ class PaymentSummaryViewModel(mContext: Context) : BaseViewModel(mContext = mCon
             )
             isAlertDialogShown.postValue(true)
         }
-    }*/
+    }
 
     private fun initiatePayment() {
 
