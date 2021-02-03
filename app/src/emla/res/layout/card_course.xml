@@ -175,7 +175,7 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvLabelCoursesContent"
-                    style="@style/TextViewBoldNavyBlueOnLightNWhiteOnDark"
+                    style="@style/TextViewLightNavyBlueOnLightNWhiteOnDark"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dp_8"
@@ -183,7 +183,7 @@
                     android:layout_marginEnd="@dimen/dp_5"
                     android:layout_marginBottom="@dimen/dp_5"
                     android:gravity="center_horizontal"
-                    android:text="Courses Content"
+                    android:text="Content"
                     android:textSize="@dimen/sp_11"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@id/ivCoursesSyllabus"
@@ -192,7 +192,7 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvLabelTopicList"
-                    style="@style/TextViewBoldNavyBlueOnLightNWhiteOnDark"
+                    style="@style/TextViewLightNavyBlueOnLightNWhiteOnDark"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dp_8"
@@ -201,28 +201,27 @@
                     android:gravity="center_horizontal"
                     android:text="Topic List"
                     android:textSize="@dimen/sp_11"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvLabelCoursesContent"
                     app:layout_constraintEnd_toEndOf="@id/ivChapterList"
                     app:layout_constraintStart_toStartOf="@id/ivChapterList"
                     app:layout_constraintTop_toBottomOf="@id/ivChapterList" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvLabePerformance"
-                    style="@style/TextViewBoldNavyBlueOnLightNWhiteOnDark"
+                    style="@style/TextViewLightNavyBlueOnLightNWhiteOnDark"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/dp_8"
                     android:layout_marginTop="@dimen/dp_2"
-                    android:layout_marginEnd="@dimen/dp_5"
-                    android:gravity="center_horizontal"
                     android:text="Performance"
-                    android:textSize="@dimen/sp_11"
-                    app:layout_constraintEnd_toEndOf="@id/ivPerformance"
-                    app:layout_constraintStart_toStartOf="@id/ivPerformance"
+                    android:gravity="center_horizontal"
+                    android:textSize="@dimen/sp_10"
+                    app:layout_constraintEnd_toEndOf="@+id/ivPerformance"
+                    app:layout_constraintStart_toStartOf="@+id/ivPerformance"
                     app:layout_constraintTop_toBottomOf="@id/ivPerformance" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvLabeCart"
-                    style="@style/TextViewBoldNavyBlueOnLightNWhiteOnDark"
+                    style="@style/TextViewLightNavyBlueOnLightNWhiteOnDark"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dp_8"
