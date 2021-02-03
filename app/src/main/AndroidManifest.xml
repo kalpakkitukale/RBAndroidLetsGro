@@ -6,11 +6,12 @@
     <application
         android:allowBackup="true"
         android:hardwareAccelerated="true"
+        android:requestLegacyExternalStorage="true"
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
-        android:requestLegacyExternalStorage="true"
         tools:ignore="GoogleAppIndexingWarning,UnusedAttribute"
-        tools:node="merge">
+        tools:node="merge"
+        tools:replace="android:usesCleartextTraffic">
 
         <activity
             android:name=".cropper.ImageCroppingActivity"

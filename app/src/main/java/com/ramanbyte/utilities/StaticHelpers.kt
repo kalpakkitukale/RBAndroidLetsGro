@@ -157,6 +157,9 @@ const val GALLERY = 1
 const val REMOVE_PHOTO = 2
 const val PATH_SEPARATOR = "/"
 
+// payment codes
+val PAYMENT_SUCCESSFUL_REQUEST_CODE = 700
+
 
 /**
  * DATA PARSE KEY
