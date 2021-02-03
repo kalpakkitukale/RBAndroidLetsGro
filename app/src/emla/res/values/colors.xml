@@ -5,6 +5,7 @@
     <color name="colorApplicationBackground">#fcfcfc</color>
     <color name="cardBackgroundColor">#ffffff</color>
     <color name="colorIconNavyBlueInLightNGrayInDark">#1d396b</color>
+    <color name="colorIconNavyBlueInLightNGrayInDarkTransparent">#951d396b</color>
     <color name="colorTextNavyBlueInLightNWhiteInDark">#1d396b</color>
     <color name="colorIconGreen">#25ae88</color>
     <color name="colorButtonBlue">#3d9df9</color>
