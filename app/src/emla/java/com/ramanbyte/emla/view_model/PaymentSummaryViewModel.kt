@@ -5,6 +5,7 @@ import android.content.Context
 import android.os.Bundle
 import android.os.Parcelable
 import androidx.lifecycle.MutableLiveData
+import com.airpay.airpaysdk_simplifiedotp.ResponseMessage
 import com.payu.india.Extras.PayUChecksum
 import com.payu.india.Model.PaymentParams
 import com.payu.india.Model.PostData
@@ -35,7 +36,7 @@ class PaymentSummaryViewModel(mContext: Context) : BaseViewModel(mContext = mCon
 
     val airPayBundle = Bundle()
     var airPayBundleLiveData: MutableLiveData<Bundle?> = MutableLiveData(null)
-  //  internal var resp: ResponseMessage? = null
+    internal var resp: ResponseMessage? = null
 
     /* val radioAirpayChecked = ObservableBoolean(false)
      val radioPayuChecked = ObservableBoolean(false)*/
@@ -287,7 +288,7 @@ class PaymentSummaryViewModel(mContext: Context) : BaseViewModel(mContext = mCon
 
         // Live Success URL Merchant Id -
         airPayBundle.putString("SUCCESS_URL", "https://pibm.net/AirPayResponse.aspx")
-       // airPayBundle.putParcelable("RESPONSEMESSAGE", resp as Parcelable?)
+        airPayBundle.putParcelable("RESPONSEMESSAGE", resp as Parcelable?)
 
         AppLog.infoLog("INPUT PARAMS-->>$airPayBundle")
 

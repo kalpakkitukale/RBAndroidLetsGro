@@ -14,6 +14,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.airpay.airpaysdk_simplifiedotp.AirpayActivity
+import com.airpay.airpaysdk_simplifiedotp.Transaction
 import com.payu.india.Payu.Payu
 import com.payu.india.Payu.PayuConstants
 import com.payu.payuui.Activity.PayUBaseActivity
@@ -55,7 +56,7 @@ class PaymentSummaryActivity : AppCompatActivity(), KodeinAware {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initViews()
-//        customRadioClickListener()
+        customRadioClickListener()
     }
 
     companion object {
@@ -224,9 +225,7 @@ class PaymentSummaryActivity : AppCompatActivity(), KodeinAware {
         startActivityForResult(intent, AIR_PAY_REQUEST_CODE)
     }
 
-    fun launchPayUUI(
-        payuGatewayModel: PayuGatewayModel
-    ) {
+    fun launchPayUUI(payuGatewayModel: PayuGatewayModel) {
 
         val intent = Intent(this, PayUBaseActivity::class.java)
         intent.putExtra(PayuConstants.PAYU_CONFIG, payuGatewayModel.payuConfig)
@@ -243,7 +242,7 @@ class PaymentSummaryActivity : AppCompatActivity(), KodeinAware {
         startActivityForResult(intent, PayuConstants.PAYU_REQUEST_CODE)
     }
 
-    /*@SuppressLint("DefaultLocale")
+    @SuppressLint("DefaultLocale")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         when (resultCode) {
@@ -267,14 +266,6 @@ class PaymentSummaryActivity : AppCompatActivity(), KodeinAware {
                             paymentGateway = keyPaymentGatewayPayUBiz
                             if (data != null) {
                                 try {
-                                    // payment cancelled
-                                    *//*paymentSummaryViewModel?.insertTransactionRequestModel?.apply {
-                                        transactionStatus =
-                                             KEY_CANCEL_TRANSACTION_STATUS
-                                    }*//*
-
-                                    paymentSummaryViewModel?.addTransaction(
-                                        initiateTransaction = false,
                                         val payResponse = data . getStringExtra (keyPayuResponseStatus)!!
                                     if (payResponse.isNotEmpty()) {
                                         val payUObject = JSONObject(payResponse)
@@ -359,7 +350,7 @@ class PaymentSummaryActivity : AppCompatActivity(), KodeinAware {
                                             transactionStatus =
                                                 KEY_FAIL_TRANSACTION_STATUS
                                         }
-                                        *//*if (status != null) {
+                                        /*if (status != null) {
                                                 AppLog.infoLog("STATUS -> =$status")
                                             }
                                             if (merchantkey != null) {
@@ -428,7 +419,7 @@ class PaymentSummaryActivity : AppCompatActivity(), KodeinAware {
                                             }
                                             if (isrisk != null) {
                                                 AppLog.infoLog("ISRISK -> =" + isrisk)
-                                            }*//*
+                                            }*/
 
                                     }
                                 } else {
@@ -449,76 +440,74 @@ class PaymentSummaryActivity : AppCompatActivity(), KodeinAware {
         }
 
 
-        *//*
+        /*
         * This code is temporary until DescribedRadioButton get completed
-        * *//*
-        fun customRadioClickListener() {
+        * */
 
-            paymentSummaryViewModel?.apply {
 
-                paymentSummaryBinding?.apply {
+    }
+    fun customRadioClickListener() {
 
-                    radioAirpay.setOnClickListener {
+        paymentSummaryViewModel?.apply {
 
-                        *//* isAirPayChecked = paymentSummaryBinding!!.radioAirpay.isChecked
+            paymentSummaryBinding?.apply {
 
-                         paymentSummaryBinding!!.radioAirpay.isChecked = !isAirPayChecked
-                         paymentSummaryBinding!!.radioPayu.isChecked = isAirPayChecked*//*
+                radioAirpay.setOnClickListener {
 
-                        *//* if(paymentSummaryBinding!!.radioPayu.isChecked){
-                             paymentSummaryBinding!!.radioPayu.isChecked = false
-                         }*//*
-                        isAirPayChecked = radioAirpay.isChecked
+                    /* isAirPayChecked = paymentSummaryBinding!!.radioAirpay.isChecked
 
-                        if (!isAirPayChecked) {
-                            radioAirpay.toggle()
-                            radioPayu.isChecked = isAirPayChecked
-                            isAirPayChecked = true
-                            isPayuChecked = false
-                        }
+                     paymentSummaryBinding!!.radioAirpay.isChecked = !isAirPayChecked
+                     paymentSummaryBinding!!.radioPayu.isChecked = isAirPayChecked
+
+                     if(paymentSummaryBinding!!.radioPayu.isChecked){
+                         paymentSummaryBinding!!.radioPayu.isChecked = false
+                     }*/
+                    isAirPayChecked = radioAirpay.isChecked
+
+                    if (!isAirPayChecked) {
+                        radioAirpay.toggle()
+                        radioPayu.isChecked = isAirPayChecked
+                        isAirPayChecked = true
+                        isPayuChecked = false
                     }
-
-                    radioPayu.setOnClickListener {
-                        *//*paymentSummaryBinding!!.radioPayu.isChecked = true
-
-                        if(paymentSummaryBinding!!.radioAirpay.isChecked){
-                            paymentSummaryBinding!!.radioAirpay.isChecked = false
-                        }*//*
-                        *//*isPayuChecked = paymentSummlaryBinding!!.radioAirpay.isChecked
-
-                        paymentSummaryBinding!!.radioPayu.isChecked = !isPayuChecked
-                        paymentSummaryBinding!!.radioAirpay.isChecked = isPayuChecked*//*
-
-                        isPayuChecked = radioPayu.isChecked
-
-                        if (!isPayuChecked) {
-                            radioPayu.toggle()
-                            radioAirpay.isChecked = isPayuChecked
-                            isPayuChecked = true
-                            isAirPayChecked = false
-                        }
-                    }
-
-                }
-            }
-        }
-
-        *//**
-         * Vinay K
-         * 28-11-2019
-         * On back pressed*//*
-        override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
-            return when (item.itemId) {
-
-                android.R.id.home -> {
-                    onBackPressed()
-                    true
                 }
 
-                else -> super.onOptionsItemSelected(item)
+                radioPayu.setOnClickListener {
+                    paymentSummaryBinding!!.radioPayu.isChecked = true
+
+                    if(paymentSummaryBinding!!.radioAirpay.isChecked){
+                        paymentSummaryBinding!!.radioAirpay.isChecked = false
+                    }
+                    isPayuChecked = paymentSummaryBinding!!.radioAirpay.isChecked
+
+                    paymentSummaryBinding!!.radioPayu.isChecked = !isPayuChecked
+                    paymentSummaryBinding!!.radioAirpay.isChecked = isPayuChecked
+
+                    isPayuChecked = radioPayu.isChecked
+
+                    if (!isPayuChecked) {
+                        radioPayu.toggle()
+                        radioAirpay.isChecked = isPayuChecked
+                        isPayuChecked = true
+                        isAirPayChecked = false
+                    }
+                }
+
+            }
+        }
+    }
+
+  override  fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        return when (item.itemId) {
+
+            android.R.id.home -> {
+                onBackPressed()
+                true
             }
 
+            else -> super.onOptionsItemSelected(item)
         }
-    }*/
+
+    }
 }

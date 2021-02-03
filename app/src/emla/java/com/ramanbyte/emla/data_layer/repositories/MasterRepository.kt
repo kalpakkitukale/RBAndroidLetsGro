@@ -164,18 +164,15 @@ class MasterRepository(val mContext: Context) : BaseRepository(mContext) {
     }
 
     suspend fun insertTransaction(insertTransactionRequestModel: InsertTransactionRequestModel): Int {
-        val loginResponseModel = applicationDatabase.getUserDao()
-            .getUserData(applicationDatabase.getClientConfigDao().getCurrentClientDetails()?.id!!)
+        val loginResponseModel = this.getCurrentUser()
 
         val deviceDetails = ""
 
-        insertTransactionRequestModel.clientId =
-            loginResponseModel!!.clientId
-        insertTransactionRequestModel.created_By = loginResponseModel.userReffId
-        insertTransactionRequestModel.modify_By = loginResponseModel.userReffId
-        insertTransactionRequestModel.added_By = loginResponseModel.userReffId
-        insertTransactionRequestModel.user_Id = loginResponseModel.id
-        insertTransactionRequestModel.registrationId = loginResponseModel.userReffId
+        insertTransactionRequestModel.created_By = loginResponseModel!!.userId
+        insertTransactionRequestModel.modify_By = loginResponseModel.userId
+        insertTransactionRequestModel.added_By = loginResponseModel.userId
+        insertTransactionRequestModel.user_Id = loginResponseModel.userId
+        insertTransactionRequestModel.registrationId = loginResponseModel.userId
 
         insertTransactionRequestModel.deviceId = 0
         insertTransactionRequestModel.deviceType =KEY_ANDROID

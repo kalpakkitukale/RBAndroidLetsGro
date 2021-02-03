@@ -34,7 +34,7 @@ interface LoginApiController {
     suspend fun updateLogout(@Body manageUserDeviceModel: ManageUserDeviceModel, @Path("userId") userId: Int): Response<Int>
 
     // Creating Payment Controller
-    @POST("AddmissionRegistration/InsertTransactionDetails")
+    @POST("CourseFeeStructure/InsertTransactionDetails")
     suspend fun postTransactionDetails(@Body insertTransactionRequestModel: InsertTransactionRequestModel): Response<Int>
 
 }
