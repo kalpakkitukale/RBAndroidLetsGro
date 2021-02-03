@@ -274,7 +274,7 @@
     </style>
 
     <style name="CustomCapsuleButtonFilled">
-        <item name="android:background">colorTransparent</item>
+        <item name="android:background">@android:color/transparent</item>
         <item name="android:gravity">center</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:textAppearance">@style/AppTheme.Font.Black</item>

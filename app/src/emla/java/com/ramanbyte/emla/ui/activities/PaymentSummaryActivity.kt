@@ -2,7 +2,6 @@ package com.ramanbyte.emla.ui.activities
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Build
@@ -14,35 +13,19 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.room.Transaction
 import com.airpay.airpaysdk_simplifiedotp.AirpayActivity
-import com.airpay.airpaysdk_simplifiedotp.Transaction
 import com.payu.india.Payu.Payu
 import com.payu.india.Payu.PayuConstants
 import com.payu.payuui.Activity.PayUBaseActivity
 import com.ramanbyte.AppController
-import com.ramanbyte.BaseAppController.Companion.setEnterPageAnimation
 import com.ramanbyte.BuildConfig
 import com.ramanbyte.R
-import com.ramanbyte.admission.AppController
-import com.ramanbyte.admission.BuildConfig
-import com.ramanbyte.admission.R
-import com.ramanbyte.admission.base.BaseActivity
-import com.ramanbyte.admission.base.di.*
-import com.ramanbyte.admission.databinding.ActivityPaymentSummaryBinding
-import com.ramanbyte.admission.models.CampusWiseProgramsModel
-import com.ramanbyte.admission.models.payments.PayuGatewayModel
-import com.ramanbyte.admission.utilities.*
-import com.ramanbyte.admission.utilities.StaticHelpers.Constants.KEY_NA
-import com.ramanbyte.admission.view_model.PaymentSummaryViewModel
-import com.ramanbyte.admission.view_model.factory.Factory
-import com.ramanbyte.base.BaseActivity
-import com.ramanbyte.databinding.ActivityApplicationFormViewerBinding.bind
 import com.ramanbyte.databinding.ActivityPaymentSummaryBinding
 import com.ramanbyte.emla.base.di.ACTIVITY_CONTEXT
 import com.ramanbyte.emla.models.PayuGatewayModel
 import com.ramanbyte.emla.view_model.PaymentSummaryViewModel
 import com.ramanbyte.utilities.*
+import com.ramanbyte.view_model.factory.BaseViewModelFactory
 import org.json.JSONObject
 import org.kodein.di.Copy
 import org.kodein.di.Kodein
@@ -53,7 +36,6 @@ import org.kodein.di.generic.bind
 import org.kodein.di.generic.instance
 import org.kodein.di.generic.singleton
 import java.util.*
-import java.util.Collections.singleton
 
 class PaymentSummaryActivity : AppCompatActivity(), KodeinAware {
 
@@ -63,7 +45,7 @@ class PaymentSummaryActivity : AppCompatActivity(), KodeinAware {
         extend(_parentKodein, copy = Copy.All)
         bind<Context>(ACTIVITY_CONTEXT) with singleton { this@PaymentSummaryActivity }
     }
-    private val factory: Editable.Factory by instance()
+    private val factory: BaseViewModelFactory by instance()
 
     private var paymentSummaryBinding: ActivityPaymentSummaryBinding? = null
     private var paymentSummaryViewModel: PaymentSummaryViewModel? = null
@@ -73,7 +55,7 @@ class PaymentSummaryActivity : AppCompatActivity(), KodeinAware {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initViews()
-        customRadioClickListener()
+//        customRadioClickListener()
     }
 
     companion object {
@@ -104,7 +86,7 @@ class PaymentSummaryActivity : AppCompatActivity(), KodeinAware {
         }
     }
 
-     fun initViews() {
+    fun initViews() {
         paymentSummaryBinding =
             DataBindingUtil.setContentView(
                 this@PaymentSummaryActivity,
@@ -128,8 +110,8 @@ class PaymentSummaryActivity : AppCompatActivity(), KodeinAware {
 
         paymentSummaryViewModel?.apply {
 
-            ProgressLoader(this@PaymentSummaryActivity,this)
-            AlertDialog(this@PaymentSummaryActivity,this)
+            ProgressLoader(this@PaymentSummaryActivity, this)
+            AlertDialog(this@PaymentSummaryActivity, this)
 
 
             intent?.extras?.apply {
@@ -179,21 +161,21 @@ class PaymentSummaryActivity : AppCompatActivity(), KodeinAware {
                         startActivityForResult(
                             PaymentStatusActivity.openPaymentStatusActivity(
                                 this@PaymentSummaryActivity,
-                                 KEY_SUCCESS_TRANSACTION_STATUS,
+                                KEY_SUCCESS_TRANSACTION_STATUS,
                                 it.toString(),
                                 paymentStepIntegration,
-                                amountLiveData.value.toString(),
+                                amountLiveData.value.toString()
                                 /*campusWiseProgramModel.apply {
                                     paymentAlreadyForProgram = true
                                 }*/
-                            ),  PAYMENT_SUCCESSFUL_REQUEST_CODE
+                            ), PAYMENT_SUCCESSFUL_REQUEST_CODE
                         )
 
                     } else {
                         // fail
                         PaymentStatusActivity.openPaymentStatusActivity(
                             this@PaymentSummaryActivity,
-                             KEY_FAIL_TRANSACTION_STATUS,
+                            KEY_FAIL_TRANSACTION_STATUS,
                             "",
                             paymentStepIntegration,
                             amountLiveData.value.toString()/*, campusWiseProgramModel.apply {
@@ -261,283 +243,282 @@ class PaymentSummaryActivity : AppCompatActivity(), KodeinAware {
         startActivityForResult(intent, PayuConstants.PAYU_REQUEST_CODE)
     }
 
-    @SuppressLint("DefaultLocale")
-    override fun onActivityResult(requestCode: Int, resultCode{
-        when (requestCode) {
-            PayuConstants.PAYU_REQUEST_CODE -> {
+    /*@SuppressLint("DefaultLocale")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when (resultCode) {
+            Activity.RESULT_CANCELED -> {
+                // payment cancelled
                 paymentSummaryViewModel?.insertTransactionRequestModel?.apply {
-                    paymentGateway = keyPaymentGatewayPayUBiz
-                    if (data != null) {
-                        try {
-                            // payment cancelled
-                            /*paymentSummaryViewModel?.insertTransactionRequestModel?.apply {
-                                transactionStatus =
-                                     KEY_CANCEL_TRANSACTION_STATUS
-                            }*/
+                    transactionStatus =
+                        KEY_CANCEL_TRANSACTION_STATUS
+                }
 
-                            paymentSummaryViewModel?.addTransaction(
-                                initiateTransaction = false,
-                                val payResponse = data.getStringExtra(keyPayuResponseStatus)!!
-                            if (payResponse.isNotEmpty()) {
-                                val payUObject = JSONObject(payResponse)
-                                if (payUObject.has(keyPayuStatus)) {
-                                    if (payUObject.getString(keyPayuStatus) == keyPayuSuccess) {
-                                        var payuTransactionMode =
-                                            payUObject.getString(keyPayuTransactionMode)
-                                                .toLowerCase()
-                                        paymentMethod = when (payuTransactionMode) {
-                                            "nb" -> keyInternetBanking
-                                            "cc" -> keyCreditCard
-                                            "db" -> keyDebitCard
-                                            "cash" -> keyCash
-                                            "emi" -> keyEmi
-                                            else -> ""
-                                        }
+                paymentSummaryViewModel?.addTransaction(
+                    initiateTransaction = false,
+                    showLoader = true,
+                    terminateTransaction = true
+                )
+            }
+            else -> {
+                when (requestCode) {
+                    PayuConstants.PAYU_REQUEST_CODE -> {
+                        paymentSummaryViewModel?.insertTransactionRequestModel?.apply {
+                            paymentGateway = keyPaymentGatewayPayUBiz
+                            if (data != null) {
+                                try {
+                                    // payment cancelled
+                                    *//*paymentSummaryViewModel?.insertTransactionRequestModel?.apply {
                                         transactionStatus =
-                                             KEY_SUCCESS
-                                        tran_Id = payUObject.getString("txnid")
+                                             KEY_CANCEL_TRANSACTION_STATUS
+                                    }*//*
+
+                                    paymentSummaryViewModel?.addTransaction(
+                                        initiateTransaction = false,
+                                        val payResponse = data . getStringExtra (keyPayuResponseStatus)!!
+                                    if (payResponse.isNotEmpty()) {
+                                        val payUObject = JSONObject(payResponse)
+                                        if (payUObject.has(keyPayuStatus)) {
+                                            if (payUObject.getString(keyPayuStatus) == keyPayuSuccess) {
+                                                var payuTransactionMode =
+                                                    payUObject.getString(keyPayuTransactionMode)
+                                                        .toLowerCase()
+                                                paymentMethod = when (payuTransactionMode) {
+                                                    "nb" -> keyInternetBanking
+                                                    "cc" -> keyCreditCard
+                                                    "db" -> keyDebitCard
+                                                    "cash" -> keyCash
+                                                    "emi" -> keyEmi
+                                                    else -> ""
+                                                }
+                                                transactionStatus =
+                                                    KEY_SUCCESS
+                                                tran_Id = payUObject.getString("txnid")
+                                            } else {
+                                                // payment fail
+                                                transactionStatus =
+                                                    KEY_FAIL_TRANSACTION_STATUS
+                                            }
+                                        } else {
+                                            // payment fail
+                                            transactionStatus =
+                                                KEY_FAIL_TRANSACTION_STATUS
+                                        }
                                     } else {
                                         // payment fail
-                                        transactionStatus =
-                                             KEY_FAIL_TRANSACTION_STATUS
+                                        transactionStatus = KEY_FAIL_TRANSACTION_STATUS
+                                    }
+
+
+                                } catch (e: java.lang.NullPointerException) {
+                                    e.printStackTrace()
+                                    AppLog.errorLog(e.message, e)
+                                    transactionStatus =
+                                        KEY_FAIL_TRANSACTION_STATUS
+                                }
+
+                            } else {
+                                // payment fail
+                                transactionStatus =
+                                    KEY_FAIL_TRANSACTION_STATUS
+                            }
+                        }
+                    }
+                    AIR_PAY_REQUEST_CODE -> {
+                        paymentSummaryViewModel?.insertTransactionRequestModel?.apply {
+                            paymentGateway = keyPaymentGatewayAirPay
+                            if (data != null) {
+                                val transactionList =
+                                    data.extras!!.getSerializable("DATA") as ArrayList<Transaction>
+                                if (transactionList.size > 0) {
+                                    transactionList[0].apply {
+                                        if (!status.isNullOrEmpty() && status == "200"
+                                            && !statusmsg.isNullOrEmpty() && statusmsg.toLowerCase() == "success"
+                                        ) {
+                                            flag = status
+                                            transactionStatus =
+                                                KEY_SUCCESS_TRANSACTION_STATUS
+                                            paymentMethod = if (chmod != null) { // payment method
+                                                AppLog.infoLog("CHMOD -> =$chmod")
+                                                when (chmod) {
+                                                    "pg" -> keyCard
+                                                    "nb" -> keyInternetBanking
+                                                    "upi" -> keyUpi
+                                                    else -> KEY_NA
+                                                }
+                                            } else {
+                                                KEY_NA
+                                            }
+
+                                            if (transactionid != null) {
+                                                AppLog.infoLog("TXN ID -> =$transactionid")
+                                                tran_Id = transactionid
+                                            }
+                                        } else {
+                                            flag = status
+                                            transactionStatus =
+                                                KEY_FAIL_TRANSACTION_STATUS
+                                        }
+                                        *//*if (status != null) {
+                                                AppLog.infoLog("STATUS -> =$status")
+                                            }
+                                            if (merchantkey != null) {
+                                                AppLog.infoLog("MERCHANT KEY -> =$merchantkey")
+                                            }
+                                            if (merchantposttype != null) {
+                                                AppLog.infoLog("MERCHANT POST TYPE =$merchantposttype")
+                                            }
+                                            if (statusmsg != null) {
+                                                AppLog.infoLog("STATUS MSG -> =$statusmsg") //  success or fail
+                                            }
+                                            if (transactionamt != null) {
+                                                AppLog.infoLog("TRANSACTION AMT -> =$transactionamt")
+                                            }
+                                            if (txN_MODE != null) {
+                                                AppLog.infoLog("TXN MODE -> =$txN_MODE")
+                                            }
+                                            if (merchanttransactionid != null) {
+                                                AppLog.infoLog("MERCHANT_TXN_ID -> =$merchanttransactionid") // order id
+                                            }
+                                            if (securehash != null) {
+                                                AppLog.infoLog("SECURE HASH -> =$securehash")
+                                            }
+                                            if (customvar != null) {
+                                                AppLog.infoLog("CUSTOMVAR -> =$customvar")
+                                            }
+                                            if (transactionstatus != null) {
+                                                AppLog.infoLog("TXN STATUS -> =$transactionstatus")
+                                            }
+                                            if (txN_DATE_TIME != null) {
+                                                AppLog.infoLog("TXN_DATETIME -> =$txN_DATE_TIME")
+                                            }
+                                            if (txN_CURRENCY_CODE != null) {
+                                                AppLog.infoLog("TXN_CURRENCY_CODE -> =" + txN_CURRENCY_CODE)
+                                            }
+                                            if (transactionvariant != null) {
+                                                AppLog.infoLog("TRANSACTIONVARIANT -> =" + transactionvariant)
+                                            }
+
+                                            if (bankname != null) {
+                                                AppLog.infoLog("BANKNAME -> =" + bankname)
+                                            }
+                                            if (cardissuer != null) {
+                                                AppLog.infoLog("CARDISSUER -> =" + cardissuer)
+                                            }
+                                            if (fullname != null) {
+                                                AppLog.infoLog("FULLNAME -> =" + fullname)
+                                            }
+                                            if (email != null) {
+                                                AppLog.infoLog("EMAIL -> =" + email)
+                                            }
+                                            if (contactno != null) {
+                                                AppLog.infoLog("CONTACTNO -> =" + contactno)
+                                            }
+                                            if (merchanT_NAME != null) {
+                                                AppLog.infoLog("MERCHANT_NAME -> =" + merchanT_NAME)
+                                            }
+                                            if (settlemenT_DATE != null) {
+                                                AppLog.infoLog("SETTLEMENT_DATE -> =" + settlemenT_DATE)
+                                            }
+                                            if (surcharge != null) {
+                                                AppLog.infoLog("SURCHARGE -> =" + surcharge)
+                                            }
+                                            if (billedamount != null) {
+                                                AppLog.infoLog("BILLEDAMOUNT -> =" + billedamount)
+                                            }
+                                            if (isrisk != null) {
+                                                AppLog.infoLog("ISRISK -> =" + isrisk)
+                                            }*//*
+
                                     }
                                 } else {
                                     // payment fail
                                     transactionStatus =
-                                         KEY_FAIL_TRANSACTION_STATUS
+                                        KEY_FAIL_TRANSACTION_STATUS
                                 }
                             } else {
                                 // payment fail
-                                transactionStatus =KEY_FAIL_TRANSACTION_STATUS
+                                transactionStatus =
+                                    KEY_FAIL_TRANSACTION_STATUS
                             }
-
-
-                        } catch (e: java.lang.NullPointerException) {
-                            e.printStackTrace()
-                            AppLog.errorLog(e.message, e)
-                            transactionStatus =
-                                 KEY_FAIL_TRANSACTION_STATUS
                         }
 
-                    } else {
-                        // payment fail
-                        transactionStatus =
-                             KEY_FAIL_TRANSACTION_STATUS
                     }
                 }
             }
-            AIR_PAY_REQUEST_CODE -> {
-                paymentSummaryViewModel?.insertTransactionRequestModel?.apply {
-                    paymentGateway = keyPaymentGatewayAirPay
-                    if (data != null) {
-                        val transactionList =
-                            data.extras!!.getSerializable("DATA") as ArrayList<Transaction>
-                        if (transactionList.size > 0) {
-                            transactionList[0].apply {
-                                if (!status.isNullOrEmpty() && status == "200"
-                                    && !statusmsg.isNullOrEmpty() && statusmsg.toLowerCase() == "success"
-                                ) {
-                                    flag = status
-                                    transactionStatus =
-                                         KEY_SUCCESS_TRANSACTION_STATUS
-                                    paymentMethod = if (chmod != null) { // payment method
-                                        AppLog.infoLog("CHMOD -> =$chmod")
-                                        when (chmod) {
-                                            "pg" -> keyCard
-                                            "nb" -> keyInternetBanking
-                                            "upi" -> keyUpi
-                                            else -> KEY_NA
-                                        }
-                                    } else {
-                                        KEY_NA
-                                    }
+        }
 
-                                    if (transactionid != null) {
-                                        AppLog.infoLog("TXN ID -> =$transactionid")
-                                        tran_Id = transactionid
-                                    }
-                                } else {
-                                    flag = status
-                                    transactionStatus =
-                                         KEY_FAIL_TRANSACTION_STATUS
-                                }
-                                /*if (status != null) {
-                                        AppLog.infoLog("STATUS -> =$status")
-                                    }
-                                    if (merchantkey != null) {
-                                        AppLog.infoLog("MERCHANT KEY -> =$merchantkey")
-                                    }
-                                    if (merchantposttype != null) {
-                                        AppLog.infoLog("MERCHANT POST TYPE =$merchantposttype")
-                                    }
-                                    if (statusmsg != null) {
-                                        AppLog.infoLog("STATUS MSG -> =$statusmsg") //  success or fail
-                                    }
-                                    if (transactionamt != null) {
-                                        AppLog.infoLog("TRANSACTION AMT -> =$transactionamt")
-                                    }
-                                    if (txN_MODE != null) {
-                                        AppLog.infoLog("TXN MODE -> =$txN_MODE")
-                                    }
-                                    if (merchanttransactionid != null) {
-                                        AppLog.infoLog("MERCHANT_TXN_ID -> =$merchanttransactionid") // order id
-                                    }
-                                    if (securehash != null) {
-                                        AppLog.infoLog("SECURE HASH -> =$securehash")
-                                    }
-                                    if (customvar != null) {
-                                        AppLog.infoLog("CUSTOMVAR -> =$customvar")
-                                    }
-                                    if (transactionstatus != null) {
-                                        AppLog.infoLog("TXN STATUS -> =$transactionstatus")
-                                    }
-                                    if (txN_DATE_TIME != null) {
-                                        AppLog.infoLog("TXN_DATETIME -> =$txN_DATE_TIME")
-                                    }
-                                    if (txN_CURRENCY_CODE != null) {
-                                        AppLog.infoLog("TXN_CURRENCY_CODE -> =" + txN_CURRENCY_CODE)
-                                    }
-                                    if (transactionvariant != null) {
-                                        AppLog.infoLog("TRANSACTIONVARIANT -> =" + transactionvariant)
-                                    }
 
-                                    if (bankname != null) {
-                                        AppLog.infoLog("BANKNAME -> =" + bankname)
-                                    }
-                                    if (cardissuer != null) {
-                                        AppLog.infoLog("CARDISSUER -> =" + cardissuer)
-                                    }
-                                    if (fullname != null) {
-                                        AppLog.infoLog("FULLNAME -> =" + fullname)
-                                    }
-                                    if (email != null) {
-                                        AppLog.infoLog("EMAIL -> =" + email)
-                                    }
-                                    if (contactno != null) {
-                                        AppLog.infoLog("CONTACTNO -> =" + contactno)
-                                    }
-                                    if (merchanT_NAME != null) {
-                                        AppLog.infoLog("MERCHANT_NAME -> =" + merchanT_NAME)
-                                    }
-                                    if (settlemenT_DATE != null) {
-                                        AppLog.infoLog("SETTLEMENT_DATE -> =" + settlemenT_DATE)
-                                    }
-                                    if (surcharge != null) {
-                                        AppLog.infoLog("SURCHARGE -> =" + surcharge)
-                                    }
-                                    if (billedamount != null) {
-                                        AppLog.infoLog("BILLEDAMOUNT -> =" + billedamount)
-                                    }
-                                    if (isrisk != null) {
-                                        AppLog.infoLog("ISRISK -> =" + isrisk)
-                                    }*/
+        *//*
+        * This code is temporary until DescribedRadioButton get completed
+        * *//*
+        fun customRadioClickListener() {
 
-                            }
-                        } else {
-                            // payment fail
-                            transactionStatus =
-                                 KEY_FAIL_TRANSACTION_STATUS
+            paymentSummaryViewModel?.apply {
+
+                paymentSummaryBinding?.apply {
+
+                    radioAirpay.setOnClickListener {
+
+                        *//* isAirPayChecked = paymentSummaryBinding!!.radioAirpay.isChecked
+
+                         paymentSummaryBinding!!.radioAirpay.isChecked = !isAirPayChecked
+                         paymentSummaryBinding!!.radioPayu.isChecked = isAirPayChecked*//*
+
+                        *//* if(paymentSummaryBinding!!.radioPayu.isChecked){
+                             paymentSummaryBinding!!.radioPayu.isChecked = false
+                         }*//*
+                        isAirPayChecked = radioAirpay.isChecked
+
+                        if (!isAirPayChecked) {
+                            radioAirpay.toggle()
+                            radioPayu.isChecked = isAirPayChecked
+                            isAirPayChecked = true
+                            isPayuChecked = false
                         }
-                    } else {
-                        // payment fail
-                        transactionStatus =
-                             KEY_FAIL_TRANSACTION_STATUS
                     }
+
+                    radioPayu.setOnClickListener {
+                        *//*paymentSummaryBinding!!.radioPayu.isChecked = true
+
+                        if(paymentSummaryBinding!!.radioAirpay.isChecked){
+                            paymentSummaryBinding!!.radioAirpay.isChecked = false
+                        }*//*
+                        *//*isPayuChecked = paymentSummlaryBinding!!.radioAirpay.isChecked
+
+                        paymentSummaryBinding!!.radioPayu.isChecked = !isPayuChecked
+                        paymentSummaryBinding!!.radioAirpay.isChecked = isPayuChecked*//*
+
+                        isPayuChecked = radioPayu.isChecked
+
+                        if (!isPayuChecked) {
+                            radioPayu.toggle()
+                            radioAirpay.isChecked = isPayuChecked
+                            isPayuChecked = true
+                            isAirPayChecked = false
+                        }
+                    }
+
+                }
+            }
+        }
+
+        *//**
+         * Vinay K
+         * 28-11-2019
+         * On back pressed*//*
+        override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+            return when (item.itemId) {
+
+                android.R.id.home -> {
+                    onBackPressed()
+                    true
                 }
 
-            }
-        }
-        paymentSummaryViewModel?.addTransaction(
-            initiateTransaction = false,
-            showLoader = true,
-            terminateTransaction = false
-        )
-    }: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        when (resultCode) {
-
-            Activity.RESULT_CANCELED -> {
-                showLoader = true,
-                terminateTransaction = true
-                )
+                else -> super.onOptionsItemSelected(item)
             }
 
-            else ->
         }
-
-
-    }
-
-
-    /*
-    * This code is temporary until DescribedRadioButton get completed
-    * */
-    fun customRadioClickListener() {
-
-        paymentSummaryViewModel?.apply {
-
-            paymentSummaryBinding?.apply {
-
-                radioAirpay.setOnClickListener {
-
-                    /* isAirPayChecked = paymentSummaryBinding!!.radioAirpay.isChecked
-
-                     paymentSummaryBinding!!.radioAirpay.isChecked = !isAirPayChecked
-                     paymentSummaryBinding!!.radioPayu.isChecked = isAirPayChecked*/
-
-                    /* if(paymentSummaryBinding!!.radioPayu.isChecked){
-                         paymentSummaryBinding!!.radioPayu.isChecked = false
-                     }*/
-                    isAirPayChecked = radioAirpay.isChecked
-
-                    if (!isAirPayChecked) {
-                        radioAirpay.toggle()
-                        radioPayu.isChecked = isAirPayChecked
-                        isAirPayChecked = true
-                        isPayuChecked = false
-                    }
-                }
-
-                radioPayu.setOnClickListener {
-                    /*paymentSummaryBinding!!.radioPayu.isChecked = true
-
-                    if(paymentSummaryBinding!!.radioAirpay.isChecked){
-                        paymentSummaryBinding!!.radioAirpay.isChecked = false
-                    }*/
-                    /*isPayuChecked = paymentSummlaryBinding!!.radioAirpay.isChecked
-
-                    paymentSummaryBinding!!.radioPayu.isChecked = !isPayuChecked
-                    paymentSummaryBinding!!.radioAirpay.isChecked = isPayuChecked*/
-
-                    isPayuChecked = radioPayu.isChecked
-
-                    if (!isPayuChecked) {
-                        radioPayu.toggle()
-                        radioAirpay.isChecked = isPayuChecked
-                        isPayuChecked = true
-                        isAirPayChecked = false
-                    }
-                }
-
-            }
-        }
-    }
-
-    /**
-     * Vinay K
-     * 28-11-2019
-     * On back pressed*/
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
-        return when (item.itemId) {
-
-            android.R.id.home -> {
-                onBackPressed()
-                true
-            }
-
-            else -> super.onOptionsItemSelected(item)
-        }
-
-    }
+    }*/
 }
