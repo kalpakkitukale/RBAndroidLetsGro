@@ -85,5 +85,9 @@
         android:name="com.ramanbyte.emla.ui.fragments.MyFavouriteVideoFragment"
         android:label="@string/my_favourite"
         tools:layout="@layout/fragment_my_favourite_video" />
+    <fragment
+        android:id="@+id/cartFragment"
+        android:name="com.ramanbyte.emla.ui.fragments.CartFragment"
+        android:label="@string/cart_list" />
 
 </navigation>

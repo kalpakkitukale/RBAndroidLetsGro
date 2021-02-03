@@ -30,6 +30,7 @@ private const val CHAPTER = "Chapter/"
 private const val SECTION = "Section/"
 private const val QUESTION = "Question/"
 private const val MASTER = "Master/"
+val ACTIVITY_CONTEXT = "activity_context"
 
 var CLIENT_BASE = BuildConfig.CLIENT_BASE
 

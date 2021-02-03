@@ -155,6 +155,7 @@
     <string name="downloading">Downloading…</string>
     <string name="downloads">Downloads</string>
     <string name="my_favourite">My Favourite</string>
+    <string name="cart_list">Cart Items</string>
     <string name="no_data">No Data</string>
     <!--<string name="lost_attempt_message">Sorry! You have expired all your attempts, contact your HR admin to continue with the test..</string>-->
     <string name="lost_attempt_message">Sorry! You have no attempts left, contact your HR admin to continue with the test..</string>

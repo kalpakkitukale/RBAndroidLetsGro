@@ -34,4 +34,11 @@
         <attr name="cwv_background_color" format="color"/>
     </declare-styleable>
 
+    // Created by Rahul 1 feb, 2021
+    <declare-styleable name="DescribedRadioButton">
+        <attr name="drb_drawableResource" format="reference" />
+        <attr name="drb_description" format="string" />
+        <attr name="drb_isChecked" format="boolean" />
+    </declare-styleable>
+
 </resources>

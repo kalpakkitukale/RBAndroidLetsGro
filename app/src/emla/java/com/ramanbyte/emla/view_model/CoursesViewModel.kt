@@ -71,7 +71,6 @@ class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
             coursesRepository.searchCourse(it)
         }
         userData = coursesRepository.getCurrentUser()
-
     }
 
     fun initPaginationResponseHandler() {

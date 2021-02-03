@@ -1,5 +1,6 @@
 package com.ramanbyte
 
+import android.app.Activity
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
 import com.google.gson.GsonBuilder
@@ -122,5 +123,25 @@ class AppController : BaseAppController(), KodeinAware {
             }
         }
         // [END fetch_config_with_callback]
+    }
+    companion object {
+
+        fun setEnterPageAnimation(activity: Activity) {
+            try {
+                activity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+
+        fun setExitPageAnimation(activity: Activity) {
+            try {
+                activity.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+            } catch (e: Exception) {
+                e.printStackTrace()
+                AppLog.errorLog(e.message, e)
+            }
+
+        }
     }
 }

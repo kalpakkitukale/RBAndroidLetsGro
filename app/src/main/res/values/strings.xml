@@ -50,5 +50,43 @@
     <string name="no_profile_data_found">No profile data found</string>
     <string name="invalid_city_selected">Invalid city selected</string>
 
+    <!-- Rahul Garg
+        Payment START
+       1 feb, 2021 -->
+    <string name="safe_payment_net_banking">Safe payment online. Only Net Banking allowed.</string>
+    <string name="safe_money_transfer">Safe money transfer using your bank account. Credit / Debit Card, Net Banking and
+        Wallets.
+    </string>
+    <string name="by_paying_you_accept_to_the_terms_and_conditions">By Paying You Accept to the Terms and Conditions</string>
+    <string name="proceed_to_pay">Proceed to Pay</string>
+    <string name="view_invoice">View Invoice</string>
+    <string name="lbl_continue">Continue</string>
+    <string name="fees_amount">Fees Amount</string>
 
+    <string name="select_payment_gateway">Kindly select the payment gateway</string>
+
+    <string name="payment_successful_message">Your Payment amount %1$s was successful. Please click on "Continue" to proceed.</string>
+    <string name="payment_fail_message">Your Payment amount %1$s was fail. Please "Try Again" later.</string>
+    <string name="rupee_symbol">\u20B9 </string>
+    <string name="payment_successful">Payment successful</string>
+    <string name="payment_fail">Payment failed</string>
+
+    <string name="payU_salt_debug">65GdodrX</string>
+    <string name="payU_salt_release">DuK6IJVP</string>
+    <string name="payU_merchant_key_debug">YqFhqG</string>
+    <string name="payU_merchant_key_release">x4nEGM</string>
+
+    <string name="airpay_username_debug">5168160</string>
+    <string name="airpay_username_release">9411006</string>
+    <string name="airpay_password_debug">NBTh6GXx</string>
+    <string name="airpay_password_release">2VbRwsYk</string>
+    <string name="airpay_merchant_key_debug">24324</string>
+    <string name="airpay_merchant_key_release">26907</string>
+    <string name="airpay_secret_key_debug">KVnqNAjbh8wKE6wM</string>
+    <string name="airpay_secret_key_release">UxvB7wBe8b739A4p</string>
+
+    <string name="admission_form_transaction_custom_message">ADMISSION FORM %1$s %2$s</string>
+    <!-- Rahul Garg
+    Payment STOP
+    -->
 </resources>

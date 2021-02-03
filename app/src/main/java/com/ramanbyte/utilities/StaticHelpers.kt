@@ -368,6 +368,48 @@ const val KEY_ALL = "All"
 const val KEY_ASCENDING = "ascending"
 const val KEY_DESCENDING = "descending"
 
+/*payment keys*/
+const val keyPayuResponseStatus = "payu_response"
+const val keyPayuStatus = "status"
+const val keyPayuSuccess = "success"
+const val keyPayuTransactionMode = "mode"
+
+const val keyInternetBanking = "Internet Banking"
+const val keyCreditCard = "Credit Card"
+const val keyDebitCard = "Debit Card"
+const val keyCard = "Card"
+const val keyCash = "Cash"
+const val keyEmi = "EMI"
+const val keyUpi = "UPI"
+
+const val keyPaymentGatewayAirPay = "AirPay"
+const val keyPaymentGatewayPayUBiz = "PayUBiz"
+const val keyPaymentDomain = "Online"
+
+
+// changed data
+
+const val keyExamFormId = "examFormId"
+const val keyCampusId = "campusId"
+const val keyCampusName = "campusName"
+const val keyProgramId = "programId"
+const val keyProgramName = "programName"
+const val keyAdmissionYear = "admissionYear"
+const val keyAmount = "amount"
+const val keyPaymentStepIntegration = "paymentStepIntegration"
+const val keyPaymentAlreadyForProgram = "paymentAlreadyForProgram"
+const val keyCampusData="campusData"
+
+const val KEY_APPLICATION_FORM_TRANSACTION_TYPE = "Admission application form fees"
+
+const val KEY_PENDING_TRANSACTION_STATUS = "Pending"
+const val KEY_SUCCESS_TRANSACTION_STATUS = "Success"
+const val KEY_FAIL_TRANSACTION_STATUS = "Fail"
+const val KEY_CANCEL_TRANSACTION_STATUS = "Cancel"
+val KEY_SUCCESS = "Success"
+
+val KEY_BEFORE_EXAM = "BeforeForm"
+
 fun skipTrailingZeroes(number: Double?): String {
     var trimmedNumber = "0"
 

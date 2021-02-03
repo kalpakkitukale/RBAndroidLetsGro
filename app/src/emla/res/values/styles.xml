@@ -248,4 +248,80 @@
         <item name="android:layout_marginEnd">@dimen/dp_8</item>
     </style>
 
+    // created by rahul garg for payment 1 feb 2021
+
+    <style name="TextViewDescription">
+        <item name="android:textAppearance">@style/AppTheme.Font.Black</item>
+        <item name="android:textSize">@dimen/sp_12</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:drawablePadding">@dimen/dp_5</item>
+    </style>
+
+    <style name="CustomRadioButton">
+        <item name="android:button">@drawable/custom_radio</item>
+        <item name="android:textAppearance">@style/AppTheme.Font.Black</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/sp_12</item>
+        <item name="android:paddingStart">@dimen/dp_8</item>
+        <item name="android:gravity">start|center_vertical</item>>
+    </style>
+
+    <style name="TextViewLabel">
+        <item name="android:textAppearance">@style/AppTheme.Font</item>
+        <item name="android:textSize">@dimen/sp_14</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:drawablePadding">@dimen/dp_5</item>
+    </style>
+
+    <style name="CustomCapsuleButtonFilled">
+        <item name="android:background">colorTransparent</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textAppearance">@style/AppTheme.Font.Black</item>
+        <item name="android:textSize">@dimen/sp_14</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:drawablePadding">@dimen/dp_5</item>
+        <item name="android:paddingStart">@dimen/dp_5</item>
+        <item name="android:paddingEnd">@dimen/dp_5</item>
+        <item name="android:minHeight">@dimen/dp_32</item>
+        <item name="android:minWidth">@dimen/dp_80</item>
+    </style>
+
+    <style name="baseDivider">
+        <item name="android:layout_height">0.5dp</item>
+        <item name="android:background">@color/colorDivider</item>
+        <item name="android:layout_marginTop">@dimen/dp_10</item>
+    </style>
+    <style name="ToolBarTitle">
+        <item name="android:textAppearance">@style/AppTheme.Font.Black</item>
+        <item name="android:textSize">@dimen/sp_18</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="ToolbarSubTitle">
+        <item name="android:textAppearance">@style/AppTheme.Font</item>
+        <item name="android:textSize">@dimen/sp_16</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+    <style name="ToolbarWithCustomBackArrow" parent="ThemeOverlay.AppCompat.Dark">
+        <!--<item name="theme">@style/ThemeOverlay.AppCompat.Dark</item>-->
+        <item name="navigationIcon">@drawable/ic_arrow_left_black</item>
+        <item name="android:homeAsUpIndicator">@drawable/ic_arrow_left_black</item>
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:elevation" tools:targetApi="lollipop">1dp</item>
+    </style>
+    <style name="TextViewTitle">
+        <item name="android:textAppearance">@style/AppTheme.Font</item>
+        <item name="android:textSize">@dimen/sp_16</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:drawablePadding">@dimen/dp_5</item>
+    </style>
+
+    <style name="TextViewSubTitle">
+        <item name="android:textAppearance">@style/AppTheme.Font</item>
+        <item name="android:textSize">@dimen/sp_14</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:drawablePadding">@dimen/dp_5</item>
+    </style>
+
 </resources>

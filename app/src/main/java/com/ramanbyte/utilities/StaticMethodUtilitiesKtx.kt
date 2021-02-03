@@ -156,6 +156,17 @@ object StaticMethodUtilitiesKtx {
         return color
     }
 
+    fun getRandomAlphaNumericString(length: Int): String {
+        var DATA = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        var stringBuilder = StringBuilder(length)
+
+        for (i in 0..length) {
+            stringBuilder.append(DATA.get(Random().nextInt(DATA.length)))
+        }
+
+        return stringBuilder.toString()
+    }
+
     fun getGoogleApiKey(context: Context): String {
 
         val app: ApplicationInfo = context.packageManager.getApplicationInfo(
