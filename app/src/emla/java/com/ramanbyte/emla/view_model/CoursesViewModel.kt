@@ -147,6 +147,26 @@ class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
         }
     }
 
+    fun showCourseSyllabus(view: View, coursesModel: CoursesModel){
+
+        view.findNavController()
+            .navigate(
+                R.id.action_coursesFragment_to_courseSyllabusFragment,
+                Bundle().apply {
+                    putParcelable(KEY_COURSE_MODEL, coursesModel)
+                })
+    }
+
+    fun showChapterList(view: View, coursesModel: CoursesModel){
+
+        view.findNavController()
+            .navigate(
+                R.id.action_coursesFragment_to_chaptersListFragment,
+                Bundle().apply {
+                    putParcelable(KEY_COURSE_MODEL, coursesModel)
+                })
+    }
+
     fun shareClick(view: View, coursesModel: CoursesModel) {
         shareLiveData.value = coursesModel
     }

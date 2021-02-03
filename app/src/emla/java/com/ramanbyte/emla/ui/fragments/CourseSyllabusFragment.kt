@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseFragment
 import com.ramanbyte.databinding.FragmentCourseSyllabusBinding
+import com.ramanbyte.emla.models.CoursesModel
 import com.ramanbyte.emla.view_model.CoursesDetailViewModel
 import com.ramanbyte.utilities.*
 
@@ -18,7 +19,7 @@ import com.ramanbyte.utilities.*
  * A simple [Fragment] subclass.
  */
 class CourseSyllabusFragment :
-    BaseFragment<FragmentCourseSyllabusBinding, CoursesDetailViewModel>(useParent = true, hasOptionsMenu = false) {
+    BaseFragment<FragmentCourseSyllabusBinding, CoursesDetailViewModel>(hasOptionsMenu = false) {
 
     private var mContext: Context? = null
 
@@ -26,6 +27,10 @@ class CourseSyllabusFragment :
     override fun layoutId(): Int = R.layout.fragment_course_syllabus
 
     override fun initiate() {
+
+        arguments?.apply {
+            viewModel.coursesModelLiveData.value  = getParcelable<CoursesModel>(KEY_COURSE_MODEL)!!
+        }
 
         ProgressLoader(mContext!!, viewModel!!)
         //AlertDialog(mContext!!, viewModel!!)
@@ -77,7 +82,7 @@ class CourseSyllabusFragment :
         viewModel?.apply {
 
 
-            //getCoursesSyllabus()
+            getCoursesSyllabus()
 
             layoutToShow.observe(this@CourseSyllabusFragment, Observer {
                 if (it != null) {

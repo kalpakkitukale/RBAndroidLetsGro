@@ -19,11 +19,11 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardContainer"
+        style="@style/customCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/customCard"
-        app:contentPadding="0dp"
-        android:onClick="@{()->coursesViewModel.courseClick(cardContainer, coursesModel)}">
+        app:contentPadding="0dp">
+        <!--  android:onClick="@{()->coursesViewModel.courseClick(cardContainer, coursesModel)}"-->
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -84,7 +84,6 @@
                     android:layout_marginEnd="@dimen/dp_5"
                     android:onClick="@{()->coursesViewModel.shareClick(ivShare, coursesModel)}"
                     android:padding="@dimen/dp_3"
-                    android:paddingTop="@dimen/dp_3"
                     android:src="@drawable/ic_share"
                     android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -95,19 +94,43 @@
                     style="@style/TextViewRegularNavyBlueOnLightNWhiteOnDark"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_2"
+                    android:layout_marginTop="@dimen/dp_5"
                     android:layout_marginBottom="@dimen/dp_16"
                     android:ellipsize="end"
                     android:lines="1"
                     android:maxLines="1"
+                    android:paddingRight="@dimen/dp_5"
                     android:paddingBottom="@dimen/dp_10"
-                    android:paddingEnd="@dimen/dp_5"
                     android:text="@{coursesModel.courseDescription}"
                     android:textSize="@dimen/sp_12"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/ivStatus"
                     app:layout_constraintStart_toStartOf="@+id/tvTopicDescription"
                     app:layout_constraintTop_toBottomOf="@+id/tvTopicDescription" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivCoursesSyllabus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:padding="@dimen/dp_5"
+                    app:layout_constraintEnd_toStartOf="@+id/ivChapterList"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    android:onClick="@{()->coursesViewModel.showCourseSyllabus(cardContainer, coursesModel)}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:srcCompat="@drawable/ic_courses"
+                    app:layout_constraintTop_toBottomOf="@id/tvTopicDetail"/>
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivChapterList"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/dp_5"
+                    android:layout_marginStart="@dimen/dp_5"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    android:onClick="@{()->coursesViewModel.showChapterList(cardContainer, coursesModel)}"
+                    app:layout_constraintStart_toEndOf="@+id/ivCoursesSyllabus"
+                    app:layout_constraintTop_toTopOf="@+id/ivCoursesSyllabus"
+                    app:srcCompat="@drawable/ic_all_content" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
