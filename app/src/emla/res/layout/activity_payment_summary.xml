@@ -22,7 +22,7 @@
 
         <include
             android:id="@+id/appbar_layout"
-            layout="@layout/app_bar_layout_new" />
+            layout="@layout/app_bar_layout" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnProceedPay"
@@ -74,7 +74,6 @@
             android:layout_marginBottom="@dimen/dp_10"
             android:gravity="center"
             android:text="@string/by_paying_you_accept_to_the_terms_and_conditions"
-
             app:layout_constraintBottom_toTopOf="@+id/radioAirpay"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

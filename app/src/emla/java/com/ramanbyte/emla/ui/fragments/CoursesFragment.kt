@@ -129,7 +129,6 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
         inflater.inflate(R.menu.menu_course_search, menu)
 
         val menuItem = menu.findItem(R.id.action_filter)
-        val cartItem = menu.findItem(R.id.action_cart)
 
         val actionView = menuItem.actionView
         badgeView = actionView.findViewById(R.id.filter_badge) as View
@@ -203,11 +202,6 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.action_cart -> {
-               findNavController().navigate(R.id.cartFragment)
-
-                true
-            }
             R.id.action_search_key -> {
                 mSearchView!!.setQuery(
                     KEY_BLANK, false

@@ -4,13 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <item
-        android:id="@+id/action_cart"
-        android:icon="@drawable/ic_baseline_search"
-        android:title="@string/search"
-        app:showAsAction="ifRoom"
-        tools:targetApi="O" />
-
-    <item
         android:id="@+id/action_search_key"
         android:icon="@drawable/ic_baseline_search"
         android:title="@string/search"
