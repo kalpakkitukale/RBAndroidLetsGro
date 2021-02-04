@@ -54,6 +54,10 @@ class CoursesAdapter(private val displayMetrics: DisplayMetrics) :
                 holder.cardCourseBinding.ivStatus.visibility = View.GONE
             }
 
+            if (coursesModel.isInCart==true)
+               holder.cardCourseBinding.ivCart.visibility = View.GONE
+
+
             courseImageUrl = getS3DynamicURL(courseImage ?: KEY_BLANK, context!!)
 //                AppS3Client.createInstance(context!!).getFileAccessUrl(courseImage ?: KEY_BLANK)
         })
