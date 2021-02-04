@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -10,76 +11,79 @@
 
 
         <variable
-            name="cartViewModel"
+            name="viewModel"
             type="com.ramanbyte.emla.view_model.CartViewModel" />
     </data>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardContainer"
+        style="@style/customCard"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/customCard">
+        android:layout_height="wrap_content">
 
-        <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            xmlns:app="http://schemas.android.com/apk/res-auto">
+            android:layout_height="match_parent">
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/imgCourse"
-                android:layout_width="100dp"
-                android:layout_height="80dp"
-                android:contentDescription="@string/app_name"
+                android:layout_width="@dimen/dp_80"
+                android:layout_height="@dimen/dp_60"
+                android:background="@drawable/ic_course_dummy"
+                android:scaleType="fitXY"
+                app:imageUrl="@{cartModel.courseImageUrl}"
                 app:layout_constraintStart_toStartOf="parent"
-                tools:ignore="MissingConstraints"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvCourseName"
-                android:layout_width="wrap_content"
+                style="@style/TextViewTitle"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_margin="@dimen/dp_3"
+                android:text="@{cartModel.courseName}"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/imgCourse"
-                app:layout_constraintTop_toTopOf="@+id/imgCourse"
-                android:text="@{cartModel.courseName}"/>
-            <TextView
+                app:layout_constraintStart_toEndOf="@+id/imgCourse"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvCourseDescription"
+                style="@style/TextViewSubTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="@{cartModel.courseDescription}"
                 app:layout_constraintStart_toStartOf="@+id/tvCourseName"
-                app:layout_constraintTop_toBottomOf="@+id/tvCourseName"
-                android:text="@{cartModel.courseDescription}"/>
+                app:layout_constraintTop_toBottomOf="@+id/tvCourseName" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvDuration"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
                 android:text="@{cartModel.duraton}"
-                android:layout_marginTop="5dp"
                 app:layout_constraintStart_toStartOf="@+id/tvCourseDescription"
                 app:layout_constraintTop_toBottomOf="@+id/tvCourseDescription" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvAmount"
+                style="@style/TextViewLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:text="@{cartModel.courseFees}"
-                app:layout_constraintBottom_toBottomOf="@id/tvDuration"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias=".8"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="1"/>
-            <ImageView
+                android:drawableStart="@drawable/ic_rupee_indian"
+                android:text="@{cartModel.courseFee}"
+                app:layout_constraintBottom_toBottomOf="@+id/imgDeleteCourse"
+                app:layout_constraintStart_toEndOf="@+id/tvDuration"
+                app:layout_constraintTop_toTopOf="@+id/tvDuration" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imgDeleteCourse"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="@id/tvDuration"
+                android:padding="@dimen/dp_10"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintVertical_bias="1"
-                android:src="@drawable/ic_arrow_right_black"
-                android:layout_marginRight="@dimen/dp_10"/>
+                app:layout_constraintTop_toBottomOf="@+id/tvCourseDescription"
+                app:srcCompat="@drawable/ic_delete_button" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

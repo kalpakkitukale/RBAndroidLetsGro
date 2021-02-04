@@ -13,9 +13,9 @@
         android:id="@+id/linearLayout4"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/colorApplicationBackground"
         android:orientation="vertical"
         android:padding="@dimen/dp_10"
-        android:background="@color/colorApplicationBackground"
         android:visibility="@{viewModel.noInternetMutableLiveData}">
         <!--  android:visibility="@{viewModel.noInternetMutableLiveData}"-->
 
@@ -38,24 +38,25 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/dp_22"
             android:gravity="center"
+            android:text="@{viewModel.visibilityMessageLiveData}"
             android:textSize="@dimen/sp_16"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ivNoInternet"
-            android:text="@{viewModel.visibilityMessageLiveData}"/>
+            app:layout_constraintTop_toBottomOf="@id/ivNoInternet" />
         <!-- android:text="@{viewModel.visibilityMessageLiveData}"-->
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnTryAgain"
+            style="@style/CustomCapsuleButtonBlueBgWhiteText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/CustomCapsuleButtonBlueBgWhiteText"
             android:layout_marginTop="@dimen/dp_16"
+            android:onClick="@{()->viewModel.getNoInternetTryAgain.invoke()}"
             android:text="@string/tryAgain"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:onClick="@{()->viewModel.getNoInternetTryAgain.invoke()}"/>
+            app:layout_constraintStart_toStartOf="parent" />
         <!--   android:onClick="@{()->viewModel.getNoInternetTryAgain.invoke()}"-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>

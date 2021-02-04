@@ -19,6 +19,7 @@ class TransactionRepository(val mContext: Context) : BaseRepository(mContext) {
     fun getCurrentUser(): UserModel? {
         return applicationDatabase.getUserDao().getCurrentUser()?.replicate<UserEntity, UserModel>()
     }
+
     suspend fun insertTransaction(insertTransactionRequestModel: InsertTransactionRequestModel): Int {
         val loginResponseModel = applicationDatabase?.getUserDao().getCurrentUser()
 
@@ -44,11 +45,9 @@ class TransactionRepository(val mContext: Context) : BaseRepository(mContext) {
     }
 
     suspend fun getCart(): ArrayList<CartResponseModel>? {
-        val userId = getCurrentUser()?.userId ?: 0
+        val userId = applicationDatabase.getUserDao().getCurrentUser()?.userId!!
         return apiRequest {
             transactionApiController.getCartList(userId)
         }
-
-
     }
 }

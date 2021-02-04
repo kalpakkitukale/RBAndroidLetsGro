@@ -9,12 +9,12 @@
         <item name="android:textAppearance">@style/AppTheme.Font</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.DayNight" >
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.DayNight">
         <item name="android:textAppearance">@style/AppTheme.Font</item>
         <item name="android:textViewStyle">@style/AppTheme.Font</item>
         <item name="button_style">@style/AppTheme.Font</item>
-       <!-- <item name="android:tint">@color/colorStudentIcon</item>
-        <item name="colorControlNormal">@color/colorStudentIcon</item>-->
+        <!-- <item name="android:tint">@color/colorStudentIcon</item>
+         <item name="colorControlNormal">@color/colorStudentIcon</item>-->
     </style>
 
     <!-- START Font Style-->
@@ -69,16 +69,16 @@
         <item name="android:textCursorDrawable">@color/colorTextNavyBlueInLightNWhiteInDark</item>
     </style>
 
-<!--
-    <style name="EditTextStyleIntoTilRegular">
-        <item name="android:textViewStyle">@style/AppTheme.Font</item>
-        <item name="button_style">@style/AppTheme.Font</item>
-        <item name="android:textAppearance">@style/AppTheme.Font</item>
-        <item name="android:padding">@dimen/dp_10</item>
-        <item name="android:textSize">@dimen/sp_14</item>
-        &lt;!&ndash;<item name="android:textColor">@color/colorAccent</item>&ndash;&gt;
-    </style>
--->
+    <!--
+        <style name="EditTextStyleIntoTilRegular">
+            <item name="android:textViewStyle">@style/AppTheme.Font</item>
+            <item name="button_style">@style/AppTheme.Font</item>
+            <item name="android:textAppearance">@style/AppTheme.Font</item>
+            <item name="android:padding">@dimen/dp_10</item>
+            <item name="android:textSize">@dimen/sp_14</item>
+            &lt;!&ndash;<item name="android:textColor">@color/colorAccent</item>&ndash;&gt;
+        </style>
+    -->
 
     <style name="EditTextRegularGrayHint">
         <item name="android:textColorHint">@color/colorTextNavyBlueInLightNWhiteInDark</item>
@@ -100,9 +100,9 @@
 
     <!--Text view  whenever we use TextView, give proper size -->
     <style name="TextViewRegularNavyBlueOnLightNWhiteOnDark">
-    <item name="android:textAppearance">@style/AppTheme.Font</item>
-    <item name="android:textColor">@color/colorTextNavyBlueInLightNWhiteInDark</item>
-</style>
+        <item name="android:textAppearance">@style/AppTheme.Font</item>
+        <item name="android:textColor">@color/colorTextNavyBlueInLightNWhiteInDark</item>
+    </style>
 
     <style name="TextViewMediumNavyBlueOnLightNWhiteOnDark">
         <item name="android:textAppearance">@style/AppTheme.Font.Medium</item>
@@ -292,17 +292,19 @@
         <item name="android:background">@color/colorDivider</item>
         <item name="android:layout_marginTop">@dimen/dp_10</item>
     </style>
+
     <style name="ToolBarTitle">
         <item name="android:textAppearance">@style/AppTheme.Font.Black</item>
         <item name="android:textSize">@dimen/sp_18</item>
-        <item name="android:textColor">@color/black</item>
+        <item name="android:textColor">@color/colorTextNavyBlueInLightNWhiteInDark</item>
     </style>
 
     <style name="ToolbarSubTitle">
         <item name="android:textAppearance">@style/AppTheme.Font</item>
         <item name="android:textSize">@dimen/sp_16</item>
-        <item name="android:textColor">@color/black</item>
+        <item name="android:textColor">@color/colorTextNavyBlueInLightNWhiteInDark</item>
     </style>
+
     <style name="ToolbarWithCustomBackArrow" parent="ThemeOverlay.AppCompat.Dark">
         <!--<item name="theme">@style/ThemeOverlay.AppCompat.Dark</item>-->
         <item name="navigationIcon">@drawable/ic_arrow_left_black</item>
@@ -310,17 +312,18 @@
         <item name="android:background">@color/colorPrimary</item>
         <item name="android:elevation" tools:targetApi="lollipop">1dp</item>
     </style>
+
     <style name="TextViewTitle">
         <item name="android:textAppearance">@style/AppTheme.Font</item>
         <item name="android:textSize">@dimen/sp_16</item>
-        <item name="android:textColor">@color/black</item>
+        <item name="android:textColor">@color/colorTextNavyBlueInLightNWhiteInDark</item>
         <item name="android:drawablePadding">@dimen/dp_5</item>
     </style>
 
     <style name="TextViewSubTitle">
         <item name="android:textAppearance">@style/AppTheme.Font</item>
         <item name="android:textSize">@dimen/sp_14</item>
-        <item name="android:textColor">@color/black</item>
+        <item name="android:textColor">@color/colorTextNavyBlueInLightNWhiteInDark</item>
         <item name="android:drawablePadding">@dimen/dp_5</item>
     </style>
 
