@@ -1,13 +1,17 @@
 package com.ramanbyte.emla.ui.fragments
 
+import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.ramanbyte.R
+import com.ramanbyte.base.BaseFragment
 import com.ramanbyte.base.BaseParentFragment
 import com.ramanbyte.databinding.FragmentChaptersListBinding
 import com.ramanbyte.emla.adapters.ChaptersListAdapter
 import com.ramanbyte.emla.content.ContentViewer
+import com.ramanbyte.emla.models.CoursesModel
 import com.ramanbyte.emla.models.MediaInfoModel
 import com.ramanbyte.emla.view_model.ChaptersViewModel
 import com.ramanbyte.emla.view_model.CoursesDetailViewModel
@@ -17,23 +21,27 @@ import com.ramanbyte.utilities.*
  * A simple [Fragment] subclass.
  */
 class ChaptersListFragment :
-    BaseParentFragment<FragmentChaptersListBinding, ChaptersViewModel, CoursesDetailViewModel>(
+    BaseFragment<FragmentChaptersListBinding, ChaptersViewModel>(
         hasOptionsMenu = false
     ) {
 
     override val viewModelClass: Class<ChaptersViewModel> = ChaptersViewModel::class.java
 
-    override val parentViewModelClass: Class<CoursesDetailViewModel> =
+   /* override val parentViewModelClass: Class<CoursesDetailViewModel> =
         CoursesDetailViewModel::class.java
-
+*/
     override fun layoutId(): Int = R.layout.fragment_chapters_list
 
     private var chaptersListAdapter: ChaptersListAdapter? = null
 
-    override fun initiateView() {
+    override fun initiate() {
 
-        viewModel.courseModel = parentViewModel.coursesModelLiveData.value
-        viewModel.courseSyllabusModel = parentViewModel.courseSyllabusModelLiveData.value
+      //  viewModel.courseModel = parentViewModel.coursesModelLiveData.value
+     //   viewModel.courseSyllabusModel = parentViewModel.courseSyllabusModelLiveData.value
+
+        arguments?.apply {
+            viewModel.courseModel  = getParcelable<CoursesModel>(KEY_COURSE_MODEL)!!
+        }
 
         ProgressLoader(context!!, viewModel)
         AlertDialog(context!!, viewModel)
@@ -50,7 +58,7 @@ class ChaptersListFragment :
         layoutBinding?.apply {
 
             lifecycleOwner = this@ChaptersListFragment
-            courseDetailViewModel = parentViewModel
+           // courseDetailViewModel = parentViewModel
             chaptersViewModel = viewModel
             noData.viewModel = viewModel
             noInternet.viewModel = viewModel
@@ -80,7 +88,8 @@ class ChaptersListFragment :
 
         viewModel.apply {
 
-            getList(parentViewModel.coursesModelLiveData?.value?.courseId ?: 0)
+         //   getList(parentViewModel.coursesModelLiveData?.value?.courseId ?: 0)
+            getList(courseModel?. courseId ?: 0)
 
             getList()?.observe(this@ChaptersListFragment, Observer {
 
@@ -93,7 +102,18 @@ class ChaptersListFragment :
                 Observer { chaptersModel ->
 
                     chaptersModel?.apply {
-                        parentViewModel.selectedChaptersModelLiveData.value = this
+
+                        /*Added code for section liist*/
+                        findNavController()
+                            .navigate(
+                                R.id.action_chaptersListFragment_to_chaptersSectionListFragment,
+                                Bundle().apply {
+                                    putParcelable(KEY_COURSE_MODEL, courseModel)
+                                    putParcelable(KEY_CHAPTER_MODEL,  chaptersModel)
+                                })
+
+                        /*Commented as there is no parent*/
+                      //  parentViewModel.selectedChaptersModelLiveData.value = this
                         selectedChaptersModelLiveData.value = null
                     }
 

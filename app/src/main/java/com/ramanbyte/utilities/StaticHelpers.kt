@@ -421,15 +421,18 @@ fun skipTrailingZeroes(number: Double?): String {
     var trimmedNumber = "0"
 
     val decimalFormat = DecimalFormat("#.##")
-    val obtainedMarksDbl = number!!
 
-    if (obtainedMarksDbl > 0.0) {
-        trimmedNumber = decimalFormat.format(obtainedMarksDbl)
+    number?.apply {
 
-        if (trimmedNumber.contains(".00") || trimmedNumber.contains(".0")) {
-            trimmedNumber = BigDecimal(obtainedMarksDbl)
-                .setScale(2, BigDecimal.ROUND_HALF_EVEN)
-                .stripTrailingZeros().toPlainString()
+        if (this > 0.0) {
+
+            trimmedNumber = decimalFormat.format(this)
+
+            if (trimmedNumber.contains(".00") || trimmedNumber.contains(".0")) {
+                trimmedNumber = BigDecimal(this)
+                    .setScale(2, BigDecimal.ROUND_HALF_EVEN)
+                    .stripTrailingZeros().toPlainString()
+            }
         }
     }
 
