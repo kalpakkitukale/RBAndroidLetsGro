@@ -403,7 +403,7 @@ const val keyPaymentStepIntegration = "paymentStepIntegration"
 const val keyPaymentAlreadyForProgram = "paymentAlreadyForProgram"
 const val keyCampusData="campusData"
 
-const val KEY_APPLICATION_FORM_TRANSACTION_TYPE = "Admission application form fees"
+const val KEY_APPLICATION_FORM_TRANSACTION_TYPE = "Course fees"
 
 const val KEY_PENDING_TRANSACTION_STATUS = "Pending"
 const val KEY_SUCCESS_TRANSACTION_STATUS = "Success"

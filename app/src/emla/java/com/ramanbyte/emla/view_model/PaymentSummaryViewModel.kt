@@ -65,6 +65,8 @@ class PaymentSummaryViewModel(mContext: Context) : BaseViewModel(mContext = mCon
         AppLog.errorLog("No Internet. Try Again")
     }
 
+
+
     @SuppressLint("DefaultLocale")
     fun addTransaction(
         initiateTransaction: Boolean,
@@ -78,20 +80,25 @@ class PaymentSummaryViewModel(mContext: Context) : BaseViewModel(mContext = mCon
                 loaderMessageLiveData.set(BindingUtils.string(R.string.please_wait))
                 isLoaderShowingLiveData.postValue(showLoader)
                 insertTransactionRequestModel.apply {
-
+                    app_Id =
+                        this@PaymentSummaryViewModel.programId // app id as program id. No application ID
                     campusId = this@PaymentSummaryViewModel.campusId
                     programId = this@PaymentSummaryViewModel.programId
-
+                    programName = this@PaymentSummaryViewModel.programNameLiveData.value.toString()
+                    amount_Paid = this@PaymentSummaryViewModel.amountLiveData.value.toString()
+                    admissionYearId =
+                        this@PaymentSummaryViewModel.admissionYearLiveData.value?.toInt() ?: 0
                     if (initiateTransaction) {
                         transactionStatus = KEY_PENDING_TRANSACTION_STATUS
                         paymentGateway = KEY_BLANK
                         createdDate = DateUtils.getCurDate(
-                           DATE_TIME_SECONDS_PATTERN
+                            DATE_TIME_SECONDS_PATTERN
                         )!!
                     }
                     paymentStepIntegration = this@PaymentSummaryViewModel.paymentStepIntegration
+                    studentName = userName
 
-
+                    emailId = loggedInUserModel?.emailId ?: ""
                     paymentDescription = BindingUtils.string(
                         R.string.admission_form_transaction_custom_message,
                         userName.toUpperCase(),

@@ -1,6 +1,7 @@
 package com.ramanbyte.emla.ui.fragments
 
 import android.content.Context
+import android.content.Intent
 import android.os.Build
 import android.text.TextUtils
 import android.util.TypedValue
@@ -19,6 +20,7 @@ import com.ramanbyte.base.BaseFragment
 import com.ramanbyte.databinding.FragmentCartBinding
 import com.ramanbyte.emla.adapters.CartAdapter
 import com.ramanbyte.emla.adapters.CoursesAdapter
+import com.ramanbyte.emla.ui.activities.PaymentSummaryActivity
 import com.ramanbyte.emla.view.RecommendedCourseFilterBottomSheet
 import com.ramanbyte.emla.view_model.CartViewModel
 import com.ramanbyte.utilities.*
@@ -41,10 +43,28 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>() {
             noInternet.viewModel = viewModel
             noData.viewModel = viewModel
             somethingWentWrong.viewModel = viewModel
+            cartFragment=this@CartFragment
         }
 
         setAdapter()
         setViewModelOp()
+    }
+
+    fun clickOnPay(view: View){
+                startActivityForResult(
+                    PaymentSummaryActivity.openPaymentActivity(
+                        requireContext(),
+                        0,
+                        0,
+                        "campusName",
+                        0,
+                        "programName",
+                        "1",
+                        10.toString(),
+                        ""
+                    ),
+                    PAYMENT_SUCCESSFUL_REQUEST_CODE
+                )
     }
 
     private fun setAdapter() {
