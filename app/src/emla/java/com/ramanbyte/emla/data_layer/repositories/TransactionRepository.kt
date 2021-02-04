@@ -4,7 +4,9 @@ import android.content.Context
 import com.ramanbyte.data_layer.base.BaseRepository
 import com.ramanbyte.emla.data_layer.network.api_layer.TransactionApiController
 import com.ramanbyte.emla.data_layer.room.entities.UserEntity
+import com.ramanbyte.emla.models.CoursesModel
 import com.ramanbyte.emla.models.UserModel
+import com.ramanbyte.emla.models.request.CartRequestModel
 import com.ramanbyte.emla.models.request.InsertTransactionRequestModel
 import com.ramanbyte.emla.models.response.CartResponseModel
 import com.ramanbyte.utilities.AppLog
@@ -19,6 +21,7 @@ class TransactionRepository(val mContext: Context) : BaseRepository(mContext) {
     fun getCurrentUser(): UserModel? {
         return applicationDatabase.getUserDao().getCurrentUser()?.replicate<UserEntity, UserModel>()
     }
+
     suspend fun insertTransaction(insertTransactionRequestModel: InsertTransactionRequestModel): Int {
         val loginResponseModel = applicationDatabase?.getUserDao().getCurrentUser()
 
@@ -48,7 +51,12 @@ class TransactionRepository(val mContext: Context) : BaseRepository(mContext) {
         return apiRequest {
             transactionApiController.getCartList(userId)
         }
+    }
 
-
+    suspend fun insertCart(cartRequestModel: CartRequestModel): Int? {
+        val userId = getCurrentUser()?.userId ?: 0
+        return apiRequest {
+            transactionApiController.insertCart(cartRequestModel)
+        }
     }
 }

@@ -136,12 +136,12 @@ class PaymentSummaryViewModel(mContext: Context) : BaseViewModel(mContext = mCon
 
                 //Showing Alert dialog for api response
                       setAlertDialogResourceModelMutableLiveData(
-                          e.message.toString(),
-                          BindingUtils.drawable(R.drawable.ic_something_went_wrong)!!,
-                          true,
-                          BindingUtils.string(R.string.strOk), {
-                              isAlertDialogShown.postValue(false)
-                          })
+                              e.message.toString(),
+                              true,
+                              BindingUtils.string(R.string.strOk),
+                              {
+                                  isAlertDialogShown.postValue(false)
+                              })
 
                 isAlertDialogShown.postValue(true)
             } catch (e: NoInternetException) {
@@ -151,12 +151,12 @@ class PaymentSummaryViewModel(mContext: Context) : BaseViewModel(mContext = mCon
 
                 //Showing Alert dialog for api response
                    setAlertDialogResourceModelMutableLiveData(
-                       e.message.toString(),
-                       BindingUtils.drawable(R.drawable.ic_no_internet)!!,
-                       true,
-                       BindingUtils.string(R.string.strOk), {
-                           isAlertDialogShown.postValue(false)
-                       })
+                           e.message.toString(),
+                           true,
+                           BindingUtils.string(R.string.strOk),
+                           {
+                               isAlertDialogShown.postValue(false)
+                           })
                 isAlertDialogShown.postValue(true)
             } catch (e: Exception) {
                 AppLog.errorLog(e.message.toString())
@@ -165,12 +165,12 @@ class PaymentSummaryViewModel(mContext: Context) : BaseViewModel(mContext = mCon
 
                    //Showing Alert dialog for api response
                    setAlertDialogResourceModelMutableLiveData(
-                       e.message.toString(),
-                       BindingUtils.drawable(R.drawable.ic_something_went_wrong)!!,
-                       true,
-                       BindingUtils.string(R.string.strOk), {
-                           isAlertDialogShown.postValue(false)
-                       })
+                           e.message.toString(),
+                           true,
+                           BindingUtils.string(R.string.strOk),
+                           {
+                               isAlertDialogShown.postValue(false)
+                           })
 
                    isAlertDialogShown.postValue(true)
 
@@ -198,12 +198,11 @@ class PaymentSummaryViewModel(mContext: Context) : BaseViewModel(mContext = mCon
             AppLog.errorLog(e.message.toString())
             isLoaderShowingLiveData.postValue(false)
             setAlertDialogResourceModelMutableLiveData(
-                e.message.toString(),
-                BindingUtils.drawable(R.drawable.ic_no_internet)!!,
-                true,BindingUtils.string(R.string.strOk),
-                positiveButtonClickFunctionality = {
-                    isAlertDialogShown.postValue(false)
-                }
+                    e.message.toString(),
+                    true,
+                    BindingUtils.string(R.string.strOk), positiveButtonClickFunctionality = {
+                        isAlertDialogShown.postValue(false)
+                    }
             )
             isAlertDialogShown.postValue(true)
         }

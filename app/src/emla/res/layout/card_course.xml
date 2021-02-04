@@ -165,7 +165,7 @@
                     android:layout_marginStart="@dimen/dp_15"
                     android:layout_marginEnd="@dimen/dp_15"
                     android:background="@drawable/image_background"
-                    android:onClick="@{()->coursesViewModel.showChapterList(cardContainer, coursesModel)}"
+                    android:onClick="@{coursesViewModel::insertCartData}"
                     android:padding="@dimen/dp_5"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"

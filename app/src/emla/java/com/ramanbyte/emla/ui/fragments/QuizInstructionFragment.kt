@@ -3,17 +3,12 @@ package com.ramanbyte.emla.ui.fragments
 import android.content.Context
 import android.view.MenuItem
 import androidx.lifecycle.Observer
-import androidx.navigation.NavOptions
-import androidx.navigation.Navigation
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.ramanbyte.R
-import com.ramanbyte.aws_s3_android.accessor.AppS3Client
 import com.ramanbyte.base.BaseFragment
 import com.ramanbyte.data_layer.SharedPreferencesDatabase
 import com.ramanbyte.databinding.FragmentQuizInstructionBinding
 import com.ramanbyte.emla.models.InstructionsModel
-import com.ramanbyte.emla.ui.activities.ContainerActivity
 import com.ramanbyte.emla.view_model.ShowQuestionsViewModel
 import com.ramanbyte.utilities.*
 import com.ramanbyte.utilities.DateUtils.DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS
@@ -88,9 +83,9 @@ class QuizInstructionFragment : BaseFragment<FragmentQuizInstructionBinding, Sho
                     if (it == true){
                         setAlertDialogResourceModelMutableLiveData(
                             BindingUtils.string(R.string.no_test_found_message),
-                            BindingUtils.drawable(R.drawable.ic_no_data)!!,
                             true,
-                            BindingUtils.string(R.string.strOk), {
+                            BindingUtils.string(R.string.strOk),
+                            {
                                 isBackPressLiveData.value = true
                                 isAlertDialogShown.postValue(false)
                             }
@@ -128,13 +123,13 @@ class QuizInstructionFragment : BaseFragment<FragmentQuizInstructionBinding, Sho
 
                     setAlertDialogResourceModelMutableLiveData(
                         BindingUtils.string(R.string.leave_test_message),
-                        BindingUtils.drawable(R.drawable.ic_submit_confirmation)!!,
                         false,
-                        BindingUtils.string(R.string.yes), {
+                        BindingUtils.string(R.string.yes),
+                        {
                             isAlertDialogShown.postValue(false)
                             findNavController().navigateUp()
-                        },
-                        BindingUtils.string(R.string.no), {
+                        }, BindingUtils.string(R.string.no),
+                        {
                             isAlertDialogShown.postValue(false)
                         }
                     )

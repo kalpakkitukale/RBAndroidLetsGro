@@ -2,7 +2,6 @@ package com.ramanbyte.emla.ui.fragments
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -11,7 +10,6 @@ import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.ramanbyte.R
-import com.ramanbyte.aws_s3_android.accessor.AppS3Client
 import com.ramanbyte.base.BaseFragment
 import com.ramanbyte.databinding.FragmentCourseDetailBinding
 import com.ramanbyte.emla.adapters.ViewPagerAdapter
@@ -144,13 +142,13 @@ class CourseDetailFragment : BaseFragment<FragmentCourseDetailBinding, CoursesDe
                     viewModel.apply {
                         setAlertDialogResourceModelMutableLiveData(
                             BindingUtils.string(R.string.no_internet_message),
-                            BindingUtils.drawable(R.drawable.ic_no_internet)!!,
                             true,
-                            BindingUtils.string(R.string.yes), {
+                            BindingUtils.string(R.string.yes),
+                            {
                                 isAlertDialogShown.postValue(false)
 
-                            },
-                            BindingUtils.string(R.string.no), {
+                            }, BindingUtils.string(R.string.no),
+                            {
                                 isAlertDialogShown.postValue(false)
                             }
                         )

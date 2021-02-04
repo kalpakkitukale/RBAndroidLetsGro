@@ -281,8 +281,8 @@ class PersonalDetailFragment :
 
         viewModel.apply {
             setAlertDialogResourceModelMutableLiveData(
-                message, BindingUtils.drawable(R.drawable.something_went_wrong),
-                false, BindingUtils.string(R.string.strOk), {
+                message, false,
+                BindingUtils.string(R.string.strOk), {
                     try {
                         isAlertDialogShown.postValue(false)
                         val intent = Intent()
@@ -296,8 +296,7 @@ class PersonalDetailFragment :
                         e.printStackTrace()
                         AppLog.errorLog(e.message, e)
                     }
-                },
-                BindingUtils.string(R.string.strCancel),
+                }, BindingUtils.string(R.string.strCancel),
                 negativeButtonClickFunctionality = {
                     isAlertDialogShown.postValue(false)
                 },

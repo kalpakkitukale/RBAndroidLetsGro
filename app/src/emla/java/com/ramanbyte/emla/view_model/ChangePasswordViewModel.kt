@@ -116,7 +116,6 @@ class ChangePasswordViewModel(var mContext: Context) : BaseViewModel(mContext) {
 
                     isAlertDialogShown.postValue(true)
                     setAlertDialogResourceModelMutableLiveData(response!!,
-                        BindingUtils.drawable(R.drawable.ic_all_the_best),
                         true,
                         BindingUtils.string(R.string.strOk),
                         {
@@ -133,11 +132,9 @@ class ChangePasswordViewModel(var mContext: Context) : BaseViewModel(mContext) {
                     isLoaderShowingLiveData.postValue(false)
                     setAlertDialogResourceModelMutableLiveData(
                         e.message.toString(),
-                        BindingUtils.drawable(
-                            R.drawable.something_went_wrong
-                        )!!,
                         true,
-                        BindingUtils.string(R.string.strOk), {
+                        BindingUtils.string(R.string.strOk),
+                        {
                             isAlertDialogShown.postValue(false)
                         }
                     )
@@ -148,13 +145,13 @@ class ChangePasswordViewModel(var mContext: Context) : BaseViewModel(mContext) {
                     isLoaderShowingLiveData.postValue(false)
                     setAlertDialogResourceModelMutableLiveData(
                         BindingUtils.string(R.string.no_internet_message),
-                        BindingUtils.drawable(R.drawable.ic_no_internet)!!,
                         false,
-                        BindingUtils.string(R.string.tryAgain), {
+                        BindingUtils.string(R.string.tryAgain),
+                        {
                             isAlertDialogShown.postValue(false)
                             changePasswordClick(view)
-                        },
-                        BindingUtils.string(R.string.no), {
+                        }, BindingUtils.string(R.string.no),
+                        {
                             isAlertDialogShown.postValue(false)
                         }
                     )

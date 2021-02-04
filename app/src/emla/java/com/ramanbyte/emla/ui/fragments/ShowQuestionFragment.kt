@@ -146,14 +146,14 @@ class ShowQuestionFragment :
                             if (btnNext.text.toString() == BindingUtils.string(R.string.submit_test)) {
                                 setAlertDialogResourceModelMutableLiveData(
                                     BindingUtils.string(R.string.submit_test_message),
-                                    BindingUtils.drawable(R.drawable.ic_submit_confirmation)!!,
                                     false,
-                                    BindingUtils.string(R.string.yes), {
+                                    BindingUtils.string(R.string.yes),
+                                    {
                                         isAlertDialogShown.postValue(false)
                                         //isTestSubmited.value = true
                                         parentViewModel.submitTest()
-                                    },
-                                    BindingUtils.string(R.string.no), {
+                                    }, BindingUtils.string(R.string.no),
+                                    {
                                         isAlertDialogShown.postValue(false)
                                     }
                                 )
@@ -190,9 +190,9 @@ class ShowQuestionFragment :
 
                             setAlertDialogResourceModelMutableLiveData(
                                 BindingUtils.string(R.string.test_completed),
-                                BindingUtils.drawable(R.drawable.ic_e_learning),
                                 true,
-                                BindingUtils.string(R.string.strOk), {
+                                BindingUtils.string(R.string.strOk),
+                                {
 
                                     if (testType == KEY_QUIZ_TYPE_ASSESSMENT) {
                                         val bundle = Bundle()
@@ -342,9 +342,9 @@ class ShowQuestionFragment :
                                 * */
                                 setAlertDialogResourceModelMutableLiveData(
                                     BindingUtils.string(R.string.not_attempted_any_question),
-                                    BindingUtils.drawable(R.drawable.ic_submit_confirmation)!!,
                                     true,
-                                    BindingUtils.string(R.string.strOk), {
+                                    BindingUtils.string(R.string.strOk),
+                                    {
                                         isAlertDialogShown.postValue(false)
                                         //niraj
                                         /*startActivity(ContainerActivity.intent(activity!!).apply {
@@ -402,9 +402,9 @@ class ShowQuestionFragment :
         viewModel.apply {
             setAlertDialogResourceModelMutableLiveData(
                 resultText,
-                BindingUtils.drawable(drawable)!!,
                 true,
-                BindingUtils.string(R.string.strOk), {
+                BindingUtils.string(R.string.strOk),
+                {
                     /*activity?.apply {
                         startActivity(ContainerActivity.intent(activity!!).apply {
                             flags =

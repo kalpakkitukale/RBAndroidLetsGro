@@ -1,5 +1,7 @@
 package com.ramanbyte.emla.data_layer.network.api_layer
 
+import com.ramanbyte.emla.models.CoursesModel
+import com.ramanbyte.emla.models.request.CartRequestModel
 import com.ramanbyte.emla.models.request.InsertTransactionRequestModel
 import com.ramanbyte.emla.models.response.CartResponseModel
 import retrofit2.Response
@@ -16,4 +18,7 @@ interface TransactionApiController {
 
     @GET("GetAllCart/{UserId}")
     suspend fun getCartList(@Path("UserId") UserId: Int): Response<ArrayList<CartResponseModel>>
+
+    @POST("AddCart")
+    suspend fun insertCart(@Body cartRequestModel: CartRequestModel): Response<Int>
 }

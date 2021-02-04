@@ -207,15 +207,15 @@ class MediaPlaybackViewModel(mContext: Context) : BaseViewModel(mContext) {
     fun onClickAskNewQuestion(view: View, questionId: Int) {
         setAlertDialogResourceModelMutableLiveData(
             BindingUtils.string(R.string.conversation_close_message),
-            BindingUtils.drawable(R.drawable.ic_submit_confirmation)!!,
             false,
-            BindingUtils.string(R.string.yes), {
+            BindingUtils.string(R.string.yes),
+            {
                 isAlertDialogShown.postValue(false)
                 AppLog.infoLog("questionId=== $questionId")
                 isNewQuestionAsked = true
                 updateConversationCloseStatus(questionId)
-            },
-            BindingUtils.string(R.string.no), {
+            }, BindingUtils.string(R.string.no),
+            {
                 isAlertDialogShown.postValue(false)
             }
         )
@@ -242,13 +242,13 @@ class MediaPlaybackViewModel(mContext: Context) : BaseViewModel(mContext) {
 
                 setAlertDialogResourceModelMutableLiveData(
                     BindingUtils.string(R.string.no_internet_message),
-                    BindingUtils.drawable(R.drawable.ic_no_internet)!!,
                     false,
-                    BindingUtils.string(R.string.yes), {
+                    BindingUtils.string(R.string.yes),
+                    {
                         isAlertDialogShown.postValue(false)
                         updateConversationCloseStatus(questionId)
-                    },
-                    BindingUtils.string(R.string.no), {
+                    }, BindingUtils.string(R.string.no),
+                    {
                         isAlertDialogShown.postValue(false)
                     }
                 )
@@ -398,9 +398,9 @@ class MediaPlaybackViewModel(mContext: Context) : BaseViewModel(mContext) {
     fun alertMediaPlayBack(message:String,image:Drawable,btnName:String){
         setAlertDialogResourceModelMutableLiveData(
             message,
-            image,
             true,
-            btnName, {
+            btnName,
+            {
                 isAlertDialogShown.postValue(false)
             }/*,
             BindingUtils.string(R.string.no), {

@@ -1,7 +1,6 @@
 package com.ramanbyte.emla.view_model
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.databinding.ObservableField
@@ -10,17 +9,23 @@ import androidx.lifecycle.MutableLiveData
 import androidx.navigation.findNavController
 import androidx.paging.PagedList
 import com.ramanbyte.R
-import com.ramanbyte.aws_s3_android.utilities.S3Constant.Companion.mContext
 import com.ramanbyte.base.BaseViewModel
+import com.ramanbyte.data_layer.CoroutineUtils
 import com.ramanbyte.data_layer.pagination.PaginationMessages
+import com.ramanbyte.emla.data_layer.network.exception.ApiException
+import com.ramanbyte.emla.data_layer.network.exception.NoInternetException
+import com.ramanbyte.emla.data_layer.network.exception.ResourceNotFound
 import com.ramanbyte.emla.data_layer.repositories.CoursesRepository
 import com.ramanbyte.emla.data_layer.repositories.RegistrationRepository
+import com.ramanbyte.emla.data_layer.repositories.TransactionRepository
 import com.ramanbyte.emla.models.CoursesModel
 import com.ramanbyte.emla.models.UserModel
+import com.ramanbyte.emla.models.request.CartRequestModel
 import com.ramanbyte.emla.models.request.CoursesRequest
 import com.ramanbyte.emla.models.response.CommonDropdownModel
 import com.ramanbyte.utilities.*
 import org.kodein.di.generic.instance
+import java.util.concurrent.TimeoutException
 
 /**
  * @author Vinay Kumbhar <vinay.pkumbhar@gmail.com>
@@ -32,6 +37,7 @@ class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
     }
     private val coursesRepository: CoursesRepository by instance()
     private val registrationRepository: RegistrationRepository by instance()
+    private val transactionRepository: TransactionRepository by instance()
 
     var isFilterApplied = MutableLiveData<Boolean>(null)
 
@@ -102,6 +108,78 @@ class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
         return coursesRepository.coursesPagedList
     }
 
+    fun insertCartData(view: View) {
+
+                CoroutineUtils.main {
+                    try {
+                        isLoaderShowingLiveData.postValue(true)
+                        val response =
+                            transactionRepository.insertCart(cartRequestModel = CartRequestModel())
+                        isLoaderShowingLiveData.postValue(false)
+                    } catch (e: NoInternetException) {
+                        isLoaderShowingLiveData.postValue(false)
+                        setAlertDialogResourceModelMutableLiveData(
+                            message = e.message.toString(),
+                            isInfoAlert = false,
+                            positiveButtonText = BindingUtils.string(R.string.try_again_),
+                            positiveButtonClickFunctionality = {
+                                insertCartData(view)
+                                isAlertDialogShown.postValue(false)
+                            },
+                            negativeButtonText = BindingUtils.string(R.string.strCancel),
+                            negativeButtonClickFunctionality = {
+                                isAlertDialogShown.postValue(false)
+                            }
+                        )
+                        isAlertDialogShown.postValue(true)
+                    } catch (e: ApiException) {
+                        isLoaderShowingLiveData.postValue(false)
+                        setAlertDialogResourceModelMutableLiveData(
+                            message = e.message.toString(),
+                            isInfoAlert = true,
+                            positiveButtonText = BindingUtils.string(R.string.strOk),
+                            positiveButtonClickFunctionality = {
+                                isAlertDialogShown.postValue(false)
+                            }
+                        )
+                        isAlertDialogShown.postValue(true)
+                    } catch (e: TimeoutException) {
+                        e.printStackTrace()
+                        AppLog.errorLog(e.message, e)
+                        isLoaderShowingLiveData.postValue(false)
+                        setAlertDialogResourceModelMutableLiveData(
+                            message = e.message ?: BindingUtils.string(R.string.connection_timeout),
+                            isInfoAlert = false,
+                            positiveButtonText = BindingUtils.string(R.string.try_again_),
+                            positiveButtonClickFunctionality = {
+                                insertCartData(view)
+                                isAlertDialogShown.postValue(false)
+                            },
+                            negativeButtonText = BindingUtils.string(R.string.cancel),
+                            negativeButtonClickFunctionality = {
+                                isAlertDialogShown.postValue(false)
+                            }
+                        )
+                        isAlertDialogShown.postValue(true)
+                    } catch (e: ResourceNotFound) {
+                        e.printStackTrace()
+                        AppLog.errorLog(e.message, e)
+                        isLoaderShowingLiveData.postValue(false)
+                        setAlertDialogResourceModelMutableLiveData(
+                            message = e.message ?: BindingUtils.string(R.string.resource_not_found),
+                            isInfoAlert = true,
+                            positiveButtonText = BindingUtils.string(R.string.strOk),
+                            positiveButtonClickFunctionality = {
+                                isAlertDialogShown.postValue(false)
+                            }
+                        )
+                        isAlertDialogShown.postValue(true)
+                    }
+                }
+
+
+    }
+
     /*
  * Go to Course Details or Pre-assessment
  * */
@@ -132,12 +210,12 @@ class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
             } else {
                 setAlertDialogResourceModelMutableLiveData(
                     BindingUtils.string(R.string.no_internet_message),
-                    BindingUtils.drawable(R.drawable.ic_no_internet)!!,
                     true,
-                    BindingUtils.string(R.string.yes), {
+                    BindingUtils.string(R.string.yes),
+                    {
                         isAlertDialogShown.postValue(false)
-                    },
-                    BindingUtils.string(R.string.no), {
+                    }, BindingUtils.string(R.string.no),
+                    {
                         isAlertDialogShown.postValue(false)
                     }
                 )

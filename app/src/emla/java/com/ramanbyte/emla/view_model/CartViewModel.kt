@@ -61,8 +61,8 @@ class CartViewModel (mContext: Context) : BaseViewModel(mContext = mContext) {
         CoroutineUtils.main {
             try {
                 isLoaderShowingLiveData.postValue(true)
-                val requestModel = CartRequestModel().apply {
-                }
+               /* val requestModel = CartRequestModel().apply {
+                }*/
 
                 val response =
                     transactionRepository.getCart()

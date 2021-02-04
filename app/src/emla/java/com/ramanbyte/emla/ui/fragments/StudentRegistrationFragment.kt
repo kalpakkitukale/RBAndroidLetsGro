@@ -16,7 +16,6 @@ import androidx.core.content.FileProvider
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavOptions
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.ramanbyte.BaseAppController
@@ -25,7 +24,6 @@ import com.ramanbyte.R
 import com.ramanbyte.base.BaseFragment
 import com.ramanbyte.cropper.ImageCroppingActivity
 import com.ramanbyte.databinding.FragmentStudentRegistrationBinding
-import com.ramanbyte.emla.ui.activities.LoginActivity
 import com.ramanbyte.emla.view_model.CreateAccountViewModel
 import com.ramanbyte.emla.view_model.LoginViewModel
 import com.ramanbyte.utilities.*
@@ -83,9 +81,9 @@ class StudentRegistrationFragment :
                 it?.let {
                     setAlertDialogResourceModelMutableLiveData(
                         BindingUtils.string(R.string.successAccountCreation),
-                        BindingUtils.drawable(R.drawable.ic_success)!!,
                         true,
-                        BindingUtils.string(R.string.strOk), {
+                        BindingUtils.string(R.string.strOk),
+                        {
                             val navOption =
                                 NavOptions.Builder().setPopUpTo(R.id.loginFragment, true).build()
                                 layoutBinding.root.findNavController().navigate(R.id.loginFragment, null, navOption)
@@ -335,8 +333,8 @@ class StudentRegistrationFragment :
 
         viewModel.apply {
             setAlertDialogResourceModelMutableLiveData(
-                message, BindingUtils.drawable(R.drawable.something_went_wrong),
-                false, BindingUtils.string(R.string.strOk), {
+                message, false,
+                BindingUtils.string(R.string.strOk), {
                     try {
                         isAlertDialogShown.postValue(false)
                         val intent = Intent()
@@ -350,8 +348,7 @@ class StudentRegistrationFragment :
                         e.printStackTrace()
                         AppLog.errorLog(e.message, e)
                     }
-                },
-                BindingUtils.string(R.string.strCancel),
+                }, BindingUtils.string(R.string.strCancel),
                 negativeButtonClickFunctionality = {
                     isAlertDialogShown.postValue(false)
                 },

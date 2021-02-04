@@ -3,14 +3,10 @@ package com.ramanbyte.emla.view_model
 import android.Manifest
 import android.app.Activity
 import android.content.Context
-import android.content.Intent
-import android.os.Bundle
 import android.view.View
-import android.widget.CompoundButton
 import androidx.databinding.library.baseAdapters.BR
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.findNavController
-import com.google.android.material.snackbar.Snackbar
 import com.ramanbyte.BaseAppController
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseViewModel
@@ -103,9 +99,9 @@ class LoginViewModel(var mContext: Context) : BaseViewModel(mContext) {
                     } else {
                         setAlertDialogResourceModelMutableLiveData(
                             BindingUtils.string(R.string.not_valid_user),
-                            BindingUtils.drawable(R.drawable.ic_invalid_user)!!,
                             true,
-                            BindingUtils.string(R.string.strOk), {
+                            BindingUtils.string(R.string.strOk),
+                            {
                                 isAlertDialogShown.postValue(false)
                             }
                         )

@@ -28,6 +28,7 @@ class CoursesModel() : Parcelable {
     var preAssessmentStatus: String? = null
     var summativeAssessmentStatus: String? = null
     var summativeaAtemptCount: Int = 0
+    var courseFee: Float = 0.0F
 
     var isInCart:Boolean=false
 

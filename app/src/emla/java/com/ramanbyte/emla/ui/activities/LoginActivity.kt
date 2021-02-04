@@ -58,13 +58,13 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(authMod
             viewModel.apply {
                 setAlertDialogResourceModelMutableLiveData(
                     BindingUtils.string(R.string.profile_changes_discarded),
-                    BindingUtils.drawable(R.drawable.ic_submit_confirmation)!!,
                     false,
-                    BindingUtils.string(R.string.yes), {
+                    BindingUtils.string(R.string.yes),
+                    {
                         isAlertDialogShown.postValue(false)
                         navController.navigateUp()
-                    },
-                    BindingUtils.string(R.string.no), {
+                    }, BindingUtils.string(R.string.no),
+                    {
                         isAlertDialogShown.postValue(false)
                     }
                 )

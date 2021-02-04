@@ -3,23 +3,18 @@ package com.ramanbyte.emla.ui.fragments
 import android.app.Activity
 import android.app.DatePickerDialog
 import android.app.Dialog
-import android.content.Intent
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MenuItem
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.lifecycle.Observer
-import androidx.navigation.NavOptions
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseFragment
 import com.ramanbyte.databinding.FragmentLearnerProfileBinding
 import com.ramanbyte.databinding.PledgeDialogBinding
 import com.ramanbyte.emla.adapters.ViewPagerAdapter
-import com.ramanbyte.emla.ui.activities.CertificateViewerActivity
 import com.ramanbyte.emla.ui.activities.ContainerActivity
-import com.ramanbyte.emla.ui.activities.LoginActivity
 import com.ramanbyte.emla.view_model.LearnerProfileViewModel
 import com.ramanbyte.utilities.*
 import com.ramanbyte.utilities.DateUtils.DATE_DISPLAY_PATTERN_SEP
@@ -225,13 +220,13 @@ class LearnerProfileFragment :
 
                     setAlertDialogResourceModelMutableLiveData(
                         BindingUtils.string(R.string.profile_changes_discarded),
-                        BindingUtils.drawable(R.drawable.ic_submit_confirmation)!!,
                         false,
-                        BindingUtils.string(R.string.yes), {
+                        BindingUtils.string(R.string.yes),
+                        {
                             isAlertDialogShown.postValue(false)
                             findNavController().navigateUp()
-                        },
-                        BindingUtils.string(R.string.no), {
+                        }, BindingUtils.string(R.string.no),
+                        {
                             isAlertDialogShown.postValue(false)
                         }
                     )

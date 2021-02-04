@@ -183,10 +183,10 @@ class FileViewerActivity : BaseActivity<ActivityFileViewerBinding, FileViewerVie
 
         viewModel.apply {
             setAlertDialogResourceModelMutableLiveData(
-                BindingUtils.string(R.string.file_download_msg), null
+                BindingUtils.string(R.string.file_download_msg), true
                 /*BindingUtils.drawable(R.drawable.ic_element_api_exception)!!*/,
-                true,
-                KEY_OK, {
+                KEY_OK,
+                {
                     isAlertDialogShown.postValue(false)
                 })
             isAlertDialogShown.postValue(true)

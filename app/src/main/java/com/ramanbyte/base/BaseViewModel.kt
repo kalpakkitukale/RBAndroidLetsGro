@@ -74,7 +74,6 @@ abstract class BaseViewModel(
 
     fun setAlertDialogResourceModelMutableLiveData(
         message: String,
-        alertDrawableResource: Drawable?,
         isInfoAlert: Boolean,
         positiveButtonText: String,
         positiveButtonClickFunctionality: () -> Unit,
@@ -210,7 +209,6 @@ abstract class BaseViewModel(
                 setAlertDialogResourceModelMutableLiveData(
                     e.message
                         ?: BindingUtils.string(R.string.please_make_sure_you_are_connected_to_internet),
-                    BindingUtils.drawable(R.drawable.ic_no_internet),
                     isInfoAlert = false,
                     positiveButtonText = BindingUtils.string(R.string.tryAgain),
                     positiveButtonClickFunctionality = {
@@ -236,7 +234,6 @@ abstract class BaseViewModel(
                 isLoaderShowingLiveData.postValue(false)
                 setAlertDialogResourceModelMutableLiveData(
                     e.message ?: BindingUtils.string(R.string.some_thing_went_wrong),
-                    BindingUtils.drawable(R.drawable.something_went_wrong),
                     isInfoAlert = false,
                     positiveButtonText = BindingUtils.string(R.string.tryAgain),
                     positiveButtonClickFunctionality = {

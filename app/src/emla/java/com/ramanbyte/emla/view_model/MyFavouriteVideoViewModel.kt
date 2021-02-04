@@ -111,9 +111,9 @@ class MyFavouriteVideoViewModel(var mContext: Context) : BaseViewModel(mContext)
                 AppLog.errorLog(e.message, e)
                 setAlertDialogResourceModelMutableLiveData(
                     BindingUtils.string(R.string.some_thing_went_wrong),
-                    BindingUtils.drawable(R.drawable.something_went_wrong)!!,
                     true,
-                    BindingUtils.string(R.string.strOk), {
+                    BindingUtils.string(R.string.strOk),
+                    {
                         isAlertDialogShown.postValue(false)
                     }
                 )
@@ -124,13 +124,12 @@ class MyFavouriteVideoViewModel(var mContext: Context) : BaseViewModel(mContext)
                 AppLog.errorLog(e.message, e)
                 setAlertDialogResourceModelMutableLiveData(
                     BindingUtils.string(R.string.no_internet_message),
-                    BindingUtils.drawable(R.drawable.ic_no_internet)!!,
                     false,
-                    BindingUtils.string(R.string.try_again), {
+                    BindingUtils.string(R.string.try_again),
+                    {
                         isAlertDialogShown.postValue(false)
                         insertFavouriteVideoStatus(favouriteVideosModel)
-                    },
-                    negativeButtonClickFunctionality = {
+                    }, negativeButtonClickFunctionality = {
                         isAlertDialogShown.postValue(false)
                     }
                 )
@@ -150,7 +149,6 @@ class MyFavouriteVideoViewModel(var mContext: Context) : BaseViewModel(mContext)
 
         setAlertDialogResourceModelMutableLiveData(
             message,
-            BindingUtils.drawable(R.drawable.ic_no_internet),
             true,
             positiveButtonText = BindingUtils.string(R.string.strOk),
             positiveButtonClickFunctionality = {
@@ -169,13 +167,12 @@ class MyFavouriteVideoViewModel(var mContext: Context) : BaseViewModel(mContext)
         } else {
             setAlertDialogResourceModelMutableLiveData(
                 BindingUtils.string(R.string.no_internet_message),
-                BindingUtils.drawable(R.drawable.ic_no_internet)!!,
                 false,
-                BindingUtils.string(R.string.try_again), {
+                BindingUtils.string(R.string.try_again),
+                {
                     playMedia(favouriteVideosModel)
                     isAlertDialogShown.postValue(false)
-                },
-                negativeButtonClickFunctionality = {
+                }, negativeButtonClickFunctionality = {
                     isAlertDialogShown.postValue(false)
                 }
             )
@@ -189,7 +186,6 @@ class MyFavouriteVideoViewModel(var mContext: Context) : BaseViewModel(mContext)
 
         setAlertDialogResourceModelMutableLiveData(
             BindingUtils.string(R.string.message_remove_favourite),
-            null,
             false,
             positiveButtonText = BindingUtils.string(R.string.strYes),
             positiveButtonClickFunctionality = {
