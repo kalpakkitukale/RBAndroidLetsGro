@@ -8,6 +8,7 @@ import com.ramanbyte.emla.data_layer.network.init.NetworkConnectionInterceptor
 import com.ramanbyte.emla.data_layer.repositories.CoursesRepository
 import com.ramanbyte.emla.data_layer.repositories.MasterRepository
 import com.ramanbyte.emla.data_layer.repositories.RegistrationRepository
+import com.ramanbyte.emla.data_layer.repositories.TransactionRepository
 import com.ramanbyte.emla.view_model.factory.ViewModelFactory
 import com.ramanbyte.emla.data_layer.room.ApplicationDatabase
 import com.ramanbyte.emla.faculty.data_layer.repositories.FacultyCoursesRepository
@@ -63,9 +64,11 @@ class AppController : BaseAppController(), KodeinAware {
 
         bind() from singleton { FacultyCoursesRepository(this@AppController) }
         bind() from singleton { FacultyQuestionRepository(this@AppController) }
+        bind() from singleton { TransactionRepository(this@AppController) }
 
         bind() from singleton { ViewModelFactory(instance()) }
     }
+
     override fun onCreate() {
         super.onCreate()
         //getUpFireBaseRemoteConfig()
@@ -124,6 +127,7 @@ class AppController : BaseAppController(), KodeinAware {
         }
         // [END fetch_config_with_callback]
     }
+
     companion object {
 
         fun setEnterPageAnimation(activity: Activity) {

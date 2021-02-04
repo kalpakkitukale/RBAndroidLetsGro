@@ -5,6 +5,7 @@
     <color name="colorApplicationBackground">#fcfcfc</color>
     <color name="cardBackgroundColor">#ffffff</color>
     <color name="colorIconNavyBlueInLightNGrayInDark">#1d396b</color>
+    <color name="colorIconNavyBlueInLightNGrayInDarkTransparent">#951d396b</color>
     <color name="colorTextNavyBlueInLightNWhiteInDark">#1d396b</color>
     <color name="colorIconGreen">#25ae88</color>
     <color name="colorButtonBlue">#3d9df9</color>
@@ -13,7 +14,8 @@
     <color name="colorTextGrayOnLightNDark">#9391a4</color>
     <color name="colorSelectedTab">#1d396b</color>
     <color name="colorNotSelectedTab">#9391a4</color>
-    <color name="colorCourseCardWithOpacity">#E6ffffff</color>
+    <color name="colorCourseCardWithOpacity">#ffffff</color>
+    <color name="colorCourseCardWithOpacity1">#E6ffffff</color>
 
     <!--Taken From previous theme-->
     <color name="transparent">#00000000</color>
