@@ -29,6 +29,8 @@ class CoursesModel() : Parcelable {
     var summativeAssessmentStatus: String? = null
     var summativeaAtemptCount: Int = 0
 
+    var isInCart:Boolean=false
+
 
     constructor(parcel: Parcel) : this() {
         courseId = parcel.readInt()

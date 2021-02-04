@@ -50,9 +50,9 @@ class CartAdapter:  RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
 
     inner class CartViewHolder(private var layoutBinding: CardCartItemBinding) :
         RecyclerView.ViewHolder(layoutBinding.root) {
-        fun bind(sessionResponseModel: CartResponseModel?) {
+        fun bind(cartResponseModel: CartResponseModel?) {
             layoutBinding?.apply {
-                cartModel = sessionResponseModel
+                cartModel = cartResponseModel
                 cartViewModel = cartViewModels
             }
         }

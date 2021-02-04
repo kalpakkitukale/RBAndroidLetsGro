@@ -36,15 +36,17 @@
 
             <TextView
                 android:id="@+id/tvCourseName"
+                style="@style/TextViewLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/imgCourse"
                 app:layout_constraintTop_toTopOf="@+id/imgCourse"
-                android:text="@{cartModel.courseName}"/>
+                android:text="@{cartModel.createdDate}"/>
             <TextView
                 android:id="@+id/tvCourseDescription"
+                style="@style/TextViewDescription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="@+id/tvCourseName"

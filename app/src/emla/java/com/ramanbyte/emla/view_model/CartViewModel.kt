@@ -145,9 +145,6 @@ class CartViewModel (mContext: Context) : BaseViewModel(mContext = mContext) {
         }
     }
 
-    fun coursesPagedList(): LiveData<PagedList<CoursesModel>>? {
-        return coursesRepository.coursesPagedList
-    }
 
 
 
