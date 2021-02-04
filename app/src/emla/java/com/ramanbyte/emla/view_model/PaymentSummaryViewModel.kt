@@ -16,6 +16,7 @@ import com.ramanbyte.base.BaseViewModel
 import com.ramanbyte.data_layer.CoroutineUtils
 import com.ramanbyte.emla.data_layer.network.exception.ApiException
 import com.ramanbyte.emla.data_layer.network.exception.NoInternetException
+import com.ramanbyte.emla.data_layer.repositories.TransactionRepository
 import com.ramanbyte.emla.data_layer.repositories.MasterRepository
 import com.ramanbyte.emla.models.PayuGatewayModel
 import com.ramanbyte.emla.models.request.InsertTransactionRequestModel
@@ -30,7 +31,7 @@ import org.kodein.di.generic.instance
 class PaymentSummaryViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
 
     val masterRepository: MasterRepository by instance()
-   // val transactionRepository: TransactionRepository by instance()
+    val transactionRepository: TransactionRepository by instance()
     val payuGatewayModel = PayuGatewayModel()
     var payuGatewayModelLiveData: MutableLiveData<PayuGatewayModel?> = MutableLiveData(null)
 
@@ -105,7 +106,7 @@ class PaymentSummaryViewModel(mContext: Context) : BaseViewModel(mContext = mCon
                         this@PaymentSummaryViewModel.amountLiveData.value.toString().toUpperCase()
                     )
                 }
-                val id = masterRepository.insertTransaction(
+                val id = transactionRepository.insertTransaction(
                     insertTransactionRequestModel
                 )
 

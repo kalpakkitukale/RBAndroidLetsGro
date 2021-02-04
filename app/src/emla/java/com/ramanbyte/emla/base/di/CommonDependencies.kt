@@ -30,6 +30,7 @@ private const val CHAPTER = "Chapter/"
 private const val SECTION = "Section/"
 private const val QUESTION = "Question/"
 private const val MASTER = "Master/"
+private const val COURSE_FEE = "CourseFeeStructure/"
 val ACTIVITY_CONTEXT = "activity_context"
 
 var CLIENT_BASE = BuildConfig.CLIENT_BASE
@@ -65,62 +66,66 @@ val repositoryDependencies = Kodein.Module("", true) {
         FacultyQuestionRepository(instance())
     }
 
+    bind<TransactionRepository>() with provider {
+        TransactionRepository(instance())
+    }
+
 }
 
 private val controllersDependencies = Kodein.Module("controllers_dependencies", true) {
 
     bind<LoginApiController>() with singleton {
         RetrofitInitializer.invoke(
-            instance(),//db
-            LoginApiController::class.java,
-            DOMAIN + EMLA + CLIENT_BASE + API + LOGIN
+                instance(),//db
+                LoginApiController::class.java,
+                DOMAIN + EMLA + CLIENT_BASE + API + LOGIN
         )
     }
     bind<RegistrationController>() with singleton {
         RetrofitInitializer.invoke(
-            instance(),//db
-            RegistrationController::class.java,
-            DOMAIN + EMLA + CLIENT_BASE + API + REGISTRATION
+                instance(),//db
+                RegistrationController::class.java,
+                DOMAIN + EMLA + CLIENT_BASE + API + REGISTRATION
         )
     }
 
     bind<CoursesController>() with singleton {
         RetrofitInitializer.invoke(
-            instance(),//db
-            CoursesController::class.java,
-            DOMAIN + EMLA + CLIENT_BASE + API + COURSE
+                instance(),//db
+                CoursesController::class.java,
+                DOMAIN + EMLA + CLIENT_BASE + API + COURSE
         )
     }
 
     bind<ChaptersController>() with singleton {
         RetrofitInitializer.invoke(
-            instance(),//db
-            ChaptersController::class.java,
-            DOMAIN + EMLA + CLIENT_BASE + API + CHAPTER
+                instance(),//db
+                ChaptersController::class.java,
+                DOMAIN + EMLA + CLIENT_BASE + API + CHAPTER
         )
     }
 
     bind<SectionsController>() with singleton {
         RetrofitInitializer.invoke(
-            instance(),//db
-            SectionsController::class.java,
-            DOMAIN + EMLA + CLIENT_BASE + API + SECTION
+                instance(),//db
+                SectionsController::class.java,
+                DOMAIN + EMLA + CLIENT_BASE + API + SECTION
         )
     }
 
     bind<QuestionController>() with singleton {
         RetrofitInitializer.invoke(
-            instance(),//db
-            QuestionController::class.java,
-            DOMAIN + EMLA + CLIENT_BASE + API + QUESTION
+                instance(),//db
+                QuestionController::class.java,
+                DOMAIN + EMLA + CLIENT_BASE + API + QUESTION
         )
     }
 
     bind<FacultyCoursesController>() with singleton {
         RetrofitInitializer.invoke(
-            instance(),//db
-            FacultyCoursesController::class.java,
-            DOMAIN + EMLA + CLIENT_BASE + API + COURSE
+                instance(),//db
+                FacultyCoursesController::class.java,
+                DOMAIN + EMLA + CLIENT_BASE + API + COURSE
         )
     }
 
@@ -130,17 +135,25 @@ private val controllersDependencies = Kodein.Module("controllers_dependencies", 
     * */
     bind<FacultyMasterApiController>() with singleton {
         RetrofitInitializer.invoke(
-            instance(),//db
-            FacultyMasterApiController::class.java,
-            DOMAIN + EMLA + CLIENT_BASE + API + MASTER
+                instance(),//db
+                FacultyMasterApiController::class.java,
+                DOMAIN + EMLA + CLIENT_BASE + API + MASTER
         )
     }
 
     bind<FacultyQuestionController>() with singleton {
         RetrofitInitializer.invoke(
-            instance(),//db
-            FacultyQuestionController::class.java,
-            DOMAIN + EMLA + CLIENT_BASE + API + QUESTION
+                instance(),//db
+                FacultyQuestionController::class.java,
+                DOMAIN + EMLA + CLIENT_BASE + API + QUESTION
+        )
+    }
+
+    bind<TransactionApiController>() with singleton {
+        RetrofitInitializer.invoke(
+                instance(),//db
+                TransactionApiController::class.java,
+                DOMAIN + EMLA + CLIENT_BASE + API + COURSE_FEE
         )
     }
     /*

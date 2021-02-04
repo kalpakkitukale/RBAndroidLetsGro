@@ -1,25 +1,19 @@
 package com.ramanbyte.emla.view_model
 
 import android.content.Context
-import android.content.Intent
-import android.os.Bundle
 import android.view.View
-import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.navigation.findNavController
 import androidx.paging.PagedList
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseViewModel
 import com.ramanbyte.data_layer.pagination.PaginationMessages
 import com.ramanbyte.emla.data_layer.repositories.CoursesRepository
-import com.ramanbyte.emla.data_layer.repositories.RegistrationRepository
 import com.ramanbyte.emla.models.CoursesModel
 import com.ramanbyte.emla.models.UserModel
-import com.ramanbyte.emla.models.request.CoursesRequest
-import com.ramanbyte.emla.models.response.CommonDropdownModel
-import com.ramanbyte.emla.ui.activities.PaymentSummaryActivity
-import com.ramanbyte.utilities.*
+import com.ramanbyte.utilities.AppLog
+import com.ramanbyte.utilities.BindingUtils
+import com.ramanbyte.utilities.KEY_BLANK
 import org.kodein.di.generic.instance
 
 class CartViewModel (mContext: Context) : BaseViewModel(mContext = mContext) {
@@ -44,7 +38,7 @@ class CartViewModel (mContext: Context) : BaseViewModel(mContext = mContext) {
 
     fun initPaginationResponseHandler() {
 
-            coursesRepository.getPaginationResponseHandler().observeForever {
+        coursesRepository.getPaginationResponseHandler().observeForever {
                 if (it != null) {
                     paginationResponse(
                         it,

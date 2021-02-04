@@ -162,28 +162,4 @@ class MasterRepository(val mContext: Context) : BaseRepository(mContext) {
         }
 
     }
-
-    suspend fun insertTransaction(insertTransactionRequestModel: InsertTransactionRequestModel): Int {
-        val loginResponseModel = this.getCurrentUser()
-
-        val deviceDetails = ""
-
-        insertTransactionRequestModel.created_By = loginResponseModel!!.userId
-        insertTransactionRequestModel.modify_By = loginResponseModel.userId
-        insertTransactionRequestModel.added_By = loginResponseModel.userId
-        insertTransactionRequestModel.user_Id = loginResponseModel.userId
-        insertTransactionRequestModel.registrationId = loginResponseModel.userId
-
-        insertTransactionRequestModel.deviceId = 0
-        insertTransactionRequestModel.deviceType =KEY_ANDROID
-        insertTransactionRequestModel.clientName = KEY_BLANK
-
-        AppLog.debugLog("insertTransactionRequestModel ---- $insertTransactionRequestModel")
-
-        val insertTransactionString = apiRequest {
-            loginApiController.postTransactionDetails(insertTransactionRequestModel)
-        }
-        AppLog.debugLog("insertTransactionString ---- $insertTransactionString")
-        return insertTransactionString ?: 0
-    }
 }
