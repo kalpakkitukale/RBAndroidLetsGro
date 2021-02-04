@@ -5,13 +5,13 @@ import com.ramanbyte.utilities.KEY_BLANK
 
 class CartResponseModel() : BaseObservable(){
     var channelPartnerName: String? = KEY_BLANK
-    var sessionTitle: String? = KEY_BLANK
-    var channelPartnerId: Int? = 0
-    var channelPartnerContactId: Int? = 0
-    var description: String? = KEY_BLANK
-    var startDateTime: String? = KEY_BLANK
-    var endDateTime: String? = KEY_BLANK
-    var deeplink: String? = KEY_BLANK
+    var courseDetailsId: Int? = 0
+    var id: Int? = 0
+    var modifyBy: String? = KEY_BLANK
+    var modifyDate: String? = KEY_BLANK
+    var createdDate: String? = KEY_BLANK
+    var appStatus: String? = KEY_BLANK
+    var delStatus: String? = KEY_BLANK
 
 
 }

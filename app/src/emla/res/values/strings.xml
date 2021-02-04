@@ -318,4 +318,9 @@ Content
     //login with facebook key
     <string name="facebook_app_id">256607422269546</string>
     <string name="fb_login_protocol_scheme">fb256607422269546</string>
+
+    //for cart
+    connection_timeout
+    <string name="connection_timeout">Connection TimeOut</string>
+    <string name="resource_not_found">Resource Not Found</string>
 </resources>

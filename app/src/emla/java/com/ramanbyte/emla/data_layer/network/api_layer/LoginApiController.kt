@@ -5,6 +5,7 @@ import com.ramanbyte.emla.models.CoursesModel
 import com.ramanbyte.emla.models.QuestionAndAnswerModel
 import com.ramanbyte.emla.models.UserModel
 import com.ramanbyte.emla.models.request.*
+import com.ramanbyte.emla.models.response.CartResponseModel
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -14,6 +15,7 @@ import retrofit2.http.*
  */
 
 interface LoginApiController {
+
 
     @POST("GetLogin")
     suspend fun doLogin(@Body loginRequest: LoginRequest): Response<UserModel>
@@ -33,8 +35,6 @@ interface LoginApiController {
     @POST("UpdateLogout/{userId}")
     suspend fun updateLogout(@Body manageUserDeviceModel: ManageUserDeviceModel, @Path("userId") userId: Int): Response<Int>
 
-    // Creating Payment Controller
-    @POST("CourseFeeStructure/CreateTransactionDetails")
-    suspend fun postTransactionDetails(@Body insertTransactionRequestModel: InsertTransactionRequestModel): Response<Int>
+
 
 }

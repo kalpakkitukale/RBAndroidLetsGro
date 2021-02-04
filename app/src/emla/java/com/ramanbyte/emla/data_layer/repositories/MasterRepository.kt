@@ -14,6 +14,7 @@ import com.ramanbyte.emla.data_layer.network.api_layer.LoginApiController
 import com.ramanbyte.emla.data_layer.room.entities.UserEntity
 import com.ramanbyte.emla.models.UserModel
 import com.ramanbyte.emla.models.request.*
+import com.ramanbyte.emla.models.response.CartResponseModel
 import com.ramanbyte.utilities.*
 import com.ramanbyte.utilities.DateUtils.getCurDate
 import com.ramanbyte.utilities.IpUtility.Companion.getIpAddress
@@ -185,5 +186,13 @@ class MasterRepository(val mContext: Context) : BaseRepository(mContext) {
         }
         AppLog.debugLog("insertTransactionString ---- $insertTransactionString")
         return insertTransactionString ?: 0
+    }
+
+    suspend fun getCart(): ArrayList<CartResponseModel>? {
+        val userId = getCurrentUser()?.userId ?: 0
+        return apiRequest {
+            loginApiController.getCartList(userId)
+        }
+
     }
 }

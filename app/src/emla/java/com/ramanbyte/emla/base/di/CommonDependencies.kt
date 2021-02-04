@@ -30,6 +30,7 @@ private const val CHAPTER = "Chapter/"
 private const val SECTION = "Section/"
 private const val QUESTION = "Question/"
 private const val MASTER = "Master/"
+private const val CourseFeeStructure = "CourseFeeStructure/"
 val ACTIVITY_CONTEXT = "activity_context"
 
 var CLIENT_BASE = BuildConfig.CLIENT_BASE
@@ -63,6 +64,9 @@ val repositoryDependencies = Kodein.Module("", true) {
     }
     bind<FacultyQuestionRepository>() with provider {
         FacultyQuestionRepository(instance())
+    }
+    bind<MasterRepository>() with provider {
+        MasterRepository(instance())
     }
 
 }
@@ -141,6 +145,14 @@ private val controllersDependencies = Kodein.Module("controllers_dependencies", 
             instance(),//db
             FacultyQuestionController::class.java,
             DOMAIN + EMLA + CLIENT_BASE + API + QUESTION
+        )
+    }
+
+    bind<CourseFeesController>() with singleton {
+        RetrofitInitializer.invoke(
+            instance(),//db
+            CourseFeesController::class.java,
+            DOMAIN + EMLA + CLIENT_BASE + API + CourseFeeStructure
         )
     }
     /*

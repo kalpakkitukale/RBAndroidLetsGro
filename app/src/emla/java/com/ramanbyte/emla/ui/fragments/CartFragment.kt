@@ -68,14 +68,17 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>() {
     }
 
     private fun setAdapter() {
-        layoutBinding.apply {
-            rvCartFragment.apply {
-              //  coursesAdapter = CartAdapter((activity!!).displayMetrics())
-                layoutManager = LinearLayoutManager(mContext, RecyclerView.VERTICAL, false)
-                adapter = cartAdapter?.apply {
-                    this.mContext = mContext
-                    viewModel = this@CartFragment.viewModel
-                }
+        layoutBinding.rvCartFragment.apply {
+            cartAdapter?.apply {
+                layoutManager =
+                    LinearLayoutManager(
+                        requireContext(),
+                        RecyclerView.VERTICAL,
+                        false
+                    )
+                this.cartList = viewModel.responseList
+                this.cartViewModels = viewModel
+                adapter = this
             }
         }
     }
@@ -84,9 +87,16 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>() {
     private fun setViewModelOp() {
         viewModel.apply {
 
-            initPaginationResponseHandler()
-           coursesPagedList()?.observe(this@CartFragment, androidx.lifecycle.Observer {
-        //    it?.let { coursesAdapter?.apply { submitList(it) } }
+            getCartList()
+            cartListLiveData?.observe(
+                viewLifecycleOwner,
+                androidx.lifecycle.Observer {
+                    it?.let {
+                        cartAdapter?.apply {
+                            setData(it)
+                        }
+                        cartListLiveData.value = null
+                    }
     })
 
 
