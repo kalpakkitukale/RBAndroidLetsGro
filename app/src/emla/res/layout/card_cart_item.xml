@@ -27,7 +27,7 @@
             xmlns:app="http://schemas.android.com/apk/res-auto">
 
             <ImageView
-                android:id="@+id/img_apn_not_set"
+                android:id="@+id/imgCourse"
                 android:layout_width="100dp"
                 android:layout_height="80dp"
                 android:contentDescription="@string/app_name"
@@ -35,37 +35,38 @@
                 tools:ignore="MissingConstraints"/>
 
             <TextView
-                android:id="@+id/tv_apn_not_set"
+                android:id="@+id/tvCourseName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Apn not set"
                 android:layout_marginTop="5dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/img_apn_not_set"
-                app:layout_constraintTop_toTopOf="@+id/img_apn_not_set" />
+                app:layout_constraintStart_toStartOf="@+id/imgCourse"
+                app:layout_constraintTop_toTopOf="@+id/imgCourse"
+                android:text="@{cartModel.courseName}"/>
             <TextView
-                android:id="@+id/tv1"
+                android:id="@+id/tvCourseDescription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Apn not set"
-                app:layout_constraintStart_toStartOf="@+id/tv_apn_not_set"
-                app:layout_constraintTop_toBottomOf="@+id/tv_apn_not_set" />
-            <TextView
-                android:id="@+id/tv2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Apn not set"
-                android:layout_marginTop="5dp"
-                app:layout_constraintStart_toStartOf="@+id/tv1"
-                app:layout_constraintTop_toBottomOf="@+id/tv1" />
+                app:layout_constraintStart_toStartOf="@+id/tvCourseName"
+                app:layout_constraintTop_toBottomOf="@+id/tvCourseName"
+                android:text="@{cartModel.courseDescription}"/>
 
             <TextView
-                android:id="@+id/tv3"
+                android:id="@+id/tvDuration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{cartModel.duraton}"
+                android:layout_marginTop="5dp"
+                app:layout_constraintStart_toStartOf="@+id/tvCourseDescription"
+                app:layout_constraintTop_toBottomOf="@+id/tvCourseDescription" />
+
+            <TextView
+                android:id="@+id/tvAmount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:text="Apn not set"
-                app:layout_constraintBottom_toBottomOf="@id/tv2"
+                android:text="@{cartModel.courseFees}"
+                app:layout_constraintBottom_toBottomOf="@id/tvDuration"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias=".8"
                 app:layout_constraintStart_toStartOf="parent"
@@ -74,7 +75,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="@id/tv2"
+                app:layout_constraintBottom_toBottomOf="@id/tvDuration"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintVertical_bias="1"
                 android:src="@drawable/ic_arrow_right_black"

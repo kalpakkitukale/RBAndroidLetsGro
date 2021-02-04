@@ -4,7 +4,10 @@ import androidx.databinding.BaseObservable
 import com.ramanbyte.utilities.KEY_BLANK
 
 class CartResponseModel() : BaseObservable(){
-    var channelPartnerName: String? = KEY_BLANK
+    var courseName: String? = KEY_BLANK
+    var courseDescription: String? = KEY_BLANK
+    var duraton: String? = KEY_BLANK
+    var courseFees: String? = KEY_BLANK
     var courseDetailsId: Int? = 0
     var id: Int? = 0
     var modifyBy: String? = KEY_BLANK
