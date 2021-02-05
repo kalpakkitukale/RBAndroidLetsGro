@@ -4,7 +4,6 @@ import android.content.Context
 import com.ramanbyte.data_layer.base.BaseRepository
 import com.ramanbyte.emla.data_layer.network.api_layer.TransactionApiController
 import com.ramanbyte.emla.data_layer.room.entities.UserEntity
-import com.ramanbyte.emla.models.CoursesModel
 import com.ramanbyte.emla.models.UserModel
 import com.ramanbyte.emla.models.request.CartRequestModel
 import com.ramanbyte.emla.models.request.InsertTransactionRequestModel
@@ -53,17 +52,23 @@ class TransactionRepository(val mContext: Context) : BaseRepository(mContext) {
         }
     }
 
-    suspend fun insertCart(cartRequestModel: CartRequestModel): Int? {
-        val userId = getCurrentUser()?.userId ?: 0
+    suspend fun insertCart(cartRequestModel: CartRequestModel, courseId: Int): Int? {
+        val loggedInUserID = getCurrentUser()?.userId ?: 0
+        cartRequestModel.apply {
+            courseDetailsId = courseId
+            userId = loggedInUserID
+            createdBy = loggedInUserID
+            modifyBy = loggedInUserID
+        }
         return apiRequest {
             transactionApiController.insertCart(cartRequestModel)
         }
     }
 
-    suspend fun deleteCart(id:Int): Int? {
+    suspend fun deleteCart(cartItemId: Int): Int? {
         val userId = getCurrentUser()?.userId ?: 0
         return apiRequest {
-            transactionApiController.deleteCart(userId, id)
+            transactionApiController.deleteCart(userId, cartItemId)
         }
     }
 }

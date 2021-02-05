@@ -108,12 +108,14 @@ class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
         return coursesRepository.coursesPagedList
     }
 
-    fun insertCartData(view: View) {
+    fun insertCartData(view: View, coursesModel: CoursesModel) {
         CoroutineUtils.main {
             try {
                 isLoaderShowingLiveData.postValue(true)
                 val response =
-                    transactionRepository.insertCart(cartRequestModel = CartRequestModel())
+                    transactionRepository.insertCart(cartRequestModel = CartRequestModel(),
+                        courseId = coursesModel.courseId
+                    )
                 isLoaderShowingLiveData.postValue(false)
             } catch (e: ApiException) {
                 isLoaderShowingLiveData.postValue(false)
@@ -138,7 +140,7 @@ class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
                     false,
                     BindingUtils.string(R.string.tryAgain), {
                         isAlertDialogShown.postValue(false)
-                        insertCartData(view)
+                        insertCartData(view, coursesModel)
                     },
                     BindingUtils.string(R.string.no), {
                         isAlertDialogShown.postValue(false)

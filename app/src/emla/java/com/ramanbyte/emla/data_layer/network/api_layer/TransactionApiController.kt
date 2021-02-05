@@ -5,10 +5,7 @@ import com.ramanbyte.emla.models.request.CartRequestModel
 import com.ramanbyte.emla.models.request.InsertTransactionRequestModel
 import com.ramanbyte.emla.models.response.CartResponseModel
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface TransactionApiController {
 
@@ -22,6 +19,6 @@ interface TransactionApiController {
     @POST("AddCart")
     suspend fun insertCart(@Body cartRequestModel: CartRequestModel): Response<Int>
 
-    @POST("DeleteCart/{Id}/{UserId}")
-    suspend fun deleteCart(@Path("UserId") UserId: Int, @Path("Id") Id: Int): Response<Int>
+    @DELETE("DeleteCart/{Id}/{UserId}")
+    suspend fun deleteCart(@Path("UserId") UserId: Int, @Path("Id") cartItemId: Int): Response<Int>
 }
