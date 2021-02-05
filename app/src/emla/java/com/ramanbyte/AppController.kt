@@ -1,5 +1,6 @@
 package com.ramanbyte
 
+import android.app.Activity
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
 import com.google.gson.GsonBuilder
@@ -7,6 +8,7 @@ import com.ramanbyte.emla.data_layer.network.init.NetworkConnectionInterceptor
 import com.ramanbyte.emla.data_layer.repositories.CoursesRepository
 import com.ramanbyte.emla.data_layer.repositories.MasterRepository
 import com.ramanbyte.emla.data_layer.repositories.RegistrationRepository
+import com.ramanbyte.emla.data_layer.repositories.TransactionRepository
 import com.ramanbyte.emla.view_model.factory.ViewModelFactory
 import com.ramanbyte.emla.data_layer.room.ApplicationDatabase
 import com.ramanbyte.emla.faculty.data_layer.repositories.FacultyCoursesRepository
@@ -62,9 +64,11 @@ class AppController : BaseAppController(), KodeinAware {
 
         bind() from singleton { FacultyCoursesRepository(this@AppController) }
         bind() from singleton { FacultyQuestionRepository(this@AppController) }
+        bind() from singleton { TransactionRepository(this@AppController) }
 
         bind() from singleton { ViewModelFactory(instance()) }
     }
+
     override fun onCreate() {
         super.onCreate()
         //getUpFireBaseRemoteConfig()
@@ -122,5 +126,26 @@ class AppController : BaseAppController(), KodeinAware {
             }
         }
         // [END fetch_config_with_callback]
+    }
+
+    companion object {
+
+        fun setEnterPageAnimation(activity: Activity) {
+            try {
+                activity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+
+        fun setExitPageAnimation(activity: Activity) {
+            try {
+                activity.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+            } catch (e: Exception) {
+                e.printStackTrace()
+                AppLog.errorLog(e.message, e)
+            }
+
+        }
     }
 }

@@ -3,14 +3,10 @@ package com.ramanbyte.emla.view_model
 import android.Manifest
 import android.app.Activity
 import android.content.Context
-import android.content.Intent
-import android.os.Bundle
 import android.view.View
-import android.widget.CompoundButton
 import androidx.databinding.library.baseAdapters.BR
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.findNavController
-import com.google.android.material.snackbar.Snackbar
 import com.ramanbyte.BaseAppController
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseViewModel

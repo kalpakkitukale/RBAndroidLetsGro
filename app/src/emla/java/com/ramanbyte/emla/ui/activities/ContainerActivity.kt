@@ -17,7 +17,6 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.webkit.WebViewCompat
 import com.google.android.material.internal.NavigationMenuView
-import com.ramanbyte.BaseAppController
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseActivity
 import com.ramanbyte.databinding.ActivityContainerBinding
@@ -168,7 +167,8 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding, ContainerViewMo
         private val NAV_COURSES = 0x1
         private val NAV_DOWNLOADS = 0x2
         private val NAV_MY_FAVOURATE = 0x3
-        private val NAV_SETTINGS = 0x4
+        private val NAV_MY_CART = 0x4
+        private val NAV_SETTINGS = 0x5
 
         fun intent(activity: Activity): Intent {
             return Intent(activity, ContainerActivity::class.java)
@@ -284,11 +284,20 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding, ContainerViewMo
             )
             headerList.add(menuPojo)
 
+            menuPojo = MenuPojo(
+                NAV_MY_CART,
+                R.drawable.ic_my_cart,
+                BindingUtils.string(R.string.my_cart),
+                false,
+                0
+            )
+            headerList.add(menuPojo)
+
 
             menuPojo = MenuPojo(
                 NAV_SETTINGS,
                 R.drawable.ic_settings,
-                BindingUtils.string(R.string.action_settings),
+                BindingUtils.string(R.string.settings),
                 false,
                 0
             )
@@ -315,6 +324,10 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding, ContainerViewMo
                 NAV_MY_FAVOURATE -> {
                     if (navController.currentDestination?.id != R.id.myFavouriteVideoFragment)
                         navController.navigate(R.id.myFavouriteVideoFragment, null, navOption)
+                }
+                NAV_MY_CART -> {
+                    if (navController.currentDestination?.id != R.id.cartFragment)
+                        navController.navigate(R.id.cartFragment, null, navOption)
                 }
                 NAV_SETTINGS -> {
                     if (navController.currentDestination?.id != R.id.settingFragment)

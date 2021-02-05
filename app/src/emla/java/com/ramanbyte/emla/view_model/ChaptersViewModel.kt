@@ -104,7 +104,7 @@ class ChaptersViewModel(mContext: Context) : BaseViewModel(mContext) {
 
             buttonView.findNavController()
                 .navigate(
-                    R.id.action_courseDetailFragment_to_preAssessmentTestFragment,
+                    R.id.action_chaptersListFragment_to_preAssessmentTestFragment,
                     Bundle().apply {
                         putInt(keyTestType, KEY_QUIZ_TYPE_SUMMATIVE)
                         putParcelable(KEY_CHAPTER_MODEL, ChaptersModel())

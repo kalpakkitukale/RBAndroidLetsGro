@@ -157,6 +157,9 @@ const val GALLERY = 1
 const val REMOVE_PHOTO = 2
 const val PATH_SEPARATOR = "/"
 
+// payment codes
+val PAYMENT_SUCCESSFUL_REQUEST_CODE = 700
+
 
 /**
  * DATA PARSE KEY
@@ -368,19 +371,68 @@ const val KEY_ALL = "All"
 const val KEY_ASCENDING = "ascending"
 const val KEY_DESCENDING = "descending"
 
+/*payment keys*/
+const val keyPayuResponseStatus = "payu_response"
+const val keyPayuStatus = "status"
+const val keyPayuSuccess = "success"
+const val keyPayuTransactionMode = "mode"
+
+const val keyInternetBanking = "Internet Banking"
+const val keyCreditCard = "Credit Card"
+const val keyDebitCard = "Debit Card"
+const val keyCard = "Card"
+const val keyCash = "Cash"
+const val keyEmi = "EMI"
+const val keyUpi = "UPI"
+
+const val keyPaymentGatewayAirPay = "AirPay"
+const val keyPaymentGatewayPayUBiz = "PayUBiz"
+const val keyPaymentDomain = "Online"
+
+
+// changed data
+
+const val keyExamFormId = "examFormId"
+const val keyCampusId = "campusId"
+const val keyCampusName = "campusName"
+const val keyProgramId = "programId"
+const val keyProgramName = "programName"
+const val keyAdmissionYear = "admissionYear"
+const val keyAmount = "amount"
+const val keyPaymentStepIntegration = "paymentStepIntegration"
+const val keyPaymentAlreadyForProgram = "paymentAlreadyForProgram"
+const val keyCampusData="campusData"
+
+const val KEY_APPLICATION_FORM_TRANSACTION_TYPE = "Course fees"
+
+const val KEY_PENDING_TRANSACTION_STATUS = "Pending"
+const val KEY_SUCCESS_TRANSACTION_STATUS = "Success"
+const val KEY_FAIL_TRANSACTION_STATUS = "Fail"
+const val KEY_CANCEL_TRANSACTION_STATUS = "Cancel"
+val KEY_SUCCESS = "Success"
+val DATE_TIME_SECONDS_PATTERN = "yyyy-MM-dd HH:mm:ss"
+val KEY_APP_STATUS = "APP"
+val KEY_DEL_STATUS = "N"
+val KEY_MOBILE_PAYMENT_TYPE = "Mobile"
+
+val KEY_BEFORE_EXAM = "BeforeForm"
+
 fun skipTrailingZeroes(number: Double?): String {
     var trimmedNumber = "0"
 
     val decimalFormat = DecimalFormat("#.##")
-    val obtainedMarksDbl = number!!
 
-    if (obtainedMarksDbl > 0.0) {
-        trimmedNumber = decimalFormat.format(obtainedMarksDbl)
+    number?.apply {
 
-        if (trimmedNumber.contains(".00") || trimmedNumber.contains(".0")) {
-            trimmedNumber = BigDecimal(obtainedMarksDbl)
-                .setScale(2, BigDecimal.ROUND_HALF_EVEN)
-                .stripTrailingZeros().toPlainString()
+        if (this > 0.0) {
+
+            trimmedNumber = decimalFormat.format(this)
+
+            if (trimmedNumber.contains(".00") || trimmedNumber.contains(".0")) {
+                trimmedNumber = BigDecimal(this)
+                    .setScale(2, BigDecimal.ROUND_HALF_EVEN)
+                    .stripTrailingZeros().toPlainString()
+            }
         }
     }
 

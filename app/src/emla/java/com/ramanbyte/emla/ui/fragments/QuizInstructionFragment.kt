@@ -3,17 +3,12 @@ package com.ramanbyte.emla.ui.fragments
 import android.content.Context
 import android.view.MenuItem
 import androidx.lifecycle.Observer
-import androidx.navigation.NavOptions
-import androidx.navigation.Navigation
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.ramanbyte.R
-import com.ramanbyte.aws_s3_android.accessor.AppS3Client
 import com.ramanbyte.base.BaseFragment
 import com.ramanbyte.data_layer.SharedPreferencesDatabase
 import com.ramanbyte.databinding.FragmentQuizInstructionBinding
 import com.ramanbyte.emla.models.InstructionsModel
-import com.ramanbyte.emla.ui.activities.ContainerActivity
 import com.ramanbyte.emla.view_model.ShowQuestionsViewModel
 import com.ramanbyte.utilities.*
 import com.ramanbyte.utilities.DateUtils.DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS

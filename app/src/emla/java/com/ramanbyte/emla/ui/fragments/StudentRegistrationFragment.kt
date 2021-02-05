@@ -16,7 +16,6 @@ import androidx.core.content.FileProvider
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavOptions
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.ramanbyte.BaseAppController
@@ -25,7 +24,6 @@ import com.ramanbyte.R
 import com.ramanbyte.base.BaseFragment
 import com.ramanbyte.cropper.ImageCroppingActivity
 import com.ramanbyte.databinding.FragmentStudentRegistrationBinding
-import com.ramanbyte.emla.ui.activities.LoginActivity
 import com.ramanbyte.emla.view_model.CreateAccountViewModel
 import com.ramanbyte.emla.view_model.LoginViewModel
 import com.ramanbyte.utilities.*

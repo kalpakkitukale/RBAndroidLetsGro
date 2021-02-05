@@ -153,6 +153,10 @@ dependencies {
 
     implementation 'com.github.barteksc:android-pdf-viewer:2.8.2'
 
+    //payment
+    implementation project(':sdkui')
+    implementation files('libs\\airpay_simplifiedotpunified.jar')
+
     //Login with Google and Facebook
 
     implementation 'com.facebook.android:facebook-android-sdk:5.15.3'

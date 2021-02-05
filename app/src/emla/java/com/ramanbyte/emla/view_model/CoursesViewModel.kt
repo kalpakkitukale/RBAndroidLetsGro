@@ -1,7 +1,6 @@
 package com.ramanbyte.emla.view_model
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.databinding.ObservableField
@@ -10,17 +9,23 @@ import androidx.lifecycle.MutableLiveData
 import androidx.navigation.findNavController
 import androidx.paging.PagedList
 import com.ramanbyte.R
-import com.ramanbyte.aws_s3_android.utilities.S3Constant.Companion.mContext
 import com.ramanbyte.base.BaseViewModel
+import com.ramanbyte.data_layer.CoroutineUtils
 import com.ramanbyte.data_layer.pagination.PaginationMessages
+import com.ramanbyte.emla.data_layer.network.exception.ApiException
+import com.ramanbyte.emla.data_layer.network.exception.NoInternetException
+import com.ramanbyte.emla.data_layer.network.exception.ResourceNotFound
 import com.ramanbyte.emla.data_layer.repositories.CoursesRepository
 import com.ramanbyte.emla.data_layer.repositories.RegistrationRepository
+import com.ramanbyte.emla.data_layer.repositories.TransactionRepository
 import com.ramanbyte.emla.models.CoursesModel
 import com.ramanbyte.emla.models.UserModel
+import com.ramanbyte.emla.models.request.CartRequestModel
 import com.ramanbyte.emla.models.request.CoursesRequest
 import com.ramanbyte.emla.models.response.CommonDropdownModel
 import com.ramanbyte.utilities.*
 import org.kodein.di.generic.instance
+import java.util.concurrent.TimeoutException
 
 /**
  * @author Vinay Kumbhar <vinay.pkumbhar@gmail.com>
@@ -32,6 +37,7 @@ class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
     }
     private val coursesRepository: CoursesRepository by instance()
     private val registrationRepository: RegistrationRepository by instance()
+    private val transactionRepository: TransactionRepository by instance()
 
     var isFilterApplied = MutableLiveData<Boolean>(null)
 
@@ -71,7 +77,6 @@ class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
             coursesRepository.searchCourse(it)
         }
         userData = coursesRepository.getCurrentUser()
-
     }
 
     fun initPaginationResponseHandler() {
@@ -101,6 +106,47 @@ class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
 
     fun coursesPagedList(): LiveData<PagedList<CoursesModel>>? {
         return coursesRepository.coursesPagedList
+    }
+
+    fun insertCartData(view: View) {
+        CoroutineUtils.main {
+            try {
+                isLoaderShowingLiveData.postValue(true)
+                val response =
+                    transactionRepository.insertCart(cartRequestModel = CartRequestModel())
+                isLoaderShowingLiveData.postValue(false)
+            } catch (e: ApiException) {
+                isLoaderShowingLiveData.postValue(false)
+                setAlertDialogResourceModelMutableLiveData(
+                    e.message.toString(),
+                    BindingUtils.drawable(
+                        R.drawable.something_went_wrong
+                    )!!,
+                    true,
+                    BindingUtils.string(R.string.strOk), {
+                        isAlertDialogShown.postValue(false)
+                    }
+                )
+                isAlertDialogShown.postValue(true)
+            } catch (e: NoInternetException) {
+                e.printStackTrace()
+                AppLog.errorLog(e.message, e)
+                isLoaderShowingLiveData.postValue(false)
+                setAlertDialogResourceModelMutableLiveData(
+                    BindingUtils.string(R.string.no_internet_message),
+                    BindingUtils.drawable(R.drawable.ic_no_internet)!!,
+                    false,
+                    BindingUtils.string(R.string.tryAgain), {
+                        isAlertDialogShown.postValue(false)
+                        insertCartData(view)
+                    },
+                    BindingUtils.string(R.string.no), {
+                        isAlertDialogShown.postValue(false)
+                    }
+                )
+                isAlertDialogShown.postValue(true)
+            }
+        }
     }
 
     /*
@@ -147,6 +193,26 @@ class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
         }
     }
 
+    fun showCourseSyllabus(view: View, coursesModel: CoursesModel) {
+
+        view.findNavController()
+            .navigate(
+                R.id.action_coursesFragment_to_courseSyllabusFragment,
+                Bundle().apply {
+                    putParcelable(KEY_COURSE_MODEL, coursesModel)
+                })
+    }
+
+    fun showChapterList(view: View, coursesModel: CoursesModel) {
+
+        view.findNavController()
+            .navigate(
+                R.id.action_coursesFragment_to_chaptersListFragment,
+                Bundle().apply {
+                    putParcelable(KEY_COURSE_MODEL, coursesModel)
+                })
+    }
+
     fun shareClick(view: View, coursesModel: CoursesModel) {
         shareLiveData.value = coursesModel
     }
@@ -169,7 +235,7 @@ class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
 
             filterRequestModel = CoursesRequest().apply {
                 userId = /*if (isFilterSelected) 0 else */ userData?.userId!!
-                userType = if(isFilterSelected)userData?.userType!! else ""
+                userType = if (isFilterSelected) userData?.userType!! else ""
                 programId = tempFilterModel.programId
                 specializationId = tempFilterModel.specializationId
                 patternId = tempFilterModel.patternId
@@ -177,10 +243,14 @@ class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
             }
 
             isFilterApplied.postValue(isFilterSelected)
-            if(filterRequestModel.programId==0)programName.set(BindingUtils.string(R.string.program))
-            if(filterRequestModel.patternId==0)patternName.set(BindingUtils.string(R.string.pattern))
-            if(filterRequestModel.specializationId==0)specializationName.set(BindingUtils.string(R.string.specialisation))
-            if(filterRequestModel.skillId==0)skillName.set(BindingUtils.string(R.string.skill))
+            if (filterRequestModel.programId == 0) programName.set(BindingUtils.string(R.string.program))
+            if (filterRequestModel.patternId == 0) patternName.set(BindingUtils.string(R.string.pattern))
+            if (filterRequestModel.specializationId == 0) specializationName.set(
+                BindingUtils.string(
+                    R.string.specialisation
+                )
+            )
+            if (filterRequestModel.skillId == 0) skillName.set(BindingUtils.string(R.string.skill))
 
             filterCourseList(filterRequestModel)
             dismissBottomSheet.postValue(true)
@@ -194,17 +264,17 @@ class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
     private fun hasFilter(): Boolean {
         return (/*tempFilterModel.userType.isNotEmpty() ||*/
                 tempFilterModel.programId != 0 ||
-                tempFilterModel.patternId != 0 ||
-                tempFilterModel.specializationId != 0 ||
-                tempFilterModel.skillId != 0)
+                        tempFilterModel.patternId != 0 ||
+                        tempFilterModel.specializationId != 0 ||
+                        tempFilterModel.skillId != 0)
     }
 
     fun getFilterState(): Boolean {
         return (/*filterRequestModel.userType.isNotEmpty() ||*/
                 filterRequestModel.programId != 0 ||
-                filterRequestModel.patternId != 0 ||
-                filterRequestModel.specializationId != 0 ||
-                filterRequestModel.skillId != 0)
+                        filterRequestModel.patternId != 0 ||
+                        filterRequestModel.specializationId != 0 ||
+                        filterRequestModel.skillId != 0)
     }
 
     fun onClearFilterClick(view: View) {

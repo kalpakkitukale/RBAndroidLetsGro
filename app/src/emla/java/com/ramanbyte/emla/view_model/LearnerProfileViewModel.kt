@@ -4,10 +4,8 @@ import android.content.Context
 import android.graphics.drawable.Drawable
 import android.view.View
 import android.widget.CompoundButton
-import androidx.core.text.isDigitsOnly
 import androidx.databinding.library.baseAdapters.BR
 import androidx.lifecycle.MutableLiveData
-import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import com.ramanbyte.R
 import com.ramanbyte.aws_s3_android.accessor.AppS3Client
@@ -19,7 +17,6 @@ import com.ramanbyte.emla.data_layer.network.exception.NoInternetException
 import com.ramanbyte.emla.data_layer.repositories.MasterRepository
 import com.ramanbyte.emla.data_layer.repositories.RegistrationRepository
 import com.ramanbyte.emla.models.CityModel
-import com.ramanbyte.emla.models.RegistrationModel
 import com.ramanbyte.emla.models.StateModel
 import com.ramanbyte.emla.models.UserDetailsModel
 import com.ramanbyte.emla.models.request.PledgeStatusRequest

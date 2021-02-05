@@ -19,11 +19,11 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardContainer"
+        style="@style/customCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/customCard"
-        app:contentPadding="0dp"
-        android:onClick="@{()->coursesViewModel.courseClick(cardContainer, coursesModel)}">
+        app:contentPadding="0dp">
+        <!--  android:onClick="@{()->coursesViewModel.courseClick(cardContainer, coursesModel)}"-->
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -42,11 +42,19 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="@drawable/gradient_course_bg"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView"
+                app:layout_constraintEnd_toEndOf="@+id/imageView"
+                app:layout_constraintStart_toStartOf="@+id/imageView"
+                app:layout_constraintTop_toTopOf="@+id/imageView" />
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/llDetails"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorCourseCardWithOpacity"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
@@ -84,30 +92,147 @@
                     android:layout_marginEnd="@dimen/dp_5"
                     android:onClick="@{()->coursesViewModel.shareClick(ivShare, coursesModel)}"
                     android:padding="@dimen/dp_3"
-                    android:paddingTop="@dimen/dp_3"
                     android:src="@drawable/ic_share"
                     android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tvTopicDescription" />
 
-                <androidx.appcompat.widget.AppCompatTextView
+                <!-- <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvTopicDetail"
                     style="@style/TextViewRegularNavyBlueOnLightNWhiteOnDark"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_2"
+                    android:layout_marginTop="@dimen/dp_5"
                     android:layout_marginBottom="@dimen/dp_16"
                     android:ellipsize="end"
                     android:lines="1"
                     android:maxLines="1"
+                    android:paddingRight="@dimen/dp_5"
                     android:paddingBottom="@dimen/dp_10"
-                    android:paddingEnd="@dimen/dp_5"
                     android:text="@{coursesModel.courseDescription}"
                     android:textSize="@dimen/sp_12"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/ivStatus"
                     app:layout_constraintStart_toStartOf="@+id/tvTopicDescription"
-                    app:layout_constraintTop_toBottomOf="@+id/tvTopicDescription" />
+                    app:layout_constraintTop_toBottomOf="@+id/tvTopicDescription" />-->
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivCoursesSyllabus"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_15"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:background="@drawable/image_background"
+                    android:onClick="@{()->coursesViewModel.showCourseSyllabus(cardContainer, coursesModel)}"
+                    android:padding="@dimen/dp_5"
+                    app:layout_constraintEnd_toStartOf="@+id/ivChapterList"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvTopicDescription"
+                    app:srcCompat="@drawable/ic_courses" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivChapterList"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_15"
+                    android:background="@drawable/image_background"
+                    android:onClick="@{()->coursesViewModel.showChapterList(cardContainer, coursesModel)}"
+                    android:padding="@dimen/dp_5"
+                    app:layout_constraintEnd_toStartOf="@+id/ivPerformance"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/ivCoursesSyllabus"
+                    app:layout_constraintTop_toTopOf="@+id/ivCoursesSyllabus"
+                    app:srcCompat="@drawable/ic_all_content" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivPerformance"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_15"
+                    android:background="@drawable/image_background"
+                    android:onClick="@{()->coursesViewModel.showChapterList(cardContainer, coursesModel)}"
+                    android:padding="@dimen/dp_5"
+                    app:layout_constraintEnd_toStartOf="@+id/ivCart"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/ivChapterList"
+                    app:layout_constraintTop_toTopOf="@+id/ivCoursesSyllabus"
+                    app:srcCompat="@drawable/ic_all_content" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivCart"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_15"
+                    android:layout_marginEnd="@dimen/dp_15"
+                    android:background="@drawable/image_background"
+                    android:onClick="@{coursesViewModel::insertCartData}"
+                    android:padding="@dimen/dp_5"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/ivPerformance"
+                    app:layout_constraintTop_toTopOf="@+id/ivCoursesSyllabus"
+                    app:srcCompat="@drawable/ic_all_content" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvLabelCoursesContent"
+                    style="@style/TextViewLightNavyBlueOnLightNWhiteOnDark"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_8"
+                    android:layout_marginTop="@dimen/dp_2"
+                    android:layout_marginEnd="@dimen/dp_5"
+                    android:layout_marginBottom="@dimen/dp_5"
+                    android:gravity="center_horizontal"
+                    android:text="Content"
+                    android:textSize="@dimen/sp_11"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@id/ivCoursesSyllabus"
+                    app:layout_constraintStart_toStartOf="@id/ivCoursesSyllabus"
+                    app:layout_constraintTop_toBottomOf="@id/ivCoursesSyllabus" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvLabelTopicList"
+                    style="@style/TextViewLightNavyBlueOnLightNWhiteOnDark"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_8"
+                    android:layout_marginTop="@dimen/dp_2"
+                    android:layout_marginEnd="@dimen/dp_5"
+                    android:gravity="center_horizontal"
+                    android:text="Topic List"
+                    android:textSize="@dimen/sp_11"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvLabelCoursesContent"
+                    app:layout_constraintEnd_toEndOf="@id/ivChapterList"
+                    app:layout_constraintStart_toStartOf="@id/ivChapterList"
+                    app:layout_constraintTop_toBottomOf="@id/ivChapterList" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvLabePerformance"
+                    style="@style/TextViewLightNavyBlueOnLightNWhiteOnDark"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_2"
+                    android:text="Performance"
+                    android:gravity="center_horizontal"
+                    android:textSize="@dimen/sp_10"
+                    app:layout_constraintEnd_toEndOf="@+id/ivPerformance"
+                    app:layout_constraintStart_toStartOf="@+id/ivPerformance"
+                    app:layout_constraintTop_toBottomOf="@id/ivPerformance" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvLabeCart"
+                    style="@style/TextViewLightNavyBlueOnLightNWhiteOnDark"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_8"
+                    android:layout_marginTop="@dimen/dp_2"
+                    android:layout_marginEnd="@dimen/dp_5"
+                    android:gravity="center_horizontal"
+                    android:text="Cart"
+                    android:textSize="@dimen/sp_11"
+                    app:layout_constraintEnd_toEndOf="@id/ivCart"
+                    app:layout_constraintStart_toStartOf="@id/ivCart"
+                    app:layout_constraintTop_toBottomOf="@id/ivCart" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

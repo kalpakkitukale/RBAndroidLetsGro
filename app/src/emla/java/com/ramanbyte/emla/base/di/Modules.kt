@@ -1,5 +1,7 @@
 package com.ramanbyte.emla.base.di
 
+import android.view.View
+import android.widget.Checkable
 import com.ramanbyte.emla.data_layer.repositories.QuizRepository
 import com.ramanbyte.emla.faculty.view_model.factory.FacultyViewModelFactory
 import com.ramanbyte.emla.view_model.factory.ViewModelFactory
@@ -28,5 +30,13 @@ val authModuleDependency = Kodein.Module(DI_AUTH_MODULE, true) {
                 DI_ACTIVITY_CONTEXT
             )
         )
+    }
+}
+interface RadioCheckable : Checkable {
+    fun addOnCheckChangeListener(onCheckedChangeListener: OnCheckedChangeListener)
+    fun removeOnCheckChangeListener(onCheckedChangeListener: OnCheckedChangeListener)
+
+    interface OnCheckedChangeListener {
+        fun onCheckedChanged(radioGroup: View, isChecked: Boolean)
     }
 }

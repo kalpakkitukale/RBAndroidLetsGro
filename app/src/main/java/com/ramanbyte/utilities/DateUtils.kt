@@ -376,5 +376,17 @@ object DateUtils {
             getDisplayDateFromCalender(neededTime,"$DATE_DISPLAY_PATTERN, ") + getDisplayDateFromCalender(neededTime,TIME_DISPLAY_PATTERN)
         }
     }
+    @JvmStatic
+    fun getCurDate(outputFormat: String): String? {
+        try {
+            val calendar = getCurrentCalender()
+            val simpleDateFormat = SimpleDateFormat(outputFormat, Locale.US)
+            return simpleDateFormat.format(Date(calendar!!.timeInMillis))
+        } catch (e: Exception) {
+            e.printStackTrace()
+            AppLog.errorLog(e.message, e)
+        }
 
+        return null
+    }
 }

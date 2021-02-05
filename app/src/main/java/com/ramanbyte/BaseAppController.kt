@@ -57,6 +57,7 @@ abstract class BaseAppController : Application() {
         val themePref: String? = SharedPreferencesDatabase.getStringPref(KEY_THEME)
         themePref?.let { SharedPreferencesDatabase.setStringPref(KEY_THEME, it) }
         ThemeHelper.applyTheme(if(themePref?.isEmpty()==true) ThemeHelper.DEFAULT_MODE else themePref)
+//        ThemeHelper.applyTheme(ThemeHelper.DARK_MODE)
     }
 
 

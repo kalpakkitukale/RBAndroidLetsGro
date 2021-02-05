@@ -32,5 +32,4 @@ interface LoginApiController {
 
     @POST("UpdateLogout/{userId}")
     suspend fun updateLogout(@Body manageUserDeviceModel: ManageUserDeviceModel, @Path("userId") userId: Int): Response<Int>
-
 }

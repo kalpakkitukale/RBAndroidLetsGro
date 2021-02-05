@@ -31,6 +31,7 @@ import com.ramanbyte.utilities.*
  * @author Vinay Kumbhar <vinay.k@ramanbyte.com>
  * @since 14/04/2020
  */
+
 class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>() {
     private lateinit var mContext: Context
     private var coursesAdapter: CoursesAdapter? = null

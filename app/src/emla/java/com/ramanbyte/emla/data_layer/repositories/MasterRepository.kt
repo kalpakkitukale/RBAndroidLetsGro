@@ -14,6 +14,7 @@ import com.ramanbyte.emla.data_layer.network.api_layer.LoginApiController
 import com.ramanbyte.emla.data_layer.room.entities.UserEntity
 import com.ramanbyte.emla.models.UserModel
 import com.ramanbyte.emla.models.request.*
+import com.ramanbyte.emla.models.response.CartResponseModel
 import com.ramanbyte.utilities.*
 import com.ramanbyte.utilities.DateUtils.getCurDate
 import com.ramanbyte.utilities.IpUtility.Companion.getIpAddress
@@ -160,6 +161,9 @@ class MasterRepository(val mContext: Context) : BaseRepository(mContext) {
         apiRequest {
             loginApiController.updateLogout(manageUserDeviceModel, userId)
         }
-
     }
+
+
+
+
 }

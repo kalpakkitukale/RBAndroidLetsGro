@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="paymentSummaryViewModel"
+            type="com.ramanbyte.emla.view_model.PaymentSummaryViewModel" />
+
+        <variable
+            name="payuGatwayModel"
+            type="com.ramanbyte.emla.models.PayuGatewayModel" />
+
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/contentLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/appbar_layout"
+            layout="@layout/app_bar_layout" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnProceedPay"
+            style="@style/CustomCapsuleButtonFilled"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp_10"
+            android:onClick="@{() -> paymentSummaryViewModel.onPaymentProceed()}"
+            android:text="@string/proceed_to_pay"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+        <View
+            android:id="@+id/dividerPayment"
+            style="@style/baseDivider"
+            android:layout_width="match_parent"
+            android:layout_marginStart="@dimen/dp_8"
+            android:layout_marginEnd="@dimen/dp_8"
+            app:layout_constraintBottom_toTopOf="@+id/radioPayu"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.ramanbyte.emla.view.DescribedRadioButton
+            android:id="@+id/radioAirpay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:drb_description="@string/safe_money_transfer"
+            app:drb_drawableResource="@drawable/airpay"
+            app:layout_constraintBottom_toTopOf="@+id/dividerPayment"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.ramanbyte.emla.view.DescribedRadioButton
+            android:id="@+id/radioPayu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp_8"
+            app:drb_description="@string/safe_payment_net_banking"
+            app:drb_drawableResource="@drawable/payu"
+            app:layout_constraintBottom_toTopOf="@+id/btnProceedPay"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/labelTerms"
+            style="@style/TextViewLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp_10"
+            android:gravity="center"
+            android:text="@string/by_paying_you_accept_to_the_terms_and_conditions"
+            app:layout_constraintBottom_toTopOf="@+id/radioAirpay"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
