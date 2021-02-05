@@ -15,6 +15,7 @@ import com.ramanbyte.emla.models.CourseSyllabusModel
 import com.ramanbyte.emla.models.CoursesModel
 import com.ramanbyte.emla.models.UserModel
 import com.ramanbyte.emla.models.request.CoursesRequest
+import com.ramanbyte.emla.models.response.CartResponseModel
 import com.ramanbyte.emla.models.response.CommonDropdownModel
 import com.ramanbyte.utilities.replicate
 import org.kodein.di.generic.instance
@@ -28,6 +29,7 @@ class CoursesRepository(mContext: Context) : BaseRepository(mContext) {
             return getCurrentUser()?.replicate<UserEntity, UserModel>()
         }
     }
+
 
     private val pageSize = 10
     private val coursesModelObservable =

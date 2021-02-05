@@ -59,4 +59,11 @@ class TransactionRepository(val mContext: Context) : BaseRepository(mContext) {
             transactionApiController.insertCart(cartRequestModel)
         }
     }
+
+    suspend fun deleteCart(id:Int): Int? {
+        val userId = getCurrentUser()?.userId ?: 0
+        return apiRequest {
+            transactionApiController.deleteCart(userId, id)
+        }
+    }
 }

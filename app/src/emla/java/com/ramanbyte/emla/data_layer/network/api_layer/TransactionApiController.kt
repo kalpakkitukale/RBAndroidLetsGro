@@ -21,4 +21,7 @@ interface TransactionApiController {
 
     @POST("AddCart")
     suspend fun insertCart(@Body cartRequestModel: CartRequestModel): Response<Int>
+
+    @POST("DeleteCart/{Id}/{UserId}")
+    suspend fun deleteCart(@Path("UserId") UserId: Int, @Path("Id") Id: Int): Response<Int>
 }

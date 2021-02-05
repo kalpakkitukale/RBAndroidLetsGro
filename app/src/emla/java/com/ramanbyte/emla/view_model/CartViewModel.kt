@@ -39,6 +39,7 @@ class CartViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
         value = arrayListOf()
     }
     var responseList: ArrayList<CartResponseModel>? = null
+    var cartResponseModel = CartResponseModel().courseDetailsId!!
 
     init {
         toggleLayoutVisibility(View.GONE, View.GONE, View.GONE, "", View.GONE)
@@ -46,6 +47,7 @@ class CartViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
             coursesRepository.searchCourse(it)
         }
         userData = coursesRepository.getCurrentUser()
+
     }
 
 
@@ -186,6 +188,142 @@ class CartViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
          }*/
     }
 
+    fun deleteCart(view: View) {
+        CoroutineUtils.main {
+            try {
 
+                val response = transactionRepository.deleteCart(cartResponseModel)
+                //cartListLiveData.postValue(response)
+
+                toggleLayoutVisibility(
+                    View.VISIBLE,
+                    View.GONE,
+                    View.GONE,
+                    KEY_BLANK,
+                    View.GONE
+                )
+                coroutineToggleLoader()
+            } catch (e: ApiException) {
+                e.printStackTrace()
+                AppLog.errorLog(e.message, e)
+                toggleLayoutVisibility(
+                    View.GONE,
+                    View.GONE,
+                    View.GONE,
+                    BindingUtils.string(R.string.some_thing_went_wrong),
+                    View.VISIBLE
+                )
+                coroutineToggleLoader()
+            } catch (e: NoInternetException) {
+                e.printStackTrace()
+                AppLog.errorLog(e.message, e)
+                toggleLayoutVisibility(
+                    View.GONE,
+                    View.GONE,
+                    View.VISIBLE,
+                    BindingUtils.string(R.string.no_internet_message),
+                    View.GONE
+                )
+                coroutineToggleLoader()
+            } catch (e: NoDataException) {
+                e.printStackTrace()
+                AppLog.errorLog(e.message, e)
+                toggleLayoutVisibility(
+                    View.GONE,
+                    View.VISIBLE,
+                    View.GONE,
+                    BindingUtils.string(R.string.empty_cart),
+                    View.GONE
+                )
+                coroutineToggleLoader()
+            }
+        }
+
+        /* CoroutineUtils.main {
+             try {
+                 isLoaderShowingLiveData.postValue(true)
+                 val requestModel = CartRequestModel().apply {
+                 }
+
+                 val response =
+                     transactionRepository.getCart()
+
+                 responseList = response
+                 cartListLiveData.postValue(response)
+
+                 toggleLayoutVisibility(
+                     View.VISIBLE,
+                     View.GONE,
+                     View.GONE,
+                     KEY_BLANK
+                 )
+
+                 isLoaderShowingLiveData.postValue(false)
+             } catch (e: NoInternetException) {
+                 e.printStackTrace()
+                 AppLog.errorLog(e.message, e)
+                 isLoaderShowingLiveData.postValue(false)
+                 toggleLayoutVisibility(
+                     View.GONE,
+                     View.GONE,
+                     View.VISIBLE,
+                     e.message ?: BindingUtils.string(R.string.please_make_sure_you_are_connected_to_internet)
+                 )
+             } catch (e: NoDataException) {
+                 e.printStackTrace()
+                 AppLog.errorLog(e.message, e)
+                 isLoaderShowingLiveData.postValue(false)
+                 toggleLayoutVisibility(
+                     View.GONE,
+                     View.VISIBLE,
+                     View.GONE,
+                     BindingUtils.string(R.string.no_files_found)
+                 )
+             } catch (e: TimeoutException) {
+                 e.printStackTrace()
+                 AppLog.errorLog(e.message, e)
+                 isLoaderShowingLiveData.postValue(false)
+                 toggleLayoutVisibility(
+                     View.GONE,
+                     View.GONE,
+                     View.VISIBLE,
+                     e.message ?: BindingUtils.string(R.string.connection_timeout)
+                 )
+             } catch (e: ResourceNotFound) {
+                 e.printStackTrace()
+                 AppLog.errorLog(e.message, e)
+                 isLoaderShowingLiveData.postValue(false)
+                 toggleLayoutVisibility(
+                     View.GONE,
+                     View.GONE,
+                     View.GONE,
+                     e.message ?: BindingUtils.string(R.string.resource_not_found),
+                     View.VISIBLE
+                 )
+             } catch (e: ApiException) {
+                 e.printStackTrace()
+                 AppLog.errorLog(e.message, e)
+                 isLoaderShowingLiveData.postValue(false)
+                 toggleLayoutVisibility(
+                     View.GONE,
+                     View.GONE,
+                     View.GONE,
+                     e.message ?: BindingUtils.string(R.string.some_thing_went_wrong),
+                     View.VISIBLE
+                 )
+             } catch (e: Exception) {
+                 e.printStackTrace()
+                 AppLog.errorLog(e.message, e)
+                 isLoaderShowingLiveData.postValue(false)
+                 toggleLayoutVisibility(
+                     View.GONE,
+                     View.GONE,
+                     View.GONE,
+                     e.message ?: BindingUtils.string(R.string.some_thing_went_wrong),
+                     View.VISIBLE
+                 )
+             }
+         }*/
+    }
 
 }
