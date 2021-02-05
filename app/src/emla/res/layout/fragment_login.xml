@@ -274,7 +274,7 @@
             app:layout_constraintTop_toTopOf="@+id/btnGoogleLogin" />
 
         <androidx.appcompat.widget.AppCompatButton
-            style="@style/CustomCapsuleButtonBlueBgWhiteText"
+            style="@style/CustomCapsuleButtonWithOnlyBorder"
             android:id="@+id/btnLoginWithClassroom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

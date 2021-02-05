@@ -25,16 +25,17 @@ class JoinClassroomActivity : BaseActivity<ActivityJoinClassroomBinding, JoinCla
 
     override fun initiate() {
         layoutBinding.apply {
-            lifecycleOwner =this@JoinClassroomActivity
+            lifecycleOwner = this@JoinClassroomActivity
             setUpToolBar()
             try {
                 val intendData = intent.extras
                 if (intendData?.getBoolean("fromClassroomPlus") == true) {
-                    layoutBinding.tvUserId.text = "classroom userID : ${intendData.getInt("user_id")}"
+                    layoutBinding.tvUserId.text =
+                        "classroom userID : ${intendData.getInt("user_id")}"
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
-                AppLog.errorLog(e.message,e)
+                AppLog.errorLog(e.message, e)
             }
         }
     }
@@ -50,13 +51,13 @@ class JoinClassroomActivity : BaseActivity<ActivityJoinClassroomBinding, JoinCla
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
-            android.R.id.home->{
+        return when (item.itemId) {
+            android.R.id.home -> {
                 onBackPressed()
-                return true
+                true
             }
-            else->{
-                return super.onOptionsItemSelected(item)
+            else -> {
+                super.onOptionsItemSelected(item)
             }
         }
 
