@@ -628,6 +628,7 @@ class LearnerProfileViewModel(private val mContext: Context) : BaseViewModel(mCo
 
                     setAlertDialogResourceModelMutableLiveData(
                         BindingUtils.string(R.string.profile_updated_successfully),
+                        BindingUtils.drawable(R.drawable.ic_success),
                         isInfoAlert = true,
                         positiveButtonText = KEY_OK,
                         positiveButtonClickFunctionality = {
@@ -652,6 +653,7 @@ class LearnerProfileViewModel(private val mContext: Context) : BaseViewModel(mCo
 
                     setAlertDialogResourceModelMutableLiveData(
                         BindingUtils.string(R.string.profile_update_failed),
+                        BindingUtils.drawable(R.drawable.ic_fail),
                         isInfoAlert = true,
                         positiveButtonText = BindingUtils.string(R.string.tryAgain),
                         positiveButtonClickFunctionality = {

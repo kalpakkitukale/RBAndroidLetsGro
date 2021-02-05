@@ -171,9 +171,9 @@ class QuizReviewFragment : BaseFragment<FragmentQuizReviewBinding, ShowQuestions
                         viewModel.apply {
                             setAlertDialogResourceModelMutableLiveData(
                                 BindingUtils.string(R.string.leave_test_message),
+                                BindingUtils.drawable(R.drawable.ic_submit_confirmation)!!,
                                 false,
-                                BindingUtils.string(R.string.yes),
-                                {
+                                BindingUtils.string(R.string.yes), {
                                     isAlertDialogShown.postValue(false)
 
                                     val bundle = Bundle()
@@ -183,8 +183,8 @@ class QuizReviewFragment : BaseFragment<FragmentQuizReviewBinding, ShowQuestions
                                     )
                                     val navOption = NavOptions.Builder().setPopUpTo(R.id.coursesFragment, false).build()
                                     activity?.let { Navigation.findNavController(it,R.id.containerNavHost).navigate(R.id.courseDetailFragment, bundle, navOption) }
-                                }, BindingUtils.string(R.string.no),
-                                {
+                                },
+                                BindingUtils.string(R.string.no), {
                                     isAlertDialogShown.postValue(false)
                                 }
                             )

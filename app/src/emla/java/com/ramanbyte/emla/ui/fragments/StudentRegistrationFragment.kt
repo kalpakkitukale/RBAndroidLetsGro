@@ -81,9 +81,9 @@ class StudentRegistrationFragment :
                 it?.let {
                     setAlertDialogResourceModelMutableLiveData(
                         BindingUtils.string(R.string.successAccountCreation),
+                        BindingUtils.drawable(R.drawable.ic_success)!!,
                         true,
-                        BindingUtils.string(R.string.strOk),
-                        {
+                        BindingUtils.string(R.string.strOk), {
                             val navOption =
                                 NavOptions.Builder().setPopUpTo(R.id.loginFragment, true).build()
                                 layoutBinding.root.findNavController().navigate(R.id.loginFragment, null, navOption)
@@ -333,8 +333,8 @@ class StudentRegistrationFragment :
 
         viewModel.apply {
             setAlertDialogResourceModelMutableLiveData(
-                message, false,
-                BindingUtils.string(R.string.strOk), {
+                message, BindingUtils.drawable(R.drawable.something_went_wrong),
+                false, BindingUtils.string(R.string.strOk), {
                     try {
                         isAlertDialogShown.postValue(false)
                         val intent = Intent()
@@ -348,7 +348,8 @@ class StudentRegistrationFragment :
                         e.printStackTrace()
                         AppLog.errorLog(e.message, e)
                     }
-                }, BindingUtils.string(R.string.strCancel),
+                },
+                BindingUtils.string(R.string.strCancel),
                 negativeButtonClickFunctionality = {
                     isAlertDialogShown.postValue(false)
                 },

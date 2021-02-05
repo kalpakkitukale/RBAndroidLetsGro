@@ -109,75 +109,44 @@ class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
     }
 
     fun insertCartData(view: View) {
-
-                CoroutineUtils.main {
-                    try {
-                        isLoaderShowingLiveData.postValue(true)
-                        val response =
-                            transactionRepository.insertCart(cartRequestModel = CartRequestModel())
-                        isLoaderShowingLiveData.postValue(false)
-                    } catch (e: NoInternetException) {
-                        isLoaderShowingLiveData.postValue(false)
-                        setAlertDialogResourceModelMutableLiveData(
-                            message = e.message.toString(),
-                            isInfoAlert = false,
-                            positiveButtonText = BindingUtils.string(R.string.try_again_),
-                            positiveButtonClickFunctionality = {
-                                insertCartData(view)
-                                isAlertDialogShown.postValue(false)
-                            },
-                            negativeButtonText = BindingUtils.string(R.string.strCancel),
-                            negativeButtonClickFunctionality = {
-                                isAlertDialogShown.postValue(false)
-                            }
-                        )
-                        isAlertDialogShown.postValue(true)
-                    } catch (e: ApiException) {
-                        isLoaderShowingLiveData.postValue(false)
-                        setAlertDialogResourceModelMutableLiveData(
-                            message = e.message.toString(),
-                            isInfoAlert = true,
-                            positiveButtonText = BindingUtils.string(R.string.strOk),
-                            positiveButtonClickFunctionality = {
-                                isAlertDialogShown.postValue(false)
-                            }
-                        )
-                        isAlertDialogShown.postValue(true)
-                    } catch (e: TimeoutException) {
-                        e.printStackTrace()
-                        AppLog.errorLog(e.message, e)
-                        isLoaderShowingLiveData.postValue(false)
-                        setAlertDialogResourceModelMutableLiveData(
-                            message = e.message ?: BindingUtils.string(R.string.connection_timeout),
-                            isInfoAlert = false,
-                            positiveButtonText = BindingUtils.string(R.string.try_again_),
-                            positiveButtonClickFunctionality = {
-                                insertCartData(view)
-                                isAlertDialogShown.postValue(false)
-                            },
-                            negativeButtonText = BindingUtils.string(R.string.cancel),
-                            negativeButtonClickFunctionality = {
-                                isAlertDialogShown.postValue(false)
-                            }
-                        )
-                        isAlertDialogShown.postValue(true)
-                    } catch (e: ResourceNotFound) {
-                        e.printStackTrace()
-                        AppLog.errorLog(e.message, e)
-                        isLoaderShowingLiveData.postValue(false)
-                        setAlertDialogResourceModelMutableLiveData(
-                            message = e.message ?: BindingUtils.string(R.string.resource_not_found),
-                            isInfoAlert = true,
-                            positiveButtonText = BindingUtils.string(R.string.strOk),
-                            positiveButtonClickFunctionality = {
-                                isAlertDialogShown.postValue(false)
-                            }
-                        )
-                        isAlertDialogShown.postValue(true)
+        CoroutineUtils.main {
+            try {
+                isLoaderShowingLiveData.postValue(true)
+                val response =
+                    transactionRepository.insertCart(cartRequestModel = CartRequestModel())
+                isLoaderShowingLiveData.postValue(false)
+            } catch (e: ApiException) {
+                isLoaderShowingLiveData.postValue(false)
+                setAlertDialogResourceModelMutableLiveData(
+                    e.message.toString(),
+                    BindingUtils.drawable(
+                        R.drawable.something_went_wrong
+                    )!!,
+                    true,
+                    BindingUtils.string(R.string.strOk), {
+                        isAlertDialogShown.postValue(false)
                     }
-                }
-
-
+                )
+                isAlertDialogShown.postValue(true)
+            } catch (e: NoInternetException) {
+                e.printStackTrace()
+                AppLog.errorLog(e.message, e)
+                isLoaderShowingLiveData.postValue(false)
+                setAlertDialogResourceModelMutableLiveData(
+                    BindingUtils.string(R.string.no_internet_message),
+                    BindingUtils.drawable(R.drawable.ic_no_internet)!!,
+                    false,
+                    BindingUtils.string(R.string.tryAgain), {
+                        isAlertDialogShown.postValue(false)
+                        insertCartData(view)
+                    },
+                    BindingUtils.string(R.string.no), {
+                        isAlertDialogShown.postValue(false)
+                    }
+                )
+                isAlertDialogShown.postValue(true)
+            }
+        }
     }
 
     /*
@@ -210,12 +179,12 @@ class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
             } else {
                 setAlertDialogResourceModelMutableLiveData(
                     BindingUtils.string(R.string.no_internet_message),
+                    BindingUtils.drawable(R.drawable.ic_no_internet)!!,
                     true,
-                    BindingUtils.string(R.string.yes),
-                    {
+                    BindingUtils.string(R.string.yes), {
                         isAlertDialogShown.postValue(false)
-                    }, BindingUtils.string(R.string.no),
-                    {
+                    },
+                    BindingUtils.string(R.string.no), {
                         isAlertDialogShown.postValue(false)
                     }
                 )
@@ -224,7 +193,7 @@ class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
         }
     }
 
-    fun showCourseSyllabus(view: View, coursesModel: CoursesModel){
+    fun showCourseSyllabus(view: View, coursesModel: CoursesModel) {
 
         view.findNavController()
             .navigate(
@@ -234,7 +203,7 @@ class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
                 })
     }
 
-    fun showChapterList(view: View, coursesModel: CoursesModel){
+    fun showChapterList(view: View, coursesModel: CoursesModel) {
 
         view.findNavController()
             .navigate(
@@ -266,7 +235,7 @@ class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
 
             filterRequestModel = CoursesRequest().apply {
                 userId = /*if (isFilterSelected) 0 else */ userData?.userId!!
-                userType = if(isFilterSelected)userData?.userType!! else ""
+                userType = if (isFilterSelected) userData?.userType!! else ""
                 programId = tempFilterModel.programId
                 specializationId = tempFilterModel.specializationId
                 patternId = tempFilterModel.patternId
@@ -274,10 +243,14 @@ class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
             }
 
             isFilterApplied.postValue(isFilterSelected)
-            if(filterRequestModel.programId==0)programName.set(BindingUtils.string(R.string.program))
-            if(filterRequestModel.patternId==0)patternName.set(BindingUtils.string(R.string.pattern))
-            if(filterRequestModel.specializationId==0)specializationName.set(BindingUtils.string(R.string.specialisation))
-            if(filterRequestModel.skillId==0)skillName.set(BindingUtils.string(R.string.skill))
+            if (filterRequestModel.programId == 0) programName.set(BindingUtils.string(R.string.program))
+            if (filterRequestModel.patternId == 0) patternName.set(BindingUtils.string(R.string.pattern))
+            if (filterRequestModel.specializationId == 0) specializationName.set(
+                BindingUtils.string(
+                    R.string.specialisation
+                )
+            )
+            if (filterRequestModel.skillId == 0) skillName.set(BindingUtils.string(R.string.skill))
 
             filterCourseList(filterRequestModel)
             dismissBottomSheet.postValue(true)
@@ -291,17 +264,17 @@ class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
     private fun hasFilter(): Boolean {
         return (/*tempFilterModel.userType.isNotEmpty() ||*/
                 tempFilterModel.programId != 0 ||
-                tempFilterModel.patternId != 0 ||
-                tempFilterModel.specializationId != 0 ||
-                tempFilterModel.skillId != 0)
+                        tempFilterModel.patternId != 0 ||
+                        tempFilterModel.specializationId != 0 ||
+                        tempFilterModel.skillId != 0)
     }
 
     fun getFilterState(): Boolean {
         return (/*filterRequestModel.userType.isNotEmpty() ||*/
                 filterRequestModel.programId != 0 ||
-                filterRequestModel.patternId != 0 ||
-                filterRequestModel.specializationId != 0 ||
-                filterRequestModel.skillId != 0)
+                        filterRequestModel.patternId != 0 ||
+                        filterRequestModel.specializationId != 0 ||
+                        filterRequestModel.skillId != 0)
     }
 
     fun onClearFilterClick(view: View) {

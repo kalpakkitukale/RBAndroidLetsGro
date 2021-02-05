@@ -194,13 +194,13 @@ class CreateAccountViewModel(var mContext: Context) : BaseViewModel(mContext = m
     fun onClickRemoveResume(view: View) {
         setAlertDialogResourceModelMutableLiveData(
             BindingUtils.string(R.string.remove_resume_alert),
+            BindingUtils.drawable(R.drawable.ic_warning)!!,
             false,
-            BindingUtils.string(R.string.yes),
-            {
+            BindingUtils.string(R.string.yes), {
                 onClickRemoveResumeLiveData.value = true
                 isAlertDialogShown.postValue(false)
-            }, BindingUtils.string(R.string.no),
-            {
+            },
+            BindingUtils.string(R.string.no), {
                 isAlertDialogShown.postValue(false)
             }
         )
@@ -312,13 +312,13 @@ class CreateAccountViewModel(var mContext: Context) : BaseViewModel(mContext = m
 
                     setAlertDialogResourceModelMutableLiveData(
                         BindingUtils.string(R.string.registration_confirmation),
+                        BindingUtils.drawable(R.drawable.ic_submit_confirmation)!!,
                         false,
-                        BindingUtils.string(R.string.yes),
-                        {
+                        BindingUtils.string(R.string.yes), {
                             registerFaculty(areaOfExpertiseList)
                             isAlertDialogShown.postValue(false)
-                        }, BindingUtils.string(R.string.no),
-                        {
+                        },
+                        BindingUtils.string(R.string.no), {
                             isAlertDialogShown.postValue(false)
                         }
                     )
@@ -330,9 +330,9 @@ class CreateAccountViewModel(var mContext: Context) : BaseViewModel(mContext = m
                             R.string.dynamic_required,
                             BindingUtils.string(R.string.resume)
                         ),
+                        BindingUtils.drawable(R.drawable.ic_warning)!!,
                         true,
-                        BindingUtils.string(R.string.strOk),
-                        {
+                        BindingUtils.string(R.string.strOk), {
                             isAlertDialogShown.postValue(false)
                         }
                     )
@@ -344,9 +344,9 @@ class CreateAccountViewModel(var mContext: Context) : BaseViewModel(mContext = m
                         R.string.dynamic_required,
                         BindingUtils.string(R.string.area_of_expertise)
                     ),
+                    BindingUtils.drawable(R.drawable.ic_warning)!!,
                     true,
-                    BindingUtils.string(R.string.strOk),
-                    {
+                    BindingUtils.string(R.string.strOk), {
                         isAlertDialogShown.postValue(false)
                     }
                 )

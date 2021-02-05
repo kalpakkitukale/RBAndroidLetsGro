@@ -202,6 +202,7 @@ class StudentAskedQuestionsViewModel(var mContext: Context) : BaseViewModel(mCon
 
         setAlertDialogResourceModelMutableLiveData(
             message,
+            BindingUtils.drawable(R.drawable.ic_warning),
             true,
             positiveButtonText = BindingUtils.string(R.string.strOk),
             positiveButtonClickFunctionality = {

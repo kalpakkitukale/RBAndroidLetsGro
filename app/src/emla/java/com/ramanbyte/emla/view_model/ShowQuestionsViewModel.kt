@@ -171,16 +171,17 @@ class ShowQuestionsViewModel(var mContext: Context) : BaseViewModel(mContext) {
             //Showing Alert Dialog for No internet data
             setAlertDialogResourceModelMutableLiveData(
                 BindingUtils.string(R.string.no_internet_message),
+                BindingUtils.drawable(R.drawable.ic_no_internet)!!,
                 false,
-                BindingUtils.string(R.string.try_again),
-                {
+                BindingUtils.string(R.string.try_again), {
                     if (btnName.equals(BindingUtils.string(R.string.previous))) {
                         onClickPrevious(view)
                     } else {
                         onClickNext(view)
                     }
                     isAlertDialogShown.postValue(false)
-                }, negativeButtonClickFunctionality = {
+                },
+                negativeButtonClickFunctionality = {
                     isAlertDialogShown.postValue(false)
                 }
             )
@@ -332,13 +333,13 @@ class ShowQuestionsViewModel(var mContext: Context) : BaseViewModel(mContext) {
 
         setAlertDialogResourceModelMutableLiveData(
             BindingUtils.string(R.string.submit_test_message),
+            BindingUtils.drawable(R.drawable.ic_submit_confirmation)!!,
             false,
-            BindingUtils.string(R.string.yes),
-            {
+            BindingUtils.string(R.string.yes), {
                 isAlertDialogShown.postValue(false)
                 isTestSubmited.value = true
-            }, BindingUtils.string(R.string.no),
-            {
+            },
+            BindingUtils.string(R.string.no), {
                 isAlertDialogShown.postValue(false)
             }
         )
