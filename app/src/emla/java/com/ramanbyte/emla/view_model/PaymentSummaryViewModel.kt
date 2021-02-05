@@ -44,12 +44,6 @@ class PaymentSummaryViewModel(mContext: Context) : BaseViewModel(mContext = mCon
 
     var paymentResponse: MutableLiveData<String> = MutableLiveData()
 
-    var examFormId = 0
-    var campusId = 0
-    var campusNameLiveData = MutableLiveData<String>()
-    var programId = 0
-    var programNameLiveData = MutableLiveData<String>()
-    var admissionYearLiveData = MutableLiveData<String>()
     var amountLiveData = MutableLiveData<String>("0.0")
     var paymentStepIntegration = ""
 
@@ -74,7 +68,7 @@ class PaymentSummaryViewModel(mContext: Context) : BaseViewModel(mContext = mCon
         showLoader: Boolean,
         terminateTransaction: Boolean
     ) {
-        CoroutineUtils.main {
+        /*CoroutineUtils.main {
             try {
                 val userName =
                     "${loggedInUserModel?.firstName ?: ""} ${loggedInUserModel?.lastName ?: ""}"
@@ -176,7 +170,7 @@ class PaymentSummaryViewModel(mContext: Context) : BaseViewModel(mContext = mCon
 
                 isAlertDialogShown.postValue(true)
             }
-        }
+        }*/
     }
 
     fun onPaymentProceed() {

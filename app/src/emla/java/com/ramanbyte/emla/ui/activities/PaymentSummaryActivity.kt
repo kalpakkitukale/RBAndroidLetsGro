@@ -6,7 +6,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.text.Editable
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -24,6 +23,7 @@ import com.ramanbyte.R
 import com.ramanbyte.databinding.ActivityPaymentSummaryBinding
 import com.ramanbyte.emla.base.di.ACTIVITY_CONTEXT
 import com.ramanbyte.emla.models.PayuGatewayModel
+import com.ramanbyte.emla.models.response.CartResponseModel
 import com.ramanbyte.emla.view_model.PaymentSummaryViewModel
 import com.ramanbyte.utilities.*
 import com.ramanbyte.view_model.factory.BaseViewModelFactory
@@ -37,6 +37,7 @@ import org.kodein.di.generic.bind
 import org.kodein.di.generic.instance
 import org.kodein.di.generic.singleton
 import java.util.*
+import kotlin.collections.ArrayList
 
 class PaymentSummaryActivity : AppCompatActivity(), KodeinAware {
 
@@ -60,29 +61,15 @@ class PaymentSummaryActivity : AppCompatActivity(), KodeinAware {
     }
 
     companion object {
-
         fun openPaymentActivity(
             context: Context,
-            examFormId: Int,
-            campusId: Int,
-            campusName: String,
-            programId: Int,
-            programName: String,
-            admissionYear: String,
             amount: String,
-            paymentStepIntegration: String
+            cartList: ArrayList<CartResponseModel>?
         ): Intent {
             val intent = Intent(context, PaymentSummaryActivity::class.java)
             //Add Required fields in Extras
-            intent.putExtra(keyExamFormId, examFormId)
-            intent.putExtra(keyCampusId, campusId)
-            intent.putExtra(keyCampusName, campusName)
-            intent.putExtra(keyProgramId, programId)
-            intent.putExtra(keyProgramName, programName)
-            intent.putExtra(keyAdmissionYear, admissionYear)
             intent.putExtra(keyAmount, amount)
-            intent.putExtra(keyPaymentStepIntegration, paymentStepIntegration)
-
+            intent.putExtra(keyCartData, cartList!!)
             return intent
         }
     }
@@ -114,15 +101,8 @@ class PaymentSummaryActivity : AppCompatActivity(), KodeinAware {
             ProgressLoader(this@PaymentSummaryActivity, this)
             AlertDialog(this@PaymentSummaryActivity, this)
 
-
             intent?.extras?.apply {
-                examFormId = getInt(keyExamFormId)
-                campusId = getInt(keyCampusId)
-                campusNameLiveData.value = getString(keyCampusName)
-                programId = getInt(keyProgramId)
-                programNameLiveData.value = getString(keyProgramName)
                 amountLiveData.value = getString(keyAmount) ?: "0"
-                admissionYearLiveData.value = getString(keyAdmissionYear)
                 paymentStepIntegration = getString(keyPaymentStepIntegration) ?: ""
 
             }
@@ -266,7 +246,7 @@ class PaymentSummaryActivity : AppCompatActivity(), KodeinAware {
                             paymentGateway = keyPaymentGatewayPayUBiz
                             if (data != null) {
                                 try {
-                                        val payResponse = data . getStringExtra (keyPayuResponseStatus)!!
+                                    val payResponse = data.getStringExtra(keyPayuResponseStatus)!!
                                     if (payResponse.isNotEmpty()) {
                                         val payUObject = JSONObject(payResponse)
                                         if (payUObject.has(keyPayuStatus)) {
@@ -446,6 +426,7 @@ class PaymentSummaryActivity : AppCompatActivity(), KodeinAware {
 
 
     }
+
     fun customRadioClickListener() {
 
         paymentSummaryViewModel?.apply {
@@ -475,7 +456,7 @@ class PaymentSummaryActivity : AppCompatActivity(), KodeinAware {
                 radioPayu.setOnClickListener {
                     paymentSummaryBinding!!.radioPayu.isChecked = true
 
-                    if(paymentSummaryBinding!!.radioAirpay.isChecked){
+                    if (paymentSummaryBinding!!.radioAirpay.isChecked) {
                         paymentSummaryBinding!!.radioAirpay.isChecked = false
                     }
                     isPayuChecked = paymentSummaryBinding!!.radioAirpay.isChecked
@@ -497,7 +478,7 @@ class PaymentSummaryActivity : AppCompatActivity(), KodeinAware {
         }
     }
 
-  override  fun onOptionsItemSelected(item: MenuItem): Boolean {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         return when (item.itemId) {
 

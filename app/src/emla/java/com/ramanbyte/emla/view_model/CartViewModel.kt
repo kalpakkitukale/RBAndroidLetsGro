@@ -2,29 +2,23 @@ package com.ramanbyte.emla.view_model
 
 import android.content.Context
 import android.view.View
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.paging.PagedList
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseViewModel
 import com.ramanbyte.data_layer.CoroutineUtils
 import com.ramanbyte.emla.data_layer.network.exception.ApiException
 import com.ramanbyte.emla.data_layer.network.exception.NoDataException
 import com.ramanbyte.emla.data_layer.network.exception.NoInternetException
-import com.ramanbyte.emla.data_layer.network.exception.ResourceNotFound
 import com.ramanbyte.emla.data_layer.repositories.CoursesRepository
 import com.ramanbyte.emla.data_layer.repositories.TransactionRepository
-import com.ramanbyte.emla.models.CoursesModel
-import com.ramanbyte.emla.models.FavouriteVideosModel
 import com.ramanbyte.emla.models.UserModel
-import com.ramanbyte.emla.models.request.CartRequestModel
 import com.ramanbyte.emla.models.response.CartResponseModel
+import com.ramanbyte.emla.ui.activities.PaymentSummaryActivity
 import com.ramanbyte.utilities.*
 import kotlinx.coroutines.delay
 import org.kodein.di.generic.instance
-import java.util.concurrent.TimeoutException
 
-class CartViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
+class CartViewModel(var mContext: Context) : BaseViewModel(mContext = mContext) {
     override var noInternetTryAgain: () -> Unit = {
         coursesRepository.tryAgain()
     }
@@ -46,9 +40,7 @@ class CartViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
             coursesRepository.searchCourse(it)
         }
         userData = coursesRepository.getCurrentUser()
-
     }
-
 
     fun getCartList() {
         CoroutineUtils.main {
@@ -147,4 +139,13 @@ class CartViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
         }
     }
 
+    fun clickOnProceedToPay(view: View) {
+        mContext.startActivity(
+            PaymentSummaryActivity.openPaymentActivity(
+                mContext,
+                10.toString(),
+                cartListLiveData.value as ArrayList<CartResponseModel>?
+            )
+        )
+    }
 }

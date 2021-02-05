@@ -103,12 +103,12 @@ class StudentAskedQuestionsViewModel(var mContext: Context) : BaseViewModel(mCon
     /*
     * On click mobile open mobile dialler
     * */
-    fun onClickMobile(view: View, mobile: String){
-        if (!mobile.isBlank() && mobile!= KEY_NA_WITHOUT_SPACE){
+    fun onClickMobile(view: View, mobile: String) {
+        if (!mobile.isBlank() && mobile != KEY_NA_WITHOUT_SPACE) {
             val intent = Intent(Intent.ACTION_DIAL)
             intent.data = Uri.parse("tel:$mobile")
             mContext.startActivity(intent)
-        }else{
+        } else {
             showAlertDialog(BindingUtils.string(R.string.invalid_mobile))
         }
     }
@@ -116,8 +116,8 @@ class StudentAskedQuestionsViewModel(var mContext: Context) : BaseViewModel(mCon
     /*
     * On click email open email application
     * */
-    fun onClickEmail(view: View, email: String){
-        if (!email.isBlank() && email!= KEY_NA_WITHOUT_SPACE){
+    fun onClickEmail(view: View, email: String) {
+        if (!email.isBlank() && email != KEY_NA_WITHOUT_SPACE) {
             val intent = Intent(
                 Intent.ACTION_VIEW,
                 Uri.parse("mailto:$email")
@@ -125,7 +125,7 @@ class StudentAskedQuestionsViewModel(var mContext: Context) : BaseViewModel(mCon
             //intent.putExtra(Intent.EXTRA_SUBJECT, "your_subject")
             //intent.putExtra(Intent.EXTRA_TEXT, "your_text")
             mContext.startActivity(intent)
-        }else{
+        } else {
             showAlertDialog(BindingUtils.string(R.string.invalid_email))
         }
     }
