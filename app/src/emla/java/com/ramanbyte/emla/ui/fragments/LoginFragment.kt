@@ -170,9 +170,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>(true, t
         viewModel.apply {
             setAlertDialogResourceModelMutableLiveData(
                 message,
+                BindingUtils.drawable(R.drawable.ic_phone_settings_),
                 false,
-                BindingUtils.string(R.string.strOk),
-                {
+                BindingUtils.string(R.string.strOk), {
                     try {
                         isAlertDialogShown.postValue(false)
                         val intent = Intent()
@@ -184,11 +184,11 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>(true, t
                         e.printStackTrace()
                         AppLog.errorLog(e.message, e)
                     }
-                }, BindingUtils.string(R.string.strCancel),
+                },
+                BindingUtils.string(R.string.strCancel),
                 negativeButtonClickFunctionality = {
                     isAlertDialogShown.postValue(false)
-                },
-                alertDrawableResourceSign = BindingUtils.drawable(R.drawable.ic_warning)!!
+                }, alertDrawableResourceSign = BindingUtils.drawable(R.drawable.ic_warning)!!
             )
             isAlertDialogShown.postValue(true)
         }

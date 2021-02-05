@@ -4,7 +4,6 @@ import android.content.Context
 import com.ramanbyte.data_layer.base.BaseRepository
 import com.ramanbyte.emla.data_layer.network.api_layer.TransactionApiController
 import com.ramanbyte.emla.data_layer.room.entities.UserEntity
-import com.ramanbyte.emla.models.CoursesModel
 import com.ramanbyte.emla.models.UserModel
 import com.ramanbyte.emla.models.request.CartRequestModel
 import com.ramanbyte.emla.models.request.InsertTransactionRequestModel
@@ -18,7 +17,6 @@ import org.kodein.di.generic.instance
 class TransactionRepository(val mContext: Context) : BaseRepository(mContext) {
 
     private val transactionApiController: TransactionApiController by instance()
-
     fun getCurrentUser(): UserModel? {
         return applicationDatabase.getUserDao().getCurrentUser()?.replicate<UserEntity, UserModel>()
     }
@@ -54,21 +52,23 @@ class TransactionRepository(val mContext: Context) : BaseRepository(mContext) {
         }
     }
 
-    suspend fun insertCart(cartRequestModel: CartRequestModel): Int? {
-        val userId = getCurrentUser()?.userId ?: 0
-      //  cartRequestModel.courseDetailsId = CoursesModel().courseId
-        cartRequestModel.delStatus = true
-        cartRequestModel.createdBy = userId
-        cartRequestModel.userId = userId
+    suspend fun insertCart(cartRequestModel: CartRequestModel, courseId: Int): Int? {
+        val loggedInUserID = getCurrentUser()?.userId ?: 0
+        cartRequestModel.apply {
+            courseDetailsId = courseId
+            userId = loggedInUserID
+            createdBy = loggedInUserID
+            modifyBy = loggedInUserID
+        }
         return apiRequest {
             transactionApiController.insertCart(cartRequestModel)
         }
     }
 
-suspend fun deleteCart(id:Int): Int? {
-    val userId = getCurrentUser()?.userId ?: 0
-    return apiRequest {
-        transactionApiController.deleteCart(userId, id)
+    suspend fun deleteCart(cartItemId: Int): Int? {
+        val userId = getCurrentUser()?.userId ?: 0
+        return apiRequest {
+            transactionApiController.deleteCart(userId, cartItemId)
+        }
     }
-}
 }

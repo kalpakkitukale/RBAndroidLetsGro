@@ -46,9 +46,9 @@ class SettingViewModel(var mContext: Context) : BaseViewModel(mContext) {
     fun clickOnLogout(view: View) {
         setAlertDialogResourceModelMutableLiveData(
             BindingUtils.string(R.string.logout_message),
+            null,
             false,
-            BindingUtils.string(R.string.yes),
-            {
+            BindingUtils.string(R.string.yes), {
                 isAlertDialogShown.postValue(false)
                 /*clickOnLogoutLiveData.value = true
                 masterRepository.deleteUser()*/
@@ -81,9 +81,9 @@ class SettingViewModel(var mContext: Context) : BaseViewModel(mContext) {
                 } else {
                     setAlertDialogResourceModelMutableLiveData(
                         BindingUtils.string(R.string.logout_user_alert),
+                        BindingUtils.drawable(R.drawable.ic_no_internet)!!,
                         false,
-                        BindingUtils.string(R.string.tryAgain),
-                        {
+                        BindingUtils.string(R.string.tryAgain), {
                             isAlertDialogShown.postValue(false)
                             clickOnLogout(view)
                         }, BindingUtils.string(R.string.strCancel), {
@@ -92,8 +92,8 @@ class SettingViewModel(var mContext: Context) : BaseViewModel(mContext) {
                     )
                     isAlertDialogShown.postValue(true)
                 }
-            }, BindingUtils.string(R.string.no),
-            {
+            },
+            BindingUtils.string(R.string.no), {
                 isAlertDialogShown.postValue(false)
             }
         )

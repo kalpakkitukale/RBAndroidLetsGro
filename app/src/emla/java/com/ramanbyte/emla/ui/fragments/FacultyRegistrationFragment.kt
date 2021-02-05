@@ -76,9 +76,9 @@ class FacultyRegistrationFragment :
                         it?.let {
                             setAlertDialogResourceModelMutableLiveData(
                                 BindingUtils.string(R.string.faculty_register_success),
+                                BindingUtils.drawable(R.drawable.ic_success)!!,
                                 true,
-                                BindingUtils.string(R.string.strOk),
-                                {
+                                BindingUtils.string(R.string.strOk), {
                                     val navOption =
                                         NavOptions.Builder().setPopUpTo(R.id.loginFragment, true)
                                             .build()
@@ -212,9 +212,9 @@ class FacultyRegistrationFragment :
                                 viewModel.apply {
                                     setAlertDialogResourceModelMutableLiveData(
                                         BindingUtils.string(R.string.resume_error),
+                                        BindingUtils.drawable(R.drawable.ic_warning)!!,
                                         true,
-                                        BindingUtils.string(R.string.strOk),
-                                        {
+                                        BindingUtils.string(R.string.strOk), {
                                             isAlertDialogShown.postValue(false)
                                         }
                                     )
@@ -225,9 +225,9 @@ class FacultyRegistrationFragment :
                             viewModel.apply {
                                 setAlertDialogResourceModelMutableLiveData(
                                     BindingUtils.string(R.string.file_type_error),
+                                    BindingUtils.drawable(R.drawable.ic_warning)!!,
                                     true,
-                                    BindingUtils.string(R.string.strOk),
-                                    {
+                                    BindingUtils.string(R.string.strOk), {
                                         isAlertDialogShown.postValue(false)
                                     }
                                 )
@@ -271,6 +271,7 @@ class FacultyRegistrationFragment :
         viewModel.apply {
             setAlertDialogResourceModelMutableLiveData(
                 message,
+                alertDrawableResource = BindingUtils.drawable(R.drawable.ic_resume),
                 isInfoAlert = false,
                 positiveButtonText = BindingUtils.string(R.string.strOk),
                 positiveButtonClickFunctionality = {
@@ -369,9 +370,9 @@ class FacultyRegistrationFragment :
                         viewModel.apply {
                             setAlertDialogResourceModelMutableLiveData(
                                 BindingUtils.string(R.string.select_max_5_courses),
+                                BindingUtils.drawable(R.drawable.ic_warning)!!,
                                 true,
-                                BindingUtils.string(R.string.strOk),
-                                {
+                                BindingUtils.string(R.string.strOk), {
                                     isAlertDialogShown.postValue(false)
                                 }
                             )

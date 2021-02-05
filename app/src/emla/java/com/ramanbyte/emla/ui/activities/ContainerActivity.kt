@@ -191,13 +191,13 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding, ContainerViewMo
 
                         setAlertDialogResourceModelMutableLiveData(
                             BindingUtils.string(R.string.profile_changes_discarded),
+                            BindingUtils.drawable(R.drawable.ic_submit_confirmation)!!,
                             false,
-                            BindingUtils.string(R.string.yes),
-                            {
+                            BindingUtils.string(R.string.yes), {
                                 isAlertDialogShown.postValue(false)
                                 navController.navigateUp()
-                            }, BindingUtils.string(R.string.no),
-                            {
+                            },
+                            BindingUtils.string(R.string.no), {
                                 isAlertDialogShown.postValue(false)
                             }
                         )
@@ -365,17 +365,17 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding, ContainerViewMo
                 viewModel.apply {
                     setAlertDialogResourceModelMutableLiveData(
                         message = BindingUtils.string(R.string.webview_update_message),
+                        alertDrawableResource = BindingUtils.drawable(R.drawable.ic_warning),
                         isInfoAlert = false,
                         positiveButtonText = BindingUtils.string(R.string.str_update),
+                        negativeButtonText = BindingUtils.string(R.string.strCancel),
                         positiveButtonClickFunctionality = {
                             val intent = Intent(Intent.ACTION_VIEW)
                             intent.data =
                                 Uri.parse("https://play.google.com/store/apps/details?id=com.google.android.webview")
                             startActivity(intent)
 
-                        },
-                        negativeButtonText = BindingUtils.string(R.string.strCancel),
-                        negativeButtonClickFunctionality = {
+                        }, negativeButtonClickFunctionality = {
                             isAlertDialogShown.postValue(false)
 
                         }

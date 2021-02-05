@@ -65,6 +65,7 @@ class MyDownloadsViewModel(mContext: Context) : BaseViewModel(mContext) {
         if (NetworkConnectivity.isConnectedToInternet()) {
             setAlertDialogResourceModelMutableLiveData(
                 BindingUtils.string(R.string.delete_content_alert),
+                null,
                 false,
                 positiveButtonText = BindingUtils.string(R.string.strYes),
                 positiveButtonClickFunctionality = {
@@ -92,6 +93,7 @@ class MyDownloadsViewModel(mContext: Context) : BaseViewModel(mContext) {
 
         setAlertDialogResourceModelMutableLiveData(
             BindingUtils.string(R.string.content_deleted_successfully),
+            BindingUtils.drawable(R.drawable.ic_success),
             true,
             positiveButtonText = BindingUtils.string(R.string.strOk),
             positiveButtonClickFunctionality = {
@@ -106,6 +108,7 @@ class MyDownloadsViewModel(mContext: Context) : BaseViewModel(mContext) {
 
         setAlertDialogResourceModelMutableLiveData(
             message,
+            BindingUtils.drawable(R.drawable.ic_no_internet),
             true,
             positiveButtonText = BindingUtils.string(R.string.strOk),
             positiveButtonClickFunctionality = {

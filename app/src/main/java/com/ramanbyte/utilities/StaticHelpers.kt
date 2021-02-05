@@ -122,6 +122,7 @@ const val KEY_LOGIN_PASSWORD = "password"
 
 const val APP_STATUS = "APP"
 const val DEL_STATUS = "N"
+const val DEL_STATUS1 = false
 const val PASSWORD_SECURITY_STATUS = "passwordSecurityStatus"
 const val IS_ACTIVE_USER = "Y"
 const val PASSWORD_SECURITY_QUESTION_STATUS = "Y"

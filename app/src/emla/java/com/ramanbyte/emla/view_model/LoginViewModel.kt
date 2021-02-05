@@ -99,9 +99,9 @@ class LoginViewModel(var mContext: Context) : BaseViewModel(mContext) {
                     } else {
                         setAlertDialogResourceModelMutableLiveData(
                             BindingUtils.string(R.string.not_valid_user),
+                            BindingUtils.drawable(R.drawable.ic_invalid_user)!!,
                             true,
-                            BindingUtils.string(R.string.strOk),
-                            {
+                            BindingUtils.string(R.string.strOk), {
                                 isAlertDialogShown.postValue(false)
                             }
                         )

@@ -253,13 +253,13 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
                                 AppLog.infoLog("questionListsize ${questionList?.size}  ${questionList?.get(0)?.questionId}")
                                 setAlertDialogResourceModelMutableLiveData(
                                     BindingUtils.string(R.string.conversation_close_message),
+                                    BindingUtils.drawable(R.drawable.ic_submit_confirmation)!!,
                                     false,
-                                    BindingUtils.string(R.string.yes),
-                                    {
+                                    BindingUtils.string(R.string.yes), {
                                         isAlertDialogShown.postValue(false)
                                         updateConversationCloseStatus(questionList?.get(0)?.questionId!!)
-                                    }, BindingUtils.string(R.string.no),
-                                    {
+                                    },
+                                    BindingUtils.string(R.string.no), {
                                         isAlertDialogShown.postValue(false)
                                     }
                                 )

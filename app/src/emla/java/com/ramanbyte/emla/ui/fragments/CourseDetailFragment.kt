@@ -142,13 +142,13 @@ class CourseDetailFragment : BaseFragment<FragmentCourseDetailBinding, CoursesDe
                     viewModel.apply {
                         setAlertDialogResourceModelMutableLiveData(
                             BindingUtils.string(R.string.no_internet_message),
+                            BindingUtils.drawable(R.drawable.ic_no_internet)!!,
                             true,
-                            BindingUtils.string(R.string.yes),
-                            {
+                            BindingUtils.string(R.string.yes), {
                                 isAlertDialogShown.postValue(false)
 
-                            }, BindingUtils.string(R.string.no),
-                            {
+                            },
+                            BindingUtils.string(R.string.no), {
                                 isAlertDialogShown.postValue(false)
                             }
                         )
