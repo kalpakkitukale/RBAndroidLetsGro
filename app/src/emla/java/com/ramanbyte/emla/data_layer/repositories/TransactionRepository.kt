@@ -18,6 +18,7 @@ import org.kodein.di.generic.instance
 class TransactionRepository(val mContext: Context) : BaseRepository(mContext) {
 
     private val transactionApiController: TransactionApiController by instance()
+
     fun getCurrentUser(): UserModel? {
         return applicationDatabase.getUserDao().getCurrentUser()?.replicate<UserEntity, UserModel>()
     }
@@ -55,15 +56,19 @@ class TransactionRepository(val mContext: Context) : BaseRepository(mContext) {
 
     suspend fun insertCart(cartRequestModel: CartRequestModel): Int? {
         val userId = getCurrentUser()?.userId ?: 0
+      //  cartRequestModel.courseDetailsId = CoursesModel().courseId
+        cartRequestModel.delStatus = true
+        cartRequestModel.createdBy = userId
+        cartRequestModel.userId = userId
         return apiRequest {
             transactionApiController.insertCart(cartRequestModel)
         }
     }
 
-    suspend fun deleteCart(id:Int): Int? {
-        val userId = getCurrentUser()?.userId ?: 0
-        return apiRequest {
-            transactionApiController.deleteCart(userId, id)
-        }
+suspend fun deleteCart(id:Int): Int? {
+    val userId = getCurrentUser()?.userId ?: 0
+    return apiRequest {
+        transactionApiController.deleteCart(userId, id)
     }
+}
 }

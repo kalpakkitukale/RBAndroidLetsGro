@@ -11,8 +11,8 @@ class CartRequestModel  {
     var modifyBy: String? = KEY_BLANK
     var modifyDate: String? = KEY_BLANK
 
-    var appStatus: String? = KEY_BLANK
-    var delStatus: String? = KEY_BLANK
+    var appStatus: String? = "APP"
+    var delStatus: Boolean? = false
     var ipAddress: String? = KEY_BLANK
 
 }

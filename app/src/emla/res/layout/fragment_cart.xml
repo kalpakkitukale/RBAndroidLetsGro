@@ -51,16 +51,49 @@
             app:layout_constraintTop_toTopOf="parent"
             android:visibility="gone"/>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/btnProceedPay"
+            app:layout_constraintVertical_bias=".1"
+            android:background="@color/colorAccent"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/lblTotalCartAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Total Amount to Pay"
+            style="@style/TextViewLabel"
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvTotalCartAmount"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvTotalCartAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Proceed to Pay"
+            style="@style/TextViewLabel"
+            android:gravity="center"
+            android:layout_margin="@dimen/dp_10"
+
+            app:layout_constraintBottom_toBottomOf="@+id/lblTotalCartAmount"
+            app:layout_constraintStart_toStartOf="parent"/>
+
         <Button
             android:id="@+id/btnProceedPay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Proceed to Pay"
             android:background="@color/colorAccent"
-            style="@style/CustomRadioButton"
+            style="@style/CustomCapsuleButtonFilled"
             android:onClick="@{cartFragment::clickOnPay}"
+            android:layout_margin="@dimen/dp_10"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
