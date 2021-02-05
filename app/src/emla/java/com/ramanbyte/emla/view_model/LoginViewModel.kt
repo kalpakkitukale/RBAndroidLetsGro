@@ -188,5 +188,4 @@ class LoginViewModel(var mContext: Context) : BaseViewModel(mContext) {
         toolbarVisibilityLiveData.postValue(visibility)
     }
 
-
 }

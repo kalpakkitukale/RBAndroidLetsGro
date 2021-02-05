@@ -33,6 +33,7 @@ import com.ramanbyte.databinding.FragmentLoginBinding
 import com.ramanbyte.emla.faculty.ui.activities.FacultyContainerActivity
 import com.ramanbyte.emla.ui.activities.ContainerActivity
 import com.ramanbyte.emla.ui.activities.ForgotPasswordActivity
+import com.ramanbyte.emla.ui.activities.JoinClassroomActivity
 import com.ramanbyte.emla.ui.activities.LoginActivity
 import com.ramanbyte.emla.view_model.LoginViewModel
 import com.ramanbyte.services.MangeUserDevice
@@ -207,6 +208,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>(true, t
         layoutBinding.apply {
             tvForgetPassword.setOnClickListener {
                 startActivity(ForgotPasswordActivity.intent(mContext as Activity))
+            }
+            btnLoginWithClassroom.setOnClickListener {
+                startActivity(Intent(requireContext(),JoinClassroomActivity::class.java))
             }
         }
     }

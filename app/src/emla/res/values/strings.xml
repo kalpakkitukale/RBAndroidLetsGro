@@ -19,6 +19,7 @@
     <string name="signup">Signup</string>
     <string name="forgot_password">Forgot Password?</string>
     <string name="log_in">Log in</string>
+    <string name="log_in_with_classroom">Log in with Classroom</string>
 
 
     <string name="allow_access_phone_storage">Allow to access the phone storage</string>

@@ -49,6 +49,7 @@
     <string name="unable_to_fetch_dependencie">Unable to fetch some dependencies. Kindly contact support!</string>
     <string name="no_profile_data_found">No profile data found</string>
     <string name="invalid_city_selected">Invalid city selected</string>
+    <string name="join_with_classroom">Join with Classroom</string>
 
 
 </resources>
