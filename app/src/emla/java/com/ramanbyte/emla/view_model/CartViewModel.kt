@@ -24,7 +24,9 @@ class CartViewModel(var mContext: Context) : BaseViewModel(mContext = mContext) 
     }
     private val coursesRepository: CoursesRepository by instance()
     val transactionRepository: TransactionRepository by instance()
-
+    var courseFess =  MutableLiveData<Float>().apply {
+        value = 0.0f
+    }
     var userData: UserModel? = null
     var searchQuery = MutableLiveData<String>().apply {
         value = KEY_BLANK
@@ -47,6 +49,11 @@ class CartViewModel(var mContext: Context) : BaseViewModel(mContext = mContext) 
             try {
                 coroutineToggleLoader(BindingUtils.string(R.string.getting_reply_list))
                 val response = transactionRepository.getCart()
+                var fee:Float = 0.0f
+                for (i in 0 until response!!.size) {
+                    fee = response.get(i).courseFee!!.toFloat().plus(fee)
+                    courseFess.postValue(fee)
+                }
                 cartListLiveData.postValue(response)
                 toggleLayoutVisibility(
                     View.VISIBLE,

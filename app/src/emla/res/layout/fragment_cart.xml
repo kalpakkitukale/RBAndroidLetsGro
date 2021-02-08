@@ -78,14 +78,15 @@
 
         <Button
             android:id="@+id/btnProceedPay"
+            style="@style/CustomCapsuleButtonFilled"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Proceed to Pay"
             android:background="@color/colorAccent"
-            style="@style/CustomRadioButton"
+            android:layout_margin="@dimen/dp_10"
             android:onClick="@{()->cartViewModel.clickOnProceedToPay(btnProceedPay)}"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

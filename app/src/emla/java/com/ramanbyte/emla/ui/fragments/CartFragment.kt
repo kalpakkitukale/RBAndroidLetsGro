@@ -125,21 +125,5 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>() {
         viewModel.getCartList()
     }
 
-    fun clickOnPay(view: View) {
-        startActivityForResult(
-            PaymentSummaryActivity.openPaymentActivity(
-                requireContext(),
-                0,
-                0,
-                "campusName",
-                0,
-                "programName",
-                "1",
-                10.toString(),
-                ""
-            ),
-            PAYMENT_SUCCESSFUL_REQUEST_CODE
-        )
-    }
 
 }
