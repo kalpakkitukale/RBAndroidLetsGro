@@ -21,8 +21,8 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>() {
     override fun initiate() {
         layoutBinding.apply {
 
-            ProgressLoader(mContext!!, viewModel)
-            AlertDialog(mContext!!, viewModel)
+            ProgressLoader(mContext, viewModel)
+            AlertDialog(mContext, viewModel)
 
             lifecycleOwner = this@CartFragment
             cartViewModel = viewModel
@@ -35,11 +35,12 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>() {
                 cartListLiveData.observe(this@CartFragment, Observer {
                     if (it != null) {
                         val cartAdapter = CartAdapter(viewModel, it, mContext)
-                        rvCartFragment?.apply {
+                        rvCartFragment.apply {
                             layoutManager =
                                 LinearLayoutManager(context!!, RecyclerView.VERTICAL, false)
                             adapter = cartAdapter
                         }
+                        cartListLiveData.value = null
                     }
                 })
             }

@@ -402,13 +402,8 @@ const val KEY_PENDING_TRANSACTION_STATUS = "Pending"
 const val KEY_SUCCESS_TRANSACTION_STATUS = "Success"
 const val KEY_FAIL_TRANSACTION_STATUS = "Fail"
 const val KEY_CANCEL_TRANSACTION_STATUS = "Cancel"
-val KEY_SUCCESS = "Success"
-val DATE_TIME_SECONDS_PATTERN = "yyyy-MM-dd HH:mm:ss"
-val KEY_APP_STATUS = "APP"
-val KEY_DEL_STATUS = "N"
-val KEY_MOBILE_PAYMENT_TYPE = "Mobile"
-
-val KEY_BEFORE_EXAM = "BeforeForm"
+const val KEY_SUCCESS = "Success"
+const val DATE_TIME_SECONDS_PATTERN = "yyyy-MM-dd HH:mm:ss"
 
 fun skipTrailingZeroes(number: Double?): String {
     var trimmedNumber = "0"

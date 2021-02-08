@@ -10,7 +10,6 @@ import com.ramanbyte.emla.models.request.InsertTransactionRequestModel
 import com.ramanbyte.emla.models.response.CartResponseModel
 import com.ramanbyte.utilities.AppLog
 import com.ramanbyte.utilities.KEY_ANDROID
-import com.ramanbyte.utilities.KEY_BLANK
 import com.ramanbyte.utilities.replicate
 import org.kodein.di.generic.instance
 
@@ -22,19 +21,16 @@ class TransactionRepository(val mContext: Context) : BaseRepository(mContext) {
     }
 
     suspend fun insertTransaction(insertTransactionRequestModel: InsertTransactionRequestModel): Int {
-        val loginResponseModel = applicationDatabase?.getUserDao().getCurrentUser()
+        val loginResponseModel = applicationDatabase.getUserDao().getCurrentUser()
 
         val deviceDetails = ""
 
         insertTransactionRequestModel.created_By = loginResponseModel!!.userId
         insertTransactionRequestModel.modify_By = loginResponseModel.userId
-        insertTransactionRequestModel.added_By = loginResponseModel.userId
         insertTransactionRequestModel.user_Id = loginResponseModel.userId
-        insertTransactionRequestModel.registrationId = loginResponseModel.userId
 
         insertTransactionRequestModel.deviceId = 0
         insertTransactionRequestModel.deviceType = KEY_ANDROID
-        insertTransactionRequestModel.clientName = KEY_BLANK
 
         AppLog.debugLog("insertTransactionRequestModel ---- $insertTransactionRequestModel")
 

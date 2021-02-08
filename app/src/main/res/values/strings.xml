@@ -85,7 +85,7 @@
     <string name="airpay_secret_key_debug">KVnqNAjbh8wKE6wM</string>
     <string name="airpay_secret_key_release">UxvB7wBe8b739A4p</string>
 
-    <string name="admission_form_transaction_custom_message">ADMISSION FORM %1$s %2$s</string>
+    <string name="admission_form_transaction_custom_message">Courses Purchased %1$s %2$s</string>
     <!-- Rahul Garg
     Payment STOP
     -->

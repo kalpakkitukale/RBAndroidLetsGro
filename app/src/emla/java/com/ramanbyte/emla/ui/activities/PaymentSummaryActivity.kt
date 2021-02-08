@@ -37,7 +37,6 @@ import org.kodein.di.generic.bind
 import org.kodein.di.generic.instance
 import org.kodein.di.generic.singleton
 import java.util.*
-import kotlin.collections.ArrayList
 
 class PaymentSummaryActivity : AppCompatActivity(), KodeinAware {
 
@@ -104,6 +103,8 @@ class PaymentSummaryActivity : AppCompatActivity(), KodeinAware {
             intent?.extras?.apply {
                 amountLiveData.value = getString(keyAmount) ?: "0"
                 paymentStepIntegration = getString(keyPaymentStepIntegration) ?: ""
+                cartListData =
+                    getParcelableArrayList<CartResponseModel>(keyCartData) as ArrayList<CartResponseModel>
 
             }
         }
@@ -264,7 +265,7 @@ class PaymentSummaryActivity : AppCompatActivity(), KodeinAware {
                                                 }
                                                 transactionStatus =
                                                     KEY_SUCCESS
-                                                tran_Id = payUObject.getString("txnid")
+                                                transId = payUObject.getString("txnid").toInt()
                                             } else {
                                                 // payment fail
                                                 transactionStatus =
@@ -323,7 +324,7 @@ class PaymentSummaryActivity : AppCompatActivity(), KodeinAware {
 
                                             if (transactionid != null) {
                                                 AppLog.infoLog("TXN ID -> =$transactionid")
-                                                tran_Id = transactionid
+                                                transId = transactionid.toInt()
                                             }
                                         } else {
                                             flag = status
