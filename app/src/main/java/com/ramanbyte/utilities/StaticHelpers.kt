@@ -159,7 +159,7 @@ const val REMOVE_PHOTO = 2
 const val PATH_SEPARATOR = "/"
 
 // payment codes
-val PAYMENT_SUCCESSFUL_REQUEST_CODE = 700
+const val PAYMENT_SUCCESSFUL_REQUEST_CODE = 700
 
 
 /**
@@ -392,17 +392,9 @@ const val keyPaymentDomain = "Online"
 
 
 // changed data
-
-const val keyExamFormId = "examFormId"
-const val keyCampusId = "campusId"
-const val keyCampusName = "campusName"
-const val keyProgramId = "programId"
-const val keyProgramName = "programName"
-const val keyAdmissionYear = "admissionYear"
 const val keyAmount = "amount"
+const val keyCartData = "cartData"
 const val keyPaymentStepIntegration = "paymentStepIntegration"
-const val keyPaymentAlreadyForProgram = "paymentAlreadyForProgram"
-const val keyCampusData="campusData"
 
 const val KEY_APPLICATION_FORM_TRANSACTION_TYPE = "Course fees"
 
