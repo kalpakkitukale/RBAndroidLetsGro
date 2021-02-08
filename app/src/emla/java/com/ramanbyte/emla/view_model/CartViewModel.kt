@@ -2,27 +2,22 @@ package com.ramanbyte.emla.view_model
 
 import android.content.Context
 import android.view.View
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.paging.PagedList
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseViewModel
 import com.ramanbyte.data_layer.CoroutineUtils
 import com.ramanbyte.emla.data_layer.network.exception.ApiException
 import com.ramanbyte.emla.data_layer.network.exception.NoDataException
 import com.ramanbyte.emla.data_layer.network.exception.NoInternetException
-import com.ramanbyte.emla.data_layer.network.exception.ResourceNotFound
 import com.ramanbyte.emla.data_layer.repositories.CoursesRepository
 import com.ramanbyte.emla.data_layer.repositories.TransactionRepository
-import com.ramanbyte.emla.models.CoursesModel
-import com.ramanbyte.emla.models.FavouriteVideosModel
 import com.ramanbyte.emla.models.UserModel
-import com.ramanbyte.emla.models.request.CartRequestModel
 import com.ramanbyte.emla.models.response.CartResponseModel
-import com.ramanbyte.utilities.*
+import com.ramanbyte.utilities.AppLog
+import com.ramanbyte.utilities.BindingUtils
+import com.ramanbyte.utilities.KEY_BLANK
 import kotlinx.coroutines.delay
 import org.kodein.di.generic.instance
-import java.util.concurrent.TimeoutException
 
 class CartViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
     override var noInternetTryAgain: () -> Unit = {
@@ -30,11 +25,15 @@ class CartViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
     }
     private val coursesRepository: CoursesRepository by instance()
     val transactionRepository: TransactionRepository by instance()
+    var courseFess =  MutableLiveData<Float>().apply {
+        value = 0.0f
+    }
 
     var userData: UserModel? = null
     var searchQuery = MutableLiveData<String>().apply {
         value = KEY_BLANK
     }
+
 
     var cartListLiveData = MutableLiveData<List<CartResponseModel>>().apply {
         value = arrayListOf()
@@ -50,12 +49,20 @@ class CartViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
     }
 
 
+
     fun getCartList() {
+
         CoroutineUtils.main {
             try {
                 coroutineToggleLoader(BindingUtils.string(R.string.getting_reply_list))
                 val response = transactionRepository.getCart()
+                var fee:Float = 0.0f
+                for (i in 0 until response!!.size) {
+                    fee = response.get(i).courseFee!!.toFloat().plus(fee)
+                    courseFess.postValue(fee)
+                }
                 cartListLiveData.postValue(response)
+
                 toggleLayoutVisibility(
                     View.VISIBLE,
                     View.GONE,

@@ -4,6 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
+        <variable
+            name="adpter"
+            type="com.ramanbyte.emla.adapters.CartAdapter" />
         <variable
             name="cartViewModel"
             type="com.ramanbyte.emla.view_model.CartViewModel" />
@@ -11,7 +15,6 @@
         <variable
             name="cartFragment"
             type="com.ramanbyte.emla.ui.fragments.CartFragment" />
-
 
     </data>
 
@@ -51,14 +54,18 @@
             app:layout_constraintTop_toTopOf="parent"
             android:visibility="gone"/>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_1"
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvTotalCartAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{String.valueOf(cartViewModel.courseFess)}"
+            style="@style/TextViewLabel"
+            app:layout_constraintVertical_bias=".9"
+            android:gravity="center"
+            android:layout_margin="@dimen/dp_10"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/btnProceedPay"
-            app:layout_constraintVertical_bias=".1"
-            android:background="@color/colorAccent"/>
+            app:layout_constraintTop_toTopOf="@+id/lblTotalCartAmount"/>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/lblTotalCartAmount"
@@ -67,21 +74,10 @@
             android:text="Total Amount to Pay"
             style="@style/TextViewLabel"
             android:gravity="center"
+            android:layout_margin="@dimen/dp_10"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tvTotalCartAmount"/>
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvTotalCartAmount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Proceed to Pay"
-            style="@style/TextViewLabel"
-            android:gravity="center"
-            android:layout_margin="@dimen/dp_10"
-
-            app:layout_constraintBottom_toBottomOf="@+id/lblTotalCartAmount"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintBottom_toTopOf="@+id/tvTotalCartAmount"/>
 
         <Button
             android:id="@+id/btnProceedPay"

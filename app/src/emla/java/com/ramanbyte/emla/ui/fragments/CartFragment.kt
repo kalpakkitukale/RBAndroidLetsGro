@@ -51,17 +51,20 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>() {
                 getCartList()
                 cartListLiveData.observe(this@CartFragment, Observer {
                     if (it != null) {
+
                         val cartAdapter = CartAdapter(viewModel, it, mContext)
                         rvCartFragment?.apply {
                             layoutManager =
                                 LinearLayoutManager(context!!, RecyclerView.VERTICAL, false)
                             adapter = cartAdapter
+
                         }
                     }
                 })
             }
         }
     }
+
 
     /*override fun initiate() {
         layoutBinding.apply {
