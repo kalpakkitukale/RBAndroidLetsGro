@@ -18,6 +18,7 @@ import com.ramanbyte.emla.data_layer.network.exception.NoInternetException
 import com.ramanbyte.emla.data_layer.repositories.MasterRepository
 import com.ramanbyte.emla.data_layer.repositories.TransactionRepository
 import com.ramanbyte.emla.models.PayuGatewayModel
+import com.ramanbyte.emla.models.request.CourseFeeRequestModel
 import com.ramanbyte.emla.models.request.InsertTransactionRequestModel
 import com.ramanbyte.emla.models.response.CartResponseModel
 import com.ramanbyte.utilities.*
@@ -46,6 +47,7 @@ class PaymentSummaryViewModel(mContext: Context) : BaseViewModel(mContext = mCon
 
     var amountLiveData = MutableLiveData<String>("0.0")
     var cartListData = ArrayList<CartResponseModel>()
+    var courseFeesList: ArrayList<CourseFeeRequestModel>? = ArrayList()
     var paymentStepIntegration = ""
 
     var paymentOptionErrorLiveData = MutableLiveData<Boolean>(false)
@@ -66,7 +68,8 @@ class PaymentSummaryViewModel(mContext: Context) : BaseViewModel(mContext = mCon
     fun addTransaction(
         initiateTransaction: Boolean,
         showLoader: Boolean,
-        terminateTransaction: Boolean
+        terminateTransaction: Boolean,
+        cartList: ArrayList<CartResponseModel>
     ) {
         CoroutineUtils.main {
             val userName =
@@ -87,7 +90,22 @@ class PaymentSummaryViewModel(mContext: Context) : BaseViewModel(mContext = mCon
                     userName.toUpperCase(),
                     this@PaymentSummaryViewModel.amountLiveData.value.toString().toUpperCase()
                 )
+                courseFeesList = ArrayList()
+                for (cart in cartList) {
+                    val courseFeeRequestModel = CourseFeeRequestModel()
+                    courseFeeRequestModel.apply {
+                        userId = loggedInUserModel?.userId!!
+                        paymentId = 0
+                        courseDetailsId = cart.courseDetailsId!!
+                        courseFeeStructureId = cart.courseFeeStructureId!!
+                        id = 0
+                    }
+                    courseFeesList!!.add(courseFeeRequestModel)
+                }
+
+                fees = courseFeesList!!
             }
+
             val id = transactionRepository.insertTransaction(
                 insertTransactionRequestModel
             )
@@ -122,7 +140,8 @@ class PaymentSummaryViewModel(mContext: Context) : BaseViewModel(mContext = mCon
                 addTransaction(
                     initiateTransaction = true,
                     showLoader = false,
-                    terminateTransaction = false
+                    terminateTransaction = false,
+                    cartList = cartListData
                 )
             } else {
                 paymentOptionErrorLiveData.value = true

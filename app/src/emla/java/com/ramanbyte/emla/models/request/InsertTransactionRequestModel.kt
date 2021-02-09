@@ -19,7 +19,7 @@ class InsertTransactionRequestModel {
     var paymentDescription = KEY_BLANK
     var transactionStatus: String = KEY_BLANK
     var flag: String = KEY_BLANK
-    var isMailSent: String = KEY_N
+    var isMailSent: Boolean = DEL_STATUS1
     var created_By: Int = 0
     var createdDate: String? = DateUtils.getCurDate(
         DATE_TIME_SECONDS_PATTERN

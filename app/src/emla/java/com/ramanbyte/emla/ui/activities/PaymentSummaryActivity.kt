@@ -237,7 +237,8 @@ class PaymentSummaryActivity : AppCompatActivity(), KodeinAware {
                 paymentSummaryViewModel?.addTransaction(
                     initiateTransaction = false,
                     showLoader = true,
-                    terminateTransaction = true
+                    terminateTransaction = true,
+                    cartList = paymentSummaryViewModel!!.cartListData
                 )
             }
             else -> {

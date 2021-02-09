@@ -11,6 +11,7 @@ class CartResponseModel() : Parcelable, BaseObservable() {
     var duraton: String? = KEY_BLANK
     var courseFee: String? = KEY_BLANK
     var courseDetailsId: Int? = 0
+    var courseFeeStructureId: Int? = 0
     var courseImageUrl: String? = null
     var courseImage: String? = null
     var id: Int? = 0
@@ -26,6 +27,7 @@ class CartResponseModel() : Parcelable, BaseObservable() {
         duraton = parcel.readString()
         courseFee = parcel.readString()
         courseDetailsId = parcel.readValue(Int::class.java.classLoader) as? Int
+        courseFeeStructureId = parcel.readValue(Int::class.java.classLoader) as? Int
         courseImageUrl = parcel.readString()
         courseImage = parcel.readString()
         id = parcel.readValue(Int::class.java.classLoader) as? Int
@@ -42,6 +44,7 @@ class CartResponseModel() : Parcelable, BaseObservable() {
         parcel.writeString(duraton)
         parcel.writeString(courseFee)
         parcel.writeValue(courseDetailsId)
+        parcel.writeValue(courseFeeStructureId)
         parcel.writeString(courseImageUrl)
         parcel.writeString(courseImage)
         parcel.writeValue(id)
