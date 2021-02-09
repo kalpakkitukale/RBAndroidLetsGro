@@ -24,6 +24,7 @@ import com.ramanbyte.emla.models.request.CartRequestModel
 import com.ramanbyte.emla.models.request.CoursesRequest
 import com.ramanbyte.emla.models.response.CommonDropdownModel
 import com.ramanbyte.utilities.*
+import kotlinx.android.synthetic.emla.card_course.view.*
 import org.kodein.di.generic.instance
 import java.util.concurrent.TimeoutException
 
@@ -115,7 +116,10 @@ class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
                 val response =
                     transactionRepository.insertCart(cartRequestModel = CartRequestModel(),
                         courseId = coursesModel.courseId
+
                     )
+                view.ivCart.visibility = View.INVISIBLE
+                view.tvLabeCart.visibility = View.INVISIBLE
                 isLoaderShowingLiveData.postValue(false)
             } catch (e: ApiException) {
                 isLoaderShowingLiveData.postValue(false)

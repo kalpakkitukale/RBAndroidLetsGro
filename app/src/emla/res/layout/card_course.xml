@@ -12,6 +12,8 @@
             name="viewPosition"
             type="Integer" />
 
+
+
         <variable
             name="coursesViewModel"
             type="com.ramanbyte.emla.view_model.CoursesViewModel" />
