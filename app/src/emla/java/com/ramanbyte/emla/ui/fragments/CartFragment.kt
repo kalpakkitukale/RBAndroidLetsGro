@@ -8,6 +8,7 @@ import com.ramanbyte.R
 import com.ramanbyte.base.BaseFragment
 import com.ramanbyte.databinding.FragmentCartBinding
 import com.ramanbyte.emla.adapters.CartAdapter
+import com.ramanbyte.emla.models.response.CartResponseModel
 import com.ramanbyte.emla.view_model.CartViewModel
 import com.ramanbyte.utilities.*
 
@@ -40,6 +41,8 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>() {
                                 LinearLayoutManager(context!!, RecyclerView.VERTICAL, false)
                             adapter = cartAdapter
                         }
+                        finalCartList = cartListLiveData.value as ArrayList<CartResponseModel>
+                        cartListLiveData.value = null
                     }
                 })
             }

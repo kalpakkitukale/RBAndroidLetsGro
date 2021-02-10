@@ -321,7 +321,7 @@ fun getDeviceVersion(): String {
     return BindingUtils.string(R.string.android) + " " + Build.VERSION.RELEASE
 }
 
-fun String?.checkValues(): String = if (isNullOrEmpty()) "NA" else this!!
+fun String?.checkValues(): String = if (isNullOrEmpty()) "NA" else this
 
 fun FragmentActivity.displayMetrics(): DisplayMetrics {
     val displayMetrics = DisplayMetrics()
@@ -394,7 +394,6 @@ const val keyPaymentDomain = "Online"
 // changed data
 const val keyAmount = "amount"
 const val keyCartData = "cartData"
-const val keyPaymentStepIntegration = "paymentStepIntegration"
 
 const val KEY_APPLICATION_FORM_TRANSACTION_TYPE = "Course fees"
 

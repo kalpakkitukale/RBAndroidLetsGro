@@ -49,16 +49,15 @@ class CoursesAdapter(private val displayMetrics: DisplayMetrics) :
                 ) || coursesModel.summativeAssessmentStatus.isNullOrEmpty())
             ) {
                 holder.cardCourseBinding.ivStatus.visibility = View.VISIBLE
-                holder.cardCourseBinding.ivStatus.setImageDrawable(BindingUtils.drawable(R.drawable.ic_success))
+                holder.cardCourseBinding.ivStatus.setImageDrawable(BindingUtils.drawable(R.drawable.ic_live))
             } else {
                 holder.cardCourseBinding.ivStatus.visibility = View.GONE
             }
 
-            if (coursesModel.isInCart==true||coursesModel.courseFee==0.0F) {
+            if (coursesModel.isInCart || coursesModel.courseFee == 0.0F) {
                 holder.cardCourseBinding.ivCart.visibility = View.INVISIBLE
                 holder.cardCourseBinding.tvLabeCart.visibility = View.INVISIBLE
-            }
-            else {
+            } else {
                 holder.cardCourseBinding.ivCart.visibility = View.VISIBLE
                 holder.cardCourseBinding.tvLabeCart.visibility = View.VISIBLE
             }

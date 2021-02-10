@@ -321,10 +321,21 @@ Content
     <string name="fb_login_protocol_scheme">fb256607422269546</string>
 
     <string name="empty_cart">Your cart is currently empty!</string>
-    //for cart
-    connection_timeout
+    <!--for cart
+    connection_timeout-->
     <string name="connection_timeout">Connection TimeOut</string>
     <string name="resource_not_found">Resource Not Found</string>
     <string name="pleaseWait">Please Wait…</string>
+    <string name="purchase_details">Purchase Details</string>
+    <string name="purchase_ref">Purchase Ref</string>
+    <string name="purchase_date">Purchase Date</string>
+    <string name="payment_type">Payment Type</string>
+    <string name="card_holder_name">Card Holder Name</string>
+    <string name="total_amount">Total Amount</string>
+    <string name="done">Done</string>
+    <string name="payment_complete">Payment Complete</string>
+    <string name="payment_fail">Payment Fail</string>
+    <string name="payment_success_message">Thank you, your payment has been successful.</string>
+    <string name="payment_fail_message">Oops! Your transaction failed. Here\'s what we know.</string>
 
 </resources>

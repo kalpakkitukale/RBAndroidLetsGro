@@ -20,14 +20,17 @@ class TransactionRepository(val mContext: Context) : BaseRepository(mContext) {
         return applicationDatabase.getUserDao().getCurrentUser()?.replicate<UserEntity, UserModel>()
     }
 
-    suspend fun insertTransaction(insertTransactionRequestModel: InsertTransactionRequestModel): Int {
+    suspend fun insertTransaction(
+        insertTransactionRequestModel: InsertTransactionRequestModel,
+        isSuccessTransaction: Boolean
+    ): Int {
         val loginResponseModel = applicationDatabase.getUserDao().getCurrentUser()
 
         val deviceDetails = ""
 
         insertTransactionRequestModel.created_By = loginResponseModel!!.userId
         insertTransactionRequestModel.modify_By = loginResponseModel.userId
-        insertTransactionRequestModel.user_Id = loginResponseModel.userId
+        insertTransactionRequestModel.userId = loginResponseModel.userId
 
         insertTransactionRequestModel.deviceId = 0
         insertTransactionRequestModel.deviceType = KEY_ANDROID
@@ -38,7 +41,9 @@ class TransactionRepository(val mContext: Context) : BaseRepository(mContext) {
             transactionApiController.postTransactionDetails(insertTransactionRequestModel)
         }
         AppLog.debugLog("insertTransactionString ---- $insertTransactionString")
-        return insertTransactionString ?: 0
+        return if (isSuccessTransaction) {
+            insertTransactionString ?: 0
+        } else -1
     }
 
     suspend fun getCart(): ArrayList<CartResponseModel>? {

@@ -38,6 +38,8 @@ class CartViewModel(var mContext: Context) : BaseViewModel(mContext = mContext) 
         value = arrayListOf()
     }
 
+    var finalCartList = ArrayList<CartResponseModel>()
+
     init {
         toggleLayoutVisibility(View.GONE, View.GONE, View.GONE, "", View.GONE)
         searchQuery.observeForever {
@@ -154,7 +156,7 @@ class CartViewModel(var mContext: Context) : BaseViewModel(mContext = mContext) 
                 PaymentSummaryActivity.openPaymentActivity(
                     mContext,
                     courseFess.value!!.toString(),
-                    cartListLiveData.value as ArrayList<CartResponseModel>?
+                    finalCartList
                 )
             )
         }

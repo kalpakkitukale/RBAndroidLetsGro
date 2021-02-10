@@ -1,12 +1,13 @@
 package com.ramanbyte.emla.models.request
 
+import com.google.gson.annotations.SerializedName
 import com.ramanbyte.utilities.*
 
 class InsertTransactionRequestModel {
 
     var id: Int = 0 // 1st time it will 0 then send id for update transaction status
-    var user_Id: Int = 0
-    var transId: Int = 0
+    var userId: Int = 0
+    var transId: Long = 0
     var transDate: String? = DateUtils.getCurDate(
         DATE_TIME_SECONDS_PATTERN
     )
@@ -20,6 +21,8 @@ class InsertTransactionRequestModel {
     var transactionStatus: String = KEY_BLANK
     var flag: String = KEY_BLANK
     var isMailSent: Boolean = DEL_STATUS1
+
+    @SerializedName("createdBy")
     var created_By: Int = 0
     var createdDate: String? = DateUtils.getCurDate(
         DATE_TIME_SECONDS_PATTERN
