@@ -30,9 +30,6 @@ class CartViewModel(var mContext: Context) : BaseViewModel(mContext = mContext) 
         value = 0.0f
     }
     var userData: UserModel? = null
-    var searchQuery = MutableLiveData<String>().apply {
-        value = KEY_BLANK
-    }
 
     var cartListLiveData = MutableLiveData<List<CartResponseModel>>().apply {
         value = arrayListOf()
@@ -42,9 +39,6 @@ class CartViewModel(var mContext: Context) : BaseViewModel(mContext = mContext) 
 
     init {
         toggleLayoutVisibility(View.GONE, View.GONE, View.GONE, "", View.GONE)
-        searchQuery.observeForever {
-            coursesRepository.searchCourse(it)
-        }
         userData = coursesRepository.getCurrentUser()
     }
 

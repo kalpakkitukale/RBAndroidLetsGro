@@ -4,6 +4,7 @@ import android.content.Context
 import com.ramanbyte.data_layer.base.BaseRepository
 import com.ramanbyte.emla.data_layer.network.api_layer.TransactionApiController
 import com.ramanbyte.emla.data_layer.room.entities.UserEntity
+import com.ramanbyte.emla.models.TransactionHistoryModel
 import com.ramanbyte.emla.models.UserModel
 import com.ramanbyte.emla.models.request.CartRequestModel
 import com.ramanbyte.emla.models.request.InsertTransactionRequestModel
@@ -70,6 +71,13 @@ class TransactionRepository(val mContext: Context) : BaseRepository(mContext) {
         val userId = getCurrentUser()?.userId ?: 0
         return apiRequest {
             transactionApiController.deleteCart(userId, cartItemId)
+        }
+    }
+
+    suspend fun getAllTransactionHistory(): List<TransactionHistoryModel>? {
+        val userId = getCurrentUser()?.userId ?: 0
+        return apiRequest {
+            transactionApiController.getAllTransactionHistory(userId)
         }
     }
 }

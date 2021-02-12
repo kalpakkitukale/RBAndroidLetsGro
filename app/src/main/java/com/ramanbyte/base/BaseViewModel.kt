@@ -278,7 +278,7 @@ abstract class BaseViewModel(
     * */
 
     suspend fun coroutineToggleLoader(loaderMessage: String = BindingUtils.string(R.string.str_loading)) {
-        withContext(Dispatchers.Default) {
+        withContext(Dispatchers.Main) {
             toggleLoader(loaderMessage)
         }
     }
