@@ -105,8 +105,32 @@ class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
         }
     }
 
+    fun myCourseListPagination() {
+            transactionRepository.getPaginationResponseHandler().observeForever {
+                if (it != null) {
+                    paginationResponse(
+                            it,
+                            //PaginationMessages("No Data", "No More data", "No Internet", "Something Wrong")
+                            PaginationMessages(
+                                    BindingUtils.string(R.string.no_courses),
+                                    BindingUtils.string(R.string.no_more_courses),
+                                    BindingUtils.string(R.string.please_make_sure_you_are_connected_to_internet),
+                                    BindingUtils.string(R.string.some_thing_went_wrong)
+                            )
+                    )
+                    AppLog.infoLog("Pagination :: ${it.msg} :: ${it.status}")
+                }
+            }
+
+            transactionRepository.myCourseList()
+
+    }
+
     fun coursesPagedList(): LiveData<PagedList<CoursesModel>>? {
         return coursesRepository.coursesPagedList
+    }
+    fun myCoursesPagedList(): LiveData<PagedList<CoursesModel>>? {
+        return transactionRepository.coursesPagedList
     }
 
     fun insertCartData(view: View, coursesModel: CoursesModel) {
