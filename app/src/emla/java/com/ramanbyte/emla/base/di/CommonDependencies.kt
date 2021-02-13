@@ -21,6 +21,7 @@ import org.kodein.di.generic.singleton
  */
 
 private const val DOMAIN = "http://webapp.classroomplus.in/"
+private const val DOMAINTEST = "http://webapptest.classroomplus.in/"
 private const val EMLA = "eMarketPlace/"
 private const val API = "/api/"
 private const val LOGIN = "Login/"
@@ -153,7 +154,7 @@ private val controllersDependencies = Kodein.Module("controllers_dependencies", 
         RetrofitInitializer.invoke(
                 instance(),//db
                 TransactionApiController::class.java,
-                DOMAIN + EMLA + CLIENT_BASE + API + COURSE_FEE
+                DOMAINTEST + EMLA + CLIENT_BASE + API + COURSE_FEE
         )
     }
     /*
