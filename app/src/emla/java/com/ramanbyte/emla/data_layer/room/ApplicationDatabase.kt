@@ -24,7 +24,7 @@ import com.ramanbyte.utilities.AppLog
 
 @Database(
     entities = [UserEntity::class, QuestionAndAnswerEntity::class, OptionsEntity::class, AnswerEntity::class, MediaInfoModel::class],
-    version = 2,
+    version = 3,
     exportSchema = true
 )
 abstract class ApplicationDatabase : RoomDatabase() {
@@ -58,6 +58,7 @@ abstract class ApplicationDatabase : RoomDatabase() {
             mContext, ApplicationDatabase::class.java, "db_emla.db"
         ).allowMainThreadQueries()
             .addMigrations(MIGRATION_1_2)
+            .addMigrations(MIGRATION_2_3)
             .build()
         /*
         * Initialization Complete
@@ -69,6 +70,11 @@ abstract class ApplicationDatabase : RoomDatabase() {
                 database.execSQL("ALTER TABLE MediaInfoModel ADD favouriteVideo VARCHAR DEFAULT '' NOT NULL")
                 database.execSQL("ALTER TABLE MediaInfoModel ADD contentTitle VARCHAR DEFAULT '' NOT NULL")
                 AppLog.infoLog("Application Database: AlterMediaInfoModelTable")
+            }
+        }
+        private val MIGRATION_2_3: Migration = object : Migration(2, 3) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                database.execSQL("ALTER TABLE UserEntity ADD classroomUserId INTEGER DEFAULT 0 NOT NULL")
             }
         }
     }

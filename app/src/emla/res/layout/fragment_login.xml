@@ -79,9 +79,9 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardLayoutMain"
+            style="@style/customCard"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            style="@style/customCard"
             android:layout_marginTop="@dimen/dp_30"
             app:cardCornerRadius="@dimen/dp_5"
             app:cardElevation="@dimen/dp_2"
@@ -112,7 +112,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/dp_10"
-                    android:hint="@string/emailId"
+                    android:hint="@string/email_user_name"
                     app:errorText="@{loginViewModel.loginRequestValidation.getValidation(StaticHelpersKt.keyEmailId)}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -179,7 +179,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_20"
-            android:onClick="@{loginViewModel::doLogin}"
+            android:onClick='@{()->loginViewModel.doLogin(btnLogin,"N")}'
             android:text="@string/log_in"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -191,8 +191,8 @@
             android:id="@+id/view5"
             android:layout_width="@dimen/dp_50"
             android:layout_height="0.5dp"
-            android:visibility="invisible"
             android:background="@color/colorDivider"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="@+id/lblLoginWith"
             app:layout_constraintEnd_toStartOf="@+id/lblLoginWith"
             app:layout_constraintHorizontal_bias="0.892"
@@ -234,8 +234,8 @@
             android:minHeight="@dimen/dp_20"
             android:onClick="@{loginViewModel::googleLogIn}"
             android:padding="@dimen/dp_5"
-            android:visibility="invisible"
             android:src="@drawable/ic_google_plus"
+            android:visibility="invisible"
             app:layout_constraintEnd_toStartOf="@+id/btnGoogleLogin"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="packed"
@@ -250,8 +250,8 @@
             android:minHeight="@dimen/dp_20"
             android:onClick="@{loginViewModel::googleLogIn}"
             android:padding="@dimen/dp_5"
-            android:visibility="invisible"
             android:src="@drawable/ic_google_plus"
+            android:visibility="invisible"
             app:layout_constraintEnd_toStartOf="@+id/btnFbLogin"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="packed"
@@ -265,25 +265,25 @@
             android:minHeight="@dimen/dp_20"
             android:onClick="@{loginViewModel::fbLogIn}"
             android:padding="@dimen/dp_5"
-            android:visibility="invisible"
             android:src="@drawable/ic_facebook"
+            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toEndOf="@+id/btnGoogleLogin"
             app:layout_constraintTop_toTopOf="@+id/btnGoogleLogin" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            style="@style/CustomCapsuleButtonWithOnlyBorder"
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/btnLoginWithClassroom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_20"
-            android:text="@string/log_in_with_classroom"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="@dimen/dp_10"
+            android:background="@drawable/custom_capsule_button_with_border"
+            android:padding="@dimen/dp_5"
+            android:src="@drawable/classroom_logo"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/btnCRLogin" />
-
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/lblSignup"

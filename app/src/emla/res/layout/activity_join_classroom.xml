@@ -3,10 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <data>
+
+        <import type="com.ramanbyte.utilities.StaticHelpersKt" />
+
+        <variable
+            name="joinClassroomViewModel"
+            type="com.ramanbyte.emla.view_model.JoinClassroomViewModel" />
+    </data>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".emla.ui.activities.JoinClassroomActivity">
+        android:orientation="vertical">
 
         <include
             android:id="@+id/app_bar_layout"
@@ -14,15 +23,195 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvUserId"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textSize="@dimen/sp_18"
-            style="@style/TextViewBoldGrayOnLightNDark"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/app_bar_layout" />
+            android:layout_height="match_parent"
+            android:fillViewport="true">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/mainContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/dp_10"
+                android:visibility="@{joinClassroomViewModel.viewVisibility}"
+                tools:context=".emla.ui.activities.JoinClassroomActivity">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvLblHaveAccount"
+                    style="@style/TextViewMediumNayBlueOnLightNWhiteOnDark14sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/have_account_on_lets_gro"
+                    android:textSize="@dimen/sp_12"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <RadioGroup
+                    android:id="@+id/rgHaveAccount"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="@id/tvLblHaveAccount"
+                    app:layout_constraintStart_toStartOf="@id/tvLblHaveAccount"
+                    app:layout_constraintTop_toBottomOf="@id/tvLblHaveAccount">
+
+                    <RadioButton
+                        android:id="@+id/rbExistingYes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/dp_5"
+                        android:checked="true"
+                        android:text="@string/yes"
+                        android:textAppearance="@style/TextViewMediumNayBlueOnLightNWhiteOnDark14sp"
+                        android:textSize="@dimen/sp_12" />
+
+                    <RadioButton
+                        android:id="@+id/rbExistingNo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/dp_5"
+                        android:text="@string/no"
+                        android:textAppearance="@style/TextViewMediumNayBlueOnLightNWhiteOnDark14sp"
+                        android:textSize="@dimen/sp_12" />
+                </RadioGroup>
+
+                <androidx.constraintlayout.widget.Group
+                    android:id="@+id/groupClassroomLogin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible"
+                    app:constraint_referenced_ids="tilUserName,tilPassword,btnLogin" />
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilUserName"
+                    style="@style/TextInputLayoutWithoutBorder"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:hint="@string/email_user_name"
+                    app:errorText="@{joinClassroomViewModel.loginValidator.getValidation(StaticHelpersKt.KEY_LOGIN_USERNAME)}"
+                    app:layout_constraintEnd_toEndOf="@id/tvLblHaveAccount"
+                    app:layout_constraintStart_toStartOf="@id/tvLblHaveAccount"
+                    app:layout_constraintTop_toBottomOf="@id/rgHaveAccount">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etUserName"
+                        style="@style/EditTextRegularGrayHint"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:imeOptions="actionNext"
+                        android:inputType="textEmailAddress"
+                        android:lines="1"
+                        android:maxLength="50"
+                        android:singleLine="true"
+                        android:text="@={joinClassroomViewModel.joinClassroomLiveData.username}" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilPassword"
+                    style="@style/TextInputLayoutWithoutBorder"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:hint="@string/password"
+                    app:endIconMode="password_toggle"
+                    app:errorText="@{joinClassroomViewModel.loginValidator.getValidation(StaticHelpersKt.KEY_LOGIN_PASSWORD)}"
+                    app:layout_constraintEnd_toEndOf="@+id/tilUserName"
+                    app:layout_constraintStart_toStartOf="@+id/tilUserName"
+                    app:layout_constraintTop_toBottomOf="@+id/tilUserName">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/ettPassword"
+                        style="@style/EditTextRegularGrayHint"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:imeOptions="actionGo"
+                        android:inputType="textPassword"
+                        android:lines="1"
+                        android:maxLength="30"
+                        android:singleLine="true"
+                        android:text="@={joinClassroomViewModel.joinClassroomLiveData.password}" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnLogin"
+                    style="@style/CustomCapsuleButtonBlueBgWhiteText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:onClick="@{joinClassroomViewModel::doLogin}"
+                    android:text="@string/log_in"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tilPassword"
+                    app:layout_constraintWidth_percent="0.5" />
+
+                <androidx.constraintlayout.widget.Group
+                    android:id="@+id/groupCreateAccount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    app:constraint_referenced_ids="tvLblCreateAccount,rgCreateAccount,btnCreateAccount" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvLblCreateAccount"
+                    style="@style/TextViewMediumNayBlueOnLightNWhiteOnDark14sp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:text="@string/want_to_create_an_account"
+                    android:textSize="@dimen/sp_12"
+                    app:layout_constraintEnd_toEndOf="@id/tvLblHaveAccount"
+                    app:layout_constraintStart_toStartOf="@id/tvLblHaveAccount"
+                    app:layout_constraintTop_toBottomOf="@id/btnLogin" />
+
+                <RadioGroup
+                    android:id="@+id/rgCreateAccount"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:onCheckedChanged="@{joinClassroomViewModel::createAccountRadioGroupClick}"
+                    app:layout_constraintEnd_toEndOf="@id/tvLblCreateAccount"
+                    app:layout_constraintStart_toStartOf="@id/tvLblCreateAccount"
+                    app:layout_constraintTop_toBottomOf="@id/tvLblCreateAccount">
+
+                    <RadioButton
+                        android:id="@+id/rbCreateYes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/dp_5"
+                        android:text="@string/yes"
+                        android:checked="true"
+                        android:textAppearance="@style/TextViewMediumNayBlueOnLightNWhiteOnDark14sp"
+                        android:textSize="@dimen/sp_12" />
+
+                    <RadioButton
+                        android:id="@+id/rbCreateNo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/dp_5"
+                        android:text="@string/no"
+                        android:textAppearance="@style/TextViewMediumNayBlueOnLightNWhiteOnDark14sp"
+                        android:textSize="@dimen/sp_12" />
+                </RadioGroup>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnCreateAccount"
+                    style="@style/CustomCapsuleButtonBlueBgWhiteText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:text="@{joinClassroomViewModel.createAccountButtonText}"
+                    android:onClick="@{joinClassroomViewModel::createAccountClick}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/rgCreateAccount"
+                    app:layout_constraintWidth_percent="0.5" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+    </LinearLayout>
 </layout>

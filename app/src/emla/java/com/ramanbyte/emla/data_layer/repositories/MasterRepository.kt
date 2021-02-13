@@ -14,7 +14,6 @@ import com.ramanbyte.emla.data_layer.network.api_layer.LoginApiController
 import com.ramanbyte.emla.data_layer.room.entities.UserEntity
 import com.ramanbyte.emla.models.UserModel
 import com.ramanbyte.emla.models.request.*
-import com.ramanbyte.emla.models.response.CartResponseModel
 import com.ramanbyte.utilities.*
 import com.ramanbyte.utilities.DateUtils.getCurDate
 import com.ramanbyte.utilities.IpUtility.Companion.getIpAddress
@@ -43,7 +42,7 @@ class MasterRepository(val mContext: Context) : BaseRepository(mContext) {
                     delete()
                     insert(userModel.replicate<UserModel, UserEntity>()!!)
                 }
-            }else if (userModel.userType == KEY_FACULTY) {
+            } else if (userModel.userType == KEY_FACULTY) {
                 applicationDatabase.getUserDao().apply {
                     delete()
                     insert(userModel.replicate<UserModel, UserEntity>()!!)
@@ -163,7 +162,90 @@ class MasterRepository(val mContext: Context) : BaseRepository(mContext) {
         }
     }
 
+    /**Vinay K
+     * To get the user details if the account is linked with lets gro.
+     * @since 11/02/2021
+     * */
+    suspend fun getUserDetails(useRefId: Int,isLoggedIn:Boolean): UserModel? {
+        val userModel = apiRequest {
+            loginApiController.getUserDetails(useRefId)
+        }
+        if(!isLoggedIn){
+        userModel?.apply {
+            classroomUserId = useRefId
+            if (userModel.userType == KEY_STUDENT) {
+                applicationDatabase.getUserDao().apply {
+                    delete()
+                    insert(userModel.replicate<UserModel, UserEntity>()!!)
+                }
+            } else if (userModel.userType == KEY_FACULTY) {
+                applicationDatabase.getUserDao().apply {
+                    delete()
+                    insert(userModel.replicate<UserModel, UserEntity>()!!)
+                }
+            }
+        }}
+        return userModel
+    }
 
+    /**Vinay K
+     * This method will be used to join the classroom account with Lets gro account
+     * here user can login with both account details(Lets gro or Classroom)
+     * @since 11/02/2021
+     * */
+    suspend fun updateLetsGroUser(joinClassroomModel: JoinClassroomModel): UserModel? {
+        val userModel = apiRequest {
+            loginApiController.updateLetsGroUser(joinClassroomModel)
+        }
+        userModel?.apply {
+            classroomUserId = joinClassroomModel.userId
 
+            if (userModel.userType == KEY_STUDENT) {
+                applicationDatabase.getUserDao().apply {
+                    delete()
+                    insert(userModel.replicate<UserModel, UserEntity>()!!)
+                }
+            } else if (userModel.userType == KEY_FACULTY) {
+                applicationDatabase.getUserDao().apply {
+                    delete()
+                    insert(userModel.replicate<UserModel, UserEntity>()!!)
+                }
+            }
+        }
+        return userModel
+    }
+
+    /**Vinay K
+     * This method will be used to create new account in Let's Gro against the Classroom user_ref_id
+     * To login use the classroom account details
+     * @since 11/02/2021
+     * */
+    suspend fun createAccount(useRefId: Int): UserModel? {
+        val userModel = apiRequest {
+            loginApiController.createAccountWithClassroom(useRefId)
+        }
+        userModel?.apply {
+            classroomUserId = useRefId
+            if (userModel.userType == KEY_STUDENT) {
+                applicationDatabase.getUserDao().apply {
+                    delete()
+                    insert(userModel.replicate<UserModel, UserEntity>()!!)
+                }
+            } else if (userModel.userType == KEY_FACULTY) {
+                applicationDatabase.getUserDao().apply {
+                    delete()
+                    insert(userModel.replicate<UserModel, UserEntity>()!!)
+                }
+            }
+        }
+        return userModel
+    }
+
+    suspend fun updateCurrentClassroomId(classroomUserId:Int,userId:Int){
+        applicationDatabase.getUserDao().apply {
+
+            updateClassroomUserId(classroomUserId,userId)
+        }
+    }
 
 }

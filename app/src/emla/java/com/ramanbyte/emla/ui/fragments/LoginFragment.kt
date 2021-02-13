@@ -33,6 +33,7 @@ import com.ramanbyte.emla.ui.activities.ContainerActivity
 import com.ramanbyte.emla.ui.activities.ForgotPasswordActivity
 import com.ramanbyte.emla.ui.activities.JoinClassroomActivity
 import com.ramanbyte.emla.ui.activities.LoginActivity
+import com.ramanbyte.emla.view.LoginWithClassroomDialog
 import com.ramanbyte.emla.view_model.LoginViewModel
 import com.ramanbyte.services.MangeUserDevice
 import com.ramanbyte.utilities.*
@@ -121,15 +122,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>(true, t
         }
     }
 
-    private fun callWorkerToMangeUserDevice() {
-        val manageUserDeviceData = Data.Builder()
-            .putInt(KEY_LOGIN_LOGOUT_STATUS, 1)
-            .build()
-        val simpleRequest = OneTimeWorkRequest.Builder(MangeUserDevice::class.java)
-            .setInputData(manageUserDeviceData)
-            .build()
-        WorkManager.getInstance(mContext!!).enqueue(simpleRequest)
-    }
 
 
     override fun onRequestPermissionsResult(
@@ -143,7 +135,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>(true, t
                     if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                         //if permission is granted for phone ask for storage permission
                         StaticMethodUtilitiesKtx.setIMEINumber(mContext!!)
-                        layoutBinding.btnLogin.let { viewModel.doLogin(it) }
+                        layoutBinding.btnLogin.let { viewModel.doLogin(it,"N") }
                     } else if (!PermissionsManager.shouldShowRequestPermissionRationale(
                             mContext!! as Activity,
                             Manifest.permission.READ_PHONE_STATE
@@ -201,14 +193,22 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>(true, t
         }
     }
 
-
+    private var loginWithClassroomDialog = LoginWithClassroomDialog()
     private fun setListeners() {
         layoutBinding.apply {
             tvForgetPassword.setOnClickListener {
                 startActivity(ForgotPasswordActivity.intent(mContext as Activity))
             }
             btnLoginWithClassroom.setOnClickListener {
-                startActivity(Intent(requireContext(),JoinClassroomActivity::class.java))
+                val fragmentTransaction = childFragmentManager.beginTransaction()
+                val prev = childFragmentManager.findFragmentByTag("dialog")
+                if (prev != null) {
+                    fragmentTransaction.remove(prev)
+                }
+                fragmentTransaction.addToBackStack(null)
+                loginWithClassroomDialog = LoginWithClassroomDialog()
+                loginWithClassroomDialog.isCancelable = false
+                loginWithClassroomDialog.show(fragmentTransaction, "dialog")
             }
         }
     }
@@ -244,7 +244,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>(true, t
                     override fun onSuccess(loginResult: LoginResult?) {
                         Log.d("APPINFO", "LoggedIn success :" + loginResult)
 
-                        callWorkerToMangeUserDevice()
+                        viewModel.callWorkerToMangeUserDevice()
                         startActivity(ContainerActivity.intent(mContext as Activity))
                         Activity().finish()
                         BaseAppController.setEnterPageAnimation(mContext as Activity)
@@ -304,7 +304,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>(true, t
 
         if (completedTask.isSuccessful) {
 
-            callWorkerToMangeUserDevice()
+            viewModel.callWorkerToMangeUserDevice()
             startActivity(ContainerActivity.intent(mContext as Activity))
             Activity().finish()
             BaseAppController.setEnterPageAnimation(mContext as Activity)

@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData
 import com.ramanbyte.utilities.AppLog
 import com.ramanbyte.utilities.KEY_NAME_PATTERN
 import com.ramanbyte.utilities.KEY_PASSWORD_PATTERN
+import com.ramanbyte.utilities.NetworkConnectivity
 import java.lang.reflect.Field
 import java.util.*
 import java.util.regex.Matcher
@@ -28,6 +29,7 @@ class ObservableValidator<T : Observable>(
 
     private var spinnerTemp = 0
 
+    var isDataResetting = false
     //Get the LiveData<String> for the property
     fun getValidation(property: String): MutableLiveData<String>? {
         val field: Field = bindingResource.getDeclaredField(property)
@@ -163,11 +165,10 @@ class ObservableValidator<T : Observable>(
     //Run the proper validation function for the rule
     private fun validateProperty(validationRule: ValidationRule): Boolean {
 
-        if (!validationRule.isEnabled) {
+        if (isDataResetting || !validationRule.isEnabled) {
             validations[validationRule.propertyId].also {
                 it?.value = null
             }
-
             return true
         }
 
@@ -207,6 +208,12 @@ class ObservableValidator<T : Observable>(
             }
             ValidationFlags.FIELD_URL_LINK -> {
                 return validateUrlLink(validationRule)
+            }
+            ValidationFlags.FIELD_INTERNET_REQUIRED -> {
+                return validateInternetConnectivity(validationRule)
+            }
+            ValidationFlags.FIELD_INVALID_STRING -> {
+                return validateString(validationRule)
             }
         }
     }
@@ -301,23 +308,6 @@ class ObservableValidator<T : Observable>(
         }
     }
 
-    fun updateSpinnerSelection(newSpinnerSelection: Int, field: String, newMessage: String) {
-
-        val bindingField: Field = bindingResource.getDeclaredField(field)
-        bindingField.isAccessible = true
-        val propertyId: Int = bindingField.getInt(null)
-
-        val index =
-            rules[propertyId]?.indexOfFirst { it.rule == ValidationFlags.FIELD_SPINNER_SELECTION }
-
-        if (index != null) {
-            rules[propertyId]?.get(index)?.apply {
-                spinnerSelection = newSpinnerSelection
-                message = newMessage
-            }
-        }
-    }
-
     //Yep logszz
     fun logRules(propertyId: Int) {
         rules[propertyId]?.forEach {
@@ -328,8 +318,8 @@ class ObservableValidator<T : Observable>(
     //Yep... logggin
     private fun logProperty(property: String) {
         try {
-            var value: String = observedObject::class.java.getMethod("get" + property.capitalize())
-                .invoke(observedObject)?.toString() ?: ""
+            var value: String? = observedObject::class.java.getMethod("get" + property.capitalize())
+                .invoke(observedObject)?.toString()
             //Log.d(TAG, value)
         } catch (e: Exception) {
             e.printStackTrace()
@@ -421,7 +411,7 @@ class ObservableValidator<T : Observable>(
                 return false
             }
         } else if (value is String) {
-            if (value.isNullOrEmpty()) {
+            if (value.trim().isEmpty()) {
                 validations[validationRule.propertyId].also {
                     it?.value = validationRule.message
                 }
@@ -674,7 +664,7 @@ class ObservableValidator<T : Observable>(
 
         val value = getProperty(validationRule.property)
 
-        if (value is String) {
+        if (value is String && value.toString().isNotEmpty()) {
 
             val p: Pattern = Patterns.WEB_URL
             val m: Matcher = p.matcher(value.toString().toLowerCase())
@@ -694,10 +684,61 @@ class ObservableValidator<T : Observable>(
         return true
     }
 
+    fun updateSpinnerSelection(newSpinnerSelection: Int, field: String, newMessage: String) {
+
+        val bindingField: Field = bindingResource.getDeclaredField(field)
+        bindingField.isAccessible = true
+        val propertyId: Int = bindingField.getInt(null)
+
+        val index =
+            rules[propertyId]?.indexOfFirst { it.rule == ValidationFlags.FIELD_SPINNER_SELECTION }
+
+        if (index != null) {
+            rules[propertyId]?.get(index)?.apply {
+                spinnerSelection = newSpinnerSelection
+                message = newMessage
+            }
+        }
+    }
+
     private fun validatePasswordPattern(newPassword: String): Boolean {
         val pattern = Pattern.compile(KEY_PASSWORD_PATTERN)
         val matcher: Matcher = pattern.matcher(newPassword)
         return matcher.matches()
+    }
+
+    private fun validateInternetConnectivity(validationRule: ValidationRule): Boolean {
+
+        if (!NetworkConnectivity.isConnectedToInternet()) {
+            validations[validationRule.propertyId].also {
+                it?.value = validationRule.message
+            }
+            return false
+        }
+        validations[validationRule.propertyId].also {
+            it?.value = null
+        }
+        return true
+    }
+
+    private fun validateString(validationRule: ValidationRule): Boolean {
+
+        val value = getProperty(validationRule.property)
+
+        if (value is String) {
+
+            if (value.startsWith(" ") || value.endsWith(" ")) {
+                validations[validationRule.propertyId].also {
+                    it?.value = "${validationRule.message} cannot start or end with space."
+                }
+                return false
+            }
+        }
+        validations[validationRule.propertyId].also {
+            it?.value = null
+        }
+        return true
+
     }
 
     //----------------------- for profile details person name validataion ----------

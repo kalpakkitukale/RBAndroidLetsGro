@@ -49,7 +49,13 @@
     <string name="unable_to_fetch_dependencie">Unable to fetch some dependencies. Kindly contact support!</string>
     <string name="no_profile_data_found">No profile data found</string>
     <string name="invalid_city_selected">Invalid city selected</string>
+
+    <!--Login with Classrooom plus START-->
     <string name="join_with_classroom">Join with Classroom</string>
+    <string name="email_user_name">Email Id/Username</string>
+    <string name="have_account_on_lets_gro">Do you have account on Lets gro?</string>
+    <string name="want_to_create_an_account">Do you want to create an account?</string>
+    <!--Login with Classrooom plus START-->
 
     <!-- Rahul Garg
         Payment START
@@ -87,6 +93,7 @@
     <string name="airpay_secret_key_release">UxvB7wBe8b739A4p</string>
 
     <string name="admission_form_transaction_custom_message">ADMISSION FORM %1$s %2$s</string>
+
     <!-- Rahul Garg
     Payment STOP
     -->

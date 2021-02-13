@@ -25,13 +25,6 @@ open class UserModel {
 
     var manager: Boolean = false
 
-//    var username   : String = ""       ": "vinay k",
-//    var userId     : String = ""   ": 2,
-//    var emailId    : String = ""   ": "vinay.k@ramanbyte.com",
-//    var isLoggedId : String = ""       ": "1",
-//    var fName      : String = ""   ": "vinay",
-//    var lName      : String = ""   ": "k",
-//    var mName      : String = ""   ": null,
-//    var userType   : String = ""       ": "STF",
-//    var isActive   : String = ""       ": "Y"
+    var classroomUserId: Int = 0
+
 }

@@ -22,4 +22,7 @@ abstract class UserDao : BaseDao<UserEntity> {
     @Query("UPDATE UserEntity SET loggedId='Y'")
     abstract fun updateCurrentUserStatus()
 
+    @Query("UPDATE UserEntity SET classroomUserId=:classroomUserId where userId=:userId")
+    abstract fun updateClassroomUserId(classroomUserId:Int,userId:Int)
+
 }

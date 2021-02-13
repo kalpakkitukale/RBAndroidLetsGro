@@ -12,8 +12,6 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.ramanbyte.view_model.factory.BaseViewModelFactory
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
@@ -35,11 +33,6 @@ abstract class BaseDialogFragment<layoutBinding : ViewDataBinding, VM : ViewMode
     lateinit var viewModel: VM
 
     private val viewModelFactory: BaseViewModelFactory by instance()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        //setStyle(DialogFragment.STYLE_NO_FRAME, 0)
-    }
 
     override fun onStart() {
         super.onStart()

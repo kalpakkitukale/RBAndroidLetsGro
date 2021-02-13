@@ -22,22 +22,23 @@ class SettingFragment : BaseFragment<FragmentSettingBinding, SettingViewModel>()
     override fun initiate() {
         layoutBinding.apply {
             settingviewModel = viewModel
-            AlertDialog(context!!, viewModel)
-            ProgressLoader(context!!, viewModel)
+            AlertDialog(requireContext(), viewModel)
+            ProgressLoader(requireContext(), viewModel)
         }
         setListener()
     }
 
     private fun setListener() {
-        viewModel?.apply {
-            clickOnLogoutLiveData?.observe(this@SettingFragment, Observer { click ->
+        viewModel.apply {
+            clickOnLogoutLiveData.observe(this@SettingFragment, Observer { click ->
                 if (click != null) {
                     if (click == true) {
-                        val intent = Intent(context!!, LoginActivity::class.java).apply {
+                        val intent = Intent(requireContext(), LoginActivity::class.java).apply {
                             flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                         }
                         startActivity(intent)
-                        clickOnLogoutLiveData?.value = false
+                        requireActivity().finish()
+                        clickOnLogoutLiveData.value = false
                     }
                 }
             })

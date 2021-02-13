@@ -22,14 +22,30 @@ interface LoginApiController {
     suspend fun forgotPassword(@Body forgetPasswordModel: ForgetPasswordModel): Response<String>
 
     @POST("ChangePassword")
-    suspend fun changePassword(@Body changePasswordModel: ChangePasswordModel):Response<String>
+    suspend fun changePassword(@Body changePasswordModel: ChangePasswordModel): Response<String>
 
     @PUT("UpdateStatus")
     suspend fun updatePledgeStatus(@Body pledgeStatusRequest: PledgeStatusRequest): Response<Int>
 
     @POST("InsertLogout/{userId}")
-    suspend fun insertLogout(@Body manageUserDeviceModel: ManageUserDeviceModel, @Path("userId") userId: Int): Response<Int>
+    suspend fun insertLogout(
+        @Body manageUserDeviceModel: ManageUserDeviceModel,
+        @Path("userId") userId: Int
+    ): Response<Int>
 
     @POST("UpdateLogout/{userId}")
-    suspend fun updateLogout(@Body manageUserDeviceModel: ManageUserDeviceModel, @Path("userId") userId: Int): Response<Int>
+    suspend fun updateLogout(
+        @Body manageUserDeviceModel: ManageUserDeviceModel,
+        @Path("userId") userId: Int
+    ): Response<Int>
+
+    @GET("GetUserDetails/{useRefId}")
+    suspend fun getUserDetails(@Path("useRefId") useRefId: Int): Response<UserModel>
+
+    @GET("InsertUserDetails/{useRefId}")//useRefId of classroom
+    suspend fun createAccountWithClassroom(@Path("useRefId") useRefId: Int): Response<UserModel>
+
+    @POST("UpdateLetsGrowUsed")
+    suspend fun updateLetsGroUser(@Body joinClassroomModel: JoinClassroomModel): Response<UserModel>
+
 }

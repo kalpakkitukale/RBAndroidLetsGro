@@ -7,6 +7,9 @@ import android.view.View
 import androidx.databinding.library.baseAdapters.BR
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.findNavController
+import androidx.work.Data
+import androidx.work.OneTimeWorkRequest
+import androidx.work.WorkManager
 import com.ramanbyte.BaseAppController
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseViewModel
@@ -19,6 +22,7 @@ import com.ramanbyte.emla.data_layer.repositories.RegistrationRepository
 import com.ramanbyte.emla.models.UserModel
 import com.ramanbyte.emla.models.request.LoginRequest
 import com.ramanbyte.emla.models.request.PledgeStatusRequest
+import com.ramanbyte.services.MangeUserDevice
 import com.ramanbyte.utilities.*
 import com.ramanbyte.validation.ObservableValidator
 import com.ramanbyte.validation.ValidationFlags
@@ -51,37 +55,49 @@ class LoginViewModel(var mContext: Context) : BaseViewModel(mContext) {
             addRule(
                 keyEmailId,
                 ValidationFlags.FIELD_REQUIRED,
+                BindingUtils.string(R.string.username_require)
+            )
+            addRule(
+                keyEmailId,
+                ValidationFlags.FIELD_CONTAINS_SPACE,
+                BindingUtils.string(R.string.invalid_username)
+            )
+            addRule(
+                keyPassword,
+                ValidationFlags.FIELD_REQUIRED,
+                BindingUtils.string(
+                    R.string.password_require
+                )
+            )
+            /**Vinay K
+             *as we are using username from classroom
+             * @since 05/02/2021
+             */
+            /*
+              addRule(
+                keyEmailId,
+                ValidationFlags.FIELD_REQUIRED,
                 BindingUtils.string(R.string.enter_emailId)
                 /*BindingUtils.string(
                     R.string.dynamic_required,
                     BindingUtils.string(R.string.emailId)
                 )*/
             )
-
             addRule(
                 keyEmailId,
                 ValidationFlags.FIELD_EMAIL,
                 BindingUtils.string(
                     R.string.invalid_email_id
                 )
-            )
-
-            addRule(
-                keyPassword,
-                ValidationFlags.FIELD_REQUIRED,
-                BindingUtils.string(
-                    R.string.required
-                )
-            )
+            )*/
         }
 
     val userModelLiveData = MutableLiveData<UserModel?>(null)
 
-    val forgotPasswordClick = MutableLiveData<Boolean?>(null)
 
     fun isUserActive(): Boolean = registrationRepository.isUserActive()
 
-    fun doLogin(view: View) {
+    fun doLogin(view: View,isFromCPPlus : String) {
         /*view.snack(BindingUtils.string(R.string.please_agree_the_instruction),
             Snackbar.LENGTH_LONG,{})*/
         if (loginRequestValidation.validateAll()) {
@@ -91,28 +107,29 @@ class LoginViewModel(var mContext: Context) : BaseViewModel(mContext) {
                 )
             ) {
                 val apiCallFunction: suspend () -> Unit = {
-                    val response = masterRepository.doLogin(userLoginRequestLiveData.value!!)
-                    if (response?.userType == KEY_STUDENT) {
-                        userModelLiveData.postValue(response)
-                    } else if (response?.userType == KEY_FACULTY) {
-                        userModelLiveData.postValue(response)
-                    } else {
-                        setAlertDialogResourceModelMutableLiveData(
-                            BindingUtils.string(R.string.not_valid_user),
-                            BindingUtils.drawable(R.drawable.ic_invalid_user)!!,
-                            true,
-                            BindingUtils.string(R.string.strOk), {
-                                isAlertDialogShown.postValue(false)
-                            }
-                        )
-                        isAlertDialogShown.postValue(true)
+                    val response = masterRepository.doLogin(userLoginRequestLiveData.value!!.apply {
+                        this.isFromCPPlus = isFromCPPlus
+                    })
+                    when (response?.userType) {
+                        KEY_STUDENT -> {
+                            userModelLiveData.postValue(response)
+                        }
+                        KEY_FACULTY -> {
+                            userModelLiveData.postValue(response)
+                        }
+                        else -> {
+                            setAlertDialogResourceModelMutableLiveData(
+                                BindingUtils.string(R.string.not_valid_user),
+                                BindingUtils.drawable(R.drawable.ic_invalid_user)!!,
+                                true,
+                                BindingUtils.string(R.string.strOk), {
+                                    isAlertDialogShown.postValue(false)
+                                }
+                            )
+                            isAlertDialogShown.postValue(true)
+                        }
                     }
                 }
-
-                val noDataFunction = {
-
-                }
-
                 invokeApiCall(apiCallFunction = apiCallFunction)
 
             } else {
@@ -123,10 +140,6 @@ class LoginViewModel(var mContext: Context) : BaseViewModel(mContext) {
 
     fun createAccount(view: View) {
         view.findNavController().navigate(R.id.action_loginFragment_to_registerAsFragment, null)
-    }
-
-    fun forgotPassword(view: View) {
-        forgotPasswordClick.value = true
     }
 
     fun googleLogIn(view: View) {
@@ -179,9 +192,21 @@ class LoginViewModel(var mContext: Context) : BaseViewModel(mContext) {
         }
     }
 
-    fun setToolbarTitle(visibility : Int,title: String){
+    fun setToolbarTitle(visibility: Int, title: String) {
         toolbarTitleLiveData.postValue(title)
         toolbarVisibilityLiveData.postValue(visibility)
     }
+
+
+    fun callWorkerToMangeUserDevice() {
+        val manageUserDeviceData = Data.Builder()
+            .putInt(KEY_LOGIN_LOGOUT_STATUS, 1)
+            .build()
+        val simpleRequest = OneTimeWorkRequest.Builder(MangeUserDevice::class.java)
+            .setInputData(manageUserDeviceData)
+            .build()
+        WorkManager.getInstance(mContext).enqueue(simpleRequest)
+    }
+
 
 }

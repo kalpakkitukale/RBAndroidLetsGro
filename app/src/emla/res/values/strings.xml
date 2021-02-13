@@ -19,7 +19,17 @@
     <string name="signup">Signup</string>
     <string name="forgot_password">Forgot Password?</string>
     <string name="log_in">Log in</string>
+
     <string name="log_in_with_classroom">Log in with Classroom</string>
+    <string name="username_require">Username/Email is required</string>
+    <string name="invalid_username">Enter a valid Username/Email</string>
+    <string name="password_require">Password is required</string>
+    <string name="create_account_confirmation">Are you sure want to create account?</string>
+    <string name="account_linked_successfully">Your classroom account is linked with the Let\'s gro Successfully.</string>
+    <string name="account_created_successfully">Your Let\'s Gro account is created Successfully.</string>
+    <string name="invalid_classroom_user">Classroom user details are invalid.</string>
+    <string name="classroom_lets_gro_unmatched">Your Classroom user account is Associated with different Let\'s gro account.</string>
+    <string name="getting_user_details">Getting user details, please wait.</string>
 
 
     <string name="allow_access_phone_storage">Allow to access the phone storage</string>
@@ -269,9 +279,9 @@ Content
     <string name="getting_reply_list">Please wait for a moment, we are bringing data for you…!</string>
     <string name="conversation_close_message">Are you sure, you want to close the recent conversation and ask new question?</string>
     <string name="conversation_close_loader_message">Closing the recent conversation.</string>
-    <string name="invalid_mobile">Not a valid Mobile Number...!</string>
-    <string name="invalid_email">Not a valid EmailID...!</string>
-    <string name="uploading_resume">Uploading resume...</string>
+    <string name="invalid_mobile">Not a valid Mobile Number…!</string>
+    <string name="invalid_email">Not a valid EmailID…!</string>
+    <string name="uploading_resume">Uploading resume…</string>
 
     <!--Favourite Video-->
     <string name="favourite_videos_unavailable">Favourite videos are not available yet!</string>

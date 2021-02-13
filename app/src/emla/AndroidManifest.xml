@@ -58,7 +58,9 @@
             tools:ignore="LockedOrientationActivity" />
         <activity android:name=".emla.ui.activities.CertificateViewerActivity" />
 
-        <activity android:name=".emla.ui.activities.JoinClassroomActivity">
+        <activity android:name=".emla.ui.activities.JoinClassroomActivity"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustResize|stateHidden">
             <intent-filter>
                 <action android:name="com.ramanbyte.emla.JOIN_WITH_CLASSROOM"/>
                 <category android:name="android.intent.category.DEFAULT"/>

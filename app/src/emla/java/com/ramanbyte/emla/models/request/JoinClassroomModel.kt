@@ -2,23 +2,19 @@ package com.ramanbyte.emla.models.request
 
 import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
-import com.google.gson.annotations.SerializedName
 import com.ramanbyte.BR
-import com.ramanbyte.utilities.KEY_N
 
 /**
- * @AddedBy Vinay Kumbhar <vinay.k@ramanbyte.com>
- * @since 14/04/2020
+ * @author Vinay Kumbhar <vinay.k@ramanbyte.com>
+ * @since 11/2/21
  */
+class JoinClassroomModel : BaseObservable() {
 
-class LoginRequest : BaseObservable() {
-
-    @SerializedName("username")
     @Bindable
-    var emailId: String = ""
+    var username: String = ""
         set(value) {
             field = value
-            notifyPropertyChanged(BR.emailId)
+            notifyPropertyChanged(BR.username)
         }
 
     @Bindable
@@ -28,5 +24,5 @@ class LoginRequest : BaseObservable() {
             notifyPropertyChanged(BR.password)
         }
 
-    var isFromCPPlus: String = KEY_N
+    var userId: Int = 0
 }

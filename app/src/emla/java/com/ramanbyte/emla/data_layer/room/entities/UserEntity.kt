@@ -24,4 +24,5 @@ class UserEntity {
     var loggedId = "N"
     var manager = false
     var userType = ""
+    var classroomUserId: Int = 0
 }
