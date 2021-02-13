@@ -1,20 +1,13 @@
 package com.ramanbyte.emla.data_layer.repositories
 
 import android.content.Context
-import androidx.databinding.ObservableField
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.paging.LivePagedListBuilder
-import androidx.paging.PagedList
 import com.ramanbyte.data_layer.base.BaseRepository
-import com.ramanbyte.data_layer.pagination.PaginationResponseHandler
 import com.ramanbyte.emla.data_layer.network.api_layer.TransactionApiController
-import com.ramanbyte.emla.data_layer.pagination.PaginationDataSourceFactory
 import com.ramanbyte.emla.data_layer.room.entities.UserEntity
+import com.ramanbyte.emla.models.TransactionHistoryModel
 import com.ramanbyte.emla.models.CoursesModel
 import com.ramanbyte.emla.models.UserModel
 import com.ramanbyte.emla.models.request.CartRequestModel
-import com.ramanbyte.emla.models.request.CoursesRequest
 import com.ramanbyte.emla.models.request.InsertTransactionRequestModel
 import com.ramanbyte.emla.models.response.CartResponseModel
 import com.ramanbyte.utilities.AppLog
@@ -26,13 +19,15 @@ import org.kodein.di.generic.instance
 class TransactionRepository(val mContext: Context) : BaseRepository(mContext) {
 
     private val transactionApiController: TransactionApiController by instance()
-
     fun getCurrentUser(): UserModel? {
         return applicationDatabase.getUserDao().getCurrentUser()?.replicate<UserEntity, UserModel>()
     }
 
-    suspend fun insertTransaction(insertTransactionRequestModel: InsertTransactionRequestModel): Int {
-        val loginResponseModel = applicationDatabase?.getUserDao().getCurrentUser()
+    suspend fun insertTransaction(
+        insertTransactionRequestModel: InsertTransactionRequestModel,
+        isSuccessTransaction: Boolean
+    ): Int {
+        val loginResponseModel = applicationDatabase.getUserDao().getCurrentUser()
 
         val deviceDetails = ""
 
@@ -79,6 +74,13 @@ class TransactionRepository(val mContext: Context) : BaseRepository(mContext) {
         val userId = getCurrentUser()?.userId ?: 0
         return apiRequest {
             transactionApiController.deleteCart(userId, cartItemId)
+        }
+    }
+
+    suspend fun getAllTransactionHistory(): List<TransactionHistoryModel>? {
+        val userId = getCurrentUser()?.userId ?: 0
+        return apiRequest {
+            transactionApiController.getAllTransactionHistory(userId)
         }
     }
 

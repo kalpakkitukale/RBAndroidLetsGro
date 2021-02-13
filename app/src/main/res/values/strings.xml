@@ -59,17 +59,10 @@
     </string>
     <string name="by_paying_you_accept_to_the_terms_and_conditions">By Paying You Accept to the Terms and Conditions</string>
     <string name="proceed_to_pay">Proceed to Pay</string>
-    <string name="view_invoice">View Invoice</string>
-    <string name="lbl_continue">Continue</string>
     <string name="fees_amount">Fees Amount</string>
 
     <string name="select_payment_gateway">Kindly select the payment gateway</string>
-
-    <string name="payment_successful_message">Your Payment amount %1$s was successful. Please click on "Continue" to proceed.</string>
-    <string name="payment_fail_message">Your Payment amount %1$s was fail. Please "Try Again" later.</string>
     <string name="rupee_symbol">\u20B9 </string>
-    <string name="payment_successful">Payment successful</string>
-    <string name="payment_fail">Payment failed</string>
 
     <string name="payU_salt_debug">65GdodrX</string>
     <string name="payU_salt_release">DuK6IJVP</string>
@@ -85,7 +78,7 @@
     <string name="airpay_secret_key_debug">KVnqNAjbh8wKE6wM</string>
     <string name="airpay_secret_key_release">UxvB7wBe8b739A4p</string>
 
-    <string name="admission_form_transaction_custom_message">ADMISSION FORM %1$s %2$s</string>
+    <string name="admission_form_transaction_custom_message">Courses Purchased %1$s %2$s</string>
     <!-- Rahul Garg
     Payment STOP
     -->

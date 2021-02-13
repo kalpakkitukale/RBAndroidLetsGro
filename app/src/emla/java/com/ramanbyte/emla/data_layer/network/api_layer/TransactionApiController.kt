@@ -1,6 +1,6 @@
 package com.ramanbyte.emla.data_layer.network.api_layer
 
-import com.ramanbyte.emla.models.CoursesModel
+import com.ramanbyte.emla.models.TransactionHistoryModel
 import com.ramanbyte.emla.models.request.CartRequestModel
 import com.ramanbyte.emla.models.request.CoursesRequest
 import com.ramanbyte.emla.models.request.InsertTransactionRequestModel
@@ -16,6 +16,9 @@ interface TransactionApiController {
 
     @GET("GetAllCart/{UserId}")
     suspend fun getCartList(@Path("UserId") UserId: Int): Response<ArrayList<CartResponseModel>>
+
+    @GET("GetAllTransactionDetails/{UserId}")
+    suspend fun getAllTransactionHistory(@Path("UserId") UserId: Int): Response<ArrayList<TransactionHistoryModel>>
 
     @POST("AddCart")
     suspend fun insertCart(@Body cartRequestModel: CartRequestModel): Response<Int>

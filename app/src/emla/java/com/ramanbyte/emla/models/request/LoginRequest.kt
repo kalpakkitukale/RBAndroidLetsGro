@@ -26,4 +26,6 @@ class LoginRequest : BaseObservable() {
             field = value
             notifyPropertyChanged(BR.password)
         }
+
+    var isFromCPPlus: String = "N"
 }

@@ -37,7 +37,6 @@ import org.kodein.di.generic.bind
 import org.kodein.di.generic.instance
 import org.kodein.di.generic.singleton
 import java.util.*
-import kotlin.collections.ArrayList
 
 class PaymentSummaryActivity : AppCompatActivity(), KodeinAware {
 
@@ -53,6 +52,8 @@ class PaymentSummaryActivity : AppCompatActivity(), KodeinAware {
     private var paymentSummaryViewModel: PaymentSummaryViewModel? = null
     private val AIR_PAY_REQUEST_CODE = 0x10
     private var mContext: Context? = null
+    private var paymentType: String = ""
+    private var transactionRefId: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -103,7 +104,8 @@ class PaymentSummaryActivity : AppCompatActivity(), KodeinAware {
 
             intent?.extras?.apply {
                 amountLiveData.value = getString(keyAmount) ?: "0"
-                paymentStepIntegration = getString(keyPaymentStepIntegration) ?: ""
+                cartListData =
+                    getParcelableArrayList<CartResponseModel>(keyCartData) as ArrayList<CartResponseModel>
 
             }
         }
@@ -137,6 +139,7 @@ class PaymentSummaryActivity : AppCompatActivity(), KodeinAware {
 
                 if (it != 0) {
                     AppController.setEnterPageAnimation(this@PaymentSummaryActivity)
+                    AppLog.infoLog("transactionResponseIdLiveData ----    $it")
                     if (it > 0) {
                         // payment success
                         startActivityForResult(
@@ -144,24 +147,20 @@ class PaymentSummaryActivity : AppCompatActivity(), KodeinAware {
                                 this@PaymentSummaryActivity,
                                 KEY_SUCCESS_TRANSACTION_STATUS,
                                 it.toString(),
-                                paymentStepIntegration,
-                                amountLiveData.value.toString()
-                                /*campusWiseProgramModel.apply {
-                                    paymentAlreadyForProgram = true
-                                }*/
+                                amountLiveData.value.toString(),
+                                paymentType, transactionRefId
                             ), PAYMENT_SUCCESSFUL_REQUEST_CODE
                         )
 
                     } else {
                         // fail
-                        PaymentStatusActivity.openPaymentStatusActivity(
-                            this@PaymentSummaryActivity,
-                            KEY_FAIL_TRANSACTION_STATUS,
-                            "",
-                            paymentStepIntegration,
-                            amountLiveData.value.toString()/*, campusWiseProgramModel.apply {
-                                paymentAlreadyForProgram = false
-                            }*/
+                        startActivity(
+                            PaymentStatusActivity.openPaymentStatusActivity(
+                                this@PaymentSummaryActivity,
+                                KEY_FAIL_TRANSACTION_STATUS,
+                                "",
+                                amountLiveData.value.toString(), paymentType, transactionRefId
+                            )
                         )
                     }
                     finish()
@@ -236,10 +235,12 @@ class PaymentSummaryActivity : AppCompatActivity(), KodeinAware {
                 paymentSummaryViewModel?.addTransaction(
                     initiateTransaction = false,
                     showLoader = true,
-                    terminateTransaction = true
+                    terminateTransaction = true,
+                    cartList = paymentSummaryViewModel!!.cartListData, isSuccessTransaction = false
                 )
             }
             else -> {
+                var isPaymentSuccessFul = true
                 when (requestCode) {
                     PayuConstants.PAYU_REQUEST_CODE -> {
                         paymentSummaryViewModel?.insertTransactionRequestModel?.apply {
@@ -262,22 +263,27 @@ class PaymentSummaryActivity : AppCompatActivity(), KodeinAware {
                                                     "emi" -> keyEmi
                                                     else -> ""
                                                 }
+                                                paymentType = paymentMethod
                                                 transactionStatus =
                                                     KEY_SUCCESS
-                                                tran_Id = payUObject.getString("txnid")
+                                                transId = payUObject.getString("txnid").toLong()
+                                                transactionRefId = payUObject.getString("txnid")
                                             } else {
                                                 // payment fail
                                                 transactionStatus =
                                                     KEY_FAIL_TRANSACTION_STATUS
+                                                isPaymentSuccessFul = false
                                             }
                                         } else {
                                             // payment fail
                                             transactionStatus =
                                                 KEY_FAIL_TRANSACTION_STATUS
+                                            isPaymentSuccessFul = false
                                         }
                                     } else {
                                         // payment fail
                                         transactionStatus = KEY_FAIL_TRANSACTION_STATUS
+                                        isPaymentSuccessFul = false
                                     }
 
 
@@ -286,12 +292,14 @@ class PaymentSummaryActivity : AppCompatActivity(), KodeinAware {
                                     AppLog.errorLog(e.message, e)
                                     transactionStatus =
                                         KEY_FAIL_TRANSACTION_STATUS
+                                    isPaymentSuccessFul = false
                                 }
 
                             } else {
                                 // payment fail
                                 transactionStatus =
                                     KEY_FAIL_TRANSACTION_STATUS
+                                isPaymentSuccessFul = false
                             }
                         }
                     }
@@ -301,124 +309,63 @@ class PaymentSummaryActivity : AppCompatActivity(), KodeinAware {
                             if (data != null) {
                                 val transactionList =
                                     data.extras!!.getSerializable("DATA") as ArrayList<Transaction>
+                                AppLog.infoLog("transactionList --------------     $transactionList")
                                 if (transactionList.size > 0) {
                                     transactionList[0].apply {
                                         if (!status.isNullOrEmpty() && status == "200"
                                             && !statusmsg.isNullOrEmpty() && statusmsg.toLowerCase() == "success"
                                         ) {
-                                            flag = status
                                             transactionStatus =
                                                 KEY_SUCCESS_TRANSACTION_STATUS
-                                            paymentMethod = if (chmod != null) { // payment method
-                                                AppLog.infoLog("CHMOD -> =$chmod")
-                                                when (chmod) {
-                                                    "pg" -> keyCard
-                                                    "nb" -> keyInternetBanking
-                                                    "upi" -> keyUpi
-                                                    else -> KEY_NA
-                                                }
-                                            } else {
-                                                KEY_NA
-                                            }
-
-                                            if (transactionid != null) {
-                                                AppLog.infoLog("TXN ID -> =$transactionid")
-                                                tran_Id = transactionid
-                                            }
                                         } else {
-                                            flag = status
                                             transactionStatus =
                                                 KEY_FAIL_TRANSACTION_STATUS
+                                            isPaymentSuccessFul = false
                                         }
-                                        /*if (status != null) {
-                                                AppLog.infoLog("STATUS -> =$status")
+                                        flag = status
+                                        paymentMethod = if (chmod != null) { // payment method
+                                            AppLog.infoLog("CHMOD -> =$chmod")
+                                            when (chmod) {
+                                                "pg" -> keyCard
+                                                "nb" -> keyInternetBanking
+                                                "upi" -> keyUpi
+                                                else -> KEY_NA
                                             }
-                                            if (merchantkey != null) {
-                                                AppLog.infoLog("MERCHANT KEY -> =$merchantkey")
-                                            }
-                                            if (merchantposttype != null) {
-                                                AppLog.infoLog("MERCHANT POST TYPE =$merchantposttype")
-                                            }
-                                            if (statusmsg != null) {
-                                                AppLog.infoLog("STATUS MSG -> =$statusmsg") //  success or fail
-                                            }
-                                            if (transactionamt != null) {
-                                                AppLog.infoLog("TRANSACTION AMT -> =$transactionamt")
-                                            }
-                                            if (txN_MODE != null) {
-                                                AppLog.infoLog("TXN MODE -> =$txN_MODE")
-                                            }
-                                            if (merchanttransactionid != null) {
-                                                AppLog.infoLog("MERCHANT_TXN_ID -> =$merchanttransactionid") // order id
-                                            }
-                                            if (securehash != null) {
-                                                AppLog.infoLog("SECURE HASH -> =$securehash")
-                                            }
-                                            if (customvar != null) {
-                                                AppLog.infoLog("CUSTOMVAR -> =$customvar")
-                                            }
-                                            if (transactionstatus != null) {
-                                                AppLog.infoLog("TXN STATUS -> =$transactionstatus")
-                                            }
-                                            if (txN_DATE_TIME != null) {
-                                                AppLog.infoLog("TXN_DATETIME -> =$txN_DATE_TIME")
-                                            }
-                                            if (txN_CURRENCY_CODE != null) {
-                                                AppLog.infoLog("TXN_CURRENCY_CODE -> =" + txN_CURRENCY_CODE)
-                                            }
-                                            if (transactionvariant != null) {
-                                                AppLog.infoLog("TRANSACTIONVARIANT -> =" + transactionvariant)
-                                            }
+                                        } else {
+                                            KEY_NA
+                                        }
+                                        paymentType = paymentMethod
 
-                                            if (bankname != null) {
-                                                AppLog.infoLog("BANKNAME -> =" + bankname)
-                                            }
-                                            if (cardissuer != null) {
-                                                AppLog.infoLog("CARDISSUER -> =" + cardissuer)
-                                            }
-                                            if (fullname != null) {
-                                                AppLog.infoLog("FULLNAME -> =" + fullname)
-                                            }
-                                            if (email != null) {
-                                                AppLog.infoLog("EMAIL -> =" + email)
-                                            }
-                                            if (contactno != null) {
-                                                AppLog.infoLog("CONTACTNO -> =" + contactno)
-                                            }
-                                            if (merchanT_NAME != null) {
-                                                AppLog.infoLog("MERCHANT_NAME -> =" + merchanT_NAME)
-                                            }
-                                            if (settlemenT_DATE != null) {
-                                                AppLog.infoLog("SETTLEMENT_DATE -> =" + settlemenT_DATE)
-                                            }
-                                            if (surcharge != null) {
-                                                AppLog.infoLog("SURCHARGE -> =" + surcharge)
-                                            }
-                                            if (billedamount != null) {
-                                                AppLog.infoLog("BILLEDAMOUNT -> =" + billedamount)
-                                            }
-                                            if (isrisk != null) {
-                                                AppLog.infoLog("ISRISK -> =" + isrisk)
-                                            }*/
+                                        if (transactionid != null) {
+                                            AppLog.infoLog("TXN ID -> =$transactionid")
+                                            transId = transactionid.toLong()
+                                            transactionRefId = transactionid
+                                        }
 
                                     }
                                 } else {
                                     // payment fail
                                     transactionStatus =
                                         KEY_FAIL_TRANSACTION_STATUS
+                                    isPaymentSuccessFul = false
                                 }
                             } else {
                                 // payment fail
                                 transactionStatus =
                                     KEY_FAIL_TRANSACTION_STATUS
+                                isPaymentSuccessFul = false
                             }
                         }
-
                     }
                 }
+                paymentSummaryViewModel?.addTransaction(
+                    initiateTransaction = false,
+                    showLoader = true,
+                    terminateTransaction = false,
+                    cartList = paymentSummaryViewModel!!.cartListData, isPaymentSuccessFul
+                )
             }
         }
-
 
         /*
         * This code is temporary until DescribedRadioButton get completed

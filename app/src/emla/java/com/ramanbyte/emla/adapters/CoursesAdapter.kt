@@ -73,6 +73,8 @@ class CoursesAdapter(private val displayMetrics: DisplayMetrics, var myCourse:In
                 }
             }
 
+            courseImageUrl = getS3DynamicURL(courseImage ?: KEY_BLANK, context!!)
+//                AppS3Client.createInstance(context!!).getFileAccessUrl(courseImage ?: KEY_BLANK)
         })
     }
 

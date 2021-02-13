@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.ramanbyte.emla.view_model.TransactionHistoryViewModel" />
+
+        <variable
+            name="transactionHistoryModel"
+            type="com.ramanbyte.emla.models.TransactionHistoryModel" />
+
+    </data>
+
+    <androidx.cardview.widget.CardView
+        style="@style/customCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/dp_5">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/lblPurchaseRef"
+                style="@style/TextViewTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text='@{@string/purchase_ref + ":" + transactionHistoryModel.transId}'
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/lblPurchaseDetail"
+                style="@style/TextViewDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/purchase_details"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lblPurchaseRef" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/lblPurchaseDate"
+                style="@style/TextViewValOfLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{transactionHistoryModel.transDate}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lblPurchaseDetail" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/lblTotalAmount"
+                style="@style/TextViewValOfLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text='@{@string/rupee_symbol + ":" + transactionHistoryModel.amountPaid}'
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lblPurchaseDate" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/lblPaymentType"
+                style="@style/TextViewValOfLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{transactionHistoryModel.paymentMethod}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lblTotalAmount" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</layout>
+

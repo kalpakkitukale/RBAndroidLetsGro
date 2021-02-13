@@ -13,7 +13,6 @@
             type="Integer" />
 
 
-
         <variable
             name="coursesViewModel"
             type="com.ramanbyte.emla.view_model.CoursesViewModel" />
@@ -83,6 +82,7 @@
                     android:layout_marginEnd="@dimen/dp_5"
                     android:padding="@dimen/dp_3"
                     android:visibility="visible"
+                    app:srcCompat="@drawable/ic_live"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@id/tvTopicDescription" />
 
@@ -158,7 +158,7 @@
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toEndOf="@+id/ivChapterList"
                     app:layout_constraintTop_toTopOf="@+id/ivCoursesSyllabus"
-                    app:srcCompat="@drawable/ic_all_content" />
+                    app:srcCompat="@drawable/ic_performance" />
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/ivCart"
@@ -173,7 +173,7 @@
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toEndOf="@+id/ivPerformance"
                     app:layout_constraintTop_toTopOf="@+id/ivCoursesSyllabus"
-                    app:srcCompat="@drawable/ic_all_content" />
+                    app:srcCompat="@drawable/ic_cart" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvLabelCoursesContent"
@@ -214,8 +214,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_2"
-                    android:text="Performance"
                     android:gravity="center_horizontal"
+                    android:text="Performance"
                     android:textSize="@dimen/sp_10"
                     app:layout_constraintEnd_toEndOf="@+id/ivPerformance"
                     app:layout_constraintStart_toStartOf="@+id/ivPerformance"

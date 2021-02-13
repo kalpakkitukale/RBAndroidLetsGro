@@ -16,10 +16,12 @@ import com.ramanbyte.base.BaseViewModel
 import com.ramanbyte.data_layer.CoroutineUtils
 import com.ramanbyte.emla.data_layer.network.exception.ApiException
 import com.ramanbyte.emla.data_layer.network.exception.NoInternetException
-import com.ramanbyte.emla.data_layer.repositories.TransactionRepository
 import com.ramanbyte.emla.data_layer.repositories.MasterRepository
+import com.ramanbyte.emla.data_layer.repositories.TransactionRepository
 import com.ramanbyte.emla.models.PayuGatewayModel
+import com.ramanbyte.emla.models.request.CourseFeeRequestModel
 import com.ramanbyte.emla.models.request.InsertTransactionRequestModel
+import com.ramanbyte.emla.models.response.CartResponseModel
 import com.ramanbyte.utilities.*
 import com.ramanbyte.utilities.StaticMethodUtilitiesKtx.getRandomAlphaNumericString
 import org.kodein.di.generic.instance
@@ -45,7 +47,8 @@ class PaymentSummaryViewModel(mContext: Context) : BaseViewModel(mContext = mCon
     var paymentResponse: MutableLiveData<String> = MutableLiveData()
 
     var amountLiveData = MutableLiveData<String>("0.0")
-    var paymentStepIntegration = ""
+    var cartListData = ArrayList<CartResponseModel>()
+    var courseFeesList: ArrayList<CourseFeeRequestModel>? = ArrayList()
 
     var paymentOptionErrorLiveData = MutableLiveData<Boolean>(false)
     var transactionResponseIdLiveData = MutableLiveData<Int>(0)
@@ -61,28 +64,21 @@ class PaymentSummaryViewModel(mContext: Context) : BaseViewModel(mContext = mCon
     }
 
 
-
     @SuppressLint("DefaultLocale")
     fun addTransaction(
         initiateTransaction: Boolean,
         showLoader: Boolean,
-        terminateTransaction: Boolean
+        terminateTransaction: Boolean,
+        cartList: ArrayList<CartResponseModel>, isSuccessTransaction: Boolean
     ) {
-        /*CoroutineUtils.main {
+        CoroutineUtils.main {
             try {
                 val userName =
                     "${loggedInUserModel?.firstName ?: ""} ${loggedInUserModel?.lastName ?: ""}"
-                loaderMessageLiveData.set(BindingUtils.string(R.string.please_wait))
+                loaderMessageLiveData.set(BindingUtils.string(R.string.pleaseWait))
                 isLoaderShowingLiveData.postValue(showLoader)
                 insertTransactionRequestModel.apply {
-                    app_Id =
-                        this@PaymentSummaryViewModel.programId // app id as program id. No application ID
-                    campusId = this@PaymentSummaryViewModel.campusId
-                    programId = this@PaymentSummaryViewModel.programId
-                    programName = this@PaymentSummaryViewModel.programNameLiveData.value.toString()
-                    amount_Paid = this@PaymentSummaryViewModel.amountLiveData.value.toString()
-                    admissionYearId =
-                        this@PaymentSummaryViewModel.admissionYearLiveData.value?.toInt() ?: 0
+                    amountPaid = amountLiveData.value!!
                     if (initiateTransaction) {
                         transactionStatus = KEY_PENDING_TRANSACTION_STATUS
                         paymentGateway = KEY_BLANK
@@ -90,18 +86,30 @@ class PaymentSummaryViewModel(mContext: Context) : BaseViewModel(mContext = mCon
                             DATE_TIME_SECONDS_PATTERN
                         )!!
                     }
-                    paymentStepIntegration = this@PaymentSummaryViewModel.paymentStepIntegration
-                    studentName = userName
-
-                    emailId = loggedInUserModel?.emailId ?: ""
                     paymentDescription = BindingUtils.string(
                         R.string.admission_form_transaction_custom_message,
                         userName.toUpperCase(),
                         this@PaymentSummaryViewModel.amountLiveData.value.toString().toUpperCase()
                     )
+                    courseFeesList = ArrayList()
+                    for (cart in cartList) {
+                        val courseFeeRequestModel = CourseFeeRequestModel()
+                        courseFeeRequestModel.apply {
+                            userId = loggedInUserModel?.userId!!
+                            paymentId = 0
+                            courseDetailsId = cart.courseDetailsId!!
+                            courseFeeStructureId = cart.courseFeeStructureId!!
+                            id = 0
+                        }
+                        courseFeesList!!.add(courseFeeRequestModel)
+                    }
+
+                    fees = courseFeesList!!
                 }
+
+
                 val id = transactionRepository.insertTransaction(
-                    insertTransactionRequestModel
+                    insertTransactionRequestModel, isSuccessTransaction
                 )
 
                 isLoaderShowingLiveData.postValue(false)
@@ -120,58 +128,56 @@ class PaymentSummaryViewModel(mContext: Context) : BaseViewModel(mContext = mCon
                         //payment success. Redirect to Success page
                         transactionResponseIdLiveData.postValue(id)
                     }
+                } else {
+                    //payment initiate failed show failed dialog
+                    transactionResponseIdLiveData.postValue(-1)
                 }
 
-
             } catch (e: ApiException) {
-                AppLog.errorLog(e.message.toString())
                 e.printStackTrace()
+                AppLog.errorLog(e.message, e)
                 isLoaderShowingLiveData.postValue(false)
-
-                //Showing Alert dialog for api response
-                      setAlertDialogResourceModelMutableLiveData(
-                          e.message.toString(),
-                          BindingUtils.drawable(R.drawable.ic_something_went_wrong)!!,
-                          true,
-                          BindingUtils.string(R.string.strOk), {
-                              isAlertDialogShown.postValue(false)
-                          })
-
+                setAlertDialogResourceModelMutableLiveData(
+                    e.message.toString(),
+                    BindingUtils.drawable(
+                        R.drawable.something_went_wrong
+                    )!!,
+                    true,
+                    BindingUtils.string(R.string.strOk), {
+                        isAlertDialogShown.postValue(false)
+                    }
+                )
                 isAlertDialogShown.postValue(true)
             } catch (e: NoInternetException) {
-                AppLog.errorLog(e.message.toString())
                 e.printStackTrace()
+                AppLog.errorLog(e.message, e)
                 isLoaderShowingLiveData.postValue(false)
-
-                //Showing Alert dialog for api response
-                   setAlertDialogResourceModelMutableLiveData(
-                       e.message.toString(),
-                       BindingUtils.drawable(R.drawable.ic_no_internet)!!,
-                       true,
-                       BindingUtils.string(R.string.strOk), {
-                           isAlertDialogShown.postValue(false)
-                       })
+                setAlertDialogResourceModelMutableLiveData(
+                    BindingUtils.string(R.string.no_internet_message),
+                    BindingUtils.drawable(R.drawable.ic_no_internet)!!,
+                    false,
+                    BindingUtils.string(R.string.tryAgain), {
+                        isAlertDialogShown.postValue(false)
+                        addTransaction(
+                            initiateTransaction,
+                            showLoader,
+                            terminateTransaction,
+                            cartList, isSuccessTransaction
+                        )
+                    },
+                    BindingUtils.string(R.string.no), {
+                        isAlertDialogShown.postValue(false)
+                    }
+                )
                 isAlertDialogShown.postValue(true)
             } catch (e: Exception) {
-                AppLog.errorLog(e.message.toString())
                 e.printStackTrace()
+                AppLog.errorLog(e.message, e)
                 isLoaderShowingLiveData.postValue(false)
-
-                   //Showing Alert dialog for api response
-                   setAlertDialogResourceModelMutableLiveData(
-                       e.message.toString(),
-                       BindingUtils.drawable(R.drawable.ic_something_went_wrong)!!,
-                       true,
-                       BindingUtils.string(R.string.strOk), {
-                           isAlertDialogShown.postValue(false)
-                       })
-
-                   isAlertDialogShown.postValue(true)
-
-                isAlertDialogShown.postValue(true)
             }
-        }*/
+        }
     }
+
 
     fun onPaymentProceed() {
         try {
@@ -182,7 +188,8 @@ class PaymentSummaryViewModel(mContext: Context) : BaseViewModel(mContext = mCon
                 addTransaction(
                     initiateTransaction = true,
                     showLoader = false,
-                    terminateTransaction = false
+                    terminateTransaction = false,
+                    cartList = cartListData, isSuccessTransaction = true
                 )
             } else {
                 paymentOptionErrorLiveData.value = true
@@ -194,7 +201,7 @@ class PaymentSummaryViewModel(mContext: Context) : BaseViewModel(mContext = mCon
             setAlertDialogResourceModelMutableLiveData(
                 e.message.toString(),
                 BindingUtils.drawable(R.drawable.ic_no_internet)!!,
-                true,BindingUtils.string(R.string.strOk),
+                true, BindingUtils.string(R.string.strOk),
                 positiveButtonClickFunctionality = {
                     isAlertDialogShown.postValue(false)
                 }
@@ -473,8 +480,10 @@ class PaymentSummaryViewModel(mContext: Context) : BaseViewModel(mContext = mCon
             key = merchantKey
             amount = amountLiveData.value ?: "0.0" // need to set final course fee
             firstName =
-                "${loggedInUserModel?.firstName ?: ""} ${loggedInUserModel?.lastName
-                    ?: ""}" // student name
+                "${loggedInUserModel?.firstName ?: ""} ${
+                    loggedInUserModel?.lastName
+                        ?: ""
+                }" // student name
             productInfo =
                 BindingUtils.string(
                     R.string.admission_form_transaction_custom_message,
@@ -486,7 +495,7 @@ class PaymentSummaryViewModel(mContext: Context) : BaseViewModel(mContext = mCon
             email = loggedInUserModel?.emailId // student email
             //using dummy phone numberr
             phone = "1234567890"
-         //   phone = loggedInUserModel?.userMobileNo
+            //   phone = loggedInUserModel?.userMobileNo
             /*  Transaction Id should be kept unique for each transaction. */
             txnId = "" + System.currentTimeMillis()
 

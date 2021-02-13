@@ -251,10 +251,10 @@
     <!--created by rahul garg for payment 1 feb 2021-->
 
     <style name="TextViewDescription">
-        <item name="android:textAppearance">@style/AppTheme.Font.Black</item>
+        <item name="android:textAppearance">@style/AppTheme.Font.Light</item>
         <item name="android:textSize">@dimen/sp_12</item>
-        <item name="android:drawablePadding">@dimen/dp_5</item>
         <item name="android:textColor">@color/colorTextNavyBlueInLightNWhiteInDark</item>
+        <item name="android:drawablePadding">@dimen/dp_5</item>
     </style>
 
     <style name="CustomRadioButton">
@@ -267,10 +267,21 @@
     </style>
 
     <style name="TextViewLabel">
-        <item name="android:textAppearance">@style/AppTheme.Font</item>
-        <item name="android:textSize">@dimen/sp_14</item>
+        <item name="android:textAppearance">@style/AppTheme.Font.Light</item>
+        <item name="android:textSize">@dimen/sp_11</item>
         <item name="android:textColor">@color/colorTextNavyBlueInLightNWhiteInDark</item>
         <item name="android:drawablePadding">@dimen/dp_5</item>
+    </style>
+
+    <style name="TextViewValOfLabel">
+        <item name="android:textAppearance">@style/AppTheme.Font.Medium</item>
+        <item name="android:textSize">@dimen/sp_12</item>
+        <item name="android:textColor">@color/colorTextNavyBlueInLightNWhiteInDark</item>
+        <item name="android:drawablePadding">@dimen/dp_5</item>
+    </style>
+
+    <style name="ImageViewOrIconWhereClickIsPerformed">
+        <item name="android:padding">@dimen/dp_5</item>
     </style>
 
     <style name="CustomCapsuleButtonFilled">
@@ -314,8 +325,8 @@
     </style>
 
     <style name="TextViewTitle">
-        <item name="android:textAppearance">@style/AppTheme.Font</item>
-        <item name="android:textSize">@dimen/sp_16</item>
+        <item name="android:textAppearance">@style/AppTheme.Font.Medium</item>
+        <item name="android:textSize">@dimen/sp_14</item>
         <item name="android:textColor">@color/colorTextNavyBlueInLightNWhiteInDark</item>
         <item name="android:drawablePadding">@dimen/dp_5</item>
     </style>

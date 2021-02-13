@@ -109,7 +109,7 @@ abstract class BaseViewModel(
         visibilityMessageLiveData.postValue(message)
     }
 
-    fun backPressed(view:View){
+    fun backPressed(view: View) {
         view.findNavController().navigateUp()
     }
 
@@ -190,6 +190,7 @@ abstract class BaseViewModel(
 
         }
     }
+
     fun invokeApiCall(apiCallFunction: suspend () -> Unit) {
         invokeApiCall(true, apiCallFunction = apiCallFunction)
     }
@@ -266,7 +267,7 @@ abstract class BaseViewModel(
                     View.GONE
                 )
                 //noDataFunction.invoke()
-            } catch (e : java.lang.reflect.UndeclaredThrowableException){
+            } catch (e: java.lang.reflect.UndeclaredThrowableException) {
 
             }
 
@@ -277,13 +278,9 @@ abstract class BaseViewModel(
     * */
 
     suspend fun coroutineToggleLoader(loaderMessage: String = BindingUtils.string(R.string.str_loading)) {
-
         withContext(Dispatchers.Main) {
-
             toggleLoader(loaderMessage)
-
         }
-
     }
 
     fun toggleLoader(loaderMessage: String = BindingUtils.string(R.string.str_loading)) {
@@ -291,8 +288,8 @@ abstract class BaseViewModel(
         loaderMessageLiveData.set(loaderMessage)
 
         val loaderStatus = isLoaderShowingLiveData.value!!
-
-        isLoaderShowingLiveData.value = !loaderStatus
+        isLoaderShowingLiveData.postValue(!loaderStatus)
+//        isLoaderShowingLiveData.value = !loaderStatus
 
     }
 }
