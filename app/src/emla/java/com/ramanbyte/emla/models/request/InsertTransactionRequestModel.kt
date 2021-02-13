@@ -21,6 +21,10 @@ class InsertTransactionRequestModel {
     var transactionStatus: String = KEY_BLANK
     var flag: String = KEY_BLANK
     var isMailSent: Boolean = DEL_STATUS1
+    var added_By: Int = 0
+    var user_Id: Int = 0
+    var registrationId: Int = 0
+    var clientName = ""
 
     @SerializedName("createdBy")
     var created_By: Int = 0

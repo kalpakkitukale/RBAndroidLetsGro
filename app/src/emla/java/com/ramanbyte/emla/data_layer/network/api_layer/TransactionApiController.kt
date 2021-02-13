@@ -1,5 +1,6 @@
 package com.ramanbyte.emla.data_layer.network.api_layer
 
+import com.ramanbyte.emla.models.CoursesModel
 import com.ramanbyte.emla.models.TransactionHistoryModel
 import com.ramanbyte.emla.models.request.CartRequestModel
 import com.ramanbyte.emla.models.request.CoursesRequest
