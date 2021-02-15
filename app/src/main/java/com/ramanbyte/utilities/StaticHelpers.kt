@@ -122,6 +122,7 @@ const val KEY_LOGIN_PASSWORD = "password"
 
 const val APP_STATUS = "APP"
 const val DEL_STATUS = "N"
+const val DEL_STATUS1 = false
 const val PASSWORD_SECURITY_STATUS = "passwordSecurityStatus"
 const val IS_ACTIVE_USER = "Y"
 const val PASSWORD_SECURITY_QUESTION_STATUS = "Y"
@@ -158,7 +159,7 @@ const val REMOVE_PHOTO = 2
 const val PATH_SEPARATOR = "/"
 
 // payment codes
-val PAYMENT_SUCCESSFUL_REQUEST_CODE = 700
+const val PAYMENT_SUCCESSFUL_REQUEST_CODE = 700
 
 
 /**
@@ -320,7 +321,7 @@ fun getDeviceVersion(): String {
     return BindingUtils.string(R.string.android) + " " + Build.VERSION.RELEASE
 }
 
-fun String?.checkValues(): String = if (isNullOrEmpty()) "NA" else this!!
+fun String?.checkValues(): String = if (isNullOrEmpty()) "NA" else this
 
 fun FragmentActivity.displayMetrics(): DisplayMetrics {
     val displayMetrics = DisplayMetrics()
@@ -391,17 +392,8 @@ const val keyPaymentDomain = "Online"
 
 
 // changed data
-
-const val keyExamFormId = "examFormId"
-const val keyCampusId = "campusId"
-const val keyCampusName = "campusName"
-const val keyProgramId = "programId"
-const val keyProgramName = "programName"
-const val keyAdmissionYear = "admissionYear"
 const val keyAmount = "amount"
-const val keyPaymentStepIntegration = "paymentStepIntegration"
-const val keyPaymentAlreadyForProgram = "paymentAlreadyForProgram"
-const val keyCampusData="campusData"
+const val keyCartData = "cartData"
 
 const val KEY_APPLICATION_FORM_TRANSACTION_TYPE = "Course fees"
 
@@ -409,13 +401,8 @@ const val KEY_PENDING_TRANSACTION_STATUS = "Pending"
 const val KEY_SUCCESS_TRANSACTION_STATUS = "Success"
 const val KEY_FAIL_TRANSACTION_STATUS = "Fail"
 const val KEY_CANCEL_TRANSACTION_STATUS = "Cancel"
-val KEY_SUCCESS = "Success"
-val DATE_TIME_SECONDS_PATTERN = "yyyy-MM-dd HH:mm:ss"
-val KEY_APP_STATUS = "APP"
-val KEY_DEL_STATUS = "N"
-val KEY_MOBILE_PAYMENT_TYPE = "Mobile"
-
-val KEY_BEFORE_EXAM = "BeforeForm"
+const val KEY_SUCCESS = "Success"
+const val DATE_TIME_SECONDS_PATTERN = "yyyy-MM-dd HH:mm:ss"
 
 fun skipTrailingZeroes(number: Double?): String {
     var trimmedNumber = "0"

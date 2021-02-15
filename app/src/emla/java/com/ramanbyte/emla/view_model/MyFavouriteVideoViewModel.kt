@@ -99,7 +99,6 @@ class MyFavouriteVideoViewModel(var mContext: Context) : BaseViewModel(mContext)
         favouriteVideosModel: FavouriteVideosModel
     ) {
         CoroutineUtils.main {
-
             try {
                 isLoaderShowingLiveData.postValue(true)
                 val response = questionRepository.insertFavouriteVideoStatus(favouriteVideosModel)

@@ -1,13 +1,13 @@
 package com.ramanbyte.emla.ui.activities
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import com.ramanbyte.AppController
 import com.ramanbyte.R
 import com.ramanbyte.databinding.ActivityPaymentStatusBinding
 import com.ramanbyte.utilities.*
@@ -16,11 +16,11 @@ import kotlinx.android.synthetic.emla.activity_payment_status.*
 class PaymentStatusActivity : AppCompatActivity() {
 
     private var paymentStatusBinding: ActivityPaymentStatusBinding? = null
-
     var transactionStatus = ""
     var transactionResponseId = ""
-    var paymentStepIntegration = ""
+    var transactionRefId = ""
     var transactionAmount = ""
+    var transactionType = ""
     var paymentMessage = ""
     var paymentStatus = ""
     private var activity_result: Int = 0
@@ -28,18 +28,6 @@ class PaymentStatusActivity : AppCompatActivity() {
     var programId = ""
 
     companion object {
-
-        /*fun openPaymentStatusActivity(
-            context: Context,
-            transactionsResponseModel: TransactionsResponseModel
-        ) {
-            val intent = Intent(context, PaymentStatusActivity::class.java)
-            //Add Required fields in Extras
-            intent.putExtra("id", transactionsResponseModel.id)
-            intent.putExtra("user_Id", transactionsResponseModel.user_Id)
-            context.startActivity(intent)
-        }*/
-
         /**
          * @author Mansi Manakiki Mody
          * @since 13 Nov 2019
@@ -49,14 +37,16 @@ class PaymentStatusActivity : AppCompatActivity() {
             context: Context,
             transactionStatus: String,
             transactionResponseId: String,
-            paymentStepIntegration: String,
-            transactionAmount: String
+            transactionAmount: String,
+            transactionType: String,
+            transactionRefId: String
         ): Intent {
             val intent = Intent(context, PaymentStatusActivity::class.java)
             intent.putExtra("transactionStatus", transactionStatus)
             intent.putExtra("transactionResponseId", transactionResponseId)
-            intent.putExtra("paymentStepIntegration", paymentStepIntegration)
+            intent.putExtra("transactionRefId", transactionRefId)
             intent.putExtra("transactionAmount", transactionAmount)
+            intent.putExtra("transactionType", transactionType)
             return intent
         }
     }
@@ -67,7 +57,7 @@ class PaymentStatusActivity : AppCompatActivity() {
         initViews()
     }
 
-     fun initViews() {
+    private fun initViews() {
         paymentStatusBinding =
             DataBindingUtil.setContentView(
                 this@PaymentStatusActivity,
@@ -77,116 +67,69 @@ class PaymentStatusActivity : AppCompatActivity() {
         intent?.extras?.apply {
             transactionStatus = getString("transactionStatus", "")
             transactionResponseId = getString("transactionResponseId", "")
-            paymentStepIntegration = getString("paymentStepIntegration", "")
+            transactionRefId = getString("transactionRefId", "")
             transactionAmount = getString("transactionAmount", "")
+            transactionType = getString("transactionType", "")
         }
-
         initToolBar()
-        //setPaymentStatusData()
-
-        /*var id = intent.extras?.getInt("id", 0)!!
-        var user_Id = intent.extras?.getInt("user_Id", 0)!!
-
-        AppLog.infoLog("received_data $id $user_Id")*/
+        setPaymentStatusData()
 
     }
 
-    /*@SuppressLint("DefaultLocale")
+    @SuppressLint("DefaultLocale")
     private fun setPaymentStatusData() {
-        when (transactionStatus.toLowerCase()) {
-            KEY_SUCCESS_TRANSACTION_STATUS.toLowerCase() -> {
-                paymentStatusBinding!!.ivPaymentStatus.setImageResource(R.drawable.ic_payment_successful)
-                paymentStatus = BindingUtils.string(R.string.payment_successful)
-                paymentMessage = BindingUtils.string(
-                    R.string.payment_successful_message,
-                    BindingUtils.string(R.string.rupee_symbol) + " " + this.transactionAmount
-                )
-            }
-
-            KEY_FAIL_TRANSACTION_STATUS.toLowerCase() -> {
-                paymentStatusBinding!!.ivPaymentStatus.setImageResource(R.drawable.ic_payment_failed)
-                paymentStatus = BindingUtils.string(R.string.payment_fail)
-                paymentMessage = BindingUtils.string(
-                    R.string.payment_fail_message,
-                    BindingUtils.string(R.string.rupee_symbol) + " " + this.transactionAmount
-                )
-
-                btnContinue.text = BindingUtils.string(R.string.try_again_)
-            }
-        }
-
-        paymentStatusBinding!!.message = paymentMessage
-        paymentStatusBinding!!.status = paymentStatus
-
-        btnContinue.setOnClickListener {
-            //  finish()
-            if (paymentStepIntegration.equals(KEY_BEFORE_EXAM, true)) {
-
-                AppLog.infoLog("Exam Form")
-            //    isPaymentDoneSuccessfully = true
-                startActivity(
-                    ExamDetailsActivity.openExamDetailsActivity(
-                        this,
-                        campusWiseProgramModel
-                    )
-                )
-                isPaymentDoneSuccessfully = true
-                // campusWiseProgramModel.paymentAlreadyForProgram = true
-                AppController.setEnterPageAnimation(this)
-                finish()
-
-                //  isFlagRefresh = true
+        paymentStatusBinding?.apply {
+            status = if (transactionStatus == KEY_SUCCESS_TRANSACTION_STATUS) {
+                BindingUtils.string(R.string.payment_complete)
             } else {
-                *//* var intent = Intent(this, DashBoardActivity::class.java)
-                 startActivity(intent)*//*
-                isPaymentDoneSuccessfully = true
-                setResult(Activity.RESULT_OK)
-                finish()
+                BindingUtils.string(R.string.payment_fail)
             }
-        }
-
-        btnViewInvoice.setOnClickListener {
-            if (campusWiseProgramModel != null) {
-                startActivity(
-                    Intent(
-                        this@PaymentStatusActivity,
-                        TransactionReceiptActivity::class.java
-                    ).apply {
-                        putExtra("programId", campusWiseProgramModel.programmId)
-                    })
+            message = if (transactionStatus == KEY_SUCCESS_TRANSACTION_STATUS) {
+                BindingUtils.string(R.string.payment_success_message)
+            } else {
+                BindingUtils.string(R.string.payment_fail_message)
             }
+            if (transactionStatus == KEY_SUCCESS_TRANSACTION_STATUS) {
+                imgTransactionStatus.setImageResource(R.drawable.ic_payment_successful)
+            } else {
+                imgTransactionStatus.setImageResource(R.drawable.ic_payment_failed)
+            }
+            purchaseRef = transactionRefId
+            paymentType = transactionType
+            totalAmount = transactionAmount
         }
-    }*/
+    }
 
     private fun initToolBar() {
-        /*setSupportActionBar(paymentStatusBinding?.appbarLa
-        yout?.toolbar)
+        setSupportActionBar(paymentStatusBinding?.appbarLayout?.toolbar)
+        val actionBar = supportActionBar
+        actionBar!!.apply {
+            setDisplayShowHomeEnabled(true) // show or hide the default home button
+            setDisplayHomeAsUpEnabled(true)
+            setDisplayShowTitleEnabled(false)
+        }
 
         try {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                if (paymentStatusBinding!!.appbarLayout.toolbar != null) {
-                    paymentStatusBinding!!.appbarLayout.toolbar.elevation = 0.0f
+            paymentStatusBinding!!.apply {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    if (appbarLayout.toolbar != null) {
+                        appbarLayout.toolbar.elevation = 0.0f
+                    }
                 }
-            }
 
-            paymentStatusBinding!!.appbarLayout.tvSubTitle.visibility = View.GONE
-            paymentStatusBinding!!.appbarLayout.title = ""
-            updateActionBarColor(
-                BindingUtils.color(R.color.colorYellow),
-                BindingUtils.color(R.color.colorYellow)
-            )
-        } catch (e: Exception) {
+                appbarLayout.tvSubTitle.visibility = View.GONE
+                appbarLayout.title = ""
+            }
+        } catch (e: NullPointerException) {
             e.printStackTrace()
             AppLog.errorLog(e.message, e)
-        }*/
+        }
     }
 
     override fun onBackPressed() {
-
         val intent = Intent()
         setResult(activity_result, intent)
         super.onBackPressed()
-        //killVisibleActivity()
     }
 
 }

@@ -35,6 +35,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
         <View
             android:id="@+id/dividerPayment"
             style="@style/baseDivider"
@@ -78,6 +79,17 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvFeesAmount"
+            style="@style/TextViewTitle"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text='@{@string/rupee_symbol + paymentSummaryViewModel.amountLiveData}'
+            app:layout_constraintBottom_toTopOf="@+id/labelTerms"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/appbar_layout" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

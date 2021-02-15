@@ -12,94 +12,213 @@
             name="message"
             type="String" />
 
+        <variable
+            name="purchaseRef"
+            type="String" />
+
+        <variable
+            name="paymentType"
+            type="String" />
+
+        <variable
+            name="totalAmount"
+            type="String" />
+
+        <import type="com.ramanbyte.utilities.DateUtils" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/colorWhite">
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/appbar_layout"
+            layout="@layout/app_bar_layout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imgTransactionStatus"
+            style="@style/ImageViewOrIconWhereClickIsPerformed"
+            android:layout_width="@dimen/dp_100"
+            android:layout_height="@dimen/dp_100"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/appbar_layout"
+            app:srcCompat="@drawable/ic_payment_successful" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/lblTransactionStatus"
+            style="@style/TextViewTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{status}"
+            android:textAllCaps="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imgTransactionStatus" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/lblTransactionMessage"
+            style="@style/TextViewSubTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="@dimen/dp_10"
+            android:text="@{message}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lblTransactionStatus" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.55" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/ivPaymentStatus"
-            android:layout_width="@dimen/dp_250"
-            android:layout_height="@dimen/dp_250"
-            app:layout_constraintBottom_toTopOf="@+id/labelPaymentStatus"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.50" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/labelPaymentStatus"
-            style="@style/TextViewTitle"
-            android:layout_width="match_parent"
+            android:id="@+id/lblPurchaseDetail"
+            style="@style/TextViewDescription"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/dp_60"
-            android:gravity="center"
-            android:text="@{status}"
-            app:layout_constraintBottom_toTopOf="@+id/guideline" />
+            android:layout_marginStart="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_10"
+            android:text="@string/purchase_details"
+            android:textAllCaps="true"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lblTransactionMessage" />
 
-        <androidx.cardview.widget.CardView
-            style="@style/customCard"
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/lblPurchaseRef"
+            style="@style/TextViewLabel"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_15"
+            android:text="@string/purchase_ref"
+            android:textAllCaps="true"
+            app:layout_constraintEnd_toEndOf="@id/guideline"
+            app:layout_constraintStart_toStartOf="@+id/lblPurchaseDetail"
+            app:layout_constraintTop_toBottomOf="@+id/lblPurchaseDetail" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/lblPurchaseRefVal"
+            style="@style/TextViewValOfLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dp_20"
+            android:gravity="end"
+            android:text="@{purchaseRef}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/guideline"
+            app:layout_constraintTop_toTopOf="@+id/lblPurchaseRef" />
+
+        <View
+            android:id="@+id/baseView1"
+            style="@style/baseDivider"
+            android:layout_width="0dp"
+            app:layout_constraintEnd_toEndOf="@id/lblPurchaseRefVal"
+            app:layout_constraintStart_toStartOf="@id/lblPurchaseRef"
+            app:layout_constraintTop_toBottomOf="@id/lblPurchaseRefVal" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/lblPurchaseDate"
+            style="@style/TextViewLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:text="@string/purchase_date"
+            android:textAllCaps="true"
+            app:layout_constraintEnd_toEndOf="@id/guideline"
+            app:layout_constraintStart_toStartOf="@+id/lblPurchaseDetail"
+            app:layout_constraintTop_toBottomOf="@+id/baseView1" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/lblPurchaseDateVal"
+            style="@style/TextViewValOfLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dp_20"
+            android:gravity="end"
+            android:text="@{DateUtils.getCurDate(DateUtils.DATE_DISPLAY_PATTERN)}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/guideline"
+            app:layout_constraintTop_toTopOf="@+id/lblPurchaseDate" />
+
+        <View
+            android:id="@+id/baseView2"
+            style="@style/baseDivider"
+            android:layout_width="0dp"
+            app:layout_constraintEnd_toEndOf="@id/lblPurchaseDateVal"
+            app:layout_constraintStart_toStartOf="@id/lblPurchaseDate"
+            app:layout_constraintTop_toBottomOf="@id/lblPurchaseDateVal" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/lblPaymentType"
+            style="@style/TextViewLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:text="@string/payment_type"
+            android:textAllCaps="true"
+            app:layout_constraintEnd_toEndOf="@id/guideline"
+            app:layout_constraintStart_toStartOf="@+id/lblPurchaseDetail"
+            app:layout_constraintTop_toBottomOf="@+id/baseView2" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/lblPaymentTypeVal"
+            style="@style/TextViewValOfLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dp_20"
+            android:gravity="end"
+            android:text="@{paymentType}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/guideline"
+            app:layout_constraintTop_toTopOf="@+id/lblPaymentType" />
+
+        <View
+            android:id="@+id/baseView3"
+            style="@style/baseDivider"
+            android:layout_width="0dp"
+            app:layout_constraintEnd_toEndOf="@id/lblPaymentTypeVal"
+            app:layout_constraintStart_toStartOf="@id/lblPaymentType"
+            app:layout_constraintTop_toBottomOf="@id/lblPaymentTypeVal" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/lblTotalAmount"
+            style="@style/TextViewLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:text="@string/total_amount"
+            android:textAllCaps="true"
+            app:layout_constraintEnd_toEndOf="@id/guideline"
+            app:layout_constraintStart_toStartOf="@+id/lblPurchaseDetail"
+            app:layout_constraintTop_toBottomOf="@+id/baseView3" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/lblTotalAmountVal"
+            style="@style/TextViewValOfLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dp_20"
+            android:gravity="end"
+            android:text="@{totalAmount}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/guideline"
+            app:layout_constraintTop_toTopOf="@+id/lblTotalAmount" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            style="@style/CustomCapsuleButtonBlueBgWhiteText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp_10"
+            android:text="@string/done"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/labelPaymentStatus">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/labelPaymentMessage"
-                    style="@style/TextViewSubTitle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/dp_22"
-                    android:layout_marginEnd="@dimen/dp_22"
-                    android:gravity="center"
-                    android:padding="@dimen/dp_8"
-                    android:text="@{message}"
-                    app:layout_constraintBottom_toTopOf="@+id/btnViewInvoice"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btnViewInvoice"
-                    style="@style/CustomCapsuleButtonFilled"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/dp_80"
-                    android:layout_marginEnd="@dimen/dp_80"
-                    android:layout_marginBottom="@dimen/dp_10"
-                    android:text="@string/view_invoice"
-                    app:layout_constraintBottom_toTopOf="@+id/btnContinue"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btnContinue"
-                    style="@style/CustomCapsuleButtonFilled"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/dp_80"
-                    android:layout_marginEnd="@dimen/dp_80"
-                    android:layout_marginBottom="@dimen/dp_10"
-                    android:text="@string/lbl_continue"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.cardview.widget.CardView>
+            app:layout_constraintStart_toStartOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

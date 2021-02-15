@@ -168,7 +168,9 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding, ContainerViewMo
         private val NAV_DOWNLOADS = 0x2
         private val NAV_MY_FAVOURATE = 0x3
         private val NAV_MY_CART = 0x4
-        private val NAV_SETTINGS = 0x5
+        private val NAV_MY_COURSE = 0x5
+        private val NAV_TRANSACTION_HISTORY = 0x6
+        private val NAV_SETTINGS = 0x7
 
         fun intent(activity: Activity): Intent {
             return Intent(activity, ContainerActivity::class.java)
@@ -293,6 +295,24 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding, ContainerViewMo
             )
             headerList.add(menuPojo)
 
+            menuPojo = MenuPojo(
+                NAV_TRANSACTION_HISTORY,
+                R.drawable.ic_my_cart,
+                BindingUtils.string(R.string.transaction_history),
+                false,
+                0
+            )
+            headerList.add(menuPojo)
+
+            menuPojo = MenuPojo(
+                NAV_MY_COURSE,
+                R.drawable.ic_mycourses,
+                BindingUtils.string(R.string.my_course),
+                false,
+                0
+            )
+            headerList.add(menuPojo)
+
 
             menuPojo = MenuPojo(
                 NAV_SETTINGS,
@@ -328,6 +348,14 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding, ContainerViewMo
                 NAV_MY_CART -> {
                     if (navController.currentDestination?.id != R.id.cartFragment)
                         navController.navigate(R.id.cartFragment, null, navOption)
+                }
+                NAV_MY_COURSE -> {
+                    if (navController.currentDestination?.id != R.id.myCourseFragment)
+                        navController.navigate(R.id.myCourseFragment, null, navOption)
+                }
+                NAV_TRANSACTION_HISTORY -> {
+                    if (navController.currentDestination?.id != R.id.transactionHistoryFragment)
+                        navController.navigate(R.id.transactionHistoryFragment, null, navOption)
                 }
                 NAV_SETTINGS -> {
                     if (navController.currentDestination?.id != R.id.settingFragment)
