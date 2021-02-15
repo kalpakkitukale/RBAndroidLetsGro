@@ -18,7 +18,7 @@ import com.ramanbyte.utilities.KEY_BLANK
 import com.ramanbyte.utilities.StaticMethodUtilitiesKtx.getS3DynamicURL
 
 
-class CoursesAdapter(private val displayMetrics: DisplayMetrics) :
+class CoursesAdapter(private val displayMetrics: DisplayMetrics, var myCourse:Int) :
     PagedListAdapter<CoursesModel, CoursesAdapter.CoursesHolder>(DIFF_CALLBACK) {
 
     var viewModel: CoursesViewModel? = null
@@ -49,20 +49,32 @@ class CoursesAdapter(private val displayMetrics: DisplayMetrics) :
                 ) || coursesModel.summativeAssessmentStatus.isNullOrEmpty())
             ) {
                 holder.cardCourseBinding.ivStatus.visibility = View.VISIBLE
-                holder.cardCourseBinding.ivStatus.setImageDrawable(BindingUtils.drawable(R.drawable.ic_live))
+                holder.cardCourseBinding.ivStatus.setImageDrawable(BindingUtils.drawable(R.drawable.ic_success))
             } else {
                 holder.cardCourseBinding.ivStatus.visibility = View.GONE
             }
 
-            if (coursesModel.isInCart || coursesModel.courseFee == 0.0F) {
+            courseImageUrl = getS3DynamicURL(courseImage ?: KEY_BLANK, context!!)
+//                AppS3Client.createInstance(context!!).getFileAccessUrl(courseImage ?: KEY_BLANK)
+
+            if(myCourse==1){
                 holder.cardCourseBinding.ivCart.visibility = View.INVISIBLE
+                holder.cardCourseBinding.ivPerformance.visibility = View.INVISIBLE
                 holder.cardCourseBinding.tvLabeCart.visibility = View.INVISIBLE
-            } else {
-                holder.cardCourseBinding.ivCart.visibility = View.VISIBLE
-                holder.cardCourseBinding.tvLabeCart.visibility = View.VISIBLE
+                holder.cardCourseBinding.tvLabePerformance.visibility = View.INVISIBLE
+            }else{
+                if (coursesModel.isInCart==true||coursesModel.courseFee==0.0F) {
+                    holder.cardCourseBinding.ivCart.visibility = View.INVISIBLE
+                    holder.cardCourseBinding.tvLabeCart.visibility = View.INVISIBLE
+                }
+                else {
+                    holder.cardCourseBinding.ivCart.visibility = View.VISIBLE
+                    holder.cardCourseBinding.tvLabeCart.visibility = View.VISIBLE
+                }
             }
 
             courseImageUrl = getS3DynamicURL(courseImage ?: KEY_BLANK, context!!)
+//                AppS3Client.createInstance(context!!).getFileAccessUrl(courseImage ?: KEY_BLANK)
         })
     }
 

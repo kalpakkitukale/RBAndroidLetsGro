@@ -1,7 +1,9 @@
 package com.ramanbyte.emla.data_layer.network.api_layer
 
+import com.ramanbyte.emla.models.CoursesModel
 import com.ramanbyte.emla.models.TransactionHistoryModel
 import com.ramanbyte.emla.models.request.CartRequestModel
+import com.ramanbyte.emla.models.request.CoursesRequest
 import com.ramanbyte.emla.models.request.InsertTransactionRequestModel
 import com.ramanbyte.emla.models.response.CartResponseModel
 import retrofit2.Response
@@ -24,4 +26,7 @@ interface TransactionApiController {
 
     @DELETE("DeleteCart/{Id}/{UserId}")
     suspend fun deleteCart(@Path("UserId") UserId: Int, @Path("Id") cartItemId: Int): Response<Int>
+
+    @POST("GetAllMyCourses")
+    suspend fun mycourseList(@Body coursesRequest: CoursesRequest): Response<List<CoursesModel>>
 }

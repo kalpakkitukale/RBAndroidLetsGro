@@ -68,7 +68,7 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
     private fun setAdapter() {
         layoutBinding.apply {
             rvCoursesFragment.apply {
-                coursesAdapter = CoursesAdapter((activity!!).displayMetrics())
+                coursesAdapter = CoursesAdapter((activity!!).displayMetrics(),0)
                 layoutManager = LinearLayoutManager(mContext, RecyclerView.VERTICAL, false)
                 adapter = coursesAdapter?.apply {
                     this.context = mContext
