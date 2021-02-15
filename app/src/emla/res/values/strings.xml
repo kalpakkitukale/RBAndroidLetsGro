@@ -28,7 +28,7 @@
     <string name="account_linked_successfully">Your classroom account is linked with the Let\'s gro Successfully.</string>
     <string name="account_created_successfully">Your Let\'s Gro account is created Successfully.</string>
     <string name="invalid_classroom_user">Classroom user details are invalid.</string>
-    <string name="classroom_lets_gro_unmatched">Your Classroom user account is Associated with different Let\'s gro account.</string>
+    <string name="classroom_lets_gro_unmatched">Your Let\'s gro user account is Associated with different Classroom account.</string>
     <string name="getting_user_details">Getting user details, please wait.</string>
 
 

@@ -277,13 +277,13 @@
             android:id="@+id/btnLoginWithClassroom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_10"
             android:background="@drawable/custom_capsule_button_with_border"
             android:padding="@dimen/dp_5"
             android:src="@drawable/classroom_logo"
+            app:layout_constraintBottom_toTopOf="@+id/lblSignup"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/btnCRLogin" />
+            app:layout_constraintTop_toBottomOf="@+id/lblLoginWith" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/lblSignup"
