@@ -307,10 +307,10 @@ Content
     <string name="message_remove_favourite">You want to remove favourite ?</string>
 
     <!--Faculty Side Courses List-->
-    <string name="faculty_no_courses">No Courses added yet...</string>
-    <string name="faculty_no_more_courses">No more courses added yet...</string>
-    <string name="faculty_no_questions">No Questions added yet...</string>
-    <string name="faculty_no_more_questions">No more questions added yet...</string>
+    <string name="faculty_no_courses">No Courses added yet…</string>
+    <string name="faculty_no_more_courses">No more courses added yet…</string>
+    <string name="faculty_no_questions">No Questions added yet…</string>
+    <string name="faculty_no_more_questions">No more questions added yet…</string>
     <string name="answered">Answered</string>
     <string name="unanswered">Unanswered</string>
     <string name="all">All</string>
@@ -349,5 +349,8 @@ Content
     <string name="payment_fail">Payment Fail</string>
     <string name="payment_success_message">Thank you, your payment has been successful.</string>
     <string name="payment_fail_message">Oops! Your transaction failed. Here\'s what we know.</string>
+    <string name="performance">Performance</string>
+    <string name="topic_list">Topic List</string>
+    <string name="cart">Cart</string>
 
 </resources>

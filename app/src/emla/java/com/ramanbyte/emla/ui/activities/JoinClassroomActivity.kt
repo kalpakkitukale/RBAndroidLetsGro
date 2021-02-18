@@ -42,7 +42,8 @@ class JoinClassroomActivity : BaseActivity<ActivityJoinClassroomBinding, JoinCla
                 if (intendData?.getBoolean("fromClassroomPlus") == true) {
                     mainContainer.visibility = View.GONE
                     viewModel.classroom_user_ref_id = intendData.getInt("user_id")
-                    AppLog.infoLog("classroom userID : ${intendData.getInt("user_id")}")
+                    viewModel.classroomUserType = intendData.getString("user_type")?: KEY_STUDENT
+                    AppLog.infoLog("classroom userID : ${intendData.getInt("user_id")} Type :${intendData.getString("user_type")}")
                 } else {
                     mainContainer.visibility = View.VISIBLE
                     title = BindingUtils.string(R.string.log_in_with_classroom)

@@ -31,6 +31,7 @@ class JoinClassroomViewModel(mContext: Context) : BaseViewModel(mContext = mCont
         value = null
     }
     var classroom_user_ref_id: Int = 0
+    var classroomUserType: String = ""
 
     var userModel: UserModel? = null
 
@@ -185,6 +186,7 @@ class JoinClassroomViewModel(mContext: Context) : BaseViewModel(mContext = mCont
                         val response =
                             masterRepository.updateLetsGroUser(joinClassroomLiveData.value?.also {
                                 it.userId = classroom_user_ref_id
+                                it.userType = classroomUserType
                             }!!)
 
                         setAlertDialogResourceModelMutableLiveData(
