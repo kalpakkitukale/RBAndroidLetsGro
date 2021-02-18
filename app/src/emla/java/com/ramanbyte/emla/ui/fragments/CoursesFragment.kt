@@ -73,7 +73,7 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
                 adapter = coursesAdapter?.apply {
                     this.context = mContext
                     viewModel = this@CoursesFragment.viewModel
-                    setHasStableIds(true)
+                    //setHasStableIds(true)
                 }
                 setHasFixedSize(true)
             }
