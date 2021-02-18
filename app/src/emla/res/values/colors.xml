@@ -7,6 +7,7 @@
     <color name="colorIconNavyBlueInLightNGrayInDark">#1d396b</color>
     <color name="colorIconNavyBlueInLightNGrayInDarkTransparent">#951d396b</color>
     <color name="colorTextNavyBlueInLightNWhiteInDark">#1d396b</color>
+    <color name="icon_bg_color">#DDDBE6</color>
     <color name="colorIconGreen">#25ae88</color>
     <color name="colorButtonBlue">#3d9df9</color>
     <color name="colorButtonLightBlue">#e6f1fe</color>
@@ -14,7 +15,7 @@
     <color name="colorTextGrayOnLightNDark">#9391a4</color>
     <color name="colorSelectedTab">#1d396b</color>
     <color name="colorNotSelectedTab">#9391a4</color>
-    <color name="colorCourseCardWithOpacity">#ffffff</color>
+    <color name="colorCourseCardWithOpacity">#FFFFFF</color>
     <color name="colorCourseCardWithOpacity1">#E6ffffff</color>
     <color name="colorButtonTextPrimary">#247df7</color>
     <!--Taken From previous theme-->

@@ -4,8 +4,8 @@ import android.content.Context
 import com.ramanbyte.data_layer.base.BaseRepository
 import com.ramanbyte.emla.data_layer.network.api_layer.RegistrationController
 import com.ramanbyte.emla.models.*
-import com.ramanbyte.emla.models.response.MasterDataResponseModel
 import com.ramanbyte.emla.models.response.CommonDropdownModel
+import com.ramanbyte.emla.models.response.MasterDataResponseModel
 import com.ramanbyte.utilities.KEY_Y
 import org.kodein.di.generic.instance
 
@@ -18,12 +18,19 @@ class RegistrationRepository(val mContext: Context) : BaseRepository(mContext) {
     private val registrationController: RegistrationController by instance()
 
     fun isUserActive(): Boolean {
-
-        return applicationDatabase?.getUserDao()?.getCurrentUser()?.loggedId == KEY_Y
-
+        return applicationDatabase.getUserDao().getCurrentUser()?.loggedId == KEY_Y
     }
 
     suspend fun register(registrationModel: RegistrationModel): String? {
+        /**
+         * @author Mansi
+         * @since 18 Feb 2021
+         * send state null if nothing selected
+         * applied this code after foreign key added in backend
+         */
+        if (registrationModel.userDetails.state == 0) {
+            registrationModel.userDetails.state = null
+        }
         return apiRequest {
             registrationController.register(registrationModel)
         }

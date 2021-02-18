@@ -3,6 +3,7 @@ package com.ramanbyte.emla.models.request
 import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
 import com.ramanbyte.BR
+import com.ramanbyte.utilities.KEY_STUDENT
 
 /**
  * @author Vinay Kumbhar <vinay.k@ramanbyte.com>
@@ -25,4 +26,6 @@ class JoinClassroomModel : BaseObservable() {
         }
 
     var userId: Int = 0
+
+    var userType : String = ""
 }
