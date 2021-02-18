@@ -22,16 +22,15 @@ class InsertTransactionRequestModel {
     var flag: String = KEY_BLANK
     var isMailSent: Boolean = DEL_STATUS1
     var added_By: Int = 0
-    var user_Id: Int = 0
     var registrationId: Int = 0
     var clientName = ""
 
     @SerializedName("createdBy")
-    var created_By: Int = 0
+    var createdBy: Int = 0
     var createdDate: String? = DateUtils.getCurDate(
         DATE_TIME_SECONDS_PATTERN
     )
-    var modify_By: Int = 0
+    var modifyBy: Int = 0
     var modifyDate: String? = DateUtils.getCurDate(
         DATE_TIME_SECONDS_PATTERN
     )
