@@ -176,7 +176,7 @@ class UserDetailsModel : BaseObservable() {
         }
 
     @Bindable
-    var state: Int? = null //set to null due to registration not working
+    var state: Int? = 0
         set(value) {
             field = value
             notifyPropertyChanged(BR.state)
