@@ -22,6 +22,12 @@ class RegistrationRepository(val mContext: Context) : BaseRepository(mContext) {
     }
 
     suspend fun register(registrationModel: RegistrationModel): String? {
+        /**
+         * @author Mansi
+         * @since 18 Feb 2021
+         * send state null if nothing selected
+         * applied this code after foreign key added in backend
+         */
         if (registrationModel.userDetails.state == 0) {
             registrationModel.userDetails.state = null
         }
