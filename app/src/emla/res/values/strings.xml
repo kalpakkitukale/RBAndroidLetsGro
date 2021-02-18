@@ -349,5 +349,8 @@ Content
     <string name="payment_fail">Payment Fail</string>
     <string name="payment_success_message">Thank you, your payment has been successful.</string>
     <string name="payment_fail_message">Oops! Your transaction failed. Here\'s what we know.</string>
+    <string name="performance">Performance</string>
+    <string name="topic_list">Topic List</string>
+    <string name="cart">Cart</string>
 
 </resources>

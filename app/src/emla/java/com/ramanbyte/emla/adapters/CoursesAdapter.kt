@@ -63,7 +63,7 @@ class CoursesAdapter(private val displayMetrics: DisplayMetrics, var myCourse:In
                 holder.cardCourseBinding.tvLabeCart.visibility = View.INVISIBLE
                 holder.cardCourseBinding.tvLabePerformance.visibility = View.INVISIBLE
             }else{
-                if (coursesModel.isInCart==true||coursesModel.courseFee==0.0F) {
+                if (coursesModel.isInCart || coursesModel.courseFee==0.0F) {
                     holder.cardCourseBinding.ivCart.visibility = View.INVISIBLE
                     holder.cardCourseBinding.tvLabeCart.visibility = View.INVISIBLE
                 }
