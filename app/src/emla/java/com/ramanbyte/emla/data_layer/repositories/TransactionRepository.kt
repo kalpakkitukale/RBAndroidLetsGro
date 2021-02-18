@@ -39,10 +39,10 @@ class TransactionRepository(val mContext: Context) : BaseRepository(mContext) {
 
         val deviceDetails = ""
 
-        insertTransactionRequestModel.created_By = loginResponseModel!!.userId
-        insertTransactionRequestModel.modify_By = loginResponseModel.userId
+        insertTransactionRequestModel.createdBy = loginResponseModel!!.userId
+        insertTransactionRequestModel.modifyBy = loginResponseModel.userId
         insertTransactionRequestModel.added_By = loginResponseModel.userId
-        insertTransactionRequestModel.user_Id = loginResponseModel.userId
+        insertTransactionRequestModel.userId = loginResponseModel.userId
         insertTransactionRequestModel.registrationId = loginResponseModel.userId
 
         insertTransactionRequestModel.deviceId = 0

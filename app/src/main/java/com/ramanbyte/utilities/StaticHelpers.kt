@@ -209,6 +209,9 @@ const val KEY_EDITED = 1
 const val KEY_NOT_EDITED = 0
 
 
+const val KEY_FROM_PAY = "FROMPAYMENT"
+
+
 fun Window.changeStatusBarColor(view: View, colorResourceId: Int) {
     //clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
