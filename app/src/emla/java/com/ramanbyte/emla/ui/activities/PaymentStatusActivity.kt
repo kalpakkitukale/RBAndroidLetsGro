@@ -102,6 +102,9 @@ class PaymentStatusActivity : AppCompatActivity() {
             } else {
                 imgTransactionStatus.setImageResource(R.drawable.ic_payment_failed)
             }
+            if(transactionStatus.equals("Fail"))
+            btnDone.setText(R.string.tryAgain)
+
             purchaseRef = transactionRefId
             paymentType = transactionType
             totalAmount = transactionAmount
@@ -143,8 +146,12 @@ class PaymentStatusActivity : AppCompatActivity() {
     }
 
     fun onclick(view: View){
-       val intent = Intent(this@PaymentStatusActivity, ContainerActivity::class.java)
-        intent.putExtra(KEY_FROM_PAY, 1)
-        startActivity(intent)
+        if(transactionStatus.equals("Fail"))
+            finish()
+        else {
+            val intent = Intent(this@PaymentStatusActivity, ContainerActivity::class.java)
+            intent.putExtra(KEY_FROM_PAY, 1)
+            startActivity(intent)
+        }
     }
 }
