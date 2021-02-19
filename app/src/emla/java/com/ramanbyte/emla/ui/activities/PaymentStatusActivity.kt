@@ -102,8 +102,9 @@ class PaymentStatusActivity : AppCompatActivity() {
             } else {
                 imgTransactionStatus.setImageResource(R.drawable.ic_payment_failed)
             }
+
             if(transactionStatus.equals("Fail"))
-            btnDone.setText(R.string.tryAgain)
+                btnDone.setText(R.string.tryAgain)
 
             purchaseRef = transactionRefId
             paymentType = transactionType
@@ -121,6 +122,7 @@ class PaymentStatusActivity : AppCompatActivity() {
             setDisplayHomeAsUpEnabled(true)
             setDisplayShowTitleEnabled(false)
         }
+
 
         try {
             paymentStatusBinding!!.apply {
