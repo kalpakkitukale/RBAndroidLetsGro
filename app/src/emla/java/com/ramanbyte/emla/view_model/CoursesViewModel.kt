@@ -71,12 +71,20 @@ class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
     var searchQuery = MutableLiveData<String>().apply {
         value = KEY_BLANK
     }
+    var searchQueryForMyCourse = MutableLiveData<String>().apply {
+        value = KEY_BLANK
+    }
+
 
     init {
         toggleLayoutVisibility(View.GONE, View.GONE, View.GONE, "", View.GONE)
         searchQuery.observeForever {
             coursesRepository.searchCourse(it)
         }
+        searchQueryForMyCourse.observeForever {
+            transactionRepository.searchCourse(it)
+        }
+
         userData = coursesRepository.getCurrentUser()
     }
 

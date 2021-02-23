@@ -8,10 +8,17 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
+import androidx.navigation.findNavController
 import com.ramanbyte.R
 import com.ramanbyte.databinding.ActivityPaymentStatusBinding
-import com.ramanbyte.utilities.*
-import kotlinx.android.synthetic.emla.activity_payment_status.*
+import com.ramanbyte.emla.ui.fragments.CartFragment
+import com.ramanbyte.emla.ui.fragments.MyCourseFragment
+import com.ramanbyte.utilities.AppLog
+import com.ramanbyte.utilities.BindingUtils
+import com.ramanbyte.utilities.KEY_FROM_PAY
+import com.ramanbyte.utilities.KEY_SUCCESS_TRANSACTION_STATUS
 
 class PaymentStatusActivity : AppCompatActivity() {
 
@@ -58,6 +65,7 @@ class PaymentStatusActivity : AppCompatActivity() {
     }
 
     private fun initViews() {
+
         paymentStatusBinding =
             DataBindingUtil.setContentView(
                 this@PaymentStatusActivity,
@@ -94,9 +102,15 @@ class PaymentStatusActivity : AppCompatActivity() {
             } else {
                 imgTransactionStatus.setImageResource(R.drawable.ic_payment_failed)
             }
+
+            if(transactionStatus.equals("Fail"))
+                btnDone.setText(R.string.tryAgain)
+
             purchaseRef = transactionRefId
             paymentType = transactionType
             totalAmount = transactionAmount
+
+            paymentActivity = this@PaymentStatusActivity
         }
     }
 
@@ -108,6 +122,7 @@ class PaymentStatusActivity : AppCompatActivity() {
             setDisplayHomeAsUpEnabled(true)
             setDisplayShowTitleEnabled(false)
         }
+
 
         try {
             paymentStatusBinding!!.apply {
@@ -132,4 +147,13 @@ class PaymentStatusActivity : AppCompatActivity() {
         super.onBackPressed()
     }
 
+    fun onclick(view: View){
+        if(transactionStatus.equals("Fail"))
+            finish()
+        else {
+            val intent = Intent(this@PaymentStatusActivity, ContainerActivity::class.java)
+            intent.putExtra(KEY_FROM_PAY, 1)
+            startActivity(intent)
+        }
+    }
 }

@@ -26,10 +26,7 @@ import com.ramanbyte.emla.base.di.authModuleDependency
 import com.ramanbyte.emla.models.CoursesModel
 import com.ramanbyte.emla.models.MenuPojo
 import com.ramanbyte.emla.view_model.ContainerViewModel
-import com.ramanbyte.utilities.AlertDialog
-import com.ramanbyte.utilities.AppLog
-import com.ramanbyte.utilities.BindingUtils
-import com.ramanbyte.utilities.KEY_COURSE_MODEL
+import com.ramanbyte.utilities.*
 import kotlinx.android.synthetic.emla.activity_container.*
 
 
@@ -86,6 +83,8 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding, ContainerViewMo
                     Bundle().apply {
                         putParcelable(KEY_COURSE_MODEL, intentData)
                     })
+            }else if(intent.hasExtra(KEY_FROM_PAY)){
+                navController.navigate(R.id.myCourseFragment)
             }
         }
 

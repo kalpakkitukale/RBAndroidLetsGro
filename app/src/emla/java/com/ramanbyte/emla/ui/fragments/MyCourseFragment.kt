@@ -1,27 +1,24 @@
 package com.ramanbyte.emla.ui.fragments
 
 import android.content.Context
-import android.content.Intent
 import android.os.Build
 import android.text.TextUtils
 import android.util.TypedValue
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import android.view.View
 import android.widget.EditText
+import android.widget.FrameLayout
 import android.widget.ImageView
+import android.widget.LinearLayout
 import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.SearchView
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.ramanbyte.BuildConfig
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseFragment
 import com.ramanbyte.databinding.FragmentCoursesBinding
 import com.ramanbyte.emla.adapters.CoursesAdapter
-import com.ramanbyte.emla.view.RecommendedCourseFilterBottomSheet
 import com.ramanbyte.emla.view_model.CoursesViewModel
 import com.ramanbyte.utilities.*
 
@@ -49,6 +46,7 @@ class MyCourseFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>(
 
         setAdapter()
         setViewModelOp()
+
     }
 
     private fun setAdapter() {
@@ -74,16 +72,21 @@ class MyCourseFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>(
             })
         }
     }
-/*
+
     var menu: Menu? = null
     private var mSearchView: SearchView? = null
     var searchItem: MenuItem? = null
+    var filterItem: MenuItem? = null
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_course_search, menu)
 
         searchItem = menu.findItem(R.id.action_search_key)
+        filterItem = menu.findItem(R.id.action_filter)
+
+        filterItem!!.setVisible(false)
+
 
         mSearchView = searchItem?.actionView as SearchView
 
@@ -112,7 +115,7 @@ class MyCourseFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>(
                     }
                 } else {
                     searchEditText.setText("")
-                    viewModel.searchQuery.postValue("")
+                    viewModel.searchQueryForMyCourse.postValue("")
                     mSearchView!!.clearFocus()
                 }
             }
@@ -124,7 +127,7 @@ class MyCourseFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>(
         mSearchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 // api call
-                viewModel.searchQuery.postValue(query.toString())
+                viewModel.searchQueryForMyCourse.postValue(query.toString())
                 mSearchView!!.clearFocus()
                 return true
             }
@@ -146,16 +149,18 @@ class MyCourseFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>(
                 )
                 mSearchView!!.clearFocus()
                 mSearchView!!.isIconified = true
+
                 true
             }
 
             else -> super.onOptionsItemSelected(item)
         }
-    }*/
+    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mContext = context
     }
+
 
 }
