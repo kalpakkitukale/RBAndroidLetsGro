@@ -1,29 +1,17 @@
 package com.ramanbyte.emla.ui.fragments
 
 import android.content.Context
-import android.content.Intent
-import android.os.Build
-import android.text.TextUtils
-import android.util.TypedValue
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
-import android.view.View
-import android.widget.EditText
-import android.widget.ImageView
-import androidx.annotation.RequiresApi
-import androidx.appcompat.widget.SearchView
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.ramanbyte.BuildConfig
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseFragment
 import com.ramanbyte.databinding.FragmentCoursesBinding
 import com.ramanbyte.emla.adapters.CoursesAdapter
-import com.ramanbyte.emla.view.RecommendedCourseFilterBottomSheet
 import com.ramanbyte.emla.view_model.CoursesViewModel
-import com.ramanbyte.utilities.*
+import com.ramanbyte.utilities.AlertDialog
+import com.ramanbyte.utilities.BindingUtils
+import com.ramanbyte.utilities.ProgressLoader
+import com.ramanbyte.utilities.displayMetrics
 
 class MyCourseFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>() {
     private lateinit var mContext: Context

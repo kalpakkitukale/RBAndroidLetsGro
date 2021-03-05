@@ -6,16 +6,24 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
 import com.ramanbyte.R
+import com.ramanbyte.base.BaseActivity
 import com.ramanbyte.databinding.ActivityPaymentStatusBinding
-import com.ramanbyte.utilities.*
-import kotlinx.android.synthetic.emla.activity_payment_status.*
+import com.ramanbyte.emla.base.di.authModuleDependency
+import com.ramanbyte.emla.models.response.CartResponseModel
+import com.ramanbyte.emla.view.CoursePerchesDetailsBottomSheet
+import com.ramanbyte.emla.view_model.TransactionHistoryViewModel
+import com.ramanbyte.utilities.AppLog
+import com.ramanbyte.utilities.BindingUtils
+import com.ramanbyte.utilities.KEY_SUCCESS_TRANSACTION_STATUS
+import com.ramanbyte.utilities.keyCartData
+import java.util.*
 
-class PaymentStatusActivity : AppCompatActivity() {
+class PaymentStatusActivity :
+    BaseActivity<ActivityPaymentStatusBinding, TransactionHistoryViewModel>(
+        authModuleDependency
+    ) {
 
-    private var paymentStatusBinding: ActivityPaymentStatusBinding? = null
     var transactionStatus = ""
     var transactionResponseId = ""
     var transactionRefId = ""
@@ -26,6 +34,7 @@ class PaymentStatusActivity : AppCompatActivity() {
     private var activity_result: Int = 0
     var campusId = ""
     var programId = ""
+    var cartListData = ArrayList<CartResponseModel>()
 
     companion object {
         /**
@@ -39,7 +48,8 @@ class PaymentStatusActivity : AppCompatActivity() {
             transactionResponseId: String,
             transactionAmount: String,
             transactionType: String,
-            transactionRefId: String
+            transactionRefId: String,
+            cartList: ArrayList<CartResponseModel>?
         ): Intent {
             val intent = Intent(context, PaymentStatusActivity::class.java)
             intent.putExtra("transactionStatus", transactionStatus)
@@ -47,6 +57,7 @@ class PaymentStatusActivity : AppCompatActivity() {
             intent.putExtra("transactionRefId", transactionRefId)
             intent.putExtra("transactionAmount", transactionAmount)
             intent.putExtra("transactionType", transactionType)
+            intent.putExtra(keyCartData, cartList!!)
             return intent
         }
     }
@@ -54,31 +65,45 @@ class PaymentStatusActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        initViews()
+        /*initViews()*/
     }
 
-    private fun initViews() {
-        paymentStatusBinding =
-            DataBindingUtil.setContentView(
-                this@PaymentStatusActivity,
-                R.layout.activity_payment_status
-            )
 
+    override val viewModelClass: Class<TransactionHistoryViewModel> =
+        TransactionHistoryViewModel::class.java
+
+    override fun layoutId(): Int = R.layout.activity_payment_status
+
+    override fun initiate() {
+        onClickListener()
         intent?.extras?.apply {
             transactionStatus = getString("transactionStatus", "")
             transactionResponseId = getString("transactionResponseId", "")
             transactionRefId = getString("transactionRefId", "")
             transactionAmount = getString("transactionAmount", "")
             transactionType = getString("transactionType", "")
+            cartListData =
+                getParcelableArrayList<CartResponseModel>(keyCartData) as ArrayList<CartResponseModel>
         }
         initToolBar()
         setPaymentStatusData()
-
+        viewModel.cartDetailsLiveData.postValue(cartListData)
     }
+
+
+    /*   private fun initViews() {
+           paymentStatusBinding =
+               DataBindingUtil.setContentView(
+                   this@PaymentStatusActivity,
+                   R.layout.activity_payment_status
+               )
+
+
+       }*/
 
     @SuppressLint("DefaultLocale")
     private fun setPaymentStatusData() {
-        paymentStatusBinding?.apply {
+        layoutBinding?.apply {
             status = if (transactionStatus == KEY_SUCCESS_TRANSACTION_STATUS) {
                 BindingUtils.string(R.string.payment_complete)
             } else {
@@ -101,7 +126,7 @@ class PaymentStatusActivity : AppCompatActivity() {
     }
 
     private fun initToolBar() {
-        setSupportActionBar(paymentStatusBinding?.appbarLayout?.toolbar)
+        setSupportActionBar(layoutBinding?.appbarLayout?.toolbar)
         val actionBar = supportActionBar
         actionBar!!.apply {
             setDisplayShowHomeEnabled(true) // show or hide the default home button
@@ -110,7 +135,7 @@ class PaymentStatusActivity : AppCompatActivity() {
         }
 
         try {
-            paymentStatusBinding!!.apply {
+            layoutBinding!!.apply {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     if (appbarLayout.toolbar != null) {
                         appbarLayout.toolbar.elevation = 0.0f
@@ -131,5 +156,21 @@ class PaymentStatusActivity : AppCompatActivity() {
         setResult(activity_result, intent)
         super.onBackPressed()
     }
+
+    var courseDetailsBottomSheet: CoursePerchesDetailsBottomSheet? = null
+
+    // click listener on the details
+    fun onClickListener() {
+        layoutBinding?.apply {
+            lblPurchaseDetail.setOnClickListener {
+                courseDetailsBottomSheet = CoursePerchesDetailsBottomSheet(true,true)
+                courseDetailsBottomSheet?.show(supportFragmentManager,"Dialog")
+
+
+
+            }
+        }
+    }
+
 
 }

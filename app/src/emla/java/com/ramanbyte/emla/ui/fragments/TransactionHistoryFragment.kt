@@ -8,6 +8,7 @@ import com.ramanbyte.R
 import com.ramanbyte.base.BaseFragment
 import com.ramanbyte.databinding.FragmentTransactionHistoryBinding
 import com.ramanbyte.emla.adapters.TransactionHistoryListAdapter
+import com.ramanbyte.emla.view.CoursePerchesDetailsBottomSheet
 import com.ramanbyte.emla.view_model.TransactionHistoryViewModel
 import com.ramanbyte.utilities.AlertDialog
 import com.ramanbyte.utilities.ProgressLoader
@@ -20,13 +21,15 @@ import com.ramanbyte.utilities.ProgressLoader
 class TransactionHistoryFragment :
     BaseFragment<FragmentTransactionHistoryBinding, TransactionHistoryViewModel>() {
     var mContext: Context? = null
+
+    var courseDetailsBottomSheet: CoursePerchesDetailsBottomSheet ?= null
     override val viewModelClass: Class<TransactionHistoryViewModel>
         get() = TransactionHistoryViewModel::class.java
 
     override fun layoutId(): Int = R.layout.fragment_transaction_history
 
     override fun initiate() {
-        layoutBinding.apply {
+     layoutBinding.apply {
 
             ProgressLoader(mContext!!, viewModel)
             AlertDialog(mContext!!, viewModel)
@@ -37,23 +40,33 @@ class TransactionHistoryFragment :
             noInternet.viewModel = viewModel
             somethingWentWrong.viewModel = viewModel
 
-            viewModel.apply {
+           viewModel.apply {
 
                 getTransactionsHistory()
 
-                transactionHistoryListLiveData.observe(this@TransactionHistoryFragment, Observer {
+                 transactionHistoryListLiveData.observe(this@TransactionHistoryFragment, Observer {
                     if (it != null) {
-                        val adpter = TransactionHistoryListAdapter(viewModel, it)
-                        rvMyTransactions.apply {
-                            layoutManager =
-                                LinearLayoutManager(context!!, RecyclerView.VERTICAL, false)
-                            adapter = adpter
-                        }
-                    }
-                    transactionHistoryListLiveData.value = null
-                })
+                         val adpter = TransactionHistoryListAdapter(viewModel, it)
+                         rvMyTransactions.apply {
+                             layoutManager =
+                                 LinearLayoutManager(context!!, RecyclerView.VERTICAL, false)
+                             adapter = adpter
+                         }
+                     }
+                    //transactionHistoryListLiveData.value = null
+                 })
 
-            }
+
+               coureseDetailClicked.observe(this@TransactionHistoryFragment, Observer {
+                   it?.let {
+                       if (it)
+                       courseDetailsBottomSheet = CoursePerchesDetailsBottomSheet(false,true)
+                       courseDetailsBottomSheet?.show(childFragmentManager,"Courece Details")
+
+                   }
+               })
+
+             }
         }
     }
 

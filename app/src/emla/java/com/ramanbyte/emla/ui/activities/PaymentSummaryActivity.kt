@@ -148,7 +148,7 @@ class PaymentSummaryActivity : AppCompatActivity(), KodeinAware {
                                 KEY_SUCCESS_TRANSACTION_STATUS,
                                 it.toString(),
                                 amountLiveData.value.toString(),
-                                paymentType, transactionRefId
+                                paymentType, transactionRefId,cartListData
                             ), PAYMENT_SUCCESSFUL_REQUEST_CODE
                         )
 
@@ -159,7 +159,7 @@ class PaymentSummaryActivity : AppCompatActivity(), KodeinAware {
                                 this@PaymentSummaryActivity,
                                 KEY_FAIL_TRANSACTION_STATUS,
                                 "",
-                                amountLiveData.value.toString(), paymentType, transactionRefId
+                                amountLiveData.value.toString(), paymentType, transactionRefId,cartListData
                             )
                         )
                     }

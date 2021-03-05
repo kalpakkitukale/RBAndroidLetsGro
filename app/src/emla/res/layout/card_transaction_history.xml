@@ -17,6 +17,7 @@
     <androidx.cardview.widget.CardView
         style="@style/customCard"
         android:layout_width="match_parent"
+        android:onClick="@{() -> viewModel.perchesDetailsClick(transactionHistoryModel)}"
         android:layout_height="wrap_content">
 
         <androidx.constraintlayout.widget.ConstraintLayout
