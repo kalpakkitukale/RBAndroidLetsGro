@@ -57,6 +57,7 @@ class MyFavouriteVideoViewModel(var mContext: Context) : BaseViewModel(mContext)
                     View.GONE
                 )
                 coroutineToggleLoader()
+                isLoaderShowingLiveData.postValue(false)
             } catch (e: ApiException) {
                 e.printStackTrace()
                 AppLog.errorLog(e.message, e)
@@ -68,6 +69,7 @@ class MyFavouriteVideoViewModel(var mContext: Context) : BaseViewModel(mContext)
                     View.VISIBLE
                 )
                 coroutineToggleLoader()
+                isLoaderShowingLiveData.postValue(false)
             } catch (e: NoInternetException) {
                 e.printStackTrace()
                 AppLog.errorLog(e.message, e)
@@ -79,6 +81,7 @@ class MyFavouriteVideoViewModel(var mContext: Context) : BaseViewModel(mContext)
                     View.GONE
                 )
                 coroutineToggleLoader()
+                isLoaderShowingLiveData.postValue(false)
             } catch (e: NoDataException) {
                 e.printStackTrace()
                 AppLog.errorLog(e.message, e)
@@ -90,6 +93,8 @@ class MyFavouriteVideoViewModel(var mContext: Context) : BaseViewModel(mContext)
                     View.GONE
                 )
                 coroutineToggleLoader()
+                isLoaderShowingLiveData.postValue(false)
+
             }
         }
 

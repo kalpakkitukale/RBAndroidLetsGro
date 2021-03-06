@@ -1,6 +1,7 @@
 package com.ramanbyte.emla.view_model
 
 import android.content.Context
+import android.content.Intent
 import android.view.View
 import androidx.lifecycle.MutableLiveData
 import com.ramanbyte.R
@@ -13,6 +14,7 @@ import com.ramanbyte.emla.data_layer.repositories.TransactionRepository
 import com.ramanbyte.emla.models.CourseDetailsModel
 import com.ramanbyte.emla.models.TransactionHistoryModel
 import com.ramanbyte.emla.models.response.CartResponseModel
+import com.ramanbyte.emla.ui.activities.ContainerActivity
 import com.ramanbyte.utilities.AppLog
 import com.ramanbyte.utilities.BindingUtils
 import com.ramanbyte.utilities.KEY_BLANK
@@ -31,7 +33,7 @@ class TransactionHistoryViewModel(var mContext: Context) : BaseViewModel(mContex
         value = arrayListOf()
     }
 
-    var cartDetailsLiveData  = MutableLiveData<ArrayList<CartResponseModel>>().apply {
+    var cartDetailsLiveData = MutableLiveData<ArrayList<CartResponseModel>>().apply {
         postValue(ArrayList<CartResponseModel>())
     }
 
@@ -95,8 +97,9 @@ class TransactionHistoryViewModel(var mContext: Context) : BaseViewModel(mContex
             }
         }
     }
+
     // transaction Deatils
-    var coureseDetailClicked= MutableLiveData<Boolean>().apply {
+    var coureseDetailClicked = MutableLiveData<Boolean>().apply {
         postValue(false)
     }
     var courseDetailsMutableLiveData = MutableLiveData<CourseDetailsModel>().apply {
@@ -119,11 +122,20 @@ class TransactionHistoryViewModel(var mContext: Context) : BaseViewModel(mContex
     }
 
     // on bottomsheet click listener
-    var onClickedBottomSheetLiveData= MutableLiveData<Boolean>().apply {
-       value = null
+    var onClickedBottomSheetLiveData = MutableLiveData<Boolean>().apply {
+        value = null
     }
-    fun onCloseClick(view: View){
+
+    fun onCloseClick(view: View) {
         onClickedBottomSheetLiveData.postValue(true)
     }
 
+    // on click for the on payment fail sucessful click
+    fun onPaymentFailSucessfulClick(view: View) {
+        val intent = Intent(mContext, ContainerActivity::class.java)
+        mContext.startActivity(intent)
+
     }
+
+
+}

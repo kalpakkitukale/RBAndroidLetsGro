@@ -26,6 +26,10 @@
 
         <import type="com.ramanbyte.utilities.DateUtils" />
 
+        <variable
+            name="trasacationViewModel"
+            type="com.ramanbyte.emla.view_model.TransactionHistoryViewModel" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -216,6 +220,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/dp_10"
             android:text="@string/done"
+            android:onClick="@{trasacationViewModel::onPaymentFailSucessfulClick}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

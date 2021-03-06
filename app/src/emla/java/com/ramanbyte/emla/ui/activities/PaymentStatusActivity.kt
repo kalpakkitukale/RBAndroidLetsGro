@@ -88,6 +88,8 @@ class PaymentStatusActivity :
         initToolBar()
         setPaymentStatusData()
         viewModel.cartDetailsLiveData.postValue(cartListData)
+        layoutBinding.trasacationViewModel = viewModel
+
     }
 
 
