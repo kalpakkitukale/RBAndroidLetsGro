@@ -3,21 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
         <variable
             name="viewModel"
             type="com.ramanbyte.emla.view_model.TransactionHistoryViewModel" />
-
         <variable
             name="transactionHistoryModel"
             type="com.ramanbyte.emla.models.TransactionHistoryModel" />
-
     </data>
 
     <androidx.cardview.widget.CardView
         style="@style/customCard"
         android:layout_width="match_parent"
-        android:onClick="@{() -> viewModel.perchesDetailsClick(transactionHistoryModel)}"
         android:layout_height="wrap_content">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -39,6 +35,7 @@
                 style="@style/TextViewDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="@{() -> viewModel.perchesDetailsClick(transactionHistoryModel)}"
                 android:text="@string/purchase_details"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/lblPurchaseRef" />

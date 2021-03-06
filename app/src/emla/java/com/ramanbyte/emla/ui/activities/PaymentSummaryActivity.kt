@@ -90,7 +90,7 @@ class PaymentSummaryActivity : AppCompatActivity(), KodeinAware {
             this@PaymentSummaryActivity, factory
         ).get(PaymentSummaryViewModel::class.java)
 
-        ProgressLoader(this@PaymentSummaryActivity, paymentSummaryViewModel!!)
+    //    ProgressLoader(this@PaymentSummaryActivity, paymentSummaryViewModel!!)
 
         paymentSummaryBinding?.apply {
             paymentSummaryViewModel = this@PaymentSummaryActivity.paymentSummaryViewModel
