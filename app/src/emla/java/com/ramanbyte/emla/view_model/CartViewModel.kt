@@ -61,6 +61,7 @@ class CartViewModel(var mContext: Context) : BaseViewModel(mContext = mContext) 
                     View.GONE
                 )
                 coroutineToggleLoader()
+                isLoaderShowingLiveData.postValue(false)
             } catch (e: ApiException) {
                 e.printStackTrace()
                 AppLog.errorLog(e.message, e)
@@ -71,8 +72,10 @@ class CartViewModel(var mContext: Context) : BaseViewModel(mContext = mContext) 
                     BindingUtils.string(R.string.some_thing_went_wrong),
                     View.VISIBLE
                 )
+
                 coroutineToggleLoader()
-            } catch (e: NoInternetException) {
+                isLoaderShowingLiveData.postValue(false)
+               } catch (e: NoInternetException) {
                 e.printStackTrace()
                 AppLog.errorLog(e.message, e)
                 toggleLayoutVisibility(
@@ -83,6 +86,7 @@ class CartViewModel(var mContext: Context) : BaseViewModel(mContext = mContext) 
                     View.GONE
                 )
                 coroutineToggleLoader()
+                isLoaderShowingLiveData.postValue(false)
             } catch (e: NoDataException) {
                 e.printStackTrace()
                 AppLog.errorLog(e.message, e)
@@ -94,6 +98,7 @@ class CartViewModel(var mContext: Context) : BaseViewModel(mContext = mContext) 
                     View.GONE
                 )
                 coroutineToggleLoader()
+                isLoaderShowingLiveData.postValue(false)
             }
         }
     }
