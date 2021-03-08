@@ -12,7 +12,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.findNavController
 import com.airpay.airpaysdk_simplifiedotp.AirpayActivity
 import com.airpay.airpaysdk_simplifiedotp.Transaction
 import com.payu.india.Payu.Payu
@@ -28,7 +27,6 @@ import com.ramanbyte.emla.models.response.CartResponseModel
 import com.ramanbyte.emla.view_model.PaymentSummaryViewModel
 import com.ramanbyte.utilities.*
 import com.ramanbyte.view_model.factory.BaseViewModelFactory
-import kotlinx.android.synthetic.main.dialog_login_with_classroomplus.*
 import org.json.JSONObject
 import org.kodein.di.Copy
 import org.kodein.di.Kodein
@@ -92,7 +90,7 @@ class PaymentSummaryActivity : AppCompatActivity(), KodeinAware {
             this@PaymentSummaryActivity, factory
         ).get(PaymentSummaryViewModel::class.java)
 
-    //    ProgressLoader(this@PaymentSummaryActivity, paymentSummaryViewModel!!)
+        //    ProgressLoader(this@PaymentSummaryActivity, paymentSummaryViewModel!!)
 
         paymentSummaryBinding?.apply {
             paymentSummaryViewModel = this@PaymentSummaryActivity.paymentSummaryViewModel
@@ -150,7 +148,7 @@ class PaymentSummaryActivity : AppCompatActivity(), KodeinAware {
                                 KEY_SUCCESS_TRANSACTION_STATUS,
                                 it.toString(),
                                 amountLiveData.value.toString(),
-                                paymentType, transactionRefId,cartListData
+                                paymentType, transactionRefId, cartListData
                             ), PAYMENT_SUCCESSFUL_REQUEST_CODE
                         )
 
@@ -161,7 +159,10 @@ class PaymentSummaryActivity : AppCompatActivity(), KodeinAware {
                                 this@PaymentSummaryActivity,
                                 KEY_FAIL_TRANSACTION_STATUS,
                                 "",
-                                amountLiveData.value.toString(), paymentType, transactionRefId,cartListData
+                                amountLiveData.value.toString(),
+                                paymentType,
+                                transactionRefId,
+                                cartListData
                             )
                         )
                     }
@@ -272,14 +273,12 @@ class PaymentSummaryActivity : AppCompatActivity(), KodeinAware {
                                                 transactionRefId = payUObject.getString("txnid")
                                             } else {
                                                 // payment fail
-                                                transactionStatus =
-                                                    KEY_FAIL_TRANSACTION_STATUS
+                                                transactionStatus = KEY_FAIL_TRANSACTION_STATUS
                                                 isPaymentSuccessFul = false
                                             }
                                         } else {
                                             // payment fail
-                                            transactionStatus =
-                                                KEY_FAIL_TRANSACTION_STATUS
+                                            transactionStatus = KEY_FAIL_TRANSACTION_STATUS
                                             isPaymentSuccessFul = false
                                         }
                                     } else {
@@ -314,14 +313,11 @@ class PaymentSummaryActivity : AppCompatActivity(), KodeinAware {
                                 AppLog.infoLog("transactionList --------------     $transactionList")
                                 if (transactionList.size > 0) {
                                     transactionList[0].apply {
-                                        if (!status.isNullOrEmpty() && status == "200"
-                                            && !statusmsg.isNullOrEmpty() && statusmsg.toLowerCase() == "success"
-                                        ) {
-                                            transactionStatus =
-                                                KEY_SUCCESS_TRANSACTION_STATUS
+                                        /* if (!status.isNullOrEmpty() && status == "200" && !statusmsg.isNullOrEmpty() && statusmsg.toLowerCase() == "success") {*/
+                                        if (!status.isNullOrEmpty() && status.equals("200", true) && !statusmsg.isNullOrEmpty() && statusmsg.toLowerCase().equals("success")) {
+                                            transactionStatus = KEY_SUCCESS_TRANSACTION_STATUS
                                         } else {
-                                            transactionStatus =
-                                                KEY_FAIL_TRANSACTION_STATUS
+                                            transactionStatus = KEY_FAIL_TRANSACTION_STATUS
                                             isPaymentSuccessFul = false
                                         }
                                         flag = status

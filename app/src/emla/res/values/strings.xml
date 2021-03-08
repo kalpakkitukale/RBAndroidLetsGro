@@ -352,5 +352,6 @@ Content
     <string name="performance">Performance</string>
     <string name="topic_list">Topic List</string>
     <string name="cart">Cart</string>
+    <string name="Payment_Status_activity">Payment Status Activity</string>
 
 </resources>

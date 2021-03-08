@@ -2,6 +2,7 @@ package com.ramanbyte.emla.view
 
 import android.content.Context
 import android.os.Bundle
+import android.view.WindowManager
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -74,5 +75,15 @@ class CoursePerchesDetailsBottomSheet(var isActivityParent: Boolean, useParent: 
             rvPerchaesDetails.layoutManager = layoutManager
             rvPerchaesDetails.adapter = adapter
         }
+    }
+
+
+    override fun onStart() {
+        super.onStart()
+        val window = dialog!!.window
+        val windowParams = window!!.attributes
+        windowParams.dimAmount = 0.70f
+        windowParams.flags = windowParams.flags or WindowManager.LayoutParams.FLAG_DIM_BEHIND
+        window.attributes = windowParams
     }
 }

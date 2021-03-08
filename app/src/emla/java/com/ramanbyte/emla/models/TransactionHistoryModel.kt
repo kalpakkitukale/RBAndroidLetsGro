@@ -1,6 +1,5 @@
 package com.ramanbyte.emla.models
 
-import com.ramanbyte.emla.models.request.CourseFeeRequestModel
 import com.ramanbyte.utilities.DateUtils
 import com.ramanbyte.utilities.DateUtils.TIME_DISPLAY_PATTERN
 import com.ramanbyte.utilities.KEY_BLANK
@@ -22,6 +21,7 @@ class TransactionHistoryModel {
         )
     var amountPaid: String = KEY_BLANK
     var paymentMethod: String = KEY_BLANK
-   var fees :List <CourseFeesModel> = arrayListOf()
+    var transactionStatus: String? = ""
+    var fees: List<CourseFeesModel> = arrayListOf()
 
 }
