@@ -20,6 +20,7 @@ class CartResponseModel() : Parcelable, BaseObservable() {
     var createdDate: String? = KEY_BLANK
     var appStatus: String? = KEY_BLANK
     var delStatus: String? = KEY_BLANK
+    var totalPaid: String? = ""
 
     constructor(parcel: Parcel) : this() {
         courseName = parcel.readString()

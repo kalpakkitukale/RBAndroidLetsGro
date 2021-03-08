@@ -84,6 +84,7 @@ class PaymentStatusActivity :
             transactionType = getString("transactionType", "")
             cartListData =
                 getParcelableArrayList<CartResponseModel>(keyCartData) as ArrayList<CartResponseModel>
+            cartListData.forEach { it.totalPaid = transactionAmount }
         }
         initToolBar()
         setPaymentStatusData()
@@ -167,8 +168,6 @@ class PaymentStatusActivity :
             lblPurchaseDetail.setOnClickListener {
                 courseDetailsBottomSheet = CoursePerchesDetailsBottomSheet(true,true)
                 courseDetailsBottomSheet?.show(supportFragmentManager,"Dialog")
-
-
 
             }
         }

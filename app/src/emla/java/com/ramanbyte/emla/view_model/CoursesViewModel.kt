@@ -8,13 +8,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.findNavController
 import androidx.paging.PagedList
+import com.amazonaws.mobile.auth.core.internal.util.ThreadUtils.runOnUiThread
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseViewModel
 import com.ramanbyte.data_layer.CoroutineUtils
 import com.ramanbyte.data_layer.pagination.PaginationMessages
 import com.ramanbyte.emla.data_layer.network.exception.ApiException
 import com.ramanbyte.emla.data_layer.network.exception.NoInternetException
-import com.ramanbyte.emla.data_layer.network.exception.ResourceNotFound
 import com.ramanbyte.emla.data_layer.repositories.CoursesRepository
 import com.ramanbyte.emla.data_layer.repositories.RegistrationRepository
 import com.ramanbyte.emla.data_layer.repositories.TransactionRepository
@@ -26,7 +26,6 @@ import com.ramanbyte.emla.models.response.CommonDropdownModel
 import com.ramanbyte.utilities.*
 import kotlinx.android.synthetic.emla.card_course.view.*
 import org.kodein.di.generic.instance
-import java.util.concurrent.TimeoutException
 
 /**
  * @author Vinay Kumbhar <vinay.pkumbhar@gmail.com>
@@ -106,75 +105,82 @@ class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
     }
 
     fun myCourseListPagination() {
-            transactionRepository.getPaginationResponseHandler().observeForever {
-                if (it != null) {
-                    paginationResponse(
-                            it,
-                            //PaginationMessages("No Data", "No More data", "No Internet", "Something Wrong")
-                            PaginationMessages(
-                                    BindingUtils.string(R.string.no_courses),
-                                    BindingUtils.string(R.string.no_more_courses),
-                                    BindingUtils.string(R.string.please_make_sure_you_are_connected_to_internet),
-                                    BindingUtils.string(R.string.some_thing_went_wrong)
-                            )
+        transactionRepository.getPaginationResponseHandler().observeForever {
+            if (it != null) {
+                paginationResponse(
+                    it,
+                    //PaginationMessages("No Data", "No More data", "No Internet", "Something Wrong")
+                    PaginationMessages(
+                        BindingUtils.string(R.string.no_courses),
+                        BindingUtils.string(R.string.no_more_courses),
+                        BindingUtils.string(R.string.please_make_sure_you_are_connected_to_internet),
+                        BindingUtils.string(R.string.some_thing_went_wrong)
                     )
-                    AppLog.infoLog("Pagination :: ${it.msg} :: ${it.status}")
-                }
+                )
+                AppLog.infoLog("Pagination :: ${it.msg} :: ${it.status}")
             }
+        }
 
-            transactionRepository.myCourseList()
+        transactionRepository.myCourseList()
 
     }
 
     fun coursesPagedList(): LiveData<PagedList<CoursesModel>>? {
         return coursesRepository.coursesPagedList
     }
+
     fun myCoursesPagedList(): LiveData<PagedList<CoursesModel>>? {
         return transactionRepository.coursesPagedList
     }
 
     fun insertCartData(view: View, coursesModel: CoursesModel) {
-        CoroutineUtils.main {
-            try {
-                isLoaderShowingLiveData.postValue(true)
-                val response =
-                    transactionRepository.insertCart(cartRequestModel = CartRequestModel(),
-                        courseId = coursesModel.courseId)
-               view.ivCart.visibility = View.GONE
-                view.tvLabeCart.visibility = View.GONE
-                isLoaderShowingLiveData.postValue(false)
-            } catch (e: ApiException) {
-                isLoaderShowingLiveData.postValue(false)
-                setAlertDialogResourceModelMutableLiveData(
-                    e.message.toString(),
-                    BindingUtils.drawable(
-                        R.drawable.something_went_wrong
-                    )!!,
-                    true,
-                    BindingUtils.string(R.string.strOk), {
-                        isAlertDialogShown.postValue(false)
-                    }
-                )
-                isAlertDialogShown.postValue(true)
-            } catch (e: NoInternetException) {
-                e.printStackTrace()
-                AppLog.errorLog(e.message, e)
-                isLoaderShowingLiveData.postValue(false)
-                setAlertDialogResourceModelMutableLiveData(
-                    BindingUtils.string(R.string.no_internet_message),
-                    BindingUtils.drawable(R.drawable.ic_no_internet)!!,
-                    false,
-                    BindingUtils.string(R.string.tryAgain), {
-                        isAlertDialogShown.postValue(false)
-                        insertCartData(view, coursesModel)
-                    },
-                    BindingUtils.string(R.string.no), {
-                        isAlertDialogShown.postValue(false)
-                    }
-                )
-                isAlertDialogShown.postValue(true)
+        runOnUiThread(Runnable {
+
+            CoroutineUtils.main {
+                try {
+                  isLoaderShowingLiveData.postValue(true)
+                    val response = transactionRepository.insertCart(
+                        cartRequestModel = CartRequestModel(),
+                        courseId = coursesModel.courseId
+                    )
+                    view.ivCart.visibility = View.INVISIBLE
+                    view.tvLabeCart.visibility = View.INVISIBLE
+                    isLoaderShowingLiveData.postValue(false)
+                } catch (e: ApiException) {
+                    isLoaderShowingLiveData.postValue(false)
+                    setAlertDialogResourceModelMutableLiveData(
+                        e.message.toString(),
+                        BindingUtils.drawable(
+                            R.drawable.something_went_wrong
+                        )!!,
+                        true,
+                        BindingUtils.string(R.string.strOk), {
+                            isAlertDialogShown.postValue(false)
+                        }
+                    )
+                    isAlertDialogShown.postValue(true)
+                } catch (e: NoInternetException) {
+                    e.printStackTrace()
+                    AppLog.errorLog(e.message, e)
+                    isLoaderShowingLiveData.postValue(false)
+                    setAlertDialogResourceModelMutableLiveData(
+                        BindingUtils.string(R.string.no_internet_message),
+                        BindingUtils.drawable(R.drawable.ic_no_internet)!!,
+                        false,
+                        BindingUtils.string(R.string.tryAgain), {
+                            isAlertDialogShown.postValue(false)
+                            insertCartData(view, coursesModel)
+                        },
+                        BindingUtils.string(R.string.no), {
+                            isAlertDialogShown.postValue(false)
+                        }
+                    )
+                    isAlertDialogShown.postValue(true)
+                }
             }
-        }
+        })
+
+
     }
 
     /*

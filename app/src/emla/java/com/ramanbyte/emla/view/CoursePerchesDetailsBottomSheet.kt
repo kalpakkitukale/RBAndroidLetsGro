@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseBottomSheetFragment
 import com.ramanbyte.databinding.CoursePerchaesDetailsBottomSheetBinding
-import com.ramanbyte.databinding.CoursePerchesDetailItemListBinding
 import com.ramanbyte.emla.adapters.PurchaseCourseDetailsAdapter
 import com.ramanbyte.emla.models.response.CartResponseModel
 import com.ramanbyte.emla.view_model.TransactionHistoryViewModel
@@ -46,6 +45,7 @@ class CoursePerchesDetailsBottomSheet(var isActivityParent: Boolean, useParent: 
             cartDetailsLiveData.observe(this@CoursePerchesDetailsBottomSheet, Observer {
                 it?.let {
                     setAdapter(it)
+                    layoutBinding?.tvTotalAmount.setText(it[0].totalPaid)
                 }
             })
 

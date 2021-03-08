@@ -51,6 +51,7 @@ class PurchaseCourseDetailsAdapter(var dataList: ArrayList<CartResponseModel>,va
         fun bind(dataPojo: CartResponseModel) {
             binding.apply {
                 this.cardData = dataPojo
+              //  this.coursewiseData = dataPojo.courseFee
 
             }
         }

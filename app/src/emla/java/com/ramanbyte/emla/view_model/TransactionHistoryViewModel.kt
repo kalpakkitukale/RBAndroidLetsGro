@@ -115,7 +115,8 @@ class TransactionHistoryViewModel(var mContext: Context) : BaseViewModel(mContex
                 this.courseName = it.courseDetails.course_Name
                 this.courseImage = it.courseDetails.courseIamge
                 this.courseDescription = it.courseDetails.description
-                this.courseFee = transactiondata.amountPaid
+                this.courseFee = it.courseFeeStructure.courseFee.toString()
+                this.totalPaid = transactiondata.amountPaid
             })
         }
         cartDetailsLiveData.postValue(cardDataList)
@@ -132,8 +133,8 @@ class TransactionHistoryViewModel(var mContext: Context) : BaseViewModel(mContex
 
     // on click for the on payment fail sucessful click
     fun onPaymentFailSucessfulClick(view: View) {
-        val intent = Intent(mContext, ContainerActivity::class.java)
-        mContext.startActivity(intent)
+       /* val intent = Intent(mContext, ContainerActivity::class.java)
+        mContext.startActivity(intent)*/
 
     }
 
