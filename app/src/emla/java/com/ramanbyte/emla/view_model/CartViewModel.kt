@@ -44,12 +44,13 @@ class CartViewModel(var mContext: Context) : BaseViewModel(mContext = mContext) 
 
     fun getCartList() {
         CoroutineUtils.main {
+            var fee = 0.0f
             try {
                // coroutineToggleLoader(BindingUtils.string(R.string.getting_reply_list))
                 isLoaderShowingLiveData.postValue(true)
                 loaderMessageLiveData.set(BindingUtils.string(R.string.getting_reply_list))
                 val response = transactionRepository.getCart()
-                var fee = 0.0f
+
                 for (i in 0 until response!!.size) {
                     fee = response[i].courseFee!!.toFloat().plus(fee)
                 }
@@ -91,6 +92,8 @@ class CartViewModel(var mContext: Context) : BaseViewModel(mContext = mContext) 
                 isLoaderShowingLiveData.postValue(false)
             } catch (e: NoDataException) {
                 e.printStackTrace()
+                fee = 0.0f
+                courseFess.postValue(fee)
                 AppLog.errorLog(e.message, e)
                 toggleLayoutVisibility(
                     View.GONE,
@@ -111,6 +114,7 @@ class CartViewModel(var mContext: Context) : BaseViewModel(mContext = mContext) 
                 isLoaderShowingLiveData.postValue(true)
                 val response = cartResponseModel.id?.let { transactionRepository.deleteCart(it) }
                 isLoaderShowingLiveData.postValue(false)
+                getCartList()
             } catch (e: ApiException) {
                 e.printStackTrace()
                 AppLog.errorLog(e.message, e)
@@ -148,7 +152,7 @@ class CartViewModel(var mContext: Context) : BaseViewModel(mContext = mContext) 
                 isLoaderShowingLiveData.postValue(false)
             }
         }
-        getCartList()
+
     }
 
     fun clickOnProceedToPay(view: View) {
