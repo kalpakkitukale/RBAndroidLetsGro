@@ -1,6 +1,7 @@
 package com.ramanbyte.emla.view_model
 
 import android.content.Context
+import android.content.Intent
 import android.view.View
 import androidx.lifecycle.MutableLiveData
 import com.ramanbyte.R
@@ -10,7 +11,10 @@ import com.ramanbyte.emla.data_layer.network.exception.ApiException
 import com.ramanbyte.emla.data_layer.network.exception.NoDataException
 import com.ramanbyte.emla.data_layer.network.exception.NoInternetException
 import com.ramanbyte.emla.data_layer.repositories.TransactionRepository
+import com.ramanbyte.emla.models.CourseDetailsModel
 import com.ramanbyte.emla.models.TransactionHistoryModel
+import com.ramanbyte.emla.models.response.CartResponseModel
+import com.ramanbyte.emla.ui.activities.ContainerActivity
 import com.ramanbyte.utilities.AppLog
 import com.ramanbyte.utilities.BindingUtils
 import com.ramanbyte.utilities.KEY_BLANK
@@ -27,6 +31,10 @@ class TransactionHistoryViewModel(var mContext: Context) : BaseViewModel(mContex
 
     var transactionHistoryListLiveData = MutableLiveData<List<TransactionHistoryModel>>().apply {
         value = arrayListOf()
+    }
+
+    var cartDetailsLiveData = MutableLiveData<ArrayList<CartResponseModel>>().apply {
+        postValue(ArrayList<CartResponseModel>())
     }
 
     override var noInternetTryAgain: () -> Unit = {
@@ -89,4 +97,45 @@ class TransactionHistoryViewModel(var mContext: Context) : BaseViewModel(mContex
             }
         }
     }
+
+    // transaction Deatils
+    var coureseDetailClicked = MutableLiveData<Boolean>().apply {
+        postValue(false)
+    }
+    var courseDetailsMutableLiveData = MutableLiveData<CourseDetailsModel>().apply {
+        postValue(CourseDetailsModel())
+    }
+
+    var cardDataList = ArrayList<CartResponseModel>()
+    fun perchesDetailsClick(transactiondata: TransactionHistoryModel) {
+        coureseDetailClicked.postValue(true)
+        cardDataList.clear()
+        transactiondata.fees.forEach {
+            cardDataList.add(CartResponseModel().apply {
+                this.courseName = it.courseDetails.course_Name
+                this.courseImage = it.courseDetails.courseIamge
+                this.courseDescription = it.courseDetails.description
+                this.courseFee = transactiondata.amountPaid
+            })
+        }
+        cartDetailsLiveData.postValue(cardDataList)
+    }
+
+    // on bottomsheet click listener
+    var onClickedBottomSheetLiveData = MutableLiveData<Boolean>().apply {
+        value = null
+    }
+
+    fun onCloseClick(view: View) {
+        onClickedBottomSheetLiveData.postValue(true)
+    }
+
+    // on click for the on payment fail sucessful click
+    fun onPaymentFailSucessfulClick(view: View) {
+        val intent = Intent(mContext, ContainerActivity::class.java)
+        mContext.startActivity(intent)
+
+    }
+
+
 }

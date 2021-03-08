@@ -29,8 +29,8 @@ class CoursesModel() : Parcelable {
     var summativeAssessmentStatus: String? = null
     var summativeaAtemptCount: Int = 0
     var courseFee: Float = 0.0F
-
     var isInCart:Boolean=false
+    var isPurchase: Boolean = false
 
 
     constructor(parcel: Parcel) : this() {
@@ -45,6 +45,7 @@ class CoursesModel() : Parcelable {
         preAssessmentStatus = parcel.readString()
         summativeAssessmentStatus = parcel.readString()
         summativeaAtemptCount = parcel.readInt()
+        isPurchase = parcel.readBoolean()
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -59,6 +60,7 @@ class CoursesModel() : Parcelable {
         parcel.writeString(preAssessmentStatus)
         parcel.writeString(summativeAssessmentStatus)
         parcel.writeInt(summativeaAtemptCount)
+        parcel.writeBoolean(isPurchase)
     }
 
     override fun describeContents(): Int {

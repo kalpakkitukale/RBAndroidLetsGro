@@ -33,21 +33,10 @@ class CoursesAdapter(private val displayMetrics: DisplayMetrics, var myCourse:In
         val coursesModel: CoursesModel = getItem(position)!!
         holder.bind(coursesModel.apply {
 
-            if ((coursesModel.preAssessmentStatus.equals(
-                    "true",
-                    true
-                )) && (coursesModel.summativeAssessmentStatus.equals("true", true))
-            ) {
+            if ((coursesModel.preAssessmentStatus.equals("true", true)) && (coursesModel.summativeAssessmentStatus.equals("true", true))) {
                 holder.cardCourseBinding.ivStatus.visibility = View.VISIBLE
                 holder.cardCourseBinding.ivStatus.setImageDrawable(BindingUtils.drawable(R.drawable.ic_tick_circle))
-            } else if (coursesModel.preAssessmentStatus.equals(
-                    "true",
-                    true
-                ) && (coursesModel.summativeAssessmentStatus.equals(
-                    "false",
-                    true
-                ) || coursesModel.summativeAssessmentStatus.isNullOrEmpty())
-            ) {
+            } else if (coursesModel.preAssessmentStatus.equals("true", true) && (coursesModel.summativeAssessmentStatus.equals("false", true) || coursesModel.summativeAssessmentStatus.isNullOrEmpty())) {
                 holder.cardCourseBinding.ivStatus.visibility = View.VISIBLE
                 holder.cardCourseBinding.ivStatus.setImageDrawable(BindingUtils.drawable(R.drawable.ic_success))
             } else {
@@ -63,7 +52,7 @@ class CoursesAdapter(private val displayMetrics: DisplayMetrics, var myCourse:In
                 holder.cardCourseBinding.tvLabeCart.visibility = View.INVISIBLE
                 holder.cardCourseBinding.tvLabePerformance.visibility = View.INVISIBLE
             }else{
-                if (coursesModel.isInCart || coursesModel.courseFee==0.0F) {
+                if (coursesModel.isInCart || coursesModel.courseFee==0.0F || coursesModel.isPurchase) {
                     holder.cardCourseBinding.ivCart.visibility = View.INVISIBLE
                     holder.cardCourseBinding.tvLabeCart.visibility = View.INVISIBLE
                 }

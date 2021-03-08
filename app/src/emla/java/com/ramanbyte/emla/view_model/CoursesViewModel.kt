@@ -147,11 +147,9 @@ class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
                 isLoaderShowingLiveData.postValue(true)
                 val response =
                     transactionRepository.insertCart(cartRequestModel = CartRequestModel(),
-                        courseId = coursesModel.courseId
-
-                    )
-                view.ivCart.visibility = View.INVISIBLE
-                view.tvLabeCart.visibility = View.INVISIBLE
+                        courseId = coursesModel.courseId)
+               view.ivCart.visibility = View.GONE
+                view.tvLabeCart.visibility = View.GONE
                 isLoaderShowingLiveData.postValue(false)
             } catch (e: ApiException) {
                 isLoaderShowingLiveData.postValue(false)

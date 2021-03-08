@@ -222,5 +222,6 @@ class UserDetailsModel : BaseObservable() {
     var user_userDelStatus = KEY_N
     var user_userStatus = KEY_APP
     var user_userIsActive = KEY_Y
+    var classroomUserId : Int = 0
 }
 

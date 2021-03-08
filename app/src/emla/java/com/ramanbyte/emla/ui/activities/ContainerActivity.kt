@@ -157,7 +157,10 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding, ContainerViewMo
                 R.id.coursesFragment,
                 R.id.myDownloadsFragment,
                 R.id.myFavouriteVideoFragment,
-                R.id.settingFragment
+                R.id.settingFragment,
+                R.id.cartFragment,
+                R.id.transactionHistoryFragment,
+                R.id.myCourseFragment
             ), layoutBinding.drawerLayout
         )
     }

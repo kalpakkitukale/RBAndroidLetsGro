@@ -11,8 +11,8 @@ import com.ramanbyte.data_layer.pagination.PaginationResponseHandler
 import com.ramanbyte.emla.data_layer.network.api_layer.TransactionApiController
 import com.ramanbyte.emla.data_layer.pagination.PaginationDataSourceFactory
 import com.ramanbyte.emla.data_layer.room.entities.UserEntity
-import com.ramanbyte.emla.models.CoursesModel
 import com.ramanbyte.emla.models.TransactionHistoryModel
+import com.ramanbyte.emla.models.CoursesModel
 import com.ramanbyte.emla.models.UserModel
 import com.ramanbyte.emla.models.request.CartRequestModel
 import com.ramanbyte.emla.models.request.CoursesRequest
@@ -39,9 +39,10 @@ class TransactionRepository(val mContext: Context) : BaseRepository(mContext) {
 
         val deviceDetails = ""
 
-        insertTransactionRequestModel.createdBy = loginResponseModel!!.userId
-        insertTransactionRequestModel.modifyBy = loginResponseModel.userId
+        insertTransactionRequestModel.created_By = loginResponseModel!!.userId
+        insertTransactionRequestModel.modify_By = loginResponseModel.userId
         insertTransactionRequestModel.added_By = loginResponseModel.userId
+        insertTransactionRequestModel.user_Id = loginResponseModel.userId
         insertTransactionRequestModel.userId = loginResponseModel.userId
         insertTransactionRequestModel.registrationId = loginResponseModel.userId
 

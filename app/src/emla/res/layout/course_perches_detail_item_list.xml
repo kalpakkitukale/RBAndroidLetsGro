@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="cardData"
+            type="com.ramanbyte.emla.models.response.CartResponseModel" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardContainer"
+        style="@style/customCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imgCourse"
+                android:layout_width="@dimen/dp_80"
+                android:layout_height="@dimen/dp_60"
+                android:background="@drawable/ic_course_dummy"
+                android:scaleType="fitXY"
+                app:imageUrl="@{cardData.courseImageUrl}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <!--   app:imageUrl="@{cartModel.courseImageUrl}"-->
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvCourseName"
+                style="@style/TextViewTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_3"
+                android:text="@{cardData.courseName}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imgCourse"
+                app:layout_constraintTop_toTopOf="parent" />
+            <!--     android:text="@{cartModel.courseName}"-->
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvCourseDescription"
+                style="@style/TextViewSubTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{cardData.courseDescription}"
+                app:layout_constraintStart_toStartOf="@+id/tvCourseName"
+                app:layout_constraintTop_toBottomOf="@+id/tvCourseName" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvAmount"
+                style="@style/TextViewLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_rupee_indian"
+                android:text="@{cardData.courseFee}"
+                app:layout_constraintEnd_toEndOf="@id/tvCourseName"
+                app:layout_constraintStart_toStartOf="@id/tvCourseName"
+                app:layout_constraintTop_toBottomOf="@+id/tvCourseDescription" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+</layout>
