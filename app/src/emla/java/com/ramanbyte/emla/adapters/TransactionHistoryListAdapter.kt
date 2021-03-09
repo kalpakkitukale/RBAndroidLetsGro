@@ -8,7 +8,7 @@ import com.ramanbyte.R
 import com.ramanbyte.databinding.CardTransactionHistoryBinding
 import com.ramanbyte.emla.models.TransactionHistoryModel
 import com.ramanbyte.emla.view_model.TransactionHistoryViewModel
-import com.ramanbyte.utilities.BindingUtils
+import com.ramanbyte.utilities.*
 
 /**
  * Created by Mansi Manakiki on 11 Feb, 2021
@@ -54,13 +54,13 @@ class TransactionHistoryListAdapter(
             cardBinding.apply {
                 viewModel = transactionHistoryViewModel
                 val status = transactionModel.transactionStatus
-                if (status.equals("Fail", true)) {
+                if (status.equals(KEY_FAIL_TRANSACTION_STATUS,  true)) {
                     transactionModel.textColor = BindingUtils.color(R.color.colorRed)
-                } else if (status.equals("Success", true)) {
+                } else if (status.equals(KEY_SUCCESS_TRANSACTION_STATUS, true)) {
                     transactionModel.textColor = BindingUtils.color(R.color.colorGreen)
-                } else if (status.equals("Pending", true)){
+                } else if (status.equals(KEY_PENDING_TRANSACTION_STATUS, true)){
                     transactionModel.textColor = BindingUtils.color(R.color.colorYellow)
-                } else if (status.equals("Cancel", true)){
+                } else if (status.equals(KEY_CANCEL_TRANSACTION_STATUS, true)){
                     transactionModel.textColor = BindingUtils.color(R.color.colorBlue)
                 }
                 this.transactionHistoryModel = transactionModel

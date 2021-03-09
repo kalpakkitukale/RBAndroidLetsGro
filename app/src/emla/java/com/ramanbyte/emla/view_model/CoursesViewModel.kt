@@ -142,51 +142,50 @@ class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
     }
 
     fun insertCartData(view: View, coursesModel: CoursesModel) {
-        runOnUiThread(Runnable {
-
-            CoroutineUtils.main {
-                try {
-                  isLoaderShowingLiveData.postValue(true)
-                    val response = transactionRepository.insertCart(
-                        cartRequestModel = CartRequestModel(),
-                        courseId = coursesModel.courseId
-                    )
-                  //  view.ivCart.visibility = View.INVISIBLE
-                  //  view.tvLabeCart.visibility = View.INVISIBLE
-                    isLoaderShowingLiveData.postValue(false)
-                } catch (e: ApiException) {
-                    isLoaderShowingLiveData.postValue(false)
-                    setAlertDialogResourceModelMutableLiveData(
-                        e.message.toString(),
-                        BindingUtils.drawable(
-                            R.drawable.something_went_wrong
-                        )!!,
-                        true,
-                        BindingUtils.string(R.string.strOk), {
-                            isAlertDialogShown.postValue(false)
-                        }
-                    )
-                    isAlertDialogShown.postValue(true)
-                } catch (e: NoInternetException) {
-                    e.printStackTrace()
-                    AppLog.errorLog(e.message, e)
-                    isLoaderShowingLiveData.postValue(false)
-                    setAlertDialogResourceModelMutableLiveData(
-                        BindingUtils.string(R.string.no_internet_message),
-                        BindingUtils.drawable(R.drawable.ic_no_internet)!!,
-                        false,
-                        BindingUtils.string(R.string.tryAgain), {
-                            isAlertDialogShown.postValue(false)
-                            insertCartData(view, coursesModel)
-                        },
-                        BindingUtils.string(R.string.no), {
-                            isAlertDialogShown.postValue(false)
-                        }
-                    )
-                    isAlertDialogShown.postValue(true)
-                }
+        CoroutineUtils.main {
+            try {
+                isLoaderShowingLiveData.postValue(true)
+                val response = transactionRepository.insertCart(
+                    cartRequestModel = CartRequestModel(),
+                    courseId = coursesModel.courseId
+                )
+                runOnUiThread(Runnable {
+                    view.ivCart.visibility = View.INVISIBLE
+                    view.tvLabeCart.visibility = View.INVISIBLE
+                })
+                isLoaderShowingLiveData.postValue(false)
+            } catch (e: ApiException) {
+                isLoaderShowingLiveData.postValue(false)
+                setAlertDialogResourceModelMutableLiveData(
+                    e.message.toString(),
+                    BindingUtils.drawable(
+                        R.drawable.something_went_wrong
+                    )!!,
+                    true,
+                    BindingUtils.string(R.string.strOk), {
+                        isAlertDialogShown.postValue(false)
+                    }
+                )
+                isAlertDialogShown.postValue(true)
+            } catch (e: NoInternetException) {
+                e.printStackTrace()
+                AppLog.errorLog(e.message, e)
+                isLoaderShowingLiveData.postValue(false)
+                setAlertDialogResourceModelMutableLiveData(
+                    BindingUtils.string(R.string.no_internet_message),
+                    BindingUtils.drawable(R.drawable.ic_no_internet)!!,
+                    false,
+                    BindingUtils.string(R.string.tryAgain), {
+                        isAlertDialogShown.postValue(false)
+                        insertCartData(view, coursesModel)
+                    },
+                    BindingUtils.string(R.string.no), {
+                        isAlertDialogShown.postValue(false)
+                    }
+                )
+                isAlertDialogShown.postValue(true)
             }
-        })
+        }
 
 
     }

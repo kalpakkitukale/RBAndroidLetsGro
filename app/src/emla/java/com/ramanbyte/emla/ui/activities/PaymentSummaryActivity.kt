@@ -54,6 +54,7 @@ class PaymentSummaryActivity : AppCompatActivity(), KodeinAware {
     private var mContext: Context? = null
     private var paymentType: String = ""
     private var transactionRefId: String = ""
+    var transactionStatus: String? = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -135,12 +136,22 @@ class PaymentSummaryActivity : AppCompatActivity(), KodeinAware {
                 }
             })
 
+
+            transactionResponseStatusLiveData.observe(this@PaymentSummaryActivity, Observer {
+                it?.let {
+                    if (it.isEmpty()) {
+                        transactionStatus = it
+                    }
+
+                }
+            })
+
             transactionResponseIdLiveData.observe(this@PaymentSummaryActivity, Observer {
 
                 if (it != 0) {
                     AppController.setEnterPageAnimation(this@PaymentSummaryActivity)
                     AppLog.infoLog("transactionResponseIdLiveData ----    $it")
-                    if (it > 0) {
+                    if (it > 0 && transactionStatus!!.equals(KEY_SUCCESS)) {
                         // payment success
                         startActivityForResult(
                             PaymentStatusActivity.openPaymentStatusActivity(
@@ -258,6 +269,9 @@ class PaymentSummaryActivity : AppCompatActivity(), KodeinAware {
                                                 var payuTransactionMode =
                                                     payUObject.getString(keyPayuTransactionMode)
                                                         .toLowerCase()
+                                                paymentSummaryViewModel?.transactionResponseStatusLiveData?.postValue(
+                                                    KEY_SUCCESS
+                                                )
                                                 paymentMethod = when (payuTransactionMode) {
                                                     "nb" -> keyInternetBanking
                                                     "cc" -> keyCreditCard
@@ -275,16 +289,25 @@ class PaymentSummaryActivity : AppCompatActivity(), KodeinAware {
                                                 // payment fail
                                                 transactionStatus = KEY_FAIL_TRANSACTION_STATUS
                                                 isPaymentSuccessFul = false
+                                                paymentSummaryViewModel?.transactionResponseStatusLiveData?.postValue(
+                                                    KEY_CANCEL_TRANSACTION_STATUS
+                                                )
                                             }
                                         } else {
                                             // payment fail
                                             transactionStatus = KEY_FAIL_TRANSACTION_STATUS
                                             isPaymentSuccessFul = false
+                                            paymentSummaryViewModel?.transactionResponseStatusLiveData?.postValue(
+                                                KEY_CANCEL_TRANSACTION_STATUS
+                                            )
                                         }
                                     } else {
                                         // payment fail
                                         transactionStatus = KEY_FAIL_TRANSACTION_STATUS
                                         isPaymentSuccessFul = false
+                                        paymentSummaryViewModel?.transactionResponseStatusLiveData?.postValue(
+                                            KEY_CANCEL_TRANSACTION_STATUS
+                                        )
                                     }
 
 
@@ -294,6 +317,9 @@ class PaymentSummaryActivity : AppCompatActivity(), KodeinAware {
                                     transactionStatus =
                                         KEY_FAIL_TRANSACTION_STATUS
                                     isPaymentSuccessFul = false
+                                    paymentSummaryViewModel?.transactionResponseStatusLiveData?.postValue(
+                                        KEY_CANCEL_TRANSACTION_STATUS
+                                    )
                                 }
 
                             } else {
@@ -314,11 +340,22 @@ class PaymentSummaryActivity : AppCompatActivity(), KodeinAware {
                                 if (transactionList.size > 0) {
                                     transactionList[0].apply {
                                         /* if (!status.isNullOrEmpty() && status == "200" && !statusmsg.isNullOrEmpty() && statusmsg.toLowerCase() == "success") {*/
-                                        if (!status.isNullOrEmpty() && status.equals("200", true) && !statusmsg.isNullOrEmpty() && statusmsg.toLowerCase().equals("success")) {
+                                        if (!status.isNullOrEmpty() && status.equals(
+                                                "200",
+                                                true
+                                            ) && !statusmsg.isNullOrEmpty() && statusmsg.toLowerCase()
+                                                .equals("success")
+                                        ) {
                                             transactionStatus = KEY_SUCCESS_TRANSACTION_STATUS
+                                            paymentSummaryViewModel?.transactionResponseStatusLiveData?.postValue(
+                                                KEY_SUCCESS
+                                            )
                                         } else {
                                             transactionStatus = KEY_FAIL_TRANSACTION_STATUS
                                             isPaymentSuccessFul = false
+                                            paymentSummaryViewModel?.transactionResponseStatusLiveData?.postValue(
+                                                KEY_CANCEL_TRANSACTION_STATUS
+                                            )
                                         }
                                         flag = status
                                         paymentMethod = if (chmod != null) { // payment method
@@ -346,12 +383,18 @@ class PaymentSummaryActivity : AppCompatActivity(), KodeinAware {
                                     transactionStatus =
                                         KEY_FAIL_TRANSACTION_STATUS
                                     isPaymentSuccessFul = false
+                                    paymentSummaryViewModel?.transactionResponseStatusLiveData?.postValue(
+                                        KEY_CANCEL_TRANSACTION_STATUS
+                                    )
                                 }
                             } else {
                                 // payment fail
                                 transactionStatus =
                                     KEY_FAIL_TRANSACTION_STATUS
                                 isPaymentSuccessFul = false
+                                paymentSummaryViewModel?.transactionResponseStatusLiveData?.postValue(
+                                    KEY_CANCEL_TRANSACTION_STATUS
+                                )
                             }
                         }
                     }
