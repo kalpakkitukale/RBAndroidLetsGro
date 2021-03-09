@@ -3,9 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.ramanbyte.emla.view_model.TransactionHistoryViewModel" />
+
         <variable
             name="transactionHistoryModel"
             type="com.ramanbyte.emla.models.TransactionHistoryModel" />
@@ -71,9 +73,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{transactionHistoryModel.transactionStatus}"
+                android:textColor="@{transactionHistoryModel.textColor}"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

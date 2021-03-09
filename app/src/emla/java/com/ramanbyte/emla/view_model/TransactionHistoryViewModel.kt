@@ -15,9 +15,7 @@ import com.ramanbyte.emla.models.CourseDetailsModel
 import com.ramanbyte.emla.models.TransactionHistoryModel
 import com.ramanbyte.emla.models.response.CartResponseModel
 import com.ramanbyte.emla.ui.activities.ContainerActivity
-import com.ramanbyte.utilities.AppLog
-import com.ramanbyte.utilities.BindingUtils
-import com.ramanbyte.utilities.KEY_BLANK
+import com.ramanbyte.utilities.*
 import org.kodein.di.generic.instance
 
 /**
@@ -134,7 +132,7 @@ class TransactionHistoryViewModel(var mContext: Context) : BaseViewModel(mContex
     // on click for the on payment fail sucessful click
     fun onPaymentFailSucessfulClick(view: View) {
         val intent = Intent(mContext, ContainerActivity::class.java)
-        intent.putExtra("Payment Status", "My Courese")
+        intent.putExtra(KEY_PAYMENT_STATUS, KEY_SUCCESS)
         mContext.startActivity(intent)
 
     }

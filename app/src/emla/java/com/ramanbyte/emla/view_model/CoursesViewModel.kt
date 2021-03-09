@@ -151,8 +151,8 @@ class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
                         cartRequestModel = CartRequestModel(),
                         courseId = coursesModel.courseId
                     )
-                    view.ivCart.visibility = View.INVISIBLE
-                    view.tvLabeCart.visibility = View.INVISIBLE
+                  //  view.ivCart.visibility = View.INVISIBLE
+                  //  view.tvLabeCart.visibility = View.INVISIBLE
                     isLoaderShowingLiveData.postValue(false)
                 } catch (e: ApiException) {
                     isLoaderShowingLiveData.postValue(false)

@@ -83,7 +83,7 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding, ContainerViewMo
                     Bundle().apply {
                         putParcelable(KEY_COURSE_MODEL, intentData)
                     })
-            }else if(intent.hasExtra(KEY_FROM_PAY)){
+            } else if (intent.hasExtra(KEY_FROM_PAY)) {
                 navController.navigate(R.id.myCourseFragment)
             }
         }
@@ -144,6 +144,11 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding, ContainerViewMo
         })
 
         checkSystemWebViewVersion()
+        // after payment then redirect to my course
+        val value = intent.extras?.getString(KEY_PAYMENT_STATUS)
+        if (value.equals(KEY_SUCCESS)) {
+            navController.navigate(R.id.myCourseFragment)
+        }
 
     }
 

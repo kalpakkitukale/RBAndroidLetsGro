@@ -14,6 +14,10 @@
     <color name="cb_vpa_text_border">#dcd36b</color>
     <color name="cb_vpa_text_highlighter">#00adf2</color>
     <color name="cb_vpa_enter_vpa">#9b9b9b</color>
+    <color name="colorGreen">#00a651</color>
+    <color name="colorRed">#FE2010</color>
+    <color name="colorYellow">#FD8B0F</color>
+    <color name="colorBlue">#247df7</color>
 
 
 
