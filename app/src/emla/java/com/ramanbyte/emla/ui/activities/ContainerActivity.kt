@@ -144,6 +144,7 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding, ContainerViewMo
         })
 
         checkSystemWebViewVersion()
+
     }
 
     /**Lazy init Navigation host controller*/

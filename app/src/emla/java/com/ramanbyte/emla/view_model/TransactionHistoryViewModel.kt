@@ -133,8 +133,19 @@ class TransactionHistoryViewModel(var mContext: Context) : BaseViewModel(mContex
 
     // on click for the on payment fail sucessful click
     fun onPaymentFailSucessfulClick(view: View) {
-       /* val intent = Intent(mContext, ContainerActivity::class.java)
-        mContext.startActivity(intent)*/
+        val intent = Intent(mContext, ContainerActivity::class.java)
+        intent.putExtra("Payment Status", "My Courese")
+        mContext.startActivity(intent)
+
+    }
+
+    // click on the perchaes detail
+    var perchaesDetailLiveData = MutableLiveData<Boolean>().apply {
+        value = false
+    }
+
+    fun purchaesDetailClick(view: View) {
+        perchaesDetailLiveData.postValue(true)
 
     }
 

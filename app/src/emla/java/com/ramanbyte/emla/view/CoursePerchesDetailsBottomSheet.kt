@@ -1,17 +1,25 @@
 package com.ramanbyte.emla.view
 
 import android.content.Context
+import android.content.res.Resources
 import android.os.Bundle
+import android.util.DisplayMetrics
+import android.view.View
 import android.view.WindowManager
+import android.widget.FrameLayout
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_EXPANDED
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseBottomSheetFragment
 import com.ramanbyte.databinding.CoursePerchaesDetailsBottomSheetBinding
 import com.ramanbyte.emla.adapters.PurchaseCourseDetailsAdapter
 import com.ramanbyte.emla.models.response.CartResponseModel
 import com.ramanbyte.emla.view_model.TransactionHistoryViewModel
+import com.ramanbyte.utilities.StaticMethodUtilitiesKtx
 
 /**
  * @author Akash Inkar <akash.1@ramanbyte.com>
@@ -37,6 +45,7 @@ class CoursePerchesDetailsBottomSheet(var isActivityParent: Boolean, useParent: 
             lifecycleOwner = this@CoursePerchesDetailsBottomSheet
             viewModels = viewModel
         }
+        fullBottomSheet()
 
         viewModelOperation()
     }
@@ -80,10 +89,35 @@ class CoursePerchesDetailsBottomSheet(var isActivityParent: Boolean, useParent: 
 
     override fun onStart() {
         super.onStart()
+
         val window = dialog!!.window
         val windowParams = window!!.attributes
         windowParams.dimAmount = 0.70f
         windowParams.flags = windowParams.flags or WindowManager.LayoutParams.FLAG_DIM_BEHIND
         window.attributes = windowParams
+    }
+
+
+    private fun fullBottomSheet() {
+        layoutBinding.apply {
+            mainContainer.viewTreeObserver.addOnGlobalLayoutListener {
+                val dialog = dialog as BottomSheetDialog
+                getDialog()?.window?.apply {
+                    setSoftInputMode(WindowManager.LayoutParams.FLAG_FULLSCREEN)
+                    setDimAmount(0.5f)
+                }
+                val bottomSheet =
+                    dialog.findViewById<View>(R.id.design_bottom_sheet) as FrameLayout
+                val mBottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
+                val height = mainContainer.height
+                val displayMetrics = DisplayMetrics()
+                requireActivity().windowManager.defaultDisplay.getMetrics(displayMetrics)
+                var screenHeight = displayMetrics.heightPixels
+                val statusBarHeight =
+                    StaticMethodUtilitiesKtx.getStatusBarHeight(requireActivity())
+                screenHeight -= statusBarHeight
+                mBottomSheetBehavior.peekHeight = height
+            }
+        }
     }
 }
