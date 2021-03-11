@@ -21,10 +21,7 @@
             android:id="@+id/mainConstraintLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp_16"
-            android:layout_marginTop="@dimen/dp_16"
-            android:layout_marginEnd="@dimen/dp_16"
-            android:layout_marginBottom="@dimen/dp_16">
+            android:layout_margin="@dimen/dp_10">
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvTitle"
@@ -42,8 +39,9 @@
                 style="@style/TextViewRegularNavyBlueOnLightNWhiteOnDark"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_10"
                 android:layout_marginTop="@dimen/dp_10"
-                android:gravity="center"
+                android:gravity="start"
                 android:text="@string/passing_score"
                 android:textSize="@dimen/sp_14"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -56,13 +54,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_12"
-                android:gravity="center"
+                android:gravity="start"
                 android:text="@string/correct_question"
                 android:textSize="@dimen/sp_14"
-                app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintEnd_toStartOf="@+id/tvCorrectQuestion"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="@id/tvScore"
                 app:layout_constraintTop_toBottomOf="@+id/tvScore" />
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -70,19 +67,15 @@
                 style="@style/TextViewRegularNavyBlueOnLightNWhiteOnDark"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:gravity="left"
-                android:text="10"
                 android:layout_marginStart="@dimen/dp_2"
                 android:onClick="@{() -> showQuestionsViewModel.onClickDialogCorrectQuestion(tvCorrectQuestion,staticHelper.keyCorrect)}"
+                android:text="10"
                 android:textColor="@color/colorRed"
                 android:textSize="@dimen/sp_14"
-                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintBottom_toBottomOf="@+id/lblCorrectQuestion"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintWidth_percent="0.11"
                 app:layout_constraintStart_toEndOf="@+id/lblCorrectQuestion"
-                app:layout_constraintTop_toTopOf="@+id/lblCorrectQuestion"
-                app:layout_constraintBottom_toBottomOf="@+id/lblCorrectQuestion"/>
+                app:layout_constraintTop_toTopOf="@+id/lblCorrectQuestion" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/lblIncorrectQuestion"
@@ -90,13 +83,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_12"
-                android:gravity="center"
+                android:gravity="start"
                 android:text="@string/incorrect_question"
                 android:textSize="@dimen/sp_14"
-                app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintEnd_toStartOf="@+id/tvIncorrectQuestion"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="@id/tvScore"
                 app:layout_constraintTop_toBottomOf="@+id/tvCorrectQuestion" />
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -104,31 +96,29 @@
                 style="@style/TextViewRegularNavyBlueOnLightNWhiteOnDark"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:gravity="left"
-                android:text="2"
+                android:layout_marginLeft="@dimen/dp_2"
                 android:onClick="@{() -> showQuestionsViewModel.onClickDialogIncorrectQuestion(tvIncorrectQuestion,staticHelper.keyWrong)}"
+                android:text="2"
                 android:textColor="@color/colorRed"
                 android:textSize="@dimen/sp_14"
-                android:layout_marginLeft="@dimen/dp_2"
-                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintBottom_toBottomOf="@+id/lblIncorrectQuestion"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintWidth_percent="0.11"
                 app:layout_constraintStart_toEndOf="@+id/lblIncorrectQuestion"
-                app:layout_constraintTop_toTopOf="@+id/lblIncorrectQuestion"
-                app:layout_constraintBottom_toBottomOf="@+id/lblIncorrectQuestion"/>
+                app:layout_constraintTop_toTopOf="@+id/lblIncorrectQuestion" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnOk"
                 style="@style/CustomCapsuleButtonBlueBgWhiteText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_20"
                 android:layout_marginEnd="@dimen/dp_22"
-                android:text="@string/strOk"
+                android:gravity="center"
                 android:onClick="@{() -> showQuestionsViewModel.onClickDialogOk(btnOk,staticHelper.keyCorrect)}"
+                android:text="@string/strOk"
                 android:textSize="@dimen/sp_14"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/tvScore"
+                app:layout_constraintStart_toStartOf="@id/tvScore"
                 app:layout_constraintTop_toBottomOf="@+id/tvIncorrectQuestion" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

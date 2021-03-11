@@ -41,7 +41,7 @@ class ChaptersViewModel(mContext: Context) : BaseViewModel(mContext) {
 
     fun getList(courseId: Int) = run {
 
-        chaptersRepository.getList(courseId)
+        courseModel?.courseId?.let { chaptersRepository.getList(it) }
 
         chaptersRepository.getPaginationResponseHandler().observeForever {
             if (it != null) {
@@ -94,14 +94,9 @@ class ChaptersViewModel(mContext: Context) : BaseViewModel(mContext) {
                 "true",
                 true
             )
-        )*/if (courseSyllabusModel?.summativeAssessmentStatus.equals(
-                "true",
-                true
-            )
-        ) {
+        )*/if (courseSyllabusModel?.summativeAssessmentStatus.equals("true", true)) {
             showValidationMessage.value = BindingUtils.string(R.string.clear_exam)
         } else {
-
             buttonView.findNavController()
                 .navigate(
                     R.id.action_chaptersListFragment_to_preAssessmentTestFragment,

@@ -196,17 +196,9 @@ class ShowQuestionFragment :
 
                                     if (testType == KEY_QUIZ_TYPE_ASSESSMENT) {
                                         val bundle = Bundle()
-                                        bundle.putParcelable(
-                                            KEY_COURSE_MODEL,
-                                            coursesModelLiveData.value
-                                        )
-                                        val navOption = NavOptions.Builder()
-                                            .setPopUpTo(R.id.coursesFragment, false).build()
-                                        activity?.let {
-                                            Navigation.findNavController(
-                                                it,
-                                                R.id.containerNavHost
-                                            ).navigate(R.id.courseDetailFragment, bundle, navOption)
+                                        bundle.putParcelable(KEY_COURSE_MODEL, coursesModelLiveData.value)
+                                        val navOption = NavOptions.Builder().setPopUpTo(R.id.coursesFragment, false).build()
+                                        activity?.let { Navigation.findNavController(it, R.id.containerNavHost).navigate(R.id.courseDetailFragment, bundle, navOption)
                                         }
 
                                         isAlertDialogShown.postValue(false)
