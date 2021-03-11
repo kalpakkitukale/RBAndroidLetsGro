@@ -29,13 +29,17 @@ class CourseSyllabusFragment :
     override fun initiate() {
 
         arguments?.apply {
-            viewModel.coursesModelLiveData.value  = getParcelable<CoursesModel>(KEY_COURSE_MODEL)!!
+            if (!this.isEmpty && this != null) {
+                viewModel.coursesModelLiveData.value =
+                    getParcelable<CoursesModel>(KEY_COURSE_MODEL)!!
+            }
         }
 
         ProgressLoader(mContext!!, viewModel!!)
         //AlertDialog(mContext!!, viewModel!!)
 
-        val width = (activity!!).displayMetrics().widthPixels - (BindingUtils.dimen(R.dimen.dp_5) * 2)
+        val width =
+            (activity!!).displayMetrics().widthPixels - (BindingUtils.dimen(R.dimen.dp_5) * 2)
         val layoutParams = layoutBinding.imgViewCourseSession.layoutParams
         layoutParams.height = (width * 0.6).toInt()
         layoutBinding.imgViewCourseSession.layoutParams = layoutParams
@@ -51,7 +55,7 @@ class CourseSyllabusFragment :
             coursesDetailViewModel = viewModel
             cardCourseLayout.coursesDetailViewModel = viewModel
 
-            if (viewModel.courseSyllabusModelLiveData.value?.credits != 0.0){
+            if (viewModel.courseSyllabusModelLiveData.value?.credits != 0.0) {
                 cardCourseLayout.apply {
                     labelCredits.visibility = View.VISIBLE
                     txtViewCredits.visibility = View.VISIBLE

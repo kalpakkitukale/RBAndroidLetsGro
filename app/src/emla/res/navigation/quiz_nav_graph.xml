@@ -61,4 +61,10 @@
         android:name="com.ramanbyte.emla.ui.fragments.CoursesFragment"
         android:label="@string/courses" />
 
+    <fragment
+        android:id="@+id/chaptersSectionListFragment"
+        android:name="com.ramanbyte.emla.ui.fragments.ChaptersSectionListFragment"
+        android:label="ChaptersSectionListFragment" />
+
+
 </navigation>

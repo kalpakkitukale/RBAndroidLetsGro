@@ -106,7 +106,7 @@ class ChaptersListFragment :
                         /*Added code for section liist*/
                         findNavController()
                             .navigate(
-                                R.id.action_chaptersListFragment_to_chaptersSectionListFragment,
+                                R.id.chaptersSectionListFragment,
                                 Bundle().apply {
                                     putParcelable(KEY_COURSE_MODEL, courseModel)
                                     putParcelable(KEY_CHAPTER_MODEL,  chaptersModel)
