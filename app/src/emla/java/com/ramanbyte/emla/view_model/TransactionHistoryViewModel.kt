@@ -88,7 +88,7 @@ class TransactionHistoryViewModel(var mContext: Context) : BaseViewModel(mContex
                     View.GONE,
                     View.VISIBLE,
                     View.GONE,
-                    BindingUtils.string(R.string.favourite_videos_unavailable),
+                    BindingUtils.string(R.string.no_transaction_message),
                     View.GONE
                 )
                 coroutineToggleLoader()
