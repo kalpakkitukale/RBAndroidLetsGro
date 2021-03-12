@@ -65,6 +65,10 @@
         android:id="@+id/chaptersSectionListFragment"
         android:name="com.ramanbyte.emla.ui.fragments.ChaptersSectionListFragment"
         android:label="ChaptersSectionListFragment" />
+    <fragment
+        android:id="@+id/chaptersListFragment"
+        android:name="com.ramanbyte.emla.ui.fragments.ChaptersListFragment"
+        android:label="ChaptersListFragment" />
 
 
 </navigation>

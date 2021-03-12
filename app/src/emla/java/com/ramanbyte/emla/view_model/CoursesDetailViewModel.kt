@@ -28,7 +28,9 @@ class CoursesDetailViewModel(val mContext: Context) : BaseViewModel(mContext = m
     var userData = masterRepository?.getCurrentUser()
     var coursesModelLiveData: MutableLiveData<CoursesModel> = MutableLiveData()
     var selectedChaptersModelLiveData: MutableLiveData<ChaptersModel?> = MutableLiveData(null)
-
+    var coureseDetailMutableLiveData = MutableLiveData<CoursesModel>().apply {
+        value = CoursesModel()
+    }
     var courseSyllabusModelLiveData = MutableLiveData<CourseSyllabusModel?>(null)
 
     var showValidationMessage = MutableLiveData<String>(null)

@@ -52,7 +52,7 @@ class PaymentSummaryViewModel(mContext: Context) : BaseViewModel(mContext = mCon
 
     var paymentOptionErrorLiveData = MutableLiveData<Boolean>(false)
     var transactionResponseIdLiveData = MutableLiveData<Int>(0)
-    var transactionResponseStatusLiveData = MutableLiveData<String>().apply {
+    var tranStatusLiveData = MutableLiveData<String>().apply {
         value = ""
     }
     var isAirPayChecked = false
