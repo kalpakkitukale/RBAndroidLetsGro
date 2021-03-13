@@ -354,5 +354,7 @@ Content
     <string name="cart">Cart</string>
     <string name="Payment_Status_activity">Payment Status Activity</string>
     <string name="no_transaction_message"> You haven\'t done any Transaction yet.</string>
+    <string name="proceed_to_pay"> Proceed to Pay</string>
+    <string name="total_amount_to_pay"> Total Amount to Pay</string>
 
 </resources>
