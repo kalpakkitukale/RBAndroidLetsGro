@@ -248,7 +248,7 @@ class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
 
         view.findNavController()
             .navigate(
-                R.id.action_coursesFragment_to_chaptersListFragment,
+                R.id.chaptersListFragment,
                 Bundle().apply {
                     putParcelable(KEY_COURSE_MODEL, coursesModel)
                 })
