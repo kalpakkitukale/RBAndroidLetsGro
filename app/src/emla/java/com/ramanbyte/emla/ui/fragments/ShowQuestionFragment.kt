@@ -13,6 +13,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.NavOptions
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager.widget.ViewPager
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseParentFragment
@@ -410,12 +411,15 @@ class ShowQuestionFragment :
                         KEY_COURSE_MODEL,
                         parentViewModel.coursesModelLiveData.value
                     )
-                    val navOption =
+                   findNavController().navigate(R.id.courseResultFragment, bundle)
+
+// do not going the tab layout (course details fragment)
+                   /* val navOption =
                         NavOptions.Builder().setPopUpTo(R.id.coursesFragment, false).build()
                     activity?.let {
                         Navigation.findNavController(it, R.id.containerNavHost)
                             .navigate(R.id.courseDetailFragment, bundle, navOption)
-                    }
+                    }*/
                     isAlertDialogShown.postValue(false)
                 }
             )

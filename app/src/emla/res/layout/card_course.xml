@@ -81,9 +81,9 @@
                     android:layout_marginEnd="@dimen/dp_5"
                     android:padding="@dimen/dp_3"
                     android:visibility="visible"
-                    app:srcCompat="@drawable/ic_live"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/tvTopicDescription" />
+                    app:layout_constraintTop_toTopOf="@id/tvTopicDescription"
+                    app:srcCompat="@drawable/ic_live" />
 
                 <!--As Discuss with mansi hide share cource icon for release-->
                 <androidx.appcompat.widget.AppCompatImageView
@@ -151,13 +151,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dp_15"
                     android:background="@drawable/image_background"
-                    android:onClick="@{()->coursesViewModel.showChapterList(cardContainer, coursesModel)}"
+                    android:onClick="@{coursesViewModel::checkPerformance}"
                     android:padding="@dimen/dp_5"
                     app:layout_constraintEnd_toStartOf="@+id/ivCart"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toEndOf="@+id/ivChapterList"
                     app:layout_constraintTop_toTopOf="@+id/ivCoursesSyllabus"
                     app:srcCompat="@drawable/ic_performance" />
+                <!--   android:onClick="@{()->coursesViewModel.showChapterList(cardContainer, coursesModel)}"-->
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/ivCart"

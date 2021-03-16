@@ -8,13 +8,15 @@ import com.ramanbyte.base.BaseFragment
 import com.ramanbyte.databinding.FragmentCourseResultBinding
 import com.ramanbyte.emla.adapters.CourseResultAdapter
 import com.ramanbyte.emla.models.CourseResultModel
+import com.ramanbyte.emla.models.CoursesModel
 import com.ramanbyte.emla.view_model.CoursesDetailViewModel
+import com.ramanbyte.utilities.KEY_COURSE_MODEL
 import com.ramanbyte.utilities.ProgressLoader
 import com.ramanbyte.utilities.skipTrailingZeroes
 
 class CourseResultFragment :
     BaseFragment<FragmentCourseResultBinding, CoursesDetailViewModel>(
-        useParent = true,
+        isNestedGraph = true,
         hasOptionsMenu = false
     ) {
 
@@ -28,6 +30,10 @@ class CourseResultFragment :
     @SuppressLint("SetTextI18n")
     override fun initiate() {
         ProgressLoader(mContext!!, viewModel!!)
+
+        arguments?.apply {
+            viewModel.coursesModelLiveData.postValue(getParcelable<CoursesModel>(KEY_COURSE_MODEL)!!)
+        }
         //AlertDialog(mContext!!, viewModel!!)
 
 

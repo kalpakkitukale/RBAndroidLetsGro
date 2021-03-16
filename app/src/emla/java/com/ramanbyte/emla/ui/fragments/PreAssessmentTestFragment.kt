@@ -125,8 +125,11 @@ class PreAssessmentTestFragment :
                                     KEY_COURSE_MODEL,
                                     courseModel
                                 )
-                                val navOption = NavOptions.Builder().setPopUpTo(R.id.coursesFragment, false).build()
-                                activity?.let { Navigation.findNavController(it,R.id.containerNavHost).navigate(R.id.courseDetailFragment, bundle, navOption) }
+
+                                findNavController().navigate(R.id.chaptersListFragment, bundle)
+                                // do not going the tab layout (course details fragment)
+                               /* val navOption = NavOptions.Builder().setPopUpTo(R.id.coursesFragment, false).build()
+                                activity?.let { Navigation.findNavController(it,R.id.containerNavHost).navigate(R.id.courseDetailFragment, bundle, navOption) }*/
                             }
                         },
                         BindingUtils.string(R.string.no), {

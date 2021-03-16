@@ -1,6 +1,7 @@
 package com.ramanbyte.emla.view_model
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.databinding.ObservableField
@@ -23,6 +24,7 @@ import com.ramanbyte.emla.models.UserModel
 import com.ramanbyte.emla.models.request.CartRequestModel
 import com.ramanbyte.emla.models.request.CoursesRequest
 import com.ramanbyte.emla.models.response.CommonDropdownModel
+import com.ramanbyte.emla.ui.activities.CertificateViewerActivity
 import com.ramanbyte.utilities.*
 import kotlinx.android.synthetic.emla.card_course.view.*
 import org.kodein.di.generic.instance
@@ -31,7 +33,7 @@ import org.kodein.di.generic.instance
  * @author Vinay Kumbhar <vinay.pkumbhar@gmail.com>
  * @since 14-04-2020
  */
-class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
+class CoursesViewModel(var mContext: Context) : BaseViewModel(mContext = mContext) {
     override var noInternetTryAgain: () -> Unit = {
         coursesRepository.tryAgain()
     }
@@ -244,14 +246,15 @@ class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
                 })
     }
 
+    // on click on the topic list
     fun showChapterList(view: View, coursesModel: CoursesModel) {
+        view.findNavController().navigate(R.id.chaptersListFragment, Bundle().apply { putParcelable(KEY_COURSE_MODEL, coursesModel) })
+    }
 
-        view.findNavController()
-            .navigate(
-                R.id.chaptersListFragment,
-                Bundle().apply {
-                    putParcelable(KEY_COURSE_MODEL, coursesModel)
-                })
+    // on click on performance check 
+    fun checkPerformance(view: View) {
+        val intent = Intent(mContext, CertificateViewerActivity::class.java)
+        mContext.startActivity(intent)
     }
 
     fun shareClick(view: View, coursesModel: CoursesModel) {
