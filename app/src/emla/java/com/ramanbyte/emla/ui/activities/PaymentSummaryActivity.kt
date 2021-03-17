@@ -357,7 +357,7 @@ class PaymentSummaryActivity : BaseActivity<ActivityPaymentSummaryBinding,Paymen
                                         }
                                         paymentType = paymentMethod
 
-                                        if (transactionid != null) {
+                                        if (transactionid != null && transactionid.isNotBlank()) {
                                             AppLog.infoLog("TXN ID -> =$transactionid")
                                             transId = transactionid.toLong()
                                             transactionRefId = transactionid
