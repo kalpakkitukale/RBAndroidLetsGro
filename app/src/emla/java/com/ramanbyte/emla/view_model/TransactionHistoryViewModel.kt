@@ -46,7 +46,7 @@ class TransactionHistoryViewModel(var mContext: Context) : BaseViewModel(mContex
     fun getTransactionsHistory() {
         CoroutineUtils.main {
             try {
-                coroutineToggleLoader(BindingUtils.string(R.string.getting_my_favourite_video_list))
+                coroutineToggleLoader(BindingUtils.string(R.string.getting_your_transaction_list))
 
                 val response = transactionRepository.getAllTransactionHistory()
                 transactionHistoryListLiveData.postValue(response)
