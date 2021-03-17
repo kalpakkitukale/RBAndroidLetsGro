@@ -91,7 +91,7 @@
                 android:maxLines="4"
                 android:text="@{chapterModel.description}"
                 android:textSize="@dimen/sp_12"
-                app:layout_constraintEnd_toEndOf="@id/IvDownload"
+               app:layout_constraintEnd_toStartOf="@id/ivStatus"
                 app:layout_constraintStart_toStartOf="@+id/tvTopicName"
                 app:layout_constraintTop_toBottomOf="@+id/tvTopicName" />
 
@@ -101,6 +101,7 @@
                 android:layout_height="wrap_content"
                 android:padding="@dimen/dp_8"
                 android:src="@drawable/ic_tick_checked"
+                app:layout_constraintStart_toEndOf="@id/tvCourseDescription"
                 app:layout_constraintEnd_toEndOf="@id/IvDownload"
                 app:layout_constraintTop_toTopOf="@+id/tvCourseDescription" />
 

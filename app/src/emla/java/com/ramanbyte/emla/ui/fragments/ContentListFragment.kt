@@ -24,9 +24,9 @@ class ContentListFragment : BaseFragment<FragmentContentListBinding, ContentView
     override fun layoutId(): Int = R.layout.fragment_content_list
 
     override fun initiate() {
-
+/*
         ProgressLoader(context!!, viewModel!!)
-        AlertDialog(context!!, viewModel!!)
+        AlertDialog(context!!, viewModel!!)*/
 
         layoutBinding.apply {
 

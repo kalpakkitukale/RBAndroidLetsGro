@@ -2,7 +2,8 @@ package com.ramanbyte.emla.ui.fragments
 
 import android.content.Context
 import android.os.Bundle
-import android.view.*
+import android.view.KeyEvent
+import android.view.View
 import androidx.lifecycle.Observer
 import androidx.navigation.NavOptions
 import androidx.navigation.Navigation
@@ -68,23 +69,23 @@ class QuizReviewFragment : BaseFragment<FragmentQuizReviewBinding, ShowQuestions
                     this@QuizReviewFragment.quizResultModel?.attemptstatus!!
                 )
 
-                if (quizResultModel?.correct == 0){
+                if (quizResultModel?.correct == 0) {
                     rbCorrect.visibility = View.GONE
 
-                    if (quizResultModel?.incorrect == 0){
+                    if (quizResultModel?.incorrect == 0) {
                         rbWrong.visibility = View.GONE
-                    }else{
+                    } else {
                         rbWrong.visibility = View.VISIBLE
                         // wrong
                     }
 
-                }else{
+                } else {
                     rbCorrect.visibility = View.VISIBLE
                     // correct
 
-                    if (quizResultModel?.incorrect == 0){
+                    if (quizResultModel?.incorrect == 0) {
                         rbWrong.visibility = View.GONE
-                    }else{
+                    } else {
                         rbWrong.visibility = View.VISIBLE
                     }
                 }
@@ -114,7 +115,8 @@ class QuizReviewFragment : BaseFragment<FragmentQuizReviewBinding, ShowQuestions
             * */
             //coursesModelLiveData.value?.courseImageUrl = courseImageUrl
 
-            val width = (activity!!).displayMetrics().widthPixels - (BindingUtils.dimen(R.dimen.dp_5) * 2)
+            val width =
+                (activity!!).displayMetrics().widthPixels - (BindingUtils.dimen(R.dimen.dp_5) * 2)
 
             val layoutParams = layoutBinding.ivQuestion.layoutParams
 
@@ -128,7 +130,7 @@ class QuizReviewFragment : BaseFragment<FragmentQuizReviewBinding, ShowQuestions
 
 
             onClickTabButtonLiveData.observe(this@QuizReviewFragment, Observer {
-                if (it != null){
+                if (it != null) {
                     when (it) {
                         keyCorrect -> {
                             if (tabTypeSelectedLiveData.value == keyWrong) {
@@ -181,8 +183,15 @@ class QuizReviewFragment : BaseFragment<FragmentQuizReviewBinding, ShowQuestions
                                         KEY_COURSE_MODEL,
                                         courseModel
                                     )
-                                    val navOption = NavOptions.Builder().setPopUpTo(R.id.coursesFragment, false).build()
-                                    activity?.let { Navigation.findNavController(it,R.id.containerNavHost).navigate(R.id.courseDetailFragment, bundle, navOption) }
+                                    val navOption =
+                                        NavOptions.Builder().setPopUpTo(R.id.coursesFragment, false)
+                                            .build()
+                                    activity?.let {
+                                        Navigation.findNavController(
+                                            it,
+                                            R.id.containerNavHost
+                                        ).navigate(R.id.chaptersListFragment, bundle, navOption)
+                                    }
                                 },
                                 BindingUtils.string(R.string.no), {
                                     isAlertDialogShown.postValue(false)

@@ -52,6 +52,9 @@ class PaymentSummaryViewModel(mContext: Context) : BaseViewModel(mContext = mCon
 
     var paymentOptionErrorLiveData = MutableLiveData<Boolean>(false)
     var transactionResponseIdLiveData = MutableLiveData<Int>(0)
+    var tranStatusLiveData = MutableLiveData<String>().apply {
+        value = ""
+    }
     var isAirPayChecked = false
     var isPayuChecked = false
 
@@ -174,6 +177,9 @@ class PaymentSummaryViewModel(mContext: Context) : BaseViewModel(mContext = mCon
                 e.printStackTrace()
                 AppLog.errorLog(e.message, e)
                 isLoaderShowingLiveData.postValue(false)
+            } catch (e: RuntimeException) {
+                e.printStackTrace()
+                AppLog.errorLog(e.message, e)
             }
         }
     }
@@ -481,8 +487,8 @@ class PaymentSummaryViewModel(mContext: Context) : BaseViewModel(mContext = mCon
             amount = amountLiveData.value ?: "0.0" // need to set final course fee
             firstName =
                 "${loggedInUserModel?.firstName ?: ""} ${
-                    loggedInUserModel?.lastName
-                        ?: ""
+                loggedInUserModel?.lastName
+                    ?: ""
                 }" // student name
             productInfo =
                 BindingUtils.string(

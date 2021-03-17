@@ -13,4 +13,5 @@ class CourseFeesModel {
     var courseFeeStructureId: Int = 0
 
     var courseDetails = CourseDetailsModel()
+    var courseFeeStructure = CourseFeeStructureModel()
 }

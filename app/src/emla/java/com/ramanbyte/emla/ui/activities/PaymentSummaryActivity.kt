@@ -8,11 +8,7 @@ import android.os.Build
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.findNavController
 import com.airpay.airpaysdk_simplifiedotp.AirpayActivity
 import com.airpay.airpaysdk_simplifiedotp.Transaction
 import com.payu.india.Payu.Payu
@@ -21,34 +17,26 @@ import com.payu.payuui.Activity.PayUBaseActivity
 import com.ramanbyte.AppController
 import com.ramanbyte.BuildConfig
 import com.ramanbyte.R
+import com.ramanbyte.base.BaseActivity
 import com.ramanbyte.databinding.ActivityPaymentSummaryBinding
-import com.ramanbyte.emla.base.di.ACTIVITY_CONTEXT
+import com.ramanbyte.emla.base.di.authModuleDependency
 import com.ramanbyte.emla.models.PayuGatewayModel
 import com.ramanbyte.emla.models.response.CartResponseModel
 import com.ramanbyte.emla.view_model.PaymentSummaryViewModel
 import com.ramanbyte.utilities.*
-import com.ramanbyte.view_model.factory.BaseViewModelFactory
-import kotlinx.android.synthetic.main.dialog_login_with_classroomplus.*
 import org.json.JSONObject
-import org.kodein.di.Copy
-import org.kodein.di.Kodein
-import org.kodein.di.KodeinAware
-import org.kodein.di.android.kodein
-import org.kodein.di.android.retainedKodein
-import org.kodein.di.generic.bind
-import org.kodein.di.generic.instance
-import org.kodein.di.generic.singleton
 import java.util.*
 
-class PaymentSummaryActivity : AppCompatActivity(), KodeinAware {
+class PaymentSummaryActivity : BaseActivity<ActivityPaymentSummaryBinding,PaymentSummaryViewModel>(
+    authModuleDependency)/*, KodeinAware*/ {
 
-    private val _parentKodein by kodein()
+   /* private val _parentKodein by kodein()
 
     override val kodein: Kodein by retainedKodein {
         extend(_parentKodein, copy = Copy.All)
         bind<Context>(ACTIVITY_CONTEXT) with singleton { this@PaymentSummaryActivity }
     }
-    private val factory: BaseViewModelFactory by instance()
+    private val factory: BaseViewModelFactory by instance()*/
 
     private var paymentSummaryBinding: ActivityPaymentSummaryBinding? = null
     private var paymentSummaryViewModel: PaymentSummaryViewModel? = null
@@ -56,10 +44,11 @@ class PaymentSummaryActivity : AppCompatActivity(), KodeinAware {
     private var mContext: Context? = null
     private var paymentType: String = ""
     private var transactionRefId: String = ""
+    var transactionStatus: String? = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        initViews()
+      //  initViews()
         customRadioClickListener()
     }
 
@@ -77,29 +66,29 @@ class PaymentSummaryActivity : AppCompatActivity(), KodeinAware {
         }
     }
 
-    fun initViews() {
-        paymentSummaryBinding =
+    override  fun initiate() {
+      /*  paymentSummaryBinding =
             DataBindingUtil.setContentView(
                 this@PaymentSummaryActivity,
                 R.layout.activity_payment_summary
-            )
+            )*/
         initToolBar()
 
         //TODO Must write below code in your activity to set up initial context for PayU
         Payu.setInstance(this)
 
-        paymentSummaryViewModel = ViewModelProviders.of(
+     /*   paymentSummaryViewModel = ViewModelProviders.of(
             this@PaymentSummaryActivity, factory
         ).get(PaymentSummaryViewModel::class.java)
+*/
+        //    ProgressLoader(this@PaymentSummaryActivity, paymentSummaryViewModel!!)
 
-    //    ProgressLoader(this@PaymentSummaryActivity, paymentSummaryViewModel!!)
-
-        paymentSummaryBinding?.apply {
-            paymentSummaryViewModel = this@PaymentSummaryActivity.paymentSummaryViewModel
+        layoutBinding?.apply {
+            paymentSummaryViewModel = this@PaymentSummaryActivity.viewModel
             lifecycleOwner = this@PaymentSummaryActivity
         }
 
-        paymentSummaryViewModel?.apply {
+        viewModel?.apply {
 
             ProgressLoader(this@PaymentSummaryActivity, this)
             AlertDialog(this@PaymentSummaryActivity, this)
@@ -112,7 +101,7 @@ class PaymentSummaryActivity : AppCompatActivity(), KodeinAware {
             }
         }
 
-        paymentSummaryViewModel?.apply {
+        viewModel?.apply {
             airPayBundleLiveData.observe(this@PaymentSummaryActivity,
                 Observer { airPayBundle ->
                     if (airPayBundle != null) {
@@ -132,8 +121,15 @@ class PaymentSummaryActivity : AppCompatActivity(), KodeinAware {
             paymentOptionErrorLiveData.observe(this@PaymentSummaryActivity, Observer { isError ->
 
                 if (isError) {
-                    paymentSummaryBinding?.contentLayout?.snackbar(BindingUtils.string(R.string.select_payment_gateway))
+                    layoutBinding?.contentLayout?.snackbar(BindingUtils.string(R.string.select_payment_gateway))
                     paymentOptionErrorLiveData.value = false
+                }
+            })
+
+
+            tranStatusLiveData.observe(this@PaymentSummaryActivity, Observer {
+                it?.let {
+                        transactionStatus = it
                 }
             })
 
@@ -142,7 +138,7 @@ class PaymentSummaryActivity : AppCompatActivity(), KodeinAware {
                 if (it != 0) {
                     AppController.setEnterPageAnimation(this@PaymentSummaryActivity)
                     AppLog.infoLog("transactionResponseIdLiveData ----    $it")
-                    if (it > 0) {
+                    if (it > 0 && transactionStatus!!.equals(KEY_SUCCESS)) {
                         // payment success
                         startActivityForResult(
                             PaymentStatusActivity.openPaymentStatusActivity(
@@ -150,7 +146,7 @@ class PaymentSummaryActivity : AppCompatActivity(), KodeinAware {
                                 KEY_SUCCESS_TRANSACTION_STATUS,
                                 it.toString(),
                                 amountLiveData.value.toString(),
-                                paymentType, transactionRefId,cartListData
+                                paymentType, transactionRefId, cartListData
                             ), PAYMENT_SUCCESSFUL_REQUEST_CODE
                         )
 
@@ -161,7 +157,10 @@ class PaymentSummaryActivity : AppCompatActivity(), KodeinAware {
                                 this@PaymentSummaryActivity,
                                 KEY_FAIL_TRANSACTION_STATUS,
                                 "",
-                                amountLiveData.value.toString(), paymentType, transactionRefId,cartListData
+                                amountLiveData.value.toString(),
+                                paymentType,
+                                transactionRefId,
+                                cartListData
                             )
                         )
                     }
@@ -175,7 +174,7 @@ class PaymentSummaryActivity : AppCompatActivity(), KodeinAware {
     }
 
     private fun initToolBar() {
-        setSupportActionBar(paymentSummaryBinding?.appbarLayout?.toolbar)
+        setSupportActionBar(layoutBinding?.appbarLayout?.toolbar)
         val actionBar = supportActionBar
         actionBar!!.apply {
             setDisplayShowHomeEnabled(true) // show or hide the default home button
@@ -184,7 +183,7 @@ class PaymentSummaryActivity : AppCompatActivity(), KodeinAware {
         }
 
         try {
-            paymentSummaryBinding!!.apply {
+            layoutBinding!!.apply {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     if (appbarLayout.toolbar != null) {
                         appbarLayout.toolbar.elevation = 0.0f
@@ -229,23 +228,23 @@ class PaymentSummaryActivity : AppCompatActivity(), KodeinAware {
         when (resultCode) {
             Activity.RESULT_CANCELED -> {
                 // payment cancelled
-                paymentSummaryViewModel?.insertTransactionRequestModel?.apply {
+                viewModel?.insertTransactionRequestModel?.apply {
                     transactionStatus =
                         KEY_CANCEL_TRANSACTION_STATUS
                 }
 
-                paymentSummaryViewModel?.addTransaction(
+                viewModel?.addTransaction(
                     initiateTransaction = false,
                     showLoader = true,
                     terminateTransaction = true,
-                    cartList = paymentSummaryViewModel!!.cartListData, isSuccessTransaction = false
+                    cartList = viewModel!!.cartListData, isSuccessTransaction = false
                 )
             }
             else -> {
                 var isPaymentSuccessFul = true
                 when (requestCode) {
                     PayuConstants.PAYU_REQUEST_CODE -> {
-                        paymentSummaryViewModel?.insertTransactionRequestModel?.apply {
+                        viewModel?.insertTransactionRequestModel?.apply {
                             paymentGateway = keyPaymentGatewayPayUBiz
                             if (data != null) {
                                 try {
@@ -257,6 +256,9 @@ class PaymentSummaryActivity : AppCompatActivity(), KodeinAware {
                                                 var payuTransactionMode =
                                                     payUObject.getString(keyPayuTransactionMode)
                                                         .toLowerCase()
+                                                viewModel?.tranStatusLiveData?.postValue(
+                                                    KEY_SUCCESS
+                                                )
                                                 paymentMethod = when (payuTransactionMode) {
                                                     "nb" -> keyInternetBanking
                                                     "cc" -> keyCreditCard
@@ -272,20 +274,27 @@ class PaymentSummaryActivity : AppCompatActivity(), KodeinAware {
                                                 transactionRefId = payUObject.getString("txnid")
                                             } else {
                                                 // payment fail
-                                                transactionStatus =
-                                                    KEY_FAIL_TRANSACTION_STATUS
+                                                transactionStatus = KEY_FAIL_TRANSACTION_STATUS
                                                 isPaymentSuccessFul = false
+                                                viewModel?.tranStatusLiveData?.postValue(
+                                                    KEY_CANCEL_TRANSACTION_STATUS
+                                                )
                                             }
                                         } else {
                                             // payment fail
-                                            transactionStatus =
-                                                KEY_FAIL_TRANSACTION_STATUS
+                                            transactionStatus = KEY_FAIL_TRANSACTION_STATUS
                                             isPaymentSuccessFul = false
+                                            viewModel?.tranStatusLiveData?.postValue(
+                                                KEY_CANCEL_TRANSACTION_STATUS
+                                            )
                                         }
                                     } else {
                                         // payment fail
                                         transactionStatus = KEY_FAIL_TRANSACTION_STATUS
                                         isPaymentSuccessFul = false
+                                        viewModel?.tranStatusLiveData?.postValue(
+                                            KEY_CANCEL_TRANSACTION_STATUS
+                                        )
                                     }
 
 
@@ -295,6 +304,9 @@ class PaymentSummaryActivity : AppCompatActivity(), KodeinAware {
                                     transactionStatus =
                                         KEY_FAIL_TRANSACTION_STATUS
                                     isPaymentSuccessFul = false
+                                    viewModel?.tranStatusLiveData?.postValue(
+                                        KEY_CANCEL_TRANSACTION_STATUS
+                                    )
                                 }
 
                             } else {
@@ -306,7 +318,7 @@ class PaymentSummaryActivity : AppCompatActivity(), KodeinAware {
                         }
                     }
                     AIR_PAY_REQUEST_CODE -> {
-                        paymentSummaryViewModel?.insertTransactionRequestModel?.apply {
+                        viewModel?.insertTransactionRequestModel?.apply {
                             paymentGateway = keyPaymentGatewayAirPay
                             if (data != null) {
                                 val transactionList =
@@ -314,15 +326,22 @@ class PaymentSummaryActivity : AppCompatActivity(), KodeinAware {
                                 AppLog.infoLog("transactionList --------------     $transactionList")
                                 if (transactionList.size > 0) {
                                     transactionList[0].apply {
-                                        if (!status.isNullOrEmpty() && status == "200"
-                                            && !statusmsg.isNullOrEmpty() && statusmsg.toLowerCase() == "success"
+                                        if (!status.isNullOrEmpty() && status.equals(
+                                                "200",
+                                                true
+                                            ) && !statusmsg.isNullOrEmpty() && statusmsg.toLowerCase()
+                                                .equals("success")
                                         ) {
-                                            transactionStatus =
-                                                KEY_SUCCESS_TRANSACTION_STATUS
+                                            transactionStatus = KEY_SUCCESS_TRANSACTION_STATUS
+                                            viewModel?.tranStatusLiveData?.postValue(
+                                                KEY_SUCCESS
+                                            )
                                         } else {
-                                            transactionStatus =
-                                                KEY_FAIL_TRANSACTION_STATUS
+                                            transactionStatus = KEY_FAIL_TRANSACTION_STATUS
                                             isPaymentSuccessFul = false
+                                            viewModel?.tranStatusLiveData?.postValue(
+                                                KEY_CANCEL_TRANSACTION_STATUS
+                                            )
                                         }
                                         flag = status
                                         paymentMethod = if (chmod != null) { // payment method
@@ -350,21 +369,27 @@ class PaymentSummaryActivity : AppCompatActivity(), KodeinAware {
                                     transactionStatus =
                                         KEY_FAIL_TRANSACTION_STATUS
                                     isPaymentSuccessFul = false
+                                    viewModel?.tranStatusLiveData?.postValue(
+                                        KEY_CANCEL_TRANSACTION_STATUS
+                                    )
                                 }
                             } else {
                                 // payment fail
                                 transactionStatus =
                                     KEY_FAIL_TRANSACTION_STATUS
                                 isPaymentSuccessFul = false
+                                viewModel?.tranStatusLiveData?.postValue(
+                                    KEY_CANCEL_TRANSACTION_STATUS
+                                )
                             }
                         }
                     }
                 }
-                paymentSummaryViewModel?.addTransaction(
+                viewModel?.addTransaction(
                     initiateTransaction = false,
                     showLoader = true,
                     terminateTransaction = false,
-                    cartList = paymentSummaryViewModel!!.cartListData, isPaymentSuccessFul
+                    cartList = viewModel!!.cartListData, isPaymentSuccessFul
                 )
 
             }
@@ -379,9 +404,9 @@ class PaymentSummaryActivity : AppCompatActivity(), KodeinAware {
 
     fun customRadioClickListener() {
 
-        paymentSummaryViewModel?.apply {
+        viewModel?.apply {
 
-            paymentSummaryBinding?.apply {
+            layoutBinding?.apply {
 
                 radioAirpay.setOnClickListener {
 
@@ -404,15 +429,15 @@ class PaymentSummaryActivity : AppCompatActivity(), KodeinAware {
                 }
 
                 radioPayu.setOnClickListener {
-                    paymentSummaryBinding!!.radioPayu.isChecked = true
+                    layoutBinding!!.radioPayu.isChecked = true
 
-                    if (paymentSummaryBinding!!.radioAirpay.isChecked) {
-                        paymentSummaryBinding!!.radioAirpay.isChecked = false
+                    if (layoutBinding!!.radioAirpay.isChecked) {
+                        layoutBinding!!.radioAirpay.isChecked = false
                     }
-                    isPayuChecked = paymentSummaryBinding!!.radioAirpay.isChecked
+                    isPayuChecked = layoutBinding!!.radioAirpay.isChecked
 
-                    paymentSummaryBinding!!.radioPayu.isChecked = !isPayuChecked
-                    paymentSummaryBinding!!.radioAirpay.isChecked = isPayuChecked
+                    layoutBinding!!.radioPayu.isChecked = !isPayuChecked
+                    layoutBinding!!.radioAirpay.isChecked = isPayuChecked
 
                     isPayuChecked = radioPayu.isChecked
 
@@ -441,4 +466,10 @@ class PaymentSummaryActivity : AppCompatActivity(), KodeinAware {
         }
 
     }
+
+    override val viewModelClass: Class<PaymentSummaryViewModel> = PaymentSummaryViewModel::class.java
+
+    override fun layoutId(): Int = R.layout.activity_payment_summary
+
+
 }

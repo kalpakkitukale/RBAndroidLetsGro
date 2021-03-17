@@ -89,6 +89,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dp_20"
             android:layout_marginTop="@dimen/dp_10"
+            android:onClick="@{trasacationViewModel::purchaesDetailClick}"
             android:text="@string/purchase_details"
             android:textAllCaps="true"
             app:layout_constraintStart_toStartOf="parent"
@@ -219,8 +220,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/dp_10"
-            android:text="@string/done"
             android:onClick="@{trasacationViewModel::onPaymentFailSucessfulClick}"
+            android:text="@string/done"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

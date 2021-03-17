@@ -1,6 +1,7 @@
 package com.ramanbyte.emla.view_model
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.databinding.ObservableField
@@ -8,13 +9,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.findNavController
 import androidx.paging.PagedList
+import com.amazonaws.mobile.auth.core.internal.util.ThreadUtils.runOnUiThread
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseViewModel
 import com.ramanbyte.data_layer.CoroutineUtils
 import com.ramanbyte.data_layer.pagination.PaginationMessages
 import com.ramanbyte.emla.data_layer.network.exception.ApiException
 import com.ramanbyte.emla.data_layer.network.exception.NoInternetException
-import com.ramanbyte.emla.data_layer.network.exception.ResourceNotFound
 import com.ramanbyte.emla.data_layer.repositories.CoursesRepository
 import com.ramanbyte.emla.data_layer.repositories.RegistrationRepository
 import com.ramanbyte.emla.data_layer.repositories.TransactionRepository
@@ -23,16 +24,16 @@ import com.ramanbyte.emla.models.UserModel
 import com.ramanbyte.emla.models.request.CartRequestModel
 import com.ramanbyte.emla.models.request.CoursesRequest
 import com.ramanbyte.emla.models.response.CommonDropdownModel
+import com.ramanbyte.emla.ui.activities.CertificateViewerActivity
 import com.ramanbyte.utilities.*
 import kotlinx.android.synthetic.emla.card_course.view.*
 import org.kodein.di.generic.instance
-import java.util.concurrent.TimeoutException
 
 /**
  * @author Vinay Kumbhar <vinay.pkumbhar@gmail.com>
  * @since 14-04-2020
  */
-class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
+class CoursesViewModel(var mContext: Context) : BaseViewModel(mContext = mContext) {
     override var noInternetTryAgain: () -> Unit = {
         coursesRepository.tryAgain()
     }
@@ -114,29 +115,30 @@ class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
     }
 
     fun myCourseListPagination() {
-            transactionRepository.getPaginationResponseHandler().observeForever {
-                if (it != null) {
-                    paginationResponse(
-                            it,
-                            //PaginationMessages("No Data", "No More data", "No Internet", "Something Wrong")
-                            PaginationMessages(
-                                    BindingUtils.string(R.string.no_courses),
-                                    BindingUtils.string(R.string.no_more_courses),
-                                    BindingUtils.string(R.string.please_make_sure_you_are_connected_to_internet),
-                                    BindingUtils.string(R.string.some_thing_went_wrong)
-                            )
+        transactionRepository.getPaginationResponseHandler().observeForever {
+            if (it != null) {
+                paginationResponse(
+                    it,
+                    //PaginationMessages("No Data", "No More data", "No Internet", "Something Wrong")
+                    PaginationMessages(
+                        BindingUtils.string(R.string.no_courses),
+                        BindingUtils.string(R.string.no_more_courses),
+                        BindingUtils.string(R.string.please_make_sure_you_are_connected_to_internet),
+                        BindingUtils.string(R.string.some_thing_went_wrong)
                     )
-                    AppLog.infoLog("Pagination :: ${it.msg} :: ${it.status}")
-                }
+                )
+                AppLog.infoLog("Pagination :: ${it.msg} :: ${it.status}")
             }
+        }
 
-            transactionRepository.myCourseList()
+        transactionRepository.myCourseList()
 
     }
 
     fun coursesPagedList(): LiveData<PagedList<CoursesModel>>? {
         return coursesRepository.coursesPagedList
     }
+
     fun myCoursesPagedList(): LiveData<PagedList<CoursesModel>>? {
         return transactionRepository.coursesPagedList
     }
@@ -145,11 +147,14 @@ class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
         CoroutineUtils.main {
             try {
                 isLoaderShowingLiveData.postValue(true)
-                val response =
-                    transactionRepository.insertCart(cartRequestModel = CartRequestModel(),
-                        courseId = coursesModel.courseId)
-               view.ivCart.visibility = View.GONE
-                view.tvLabeCart.visibility = View.GONE
+                val response = transactionRepository.insertCart(
+                    cartRequestModel = CartRequestModel(),
+                    courseId = coursesModel.courseId
+                )
+                runOnUiThread(Runnable {
+                    view.ivCart.visibility = View.INVISIBLE
+                    view.tvLabeCart.visibility = View.INVISIBLE
+                })
                 isLoaderShowingLiveData.postValue(false)
             } catch (e: ApiException) {
                 isLoaderShowingLiveData.postValue(false)
@@ -183,6 +188,8 @@ class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
                 isAlertDialogShown.postValue(true)
             }
         }
+
+
     }
 
     /*
@@ -233,20 +240,21 @@ class CoursesViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
 
         view.findNavController()
             .navigate(
-                R.id.action_coursesFragment_to_courseSyllabusFragment,
+                R.id.courseSyllabusFragment, /*action_coursesFragment_to_courseSyllabusFragment*/
                 Bundle().apply {
                     putParcelable(KEY_COURSE_MODEL, coursesModel)
                 })
     }
 
+    // on click on the topic list
     fun showChapterList(view: View, coursesModel: CoursesModel) {
+        view.findNavController().navigate(R.id.chaptersListFragment, Bundle().apply { putParcelable(KEY_COURSE_MODEL, coursesModel) })
+    }
 
-        view.findNavController()
-            .navigate(
-                R.id.action_coursesFragment_to_chaptersListFragment,
-                Bundle().apply {
-                    putParcelable(KEY_COURSE_MODEL, coursesModel)
-                })
+    // on click on performance check 
+    fun checkPerformance(view: View) {
+        val intent = Intent(mContext, CertificateViewerActivity::class.java)
+        mContext.startActivity(intent)
     }
 
     fun shareClick(view: View, coursesModel: CoursesModel) {

@@ -124,5 +124,9 @@
         android:id="@+id/transactionHistoryFragment"
         android:name="com.ramanbyte.emla.ui.fragments.TransactionHistoryFragment"
         android:label="@string/transaction_history" />
+    <fragment
+        android:id="@+id/courseResultFragment"
+        android:name="com.ramanbyte.emla.ui.fragments.CourseResultFragment"
+        android:label="CourseResultFragment" />
 
 </navigation>

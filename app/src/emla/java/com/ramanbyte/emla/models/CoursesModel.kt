@@ -45,7 +45,7 @@ class CoursesModel() : Parcelable {
         preAssessmentStatus = parcel.readString()
         summativeAssessmentStatus = parcel.readString()
         summativeaAtemptCount = parcel.readInt()
-        isPurchase = parcel.readBoolean()
+       // isPurchase = parcel.readBoolean()
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -60,7 +60,7 @@ class CoursesModel() : Parcelable {
         parcel.writeString(preAssessmentStatus)
         parcel.writeString(summativeAssessmentStatus)
         parcel.writeInt(summativeaAtemptCount)
-        parcel.writeBoolean(isPurchase)
+        //parcel.writeBoolean(isPurchase)
     }
 
     override fun describeContents(): Int {

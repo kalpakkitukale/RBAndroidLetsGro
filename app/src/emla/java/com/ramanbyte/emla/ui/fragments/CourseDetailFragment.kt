@@ -25,12 +25,9 @@ import kotlinx.android.synthetic.emla.fragment_course_detail.*
  * A simple [Fragment] subclass.
  */
 class CourseDetailFragment : BaseFragment<FragmentCourseDetailBinding, CoursesDetailViewModel>() {
-
-
     private var courseModel: CoursesModel? = null
     private var menu: Menu? = null
     private var viewPagerAdapter: ViewPagerAdapter? = null
-
     override val viewModelClass: Class<CoursesDetailViewModel> = CoursesDetailViewModel::class.java
     override fun layoutId(): Int = R.layout.fragment_course_detail
 
@@ -42,13 +39,21 @@ class CourseDetailFragment : BaseFragment<FragmentCourseDetailBinding, CoursesDe
         }
 
         setToolbarTitle(courseModel?.courseName!!)
+        viewModel.coureseDetailMutableLiveData.postValue(courseModel)
 
         /*courseModel?.courseImageUrl =
             AppS3Client.createInstance(context!!).getFileAccessUrl(
                 courseModel?.courseImage ?: KEY_BLANK
             ) ?: ""*/
 
-        courseModel?.courseImageUrl = StaticMethodUtilitiesKtx.getS3DynamicURL(courseModel?.courseImage!!, context!!)
+        try {
+            courseModel?.courseImageUrl =
+                StaticMethodUtilitiesKtx.getS3DynamicURL(courseModel?.courseImage!!, context!!)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            AppLog.infoLog(e.message.toString())
+        }
+
 
         layoutBinding.apply {
 

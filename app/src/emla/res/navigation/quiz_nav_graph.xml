@@ -34,6 +34,9 @@
         <action
             android:id="@+id/action_showQuestionFragment_to_courseDetailFragment"
             app:destination="@id/quizCourseDetailFragment" />
+        <action
+            android:id="@+id/action_showQuestionFragment_to_courseResultFragment"
+            app:destination="@id/courseResultFragment" />
     </fragment>
 
     <fragment
@@ -60,5 +63,19 @@
         android:id="@+id/coursesFragment"
         android:name="com.ramanbyte.emla.ui.fragments.CoursesFragment"
         android:label="@string/courses" />
+
+    <fragment
+        android:id="@+id/chaptersSectionListFragment"
+        android:name="com.ramanbyte.emla.ui.fragments.ChaptersSectionListFragment"
+        android:label="ChaptersSectionListFragment" />
+    <fragment
+        android:id="@+id/chaptersListFragment"
+        android:name="com.ramanbyte.emla.ui.fragments.ChaptersListFragment"
+        android:label="ChaptersListFragment" />
+    <fragment
+        android:id="@+id/courseResultFragment"
+        android:name="com.ramanbyte.emla.ui.fragments.CourseResultFragment"
+        android:label="CourseResultFragment" />
+
 
 </navigation>

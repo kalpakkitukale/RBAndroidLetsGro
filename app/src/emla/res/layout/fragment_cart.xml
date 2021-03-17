@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="cartViewModel"
             type="com.ramanbyte.emla.view_model.CartViewModel" />
@@ -22,71 +23,73 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvCartFragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_margin="@dimen/dp_2"
             android:visibility="@{cartViewModel.viewVisibilityLiveData}"
+            app:layout_constraintBottom_toTopOf="@id/lblTotalCartAmount"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
 
-
         <include
             android:id="@+id/noInternet"
             layout="@layout/no_internet"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
         <include
             android:id="@+id/somethingWentWrong"
             layout="@layout/something_went_wrong"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
         <include
             android:id="@+id/noData"
             layout="@layout/no_data"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:visibility="gone"/>
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvTotalCartAmount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{String.valueOf(cartViewModel.courseFess)}"
-            style="@style/TextViewLabel"
-            app:layout_constraintVertical_bias=".9"
-            android:gravity="center"
-            android:layout_margin="@dimen/dp_10"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/lblTotalCartAmount"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/lblTotalCartAmount"
+            style="@style/TextViewLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Total Amount to Pay"
-            style="@style/TextViewLabel"
-            android:gravity="center"
             android:layout_margin="@dimen/dp_10"
+            android:text="@string/total_amount_to_pay"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/tvTotalCartAmount"/>
+            app:layout_constraintBottom_toTopOf="@+id/tvTotalCartAmount"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvTotalCartAmount"
+            style="@style/TextViewLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:text="@{String.valueOf(cartViewModel.courseFess)}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btnProceedPay"
+            app:layout_constraintStart_toStartOf="@id/lblTotalCartAmount"
+            app:layout_constraintTop_toTopOf="@+id/lblTotalCartAmount" />
+
 
         <Button
             android:id="@+id/btnProceedPay"
             style="@style/CustomCapsuleButtonFilled"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Proceed to Pay"
-            android:background="@color/colorAccent"
             android:layout_margin="@dimen/dp_10"
+            android:background="@color/colorAccent"
+            android:gravity="end"
             android:onClick="@{()->cartViewModel.clickOnProceedToPay(btnProceedPay)}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            android:text="@string/proceed_to_pay"
+            app:layout_constraintBottom_toBottomOf="@id/tvTotalCartAmount"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tvTotalCartAmount"
+            app:layout_constraintTop_toTopOf="@id/lblTotalCartAmount" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -6,6 +6,10 @@
     <data>
 
         <variable
+            name="imageUrl"
+            type="String" />
+
+        <variable
             name="chaptersViewModel"
             type="com.ramanbyte.emla.view_model.ChaptersViewModel" />
 
@@ -34,8 +38,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/ic_course_dummy"
-                app:imageUrl="@{courseDetailViewModel.coursesModelLiveData.courseImageUrl}"
+                app:imageUrl="@{imageUrl}"
                 android:scaleType="fitXY" />
+            <!--imageUrl
+             app:imageUrl="@{courseDetailViewModel.coursesModelLiveData.courseImageUrl}"
+            -->
 
         </androidx.cardview.widget.CardView>
 

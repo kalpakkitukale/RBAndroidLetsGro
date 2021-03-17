@@ -15,9 +15,7 @@ import com.ramanbyte.emla.models.CourseDetailsModel
 import com.ramanbyte.emla.models.TransactionHistoryModel
 import com.ramanbyte.emla.models.response.CartResponseModel
 import com.ramanbyte.emla.ui.activities.ContainerActivity
-import com.ramanbyte.utilities.AppLog
-import com.ramanbyte.utilities.BindingUtils
-import com.ramanbyte.utilities.KEY_BLANK
+import com.ramanbyte.utilities.*
 import org.kodein.di.generic.instance
 
 /**
@@ -90,7 +88,7 @@ class TransactionHistoryViewModel(var mContext: Context) : BaseViewModel(mContex
                     View.GONE,
                     View.VISIBLE,
                     View.GONE,
-                    BindingUtils.string(R.string.favourite_videos_unavailable),
+                    BindingUtils.string(R.string.no_transaction_message),
                     View.GONE
                 )
                 coroutineToggleLoader()
@@ -115,7 +113,8 @@ class TransactionHistoryViewModel(var mContext: Context) : BaseViewModel(mContex
                 this.courseName = it.courseDetails.course_Name
                 this.courseImage = it.courseDetails.courseIamge
                 this.courseDescription = it.courseDetails.description
-                this.courseFee = transactiondata.amountPaid
+                this.courseFee = it.courseFeeStructure.courseFee.toString()
+                this.totalPaid = transactiondata.amountPaid
             })
         }
         cartDetailsLiveData.postValue(cardDataList)
@@ -133,7 +132,18 @@ class TransactionHistoryViewModel(var mContext: Context) : BaseViewModel(mContex
     // on click for the on payment fail sucessful click
     fun onPaymentFailSucessfulClick(view: View) {
         val intent = Intent(mContext, ContainerActivity::class.java)
+        intent.putExtra(KEY_PAYMENT_STATUS, KEY_SUCCESS)
         mContext.startActivity(intent)
+
+    }
+
+    // click on the perchaes detail
+    var perchaesDetailLiveData = MutableLiveData<Boolean>().apply {
+        value = false
+    }
+
+    fun purchaesDetailClick(view: View) {
+        perchaesDetailLiveData.postValue(true)
 
     }
 

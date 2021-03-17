@@ -35,6 +35,7 @@ class PaymentStatusActivity :
     var campusId = ""
     var programId = ""
     var cartListData = ArrayList<CartResponseModel>()
+    var courseDetailsBottomSheet: CoursePerchesDetailsBottomSheet? = null
 
     companion object {
         /**
@@ -75,7 +76,7 @@ class PaymentStatusActivity :
     override fun layoutId(): Int = R.layout.activity_payment_status
 
     override fun initiate() {
-        onClickListener()
+        viewModelOperation()
         intent?.extras?.apply {
             transactionStatus = getString("transactionStatus", "")
             transactionResponseId = getString("transactionResponseId", "")
@@ -84,6 +85,7 @@ class PaymentStatusActivity :
             transactionType = getString("transactionType", "")
             cartListData =
                 getParcelableArrayList<CartResponseModel>(keyCartData) as ArrayList<CartResponseModel>
+            cartListData.forEach { it.totalPaid = transactionAmount }
         }
         initToolBar()
         setPaymentStatusData()
@@ -159,19 +161,21 @@ class PaymentStatusActivity :
         super.onBackPressed()
     }
 
-    var courseDetailsBottomSheet: CoursePerchesDetailsBottomSheet? = null
 
     // click listener on the details
-    fun onClickListener() {
-        layoutBinding?.apply {
-            lblPurchaseDetail.setOnClickListener {
-                courseDetailsBottomSheet = CoursePerchesDetailsBottomSheet(true,true)
-                courseDetailsBottomSheet?.show(supportFragmentManager,"Dialog")
-
-
-
-            }
+    fun viewModelOperation() {
+        viewModel.apply {
+            perchaesDetailLiveData.observe(this@PaymentStatusActivity, androidx.lifecycle.Observer {
+                it?.let {
+                    if (it) {
+                        courseDetailsBottomSheet = CoursePerchesDetailsBottomSheet(true, true)
+                        courseDetailsBottomSheet?.show(supportFragmentManager, "Dialog")
+                        perchaesDetailLiveData.postValue(false)
+                    }
+                }
+            })
         }
+
     }
 
 

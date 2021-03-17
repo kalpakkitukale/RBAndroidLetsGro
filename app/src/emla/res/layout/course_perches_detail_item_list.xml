@@ -43,12 +43,12 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvCourseDescription"
                 style="@style/TextViewSubTitle"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@{cardData.courseDescription}"
+                app:layout_constraintEnd_toEndOf="@id/tvCourseName"
                 app:layout_constraintStart_toStartOf="@+id/tvCourseName"
                 app:layout_constraintTop_toBottomOf="@+id/tvCourseName" />
-
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvAmount"
