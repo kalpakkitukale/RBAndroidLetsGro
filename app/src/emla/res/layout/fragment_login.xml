@@ -15,6 +15,7 @@
         android:id="@+id/layoutMain"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/transparent"
         android:fillViewport="true"
         android:fitsSystemWindows="true">
 
@@ -73,6 +74,7 @@
             android:layout_width="@dimen/dp_130"
             android:layout_height="@dimen/dp_30"
             android:src="@drawable/from_ramanbyte"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -94,7 +96,8 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:background="@color/transparent">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/lableSignIn"
@@ -102,7 +105,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/log_in"
-                    android:textColor="@color/labelColorBig"
+                    android:textColor="@color/colorTextBlackInLightNBlueInDark"
                     app:layout_constraintStart_toStartOf="@+id/tilUserName"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -123,6 +126,7 @@
                         style="@style/EditTextRegularGrayHint"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:background="@color/transparent"
                         android:imeOptions="actionNext"
                         android:inputType="textEmailAddress"
                         android:lines="1"
@@ -131,24 +135,37 @@
                         android:text="@={loginViewModel.userLoginRequestLiveData.emailId}" />
                 </com.google.android.material.textfield.TextInputLayout>
 
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvForgetPassword"
+                    style="@style/TextViewMediumNayBlueOnLightNWhiteOnDark14sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:text="@string/forgot_password"
+                    android:textSize="@dimen/sp_11"
+                    app:layout_constraintEnd_toEndOf="@+id/tilPassword"
+                    app:layout_constraintTop_toBottomOf="@+id/tilUserName" />
+
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/tilPassword"
                     style="@style/TextInputLayoutWithoutBorder"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_15"
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:background="@color/transparent"
                     android:hint="@string/password"
                     app:endIconMode="password_toggle"
                     app:errorText="@{loginViewModel.loginRequestValidation.getValidation(StaticHelpersKt.keyPassword)}"
                     app:layout_constraintEnd_toEndOf="@+id/tilUserName"
                     app:layout_constraintStart_toStartOf="@+id/tilUserName"
-                    app:layout_constraintTop_toBottomOf="@+id/tilUserName">
+                    app:layout_constraintTop_toBottomOf="@+id/tvForgetPassword">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/ettPassword"
                         style="@style/EditTextRegularGrayHint"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:background="@color/transparent"
                         android:imeOptions="actionGo"
                         android:inputType="textPassword"
                         android:lines="1"
@@ -157,161 +174,150 @@
                         android:text="@={loginViewModel.userLoginRequestLiveData.password}" />
                 </com.google.android.material.textfield.TextInputLayout>
 
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnLogin"
+                    style="@style/CustomCapsuleButtonBlueBgWhiteText"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/dp_40"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:onClick='@{()->loginViewModel.doLogin(btnLogin,"N")}'
+                    android:text="@string/log_in"
+                    app:layout_constraintEnd_toEndOf="@id/tilPassword"
+                    app:layout_constraintStart_toStartOf="@id/tilPassword"
+                    app:layout_constraintTop_toBottomOf="@+id/tilPassword" />
+
+
+                <View
+                    android:id="@+id/view5"
+                    android:layout_width="@dimen/dp_50"
+                    android:layout_height="0.5dp"
+                    android:background="@color/colorDivider"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toBottomOf="@+id/lblLoginWith"
+                    app:layout_constraintEnd_toStartOf="@+id/lblLoginWith"
+                    app:layout_constraintHorizontal_bias="0.892"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/lblLoginWith" />
+
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvForgetPassword"
-                    style="@style/TextViewRegularGrayOnLightNDark"
+                    android:id="@+id/lblLoginWith"
+                    style="@style/TextViewLabelMediumGrayOnLightNDark28sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_15"
-                    android:layout_marginBottom="@dimen/dp_10"
-                    android:text="@string/forgot_password"
-                    android:textSize="@dimen/sp_11"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/tilPassword"
-                    app:layout_constraintTop_toBottomOf="@+id/tilPassword" />
+                    android:text="@string/login_with"
+                    android:textSize="@dimen/sp_12"
+                    android:visibility="visible"
+                    app:layout_constraintEnd_toEndOf="@+id/btnLogin"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="@+id/btnLogin"
+                    app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
+
+                <View
+                    android:id="@+id/view6"
+                    android:layout_width="@dimen/dp_50"
+                    android:layout_height="0.5dp"
+                    android:background="@color/colorDivider"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toBottomOf="@+id/lblLoginWith"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.116"
+                    app:layout_constraintStart_toEndOf="@+id/lblLoginWith"
+                    app:layout_constraintTop_toTopOf="@+id/lblLoginWith"
+                    app:layout_constraintVertical_bias="0.444" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/btnCRLogin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_15"
+                    android:minHeight="@dimen/dp_20"
+                    android:onClick="@{loginViewModel::googleLogIn}"
+                    android:padding="@dimen/dp_5"
+                    android:src="@drawable/ic_google_plus"
+                    android:visibility="invisible"
+                    app:layout_constraintEnd_toStartOf="@+id/btnGoogleLogin"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/lblLoginWith" />
+
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/btnGoogleLogin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minHeight="@dimen/dp_20"
+                    android:onClick="@{loginViewModel::googleLogIn}"
+                    android:padding="@dimen/dp_5"
+                    android:src="@drawable/ic_google_plus"
+                    android:visibility="invisible"
+                    app:layout_constraintEnd_toStartOf="@+id/btnFbLogin"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toEndOf="@+id/btnCRLogin"
+                    app:layout_constraintTop_toTopOf="@+id/btnCRLogin" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/btnFbLogin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minHeight="@dimen/dp_20"
+                    android:onClick="@{loginViewModel::fbLogIn}"
+                    android:padding="@dimen/dp_5"
+                    android:src="@drawable/ic_facebook"
+                    android:visibility="invisible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toEndOf="@+id/btnGoogleLogin"
+                    app:layout_constraintTop_toTopOf="@+id/btnGoogleLogin" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/btnLoginWithClassroom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/custom_capsule_button_with_border"
+                    android:padding="@dimen/dp_5"
+                    android:src="@drawable/classroom_logo"
+                    app:layout_constraintBottom_toTopOf="@+id/lblSignup"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/lblLoginWith" />
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/lblSignup"
+                    style="@style/TextViewMediumNayBlueOnLightNWhiteOnDark14sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:text="@string/have_an_account"
+                    android:textSize="@dimen/sp_12"
+                    app:layout_constraintEnd_toStartOf="@+id/ivClientLogo"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/btnGoogleLogin" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/ivClientLogo"
+                    style="@style/TextViewMediumNayBlueOnLightNWhiteOnDark14sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{loginViewModel::createAccount}"
+                    android:padding="@dimen/dp_5"
+                    android:text="@string/signup_here"
+                    android:textSize="@dimen/sp_12"
+                    app:layout_constraintBottom_toBottomOf="@+id/lblSignup"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toEndOf="@+id/lblSignup"
+                    app:layout_constraintTop_toTopOf="@+id/lblSignup" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnLogin"
-            style="@style/CustomCapsuleButtonBlueBgWhiteText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_20"
-            android:onClick='@{()->loginViewModel.doLogin(btnLogin,"N")}'
-            android:text="@string/log_in"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardLayoutMain"
-            app:layout_constraintWidth_percent="0.4" />
-
-
-        <View
-            android:id="@+id/view5"
-            android:layout_width="@dimen/dp_50"
-            android:layout_height="0.5dp"
-            android:background="@color/colorDivider"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="@+id/lblLoginWith"
-            app:layout_constraintEnd_toStartOf="@+id/lblLoginWith"
-            app:layout_constraintHorizontal_bias="0.892"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/lblLoginWith" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/lblLoginWith"
-            style="@style/TextViewLabelMediumGrayOnLightNDark28sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_15"
-            android:text="@string/login_with"
-            android:textSize="@dimen/sp_12"
-            android:visibility="visible"
-            app:layout_constraintEnd_toEndOf="@+id/btnLogin"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toStartOf="@+id/btnLogin"
-            app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
-
-        <View
-            android:id="@+id/view6"
-            android:layout_width="@dimen/dp_50"
-            android:layout_height="0.5dp"
-            android:background="@color/colorDivider"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="@+id/lblLoginWith"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.116"
-            app:layout_constraintStart_toEndOf="@+id/lblLoginWith"
-            app:layout_constraintTop_toTopOf="@+id/lblLoginWith"
-            app:layout_constraintVertical_bias="0.444" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/btnCRLogin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_15"
-            android:minHeight="@dimen/dp_20"
-            android:onClick="@{loginViewModel::googleLogIn}"
-            android:padding="@dimen/dp_5"
-            android:src="@drawable/ic_google_plus"
-            android:visibility="invisible"
-            app:layout_constraintEnd_toStartOf="@+id/btnGoogleLogin"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lblLoginWith" />
-
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/btnGoogleLogin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:minHeight="@dimen/dp_20"
-            android:onClick="@{loginViewModel::googleLogIn}"
-            android:padding="@dimen/dp_5"
-            android:src="@drawable/ic_google_plus"
-            android:visibility="invisible"
-            app:layout_constraintEnd_toStartOf="@+id/btnFbLogin"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toEndOf="@+id/btnCRLogin"
-            app:layout_constraintTop_toTopOf="@+id/btnCRLogin" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/btnFbLogin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:minHeight="@dimen/dp_20"
-            android:onClick="@{loginViewModel::fbLogIn}"
-            android:padding="@dimen/dp_5"
-            android:src="@drawable/ic_facebook"
-            android:visibility="invisible"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toEndOf="@+id/btnGoogleLogin"
-            app:layout_constraintTop_toTopOf="@+id/btnGoogleLogin" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/btnLoginWithClassroom"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/custom_capsule_button_with_border"
-            android:padding="@dimen/dp_5"
-            android:src="@drawable/classroom_logo"
-            app:layout_constraintBottom_toTopOf="@+id/lblSignup"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lblLoginWith" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/lblSignup"
-            style="@style/TextViewMediumNayBlueOnLightNWhiteOnDark14sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/have_an_account"
-            android:textSize="@dimen/sp_12"
-            app:layout_constraintBottom_toTopOf="@+id/ivElement1"
-            app:layout_constraintEnd_toStartOf="@+id/ivClientLogo"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnGoogleLogin" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/ivClientLogo"
-            style="@style/TextViewMediumNayBlueOnLightNWhiteOnDark14sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="@{loginViewModel::createAccount}"
-            android:padding="@dimen/dp_5"
-            android:text="@string/signup_here"
-            android:textSize="@dimen/sp_12"
-            app:layout_constraintBottom_toBottomOf="@+id/lblSignup"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toEndOf="@+id/lblSignup"
-            app:layout_constraintTop_toTopOf="@+id/lblSignup" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
