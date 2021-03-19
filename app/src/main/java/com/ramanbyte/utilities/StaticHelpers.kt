@@ -160,6 +160,7 @@ const val PATH_SEPARATOR = "/"
 
 // payment codes
 const val PAYMENT_SUCCESSFUL_REQUEST_CODE = 700
+const val PAYTM_REQUEST_CODE = 0x6
 
 
 /**
@@ -393,6 +394,19 @@ const val keyPaymentGatewayAirPay = "AirPay"
 const val keyPaymentGatewayPayUBiz = "PayUBiz"
 const val keyPaymentDomain = "Online"
 
+const val keyPaymentGatewayPayTmPay = "AirPay"
+const val KEY_CARD = "Card"
+const val KEY_INTERNET_BANKING = "Internet banking"
+const val KEY_PREPAID = "Prepaid Card"
+const val KEY_UPI = "UPI"
+const val KEY_CREDIT_CARD = "Credit Card"
+const val KEY_DEBIT_CARD = "Debit Card"
+const val KEY_CASH = "Cash"
+const val KEY_EMI = "EMI"
+const val KEY_PAYTM_WALLET = "Paytm wallet"
+const val KEY_POSTPAID = "Postpaid"
+const val KEY_USER_ID = "userId"
+const val KEY_COUPON_CODE = "couponCode"
 
 // changed data
 const val keyAmount = "amount"

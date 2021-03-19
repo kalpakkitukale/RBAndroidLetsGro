@@ -10,13 +10,10 @@ import com.ramanbyte.data_layer.base.BaseRepository
 import com.ramanbyte.data_layer.pagination.PaginationResponseHandler
 import com.ramanbyte.emla.data_layer.pagination.PaginationDataSourceFactory
 import com.ramanbyte.emla.data_layer.room.entities.UserEntity
-import com.ramanbyte.emla.faculty.data_layer.network.api_layer.FacultyCoursesController
 import com.ramanbyte.emla.faculty.data_layer.network.api_layer.FacultyMasterApiController
 import com.ramanbyte.emla.faculty.models.FacultyCoursesModel
 import com.ramanbyte.emla.faculty.models.request.FacultyCoursesRequestModel
-import com.ramanbyte.emla.models.CoursesModel
 import com.ramanbyte.emla.models.UserModel
-import com.ramanbyte.emla.models.request.CoursesRequest
 import com.ramanbyte.utilities.replicate
 import org.kodein.di.generic.instance
 

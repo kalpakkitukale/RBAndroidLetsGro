@@ -10,6 +10,7 @@ import com.ramanbyte.utilities.BindingUtils
 import com.ramanbyte.utilities.KEY_NO_INTERNET_ERROR
 import okhttp3.Interceptor
 import okhttp3.Response
+import kotlin.jvm.Throws
 
 /**
  * @addedBy Vinay Kumbhar <vinay.pkumbhar@gmail.com>
@@ -18,7 +19,6 @@ import okhttp3.Response
 class NetworkConnectionInterceptor(val context: Context) : Interceptor {
 
     private val applicationContext = context.applicationContext
-
 
     @Throws(NoInternetException::class)
     override fun intercept(chain: Interceptor.Chain): Response {
@@ -34,7 +34,7 @@ class NetworkConnectionInterceptor(val context: Context) : Interceptor {
                     "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIzOTVhZWUxZS1lNmI5LTQ3ODItYjBiNy0wNzAwNDIwNjJiMTkiLCJzdWIiOiJzdXBlcmFkbWluQHBpYm0uaW4iLCJqdGkiOiI2NWQxZWVmNi01MjViLTQxMmUtOGUyYi1hMTJlMzk4YTlkMmIiLCJlbWFpbCI6InN1cGVyYWRtaW5AcGlibS5pbiIsImlhdCI6IjEiLCJleHAiOjE4NDEzMTA2NDQsImlzcyI6IlBJQk0iLCJhdWQiOiJQSUJNIn0.8IKHm6TFRuokD1B-ATtnABbJLmhme0xis3zWhxTp55c"
                     /*SharedPreferencesDatabase.getStringPref(SharedPreferencesDatabase.KEY_AUTH_TOKEN)*/
                 )
-                .method(originalRequest.method(), originalRequest.body())
+                .method(originalRequest.method, originalRequest.body)
                 .build()
 
             return chain.proceed(authorizedRequest)

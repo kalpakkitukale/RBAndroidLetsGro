@@ -12,6 +12,8 @@ import com.ramanbyte.utilities.KEY_SOMETHING_WENT_WRONG_ERROR
 import org.json.JSONException
 import retrofit2.Response
 import java.net.SocketTimeoutException
+import kotlin.jvm.Throws
+
 /**
  * @author Vinay Kumbhar <vinay.pkumbhar@gmail.com>
  * @since 13-04-2020

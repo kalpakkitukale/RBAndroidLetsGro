@@ -17,7 +17,6 @@ import com.ramanbyte.emla.models.UserModel
 import com.ramanbyte.emla.models.request.ChapterRequest
 import com.ramanbyte.utilities.replicate
 import org.kodein.di.generic.instance
-import kotlin.contracts.contract
 
 class ChaptersRepository(mContext: Context) : BaseRepository(mContext) {
 

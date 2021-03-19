@@ -8,9 +8,14 @@ import android.os.Build
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.airpay.airpaysdk_simplifiedotp.AirpayActivity
 import com.airpay.airpaysdk_simplifiedotp.Transaction
+import com.paytm.pgsdk.PaytmConstants
+import com.paytm.pgsdk.PaytmOrder
+import com.paytm.pgsdk.PaytmPaymentTransactionCallback
+import com.paytm.pgsdk.TransactionManager
 import com.payu.india.Payu.Payu
 import com.payu.india.Payu.PayuConstants
 import com.payu.payuui.Activity.PayUBaseActivity
@@ -18,6 +23,7 @@ import com.ramanbyte.AppController
 import com.ramanbyte.BuildConfig
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseActivity
+import com.ramanbyte.data_layer.SharedPreferencesDatabase
 import com.ramanbyte.databinding.ActivityPaymentSummaryBinding
 import com.ramanbyte.emla.base.di.authModuleDependency
 import com.ramanbyte.emla.models.PayuGatewayModel
@@ -27,16 +33,17 @@ import com.ramanbyte.utilities.*
 import org.json.JSONObject
 import java.util.*
 
-class PaymentSummaryActivity : BaseActivity<ActivityPaymentSummaryBinding,PaymentSummaryViewModel>(
-    authModuleDependency)/*, KodeinAware*/ {
+class PaymentSummaryActivity : BaseActivity<ActivityPaymentSummaryBinding, PaymentSummaryViewModel>(
+    authModuleDependency
+), PaytmPaymentTransactionCallback/*, KodeinAware*/ {
 
-   /* private val _parentKodein by kodein()
+    /* private val _parentKodein by kodein()
 
-    override val kodein: Kodein by retainedKodein {
-        extend(_parentKodein, copy = Copy.All)
-        bind<Context>(ACTIVITY_CONTEXT) with singleton { this@PaymentSummaryActivity }
-    }
-    private val factory: BaseViewModelFactory by instance()*/
+     override val kodein: Kodein by retainedKodein {
+         extend(_parentKodein, copy = Copy.All)
+         bind<Context>(ACTIVITY_CONTEXT) with singleton { this@PaymentSummaryActivity }
+     }
+     private val factory: BaseViewModelFactory by instance()*/
 
     private var paymentSummaryBinding: ActivityPaymentSummaryBinding? = null
     private var paymentSummaryViewModel: PaymentSummaryViewModel? = null
@@ -48,7 +55,7 @@ class PaymentSummaryActivity : BaseActivity<ActivityPaymentSummaryBinding,Paymen
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-      //  initViews()
+        //  initViews()
         customRadioClickListener()
     }
 
@@ -66,21 +73,20 @@ class PaymentSummaryActivity : BaseActivity<ActivityPaymentSummaryBinding,Paymen
         }
     }
 
-    override  fun initiate() {
-      /*  paymentSummaryBinding =
-            DataBindingUtil.setContentView(
-                this@PaymentSummaryActivity,
-                R.layout.activity_payment_summary
-            )*/
+    override fun initiate() {
+        /*  paymentSummaryBinding =
+              DataBindingUtil.setContentView(
+                  this@PaymentSummaryActivity,
+                  R.layout.activity_payment_summary
+              )*/
         initToolBar()
-
-        //TODO Must write below code in your activity to set up initial context for PayU
+        viewModelOperation()
         Payu.setInstance(this)
 
-     /*   paymentSummaryViewModel = ViewModelProviders.of(
-            this@PaymentSummaryActivity, factory
-        ).get(PaymentSummaryViewModel::class.java)
-*/
+        /*   paymentSummaryViewModel = ViewModelProviders.of(
+               this@PaymentSummaryActivity, factory
+           ).get(PaymentSummaryViewModel::class.java)
+   */
         //    ProgressLoader(this@PaymentSummaryActivity, paymentSummaryViewModel!!)
 
         layoutBinding?.apply {
@@ -129,7 +135,7 @@ class PaymentSummaryActivity : BaseActivity<ActivityPaymentSummaryBinding,Paymen
 
             tranStatusLiveData.observe(this@PaymentSummaryActivity, Observer {
                 it?.let {
-                        transactionStatus = it
+                    transactionStatus = it
                 }
             })
 
@@ -276,17 +282,13 @@ class PaymentSummaryActivity : BaseActivity<ActivityPaymentSummaryBinding,Paymen
                                                 // payment fail
                                                 transactionStatus = KEY_FAIL_TRANSACTION_STATUS
                                                 isPaymentSuccessFul = false
-                                                viewModel?.tranStatusLiveData?.postValue(
-                                                    KEY_CANCEL_TRANSACTION_STATUS
-                                                )
+                                                viewModel?.tranStatusLiveData?.postValue(KEY_CANCEL_TRANSACTION_STATUS)
                                             }
                                         } else {
                                             // payment fail
                                             transactionStatus = KEY_FAIL_TRANSACTION_STATUS
                                             isPaymentSuccessFul = false
-                                            viewModel?.tranStatusLiveData?.postValue(
-                                                KEY_CANCEL_TRANSACTION_STATUS
-                                            )
+                                            viewModel?.tranStatusLiveData?.postValue(KEY_CANCEL_TRANSACTION_STATUS)
                                         }
                                     } else {
                                         // payment fail
@@ -321,27 +323,17 @@ class PaymentSummaryActivity : BaseActivity<ActivityPaymentSummaryBinding,Paymen
                         viewModel?.insertTransactionRequestModel?.apply {
                             paymentGateway = keyPaymentGatewayAirPay
                             if (data != null) {
-                                val transactionList =
-                                    data.extras!!.getSerializable("DATA") as ArrayList<Transaction>
+                                val transactionList = data.extras!!.getSerializable("DATA") as ArrayList<Transaction>
                                 AppLog.infoLog("transactionList --------------     $transactionList")
                                 if (transactionList.size > 0) {
                                     transactionList[0].apply {
-                                        if (!status.isNullOrEmpty() && status.equals(
-                                                "200",
-                                                true
-                                            ) && !statusmsg.isNullOrEmpty() && statusmsg.toLowerCase()
-                                                .equals("success")
-                                        ) {
+                                        if (!status.isNullOrEmpty() && status.equals("200", true) && !statusmsg.isNullOrEmpty() && statusmsg.toLowerCase().equals("success")) {
                                             transactionStatus = KEY_SUCCESS_TRANSACTION_STATUS
-                                            viewModel?.tranStatusLiveData?.postValue(
-                                                KEY_SUCCESS
-                                            )
+                                            viewModel?.tranStatusLiveData?.postValue(KEY_SUCCESS)
                                         } else {
                                             transactionStatus = KEY_FAIL_TRANSACTION_STATUS
                                             isPaymentSuccessFul = false
-                                            viewModel?.tranStatusLiveData?.postValue(
-                                                KEY_CANCEL_TRANSACTION_STATUS
-                                            )
+                                            viewModel?.tranStatusLiveData?.postValue(KEY_CANCEL_TRANSACTION_STATUS)
                                         }
                                         flag = status
                                         paymentMethod = if (chmod != null) { // payment method
@@ -366,8 +358,7 @@ class PaymentSummaryActivity : BaseActivity<ActivityPaymentSummaryBinding,Paymen
                                     }
                                 } else {
                                     // payment fail
-                                    transactionStatus =
-                                        KEY_FAIL_TRANSACTION_STATUS
+                                    transactionStatus = KEY_FAIL_TRANSACTION_STATUS
                                     isPaymentSuccessFul = false
                                     viewModel?.tranStatusLiveData?.postValue(
                                         KEY_CANCEL_TRANSACTION_STATUS
@@ -375,21 +366,43 @@ class PaymentSummaryActivity : BaseActivity<ActivityPaymentSummaryBinding,Paymen
                                 }
                             } else {
                                 // payment fail
-                                transactionStatus =
-                                    KEY_FAIL_TRANSACTION_STATUS
+                                transactionStatus = KEY_FAIL_TRANSACTION_STATUS
                                 isPaymentSuccessFul = false
-                                viewModel?.tranStatusLiveData?.postValue(
-                                    KEY_CANCEL_TRANSACTION_STATUS
-                                )
+                                viewModel?.tranStatusLiveData?.postValue(KEY_CANCEL_TRANSACTION_STATUS)
                             }
                         }
+                    }
+
+                    //here is code for the paytm
+                    PAYTM_REQUEST_CODE -> {
+                        viewModel?.insertTransactionRequestModel.apply {
+                            data?.extras?.let { bundle ->
+                                if (bundle.containsKey("response") && bundle.getString("response")?.isNotEmpty() == true) {
+                                    val responseJson = JSONObject(bundle.getString("response").toString())
+                                    if (responseJson.getString(PaytmConstants.STATUS) == "TXN_SUCCESS") {
+                                    isPaymentSuccessFul = true
+                                        SharedPreferencesDatabase.setStringPref(SharedPreferencesDatabase.TRANSACTION_ID, responseJson.getString(PaytmConstants.TRANSACTION_ID))
+                                        SharedPreferencesDatabase.setStringPref(SharedPreferencesDatabase.TRANSACTION_MODE, responseJson.getString(PaytmConstants.PAYMENT_MODE))
+                                        transactionStatus = KEY_SUCCESS_TRANSACTION_STATUS
+                                        viewModel?.tranStatusLiveData?.postValue(KEY_SUCCESS)
+
+
+                                    }
+                                    responseJson.getString("ORDERID")?.let { it1 -> viewModel.transactionStatus(it1) }
+                                }
+
+
+                            }
+                        }
+
+
                     }
                 }
                 viewModel?.addTransaction(
                     initiateTransaction = false,
                     showLoader = true,
                     terminateTransaction = false,
-                    cartList = viewModel!!.cartListData, isPaymentSuccessFul
+                    cartList = viewModel!!.cartListData, isSuccessTransaction = isPaymentSuccessFul
                 )
 
             }
@@ -430,17 +443,13 @@ class PaymentSummaryActivity : BaseActivity<ActivityPaymentSummaryBinding,Paymen
 
                 radioPayu.setOnClickListener {
                     layoutBinding!!.radioPayu.isChecked = true
-
                     if (layoutBinding!!.radioAirpay.isChecked) {
                         layoutBinding!!.radioAirpay.isChecked = false
                     }
                     isPayuChecked = layoutBinding!!.radioAirpay.isChecked
-
                     layoutBinding!!.radioPayu.isChecked = !isPayuChecked
                     layoutBinding!!.radioAirpay.isChecked = isPayuChecked
-
                     isPayuChecked = radioPayu.isChecked
-
                     if (!isPayuChecked) {
                         radioPayu.toggle()
                         radioAirpay.isChecked = isPayuChecked
@@ -448,6 +457,26 @@ class PaymentSummaryActivity : BaseActivity<ActivityPaymentSummaryBinding,Paymen
                         isAirPayChecked = false
                     }
                 }
+
+                radioPaytm.setOnClickListener {
+                    layoutBinding?.radioPaytm.isChecked = true
+
+                    if (layoutBinding.radioAirpay.isChecked ||layoutBinding.radioPayu.isChecked){
+                        layoutBinding.radioAirpay.isChecked = false
+                        layoutBinding.radioPayu.isChecked = false
+                    }
+                    isPayuChecked = layoutBinding.radioPayu.isChecked
+                    isAirPayChecked = layoutBinding.radioAirpay.isChecked
+
+
+
+                    if (!isPaytmChecked){
+                        isPaytmChecked = true
+                        isPayuChecked = false
+                        isAirPayChecked = false
+                    }
+                }
+
 
             }
         }
@@ -467,9 +496,185 @@ class PaymentSummaryActivity : BaseActivity<ActivityPaymentSummaryBinding,Paymen
 
     }
 
-    override val viewModelClass: Class<PaymentSummaryViewModel> = PaymentSummaryViewModel::class.java
+    override val viewModelClass: Class<PaymentSummaryViewModel> =
+        PaymentSummaryViewModel::class.java
 
     override fun layoutId(): Int = R.layout.activity_payment_summary
+
+    fun viewModelOperation() {
+        viewModel.apply {
+            transactionTokenLiveData.observe(this@PaymentSummaryActivity, Observer {
+                it?.let {
+                        val responseBody = it.body
+                        val responseResult = it.body.resultInfo
+                        val responseStatus = it.body.resultInfo.resultStatus
+                        if (responseStatus.equals("f", true)) {
+                            AlertUtilities.showInfoAlertDialog(
+                                this@PaymentSummaryActivity,
+                                responseResult.resultMsg
+                            )
+                        } else {
+                            placePaytmOrder(responseBody.txnToken) //txnToken txn token nhi tya entity madhe
+                        }
+
+
+                }
+            })
+
+            tokenStatusLiveData.observe(this@PaymentSummaryActivity, Observer {
+                it?.let {
+                    if (it.body.resultInfo.resultStatus.equals("TXN_SUCCESS")) {
+                        transactionStatus = KEY_SUCCESS
+                        SharedPreferencesDatabase.setStringPref(SharedPreferencesDatabase.TRANSACTION_ID, it.body.txnId)
+                        SharedPreferencesDatabase.setStringPref(SharedPreferencesDatabase.TRANSACTION_MODE, getTransactionMode(it.body.paymentMode))
+                      viewModel?.insertTransactionRequestModel.apply {
+                            transactionStatus = KEY_SUCCESS_TRANSACTION_STATUS
+                            viewModel.tranStatusLiveData.postValue(KEY_SUCCESS)
+                            paymentGateway = keyPaymentGatewayPayTmPay
+                            this.paymentMethod = getTransactionMode(it.body.paymentMode)
+                            this.transId = 9763767218 /*SharedPreferencesDatabase.getStringPref(SharedPreferencesDatabase.TRANSACTION_ID).toInt()
+                                .toLong()*/
+
+                          paymentType = getTransactionMode(it.body.paymentMode)
+                          transactionRefId = it.body.txnId
+                        }
+
+                        viewModel?.addTransaction(
+                            initiateTransaction = false,
+                            showLoader = true,
+                            terminateTransaction = false,
+                            cartList = viewModel!!.cartListData, isSuccessTransaction = true
+                        )
+
+                    } else if (it.body.resultInfo.resultStatus.equals("TXN_FAILURE")) {
+                        // transaction impelemet need
+                        transactionStatus = KEY_FAIL_TRANSACTION_STATUS
+                        AlertUtilities.showAlertDialog(
+                            this@PaymentSummaryActivity,
+                            BindingUtils.string(R.string.payment_fail_message),
+                            "Set",
+                            BindingUtils.string(R.string.strCancel),
+                            { dialog, which ->
+                                try {
+                                    viewModel?.insertTransactionRequestModel.apply {
+                                        transactionStatus = KEY_FAIL_TRANSACTION_STATUS
+                                        viewModel?.tranStatusLiveData?.postValue(
+                                            KEY_SUCCESS
+                                        )
+                                        viewModel.tranStatusLiveData.postValue(KEY_CANCEL_TRANSACTION_STATUS)
+                                        this.paymentMethod = it.body.bankName
+                                        paymentGateway = keyPaymentGatewayPayTmPay
+                                        this.transId =0
+                                    }
+                                    viewModel?.addTransaction(
+                                        initiateTransaction = false,
+                                        showLoader = true,
+                                        terminateTransaction = false,
+                                        cartList = viewModel!!.cartListData,
+                                        isSuccessTransaction = false
+                                    )
+                                } catch (e: Exception) {
+                                    e.printStackTrace()
+                                    AppLog.errorLog(e.message, e)
+                                }
+                            },
+                            { dialog, which -> })
+                    }
+
+                }
+            })
+
+
+        }
+    }
+    fun placePaytmOrder(tokenNo: String) {
+        try {
+            val host = if (BuildConfig.FLAVOR.equals("prod", true) || BuildConfig.FLAVOR.equals("uat", true)) {
+                "https://securegw.paytm.in/" // live
+            } else {
+                "https://securegw-stage.paytm.in/" // testing
+            }
+            val callBackUrl = host + "theia/paytmCallback?ORDER_ID=" + viewModel.payTmOrderId
+            AppLog.infoLog("callback URL $callBackUrl")
+            val payTmOrder = PaytmOrder(
+                viewModel.payTmOrderId,
+                BuildConfig.MERCHANT_ID,
+                tokenNo,
+                viewModel.amountLiveData.value,
+                callBackUrl
+            )
+            val transactionManager = TransactionManager(payTmOrder, this)
+            transactionManager.setShowPaymentUrl(host + "theia/api/v1/showPaymentPage")
+            transactionManager.startTransaction(this, PAYTM_REQUEST_CODE)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            AppLog.errorLog(e.message,e)
+        }
+    }
+
+    var isTransaction: Boolean = false
+    override fun onTransactionResponse(bundle: Bundle?) {
+        bundle?.let {
+            if (it.getString(PaytmConstants.STATUS).equals("TXN_SUCCESS")) {
+                isTransaction = true
+                SharedPreferencesDatabase.setStringPref(SharedPreferencesDatabase.TRANSACTION_ID, it.getString(PaytmConstants.TRANSACTION_ID).toString())
+                SharedPreferencesDatabase.setStringPref(SharedPreferencesDatabase.TRANSACTION_MODE, it.getString(PaytmConstants.PAYMENT_MODE).toString())
+                it.getString("ORDERID")?.let { id -> viewModel.transactionStatus(id) }
+            }
+        }
+    }
+
+    override fun clientAuthenticationFailed(p0: String?) {
+    }
+
+    override fun someUIErrorOccurred(p0: String?) {
+
+    }
+
+    override fun onTransactionCancel(p0: String?, p1: Bundle?) {
+    }
+
+    override fun networkNotAvailable() {
+    }
+
+    override fun onErrorProceed(p0: String?) {
+    }
+
+    override fun onErrorLoadingWebPage(p0: Int, p1: String?, p2: String?) {
+    }
+
+    override fun onBackPressedCancelTransaction() {
+        viewModel?.insertTransactionRequestModel.apply {
+            transactionStatus = KEY_CANCEL_TRANSACTION_STATUS
+            viewModel.tranStatusLiveData.postValue(KEY_CANCEL_TRANSACTION_STATUS)
+            paymentGateway = keyPaymentGatewayPayTmPay
+            this.transId =0
+        }
+        viewModel?.addTransaction(
+            initiateTransaction = false,
+            showLoader = true,
+            terminateTransaction = false,
+            cartList = viewModel!!.cartListData,
+            isSuccessTransaction = false
+        )
+    }
+
+    // get transaction mode
+    private fun getTransactionMode(mode: String): String {
+        return when (mode.toLowerCase()) {
+            "pg" -> KEY_CARD
+            "nb" -> KEY_INTERNET_BANKING
+            "ppc" -> KEY_PREPAID
+            "upi" -> KEY_UPI
+            "cc" -> KEY_CREDIT_CARD
+            "db","dc" -> KEY_DEBIT_CARD
+            "cash" -> KEY_CASH
+            "emi" -> KEY_EMI
+            "ppi" -> KEY_PAYTM_WALLET
+            "paytmcc" -> KEY_POSTPAID
+            else -> KEY_CARD
+        }
+    }
 
 
 }

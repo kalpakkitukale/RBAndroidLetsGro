@@ -39,6 +39,7 @@
                 android:layout_height="wrap_content"
                 android:onClick="@{() -> viewModel.perchesDetailsClick(transactionHistoryModel)}"
                 android:text="@string/purchase_details"
+                android:visibility="gone"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/lblPurchaseRef" />
 
@@ -70,13 +71,24 @@
                 app:layout_constraintTop_toBottomOf="@+id/lblTotalAmount" />
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvTransactionStatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{transactionHistoryModel.transactionStatus}"
                 android:textColor="@{transactionHistoryModel.textColor}"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/SmallCustomCapsuleButtonBlueBgWhiteText"
+                android:text="@string/view_perchaes_details"
+                android:onClick="@{() -> viewModel.perchesDetailsClick(transactionHistoryModel)}"
+                app:layout_constraintTop_toBottomOf="@id/tvTransactionStatus"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
