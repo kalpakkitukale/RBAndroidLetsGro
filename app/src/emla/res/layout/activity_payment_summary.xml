@@ -23,7 +23,7 @@
         <include
             android:id="@+id/appbar_layout"
             layout="@layout/app_bar_layout" />
-<!--wait-->
+        <!--wait-->
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnProceedPay"
             style="@style/CustomCapsuleButtonFilled"

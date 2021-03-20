@@ -14,7 +14,7 @@ import com.ramanbyte.utilities.KEY_BLANK
 class TransactionHistoryModel {
     var id: Int = 0
     var userId: Int = 0
-    var transId: Long = 0
+    var transId: String = ""
     var transDate: String = KEY_BLANK
         get() = DateUtils.getDisplayDateFromDate(
             field,

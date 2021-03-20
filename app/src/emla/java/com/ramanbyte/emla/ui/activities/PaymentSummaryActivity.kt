@@ -276,7 +276,7 @@ class PaymentSummaryActivity : BaseActivity<ActivityPaymentSummaryBinding, Payme
                                                 paymentType = paymentMethod
                                                 transactionStatus =
                                                     KEY_SUCCESS
-                                                transId = payUObject.getString("txnid").toLong()
+                                                transId = payUObject.getString("txnid") /*.toLong()*/
                                                 transactionRefId = payUObject.getString("txnid")
                                             } else {
                                                 // payment fail
@@ -351,7 +351,7 @@ class PaymentSummaryActivity : BaseActivity<ActivityPaymentSummaryBinding, Payme
 
                                         if (transactionid != null && transactionid.isNotBlank()) {
                                             AppLog.infoLog("TXN ID -> =$transactionid")
-                                            transId = transactionid.toLong()
+                                            transId = transactionid/*.toLong()*/
                                             transactionRefId = transactionid
                                         }
 
@@ -436,8 +436,10 @@ class PaymentSummaryActivity : BaseActivity<ActivityPaymentSummaryBinding, Payme
                     if (!isAirPayChecked) {
                         radioAirpay.toggle()
                         radioPayu.isChecked = isAirPayChecked
+                        radioPaytm.isChecked = isAirPayChecked
                         isAirPayChecked = true
                         isPayuChecked = false
+                        isPaytmChecked = false
                     }
                 }
 
@@ -449,12 +451,14 @@ class PaymentSummaryActivity : BaseActivity<ActivityPaymentSummaryBinding, Payme
                     isPayuChecked = layoutBinding!!.radioAirpay.isChecked
                     layoutBinding!!.radioPayu.isChecked = !isPayuChecked
                     layoutBinding!!.radioAirpay.isChecked = isPayuChecked
+                    layoutBinding!!.radioPaytm.isChecked = isPayuChecked
                     isPayuChecked = radioPayu.isChecked
                     if (!isPayuChecked) {
                         radioPayu.toggle()
                         radioAirpay.isChecked = isPayuChecked
                         isPayuChecked = true
                         isAirPayChecked = false
+                        isPaytmChecked = false
                     }
                 }
 
@@ -467,6 +471,7 @@ class PaymentSummaryActivity : BaseActivity<ActivityPaymentSummaryBinding, Payme
                     }
                     isPayuChecked = layoutBinding.radioPayu.isChecked
                     isAirPayChecked = layoutBinding.radioAirpay.isChecked
+                    isPaytmChecked = layoutBinding.radioPaytm.isChecked
 
 
 
@@ -532,8 +537,7 @@ class PaymentSummaryActivity : BaseActivity<ActivityPaymentSummaryBinding, Payme
                             viewModel.tranStatusLiveData.postValue(KEY_SUCCESS)
                             paymentGateway = keyPaymentGatewayPayTmPay
                             this.paymentMethod = getTransactionMode(it.body.paymentMode)
-                            this.transId = 9763767218 /*SharedPreferencesDatabase.getStringPref(SharedPreferencesDatabase.TRANSACTION_ID).toInt()
-                                .toLong()*/
+                            this.transId = it.body.txnId
 
                           paymentType = getTransactionMode(it.body.paymentMode)
                           transactionRefId = it.body.txnId
@@ -564,7 +568,7 @@ class PaymentSummaryActivity : BaseActivity<ActivityPaymentSummaryBinding, Payme
                                         viewModel.tranStatusLiveData.postValue(KEY_CANCEL_TRANSACTION_STATUS)
                                         this.paymentMethod = it.body.bankName
                                         paymentGateway = keyPaymentGatewayPayTmPay
-                                        this.transId =0
+                                        this.transId ="0"
                                     }
                                     viewModel?.addTransaction(
                                         initiateTransaction = false,
@@ -648,7 +652,7 @@ class PaymentSummaryActivity : BaseActivity<ActivityPaymentSummaryBinding, Payme
             transactionStatus = KEY_CANCEL_TRANSACTION_STATUS
             viewModel.tranStatusLiveData.postValue(KEY_CANCEL_TRANSACTION_STATUS)
             paymentGateway = keyPaymentGatewayPayTmPay
-            this.transId =0
+            this.transId ="0"
         }
         viewModel?.addTransaction(
             initiateTransaction = false,
