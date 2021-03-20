@@ -22,7 +22,6 @@
         android:id="@+id/actionCart"
         android:icon="@drawable/ic_my_cart"
         android:title="@string/cart"
-        android:visible="false"
         app:showAsAction="ifRoom" />
 
 </menu>
