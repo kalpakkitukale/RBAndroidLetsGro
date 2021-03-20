@@ -26,6 +26,9 @@
         <action
             android:id="@+id/action_coursesFragment_to_courseSyllabusFragment"
             app:destination="@id/courseSyllabusFragment" />
+        <action
+            android:id="@+id/action_coursesFragment_to_cartFragment"
+            app:destination="@id/cartFragment" />
     </fragment>
     <fragment
         android:id="@+id/myDownloadsFragment"

@@ -3,6 +3,7 @@ package com.ramanbyte.emla.ui.fragments
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import android.os.Bundle
 import android.text.TextUtils
 import android.util.TypedValue
 import android.view.Menu
@@ -225,6 +226,12 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
                 courseFilterBottomSheet?.show(childFragmentManager, "course_filter")
                 true
             }
+
+            R.id.actionCart -> {
+                findNavController().navigate(R.id.action_coursesFragment_to_cartFragment)
+                true
+            }
+
             else -> super.onOptionsItemSelected(item)
         }
     }

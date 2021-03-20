@@ -16,6 +16,12 @@
         android:icon="@drawable/ic_filter"
         android:title="@string/filter"
         app:actionLayout="@layout/custom_action_badge_layout"
-        app:showAsAction="ifRoom"></item>
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/actionCart"
+        android:icon="@drawable/ic_my_cart"
+        android:title="@string/cart"
+        app:showAsAction="ifRoom" />
 
 </menu>
