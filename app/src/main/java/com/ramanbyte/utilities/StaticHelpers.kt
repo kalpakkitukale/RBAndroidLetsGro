@@ -394,7 +394,7 @@ const val keyPaymentGatewayAirPay = "AirPay"
 const val keyPaymentGatewayPayUBiz = "PayUBiz"
 const val keyPaymentDomain = "Online"
 
-const val keyPaymentGatewayPayTmPay = "AirPay"
+const val keyPaymentGatewayPayTmPay = "PayTM"
 const val KEY_CARD = "Card"
 const val KEY_INTERNET_BANKING = "Internet banking"
 const val KEY_PREPAID = "Prepaid Card"

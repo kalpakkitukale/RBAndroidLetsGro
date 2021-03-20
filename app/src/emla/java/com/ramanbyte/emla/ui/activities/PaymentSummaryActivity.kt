@@ -187,7 +187,6 @@ class PaymentSummaryActivity : BaseActivity<ActivityPaymentSummaryBinding, Payme
             setDisplayHomeAsUpEnabled(true)
             setDisplayShowTitleEnabled(false)
         }
-
         try {
             layoutBinding!!.apply {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -195,7 +194,6 @@ class PaymentSummaryActivity : BaseActivity<ActivityPaymentSummaryBinding, Payme
                         appbarLayout.toolbar.elevation = 0.0f
                     }
                 }
-
                 appbarLayout.tvSubTitle.visibility = View.GONE
                 appbarLayout.title = BindingUtils.string(R.string.fees_amount)
             }
@@ -204,15 +202,12 @@ class PaymentSummaryActivity : BaseActivity<ActivityPaymentSummaryBinding, Payme
             AppLog.errorLog(e.message, e)
         }
     }
-
     fun launchAirPayUI(airpayBundle: Bundle) {
         val intent = Intent(this, AirpayActivity::class.java)
         intent.putExtras(airpayBundle)
         startActivityForResult(intent, AIR_PAY_REQUEST_CODE)
     }
-
     fun launchPayUUI(payuGatewayModel: PayuGatewayModel) {
-
         val intent = Intent(this, PayUBaseActivity::class.java)
         intent.putExtra(PayuConstants.PAYU_CONFIG, payuGatewayModel.payuConfig)
         intent.putExtra(PayuConstants.PAYMENT_PARAMS, payuGatewayModel.mPaymentParams)
@@ -224,10 +219,8 @@ class PaymentSummaryActivity : BaseActivity<ActivityPaymentSummaryBinding, Payme
             }
         )
         intent.putExtra(PayuConstants.PAYU_HASHES, payuGatewayModel.payuHashes)
-
         startActivityForResult(intent, PayuConstants.PAYU_REQUEST_CODE)
     }
-
     @SuppressLint("DefaultLocale")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -298,8 +291,6 @@ class PaymentSummaryActivity : BaseActivity<ActivityPaymentSummaryBinding, Payme
                                             KEY_CANCEL_TRANSACTION_STATUS
                                         )
                                     }
-
-
                                 } catch (e: java.lang.NullPointerException) {
                                     e.printStackTrace()
                                     AppLog.errorLog(e.message, e)
@@ -310,7 +301,6 @@ class PaymentSummaryActivity : BaseActivity<ActivityPaymentSummaryBinding, Payme
                                         KEY_CANCEL_TRANSACTION_STATUS
                                     )
                                 }
-
                             } else {
                                 // payment fail
                                 transactionStatus =
@@ -372,7 +362,6 @@ class PaymentSummaryActivity : BaseActivity<ActivityPaymentSummaryBinding, Payme
                             }
                         }
                     }
-
                     //here is code for the paytm
                     PAYTM_REQUEST_CODE -> {
                         viewModel?.insertTransactionRequestModel.apply {
@@ -385,17 +374,11 @@ class PaymentSummaryActivity : BaseActivity<ActivityPaymentSummaryBinding, Payme
                                         SharedPreferencesDatabase.setStringPref(SharedPreferencesDatabase.TRANSACTION_MODE, responseJson.getString(PaytmConstants.PAYMENT_MODE))
                                         transactionStatus = KEY_SUCCESS_TRANSACTION_STATUS
                                         viewModel?.tranStatusLiveData?.postValue(KEY_SUCCESS)
-
-
                                     }
                                     responseJson.getString("ORDERID")?.let { it1 -> viewModel.transactionStatus(it1) }
                                 }
-
-
                             }
                         }
-
-
                     }
                 }
                 viewModel?.addTransaction(
@@ -416,18 +399,12 @@ class PaymentSummaryActivity : BaseActivity<ActivityPaymentSummaryBinding, Payme
     }
 
     fun customRadioClickListener() {
-
         viewModel?.apply {
-
             layoutBinding?.apply {
-
                 radioAirpay.setOnClickListener {
-
                     /* isAirPayChecked = paymentSummaryBinding!!.radioAirpay.isChecked
-
                      paymentSummaryBinding!!.radioAirpay.isChecked = !isAirPayChecked
                      paymentSummaryBinding!!.radioPayu.isChecked = isAirPayChecked
-
                      if(paymentSummaryBinding!!.radioPayu.isChecked){
                          paymentSummaryBinding!!.radioPayu.isChecked = false
                      }*/
@@ -442,7 +419,6 @@ class PaymentSummaryActivity : BaseActivity<ActivityPaymentSummaryBinding, Payme
                         isPaytmChecked = false
                     }
                 }
-
                 radioPayu.setOnClickListener {
                     layoutBinding!!.radioPayu.isChecked = true
                     if (layoutBinding!!.radioAirpay.isChecked) {
@@ -461,7 +437,6 @@ class PaymentSummaryActivity : BaseActivity<ActivityPaymentSummaryBinding, Payme
                         isPaytmChecked = false
                     }
                 }
-
                 radioPaytm.setOnClickListener {
                     layoutBinding?.radioPaytm.isChecked = true
 
@@ -472,40 +447,28 @@ class PaymentSummaryActivity : BaseActivity<ActivityPaymentSummaryBinding, Payme
                     isPayuChecked = layoutBinding.radioPayu.isChecked
                     isAirPayChecked = layoutBinding.radioAirpay.isChecked
                     isPaytmChecked = layoutBinding.radioPaytm.isChecked
-
-
-
                     if (!isPaytmChecked){
                         isPaytmChecked = true
                         isPayuChecked = false
                         isAirPayChecked = false
                     }
                 }
-
-
             }
         }
     }
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
         return when (item.itemId) {
-
             android.R.id.home -> {
                 onBackPressed()
                 true
             }
-
             else -> super.onOptionsItemSelected(item)
         }
-
     }
-
     override val viewModelClass: Class<PaymentSummaryViewModel> =
         PaymentSummaryViewModel::class.java
-
     override fun layoutId(): Int = R.layout.activity_payment_summary
-
+    //payTm gateway releted operation done here.
     fun viewModelOperation() {
         viewModel.apply {
             transactionTokenLiveData.observe(this@PaymentSummaryActivity, Observer {
@@ -536,8 +499,9 @@ class PaymentSummaryActivity : BaseActivity<ActivityPaymentSummaryBinding, Payme
                             transactionStatus = KEY_SUCCESS_TRANSACTION_STATUS
                             viewModel.tranStatusLiveData.postValue(KEY_SUCCESS)
                             paymentGateway = keyPaymentGatewayPayTmPay
-                            this.paymentMethod = getTransactionMode(it.body.paymentMode)
-                            this.transId = it.body.txnId
+                            paymentMethod = getTransactionMode(it.body.paymentMode)
+                            transId = it.body.txnId
+                            transId = it.body.txnId
 
                           paymentType = getTransactionMode(it.body.paymentMode)
                           transactionRefId = it.body.txnId
@@ -551,7 +515,6 @@ class PaymentSummaryActivity : BaseActivity<ActivityPaymentSummaryBinding, Payme
                         )
 
                     } else if (it.body.resultInfo.resultStatus.equals("TXN_FAILURE")) {
-                        // transaction impelemet need
                         transactionStatus = KEY_FAIL_TRANSACTION_STATUS
                         AlertUtilities.showAlertDialog(
                             this@PaymentSummaryActivity,
@@ -615,7 +578,6 @@ class PaymentSummaryActivity : BaseActivity<ActivityPaymentSummaryBinding, Payme
             AppLog.errorLog(e.message,e)
         }
     }
-
     var isTransaction: Boolean = false
     override fun onTransactionResponse(bundle: Bundle?) {
         bundle?.let {
@@ -627,26 +589,18 @@ class PaymentSummaryActivity : BaseActivity<ActivityPaymentSummaryBinding, Payme
             }
         }
     }
-
     override fun clientAuthenticationFailed(p0: String?) {
     }
-
     override fun someUIErrorOccurred(p0: String?) {
-
     }
-
     override fun onTransactionCancel(p0: String?, p1: Bundle?) {
     }
-
     override fun networkNotAvailable() {
     }
-
     override fun onErrorProceed(p0: String?) {
     }
-
     override fun onErrorLoadingWebPage(p0: Int, p1: String?, p2: String?) {
     }
-
     override fun onBackPressedCancelTransaction() {
         viewModel?.insertTransactionRequestModel.apply {
             transactionStatus = KEY_CANCEL_TRANSACTION_STATUS
@@ -662,8 +616,7 @@ class PaymentSummaryActivity : BaseActivity<ActivityPaymentSummaryBinding, Payme
             isSuccessTransaction = false
         )
     }
-
-    // get transaction mode
+    // get transaction mode for paytm
     private fun getTransactionMode(mode: String): String {
         return when (mode.toLowerCase()) {
             "pg" -> KEY_CARD

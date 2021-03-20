@@ -26,10 +26,22 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/lblPurchaseRef"
                 style="@style/TextViewTitle"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text='@{@string/purchase_ref + ":" + transactionHistoryModel.transId}'
+                app:layout_constraintEnd_toStartOf="@id/tvTransactionStatus"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvTransactionStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_5"
+                android:text="@{transactionHistoryModel.transactionStatus}"
+                android:textColor="@{transactionHistoryModel.textColor}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/lblPurchaseRef"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -70,27 +82,15 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/lblTotalAmount" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tvTransactionStatus"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{transactionHistoryModel.transactionStatus}"
-                android:textColor="@{transactionHistoryModel.textColor}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
             <androidx.appcompat.widget.AppCompatButton
+                style="@style/SmallCustomCapsuleButtonBlueBgWhiteText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/SmallCustomCapsuleButtonBlueBgWhiteText"
-                android:text="@string/view_perchaes_details"
                 android:onClick="@{() -> viewModel.perchesDetailsClick(transactionHistoryModel)}"
-                app:layout_constraintTop_toBottomOf="@id/tvTransactionStatus"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:text="@string/view_perchaes_details"
                 app:layout_constraintBottom_toBottomOf="parent"
-                />
-
-
+                app:layout_constraintEnd_toEndOf="@id/tvTransactionStatus"
+                app:layout_constraintTop_toBottomOf="@id/tvTransactionStatus" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </layout>
