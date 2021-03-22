@@ -154,14 +154,14 @@ class CartViewModel(var mContext: Context) : BaseViewModel(mContext = mContext) 
         }
 
     }
-//var unpaidCourse= ArrayList<Int>()
+var unpaidCourse= ArrayList<Int>()
     fun clickOnProceedToPay(view: View) {
-      /*  finalCartList?.forEach {
+        finalCartList?.forEach {
             if (it.courseFee.equals("0",true) ||it.courseFee.equals("0.0",true)){
                 unpaidCourse.add(it.courseDetailsId!!)
             }
         }
-        AppLog.infoLog("Pibm Un paid courese data --> ${unpaidCourse.size}")*/
+        AppLog.infoLog("Pibm Un paid courese data --> ${unpaidCourse.size}")
 
         if (courseFess.value!! > 0.0f) {
             mContext.startActivity(
