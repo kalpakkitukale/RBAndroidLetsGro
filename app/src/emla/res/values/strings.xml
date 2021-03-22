@@ -359,5 +359,7 @@ Content
     <string name="total_amount_to_pay"> Total Amount to Pay</string>
     <string name="view_perchaes_details"> Purchase Details</string>
     <string name="view"> View</string>
+    <string name="proceed"> Proceed</string>
+    <string name="courseware">Courseware</string>
 
 </resources>

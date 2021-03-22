@@ -85,7 +85,7 @@
             android:background="@color/colorAccent"
             android:gravity="end"
             android:onClick="@{()->cartViewModel.clickOnProceedToPay(btnProceedPay)}"
-            android:text="@string/proceed_to_pay"
+            android:text="@string/proceed"
             app:layout_constraintBottom_toBottomOf="@id/tvTotalCartAmount"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/tvTotalCartAmount"

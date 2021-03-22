@@ -35,14 +35,25 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>() {
                 getCartList()
                 cartListLiveData.observe(this@CartFragment, Observer {
                     if (it != null) {
-                        val cartAdapter = CartAdapter(viewModel, it, mContext)
-                        rvCartFragment.apply {
-                            layoutManager =
-                                LinearLayoutManager(context!!, RecyclerView.VERTICAL, false)
-                            adapter = cartAdapter
+                        try {
+                            val filterList= it.sortedBy {
+                                it.courseFee
+                            }
+
+                            val cartAdapter = CartAdapter(viewModel, filterList, mContext)
+                            rvCartFragment.apply {
+                                layoutManager =
+                                    LinearLayoutManager(context!!, RecyclerView.VERTICAL, false)
+                                adapter = cartAdapter
+                            }
+                            finalCartList = cartListLiveData.value as ArrayList<CartResponseModel>
+                            cartListLiveData.value = null
+                        }catch (e:Exception){
+                            e.printStackTrace()
+                            AppLog.infoLog(e.message.toString())
                         }
-                        finalCartList = cartListLiveData.value as ArrayList<CartResponseModel>
-                        cartListLiveData.value = null
+
+
                     }
                 })
             }
