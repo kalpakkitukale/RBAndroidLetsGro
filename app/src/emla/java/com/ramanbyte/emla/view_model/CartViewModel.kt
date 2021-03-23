@@ -160,74 +160,85 @@ class CartViewModel(var mContext: Context) : BaseViewModel(mContext = mContext) 
 
     }
 
-    var insertTransactionModelLiveData = MutableLiveData<InsertTransactionRequestModel>().apply {
-        this.value = InsertTransactionRequestModel()
-    }
-
-    var courseFeesList: ArrayList<CourseFeeRequestModel>? = ArrayList()
-    var unpaidCourse = ArrayList<CartResponseModel>()
-    val loggedInUserModel = masterRepository.getCurrentUser()
     var isPaid: Boolean? = false
+    var demo: Boolean? = false
 
     // on proceed button click event
     fun clickOnProceedToPay(view: View) {
         isPaid = checkCouresePaidUnpaid()
-        if (courseFess.value!! > 0.0f) {
-            mContext.startActivity(
-                PaymentSummaryActivity.openPaymentActivity(
-                    mContext,
-                    courseFess.value!!.toString(),
-                    finalCartList
+
+        // here is temp if else
+        if (demo == true){
+            if (courseFess.value!! > 0.0f) {
+                mContext.startActivity(
+                    PaymentSummaryActivity.openPaymentActivity(
+                        mContext,
+                        courseFess.value!!.toString(),
+                        finalCartList
+                    )
                 )
-            )
-        }
+            }
+       }
+
     }
+
+    var insertTransactionModelLiveData = MutableLiveData<InsertTransactionRequestModel>().apply {
+        this.value = InsertTransactionRequestModel()
+    }
+    val loggedInUserModel = masterRepository.getCurrentUser()
+    var courseFeesList: ArrayList<CourseFeeRequestModel>? = ArrayList()
+    var unpaidCourse = ArrayList<CartResponseModel>()
+    var paidCourse = ArrayList<CartResponseModel>()
 
     // check the selected course are free or paid
     fun checkCouresePaidUnpaid():Boolean{
         finalCartList?.forEach {
             if (it.courseFee.equals("0", true) || it.courseFee.equals("0.0", true)) {
                 unpaidCourse.add(it)
+            }else{
+                paidCourse.add(it)
             }
         }
 
+// unpaid transaction entry sucessfull going in the local data base
+        if (unpaidCourse.size>0){
+            insertTransactionModelLiveData.value?.apply {
+                transId = DateUtils.getCurrentDateTime(DATE_SQLITE_PATTERN)
+                transactionStatus = KEY_SUCCESS_TRANSACTION_STATUS
+                transDate = DateUtils.getCurrentDateTime(DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS)
+                amountPaid = "0.0"
+                paymentDomain = "Online"
+                paymentGateway= "Free"
+                paymentMethod ="Free"
+                paymentDescription ="free"
+
+                courseFeesList = ArrayList()
+                for (cart in finalCartList) {
+                    val courseFeeRequestModel = CourseFeeRequestModel()
+                    courseFeeRequestModel.apply {
+                        userId = loggedInUserModel?.userId!!
+                        paymentId = 0
+                        courseDetailsId = cart.courseDetailsId!!
+                        courseFeeStructureId = 61
+                        id = 0
+                    }
+                    courseFeesList!!.add(courseFeeRequestModel)
+                }
+
+                fees = courseFeesList!!
+            }
+            var id: Int? = 0
+            CoroutineUtils.main {
+                id = transactionRepository.insertTransaction(insertTransactionModelLiveData.value!!, true)
+            }
+
+
+
+        }
+//____________________End____________________________
         return false
     }
 
 
 
-    /* if (finalCartList.size == unpaidCourse.size) {
-          insertTransactionModelLiveData.value?.apply {
-              transId = DateUtils.getCurrentDateTime(DATE_SQLITE_PATTERN)
-              transactionStatus = KEY_SUCCESS_TRANSACTION_STATUS
-              transDate = DateUtils.getCurrentDateTime(DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS)
-
-              courseFeesList = ArrayList()
-              for (cart in finalCartList) {
-                  val courseFeeRequestModel = CourseFeeRequestModel()
-                  courseFeeRequestModel.apply {
-                      userId = loggedInUserModel?.userId!!
-                      paymentId = 0
-                      courseDetailsId = cart.courseDetailsId!!
-                      courseFeeStructureId = cart.courseFeeStructureId!!
-                      id = 0
-                  }
-                  courseFeesList!!.add(courseFeeRequestModel)
-              }
-
-              fees = courseFeesList!!
-          }
-          var id: Int? = 0
-          CoroutineUtils.main {
-              id = transactionRepository.insertTransaction(
-                  insertTransactionModelLiveData.value!!,
-                  true
-              )
-          }
-
-          if (id != null && id != 0) {
-              Toast.makeText(mContext, "Operation Done", Toast.LENGTH_SHORT).show()
-          }
-
-      }*/
 }
