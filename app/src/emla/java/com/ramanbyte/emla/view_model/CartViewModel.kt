@@ -160,27 +160,7 @@ class CartViewModel(var mContext: Context) : BaseViewModel(mContext = mContext) 
 
     }
 
-    var isPaid: Boolean? = false
-    var demo: Boolean? = false
 
-    // on proceed button click event
-    fun clickOnProceedToPay(view: View) {
-        isPaid = checkCouresePaidUnpaid()
-
-        // here is temp if else
-        if (demo == true){
-            if (courseFess.value!! > 0.0f) {
-                mContext.startActivity(
-                    PaymentSummaryActivity.openPaymentActivity(
-                        mContext,
-                        courseFess.value!!.toString(),
-                        finalCartList
-                    )
-                )
-            }
-       }
-
-    }
 
     var insertTransactionModelLiveData = MutableLiveData<InsertTransactionRequestModel>().apply {
         this.value = InsertTransactionRequestModel()
@@ -189,31 +169,51 @@ class CartViewModel(var mContext: Context) : BaseViewModel(mContext = mContext) 
     var courseFeesList: ArrayList<CourseFeeRequestModel>? = ArrayList()
     var unpaidCourse = ArrayList<CartResponseModel>()
     var paidCourse = ArrayList<CartResponseModel>()
-
-    // check the selected course are free or paid
-    fun checkCouresePaidUnpaid():Boolean{
-        finalCartList?.forEach {
-            if (it.courseFee.equals("0", true) || it.courseFee.equals("0.0", true)) {
-                unpaidCourse.add(it)
-            }else{
-                paidCourse.add(it)
+    var id: Int? = 0
+    // on proceed button click event
+    fun clickOnProceedToPay(view: View) {
+        if (finalCartList.size > 0) {
+            finalCartList?.forEach {
+                if (it.courseFee.equals("0", true) || it.courseFee.equals("0.0", true)) {
+                    unpaidCourse.add(it)
+                } else {
+                    paidCourse.add(it)
+                }
             }
+
+            if (paidCourse.size > 0) {
+                if (courseFess.value!! > 0.0f) {
+                    mContext.startActivity(PaymentSummaryActivity.openPaymentActivity(mContext, courseFess.value!!.toString(), paidCourse))
+                    checkCouresePaidUnpaid()
+                }
+            }
+            else{
+                checkCouresePaidUnpaid()
+            }
+
         }
 
-// unpaid transaction entry sucessfull going in the local data base
-        if (unpaidCourse.size>0){
+
+
+    }
+
+
+
+    // check the selected course are free or paid 20200323-F-999999-1
+    //YYMMDD-F-STUDENTID-COUNT
+    fun checkCouresePaidUnpaid() {
+        if (unpaidCourse.size > 0) {
             insertTransactionModelLiveData.value?.apply {
                 transId = DateUtils.getCurrentDateTime(DATE_SQLITE_PATTERN)
                 transactionStatus = KEY_SUCCESS_TRANSACTION_STATUS
                 transDate = DateUtils.getCurrentDateTime(DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS)
                 amountPaid = "0.0"
                 paymentDomain = "Online"
-                paymentGateway= "Free"
-                paymentMethod ="Free"
-                paymentDescription ="free"
-
+                paymentGateway = "Free"
+                paymentMethod = "Free"
+                paymentDescription = "free"
                 courseFeesList = ArrayList()
-                for (cart in finalCartList) {
+                for (cart in unpaidCourse) {
                     val courseFeeRequestModel = CourseFeeRequestModel()
                     courseFeeRequestModel.apply {
                         userId = loggedInUserModel?.userId!!
@@ -227,18 +227,68 @@ class CartViewModel(var mContext: Context) : BaseViewModel(mContext = mContext) 
 
                 fees = courseFeesList!!
             }
-            var id: Int? = 0
-            CoroutineUtils.main {
-                id = transactionRepository.insertTransaction(insertTransactionModelLiveData.value!!, true)
-            }
 
+            insertUnpaidCourseTransaction()
 
 
         }
 //____________________End____________________________
-        return false
+
     }
 
+
+    fun insertUnpaidCourseTransaction(){
+        try {
+            CoroutineUtils.main {
+                id = transactionRepository.insertTransaction(insertTransactionModelLiveData.value!!, true)
+            }
+
+            if (id!= null && id!=0 && paidCourse.size==0){
+                Toast.makeText(mContext,"Akash Your data is done for the test",Toast.LENGTH_SHORT).show()
+            }
+
+
+        } catch (e: ApiException) {
+            e.printStackTrace()
+            AppLog.errorLog(e.message, e)
+            isLoaderShowingLiveData.postValue(false)
+            setAlertDialogResourceModelMutableLiveData(
+                e.message.toString(),
+                BindingUtils.drawable(
+                    R.drawable.something_went_wrong
+                )!!,
+                true,
+                BindingUtils.string(R.string.strOk), {
+                    isAlertDialogShown.postValue(false)
+                }
+            )
+            isAlertDialogShown.postValue(true)
+        }  catch (e: NoInternetException) {
+            e.printStackTrace()
+            AppLog.errorLog(e.message, e)
+            isLoaderShowingLiveData.postValue(false)
+            setAlertDialogResourceModelMutableLiveData(
+                BindingUtils.string(R.string.no_internet_message),
+                BindingUtils.drawable(R.drawable.ic_no_internet)!!,
+                false,
+                BindingUtils.string(R.string.tryAgain), {
+                    isAlertDialogShown.postValue(false)
+                    checkCouresePaidUnpaid()
+                },
+                BindingUtils.string(R.string.no), {
+                    isAlertDialogShown.postValue(false)
+                }
+            )
+            isAlertDialogShown.postValue(true)
+        }  catch (e: Exception) {
+            e.printStackTrace()
+            AppLog.errorLog(e.message, e)
+            isLoaderShowingLiveData.postValue(false)
+        } catch (e: RuntimeException) {
+            e.printStackTrace()
+            AppLog.errorLog(e.message, e)
+        }
+    }
 
 
 }
