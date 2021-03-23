@@ -62,6 +62,7 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>() {
                                 })
                             isAlertDialogShown.postValue(true)
                         }
+                        freeCourseAddSucessfullyLiveData.postValue(0)
                     }
                 }
                 )

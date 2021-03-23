@@ -2,7 +2,6 @@ package com.ramanbyte.emla.view_model
 
 import android.content.Context
 import android.view.View
-import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseViewModel
@@ -40,6 +39,16 @@ class CartViewModel(var mContext: Context) : BaseViewModel(mContext = mContext) 
         value = arrayListOf()
     }
 
+    var insertTransactionModelLiveData = MutableLiveData<InsertTransactionRequestModel>().apply {
+        this.value = InsertTransactionRequestModel()
+    }
+    val loggedInUserModel = masterRepository.getCurrentUser()
+    var courseFeesList: ArrayList<CourseFeeRequestModel>? = ArrayList()
+    var unpaidCourse = ArrayList<CartResponseModel>()
+    var paidCourse = ArrayList<CartResponseModel>()
+    var freeCourseAddSucessfullyLiveData = MutableLiveData<Int>().apply {
+        postValue(0)
+    }
     var finalCartList = ArrayList<CartResponseModel>()
 
     init {
@@ -161,17 +170,6 @@ class CartViewModel(var mContext: Context) : BaseViewModel(mContext = mContext) 
     }
 
 
-    var insertTransactionModelLiveData = MutableLiveData<InsertTransactionRequestModel>().apply {
-        this.value = InsertTransactionRequestModel()
-    }
-    val loggedInUserModel = masterRepository.getCurrentUser()
-    var courseFeesList: ArrayList<CourseFeeRequestModel>? = ArrayList()
-    var unpaidCourse = ArrayList<CartResponseModel>()
-    var paidCourse = ArrayList<CartResponseModel>()
-    var freeCourseAddSucessfullyLiveData= MutableLiveData<Int>().apply {
-        value = 0
-    }
-
     // on proceed button click event
     fun clickOnProceedToPay(view: View) {
         if (finalCartList.size > 0) {
@@ -241,10 +239,12 @@ class CartViewModel(var mContext: Context) : BaseViewModel(mContext = mContext) 
     fun insertUnpaidCourseTransaction() {
         try {
             CoroutineUtils.main {
-                freeCourseAddSucessfullyLiveData.postValue( transactionRepository.insertTransaction(
-                    insertTransactionModelLiveData.value!!,
-                    true
-                ))
+                freeCourseAddSucessfullyLiveData.postValue(
+                    transactionRepository.insertTransaction(
+                        insertTransactionModelLiveData.value!!,
+                        true
+                    )
+                )
             }
         } catch (e: ApiException) {
             e.printStackTrace()
