@@ -2,6 +2,7 @@ package com.ramanbyte.emla.view_model
 
 import android.content.Context
 import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseViewModel
@@ -10,13 +11,16 @@ import com.ramanbyte.emla.data_layer.network.exception.ApiException
 import com.ramanbyte.emla.data_layer.network.exception.NoDataException
 import com.ramanbyte.emla.data_layer.network.exception.NoInternetException
 import com.ramanbyte.emla.data_layer.repositories.CoursesRepository
+import com.ramanbyte.emla.data_layer.repositories.MasterRepository
 import com.ramanbyte.emla.data_layer.repositories.TransactionRepository
 import com.ramanbyte.emla.models.UserModel
+import com.ramanbyte.emla.models.request.CourseFeeRequestModel
+import com.ramanbyte.emla.models.request.InsertTransactionRequestModel
 import com.ramanbyte.emla.models.response.CartResponseModel
 import com.ramanbyte.emla.ui.activities.PaymentSummaryActivity
-import com.ramanbyte.utilities.AppLog
-import com.ramanbyte.utilities.BindingUtils
-import com.ramanbyte.utilities.KEY_BLANK
+import com.ramanbyte.utilities.*
+import com.ramanbyte.utilities.DateUtils.DATE_SQLITE_PATTERN
+import com.ramanbyte.utilities.DateUtils.DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS
 import kotlinx.coroutines.delay
 import org.kodein.di.generic.instance
 
@@ -26,6 +30,7 @@ class CartViewModel(var mContext: Context) : BaseViewModel(mContext = mContext) 
     }
     private val coursesRepository: CoursesRepository by instance()
     val transactionRepository: TransactionRepository by instance()
+    val masterRepository: MasterRepository by instance()
     var courseFess = MutableLiveData<Float>().apply {
         value = 0.0f
     }
@@ -46,7 +51,7 @@ class CartViewModel(var mContext: Context) : BaseViewModel(mContext = mContext) 
         CoroutineUtils.main {
             var fee = 0.0f
             try {
-               // coroutineToggleLoader(BindingUtils.string(R.string.getting_reply_list))
+                // coroutineToggleLoader(BindingUtils.string(R.string.getting_reply_list))
                 isLoaderShowingLiveData.postValue(true)
                 loaderMessageLiveData.set(BindingUtils.string(R.string.getting_reply_list))
                 val response = transactionRepository.getCart()
@@ -78,7 +83,7 @@ class CartViewModel(var mContext: Context) : BaseViewModel(mContext = mContext) 
 
                 coroutineToggleLoader()
                 isLoaderShowingLiveData.postValue(false)
-               } catch (e: NoInternetException) {
+            } catch (e: NoInternetException) {
                 e.printStackTrace()
                 AppLog.errorLog(e.message, e)
                 toggleLayoutVisibility(
@@ -154,15 +159,19 @@ class CartViewModel(var mContext: Context) : BaseViewModel(mContext = mContext) 
         }
 
     }
-var unpaidCourse= ArrayList<Int>()
-    fun clickOnProceedToPay(view: View) {
-        finalCartList?.forEach {
-            if (it.courseFee.equals("0",true) ||it.courseFee.equals("0.0",true)){
-                unpaidCourse.add(it.courseDetailsId!!)
-            }
-        }
-        AppLog.infoLog("Pibm Un paid courese data --> ${unpaidCourse.size}")
 
+    var insertTransactionModelLiveData = MutableLiveData<InsertTransactionRequestModel>().apply {
+        this.value = InsertTransactionRequestModel()
+    }
+
+    var courseFeesList: ArrayList<CourseFeeRequestModel>? = ArrayList()
+    var unpaidCourse = ArrayList<CartResponseModel>()
+    val loggedInUserModel = masterRepository.getCurrentUser()
+    var isPaid: Boolean? = false
+
+    // on proceed button click event
+    fun clickOnProceedToPay(view: View) {
+        isPaid = checkCouresePaidUnpaid()
         if (courseFess.value!! > 0.0f) {
             mContext.startActivity(
                 PaymentSummaryActivity.openPaymentActivity(
@@ -173,4 +182,52 @@ var unpaidCourse= ArrayList<Int>()
             )
         }
     }
+
+    // check the selected course are free or paid
+    fun checkCouresePaidUnpaid():Boolean{
+        finalCartList?.forEach {
+            if (it.courseFee.equals("0", true) || it.courseFee.equals("0.0", true)) {
+                unpaidCourse.add(it)
+            }
+        }
+
+        return false
+    }
+
+
+
+    /* if (finalCartList.size == unpaidCourse.size) {
+          insertTransactionModelLiveData.value?.apply {
+              transId = DateUtils.getCurrentDateTime(DATE_SQLITE_PATTERN)
+              transactionStatus = KEY_SUCCESS_TRANSACTION_STATUS
+              transDate = DateUtils.getCurrentDateTime(DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS)
+
+              courseFeesList = ArrayList()
+              for (cart in finalCartList) {
+                  val courseFeeRequestModel = CourseFeeRequestModel()
+                  courseFeeRequestModel.apply {
+                      userId = loggedInUserModel?.userId!!
+                      paymentId = 0
+                      courseDetailsId = cart.courseDetailsId!!
+                      courseFeeStructureId = cart.courseFeeStructureId!!
+                      id = 0
+                  }
+                  courseFeesList!!.add(courseFeeRequestModel)
+              }
+
+              fees = courseFeesList!!
+          }
+          var id: Int? = 0
+          CoroutineUtils.main {
+              id = transactionRepository.insertTransaction(
+                  insertTransactionModelLiveData.value!!,
+                  true
+              )
+          }
+
+          if (id != null && id != 0) {
+              Toast.makeText(mContext, "Operation Done", Toast.LENGTH_SHORT).show()
+          }
+
+      }*/
 }
