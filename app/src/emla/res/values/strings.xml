@@ -361,5 +361,6 @@ Content
     <string name="view"> View</string>
     <string name="proceed"> Proceed</string>
     <string name="courseware">Courseware</string>
+    <string name="transaction_sucessful">Thank you, your course added has been successful.</string>
 
 </resources>

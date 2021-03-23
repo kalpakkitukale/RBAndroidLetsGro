@@ -2,6 +2,7 @@ package com.ramanbyte.emla.ui.fragments
 
 import android.content.Context
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ramanbyte.R
@@ -10,7 +11,9 @@ import com.ramanbyte.databinding.FragmentCartBinding
 import com.ramanbyte.emla.adapters.CartAdapter
 import com.ramanbyte.emla.models.response.CartResponseModel
 import com.ramanbyte.emla.view_model.CartViewModel
-import com.ramanbyte.utilities.*
+import com.ramanbyte.utilities.AlertDialog
+import com.ramanbyte.utilities.BindingUtils
+import com.ramanbyte.utilities.ProgressLoader
 
 class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>() {
     private lateinit var mContext: Context
@@ -45,6 +48,23 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>() {
                         cartListLiveData.value = null
                     }
                 })
+// free course added sucessfully then it redirect to my course fragment
+                freeCourseAddSucessfullyLiveData.observe(this@CartFragment, Observer {
+                    it?.let {
+                        if (it != null && it != 0 && paidCourse.size == 0) {
+                            setAlertDialogResourceModelMutableLiveData(
+                                BindingUtils.string(R.string.transaction_sucessful),
+                                BindingUtils.drawable(R.drawable.ic_all_the_best)!!,
+                                true,
+                                BindingUtils.string(R.string.strOk), {
+                                    view?.findNavController()?.navigate(R.id.myCourseFragment)
+                                    isAlertDialogShown.postValue(false)
+                                })
+                            isAlertDialogShown.postValue(true)
+                        }
+                    }
+                }
+                )
             }
         }
     }

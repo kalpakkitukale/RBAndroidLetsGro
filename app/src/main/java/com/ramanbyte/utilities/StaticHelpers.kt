@@ -420,6 +420,9 @@ const val KEY_FAIL_TRANSACTION_STATUS = "Fail"
 const val KEY_CANCEL_TRANSACTION_STATUS = "Cancel"
 const val KEY_SUCCESS = "Success"
 const val KEY_PAYMENT_STATUS = "PaymentStatus"
+const val KEY_FREE_AMOUNT = "0.0"
+const val KEY_FREE= "Free"
+const val KEY_ONLINE= "Online"
 const val DATE_TIME_SECONDS_PATTERN = "yyyy-MM-dd HH:mm:ss"
 
 fun skipTrailingZeroes(number: Double?): String {

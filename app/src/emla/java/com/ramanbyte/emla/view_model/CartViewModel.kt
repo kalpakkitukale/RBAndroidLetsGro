@@ -19,7 +19,7 @@ import com.ramanbyte.emla.models.request.InsertTransactionRequestModel
 import com.ramanbyte.emla.models.response.CartResponseModel
 import com.ramanbyte.emla.ui.activities.PaymentSummaryActivity
 import com.ramanbyte.utilities.*
-import com.ramanbyte.utilities.DateUtils.DATE_SQLITE_PATTERN
+import com.ramanbyte.utilities.DateUtils.DATE_TRANSACTION_ID_PATTERN
 import com.ramanbyte.utilities.DateUtils.DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS
 import kotlinx.coroutines.delay
 import org.kodein.di.generic.instance
@@ -161,7 +161,6 @@ class CartViewModel(var mContext: Context) : BaseViewModel(mContext = mContext) 
     }
 
 
-
     var insertTransactionModelLiveData = MutableLiveData<InsertTransactionRequestModel>().apply {
         this.value = InsertTransactionRequestModel()
     }
@@ -169,7 +168,10 @@ class CartViewModel(var mContext: Context) : BaseViewModel(mContext = mContext) 
     var courseFeesList: ArrayList<CourseFeeRequestModel>? = ArrayList()
     var unpaidCourse = ArrayList<CartResponseModel>()
     var paidCourse = ArrayList<CartResponseModel>()
-    var id: Int? = 0
+    var freeCourseAddSucessfullyLiveData= MutableLiveData<Int>().apply {
+        value = 0
+    }
+
     // on proceed button click event
     fun clickOnProceedToPay(view: View) {
         if (finalCartList.size > 0) {
@@ -183,35 +185,38 @@ class CartViewModel(var mContext: Context) : BaseViewModel(mContext = mContext) 
 
             if (paidCourse.size > 0) {
                 if (courseFess.value!! > 0.0f) {
-                    mContext.startActivity(PaymentSummaryActivity.openPaymentActivity(mContext, courseFess.value!!.toString(), paidCourse))
+                    mContext.startActivity(
+                        PaymentSummaryActivity.openPaymentActivity(
+                            mContext,
+                            courseFess.value!!.toString(),
+                            paidCourse
+                        )
+                    )
                     checkCouresePaidUnpaid()
                 }
-            }
-            else{
+            } else {
                 checkCouresePaidUnpaid()
             }
 
         }
 
 
-
     }
 
 
-
-    // check the selected course are free or paid 20200323-F-999999-1
-    //YYMMDD-F-STUDENTID-COUNT
+    // free course transaction are done here
     fun checkCouresePaidUnpaid() {
         if (unpaidCourse.size > 0) {
             insertTransactionModelLiveData.value?.apply {
-                transId = DateUtils.getCurrentDateTime(DATE_SQLITE_PATTERN)
+                transId =
+                    DateUtils.getCurrentDateTime(DATE_TRANSACTION_ID_PATTERN) + "-F-" + loggedInUserModel?.userId
                 transactionStatus = KEY_SUCCESS_TRANSACTION_STATUS
                 transDate = DateUtils.getCurrentDateTime(DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS)
-                amountPaid = "0.0"
-                paymentDomain = "Online"
-                paymentGateway = "Free"
-                paymentMethod = "Free"
-                paymentDescription = "free"
+                amountPaid = KEY_FREE_AMOUNT
+                paymentDomain = KEY_ONLINE
+                paymentGateway = KEY_FREE
+                paymentMethod = KEY_FREE
+                paymentDescription = KEY_FREE
                 courseFeesList = ArrayList()
                 for (cart in unpaidCourse) {
                     val courseFeeRequestModel = CourseFeeRequestModel()
@@ -227,27 +232,20 @@ class CartViewModel(var mContext: Context) : BaseViewModel(mContext = mContext) 
 
                 fees = courseFeesList!!
             }
-
             insertUnpaidCourseTransaction()
-
-
         }
-//____________________End____________________________
 
     }
 
 
-    fun insertUnpaidCourseTransaction(){
+    fun insertUnpaidCourseTransaction() {
         try {
             CoroutineUtils.main {
-                id = transactionRepository.insertTransaction(insertTransactionModelLiveData.value!!, true)
+                freeCourseAddSucessfullyLiveData.postValue( transactionRepository.insertTransaction(
+                    insertTransactionModelLiveData.value!!,
+                    true
+                ))
             }
-
-            if (id!= null && id!=0 && paidCourse.size==0){
-                Toast.makeText(mContext,"Akash Your data is done for the test",Toast.LENGTH_SHORT).show()
-            }
-
-
         } catch (e: ApiException) {
             e.printStackTrace()
             AppLog.errorLog(e.message, e)
@@ -263,7 +261,7 @@ class CartViewModel(var mContext: Context) : BaseViewModel(mContext = mContext) 
                 }
             )
             isAlertDialogShown.postValue(true)
-        }  catch (e: NoInternetException) {
+        } catch (e: NoInternetException) {
             e.printStackTrace()
             AppLog.errorLog(e.message, e)
             isLoaderShowingLiveData.postValue(false)
@@ -280,7 +278,7 @@ class CartViewModel(var mContext: Context) : BaseViewModel(mContext = mContext) 
                 }
             )
             isAlertDialogShown.postValue(true)
-        }  catch (e: Exception) {
+        } catch (e: Exception) {
             e.printStackTrace()
             AppLog.errorLog(e.message, e)
             isLoaderShowingLiveData.postValue(false)
