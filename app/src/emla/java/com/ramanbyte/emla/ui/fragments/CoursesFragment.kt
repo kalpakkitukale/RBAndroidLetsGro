@@ -3,7 +3,6 @@ package com.ramanbyte.emla.ui.fragments
 import android.content.Context
 import android.content.Intent
 import android.os.Build
-import android.os.Bundle
 import android.text.TextUtils
 import android.util.TypedValue
 import android.view.Menu
@@ -12,8 +11,11 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.RelativeLayout
+import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.MenuItemCompat
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -138,8 +140,24 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
         AppLog.infoLog("CoursesFragment onCreateOptionsMenu ${false}")
         AppLog.infoLog("CoursesFragment value ${viewModel.isFilterApplied.value}}")
         //setupBadge()
-
         setupBadge(viewModel.getFilterState())
+
+        // count of text view logic here
+
+        try {
+            val item = menu.findItem(R.id.actionCart)
+            MenuItemCompat.setActionView(item,R.layout.layout_for_course_menu)
+            val notifCount = MenuItemCompat.getActionView(item) as RelativeLayout
+
+            val tv = notifCount.findViewById<View>(R.id.actionbar_notifcation_textview) as TextView
+            tv.text = "99"
+
+
+        }catch (e:Exception){
+            e.printStackTrace()
+        }
+
+
 
 
         actionView.setOnClickListener {
