@@ -221,7 +221,6 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
         } catch (e: Exception) {
             e.printStackTrace()
         }
-
         super.onCreateOptionsMenu(menu, inflater)
         this.menu = menu
     }
@@ -279,8 +278,7 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
 
 //count of selected cart item on the option menu
     fun setCountTextView(no: Int) {
-       /* countTextView?.visibility = View.VISIBLE
-        countTextView?.text = no.toString()*/
-
-}
+        countTextView?.visibility = View.VISIBLE
+        countTextView?.text = no.toString()
+        }
 }
