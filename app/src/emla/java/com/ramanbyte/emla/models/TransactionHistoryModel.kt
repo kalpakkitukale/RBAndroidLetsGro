@@ -21,7 +21,7 @@ class TransactionHistoryModel {
             DateUtils.DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS,
             DateUtils.DATE_DISPLAY_PATTERN + " | " + TIME_DISPLAY_PATTERN
         )
-    var amountPaid: String = KEY_BLANK
+    var amountPaid: Double = 0.0
     var paymentMethod: String = KEY_BLANK
     var transactionStatus: String? = ""
     var textColor = BindingUtils.color(R.color.black)
