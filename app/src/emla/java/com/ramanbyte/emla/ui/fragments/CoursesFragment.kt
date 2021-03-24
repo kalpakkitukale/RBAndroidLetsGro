@@ -137,6 +137,7 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
     private var mSearchView: SearchView? = null
     var searchItem: MenuItem? = null
     var countTextView: TextView? = null
+    var layout:RelativeLayout? = null
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -206,13 +207,17 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
                 return false
             }
         })
-        // count of text view logic here
+        // count of textview logic here
         try {
             val item = menu.findItem(R.id.actionCart)
             item.setActionView(R.layout.layout_for_course_menu)
             val notifCount =item.actionView as RelativeLayout
             countTextView = notifCount.findViewById<View>(R.id.actionbar_notifcation_textview) as TextView
             countTextView?.visibility = View.GONE
+             layout = notifCount.findViewById<RelativeLayout>(R.id.layoutParent) as RelativeLayout
+            layout?.setOnClickListener {
+                findNavController().navigate(R.id.action_coursesFragment_to_cartFragment)
+            }
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -245,11 +250,6 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
                 true
             }
 
-            R.id.actionCart -> {
-                findNavController().navigate(R.id.action_coursesFragment_to_cartFragment)
-                true
-            }
-
             else -> super.onOptionsItemSelected(item)
         }
     }
@@ -279,7 +279,8 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
 
 //count of selected cart item on the option menu
     fun setCountTextView(no: Int) {
-      //  countTextView?.visibility = View.VISIBLE
-       // countTextView?.text = no.toString()
-    }
+       /* countTextView?.visibility = View.VISIBLE
+        countTextView?.text = no.toString()*/
+
+}
 }
