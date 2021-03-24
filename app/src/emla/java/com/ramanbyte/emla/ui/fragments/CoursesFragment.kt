@@ -3,6 +3,7 @@ package com.ramanbyte.emla.ui.fragments
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import android.os.Handler
 import android.text.TextUtils
 import android.util.TypedValue
 import android.view.Menu
@@ -128,6 +129,7 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
     var menu: Menu? = null
     private var mSearchView: SearchView? = null
     var searchItem: MenuItem? = null
+    var countTextView: TextView? = null
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -141,24 +143,18 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
         AppLog.infoLog("CoursesFragment value ${viewModel.isFilterApplied.value}}")
         //setupBadge()
         setupBadge(viewModel.getFilterState())
-
         // count of text view logic here
-
         try {
             val item = menu.findItem(R.id.actionCart)
-            MenuItemCompat.setActionView(item,R.layout.layout_for_course_menu)
+            MenuItemCompat.setActionView(item, R.layout.layout_for_course_menu)
             val notifCount = MenuItemCompat.getActionView(item) as RelativeLayout
+            countTextView = notifCount.findViewById<View>(R.id.actionbar_notifcation_textview) as TextView
+            countTextView?.visibility = View.VISIBLE
+            countTextView?.text = "99"
 
-            val tv = notifCount.findViewById<View>(R.id.actionbar_notifcation_textview) as TextView
-            tv.text = "99"
-
-
-        }catch (e:Exception){
+        } catch (e: Exception) {
             e.printStackTrace()
         }
-
-
-
 
         actionView.setOnClickListener {
             onOptionsItemSelected(menuItem)
@@ -277,4 +273,8 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
         mContext = context
     }
 
+
+    fun setCountTextView(no:Int){
+        countTextView?.text = no.toString()
+    }
 }
