@@ -53,7 +53,7 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>() {
                     it?.let {
                         if (it != null && it != 0 && paidCourse.size == 0) {
                             setAlertDialogResourceModelMutableLiveData(
-                                BindingUtils.string(R.string.transaction_sucessful),
+                                BindingUtils.string(R.string.unpaid_transaction_sucessful),
                                 BindingUtils.drawable(R.drawable.ic_all_the_best)!!,
                                 true,
                                 BindingUtils.string(R.string.strOk), {
