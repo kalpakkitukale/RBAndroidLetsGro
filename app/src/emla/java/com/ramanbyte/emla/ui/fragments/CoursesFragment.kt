@@ -3,7 +3,6 @@ package com.ramanbyte.emla.ui.fragments
 import android.content.Context
 import android.content.Intent
 import android.os.Build
-import android.os.Handler
 import android.text.TextUtils
 import android.util.TypedValue
 import android.view.Menu
@@ -123,6 +122,14 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
                 }
 
             })
+
+            selectedCourseCountLiveData.observe(this@CoursesFragment, Observer {
+                it?.let {
+                    if (it!= 0){
+                        setCountTextView(it)
+                    }
+                }
+            })
         }
     }
 
@@ -134,27 +141,13 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_course_search, menu)
-
         val menuItem = menu.findItem(R.id.action_filter)
-
         val actionView = menuItem.actionView
         badgeView = actionView.findViewById(R.id.filter_badge) as View
         AppLog.infoLog("CoursesFragment onCreateOptionsMenu ${false}")
         AppLog.infoLog("CoursesFragment value ${viewModel.isFilterApplied.value}}")
         //setupBadge()
         setupBadge(viewModel.getFilterState())
-        // count of text view logic here
-        try {
-            val item = menu.findItem(R.id.actionCart)
-            MenuItemCompat.setActionView(item, R.layout.layout_for_course_menu)
-            val notifCount = MenuItemCompat.getActionView(item) as RelativeLayout
-            countTextView = notifCount.findViewById<View>(R.id.actionbar_notifcation_textview) as TextView
-            countTextView?.visibility = View.VISIBLE
-            countTextView?.text = "99"
-
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
 
         actionView.setOnClickListener {
             onOptionsItemSelected(menuItem)
@@ -213,6 +206,17 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
                 return false
             }
         })
+        // count of text view logic here
+        try {
+            val item = menu.findItem(R.id.actionCart)
+            item.setActionView(R.layout.layout_for_course_menu)
+            val notifCount =item.actionView as RelativeLayout
+            countTextView = notifCount.findViewById<View>(R.id.actionbar_notifcation_textview) as TextView
+            countTextView?.visibility = View.GONE
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
         super.onCreateOptionsMenu(menu, inflater)
         this.menu = menu
     }
@@ -273,8 +277,9 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
         mContext = context
     }
 
-
-    fun setCountTextView(no:Int){
-        countTextView?.text = no.toString()
+//count of selected cart item on the option menu
+    fun setCountTextView(no: Int) {
+      //  countTextView?.visibility = View.VISIBLE
+       // countTextView?.text = no.toString()
     }
 }

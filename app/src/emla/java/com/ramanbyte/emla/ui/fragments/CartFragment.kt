@@ -59,10 +59,11 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>() {
                                 BindingUtils.string(R.string.strOk), {
                                     view?.findNavController()?.navigate(R.id.myCourseFragment)
                                     isAlertDialogShown.postValue(false)
+                                    freeCourseAddSucessfullyLiveData.postValue(0)
                                 })
                             isAlertDialogShown.postValue(true)
                         }
-                        freeCourseAddSucessfullyLiveData.postValue(0)
+
                     }
                 }
                 )
