@@ -32,6 +32,8 @@ object SharedPreferencesDatabase {
     val KEY_IS_LOGGED_IN = "IS_LOGGED_IN"
     val IS_PERMISSION_DENIED = "isPermissionDenied"
     val PRE_ASSESSMENT_STATUS = "PRE_ASSESSMENT_STATUS"
+    val TRANSACTION_ID = "transactionId"
+    val TRANSACTION_MODE = "transactionMode"
 
     private val prefEditor: SharedPreferences.Editor?
         get() {

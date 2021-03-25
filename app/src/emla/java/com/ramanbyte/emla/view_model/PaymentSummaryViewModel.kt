@@ -1,28 +1,42 @@
 package com.ramanbyte.emla.view_model
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import android.os.Bundle
 import android.os.Parcelable
+import android.view.View
 import androidx.lifecycle.MutableLiveData
 import com.airpay.airpaysdk_simplifiedotp.ResponseMessage
+import com.paytm.pgsdk.PaytmConstants
+import com.paytm.pgsdk.PaytmOrder
+import com.paytm.pgsdk.PaytmPaymentTransactionCallback
+import com.paytm.pgsdk.TransactionManager
 import com.payu.india.Extras.PayUChecksum
 import com.payu.india.Model.PaymentParams
 import com.payu.india.Model.PostData
 import com.payu.india.Payu.PayuConstants
 import com.payu.india.Payu.PayuErrors
+import com.ramanbyte.BuildConfig
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseViewModel
 import com.ramanbyte.data_layer.CoroutineUtils
+import com.ramanbyte.data_layer.SharedPreferencesDatabase
+import com.ramanbyte.data_layer.SharedPreferencesDatabase.TRANSACTION_ID
+import com.ramanbyte.data_layer.SharedPreferencesDatabase.TRANSACTION_MODE
 import com.ramanbyte.emla.data_layer.network.exception.ApiException
 import com.ramanbyte.emla.data_layer.network.exception.NoInternetException
 import com.ramanbyte.emla.data_layer.repositories.MasterRepository
+import com.ramanbyte.emla.data_layer.repositories.PaymentRepository
 import com.ramanbyte.emla.data_layer.repositories.TransactionRepository
 import com.ramanbyte.emla.models.PayuGatewayModel
 import com.ramanbyte.emla.models.request.CourseFeeRequestModel
 import com.ramanbyte.emla.models.request.InsertTransactionRequestModel
+import com.ramanbyte.emla.models.request.PayTmTokenRequestModel
 import com.ramanbyte.emla.models.response.CartResponseModel
+import com.ramanbyte.emla.models.response.PayTMTokenResponseModel
 import com.ramanbyte.utilities.*
+import com.ramanbyte.utilities.DateUtils.DATE_TIME_SECONDS_PATTERN_FOR_FILE
 import com.ramanbyte.utilities.StaticMethodUtilitiesKtx.getRandomAlphaNumericString
 import org.kodein.di.generic.instance
 
@@ -30,10 +44,11 @@ import org.kodein.di.generic.instance
 /**
  * @author Mansi Manakiki Mody
  */
-class PaymentSummaryViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
+class PaymentSummaryViewModel(var mContext: Context) : BaseViewModel(mContext = mContext){
 
     val masterRepository: MasterRepository by instance()
     val transactionRepository: TransactionRepository by instance()
+    val paymentRepository: PaymentRepository by instance()
     val payuGatewayModel = PayuGatewayModel()
     var payuGatewayModelLiveData: MutableLiveData<PayuGatewayModel?> = MutableLiveData(null)
 
@@ -57,6 +72,7 @@ class PaymentSummaryViewModel(mContext: Context) : BaseViewModel(mContext = mCon
     }
     var isAirPayChecked = false
     var isPayuChecked = false
+    var isPaytmChecked = false
 
     val loggedInUserModel = masterRepository.getCurrentUser()
 
@@ -85,9 +101,7 @@ class PaymentSummaryViewModel(mContext: Context) : BaseViewModel(mContext = mCon
                     if (initiateTransaction) {
                         transactionStatus = KEY_PENDING_TRANSACTION_STATUS
                         paymentGateway = KEY_BLANK
-                        createdDate = DateUtils.getCurDate(
-                            DATE_TIME_SECONDS_PATTERN
-                        )!!
+                        createdDate = DateUtils.getCurDate(DATE_TIME_SECONDS_PATTERN)!!
                     }
                     paymentDescription = BindingUtils.string(
                         R.string.admission_form_transaction_custom_message,
@@ -190,7 +204,7 @@ class PaymentSummaryViewModel(mContext: Context) : BaseViewModel(mContext = mCon
             if (!NetworkConnectivity.isConnectedToInternet())
                 throw NoInternetException(BindingUtils.string(R.string.please_make_sure_you_are_connected_to_internet))
 
-            if (isAirPayChecked || isPayuChecked) {
+            if (isAirPayChecked || isPayuChecked || isPaytmChecked) {
                 addTransaction(
                     initiateTransaction = true,
                     showLoader = false,
@@ -222,16 +236,22 @@ class PaymentSummaryViewModel(mContext: Context) : BaseViewModel(mContext = mCon
             isPayuChecked -> {
                 generatePayUParam()
                 generateHashFromSDK(
-                    /*if (BuildConfig.DEBUG) {*/
+                    /*if (BuildConfig.DEBUG) {*/ // this line already commited
                     BindingUtils.string(R.string.payU_salt_debug)
-                    /*} else {
-                        BindingUtils.string(R.string.payU_salt_release)
-                    }*/
+                    /*} else { // this line already commited
+                         BindingUtils.string(R.string.payU_salt_release) // this line already commited
+                     }*/// this line already commited
                 )
+
             }
             isAirPayChecked -> {
                 generateBundleForAirPay()
             }
+// main hitun call honar aahe te
+            isPaytmChecked -> {
+                getTransactionToken()
+            }
+
             else -> paymentOptionErrorLiveData.postValue(true)
         }
     }
@@ -538,6 +558,70 @@ class PaymentSummaryViewModel(mContext: Context) : BaseViewModel(mContext = mCon
 
         payuGatewayModel.mPaymentParams = mPaymentParams
     }
+
+    var payTmOrderId = ""
+    var transactionTokenLiveData = MutableLiveData<PayTMTokenResponseModel>().apply {
+        value = null
+    }
+
+    fun getTransactionToken() {
+        payTmOrderId = DateUtils.getCustomDatePattern("eMLA", DATE_TIME_SECONDS_PATTERN_FOR_FILE)
+        val host = if (BuildConfig.FLAVOR.equals("prod") || BuildConfig.FLAVOR.equals("Uat")) {
+            " https://securegw.paytm.in/" // live
+        } else {
+            "https://securegw-stage.paytm.in/" // testing
+        }
+        val requestObjects = PayTmTokenRequestModel()
+        requestObjects.apply {
+            this.mid = BuildConfig.MERCHANT_ID
+            this.orderid = payTmOrderId
+            this.amount = amountLiveData.value
+            this.callBackURL = host + "theia/paytmCallback?ORDER_ID=" + payTmOrderId
+        }
+
+        try {
+            CoroutineUtils.main {
+                transactionTokenLiveData.postValue(paymentRepository.getToken(requestObjects))
+                //paymentRepository.getToken(requestObjects)
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            AppLog.infoLog(e.message.toString())
+        } catch (e: IllegalArgumentException) {
+            e.printStackTrace()
+            AppLog.infoLog(e.message.toString())
+        }
+
+    }
+
+    var tokenStatusLiveData = MutableLiveData<PayTMTokenResponseModel>().apply {
+        value = PayTMTokenResponseModel()
+    }
+
+    fun transactionStatus(id: String) {
+        val requestData = PayTmTokenRequestModel().apply {
+            this.mid = BuildConfig.MERCHANT_ID
+            this.orderid = id
+        }
+        try {
+            CoroutineUtils.main {
+                tokenStatusLiveData.postValue(paymentRepository.getStatus(requestData))
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            AppLog.infoLog(e.message.toString())
+        }
+
+    }
+
+    // on payTm Click listener
+    fun onPaytmClikc(view: View) {
+        getTransactionToken()
+    }
+
+
+
+
 
 
 }

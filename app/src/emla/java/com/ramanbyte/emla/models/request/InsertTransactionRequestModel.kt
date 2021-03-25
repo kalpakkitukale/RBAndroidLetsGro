@@ -7,7 +7,7 @@ class InsertTransactionRequestModel {
 
     var id: Int = 0 // 1st time it will 0 then send id for update transaction status
     var userId: Int = 0
-    var transId: Long = 0
+    var transId: String = ""
     var transDate: String? = DateUtils.getCurDate(
         DATE_TIME_SECONDS_PATTERN
     )

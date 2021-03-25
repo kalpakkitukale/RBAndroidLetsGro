@@ -45,6 +45,7 @@ android {
             buildConfigField("String", "S3_OBJECT", "\"dev\"")
             buildConfigField("String", "CLIENT_BASE", "\"dev\"")
             buildConfigField("String", "BASE_URL", "\"http://webapptest.classroomplus.in/\"")
+            buildConfigField("String","MERCHANT_ID",MERCHANT_ID)
         }
 
         qa {
@@ -52,18 +53,22 @@ android {
             buildConfigField("String", "S3_OBJECT", "\"test\"")
             buildConfigField("String", "CLIENT_BASE", "\"test\"")
             buildConfigField("String", "BASE_URL", "\"http://webapptest.classroomplus.in/\"")
+            buildConfigField("String","MERCHANT_ID",MERCHANT_ID)
         }
         uat {
             dimension "env"
             buildConfigField("String", "S3_OBJECT", "\"uat\"")
             buildConfigField("String", "CLIENT_BASE", "\"uat\"")
             buildConfigField("String", "BASE_URL", "\"http://webapptest.classroomplus.in/\"")
+            buildConfigField("String","MERCHANT_ID",MERCHANT_ID)
+
         }
         prod {
             dimension "env"
             buildConfigField("String", "S3_OBJECT", "\"prod\"")
             buildConfigField("String", "CLIENT_BASE", "\"prod\"")
             buildConfigField("String", "BASE_URL", "\"http://webapp.classroomplus.in/\"")
+            buildConfigField("String","MERCHANT_ID",MERCHANT_ID)
         }
     }
     compileOptions {
@@ -168,4 +173,7 @@ dependencies {
 
     // Used for custom webview
     implementation "androidx.webkit:webkit:1.2.0"
+
+    //all in one paytm dependency
+   implementation 'com.paytm.appinvokesdk:appinvokesdk:1.2'
 }

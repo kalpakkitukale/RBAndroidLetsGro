@@ -357,5 +357,10 @@ Content
     <string name="no_transaction_message"> You haven\'t done any Transaction yet.</string>
     <string name="proceed_to_pay"> Proceed to Pay</string>
     <string name="total_amount_to_pay"> Total Amount to Pay</string>
+    <string name="view_perchaes_details"> Purchase Details</string>
+    <string name="view"> View</string>
+    <string name="proceed"> Proceed</string>
+    <string name="courseware">Courseware</string>
+    <string name="unpaid_transaction_sucessful">Thank you. Your course(s) has been added successfully.</string>
 
 </resources>

@@ -75,6 +75,9 @@ class CoursesViewModel(var mContext: Context) : BaseViewModel(mContext = mContex
     var searchQueryForMyCourse = MutableLiveData<String>().apply {
         value = KEY_BLANK
     }
+    var selectedCourseCountLiveData = MutableLiveData<Int>().apply {
+        postValue(0)
+    }
 
 
     init {
@@ -144,6 +147,7 @@ class CoursesViewModel(var mContext: Context) : BaseViewModel(mContext = mContex
     }
 
     fun insertCartData(view: View, coursesModel: CoursesModel) {
+        selectedCourseCountLiveData.postValue(selectedCourseCountLiveData.value?.plus(1))
         CoroutineUtils.main {
             try {
                 isLoaderShowingLiveData.postValue(true)

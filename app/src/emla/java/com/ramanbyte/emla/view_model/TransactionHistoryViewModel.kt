@@ -114,7 +114,7 @@ class TransactionHistoryViewModel(var mContext: Context) : BaseViewModel(mContex
                 this.courseImage = it.courseDetails.courseIamge
                 this.courseDescription = it.courseDetails.description
                 this.courseFee = it.courseFeeStructure.courseFee.toString()
-                this.totalPaid = transactiondata.amountPaid
+                this.totalPaid = transactiondata.amountPaid.toString()
             })
         }
         cartDetailsLiveData.postValue(cardDataList)

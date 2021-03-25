@@ -2,7 +2,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-
     <item
         android:id="@+id/action_search_key"
         android:icon="@drawable/ic_baseline_search"
@@ -10,12 +9,17 @@
         app:actionViewClass="androidx.appcompat.widget.SearchView"
         app:showAsAction="ifRoom"
         tools:targetApi="O" />
-
     <item
         android:id="@+id/action_filter"
         android:icon="@drawable/ic_filter"
         android:title="@string/filter"
         app:actionLayout="@layout/custom_action_badge_layout"
-        app:showAsAction="ifRoom"></item>
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/actionCart"
+        android:title="@string/cart"
+        android:actionLayout="@layout/layout_for_course_menu"
+        android:icon="@drawable/ic_my_cart"
+        app:showAsAction="ifRoom" />
 
 </menu>

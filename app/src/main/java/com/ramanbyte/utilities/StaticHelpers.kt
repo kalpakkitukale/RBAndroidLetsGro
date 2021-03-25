@@ -160,6 +160,7 @@ const val PATH_SEPARATOR = "/"
 
 // payment codes
 const val PAYMENT_SUCCESSFUL_REQUEST_CODE = 700
+const val PAYTM_REQUEST_CODE = 0x6
 
 
 /**
@@ -393,6 +394,19 @@ const val keyPaymentGatewayAirPay = "AirPay"
 const val keyPaymentGatewayPayUBiz = "PayUBiz"
 const val keyPaymentDomain = "Online"
 
+const val keyPaymentGatewayPayTmPay = "PayTM"
+const val KEY_CARD = "Card"
+const val KEY_INTERNET_BANKING = "Internet banking"
+const val KEY_PREPAID = "Prepaid Card"
+const val KEY_UPI = "UPI"
+const val KEY_CREDIT_CARD = "Credit Card"
+const val KEY_DEBIT_CARD = "Debit Card"
+const val KEY_CASH = "Cash"
+const val KEY_EMI = "EMI"
+const val KEY_PAYTM_WALLET = "Paytm wallet"
+const val KEY_POSTPAID = "Postpaid"
+const val KEY_USER_ID = "userId"
+const val KEY_COUPON_CODE = "couponCode"
 
 // changed data
 const val keyAmount = "amount"
@@ -406,6 +420,9 @@ const val KEY_FAIL_TRANSACTION_STATUS = "Fail"
 const val KEY_CANCEL_TRANSACTION_STATUS = "Cancel"
 const val KEY_SUCCESS = "Success"
 const val KEY_PAYMENT_STATUS = "PaymentStatus"
+const val KEY_FREE_AMOUNT = "0.0"
+const val KEY_FREE= "Free"
+const val KEY_ONLINE= "Online"
 const val DATE_TIME_SECONDS_PATTERN = "yyyy-MM-dd HH:mm:ss"
 
 fun skipTrailingZeroes(number: Double?): String {

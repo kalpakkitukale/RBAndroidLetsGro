@@ -32,12 +32,20 @@ private const val QUESTION = "Question/"
 private const val MASTER = "Master/"
 private const val COURSE_FEE = "CourseFeeStructure/"
 val ACTIVITY_CONTEXT = "activity_context"
+private const val ADMISSION = "Admission/"
+private const val PAYMENT_GATEWAY = "PaymentGateway/"
+
+//http://webapptest.classroomplus.in/Admission/Test/api/PaymentGateway/GetTransactionToken
 
 var CLIENT_BASE = BuildConfig.CLIENT_BASE
 
 val repositoryDependencies = Kodein.Module("", true) {
 
     import(controllersDependencies, true)
+
+    bind<PaymentRepository>() with singleton {
+        PaymentRepository(instance())
+    }
 
     bind<CoursesRepository>() with singleton {
         CoursesRepository(instance())
@@ -104,6 +112,16 @@ private val controllersDependencies = Kodein.Module("controllers_dependencies", 
             DOMAIN + EMLA + CLIENT_BASE + API + CHAPTER
         )
     }
+
+
+    bind<PaymentController>() with singleton {
+        RetrofitInitializer.invoke(
+            instance(),//db
+            PaymentController::class.java,
+            DOMAIN + ADMISSION + CLIENT_BASE + API + PAYMENT_GATEWAY
+        )
+    }
+
 
     bind<SectionsController>() with singleton {
         RetrofitInitializer.invoke(

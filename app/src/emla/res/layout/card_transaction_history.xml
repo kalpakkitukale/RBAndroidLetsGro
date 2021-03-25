@@ -11,6 +11,8 @@
         <variable
             name="transactionHistoryModel"
             type="com.ramanbyte.emla.models.TransactionHistoryModel" />
+
+        <import type="com.ramanbyte.utilities.StaticHelpersKt"/>
     </data>
 
     <androidx.cardview.widget.CardView
@@ -26,10 +28,22 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/lblPurchaseRef"
                 style="@style/TextViewTitle"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text='@{@string/purchase_ref + ":" + transactionHistoryModel.transId}'
+                app:layout_constraintEnd_toStartOf="@id/tvTransactionStatus"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvTransactionStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_5"
+                android:text="@{transactionHistoryModel.transactionStatus}"
+                android:textColor="@{transactionHistoryModel.textColor}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/lblPurchaseRef"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -39,6 +53,7 @@
                 android:layout_height="wrap_content"
                 android:onClick="@{() -> viewModel.perchesDetailsClick(transactionHistoryModel)}"
                 android:text="@string/purchase_details"
+                android:visibility="gone"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/lblPurchaseRef" />
 
@@ -56,7 +71,7 @@
                 style="@style/TextViewValOfLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text='@{@string/rupee_symbol + ":" + transactionHistoryModel.amountPaid}'
+                android:text='@{@string/rupee_symbol + ":" +StaticHelpersKt.skipTrailingZeroes(transactionHistoryModel.amountPaid)  }'
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/lblPurchaseDate" />
 
@@ -69,16 +84,15 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/lblTotalAmount" />
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <androidx.appcompat.widget.AppCompatButton
+                style="@style/SmallCustomCapsuleButtonBlueBgWhiteText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{transactionHistoryModel.transactionStatus}"
-                android:textColor="@{transactionHistoryModel.textColor}"
+                android:onClick="@{() -> viewModel.perchesDetailsClick(transactionHistoryModel)}"
+                android:text="@string/view_perchaes_details"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-
+                app:layout_constraintEnd_toEndOf="@id/tvTransactionStatus"
+                app:layout_constraintTop_toBottomOf="@id/tvTransactionStatus" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </layout>

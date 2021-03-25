@@ -23,7 +23,7 @@
         <include
             android:id="@+id/appbar_layout"
             layout="@layout/app_bar_layout" />
-
+        <!--wait-->
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnProceedPay"
             style="@style/CustomCapsuleButtonFilled"
@@ -32,9 +32,14 @@
             android:layout_marginBottom="@dimen/dp_10"
             android:onClick="@{() -> paymentSummaryViewModel.onPaymentProceed()}"
             android:text="@string/proceed_to_pay"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+        <!--   android:onClick="@{() -> paymentSummaryViewModel.onPaymentProceed()}"
+               android:onClick="@{paymentSummaryViewModel::onPaytmClikc}"
+        -->
+
 
         <View
             android:id="@+id/dividerPayment"
@@ -43,6 +48,17 @@
             android:layout_marginStart="@dimen/dp_8"
             android:layout_marginEnd="@dimen/dp_8"
             app:layout_constraintBottom_toTopOf="@+id/radioPayu"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+        <View
+            android:id="@+id/dividerPayTm"
+            style="@style/baseDivider"
+            android:layout_width="match_parent"
+            android:layout_marginStart="@dimen/dp_8"
+            android:layout_marginEnd="@dimen/dp_8"
+            app:layout_constraintBottom_toTopOf="@+id/radioPaytm"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -60,9 +76,20 @@
             android:id="@+id/radioPayu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/dp_8"
             app:drb_description="@string/safe_payment_net_banking"
             app:drb_drawableResource="@drawable/payu"
+            app:layout_constraintBottom_toTopOf="@+id/dividerPayTm"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.ramanbyte.emla.view.DescribedRadioButton
+            android:id="@+id/radioPaytm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp_8"
+            android:visibility="visible"
+            app:drb_description="@string/simplifying_payment"
+            app:drb_drawableResource="@drawable/ic_paytm_icon"
             app:layout_constraintBottom_toTopOf="@+id/btnProceedPay"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

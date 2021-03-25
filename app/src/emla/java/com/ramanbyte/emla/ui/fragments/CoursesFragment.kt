@@ -11,8 +11,11 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.RelativeLayout
+import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.MenuItemCompat
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -119,27 +122,33 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
                 }
 
             })
+
+            selectedCourseCountLiveData.observe(this@CoursesFragment, Observer {
+                it?.let {
+                    if (it!= 0){
+                        setCountTextView(it)
+                    }
+                }
+            })
         }
     }
 
     var menu: Menu? = null
     private var mSearchView: SearchView? = null
     var searchItem: MenuItem? = null
+    var countTextView: TextView? = null
+    var layout:RelativeLayout? = null
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_course_search, menu)
-
         val menuItem = menu.findItem(R.id.action_filter)
-
         val actionView = menuItem.actionView
         badgeView = actionView.findViewById(R.id.filter_badge) as View
         AppLog.infoLog("CoursesFragment onCreateOptionsMenu ${false}")
         AppLog.infoLog("CoursesFragment value ${viewModel.isFilterApplied.value}}")
         //setupBadge()
-
         setupBadge(viewModel.getFilterState())
-
 
         actionView.setOnClickListener {
             onOptionsItemSelected(menuItem)
@@ -198,6 +207,20 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
                 return false
             }
         })
+        // count of textview logic here
+        try {
+            val item = menu.findItem(R.id.actionCart)
+            item.setActionView(R.layout.layout_for_course_menu)
+            val notifCount =item.actionView as RelativeLayout
+            countTextView = notifCount.findViewById<View>(R.id.actionbar_notifcation_textview) as TextView
+            countTextView?.visibility = View.GONE
+             layout = notifCount.findViewById<RelativeLayout>(R.id.layoutParent) as RelativeLayout
+            layout?.setOnClickListener {
+                findNavController().navigate(R.id.action_coursesFragment_to_cartFragment)
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
         super.onCreateOptionsMenu(menu, inflater)
         this.menu = menu
     }
@@ -225,6 +248,7 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
                 courseFilterBottomSheet?.show(childFragmentManager, "course_filter")
                 true
             }
+
             else -> super.onOptionsItemSelected(item)
         }
     }
@@ -252,4 +276,9 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
         mContext = context
     }
 
+//count of selected cart item on the option menu
+    fun setCountTextView(no: Int) {
+        countTextView?.visibility = View.VISIBLE
+        countTextView?.text = no.toString()
+        }
 }

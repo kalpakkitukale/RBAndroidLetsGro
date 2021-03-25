@@ -6,6 +6,7 @@ import org.joda.time.DateTime
 import org.joda.time.Days
 import org.joda.time.Minutes
 import java.text.DateFormat
+import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -43,6 +44,7 @@ object DateUtils {
     const val DATE_TIME_SESSION_STATUS_PATTERN = "MMM dd yyyy $TIME_SERVER_PATTERN"
     const val DATE_TIME_SRVER_PATTERN = "mm/dd/yyyy hh:mm:ss a"
     const val DATE_MONTH_DAY_YEAR_PATTERN = "MMM dd, yyyy"
+    const val DATE_TRANSACTION_ID_PATTERN = "yyyyMMdd"
 
     private var simpleDateFormat: SimpleDateFormat? = null
 
@@ -388,5 +390,19 @@ object DateUtils {
         }
 
         return null
+    }
+
+    fun getCustomDatePattern(infix: String, pattern: String): String {
+        var currentDate = ""
+        try {
+            val curTimeMillis = System.currentTimeMillis()
+            val curDate = Date(curTimeMillis)
+            val simpleDateFormat = SimpleDateFormat(pattern, Locale.US)
+            currentDate = infix + simpleDateFormat.format(curDate)
+        } catch (e: ParseException) {
+            e.printStackTrace()
+            AppLog.errorLog(e.message, e)
+        }
+        return currentDate
     }
 }
