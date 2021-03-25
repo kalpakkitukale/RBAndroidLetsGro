@@ -22,7 +22,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilProgramLevel"
-                style="@style/TextInputLayoutWithoutBorder"
+                style="@style/TextInputLayout"
                 android:layout_width="@dimen/dp_0"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/dp_22"
@@ -37,7 +37,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etProgramLevel"
-                    style="@style/EditTextRegularGrayHint"
+                    style="@style/EditTextStyleIntoTilRegular"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:focusable="false"
@@ -60,7 +60,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilBatchYear"
-                style="@style/TextInputLayoutWithoutBorder"
+                style="@style/TextInputLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/dp_22"
@@ -72,7 +72,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etBatchYear"
-                    style="@style/EditTextRegularGrayHint"
+                    style="@style/EditTextStyleIntoTilRegular"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:imeOptions="actionNext"
@@ -87,7 +87,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilPattern"
-                style="@style/TextInputLayoutWithoutBorder"
+                style="@style/TextInputLayout"
                 android:layout_width="@dimen/dp_0"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/dp_22"
@@ -102,7 +102,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etPattern"
-                    style="@style/EditTextRegularGrayHint"
+                    style="@style/EditTextStyleIntoTilRegular"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:focusable="false"
@@ -125,7 +125,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilSpecialization"
-                style="@style/TextInputLayoutWithoutBorder"
+                style="@style/TextInputLayout"
                 android:layout_width="@dimen/dp_0"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/dp_22"
@@ -140,7 +140,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etSpecialization"
-                    style="@style/EditTextRegularGrayHint"
+                    style="@style/EditTextStyleIntoTilRegular"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:focusable="false"
@@ -163,7 +163,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilUniversity"
-                style="@style/TextInputLayoutWithoutBorder"
+                style="@style/TextInputLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/dp_22"
@@ -175,7 +175,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etUniversity"
-                    style="@style/EditTextRegularGrayHint"
+                    style="@style/EditTextStyleIntoTilRegular"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:imeOptions="actionNext"
@@ -190,7 +190,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilInstitute"
-                style="@style/TextInputLayoutWithoutBorder"
+                style="@style/TextInputLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/dp_22"
@@ -203,7 +203,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etInstitute"
-                    style="@style/EditTextRegularGrayHint"
+                    style="@style/EditTextStyleIntoTilRegular"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:imeOptions="actionDone"
@@ -217,7 +217,7 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnSave"
-                style="@style/CustomCapsuleButtonBlueBgWhiteText"
+                style="@style/CustomCapsuleButtonFilled"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/dp_22"

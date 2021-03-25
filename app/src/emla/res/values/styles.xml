@@ -5,16 +5,24 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="android:windowLightStatusBar" tools:ignore="NewApi">?attr/isLightTheme</item>
+        <item name="android:windowLightStatusBar" tools:ignore="NewApi">true</item>
         <item name="android:textAppearance">@style/AppTheme.Font</item>
+        <item name="android:windowBackground">@color/colorApplicationBackground</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.DayNight">
         <item name="android:textAppearance">@style/AppTheme.Font</item>
         <item name="android:textViewStyle">@style/AppTheme.Font</item>
         <item name="button_style">@style/AppTheme.Font</item>
-        <!-- <item name="android:tint">@color/colorStudentIcon</item>
-         <item name="colorControlNormal">@color/colorStudentIcon</item>-->
+        <item name="android:textColor">@color/colorToolbarText</item>
+        <item name="drawerArrowStyle">@style/DrawerHamburgerStyle</item>
+        <item name="android:textColorPrimary">@color/colorToolbarText</item>
+        <item name="android:textColorSecondary">@color/colorToolbarText</item>
+    </style>
+
+    <style name="DrawerHamburgerStyle" parent="@style/Widget.AppCompat.DrawerArrowToggle">
+        <item name="spinBars">true</item>
+        <item name="color">@color/colorHamburger</item>
     </style>
 
     <!-- START Font Style-->
@@ -52,50 +60,6 @@
     <style name="AppTheme.Font.Italic">
         <item name="android:fontFamily">@font/roboto_italic</item>
         <item name="android:includeFontPadding">false</item>
-    </style>
-
-    <!--Font End-->
-
-    <style name="TextInputLayoutWithoutBorder" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
-        <item name="android:textColorHint">@color/colorTextHint</item>
-        <item name="hintTextColor">@color/colorTextHint</item>
-        <item name="boxStrokeWidth">0.1dp</item>
-        <item name="android:textAppearance">@style/AppTheme.Font</item>
-        <item name="android:textViewStyle">@style/AppTheme.Font</item>
-        <item name="button_style">@style/AppTheme.Font</item>
-        <item name="boxStrokeWidthFocused">1dp</item>
-        <item name="boxStrokeColor">@color/colorTextGrayOnLightNDark</item>
-        <item name="boxBackgroundColor">@color/transparent</item>
-        <item name="android:textCursorDrawable">@color/colorTextNavyBlueInLightNWhiteInDark</item>
-    </style>
-
-    <!--
-        <style name="EditTextStyleIntoTilRegular">
-            <item name="android:textViewStyle">@style/AppTheme.Font</item>
-            <item name="button_style">@style/AppTheme.Font</item>
-            <item name="android:textAppearance">@style/AppTheme.Font</item>
-            <item name="android:padding">@dimen/dp_10</item>
-            <item name="android:textSize">@dimen/sp_14</item>
-            &lt;!&ndash;<item name="android:textColor">@color/colorAccent</item>&ndash;&gt;
-        </style>
-    -->
-
-    <style name="EditTextRegularGrayHint">
-        <item name="android:textColorHint">@color/colorTextNavyBlueInLightNWhiteInDark</item>
-        <item name="android:textAppearance">@style/AppTheme.Font</item>
-        <item name="android:textColor">@color/colorTextNavyBlueInLightNWhiteInDark</item>
-        <item name="android:drawablePadding">@dimen/dp_5</item>
-        <item name="background">@color/colorTransparent</item>
-        <item name="android:textSize">@dimen/sp_16</item>
-        <item name="hintAnimationEnabled">false</item>
-        <item name="android:textCursorDrawable">@color/colorTextNavyBlueInLightNWhiteInDark</item>
-    </style>
-
-    <style name="EditTextHintStyleHintLight">
-        <item name="android:textAppearance">@style/AppTheme.Font.Light</item>
-        <item name="android:textSize">@dimen/sp_10</item>
-        <item name="android:textColorHint">@color/colorTextHint</item>
-        <!--<item name="android:textColor">@color/colorAccent</item>-->
     </style>
 
     <!--Text view  whenever we use TextView, give proper size -->
@@ -162,35 +126,6 @@
         <item name="android:textColor">@color/colorTextGrayOnLightNDark</item>
     </style>
 
-    <style name="CustomCapsuleButtonBlueBgWhiteText">
-        <item name="android:background">@drawable/blue_button_capsule</item>
-        <item name="android:gravity">center</item>
-        <item name="android:textColor">@color/colorWhite</item>
-        <item name="android:minHeight">@null</item>
-        <item name="android:paddingTop">@dimen/dp_12</item>
-        <item name="android:paddingBottom">@dimen/dp_12</item>
-        <item name="android:paddingStart">@dimen/dp_20</item>
-        <item name="android:paddingEnd">@dimen/dp_20</item>
-        <item name="android:textAppearance">@style/AppTheme.Font</item>
-        <item name="android:textAllCaps">true</item>
-        <item name="android:textSize">@dimen/sp_14</item>
-    </style>
-
-    <style name="CustomCapsuleButtonWithOnlyBorder">
-        <item name="android:background">@drawable/custom_capsule_button_with_border</item>
-        <item name="android:gravity">center</item>
-        <item name="android:textColor">@color/colorButtonTextPrimary</item>
-        <item name="android:textAppearance">@style/AppTheme.Font</item>
-        <item name="android:layout_gravity">center_horizontal</item>
-        <item name="android:textSize">@dimen/sp_14</item>
-        <item name="android:textAllCaps">false</item>
-        <item name="android:drawablePadding">@dimen/dp_5</item>
-        <item name="android:paddingStart">@dimen/dp_15</item>
-        <item name="android:paddingEnd">@dimen/dp_15</item>
-        <item name="android:minHeight">@dimen/dp_32</item>
-
-    </style>
-
     <style name="FilePickerTheme" parent="LibAppTheme">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorAccent</item>
@@ -229,7 +164,7 @@
     <style name="exoImageButtonStyle">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:background">@color/transparent</item>
+        <item name="android:background">@color/colorTransparent</item>
         <item name="android:layout_margin">@dimen/dp_3</item>
     </style>
 
@@ -251,27 +186,6 @@
         <item name="android:fontFamily">@font/roboto_regular</item>
     </style>
 
-    <style name="customCard" parent="Widget.MaterialComponents.CardView">
-        <item name="cardBackgroundColor">@color/cardBackgroundColor</item>
-        <item name="cardCornerRadius">@dimen/dp_5</item>
-        <item name="cardElevation">@dimen/dp_2</item>
-        <item name="cardUseCompatPadding">true</item>
-        <item name="contentPadding">@dimen/dp_5</item>
-        <item name="android:layout_marginTop">@dimen/dp_3</item>
-        <item name="android:layout_marginBottom">@dimen/dp_3</item>
-        <item name="android:layout_marginStart">@dimen/dp_8</item>
-        <item name="android:layout_marginEnd">@dimen/dp_8</item>
-    </style>
-
-    <!--created by rahul garg for payment 1 feb 2021-->
-
-    <style name="TextViewDescription">
-        <item name="android:textAppearance">@style/AppTheme.Font.Light</item>
-        <item name="android:textSize">@dimen/sp_12</item>
-        <item name="android:textColor">@color/colorTextNavyBlueInLightNWhiteInDark</item>
-        <item name="android:drawablePadding">@dimen/dp_5</item>
-    </style>
-
     <style name="CustomRadioButton">
         <item name="android:button">@drawable/custom_radio</item>
         <item name="android:textAppearance">@style/AppTheme.Font.Black</item>
@@ -279,44 +193,6 @@
         <item name="android:textSize">@dimen/sp_12</item>
         <item name="android:paddingStart">@dimen/dp_8</item>
         <item name="android:gravity">start|center_vertical</item>>
-    </style>
-
-    <style name="TextViewLabel">
-        <item name="android:textAppearance">@style/AppTheme.Font.Light</item>
-        <item name="android:textSize">@dimen/sp_11</item>
-        <item name="android:textColor">@color/colorTextNavyBlueInLightNWhiteInDark</item>
-        <item name="android:drawablePadding">@dimen/dp_5</item>
-    </style>
-
-    <style name="TextViewValOfLabel">
-        <item name="android:textAppearance">@style/AppTheme.Font.Medium</item>
-        <item name="android:textSize">@dimen/sp_12</item>
-        <item name="android:textColor">@color/colorTextNavyBlueInLightNWhiteInDark</item>
-        <item name="android:drawablePadding">@dimen/dp_5</item>
-    </style>
-
-    <style name="ImageViewOrIconWhereClickIsPerformed">
-        <item name="android:padding">@dimen/dp_5</item>
-    </style>
-
-    <style name="CustomCapsuleButtonFilled">
-        <item name="android:background">@android:color/transparent</item>
-        <item name="android:gravity">center</item>
-        <item name="android:textColor">@color/colorTextNavyBlueInLightNWhiteInDark</item>
-        <item name="android:textAppearance">@style/AppTheme.Font.Black</item>
-        <item name="android:textSize">@dimen/sp_14</item>
-        <item name="android:textAllCaps">false</item>
-        <item name="android:drawablePadding">@dimen/dp_5</item>
-        <item name="android:paddingStart">@dimen/dp_5</item>
-        <item name="android:paddingEnd">@dimen/dp_5</item>
-        <item name="android:minHeight">@dimen/dp_32</item>
-        <item name="android:minWidth">@dimen/dp_80</item>
-    </style>
-
-    <style name="baseDivider">
-        <item name="android:layout_height">0.5dp</item>
-        <item name="android:background">@color/colorDivider</item>
-        <item name="android:layout_marginTop">@dimen/dp_10</item>
     </style>
 
     <style name="ToolBarTitle">
@@ -339,20 +215,6 @@
         <item name="android:elevation" tools:targetApi="lollipop">1dp</item>
     </style>
 
-    <style name="TextViewTitle">
-        <item name="android:textAppearance">@style/AppTheme.Font.Medium</item>
-        <item name="android:textSize">@dimen/sp_14</item>
-        <item name="android:textColor">@color/colorTextNavyBlueInLightNWhiteInDark</item>
-        <item name="android:drawablePadding">@dimen/dp_5</item>
-    </style>
-
-    <style name="TextViewSubTitle">
-        <item name="android:textAppearance">@style/AppTheme.Font</item>
-        <item name="android:textSize">@dimen/sp_14</item>
-        <item name="android:textColor">@color/colorTextNavyBlueInLightNWhiteInDark</item>
-        <item name="android:drawablePadding">@dimen/dp_5</item>
-    </style>
-
 
     <style name="SmallCustomCapsuleButtonBlueBgWhiteText">
         <item name="android:background">@drawable/blue_button_capsule</item>
@@ -366,6 +228,146 @@
         <item name="android:textAppearance">@style/AppTheme.Font</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:textSize">@dimen/sp_12</item>
+    </style>
+
+    <!--
+New Style START
+    -->
+
+    <style name="TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.FilledBox.Dense">
+        <item name="android:textColorHint">@color/textHintColor</item>
+        <item name="hintTextColor">@color/textHintColor</item>
+        <item name="boxStrokeWidth">0.1dp</item>
+        <item name="boxStrokeColor">@color/textHintColor</item>
+        <item name="colorAccent">@color/textHintColor</item>
+        <item name="boxStrokeWidthFocused">1dp</item>
+    </style>
+
+    <style name="EditTextStyleIntoTilRegular">
+        <item name="android:textAppearance">@style/AppTheme.Font</item>
+        <item name="android:drawablePadding">@dimen/dp_5</item>
+        <item name="android:textSize">@dimen/sp_14</item>
+        <item name="android:textColor">@color/colorNormalText</item>
+        <item name="android:textColorHint">@color/textHintColor</item>
+        <item name="android:textCursorDrawable">@null</item>
+        <item name="android:background">@color/colorTransparent</item>
+    </style>
+
+    <style name="TextViewTitleLarge">
+        <item name="android:textAppearance">@style/AppTheme.Font.Medium</item>
+        <item name="android:textSize">@dimen/sp_24</item>
+        <item name="android:textColor">@color/colorLargeText</item>
+        <item name="android:drawablePadding">@dimen/dp_5</item>
+    </style>
+
+    <style name="TextViewTitle">
+        <item name="android:textAppearance">@style/AppTheme.Font.Medium</item>
+        <item name="android:textSize">@dimen/sp_14</item>
+        <item name="android:textColor">@color/colorLargeText</item>
+        <item name="android:drawablePadding">@dimen/dp_5</item>
+    </style>
+
+    <style name="TextViewSubTitle">
+        <item name="android:textAppearance">@style/AppTheme.Font</item>
+        <item name="android:textSize">@dimen/sp_14</item>
+        <item name="android:textColor">@color/colorSubTitle</item>
+        <item name="android:drawablePadding">@dimen/dp_5</item>
+    </style>
+
+    <style name="TextViewDescription">
+        <item name="android:textAppearance">@style/AppTheme.Font.Light</item>
+        <item name="android:textSize">@dimen/sp_12</item>
+        <item name="android:textColor">@color/colorDescription</item>
+        <item name="android:drawablePadding">@dimen/dp_5</item>
+    </style>
+
+    <style name="TextViewLabel">
+        <item name="android:textAppearance">@style/AppTheme.Font.Light</item>
+        <item name="android:textSize">@dimen/sp_12</item>
+        <item name="android:textColor">@color/colorLabel</item>
+        <item name="android:drawablePadding">@dimen/dp_5</item>
+    </style>
+
+    <style name="TextViewValueOfLabel">
+        <item name="android:textAppearance">@style/AppTheme.Font.Medium</item>
+        <item name="android:textSize">@dimen/sp_14</item>
+        <item name="android:textColor">@color/colorValueOfLabel</item>
+        <item name="android:drawablePadding">@dimen/dp_5</item>
+    </style>
+
+    <style name="TextViewValueOfLabelWithDiffColor">
+        <item name="android:textAppearance">@style/AppTheme.Font.Medium</item>
+        <item name="android:textSize">@dimen/sp_14</item>
+        <item name="android:textColor">@color/colorIcon</item>
+        <item name="android:drawablePadding">@dimen/dp_5</item>
+    </style>
+
+    <style name="TextViewNavigationText">
+        <item name="android:textAppearance">@style/AppTheme.Font.Light</item>
+        <item name="android:textSize">@dimen/sp_12</item>
+        <item name="android:textColor">@color/colorNavigationTextView</item>
+        <item name="android:drawablePadding">@dimen/dp_5</item>
+    </style>
+
+    <style name="CustomCapsuleButtonFilled">
+        <item name="android:background">@drawable/custom_button_filled</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/colorFilledButtonText</item>
+        <item name="android:textAppearance">@style/AppTheme.Font</item>
+        <item name="android:textSize">@dimen/sp_14</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:drawablePadding">@dimen/dp_5</item>
+        <item name="android:minHeight">@dimen/dp_32</item>
+        <item name="android:paddingStart">@dimen/dp_15</item>
+        <item name="android:paddingEnd">@dimen/dp_15</item>
+    </style>
+
+    <style name="CustomCapsuleButtonWithOnlyBorder">
+        <item name="android:background">@drawable/custom_capsule_button_with_border</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/colorButtonTextPrimary</item>
+        <item name="android:textAppearance">@style/AppTheme.Font</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:textSize">@dimen/sp_14</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:drawablePadding">@dimen/dp_5</item>
+        <item name="android:paddingStart">@dimen/dp_15</item>
+        <item name="android:paddingEnd">@dimen/dp_15</item>
+        <item name="android:minHeight">@dimen/dp_32</item>
+    </style>
+
+    <style name="ImageViewOrIconWhereClickIsPerformed">
+        <item name="android:padding">@dimen/dp_5</item>
+    </style>
+
+    <style name="customCard" parent="Widget.MaterialComponents.CardView">
+        <item name="cardBackgroundColor">@color/colorCardBackground</item>
+        <item name="cardCornerRadius">@dimen/dp_3</item>
+        <item name="cardElevation">1dp</item>
+        <item name="android:drawablePadding">@dimen/dp_5</item>
+        <item name="cardUseCompatPadding">true</item>
+        <item name="contentPadding">@dimen/dp_12</item>
+        <item name="android:layout_marginTop">@dimen/dp_5</item>
+        <item name="android:layout_marginStart">@dimen/dp_8</item>
+        <item name="android:layout_marginEnd">@dimen/dp_8</item>
+    </style>
+
+    <style name="baseDivider">
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/colorDivider</item>
+        <item name="android:layout_marginTop">@dimen/dp_10</item>
+    </style>
+
+    <style name="baseDividerVertical">
+        <item name="android:layout_width">1dp</item>
+        <item name="android:background">@color/colorDivider</item>
+    </style>
+
+    <style name="baseDividerForLogin">
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/colorDivider</item>
+        <item name="android:layout_marginStart">@dimen/dp_8</item>
+        <item name="android:layout_marginEnd">@dimen/dp_8</item>
     </style>
 
 

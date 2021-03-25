@@ -38,7 +38,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilFirstName"
-                style="@style/TextInputLayoutWithoutBorder"
+                style="@style/TextInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/dp_22"
@@ -50,7 +50,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etFirstName"
-                    style="@style/EditTextRegularGrayHint"
+                    style="@style/EditTextStyleIntoTilRegular"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:digits="@string/alpha_digit_format"
@@ -64,7 +64,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilLastName"
-                style="@style/TextInputLayoutWithoutBorder"
+                style="@style/TextInputLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_15"
@@ -76,7 +76,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etLastName"
-                    style="@style/EditTextRegularGrayHint"
+                    style="@style/EditTextStyleIntoTilRegular"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:digits="@string/alpha_digit_format"
@@ -91,7 +91,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilUserEmailId"
-                style="@style/TextInputLayoutWithoutBorder"
+                style="@style/TextInputLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_15"
@@ -103,7 +103,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etUserEmailId"
-                    style="@style/EditTextRegularGrayHint"
+                    style="@style/EditTextStyleIntoTilRegular"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:imeOptions="actionNext"
@@ -116,7 +116,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilNewPassword"
-                style="@style/TextInputLayoutWithoutBorder"
+                style="@style/TextInputLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_15"
@@ -129,7 +129,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etNewPassword"
-                    style="@style/EditTextRegularGrayHint"
+                    style="@style/EditTextStyleIntoTilRegular"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:imeOptions="actionGo"
@@ -142,7 +142,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilRepeatPassword"
-                style="@style/TextInputLayoutWithoutBorder"
+                style="@style/TextInputLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_15"
@@ -155,7 +155,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etRepeatPassword"
-                    style="@style/EditTextRegularGrayHint"
+                    style="@style/EditTextStyleIntoTilRegular"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:imeOptions="actionGo"
@@ -168,7 +168,7 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnLogin"
-                style="@style/CustomCapsuleButtonBlueBgWhiteText"
+                style="@style/CustomCapsuleButtonFilled"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_22"

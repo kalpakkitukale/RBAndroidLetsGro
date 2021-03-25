@@ -1,6 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#212121</color>
-    <color name="colorPrimaryDark">#212121</color>
     <color name="colorIconNavyBlueInLightNGrayInDark">#919191</color>
+
+    <!--colors adding colours as per new theme START
+    mansi
+    -->
+
+    <color name="colorPrimary">#121212</color>
+    <color name="colorPrimaryDark">#121212</color>
+    <color name="colorAccent1">#007BFF</color>
+    <color name="colorToolbar">#121212</color>
+    <color name="colorToolbarText">#ffffff</color>
+    <color name="colorHamburger">#ffffff</color>
+    <color name="colorLargeText">#07d3ff</color>
+    <color name="colorNormalText">#fafafa</color>
+    <color name="colorSubTitle">#fafafa</color>
+    <color name="colorDescription">#fafafa</color>
+    <color name="colorNavigationTextView">#fafafa</color>
+    <color name="colorLabel">#A2A0A0</color>
+    <color name="colorValueOfLabel">#C7C6C6</color>
+    <color name="colorFilledButton">#007BFF</color>
+    <color name="colorBorderedButton">#007BFF</color>
+    <color name="colorFilledButtonText">#fafafa</color>
+    <color name="colorBorderedButtonText">#fafafa</color>
+    <color name="colorDivider">#5B5B5B</color>
+    <color name="colorIcon">#007BFF</color>
+    <color name="colorIconNormal">#959595</color>
+    <color name="textHintColor">#fafafa</color>
+    <color name="colorApplicationBackground">#121212</color>
+    <color name="colorCardBackground">#333333</color>
+    <color name="colorTransparent">#00000000</color>
 </resources>

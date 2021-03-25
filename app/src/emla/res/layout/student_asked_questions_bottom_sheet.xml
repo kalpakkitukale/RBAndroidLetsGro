@@ -168,7 +168,7 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnApplyFilter"
-            style="@style/CustomCapsuleButtonBlueBgWhiteText"
+            style="@style/CustomCapsuleButtonFilled"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_15"

@@ -109,7 +109,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/lblPurchaseRefVal"
-            style="@style/TextViewValOfLabel"
+            style="@style/TextViewValueOfLabel"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/dp_20"
@@ -141,7 +141,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/lblPurchaseDateVal"
-            style="@style/TextViewValOfLabel"
+            style="@style/TextViewValueOfLabel"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/dp_20"
@@ -173,7 +173,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/lblPaymentTypeVal"
-            style="@style/TextViewValOfLabel"
+            style="@style/TextViewValueOfLabel"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/dp_20"
@@ -205,7 +205,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/lblTotalAmountVal"
-            style="@style/TextViewValOfLabel"
+            style="@style/TextViewValueOfLabel"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/dp_20"
@@ -216,7 +216,7 @@
             app:layout_constraintTop_toTopOf="@+id/lblTotalAmount" />
 
         <androidx.appcompat.widget.AppCompatButton
-            style="@style/CustomCapsuleButtonBlueBgWhiteText"
+            style="@style/CustomCapsuleButtonFilled"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/dp_10"
