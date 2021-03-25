@@ -39,7 +39,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_marginEnd="@dimen/dp_10"
-                android:background="@color/transparent"
+                android:background="@color/colorTransparent"
                 android:padding="@dimen/dp_5"
                 android:src="@drawable/ic_arrow_down_gray"
                 app:layout_constraintBottom_toBottomOf="@+id/tvLabelTitleLSR"
@@ -75,7 +75,7 @@
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/etAddReplyLSR"
-        style="@style/EditTextRegularGrayHint"
+        style="@style/EditTextStyleIntoTilRegular"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/dp_10"

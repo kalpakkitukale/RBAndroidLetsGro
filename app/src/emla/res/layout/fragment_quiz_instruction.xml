@@ -140,7 +140,7 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnStartQuiz"
-            style="@style/CustomCapsuleButtonBlueBgWhiteText"
+            style="@style/CustomCapsuleButtonFilled"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/dp_15"

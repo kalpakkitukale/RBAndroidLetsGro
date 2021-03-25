@@ -38,7 +38,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilFirstName"
-                style="@style/TextInputLayoutWithoutBorder"
+                style="@style/TextInputLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/dp_22"
@@ -50,7 +50,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etFirstName"
-                    style="@style/EditTextRegularGrayHint"
+                    style="@style/EditTextStyleIntoTilRegular"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                    android:digits="@string/alpha_digit_format"
@@ -64,7 +64,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilMiddleName"
-                style="@style/TextInputLayoutWithoutBorder"
+                style="@style/TextInputLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/dp_22"
@@ -76,7 +76,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etMiddleName"
-                    style="@style/EditTextRegularGrayHint"
+                    style="@style/EditTextStyleIntoTilRegular"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:digits="@string/alpha_digit_format"
@@ -90,7 +90,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilLastName"
-                style="@style/TextInputLayoutWithoutBorder"
+                style="@style/TextInputLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/dp_22"
@@ -102,7 +102,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etLastName"
-                    style="@style/EditTextRegularGrayHint"
+                    style="@style/EditTextStyleIntoTilRegular"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                    android:digits="@string/alpha_digit_format"
@@ -116,7 +116,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilDoB"
-                style="@style/TextInputLayoutWithoutBorder"
+                style="@style/TextInputLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/dp_22"
@@ -128,7 +128,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etDoB"
-                    style="@style/EditTextRegularGrayHint"
+                    style="@style/EditTextStyleIntoTilRegular"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                    android:focusable="false"
@@ -144,7 +144,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilEmailId"
-                style="@style/TextInputLayoutWithoutBorder"
+                style="@style/TextInputLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/dp_22"
@@ -156,7 +156,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etEmailId"
-                    style="@style/EditTextRegularGrayHint"
+                    style="@style/EditTextStyleIntoTilRegular"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                 android:imeOptions="actionNext"
@@ -170,7 +170,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilMobileNo"
-                style="@style/TextInputLayoutWithoutBorder"
+                style="@style/TextInputLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/dp_22"
@@ -182,7 +182,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etMobileNo"
-                    style="@style/EditTextRegularGrayHint"
+                    style="@style/EditTextStyleIntoTilRegular"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:imeOptions="actionNext"
@@ -195,7 +195,7 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnNext"
-                style="@style/CustomCapsuleButtonBlueBgWhiteText"
+                style="@style/CustomCapsuleButtonFilled"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_16"
