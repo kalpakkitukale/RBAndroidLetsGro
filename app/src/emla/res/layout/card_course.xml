@@ -39,28 +39,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:scaleType="fitXY"
+                android:src="@drawable/ic_course_dummy"
                 app:imageUrl="@{coursesModel.courseImageUrl}"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="H,7:3"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:background="@drawable/gradient_course_bg"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView"
-                app:layout_constraintEnd_toEndOf="@+id/imageView"
-                app:layout_constraintStart_toStartOf="@+id/imageView"
-                app:layout_constraintTop_toTopOf="@+id/imageView" />
-
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/llDetails"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
+                android:background="@color/colorPrimary"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/imageView">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvTopicDescription"
@@ -72,26 +63,37 @@
                     android:layout_marginEnd="@dimen/dp_5"
                     android:text="@{coursesModel.courseName}"
                     android:textSize="@dimen/sp_18"
-                    app:layout_constraintEnd_toStartOf="@+id/ivStatus"
+                    app:layout_constraintEnd_toStartOf="@id/tvcourseCost"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvcourseCost"
                     style="@style/TextViewBoldNavyBlueOnLightNWhiteOnDark"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dp_8"
                     android:layout_marginTop="@dimen/dp_2"
                     android:layout_marginEnd="@dimen/dp_5"
-                    android:drawablePadding="@dimen/dp_2"
                     android:drawableEnd="@drawable/ic_rupee_indian"
+                    android:drawablePadding="@dimen/dp_2"
+                    android:gravity="end"
                     android:text="@{StaticHelpersKt.skipTrailingZeroes(coursesModel.courseFee)}"
                     android:textSize="@dimen/sp_12"
-                    android:gravity="end"
+                    app:layout_constraintBottom_toBottomOf="@id/tvTopicDescription"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/tvTopicDescription"
+                    app:layout_constraintTop_toTopOf="@id/tvTopicDescription" />
+
+                <androidx.constraintlayout.widget.Barrier
+                    android:id="@+id/titleBarrier"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:barrierDirection="bottom"
+                    app:constraint_referenced_ids="tvcourseCost,tvTopicDescription"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tvTopicDescription" />
+                    app:layout_constraintTop_toBottomOf="@id/tvcourseCost" />
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/ivStatus"
@@ -138,43 +140,41 @@
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/ivCoursesSyllabus"
-                    android:layout_width="@dimen/dp_50"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/dp_15"
-                    android:layout_marginTop="@dimen/dp_20"
+                    android:layout_width="@dimen/dp_37"
+                    android:layout_height="@dimen/dp_37"
+                    android:layout_marginTop="@dimen/dp_10"
                     android:background="@drawable/image_background"
                     android:onClick="@{()->coursesViewModel.showCourseSyllabus(cardContainer, coursesModel)}"
                     android:padding="@dimen/dp_5"
-                    app:layout_constraintEnd_toStartOf="@+id/ivChapterList"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tvcourseCost"
+                    android:visibility="visible"
+                    app:layout_constraintEnd_toEndOf="@id/tvLabelCoursesContent"
+                    app:layout_constraintStart_toStartOf="@id/tvLabelCoursesContent"
+                    app:layout_constraintTop_toBottomOf="@id/titleBarrier"
                     app:srcCompat="@drawable/ic_course_content_new" />
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/ivChapterList"
-                    android:layout_width="@dimen/dp_50"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/dp_15"
+                    android:layout_width="@dimen/dp_37"
+                    android:layout_height="@dimen/dp_37"
                     android:background="@drawable/image_background"
                     android:onClick="@{()->coursesViewModel.showChapterList(cardContainer, coursesModel)}"
                     android:padding="@dimen/dp_5"
-                    app:layout_constraintEnd_toStartOf="@+id/ivPerformance"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/ivCoursesSyllabus"
+                    android:visibility="visible"
+                    app:layout_constraintEnd_toEndOf="@id/tvLabelTopicList"
+                    app:layout_constraintStart_toStartOf="@id/tvLabelTopicList"
                     app:layout_constraintTop_toTopOf="@+id/ivCoursesSyllabus"
                     app:srcCompat="@drawable/ic_topic_list" />
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/ivPerformance"
                     android:layout_width="@dimen/dp_37"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/dp_15"
+                    android:layout_height="@dimen/dp_37"
                     android:background="@drawable/image_background"
                     android:onClick="@{coursesViewModel::checkPerformance}"
                     android:padding="@dimen/dp_5"
-                    app:layout_constraintEnd_toStartOf="@+id/ivCart"
-                    app:layout_constraintStart_toEndOf="@+id/ivChapterList"
+                    android:visibility="visible"
+                    app:layout_constraintEnd_toEndOf="@id/tvLabePerformance"
+                    app:layout_constraintStart_toStartOf="@id/tvLabePerformance"
                     app:layout_constraintTop_toTopOf="@+id/ivCoursesSyllabus"
                     app:srcCompat="@drawable/ic_performance" />
 
@@ -184,11 +184,13 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_2"
-                    android:gravity="center_horizontal"
+                    android:layout_marginBottom="@dimen/dp_5"
+                    android:gravity="center"
                     android:text="@string/performance"
-                    android:textSize="@dimen/sp_10"
-                    app:layout_constraintEnd_toEndOf="@+id/ivPerformance"
-                    app:layout_constraintStart_toStartOf="@+id/ivPerformance"
+                    android:textSize="@dimen/sp_9"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/tvLabeCart"
+                    app:layout_constraintStart_toEndOf="@id/tvLabelTopicList"
                     app:layout_constraintTop_toBottomOf="@id/ivPerformance" />
 
 
@@ -196,16 +198,14 @@
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/ivCart"
-                    android:layout_width="@dimen/dp_50"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/dp_15"
-                    android:layout_marginEnd="@dimen/dp_15"
+                    android:layout_width="@dimen/dp_37"
+                    android:layout_height="@dimen/dp_37"
                     android:background="@drawable/image_background"
                     android:onClick="@{()->coursesViewModel.insertCartData(cardContainer, coursesModel)}"
                     android:padding="@dimen/dp_5"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/ivPerformance"
+                    android:visibility="visible"
+                    app:layout_constraintEnd_toEndOf="@id/tvLabeCart"
+                    app:layout_constraintStart_toStartOf="@id/tvLabeCart"
                     app:layout_constraintTop_toTopOf="@+id/ivCoursesSyllabus"
                     app:srcCompat="@drawable/ic_cart" />
 
@@ -216,12 +216,12 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_2"
                     android:layout_marginBottom="@dimen/dp_5"
-                    android:gravity="center_horizontal"
+                    android:gravity="center"
                     android:text="@string/courseware"
                     android:textSize="@dimen/sp_9"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@id/ivCoursesSyllabus"
-                    app:layout_constraintStart_toStartOf="@id/ivCoursesSyllabus"
+                    app:layout_constraintEnd_toStartOf="@id/tvLabelTopicList"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/ivCoursesSyllabus" />
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -230,14 +230,14 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_2"
-                    android:gravity="center_horizontal"
+                    android:layout_marginBottom="@dimen/dp_5"
+                    android:gravity="center"
                     android:text="@string/topic_list"
                     android:textSize="@dimen/sp_9"
-                    app:layout_constraintBottom_toBottomOf="@+id/tvLabelCoursesContent"
-                    app:layout_constraintEnd_toEndOf="@id/ivChapterList"
-                    app:layout_constraintStart_toStartOf="@id/ivChapterList"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/tvLabePerformance"
+                    app:layout_constraintStart_toEndOf="@id/tvLabelCoursesContent"
                     app:layout_constraintTop_toBottomOf="@id/ivChapterList" />
-
 
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -246,11 +246,45 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_2"
-                    android:gravity="center_horizontal"
+                    android:layout_marginBottom="@dimen/dp_5"
+                    android:gravity="center"
                     android:text="@string/cart"
-                    android:textSize="@dimen/sp_11"
-                    app:layout_constraintEnd_toEndOf="@id/ivCart"
-                    app:layout_constraintStart_toStartOf="@id/ivCart"
+                    android:textSize="@dimen/sp_9"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/tvLabePerformance"
+                    app:layout_constraintTop_toBottomOf="@id/ivCart" />
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvLabeCart1"
+                    style="@style/TextViewLightNavyBlueOnLightNWhiteOnDark"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_2"
+                    android:layout_marginBottom="@dimen/dp_5"
+                    android:gravity="center"
+                    android:text="@string/cart"
+                    android:textSize="@dimen/sp_9"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/tvLabePerformance"
+                    app:layout_constraintTop_toBottomOf="@id/ivCart" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvLabeCart2"
+                    style="@style/TextViewLightNavyBlueOnLightNWhiteOnDark"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_2"
+                    android:layout_marginBottom="@dimen/dp_5"
+
+                    android:gravity="center"
+                    android:text="@string/cart"
+                    android:textSize="@dimen/sp_9"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/tvLabePerformance"
                     app:layout_constraintTop_toBottomOf="@id/ivCart" />
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -270,7 +304,6 @@
                     tools:listitem="@layout/custom_tab_recyclerview_layout" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>

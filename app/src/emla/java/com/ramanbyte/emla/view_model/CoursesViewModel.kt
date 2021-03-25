@@ -378,10 +378,12 @@ class CoursesViewModel(var mContext: Context) : BaseViewModel(mContext = mContex
     val contentOnclickListener: (view: View, obj: Any) -> Unit = { view, obj ->
         obj as CoursesModel
         Toast.makeText(mContext,"Demo Done",Toast.LENGTH_SHORT).show()
+        AppLog.infoLog("Pibm Demo 1")
     }
 
     val attendanceOnclickListener: (view: View, obj: Any) -> Unit = { view, obj ->
         obj as CoursesModel
         Toast.makeText(mContext,"Demo Done 2",Toast.LENGTH_SHORT).show()
+        AppLog.infoLog("Pibm Demo 2")
     }
 }

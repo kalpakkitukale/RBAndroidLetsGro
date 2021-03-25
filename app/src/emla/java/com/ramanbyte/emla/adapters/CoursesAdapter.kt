@@ -36,8 +36,8 @@ class CoursesAdapter(private val displayMetrics: DisplayMetrics, var myCourse: I
 
     override fun onBindViewHolder(holder: CoursesHolder, position: Int) {
         val coursesModel: CoursesModel = getItem(position)!!
-        holder.setData(coursesModel)
-        holder.bind(coursesModel.apply {
+        //holder.setData(coursesModel)
+      holder.bind(coursesModel.apply {
 
             if ((coursesModel.preAssessmentStatus.equals(
                     "true",
@@ -90,7 +90,7 @@ class CoursesAdapter(private val displayMetrics: DisplayMetrics, var myCourse: I
         init {
             cardCourseBinding.coursesViewModel = viewModel
 
-            val layoutParams = cardCourseBinding.root.layoutParams
+           /* val layoutParams = cardCourseBinding.root.layoutParams
 
             val width = displayMetrics.widthPixels - (BindingUtils.dimen(R.dimen.dp_5) * 2)
 
@@ -98,10 +98,10 @@ class CoursesAdapter(private val displayMetrics: DisplayMetrics, var myCourse: I
 
             cardCourseBinding.root.layoutParams = layoutParams
 
-            cardCourseBinding.imageView.layoutParams.apply {
+           cardCourseBinding.imageView.layoutParams.apply {
 
                 height = (width * 0.6).toInt()
-            }
+            }*/
         }
 
         fun bind(coursesModel: CoursesModel) {
@@ -113,7 +113,7 @@ class CoursesAdapter(private val displayMetrics: DisplayMetrics, var myCourse: I
             }
         }
 
-        fun setData(coursesModel: CoursesModel) {
+       /* fun setData(coursesModel: CoursesModel) {
             cardCourseBinding.apply {
                 if (coursesModel.courseImage == null || coursesModel.courseImage?.isEmpty() == true) {
                     when {
@@ -130,24 +130,23 @@ class CoursesAdapter(private val displayMetrics: DisplayMetrics, var myCourse: I
 
                     AppLog.infoLog("CourseListAdapter coursePosition $coursePosition")
 
-                    /* R.array.course_images.resDrawableArray(ivCourseImage.context, coursePosition) {
+                    *//* R.array.course_images.resDrawableArray(ivCourseImage.context, coursePosition) {
                          GlideApp.with(ivCourseImage.context).load(it).into(ivCourseImage)
-                     }*/
+                     }*//*
                 } else {
                     //loading image
-                    /*  val imgUrl = ivCourseImage.context.let {
+                    *//*  val imgUrl = ivCourseImage.context.let {
                           AppS3Client.createInstance(it).getFileAccessUrl(model.imageUrl!!)
-                      }*/
+                      }*//*
                     //   StaticMethodUtilitiesKtx.loadImage(imgUrl!!, ivCourseImage)
                 }
 
                 rvCustomTabList.layoutManager =
                     LinearLayoutManager(rvCustomTabList.context, RecyclerView.HORIZONTAL, false)
-                rvCustomTabList.adapter =
-                    CustomTabLayoutAdapter(getCustomTabModuleList(), coursesModel)
+                rvCustomTabList.adapter = CustomTabLayoutAdapter(getCustomTabModuleList(), coursesModel)
 
             }
-        }
+        }*/
     }
 
 
