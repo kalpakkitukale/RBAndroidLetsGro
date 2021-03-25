@@ -12,8 +12,6 @@
     <color name="colorTextGrayOnLightNDark">#9391a4</color>
     <color name="colorSelectedTab">#1d396b</color>
     <color name="colorNotSelectedTab">#9391a4</color>
-    <color name="colorCourseCardWithOpacity">#FFFFFF</color>
-    <color name="colorCourseCardWithOpacity1">#E6ffffff</color>
     <color name="colorButtonTextPrimary">#247df7</color>
     <!--Taken From previous theme-->
     <color name="colorChipUncheck">#F2F2F2</color>

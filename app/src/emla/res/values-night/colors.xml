@@ -9,8 +9,6 @@
     <color name="colorNotSelectedTab">#9391a4</color>
     <color name="colorExoControl">#E6FFFFFF</color>
     <color name="colorButtonTextPrimary">#fafafa</color>
-    <color name="colorCourseCardWithOpacity">#EE000000</color>
-    <color name="colorCourseCardWithOpacity1">#E6000000</color>
     <color name="icon_bg_color">#323232</color>
     <color name="colorTextBlackInLightNBlueInDark">#3d9df9</color>
 </resources>
