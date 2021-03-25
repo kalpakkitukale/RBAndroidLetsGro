@@ -16,7 +16,8 @@
         <variable
             name="coursesViewModel"
             type="com.ramanbyte.emla.view_model.CoursesViewModel" />
-        <import type="com.ramanbyte.utilities.StaticHelpersKt"/>
+
+        <import type="com.ramanbyte.utilities.StaticHelpersKt" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -74,6 +75,23 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvcourseCost"
+                    style="@style/TextViewBoldNavyBlueOnLightNWhiteOnDark"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_8"
+                    android:layout_marginTop="@dimen/dp_2"
+                    android:layout_marginEnd="@dimen/dp_5"
+                    android:drawablePadding="@dimen/dp_2"
+                    android:drawableEnd="@drawable/ic_rupee_indian"
+                    android:text="@{StaticHelpersKt.skipTrailingZeroes(coursesModel.courseFee)}"
+                    android:textSize="@dimen/sp_12"
+                    android:gravity="end"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvTopicDescription" />
+
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/ivStatus"
                     android:layout_width="@dimen/dp_22"
@@ -129,7 +147,7 @@
                     app:layout_constraintEnd_toStartOf="@+id/ivChapterList"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tvTopicDescription"
+                    app:layout_constraintTop_toBottomOf="@id/tvcourseCost"
                     app:srcCompat="@drawable/ic_course_content_new" />
 
                 <androidx.appcompat.widget.AppCompatImageView
