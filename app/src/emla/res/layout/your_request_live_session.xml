@@ -24,7 +24,7 @@
         android:id="@+id/imgArrowDownLSR"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:background="@color/transparent"
+        android:background="@color/colorTransparent"
         android:paddingStart="@dimen/dp_5"
         android:paddingEnd="@dimen/dp_10"
         android:paddingTop="@dimen/dp_5"

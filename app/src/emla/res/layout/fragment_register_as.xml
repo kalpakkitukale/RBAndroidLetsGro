@@ -12,115 +12,61 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true"
-        android:fitsSystemWindows="true">
+        android:padding="@dimen/dp_10">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/conImageElement"
-            android:layout_width="@dimen/dp_70"
-            android:layout_height="@dimen/dp_70"
-            android:layout_marginTop="@dimen/dp_20"
-            android:src="@mipmap/logo"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/lblLets"
-            style="@style/TextViewMediumNayBlueOnLightNWhiteOnDark14sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/dp_2"
-            android:text="@string/lets"
-            android:visibility="gone"
-            app:layout_constraintEnd_toStartOf="@+id/lblGro"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/conImageElement"
-            app:layout_constraintVertical_chainStyle="packed" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/lblGro"
-            style="@style/TextViewMediumNayBlueOnLightNWhiteOnDark14sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp_2"
-            android:text="@string/gro"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="@+id/lblLets"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toEndOf="@+id/lblLets"
-            app:layout_constraintTop_toTopOf="@+id/lblLets" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/ivElement1"
-            android:layout_width="@dimen/dp_130"
-            android:layout_height="@dimen/dp_30"
-            android:src="@drawable/from_ramanbyte"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardLayoutMain"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
             style="@style/customCard"
-            android:layout_marginTop="@dimen/dp_30"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lblGro"
-            app:layout_constraintWidth_percent="0.85">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:padding="@dimen/dp_10">
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/lableSignIn"
-                    style="@style/TextViewLabelMediumGrayOnLightNDark28sp"
+                    android:id="@+id/lblTitle"
+                    style="@style/TextViewTitleLarge"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/Register_as"
-                    android:textColor="@color/colorLightGray"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <View
-                    android:id="@+id/viewVertical"
-                    android:layout_width="1dp"
-                    android:layout_height="0dp"
-                    android:layout_marginTop="@dimen/dp_20"
-                    android:background="@color/colorDivider"
-                    app:layout_constraintBottom_toBottomOf="@+id/btnStudent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/lableSignIn"
-                    app:layout_constraintVertical_bias="0.0" />
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.5" />
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/ivStudent"
                     android:layout_width="@dimen/dp_60"
                     android:layout_height="@dimen/dp_60"
-                    android:layout_marginTop="@dimen/dp_20"
-                    app:srcCompat="@drawable/ic_student"
-                    app:layout_constraintEnd_toStartOf="@+id/viewVertical"
+                    android:layout_marginTop="@dimen/dp_35"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline"
+                    app:layout_constraintHorizontal_bias="0.42"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/viewVertical" />
+                    app:layout_constraintTop_toBottomOf="@+id/lblTitle"
+                    app:srcCompat="@drawable/ic_student" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnStudent"
-                    style="@style/CustomCapsuleButtonBlueBgWhiteText"
+                    style="@style/CustomCapsuleButtonFilled"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_8"
-                    android:layout_marginBottom="@dimen/dp_30"
+                    android:layout_marginTop="@dimen/dp_10"
                     android:onClick="@{loginViewModel::onClickStudent}"
                     android:text="@string/student"
                     android:textAllCaps="false"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/viewVertical"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline"
+                    app:layout_constraintHorizontal_bias="0.4"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/ivStudent" />
 
@@ -128,41 +74,60 @@
                     android:id="@+id/ivFaculty"
                     android:layout_width="@dimen/dp_60"
                     android:layout_height="@dimen/dp_60"
-                    android:layout_marginTop="@dimen/dp_20"
-                    app:srcCompat="@drawable/ic_faculty"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/viewVertical"
-                    app:layout_constraintTop_toTopOf="@+id/viewVertical" />
+                    app:layout_constraintHorizontal_bias="0.6"
+                    app:layout_constraintStart_toStartOf="@+id/guideline"
+                    app:layout_constraintTop_toTopOf="@+id/ivStudent"
+                    app:srcCompat="@drawable/ic_faculty" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnFaculty"
-                    style="@style/CustomCapsuleButtonBlueBgWhiteText"
+                    style="@style/CustomCapsuleButtonFilled"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_8"
                     android:onClick="@{loginViewModel::onClickFaculty}"
                     android:text="@string/faculty"
                     android:textAllCaps="false"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/viewVertical"
-                    app:layout_constraintTop_toBottomOf="@+id/ivFaculty"/>
+                    app:layout_constraintHorizontal_bias="0.60"
+                    app:layout_constraintStart_toStartOf="@+id/guideline"
+                    app:layout_constraintTop_toTopOf="@+id/btnStudent" />
 
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnLogin"
+                    style="@style/CustomCapsuleButtonFilled"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_35"
+                    android:alpha="@{(loginViewModel.isRegisterAsSelected == true)? 1f : 0.3f}"
+                    android:enabled="@{loginViewModel.isRegisterAsSelected}"
+                    android:onClick="@{loginViewModel::onClickContinue}"
+                    android:text="@string/strContinue"
+                    android:textAllCaps="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/btnFaculty" />
+
+                <View
+                    style="@style/baseDividerVertical"
+                    android:layout_height="0dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/btnStudent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/ivStudent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnLogin"
-            style="@style/CustomCapsuleButtonBlueBgWhiteText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_20"
-            android:onClick="@{loginViewModel::onClickContinue}"
-            android:text="@string/strContinue"
-            android:alpha="@{(loginViewModel.isRegisterAsSelected == true)? 1f : 0.3f}"
-            android:enabled="@{loginViewModel.isRegisterAsSelected}"
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivLoginLogo"
+            android:layout_width="@dimen/dp_100"
+            android:layout_height="@dimen/dp_100"
+            app:layout_constraintBottom_toTopOf="@+id/cardLayoutMain"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardLayoutMain" />
-
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@mipmap/logo" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -11,87 +11,74 @@
             type="com.ramanbyte.emla.view_model.LoginViewModel" />
     </data>
 
-    <RelativeLayout
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/dp_10"
+        android:paddingTop="@dimen/dp_10"
+        android:paddingEnd="@dimen/dp_10"
+        android:paddingBottom="@dimen/dp_40">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivClose"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:padding="@dimen/dp_5"
+            android:src="@drawable/ic_close_black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/lblTitle"
+            style="@style/TextViewTitleLarge"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:padding="@dimen/dp_10">
+            android:layout_marginStart="@dimen/dp_15"
+            android:layout_marginEnd="@dimen/dp_15"
+            android:text="@string/log_in_with_classroom"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivClose" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/labelTitle"
-                style="@style/TextViewBoldNavyBlueOnLightNWhiteOnDark"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dp_10"
-                android:text="@string/log_in_with_classroom"
-                android:textSize="@dimen/sp_18"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilUserName"
+            style="@style/TextInputLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_25"
+            android:hint="@string/email_user_name"
+            app:endIconDrawable="@null"
+            app:endIconMode="clear_text"
+            app:errorText="@{loginViewModel.loginRequestValidation.getValidation(StaticHelpersKt.keyEmailId)}"
+            app:layout_constraintEnd_toEndOf="@+id/lblTitle"
+            app:layout_constraintStart_toStartOf="@+id/lblTitle"
+            app:layout_constraintTop_toBottomOf="@+id/lblTitle">
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/ivClose"
-                android:layout_width="@dimen/dp_40"
-                android:layout_height="0dp"
-                android:src="@drawable/ic_close_black"
-                app:layout_constraintBottom_toBottomOf="@+id/labelTitle"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/labelTitle" />
-
-            <androidx.constraintlayout.widget.Barrier
-                android:id="@+id/barrierTitle"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etUserName"
+                style="@style/EditTextStyleIntoTilRegular"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:barrierDirection="bottom"
-                app:constraint_referenced_ids="labelTitle,ivClose" />
-
-            <View
-                android:id="@+id/view"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginStart="@dimen/dp_5"
-                android:layout_marginTop="@dimen/dp_10"
-                android:layout_marginEnd="@dimen/dp_5"
-                android:background="@color/colorDivider"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/barrierTitle" />
-
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tilUserName"
-                style="@style/TextInputLayoutWithoutBorder"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/dp_10"
-                android:hint="@string/email_user_name"
-                app:errorText="@{loginViewModel.loginRequestValidation.getValidation(StaticHelpersKt.keyEmailId)}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/view">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etUserName"
-                    style="@style/EditTextRegularGrayHint"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:imeOptions="actionNext"
-                    android:inputType="textEmailAddress"
-                    android:lines="1"
-                    android:maxLength="50"
-                    android:singleLine="true"
-                    android:text="@={loginViewModel.userLoginRequestLiveData.emailId}" />
-            </com.google.android.material.textfield.TextInputLayout>
+                android:background="@color/colorTransparent"
+                android:imeOptions="actionNext"
+                android:inputType="textEmailAddress"
+                android:maxLength="50"
+                android:singleLine="true"
+                android:text="@={loginViewModel.userLoginRequestLiveData.emailId}" />
+        </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilPassword"
-                style="@style/TextInputLayoutWithoutBorder"
+                style="@style/TextInputLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_15"
+                android:layout_marginTop="@dimen/dp_35"
                 android:hint="@string/password"
+                app:endIconDrawable="@null"
                 app:endIconMode="password_toggle"
                 app:errorText="@{loginViewModel.loginRequestValidation.getValidation(StaticHelpersKt.keyPassword)}"
                 app:layout_constraintEnd_toEndOf="@+id/tilUserName"
@@ -100,29 +87,31 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/ettPassword"
-                    style="@style/EditTextRegularGrayHint"
+                    style="@style/EditTextStyleIntoTilRegular"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:imeOptions="actionGo"
+                    android:background="@color/colorTransparent"
+                    android:imeOptions="actionDone"
                     android:inputType="textPassword"
-                    android:lines="1"
                     android:maxLength="30"
                     android:singleLine="true"
                     android:text="@={loginViewModel.userLoginRequestLiveData.password}" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnLogin"
-                style="@style/CustomCapsuleButtonBlueBgWhiteText"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_20"
-                android:onClick='@{()->loginViewModel.doLogin(btnLogin,"Y")}'
-                android:text="@string/log_in"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tilPassword"
-                app:layout_constraintWidth_percent="0.4" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </RelativeLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnLogin"
+            style="@style/CustomCapsuleButtonFilled"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_35"
+            android:onClick='@{()->loginViewModel.doLogin(btnLogin,"Y")}'
+            android:text="@string/log_in"
+            android:textAllCaps="true"
+            app:layout_constraintEnd_toEndOf="@+id/lblTitle"
+            app:layout_constraintStart_toStartOf="@+id/lblTitle"
+            app:layout_constraintTop_toBottomOf="@id/tilPassword" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
 </layout>

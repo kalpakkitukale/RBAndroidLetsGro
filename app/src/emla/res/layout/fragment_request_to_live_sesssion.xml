@@ -6,7 +6,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilMobileNo"
-        style="@style/TextInputLayoutWithoutBorder"
+        style="@style/TextInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/dp_22"
@@ -17,7 +17,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etMobileNo"
-            style="@style/EditTextRegularGrayHint"
+            style="@style/EditTextStyleIntoTilRegular"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/dp_16"
@@ -29,7 +29,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilAlternateMobileNo"
-        style="@style/TextInputLayoutWithoutBorder"
+        style="@style/TextInputLayout"
         android:layout_width="0dp"
         android:gravity="bottom"
         android:layout_height="wrap_content"
@@ -40,7 +40,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etAlternateMobileNo"
-            style="@style/EditTextRegularGrayHint"
+            style="@style/EditTextStyleIntoTilRegular"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
              android:drawableStart="@drawable/ic_call"
@@ -53,7 +53,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilTimeToContact"
-        style="@style/TextInputLayoutWithoutBorder"
+        style="@style/TextInputLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_22"
@@ -63,7 +63,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etTimeToContact"
-            style="@style/EditTextRegularGrayHint"
+            style="@style/EditTextStyleIntoTilRegular"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="@string/time_to_contact"
@@ -76,7 +76,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilLearnInLiveSession"
-        style="@style/TextInputLayoutWithoutBorder"
+        style="@style/TextInputLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_22"
@@ -86,7 +86,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etLearnInLiveSession"
-            style="@style/EditTextRegularGrayHint"
+            style="@style/EditTextStyleIntoTilRegular"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="@string/what_you_want_to_learn_in_live_session"
@@ -98,7 +98,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnSendLiveSession"
-        style="@style/CustomCapsuleButtonBlueBgWhiteText"
+        style="@style/CustomCapsuleButtonFilled"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/send"
@@ -109,7 +109,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnCancelLiveSession"
-        style="@style/CustomCapsuleButtonBlueBgWhiteText"
+        style="@style/CustomCapsuleButtonFilled"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/cancel"

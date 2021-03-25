@@ -84,7 +84,7 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/tilUserName"
-                    style="@style/TextInputLayoutWithoutBorder"
+                    style="@style/TextInputLayout"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_10"
@@ -96,7 +96,7 @@
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etUserName"
-                        style="@style/EditTextRegularGrayHint"
+                        style="@style/EditTextStyleIntoTilRegular"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:imeOptions="actionNext"
@@ -109,7 +109,7 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/tilPassword"
-                    style="@style/TextInputLayoutWithoutBorder"
+                    style="@style/TextInputLayout"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_10"
@@ -122,7 +122,7 @@
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/ettPassword"
-                        style="@style/EditTextRegularGrayHint"
+                        style="@style/EditTextStyleIntoTilRegular"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:imeOptions="actionGo"
@@ -135,7 +135,7 @@
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnLogin"
-                    style="@style/CustomCapsuleButtonBlueBgWhiteText"
+                    style="@style/CustomCapsuleButtonFilled"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -198,7 +198,7 @@
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnCreateAccount"
-                    style="@style/CustomCapsuleButtonBlueBgWhiteText"
+                    style="@style/CustomCapsuleButtonFilled"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"

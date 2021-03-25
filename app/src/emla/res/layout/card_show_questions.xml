@@ -41,7 +41,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/cardBackgroundColor"
+                    android:background="@color/colorCardBackground"
                     app:layout_anchor="@+id/cardMainContainer"
                     app:layout_anchorGravity="center">
 
