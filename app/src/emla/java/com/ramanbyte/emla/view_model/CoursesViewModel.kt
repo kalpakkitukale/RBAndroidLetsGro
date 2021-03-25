@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -374,5 +375,13 @@ class CoursesViewModel(var mContext: Context) : BaseViewModel(mContext = mContex
     }
 
     //fun isUserActive(): Boolean = registrationRepository.isUserActive()
+    val contentOnclickListener: (view: View, obj: Any) -> Unit = { view, obj ->
+        obj as CoursesModel
+        Toast.makeText(mContext,"Demo Done",Toast.LENGTH_SHORT).show()
+    }
 
+    val attendanceOnclickListener: (view: View, obj: Any) -> Unit = { view, obj ->
+        obj as CoursesModel
+        Toast.makeText(mContext,"Demo Done 2",Toast.LENGTH_SHORT).show()
+    }
 }

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer-array name="course_images">
+        <item>@drawable/ic_all_the_best</item>
+        <item>@drawable/ic_course_dummy</item>
+    </integer-array>
+
+</resources>
