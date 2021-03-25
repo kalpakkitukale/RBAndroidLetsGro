@@ -8,7 +8,7 @@ class CourseFeeStructureModel {
     var id: Int = 0
     var clientId: Int = 0
     var campusId: Int = 0
-    var courseFee: Int = 0
+    var courseFee: String = ""
     var courseDetailId: Int = 0
     var valideMonth: Int = 0
     var effectiveDate: String = ""
