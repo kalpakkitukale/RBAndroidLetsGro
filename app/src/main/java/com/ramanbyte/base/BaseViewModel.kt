@@ -127,7 +127,7 @@ abstract class BaseViewModel(
         when (paginationResponseHandler) {
 
             PaginationResponseHandler.INIT_LOADING -> {
-                isLoaderShowingLiveData.postValue(true)
+             //   isLoaderShowingLiveData.postValue(true)
                 toggleLayoutVisibility(
                     View.GONE,
                     View.GONE,
