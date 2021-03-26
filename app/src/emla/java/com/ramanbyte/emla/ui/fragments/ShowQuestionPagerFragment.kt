@@ -100,11 +100,11 @@ class ShowQuestionPagerFragment : BaseFragment<CardShowQuestionsBinding, ShowQue
 
             wvQuestion.webChromeClient = WebChromeClient()
 
-            rvAnswer?.apply {
+            rvAnswer.apply {
                 //isNestedScrollingEnabled = true
 
                 val optionsList = viewModel.getOptions(
-                    this@ShowQuestionPagerFragment.questionAndAnswerModelData?.id ?: 0
+                    this@ShowQuestionPagerFragment.questionAndAnswerModelData.id
                 )
 
                 answerAdapter = AnswerAdapter(
@@ -118,7 +118,7 @@ class ShowQuestionPagerFragment : BaseFragment<CardShowQuestionsBinding, ShowQue
                 //--------------------------  Clear the selected options ----------------------------
                 //answerAdapter.lastSelectedPosition = optionList?.indexOfFirst { it.isChecked }
 
-                questionAndAnswerModelData?.clearOptions = {
+                questionAndAnswerModelData.clearOptions = {
                     viewModel.apply {
                         deleteQuestionRelatedOptionLB(questionAndAnswerModel?.id ?: 0)
 
@@ -199,7 +199,7 @@ class ShowQuestionPagerFragment : BaseFragment<CardShowQuestionsBinding, ShowQue
                         "$marksStr ${BindingUtils.string(R.string.marks)}"
                     )
                 val foregroundSpanQuestionMarks =
-                    ForegroundColorSpan(BindingUtils.color(R.color.colorIconNavyBlueInLightNGrayInDark))
+                    ForegroundColorSpan(BindingUtils.color(R.color.colorIcon))
                 if (marksStr.length == 3) {
                     spannableStringQuestionMarks.setSpan(
                         foregroundSpanQuestionMarks,

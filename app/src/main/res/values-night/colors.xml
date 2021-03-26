@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorIconNavyBlueInLightNGrayInDark">#919191</color>
 
     <!--colors adding colours as per new theme START
     mansi
@@ -8,7 +7,7 @@
 
     <color name="colorPrimary">#121212</color>
     <color name="colorPrimaryDark">#121212</color>
-    <color name="colorAccent1">#007BFF</color>
+    <color name="colorAccent">#007BFF</color>
     <color name="colorToolbar">#121212</color>
     <color name="colorToolbarText">#ffffff</color>
     <color name="colorHamburger">#ffffff</color>
@@ -30,4 +29,5 @@
     <color name="colorApplicationBackground">#121212</color>
     <color name="colorCardBackground">#333333</color>
     <color name="colorTransparent">#00000000</color>
+    <color name="colorImageViewBackground">#444444</color>
 </resources>

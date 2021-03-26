@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorIconNavyBlueInLightNGrayInDark">#1d396b</color>
+
     <color name="bg_gray">#9391a4</color>
 
     <!--colors adding colours as per new theme START
@@ -31,4 +31,5 @@
     <color name="colorApplicationBackground">#f2f0fa</color>
     <color name="colorCardBackground">#ffffff</color>
     <color name="colorTransparent">#00000000</color>
+    <color name="colorImageViewBackground">#E8E6F1</color>
 </resources>

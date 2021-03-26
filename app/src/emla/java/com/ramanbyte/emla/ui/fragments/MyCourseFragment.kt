@@ -77,7 +77,7 @@ class MyCourseFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>(
 
         val searchEditText = mSearchView!!.findViewById(R.id.search_src_text) as EditText
 
-        searchEditText.setTextColor(BindingUtils.color(R.color.colorIconNavyBlueInLightNGrayInDark))
+        searchEditText.setTextColor(BindingUtils.color(R.color.colorIcon))
         searchEditText.hint = BindingUtils.string(R.string.search_by_course_or_keywords)
         searchEditText.setTextSize(
             TypedValue.COMPLEX_UNIT_PX,
