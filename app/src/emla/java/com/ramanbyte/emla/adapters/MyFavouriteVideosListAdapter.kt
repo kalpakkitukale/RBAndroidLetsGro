@@ -1,7 +1,6 @@
 package com.ramanbyte.emla.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -9,9 +8,6 @@ import com.ramanbyte.R
 import com.ramanbyte.databinding.CardMyFavouriteVideosBinding
 import com.ramanbyte.emla.models.FavouriteVideosModel
 import com.ramanbyte.emla.view_model.MyFavouriteVideoViewModel
-import com.ramanbyte.utilities.BindingUtils
-import com.ramanbyte.utilities.NetworkConnectivity
-import kotlinx.android.synthetic.emla.exo_playback_control_view.*
 
 class MyFavouriteVideosListAdapter(
     private var favouriteViewModel: MyFavouriteVideoViewModel,

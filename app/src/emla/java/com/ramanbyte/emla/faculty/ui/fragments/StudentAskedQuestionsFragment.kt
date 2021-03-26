@@ -179,7 +179,7 @@ class StudentAskedQuestionsFragment :
 
         val searchEditText = mSearchView!!.findViewById(R.id.search_src_text) as EditText
 
-        searchEditText.setTextColor(BindingUtils.color(R.color.colorIconNavyBlueInLightNGrayInDark))
+        searchEditText.setTextColor(BindingUtils.color(R.color.colorIcon))
         searchEditText.setHintTextColor(BindingUtils.color(R.color.colorTextHint))
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             //searchEditText.setTextCursorDrawable(BindingUtils.color(R.color.colorTextNavyBlueInLightNWhiteInDark))

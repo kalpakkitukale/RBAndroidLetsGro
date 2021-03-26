@@ -11,13 +11,10 @@ import com.ramanbyte.R
 import com.ramanbyte.databinding.CardContentBinding
 import com.ramanbyte.emla.models.ContentModel
 import com.ramanbyte.emla.view_model.ContentViewModel
-import com.ramanbyte.utilities.AppLog
 import com.ramanbyte.utilities.BindingUtils
 import com.ramanbyte.utilities.FileUtils.KEY_PRESENTATION_PPTX_EXTENSION
 import com.ramanbyte.utilities.FileUtils.KEY_PRESENTATION_PPT_EXTENSION
-import kotlinx.android.synthetic.emla.exo_playback_control_view.*
 import java.util.*
-import kotlin.collections.ArrayList
 
 class ContentListAdapter(
     private val viewModel: ContentViewModel,
@@ -64,7 +61,7 @@ class ContentListAdapter(
 
             val contentModel = contentList[adapterPosition]
 
-            contentModel?.apply {
+            contentModel.apply {
 
                 isDownloaded = viewModel.isMediaDownloaded(this)
 

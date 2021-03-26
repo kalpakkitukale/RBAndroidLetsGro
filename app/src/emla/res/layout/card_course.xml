@@ -23,20 +23,17 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardContainer"
-        style="@style/customCard"
+        style="@style/customCardWithoutPadding"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:contentPadding="0dp">
-        <!--  android:onClick="@{()->coursesViewModel.courseClick(cardContainer, coursesModel)}"-->
+        android:layout_height="wrap_content">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/imageView"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:scaleType="fitXY"
                 android:src="@drawable/ic_course_dummy"
@@ -50,245 +47,142 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/colorCardBackground"
+                android:padding="@dimen/dp_8"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/imageView">
+                app:layout_constraintTop_toBottomOf="@+id/imageView">
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvTopicDescription"
-                    style="@style/TextViewBoldNavyBlueOnLightNWhiteOnDark"
+                    android:id="@+id/lblCourseName"
+                    style="@style/TextViewTitle.CourseName"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/dp_8"
-                    android:layout_marginTop="@dimen/dp_2"
-                    android:layout_marginEnd="@dimen/dp_5"
-                    android:text="@{coursesModel.courseName}"
-                    android:textSize="@dimen/sp_18"
-                    android:singleLine="true"
                     android:ellipsize="end"
-                    app:layout_constraintEnd_toStartOf="@id/tvcourseCost"
+                    android:maxLines="2"
+                    android:text="@{coursesModel.courseName}"
+                    app:layout_constraintEnd_toStartOf="@+id/tvcourseCost"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvcourseCost"
-                    style="@style/TextViewBoldNavyBlueOnLightNWhiteOnDark"
+                    style="@style/TextViewTitle.CoursePrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/dp_8"
-                    android:layout_marginTop="@dimen/dp_2"
-                    android:layout_marginEnd="@dimen/dp_5"
-                    android:drawableEnd="@drawable/ic_rupee_indian"
-                    android:drawablePadding="@dimen/dp_2"
-                    android:gravity="end"
+                    android:drawableStart="@drawable/ic_rupee_indian"
+                    android:drawablePadding="@dimen/dp_5"
                     android:text="@{StaticHelpersKt.skipTrailingZeroes(coursesModel.courseFee)}"
-                    android:textSize="@dimen/sp_12"
-                    app:layout_constraintBottom_toBottomOf="@id/tvTopicDescription"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/tvTopicDescription"
-                    app:layout_constraintTop_toTopOf="@id/tvTopicDescription" />
+                    app:layout_constraintTop_toTopOf="@+id/lblCourseName" />
 
-                <androidx.constraintlayout.widget.Barrier
-                    android:id="@+id/titleBarrier"
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:id="@+id/layoutSyllabus"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:barrierDirection="bottom"
-                    app:constraint_referenced_ids="tvcourseCost,tvTopicDescription,ivStatus"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tvcourseCost" />
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/ivStatus"
-                    android:layout_width="@dimen/dp_22"
-                    android:layout_height="@dimen/dp_22"
-                    android:layout_marginTop="@dimen/dp_2"
-                    android:layout_marginEnd="@dimen/dp_5"
-                    android:padding="@dimen/dp_3"
-                    android:visibility="visible"
-                    app:layout_constraintEnd_toEndOf="parent"
-                   app:layout_constraintTop_toBottomOf="@id/tvcourseCost"
-                    app:srcCompat="@drawable/ic_live" />
-
-                <!--As Discuss with mansi hide share cource icon for release-->
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/ivShare"
-                    android:layout_width="@dimen/dp_22"
-                    android:layout_height="@dimen/dp_22"
-                    android:layout_marginEnd="@dimen/dp_5"
-                    android:onClick="@{()->coursesViewModel.shareClick(ivShare, coursesModel)}"
-                    android:padding="@dimen/dp_3"
-                    android:src="@drawable/ic_share"
-                    android:visibility="gone"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvTopicDescription" />
-
-                <!-- <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvTopicDetail"
-                    style="@style/TextViewRegularNavyBlueOnLightNWhiteOnDark"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_5"
-                    android:layout_marginBottom="@dimen/dp_16"
-                    android:ellipsize="end"
-                    android:lines="1"
-                    android:maxLines="1"
-                    android:paddingRight="@dimen/dp_5"
-                    android:paddingBottom="@dimen/dp_10"
-                    android:text="@{coursesModel.courseDescription}"
-                    android:textSize="@dimen/sp_12"
-                    app:layout_constraintEnd_toEndOf="@+id/ivStatus"
-                    app:layout_constraintStart_toStartOf="@+id/tvTopicDescription"
-                    app:layout_constraintTop_toBottomOf="@+id/tvTopicDescription" />-->
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/ivCoursesSyllabus"
-                    android:layout_width="@dimen/dp_37"
-                    android:layout_height="@dimen/dp_37"
                     android:layout_marginTop="@dimen/dp_10"
-                    android:background="@drawable/image_background"
+                    android:gravity="center"
                     android:onClick="@{()->coursesViewModel.showCourseSyllabus(cardContainer, coursesModel)}"
-                    android:padding="@dimen/dp_5"
-                    android:visibility="visible"
-                    app:layout_constraintEnd_toEndOf="@id/tvLabelCoursesContent"
-                    app:layout_constraintStart_toStartOf="@id/tvLabelCoursesContent"
-                    app:layout_constraintTop_toBottomOf="@id/titleBarrier"
-                    app:srcCompat="@drawable/ic_course_content_new" />
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/ivChapterList"
-                    android:layout_width="@dimen/dp_37"
-                    android:layout_height="@dimen/dp_37"
-                    android:background="@drawable/image_background"
-                    android:onClick="@{()->coursesViewModel.showChapterList(cardContainer, coursesModel)}"
-                    android:padding="@dimen/dp_5"
-                    android:visibility="visible"
-                    app:layout_constraintEnd_toEndOf="@id/tvLabelTopicList"
-                    app:layout_constraintStart_toStartOf="@id/tvLabelTopicList"
-                    app:layout_constraintTop_toTopOf="@+id/ivCoursesSyllabus"
-                    app:srcCompat="@drawable/ic_topic_list" />
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/ivPerformance"
-                    android:layout_width="@dimen/dp_37"
-                    android:layout_height="@dimen/dp_37"
-                    android:background="@drawable/image_background"
-                    android:onClick="@{() -> coursesViewModel.checkPerformance(ivPerformance,coursesModel)}"
-                    android:padding="@dimen/dp_5"
-                    android:visibility="visible"
-                    app:layout_constraintEnd_toEndOf="@id/tvLabePerformance"
-                    app:layout_constraintStart_toStartOf="@id/tvLabePerformance"
-                    app:layout_constraintTop_toTopOf="@+id/ivCoursesSyllabus"
-                    app:srcCompat="@drawable/ic_performance" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvLabePerformance"
-                    style="@style/TextViewLightNavyBlueOnLightNWhiteOnDark"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_2"
-                    android:layout_marginBottom="@dimen/dp_5"
-                    android:gravity="center"
-                    android:text="@string/performance"
-                    android:textSize="@dimen/sp_9"
+                    android:orientation="vertical"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/tvLabeCart"
-                    app:layout_constraintStart_toEndOf="@id/tvLabelTopicList"
-                    app:layout_constraintTop_toBottomOf="@id/ivPerformance" />
-
-
-                <!--   android:onClick="@{()->coursesViewModel.showChapterList(cardContainer, coursesModel)}"-->
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/ivCart"
-                    android:layout_width="@dimen/dp_37"
-                    android:layout_height="@dimen/dp_37"
-                    android:background="@drawable/image_background"
-                    android:onClick="@{()->coursesViewModel.insertCartData(cardContainer, coursesModel)}"
-                    android:padding="@dimen/dp_5"
-                    android:visibility="visible"
-                    app:layout_constraintEnd_toEndOf="@id/tvLabeCart"
-                    app:layout_constraintStart_toStartOf="@id/tvLabeCart"
-                    app:layout_constraintTop_toTopOf="@+id/ivCoursesSyllabus"
-                    app:srcCompat="@drawable/ic_cart" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvLabelCoursesContent"
-                    style="@style/TextViewLightNavyBlueOnLightNWhiteOnDark"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_2"
-                    android:layout_marginBottom="@dimen/dp_5"
-                    android:gravity="center"
-                    android:text="@string/courseware"
-                    android:textSize="@dimen/sp_9"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/tvLabelTopicList"
+                    app:layout_constraintEnd_toStartOf="@+id/layoutTopics"
+                    app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/ivCoursesSyllabus" />
+                    app:layout_constraintTop_toBottomOf="@id/lblCourseName">
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvLabelTopicList"
-                    style="@style/TextViewLightNavyBlueOnLightNWhiteOnDark"
-                    android:layout_width="0dp"
+                    <androidx.appcompat.widget.AppCompatImageView
+                        style="@style/ImageViewOrIconWhereClickIsPerformed"
+                        android:layout_width="@dimen/dp_40"
+                        android:layout_height="@dimen/dp_40"
+                        app:srcCompat="@drawable/ic_course_content_new" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/TextViewVerySmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_5"
+                        android:text="@string/courseware" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layoutTopics"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_2"
-                    android:layout_marginBottom="@dimen/dp_5"
                     android:gravity="center"
-                    android:text="@string/topic_list"
-                    android:textSize="@dimen/sp_9"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/tvLabePerformance"
-                    app:layout_constraintStart_toEndOf="@id/tvLabelCoursesContent"
-                    app:layout_constraintTop_toBottomOf="@id/ivChapterList" />
+                    android:onClick="@{()->coursesViewModel.showChapterList(cardContainer, coursesModel)}"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toStartOf="@+id/layoutPerformance"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/layoutSyllabus"
+                    app:layout_constraintTop_toTopOf="@id/layoutSyllabus">
 
+                    <androidx.appcompat.widget.AppCompatImageView
+                        style="@style/ImageViewOrIconWhereClickIsPerformed"
+                        android:layout_width="@dimen/dp_40"
+                        android:layout_height="@dimen/dp_40"
+                        app:srcCompat="@drawable/ic_topic_list" />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvLabeCart"
-                    style="@style/TextViewLightNavyBlueOnLightNWhiteOnDark"
-                    android:layout_width="0dp"
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/TextViewVerySmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_5"
+                        android:text="@string/topic_list" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layoutPerformance"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_2"
-                    android:layout_marginBottom="@dimen/dp_5"
                     android:gravity="center"
-                    android:text="@string/cart"
-                    android:textSize="@dimen/sp_9"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/tvLabeCart1"
-                    app:layout_constraintStart_toEndOf="@id/tvLabePerformance"
-                    app:layout_constraintTop_toBottomOf="@id/ivCart" />
-                <!--   app:layout_constraintEnd_toEndOf="parent"-->
+                    android:onClick="@{coursesViewModel::checkPerformance}"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toStartOf="@+id/layoutCart"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/layoutTopics"
+                    app:layout_constraintTop_toTopOf="@id/layoutSyllabus">
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvLabeCart1"
-                    style="@style/TextViewLightNavyBlueOnLightNWhiteOnDark"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_2"
-                    android:layout_marginBottom="@dimen/dp_5"
-                    android:gravity="center"
-                    android:text="@string/cart"
-                    android:textSize="@dimen/sp_9"
-                    android:visibility="invisible"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/tvLabeCart2"
-                    app:layout_constraintStart_toEndOf="@id/tvLabeCart"
-                    app:layout_constraintTop_toBottomOf="@id/ivCart" />
+                    <androidx.appcompat.widget.AppCompatImageView
+                        style="@style/ImageViewOrIconWhereClickIsPerformed"
+                        android:layout_width="@dimen/dp_40"
+                        android:layout_height="@dimen/dp_40"
+                        app:srcCompat="@drawable/ic_performance" />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvLabeCart2"
-                    style="@style/TextViewLightNavyBlueOnLightNWhiteOnDark"
-                    android:layout_width="0dp"
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/TextViewVerySmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_5"
+                        android:text="@string/performance" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layoutCart"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_2"
-                    android:layout_marginBottom="@dimen/dp_5"
                     android:gravity="center"
-                    android:text="@string/cart"
-                    android:textSize="@dimen/sp_9"
-                    android:visibility="invisible"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:onClick="@{()->coursesViewModel.insertCartData(cardContainer, coursesModel)}"
+                    android:orientation="vertical"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/tvLabeCart1"
-                    app:layout_constraintTop_toBottomOf="@id/ivCart" />
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/layoutPerformance"
+                    app:layout_constraintTop_toTopOf="@id/layoutSyllabus">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        style="@style/ImageViewOrIconWhereClickIsPerformed"
+                        android:layout_width="@dimen/dp_40"
+                        android:layout_height="@dimen/dp_40"
+                        app:srcCompat="@drawable/ic_cart" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/TextViewVerySmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_5"
+                        android:text="@string/cart" />
+
+                </LinearLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvCustomTabList"
@@ -297,17 +191,39 @@
                     android:layout_marginTop="@dimen/dp_5"
                     android:layout_marginBottom="@dimen/dp_10"
                     android:background="@null"
-                    android:elevation="0dp"
                     android:orientation="horizontal"
                     android:visibility="gone"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvLabeCart"
+                    app:layout_constraintTop_toBottomOf="@+id/lblCourseName"
                     tools:listitem="@layout/custom_tab_recyclerview_layout" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivShare"
+                style="@style/ImageViewOnCardWithBackground"
+                android:layout_width="@dimen/dp_35"
+                android:layout_height="@dimen/dp_35"
+                android:onClick="@{()->coursesViewModel.shareClick(ivShare, coursesModel)}"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/imageView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:srcCompat="@drawable/ic_share" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivStatus"
+                style="@style/ImageViewOnCardWithBackground"
+                android:layout_width="@dimen/dp_35"
+                android:layout_height="@dimen/dp_35"
+                android:layout_marginEnd="@dimen/dp_10"
+                android:visibility="gone"
+                app:layout_constraintEnd_toStartOf="@+id/ivShare"
+                app:layout_constraintTop_toTopOf="@+id/ivShare"
+                app:srcCompat="@drawable/ic_live" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     </androidx.cardview.widget.CardView>
 </layout>
