@@ -5,5 +5,5 @@
     android:height="@dimen/dp_15">
     <path
         android:pathData="M386.258 91.567L203.718 273.512 21.179 91.567 0 112.815 203.718 315.87 407.437 112.815Z"
-        android:fillColor="@color/colorIconNavyBlueInLightNGrayInDark" />
+        android:fillColor="@color/colorIcon" />
 </vector>
