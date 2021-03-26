@@ -76,14 +76,12 @@
             app:layout_constraintTop_toTopOf="@+id/lblTotalCartAmount" />
 
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnProceedPay"
             style="@style/CustomCapsuleButtonFilled"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/dp_10"
-            android:background="@color/colorAccent"
-            android:gravity="end"
             android:onClick="@{()->cartViewModel.clickOnProceedToPay(btnProceedPay)}"
             android:text="@string/proceed"
             app:layout_constraintBottom_toBottomOf="@id/tvTotalCartAmount"

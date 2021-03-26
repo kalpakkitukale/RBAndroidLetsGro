@@ -86,7 +86,7 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
     //share Course Details through a link
     private fun setViewModelOp() {
         viewModel.apply {
-
+            selectedCourseCountLiveData.postValue(0)
             initPaginationResponseHandler()
             coursesPagedList()?.observe(this@CoursesFragment, androidx.lifecycle.Observer {
                 it?.let { coursesAdapter?.apply { submitList(it) } }
