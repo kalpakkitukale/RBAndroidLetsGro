@@ -29,19 +29,19 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="@color/colorPrimary"
-                app:titleTextColor="@color/colorTextNavyBlueInLightNWhiteInDark"
-                app:popupTheme="@style/AppTheme.PopupOverlay"
+                android:background="@color/colorToolbar"
                 android:contentInsetStart="0dp"
                 android:contentInsetLeft="0dp"
+                android:elevation="0dip"
                 android:contentInsetEnd="0dp"
                 android:contentInsetRight="0dp"
+                android:theme="@style/AppTheme.AppBarOverlay"
+                app:contentInsetStartWithNavigation="0dp"
                 app:contentInsetEnd="0dp"
                 app:contentInsetLeft="0dp"
                 app:contentInsetRight="0dp"
                 app:contentInsetStart="0dp"
-                app:contentInsetStartWithNavigation="0dp"
-                app:elevation="0dip">
+                app:titleTextColor="@color/colorToolbarText">
                 <!--android:theme="?attr/toolBarMenuItem"-->
 
                 <RelativeLayout

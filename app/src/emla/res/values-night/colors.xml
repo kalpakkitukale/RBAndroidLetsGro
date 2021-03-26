@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-<color name="colorIconNavyBlueInLightNGrayInDark">#919191</color>
-    <color name="colorTextNavyBlueInLightNWhiteInDark">#ffffff</color>
+
+<color name="colorTextNavyBlueInLightNWhiteInDark">#ffffff</color>
     <color name="colorTextHint">#9391a4</color>
     <color name="colorTextGrayOnLightNDark">#9391a4</color>
     <color name="colorSelectedTab">#ffffff</color>
     <color name="colorNotSelectedTab">#9391a4</color>
     <color name="colorExoControl">#E6FFFFFF</color>
     <color name="colorButtonTextPrimary">#fafafa</color>
-    <color name="colorCourseCardWithOpacity">#EE000000</color>
-    <color name="colorCourseCardWithOpacity1">#E6000000</color>
     <color name="icon_bg_color">#323232</color>
     <color name="colorTextBlackInLightNBlueInDark">#3d9df9</color>
 </resources>

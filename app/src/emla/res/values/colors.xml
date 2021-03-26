@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-<color name="colorIconNavyBlueInLightNGrayInDark">#1d396b</color>
-    <color name="colorIconNavyBlueInLightNGrayInDarkTransparent">#951d396b</color>
+
+<color name="colorIconNavyBlueInLightNGrayInDarkTransparent">#951d396b</color>
     <color name="colorTextNavyBlueInLightNWhiteInDark">#1d396b</color>
     <color name="icon_bg_color">#DDDBE6</color>
     <color name="colorIconGreen">#25ae88</color>
@@ -12,8 +12,6 @@
     <color name="colorTextGrayOnLightNDark">#9391a4</color>
     <color name="colorSelectedTab">#1d396b</color>
     <color name="colorNotSelectedTab">#9391a4</color>
-    <color name="colorCourseCardWithOpacity">#FFFFFF</color>
-    <color name="colorCourseCardWithOpacity1">#E6ffffff</color>
     <color name="colorButtonTextPrimary">#247df7</color>
     <!--Taken From previous theme-->
     <color name="colorChipUncheck">#F2F2F2</color>

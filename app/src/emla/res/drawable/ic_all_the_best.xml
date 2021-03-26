@@ -8,13 +8,13 @@
       android:fillColor="#E8DEFF"/>
   <path
       android:pathData="M79.5,423.5h147.3v226.6h-147.3z"
-      android:fillColor="@color/colorIconNavyBlueInLightNGrayInDark"/>
+      android:fillColor="@color/colorIcon" />
   <path
       android:pathData="M341.1,699.9c-21.5,0 -42.9,0 -64.4,0c-16.2,0 -32.4,0.1 -48.6,0.1c0.3,-2.7 -0.3,-5.5 -2.2,-8c0,0 0,-0.1 -0.1,-0.1c-4.3,-5.7 -7.6,-12.2 -9.7,-18.9c-2.6,-8 -5.2,-15.3 -6.9,-22.9h17.7V502.4c60.2,17.5 69.1,88.7 72.5,96.3c3.9,8.7 8.4,28.8 12.1,37.2C321.2,658.2 330.8,679.5 341.1,699.9z"
       android:fillColor="#E8DEFF"/>
-  <path
-      android:pathData="M226.8,502.4V650h-17.7c-3,-13.2 -3.4,-27.1 4.2,-46.7c21.4,-55.7 -6.8,-59.9 -25.6,-61.1c-8.7,-0.6 -14.6,-3.6 -20.3,-10.2c-8.4,-9.8 0.4,-33.5 31.4,-33.5C209.4,498.5 218.9,499.9 226.8,502.4z"
-      android:fillColor="@color/colorIconNavyBlueInLightNGrayInDark"/>
+    <path
+        android:pathData="M226.8,502.4V650h-17.7c-3,-13.2 -3.4,-27.1 4.2,-46.7c21.4,-55.7 -6.8,-59.9 -25.6,-61.1c-8.7,-0.6 -14.6,-3.6 -20.3,-10.2c-8.4,-9.8 0.4,-33.5 31.4,-33.5C209.4,498.5 218.9,499.9 226.8,502.4z"
+        android:fillColor="@color/colorIcon" />
   <path
       android:pathData="M241.1,439.3l0,17.4l-118.8,0l0,196.5l-17.5,0l0,-196.5l-33.2,0l0,-17.4z"
       android:fillColor="#FFFFFF"/>
@@ -30,9 +30,9 @@
   <path
       android:pathData="M79.5,608.9V639c-6.1,6 -12,8 -16.7,5.8C65.1,631.6 70.9,619.4 79.5,608.9z"
       android:fillColor="#E8DEFF"/>
-  <path
-      android:pathData="M104.8,544.2v51c-4.9,11.1 -10.5,21.2 -15.1,29.5c-3.3,6.1 -6.8,10.9 -10.3,14.3v-30.1c1.6,-1.9 3.2,-3.8 5,-5.5C96.3,591.3 102.7,569.2 104.8,544.2z"
-      android:fillColor="@color/colorIconNavyBlueInLightNGrayInDark"/>
+    <path
+        android:pathData="M104.8,544.2v51c-4.9,11.1 -10.5,21.2 -15.1,29.5c-3.3,6.1 -6.8,10.9 -10.3,14.3v-30.1c1.6,-1.9 3.2,-3.8 5,-5.5C96.3,591.3 102.7,569.2 104.8,544.2z"
+        android:fillColor="@color/colorIcon" />
   <path
       android:pathData="M104.8,544.2c0.5,-6.3 0.8,-12.8 0.8,-19.3c0,-3.4 -0.3,-6.6 -0.8,-9.6c-0.6,-3.4 -1.5,-6.5 -2.6,-9.4c0.9,1.1 1.8,2.3 2.6,3.4c19.4,27.5 11.6,59.6 0,85.9V544.2z"
       android:fillColor="#E8DEFF"/>
