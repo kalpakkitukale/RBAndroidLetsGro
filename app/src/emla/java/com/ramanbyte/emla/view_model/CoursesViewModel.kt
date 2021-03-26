@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -157,8 +156,7 @@ class CoursesViewModel(var mContext: Context) : BaseViewModel(mContext = mContex
                     courseId = coursesModel.courseId
                 )
                 runOnUiThread(Runnable {
-                    view.ivCart.visibility = View.INVISIBLE
-                    view.tvLabeCart.visibility = View.INVISIBLE
+                    view.layoutCart.visibility = View.INVISIBLE
                 })
                 isLoaderShowingLiveData.postValue(false)
             } catch (e: ApiException) {

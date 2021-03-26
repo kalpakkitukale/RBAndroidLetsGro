@@ -260,9 +260,23 @@ New Style START
         <item name="android:drawablePadding">@dimen/dp_5</item>
     </style>
 
+    <style name="TextViewTitle.CourseName">
+        <item name="android:textAppearance">@style/AppTheme.Font.Medium</item>
+        <item name="android:textSize">@dimen/sp_20</item>
+        <item name="android:textColor">@color/colorLargeText</item>
+        <item name="android:drawablePadding">@dimen/dp_5</item>
+    </style>
+
+    <style name="TextViewTitle.CoursePrice">
+        <item name="android:textAppearance">@style/AppTheme.Font.Medium</item>
+        <item name="android:textSize">@dimen/sp_18</item>
+        <item name="android:textColor">@color/colorLargeText</item>
+        <item name="android:drawablePadding">@dimen/dp_5</item>
+    </style>
+
     <style name="TextViewTitle">
         <item name="android:textAppearance">@style/AppTheme.Font.Medium</item>
-        <item name="android:textSize">@dimen/sp_14</item>
+        <item name="android:textSize">@dimen/sp_16</item>
         <item name="android:textColor">@color/colorLargeText</item>
         <item name="android:drawablePadding">@dimen/dp_5</item>
     </style>
@@ -279,6 +293,12 @@ New Style START
         <item name="android:textSize">@dimen/sp_12</item>
         <item name="android:textColor">@color/colorDescription</item>
         <item name="android:drawablePadding">@dimen/dp_5</item>
+    </style>
+
+    <style name="TextViewVerySmall">
+        <item name="android:textAppearance">@style/AppTheme.Font.Light</item>
+        <item name="android:textSize">@dimen/sp_9</item>
+        <item name="android:textColor">@color/colorDescription</item>
     </style>
 
     <style name="TextViewLabel">
@@ -338,6 +358,12 @@ New Style START
 
     <style name="ImageViewOrIconWhereClickIsPerformed">
         <item name="android:padding">@dimen/dp_5</item>
+        <item name="android:background">@drawable/custom_background_imageview</item>
+    </style>
+
+    <style name="ImageViewOnCardWithBackground">
+        <item name="android:padding">@dimen/dp_8</item>
+        <item name="android:background">@drawable/custom_background_imageview</item>
     </style>
 
     <style name="customCard" parent="Widget.MaterialComponents.CardView">
@@ -347,6 +373,18 @@ New Style START
         <item name="android:drawablePadding">@dimen/dp_5</item>
         <item name="cardUseCompatPadding">true</item>
         <item name="contentPadding">@dimen/dp_12</item>
+        <item name="android:layout_marginTop">@dimen/dp_5</item>
+        <item name="android:layout_marginStart">@dimen/dp_8</item>
+        <item name="android:layout_marginEnd">@dimen/dp_8</item>
+    </style>
+
+    <style name="customCardWithoutPadding" parent="Widget.MaterialComponents.CardView">
+        <item name="cardBackgroundColor">@color/colorCardBackground</item>
+        <item name="cardCornerRadius">@dimen/dp_3</item>
+        <item name="cardElevation">1dp</item>
+        <item name="android:drawablePadding">@dimen/dp_5</item>
+        <item name="cardUseCompatPadding">false</item>
+        <item name="contentPadding">0dp</item>
         <item name="android:layout_marginTop">@dimen/dp_5</item>
         <item name="android:layout_marginStart">@dimen/dp_8</item>
         <item name="android:layout_marginEnd">@dimen/dp_8</item>

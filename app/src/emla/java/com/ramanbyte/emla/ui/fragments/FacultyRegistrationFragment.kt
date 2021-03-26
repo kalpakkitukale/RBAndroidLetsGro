@@ -93,7 +93,7 @@ class FacultyRegistrationFragment :
 
                 onClickUploadResumeLiveData.observe(this@FacultyRegistrationFragment, Observer {
                     if (it != null) {
-                        it?.let {
+                        it.let {
                             if (PermissionsManager.checkPermission(
                                     activity!!,
                                     Manifest.permission.WRITE_EXTERNAL_STORAGE
@@ -180,14 +180,15 @@ class FacultyRegistrationFragment :
                         AppLog.infoLog("fileName size :: $fileSizeKB     $fileSizeMB      $fileSize      $selectedFilePath    ")
 
                         extension =
-                            selectedFilePath.substring(selectedFilePath.lastIndexOf(".")) ?: ""
+                            selectedFilePath.substring(selectedFilePath.lastIndexOf("."))
 
                         if (extension.equals(FileUtils.KEY_PDF_DOCUMENT_EXTENSION, true) ||
                             extension.equals(FileUtils.KEY_DOCUMENT_DOC_EXTENSION, true) ||
                             extension.equals(FileUtils.KEY_DOCUMENT_DOCX_EXTENSION, true) ||
                             extension.equals(FileUtils.KEY_TEXT_EXTENSION, true) ||
                             extension.equals(FileUtils.KEY_RICH_TEXT_EXTENSION, true) ||
-                            extension.equals(FileUtils.KEY_PRESENTATION_PPT_EXTENSION, true)) {
+                            extension.equals(FileUtils.KEY_PRESENTATION_PPT_EXTENSION, true)
+                        ) {
 
                             if (fileSizeMB <= 2) {
                                 layoutBinding.apply {
@@ -221,7 +222,7 @@ class FacultyRegistrationFragment :
                                     isAlertDialogShown.postValue(true)
                                 }
                             }
-                        }else{
+                        } else {
                             viewModel.apply {
                                 setAlertDialogResourceModelMutableLiveData(
                                     BindingUtils.string(R.string.file_type_error),
@@ -400,7 +401,7 @@ class FacultyRegistrationFragment :
         return chip.apply {
             text = model.courseName
             id = model.courseId
-            setTextColor(ColorStateList.valueOf(BindingUtils.color(R.color.colorIconNavyBlueInLightNGrayInDark)))
+            setTextColor(ColorStateList.valueOf(BindingUtils.color(R.color.colorIcon)))
             isClickable = true
             isCheckable = false
             isCloseIconVisible = true

@@ -11,7 +11,7 @@ import com.ramanbyte.utilities.BindingUtils
 import com.ramanbyte.utilities.KEY_BLANK
 import com.ramanbyte.utilities.KEY_NA_WITHOUT_SPACE
 
-class ContentModel() : Parcelable, BaseObservable() {
+class ContentModel : Parcelable, BaseObservable() {
 
     var id: Int = 0
 
@@ -62,7 +62,7 @@ class ContentModel() : Parcelable, BaseObservable() {
         }
 
     @Bindable
-    var downloadStatusColor = BindingUtils.color(R.color.colorIconNavyBlueInLightNGrayInDark)
+    var downloadStatusColor = BindingUtils.color(R.color.colorIcon)
         set(value) {
             field = value
             notifyPropertyChanged(BR.downloadStatusColor)

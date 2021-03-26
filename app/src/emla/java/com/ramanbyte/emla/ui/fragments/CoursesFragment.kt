@@ -15,7 +15,6 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.SearchView
-import androidx.core.view.MenuItemCompat
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -160,7 +159,7 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
 
         val searchEditText = mSearchView!!.findViewById(search_src_text) as EditText
 
-        searchEditText.setTextColor(BindingUtils.color(R.color.colorIconNavyBlueInLightNGrayInDark))
+        searchEditText.setTextColor(BindingUtils.color(R.color.colorIcon))
         searchEditText.hint = BindingUtils.string(R.string.search_by_course_or_keywords)
         searchEditText.setTextSize(
             TypedValue.COMPLEX_UNIT_PX,
