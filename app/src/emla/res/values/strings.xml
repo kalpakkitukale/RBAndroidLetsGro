@@ -362,5 +362,5 @@ Content
     <string name="proceed"> Proceed</string>
     <string name="courseware">Courseware</string>
     <string name="unpaid_transaction_sucessful">Thank you. Your course(s) has been added successfully.</string>
-
+    <string name="course_Result_Fragment">Course Result Fragment</string>
 </resources>

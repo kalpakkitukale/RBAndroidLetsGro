@@ -172,7 +172,7 @@
                     android:layout_width="@dimen/dp_37"
                     android:layout_height="@dimen/dp_37"
                     android:background="@drawable/image_background"
-                    android:onClick="@{coursesViewModel::checkPerformance}"
+                    android:onClick="@{() -> coursesViewModel.checkPerformance(ivPerformance,coursesModel)}"
                     android:padding="@dimen/dp_5"
                     android:visibility="visible"
                     app:layout_constraintEnd_toEndOf="@id/tvLabePerformance"

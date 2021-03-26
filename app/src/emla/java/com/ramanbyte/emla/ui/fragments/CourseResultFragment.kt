@@ -10,6 +10,7 @@ import com.ramanbyte.emla.adapters.CourseResultAdapter
 import com.ramanbyte.emla.models.CourseResultModel
 import com.ramanbyte.emla.models.CoursesModel
 import com.ramanbyte.emla.view_model.CoursesDetailViewModel
+import com.ramanbyte.utilities.BindingUtils
 import com.ramanbyte.utilities.KEY_COURSE_MODEL
 import com.ramanbyte.utilities.ProgressLoader
 import com.ramanbyte.utilities.skipTrailingZeroes
@@ -52,6 +53,9 @@ class CourseResultFragment :
             somethingWentWrong.viewModel = viewModel
 
             coursesViewModel = viewModel
+
+            setToolbarTitle(BindingUtils.string(R.string.course_Result_Fragment))
+
 
         }
 

@@ -257,9 +257,11 @@ class CoursesViewModel(var mContext: Context) : BaseViewModel(mContext = mContex
     }
 
     // on click on performance check 
-    fun checkPerformance(view: View) {
-        val intent = Intent(mContext, CertificateViewerActivity::class.java)
-        mContext.startActivity(intent)
+    fun checkPerformance(view: View, coursesModel: CoursesModel) {
+        view.findNavController().navigate(R.id.courseResultFragment, Bundle().apply {
+            putParcelable(KEY_COURSE_MODEL, coursesModel)
+        })
+
     }
 
     fun shareClick(view: View, coursesModel: CoursesModel) {
