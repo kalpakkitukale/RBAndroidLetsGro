@@ -33,6 +33,10 @@ class CartViewModel(var mContext: Context) : BaseViewModel(mContext = mContext) 
     var courseFess = MutableLiveData<Float>().apply {
         value = 0.0f
     }
+
+    var clickedLiveData = MutableLiveData<Boolean>().apply {
+        value = false
+    }
     var userData: UserModel? = null
 
     var cartListLiveData = MutableLiveData<List<CartResponseModel>>().apply {
@@ -170,9 +174,6 @@ class CartViewModel(var mContext: Context) : BaseViewModel(mContext = mContext) 
     }
 
 
-    var clickedLiveData = MutableLiveData<Boolean>().apply {
-        value = false
-    }
     // on proceed button click event
     fun clickOnProceedToPay(view: View) {
         clickedLiveData.postValue(true)
