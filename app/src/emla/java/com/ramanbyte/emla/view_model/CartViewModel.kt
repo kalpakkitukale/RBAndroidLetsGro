@@ -170,8 +170,12 @@ class CartViewModel(var mContext: Context) : BaseViewModel(mContext = mContext) 
     }
 
 
+    var clickedLiveData = MutableLiveData<Boolean>().apply {
+        value = false
+    }
     // on proceed button click event
     fun clickOnProceedToPay(view: View) {
+        clickedLiveData.postValue(true)
         if (finalCartList.size > 0) {
             finalCartList?.forEach {
                 if (it.courseFee.equals("0", true) || it.courseFee.equals("0.0", true)) {

@@ -14,6 +14,7 @@ import com.ramanbyte.emla.view_model.CartViewModel
 import com.ramanbyte.utilities.AlertDialog
 import com.ramanbyte.utilities.BindingUtils
 import com.ramanbyte.utilities.ProgressLoader
+import java.util.logging.Handler
 
 class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>() {
     private lateinit var mContext: Context
@@ -36,6 +37,7 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>() {
 
             viewModel.apply {
                 getCartList()
+                clickedLiveData.postValue(false)
                 cartListLiveData.observe(this@CartFragment, Observer {
                     if (it != null) {
                         val cartAdapter = CartAdapter(viewModel, it, mContext)
@@ -59,14 +61,24 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>() {
                                 BindingUtils.string(R.string.strOk), {
                                     view?.findNavController()?.navigate(R.id.myCourseFragment)
                                     isAlertDialogShown.postValue(false)
+                                    clickedLiveData.postValue(false)
                                     freeCourseAddSucessfullyLiveData.postValue(0)
                                 })
                             isAlertDialogShown.postValue(true)
                         }
 
                     }
-                }
-                )
+                })
+
+                clickedLiveData.observe(this@CartFragment, Observer {
+                    it?.let {
+                        if (it){
+                            layoutBinding.btnProceedPay.isClickable = false
+                        }else{
+                            layoutBinding.btnProceedPay.isClickable = true
+                        }
+                    }
+                })
             }
         }
     }
@@ -74,5 +86,10 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mContext = context
+    }
+
+    override fun onResume() {
+        viewModel.clickedLiveData.postValue(false)
+        super.onResume()
     }
 }
