@@ -375,15 +375,13 @@ class CoursesViewModel(var mContext: Context) : BaseViewModel(mContext = mContex
     }
 
     //fun isUserActive(): Boolean = registrationRepository.isUserActive()
-    val contentOnclickListener: (view: View, obj: Any) -> Unit = { view, obj ->
+    val onCoursewareclickListener: (view: View, obj: Any) -> Unit = { view, obj ->
         obj as CoursesModel
-        Toast.makeText(mContext,"Demo Done",Toast.LENGTH_SHORT).show()
-        AppLog.infoLog("Pibm Demo 1")
+        AppLog.infoLog("Pibm onCoursewareclickListener ")
     }
 
-    val attendanceOnclickListener: (view: View, obj: Any) -> Unit = { view, obj ->
+    val onPerformanceclickListener: (view: View, obj: Any) -> Unit = { view, obj ->
         obj as CoursesModel
-        Toast.makeText(mContext,"Demo Done 2",Toast.LENGTH_SHORT).show()
-        AppLog.infoLog("Pibm Demo 2")
+        AppLog.infoLog("Pibm onPerformanceclickListener")
     }
 }

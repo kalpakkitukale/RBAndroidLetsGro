@@ -49,7 +49,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorPrimary"
+                android:background="@color/colorCardBackground"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/imageView">
 
@@ -63,6 +63,8 @@
                     android:layout_marginEnd="@dimen/dp_5"
                     android:text="@{coursesModel.courseName}"
                     android:textSize="@dimen/sp_18"
+                    android:singleLine="true"
+                    android:ellipsize="end"
                     app:layout_constraintEnd_toStartOf="@id/tvcourseCost"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -90,7 +92,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:barrierDirection="bottom"
-                    app:constraint_referenced_ids="tvcourseCost,tvTopicDescription"
+                    app:constraint_referenced_ids="tvcourseCost,tvTopicDescription,ivStatus"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tvcourseCost" />
@@ -104,7 +106,7 @@
                     android:padding="@dimen/dp_3"
                     android:visibility="visible"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/tvTopicDescription"
+                   app:layout_constraintTop_toBottomOf="@id/tvcourseCost"
                     app:srcCompat="@drawable/ic_live" />
 
                 <!--As Discuss with mansi hide share cource icon for release-->
@@ -251,10 +253,10 @@
                     android:text="@string/cart"
                     android:textSize="@dimen/sp_9"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/tvLabeCart1"
                     app:layout_constraintStart_toEndOf="@id/tvLabePerformance"
                     app:layout_constraintTop_toBottomOf="@id/ivCart" />
-
+                <!--   app:layout_constraintEnd_toEndOf="parent"-->
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvLabeCart1"
@@ -266,9 +268,10 @@
                     android:gravity="center"
                     android:text="@string/cart"
                     android:textSize="@dimen/sp_9"
+                    android:visibility="invisible"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/tvLabePerformance"
+                    app:layout_constraintEnd_toStartOf="@id/tvLabeCart2"
+                    app:layout_constraintStart_toEndOf="@id/tvLabeCart"
                     app:layout_constraintTop_toBottomOf="@id/ivCart" />
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -278,13 +281,13 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_2"
                     android:layout_marginBottom="@dimen/dp_5"
-
                     android:gravity="center"
                     android:text="@string/cart"
                     android:textSize="@dimen/sp_9"
+                    android:visibility="invisible"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/tvLabePerformance"
+                    app:layout_constraintStart_toEndOf="@id/tvLabeCart1"
                     app:layout_constraintTop_toBottomOf="@id/ivCart" />
 
                 <androidx.recyclerview.widget.RecyclerView

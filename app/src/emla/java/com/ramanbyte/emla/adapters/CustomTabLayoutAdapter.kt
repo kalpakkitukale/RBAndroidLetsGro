@@ -1,11 +1,13 @@
 package com.ramanbyte.emla.adapters
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ramanbyte.R
 import com.ramanbyte.databinding.CustomTabRecyclerviewLayoutBinding
 import com.ramanbyte.emla.models.CustomTabModel
+import com.ramanbyte.utilities.AppLog
 
 /**
  * @author Akash Inkar <akash.1@ramanbyte.com>

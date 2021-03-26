@@ -69,7 +69,8 @@ class CoursesAdapter(private val displayMetrics: DisplayMetrics, var myCourse: I
                 holder.cardCourseBinding.tvLabeCart.visibility = View.INVISIBLE
                 holder.cardCourseBinding.tvLabePerformance.visibility = View.INVISIBLE
             } else {
-                if (coursesModel.isInCart /*|| coursesModel.courseFee==0.0F*/ || coursesModel.isPurchase) {
+                // /*|| coursesModel.courseFee==0.0F*/ course are mandatory as discuss with Manish Sir
+                if (coursesModel.isInCart  || coursesModel.isPurchase) {
                     holder.cardCourseBinding.ivCart.visibility = View.INVISIBLE
                     holder.cardCourseBinding.tvLabeCart.visibility = View.INVISIBLE
                 } else {
@@ -112,8 +113,8 @@ class CoursesAdapter(private val displayMetrics: DisplayMetrics, var myCourse: I
                 viewPosition = adapterPosition
             }
         }
-
-       /* fun setData(coursesModel: CoursesModel) {
+// bind data to custom tab layout recyclerview
+       fun setData(coursesModel: CoursesModel) {
             cardCourseBinding.apply {
                 if (coursesModel.courseImage == null || coursesModel.courseImage?.isEmpty() == true) {
                     when {
@@ -130,14 +131,14 @@ class CoursesAdapter(private val displayMetrics: DisplayMetrics, var myCourse: I
 
                     AppLog.infoLog("CourseListAdapter coursePosition $coursePosition")
 
-                    *//* R.array.course_images.resDrawableArray(ivCourseImage.context, coursePosition) {
+                    /* R.array.course_images.resDrawableArray(ivCourseImage.context, coursePosition) {
                          GlideApp.with(ivCourseImage.context).load(it).into(ivCourseImage)
-                     }*//*
+                     }*/
                 } else {
                     //loading image
-                    *//*  val imgUrl = ivCourseImage.context.let {
+                    /*  val imgUrl = ivCourseImage.context.let {
                           AppS3Client.createInstance(it).getFileAccessUrl(model.imageUrl!!)
-                      }*//*
+                      }*/
                     //   StaticMethodUtilitiesKtx.loadImage(imgUrl!!, ivCourseImage)
                 }
 
@@ -146,7 +147,7 @@ class CoursesAdapter(private val displayMetrics: DisplayMetrics, var myCourse: I
                 rvCustomTabList.adapter = CustomTabLayoutAdapter(getCustomTabModuleList(), coursesModel)
 
             }
-        }*/
+        }
     }
 
 
@@ -175,13 +176,57 @@ class CoursesAdapter(private val displayMetrics: DisplayMetrics, var myCourse: I
         customTabModelList.add(CustomTabModel().apply {
             icon = BindingUtils.drawable(R.drawable.ic_course_dummy)
             title = BindingUtils.string(R.string.courseware)
-            clickListener = viewModel?.contentOnclickListener!!
+            clickListener = viewModel?.onCoursewareclickListener!!
         })
 
         customTabModelList.add(CustomTabModel().apply {
             icon = BindingUtils.drawable(R.drawable.ic_all_the_best)
             title = BindingUtils.string(R.string.performance)
-            clickListener = viewModel?.attendanceOnclickListener!!
+            clickListener = viewModel?.onPerformanceclickListener!!
+        })
+
+
+
+        customTabModelList.add(CustomTabModel().apply {
+            icon = BindingUtils.drawable(R.drawable.ic_course_dummy)
+            title = BindingUtils.string(R.string.courseware)
+            clickListener = viewModel?.onCoursewareclickListener!!
+        })
+
+        customTabModelList.add(CustomTabModel().apply {
+            icon = BindingUtils.drawable(R.drawable.ic_all_the_best)
+            title = BindingUtils.string(R.string.performance)
+            clickListener = viewModel?.onPerformanceclickListener!!
+        })
+
+        customTabModelList.add(CustomTabModel().apply {
+            icon = BindingUtils.drawable(R.drawable.ic_course_dummy)
+            title = BindingUtils.string(R.string.courseware)
+            clickListener = viewModel?.onCoursewareclickListener!!
+        })
+
+        customTabModelList.add(CustomTabModel().apply {
+            icon = BindingUtils.drawable(R.drawable.ic_all_the_best)
+            title = BindingUtils.string(R.string.performance)
+            clickListener = viewModel?.onPerformanceclickListener!!
+        })
+
+        customTabModelList.add(CustomTabModel().apply {
+            icon = BindingUtils.drawable(R.drawable.ic_course_dummy)
+            title = BindingUtils.string(R.string.courseware)
+            clickListener = viewModel?.onCoursewareclickListener!!
+        })
+
+        customTabModelList.add(CustomTabModel().apply {
+            icon = BindingUtils.drawable(R.drawable.ic_all_the_best)
+            title = BindingUtils.string(R.string.performance)
+            clickListener = viewModel?.onPerformanceclickListener!!
+        })
+
+        customTabModelList.add(CustomTabModel().apply {
+            icon = BindingUtils.drawable(R.drawable.ic_course_dummy)
+            title = BindingUtils.string(R.string.courseware)
+            clickListener = viewModel?.onCoursewareclickListener!!
         })
         return customTabModelList
     }
