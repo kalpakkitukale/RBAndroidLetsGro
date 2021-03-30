@@ -32,4 +32,5 @@
     <color name="colorCardBackground">#ffffff</color>
     <color name="colorTransparent">#00000000</color>
     <color name="colorImageViewBackground">#E8E6F1</color>
+    <color name="colorMenuItemColor">#121212</color>
 </resources>
