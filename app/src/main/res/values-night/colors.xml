@@ -15,6 +15,7 @@
     <color name="colorNormalText">#fafafa</color>
     <color name="colorSubTitle">#fafafa</color>
     <color name="colorDescription">#fafafa</color>
+    <color name="colorCustomMenuText">#1b1b1b</color>
     <color name="colorNavigationTextView">#fafafa</color>
     <color name="colorLabel">#A2A0A0</color>
     <color name="colorValueOfLabel">#C7C6C6</color>
@@ -30,4 +31,5 @@
     <color name="colorCardBackground">#333333</color>
     <color name="colorTransparent">#00000000</color>
     <color name="colorImageViewBackground">#444444</color>
+    <color name="colorMenuItemColor">#ffffff</color>
 </resources>

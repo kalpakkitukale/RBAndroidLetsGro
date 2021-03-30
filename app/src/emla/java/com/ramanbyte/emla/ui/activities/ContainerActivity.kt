@@ -295,20 +295,20 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding, ContainerViewMo
             headerList.add(menuPojo)
 
             menuPojo = MenuPojo(
-                NAV_MY_CART,
-                R.drawable.ic_my_cart,
-                BindingUtils.string(R.string.my_cart),
-                false,
-                0
+                    NAV_MY_CART,
+                    R.drawable.ic_cart_border,
+                    BindingUtils.string(R.string.my_cart),
+                    false,
+                    0
             )
             headerList.add(menuPojo)
 
             menuPojo = MenuPojo(
-                NAV_TRANSACTION_HISTORY,
-                R.drawable.ic_my_cart,
-                BindingUtils.string(R.string.transaction_history),
-                false,
-                0
+                    NAV_TRANSACTION_HISTORY,
+                    R.drawable.ic_cart_border,
+                    BindingUtils.string(R.string.transaction_history),
+                    false,
+                    0
             )
             headerList.add(menuPojo)
 

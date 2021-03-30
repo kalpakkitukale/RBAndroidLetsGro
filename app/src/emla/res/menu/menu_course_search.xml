@@ -19,7 +19,6 @@
         android:id="@+id/actionCart"
         android:title="@string/cart"
         android:actionLayout="@layout/layout_for_course_menu"
-        android:icon="@drawable/ic_my_cart"
         app:showAsAction="ifRoom" />
 
 </menu>
