@@ -6,7 +6,7 @@
     android:layout_height="?attr/actionBarSize">
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/actionCart2"
+        android:id="@+id/actionCart"
         style="@style/ImageViewForCustomToolBarMenu"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

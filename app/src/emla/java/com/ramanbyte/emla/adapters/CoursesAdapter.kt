@@ -17,7 +17,6 @@ import com.ramanbyte.databinding.CardCourseBinding
 import com.ramanbyte.emla.models.CoursesModel
 import com.ramanbyte.emla.models.CustomTabModel
 import com.ramanbyte.emla.view_model.CoursesViewModel
-import com.ramanbyte.utilities.AppLog
 import com.ramanbyte.utilities.BindingUtils
 import com.ramanbyte.utilities.KEY_BLANK
 import com.ramanbyte.utilities.StaticMethodUtilitiesKtx.getS3DynamicURL
@@ -39,25 +38,17 @@ class CoursesAdapter(private val displayMetrics: DisplayMetrics, var myCourse: I
         holder.setData(coursesModel, position)
         holder.bind(coursesModel.apply {
 
-            if ((coursesModel.preAssessmentStatus.equals(
-                    "true",
-                    true
-                )) && (coursesModel.summativeAssessmentStatus.equals("true", true))
-            ) {
+            if ((coursesModel.preAssessmentStatus.equals("true", true)) && (coursesModel.summativeAssessmentStatus.equals("true", true))) {
                 holder.cardCourseBinding.ivStatus.visibility = View.VISIBLE
+                holder.cardCourseBinding.tvcourseCost.visibility = View.GONE
                 holder.cardCourseBinding.ivStatus.setImageDrawable(BindingUtils.drawable(R.drawable.ic_tick_circle))
-            } else if (coursesModel.preAssessmentStatus.equals(
-                    "true",
-                    true
-                ) && (coursesModel.summativeAssessmentStatus.equals(
-                    "false",
-                    true
-                ) || coursesModel.summativeAssessmentStatus.isNullOrEmpty())
-            ) {
+            } else if (coursesModel.preAssessmentStatus.equals("true", true) && (coursesModel.summativeAssessmentStatus.equals("false", true) || coursesModel.summativeAssessmentStatus.isNullOrEmpty())) {
                 holder.cardCourseBinding.ivStatus.visibility = View.VISIBLE
+                holder.cardCourseBinding.tvcourseCost.visibility = View.GONE
                 holder.cardCourseBinding.ivStatus.setImageDrawable(BindingUtils.drawable(R.drawable.ic_success))
             } else {
                 holder.cardCourseBinding.ivStatus.visibility = View.GONE
+                holder.cardCourseBinding.tvcourseCost.visibility = View.VISIBLE
             }
             courseImageUrl = getS3DynamicURL(courseImage ?: KEY_BLANK, context!!)
 //                AppS3Client.createInstance(context!!).getFileAccessUrl(courseImage ?: KEY_BLANK)
@@ -97,7 +88,7 @@ class CoursesAdapter(private val displayMetrics: DisplayMetrics, var myCourse: I
             cardCourseBinding.apply {
                 rvCustomTabList.layoutManager =
                     LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
-                adapter = CustomTabLayoutAdapter(customList, coursesModel, position, viewModel)
+                adapter = CustomTabLayoutAdapter(customList, coursesModel, coursesModel.courseId, viewModel)
                 rvCustomTabList.adapter = adapter
             }
         }

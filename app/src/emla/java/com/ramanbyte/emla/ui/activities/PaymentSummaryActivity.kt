@@ -606,7 +606,7 @@ class PaymentSummaryActivity : BaseActivity<ActivityPaymentSummaryBinding, Payme
             transactionStatus = KEY_CANCEL_TRANSACTION_STATUS
             viewModel.tranStatusLiveData.postValue(KEY_CANCEL_TRANSACTION_STATUS)
             paymentGateway = keyPaymentGatewayPayTmPay
-            this.transId ="0"
+
         }
         viewModel?.addTransaction(
             initiateTransaction = false,

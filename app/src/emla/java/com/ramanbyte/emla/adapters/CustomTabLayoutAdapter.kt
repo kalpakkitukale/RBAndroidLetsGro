@@ -18,7 +18,7 @@ class CustomTabLayoutAdapter(
     var position: Int?,
     var viewModel: CoursesViewModel?
 ) : RecyclerView.Adapter<CustomTabLayoutAdapter.CustomTabLayoutViewHolder>() {
-
+var positions= position
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomTabLayoutViewHolder {
         val rootView = LayoutInflater.from(parent.context)
             .inflate(R.layout.custom_tab_recyclerview_layout, parent, false)
@@ -33,16 +33,14 @@ class CustomTabLayoutAdapter(
         val customTabModel = customTabModelList[position]
         holder.bind(customTabModelList[position])
         holder.binding.apply {
-         /*  root.setOnClickListener {
-                customTabModel.clickListener.invoke(it, obj)
-               // removeFromList(position)
-            }*/
-
-            tablayout.setOnClickListener {
+          root.setOnClickListener {
+                customTabModel.clickListener.invoke(it, obj,positions!!)
+            }
+            /*tablayout.setOnClickListener {
                 customTabModelList.removeAt(position)
                 customTabModel.clickListener.invoke(it, obj,position)
                 notifyItemRemoved(position)
-            }
+            }*/
         }
     }
     inner class CustomTabLayoutViewHolder(var binding: CustomTabRecyclerviewLayoutBinding) :

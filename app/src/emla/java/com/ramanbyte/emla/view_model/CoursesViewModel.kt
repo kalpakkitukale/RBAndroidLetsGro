@@ -153,9 +153,9 @@ class CoursesViewModel(var mContext: Context) : BaseViewModel(mContext = mContex
                     cartRequestModel = CartRequestModel(),
                     courseId = coursesModel.courseId
                 )
-               /* runOnUiThread(Runnable {
+                runOnUiThread(Runnable {
                     view.layoutCart.visibility = View.INVISIBLE
-                })*/
+                })
                 isLoaderShowingLiveData.postValue(false)
             } catch (e: ApiException) {
                 isLoaderShowingLiveData.postValue(false)
