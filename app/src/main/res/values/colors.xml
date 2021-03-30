@@ -17,6 +17,7 @@
     <color name="colorNormalText">#343434</color>
     <color name="colorSubTitle">#343434</color>
     <color name="colorDescription">#1b1b1b</color>
+    <color name="colorCustomMenuText">#1b1b1b</color>
     <color name="colorNavigationTextView">#1b1b1b</color>
     <color name="colorLabel">#363636</color>
     <color name="colorValueOfLabel">#1b1b1b</color>

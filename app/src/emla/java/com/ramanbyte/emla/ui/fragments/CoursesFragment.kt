@@ -11,10 +11,10 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
-import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.SearchView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -136,7 +136,7 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
     private var mSearchView: SearchView? = null
     var searchItem: MenuItem? = null
     var countTextView: TextView? = null
-    var layout:RelativeLayout? = null
+    var layout: ConstraintLayout? = null
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -210,10 +210,10 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
         try {
             val item = menu.findItem(R.id.actionCart)
             item.setActionView(R.layout.layout_for_course_menu)
-            val notifCount =item.actionView as RelativeLayout
+            val notifCount = item.actionView as ConstraintLayout
             countTextView = notifCount.findViewById<View>(R.id.actionbar_notifcation_textview) as TextView
             countTextView?.visibility = View.GONE
-             layout = notifCount.findViewById<RelativeLayout>(R.id.layoutParent) as RelativeLayout
+            layout = notifCount.findViewById(R.id.layoutParent) as ConstraintLayout
             layout?.setOnClickListener {
                 findNavController().navigate(R.id.action_coursesFragment_to_cartFragment)
             }
