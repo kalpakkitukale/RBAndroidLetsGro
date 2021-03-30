@@ -69,14 +69,7 @@
                     android:id="@+id/cardCourseSyllabus"
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
-                    android:layout_marginTop="@dimen/dp_10"
-                    android:layout_marginStart="@dimen/dp_8"
-                    android:layout_marginEnd="@dimen/dp_8"
-                    app:cardCornerRadius="@dimen/dp_5"
-                    app:cardBackgroundColor="@color/colorCardBackground"
-                    app:cardUseCompatPadding="true"
-                    app:cardElevation="@dimen/dp_2"
-                    app:contentPadding="@dimen/dp_8"
+                    style="@style/customCard"
                     app:layout_constraintEnd_toEndOf="@+id/cardCourseLayout"
                     app:layout_constraintStart_toStartOf="@+id/cardCourseLayout"
                     app:layout_constraintTop_toBottomOf="@+id/cardCourseLayout">
@@ -87,13 +80,11 @@
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/headerCourseSyllabus"
-                            style="@style/TextViewMediumNavyBlueOnLightNWhiteOnDark"
+                            style="@style/TextViewTitle"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_margin="@dimen/dp_5"
                             android:onClick="@{coursesDetailViewModel::onHeaderClick}"
                             android:text="@string/course_syllabus"
-                            android:textSize="@dimen/sp_16"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -102,11 +93,10 @@
                             android:id="@+id/imgViewCourseSyllabus"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="@dimen/dp_8"
-                            android:src="@drawable/ic_down_arrow"
                             app:layout_constraintBottom_toBottomOf="@+id/headerCourseSyllabus"
-                            app:layout_constraintRight_toRightOf="parent"
-                            app:layout_constraintTop_toTopOf="@+id/headerCourseSyllabus" />
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/headerCourseSyllabus"
+                            app:srcCompat="@drawable/ic_down_arrow" />
 
                         <com.ramanbyte.emla.view.CustomWebView
                             android:id="@+id/rvCourseSyllabus"
@@ -131,14 +121,7 @@
                     android:id="@+id/cardAssessmentInstruction"
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
-                    android:layout_marginTop="@dimen/dp_10"
-                    android:layout_marginStart="@dimen/dp_8"
-                    android:layout_marginEnd="@dimen/dp_8"
-                    app:cardCornerRadius="@dimen/dp_5"
-                    app:cardBackgroundColor="@color/colorCardBackground"
-                    app:cardUseCompatPadding="true"
-                    app:cardElevation="@dimen/dp_2"
-                    app:contentPadding="@dimen/dp_8"
+                    style="@style/customCard"
                     app:layout_constraintEnd_toEndOf="@+id/cardCourseLayout"
                     app:layout_constraintStart_toStartOf="@+id/cardCourseLayout"
                     app:layout_constraintTop_toBottomOf="@+id/cardCourseSyllabus">
@@ -149,13 +132,11 @@
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/headerAssessmentInstruction"
-                            style="@style/TextViewMediumNavyBlueOnLightNWhiteOnDark"
+                            style="@style/TextViewTitle"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_margin="@dimen/dp_5"
                             android:onClick="@{coursesDetailViewModel::onHeaderClick}"
                             android:text="@string/assessment_instruction"
-                            android:textSize="@dimen/sp_16"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -165,11 +146,10 @@
                             android:id="@+id/imgViewAssessmentInstruction"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="@dimen/dp_8"
-                            android:src="@drawable/ic_down_arrow"
                             app:layout_constraintBottom_toBottomOf="@+id/headerAssessmentInstruction"
-                            app:layout_constraintRight_toRightOf="parent"
-                            app:layout_constraintTop_toTopOf="@+id/headerAssessmentInstruction" />
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/headerAssessmentInstruction"
+                            app:srcCompat="@drawable/ic_down_arrow" />
 
                         <com.ramanbyte.emla.view.CustomWebView
                             android:id="@+id/webViewAssessmentInstruction"
@@ -190,14 +170,7 @@
                     android:id="@+id/cardWhatIWillLearn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_10"
-                    android:layout_marginStart="@dimen/dp_8"
-                    android:layout_marginEnd="@dimen/dp_8"
-                    app:cardBackgroundColor="@color/colorCardBackground"
-                    app:cardCornerRadius="@dimen/dp_5"
-                    app:cardElevation="@dimen/dp_2"
-                    app:cardUseCompatPadding="true"
-                    app:contentPadding="@dimen/dp_8"
+                    style="@style/customCard"
                     app:layout_constraintEnd_toEndOf="@+id/cardCourseLayout"
                     app:layout_constraintStart_toStartOf="@+id/cardCourseLayout"
                     app:layout_constraintTop_toBottomOf="@+id/cardAssessmentInstruction">
@@ -208,13 +181,11 @@
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/headerWhatIWillLearn"
-                            style="@style/TextViewMediumNavyBlueOnLightNWhiteOnDark"
+                            style="@style/TextViewTitle"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_margin="@dimen/dp_5"
                             android:onClick="@{coursesDetailViewModel::onHeaderClick}"
                             android:text="@string/what_i_ll_learn"
-                            android:textSize="@dimen/sp_16"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -223,11 +194,10 @@
                             android:id="@+id/imgViewWhatIWillLearn"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="@dimen/dp_8"
-                            android:src="@drawable/ic_down_arrow"
                             app:layout_constraintBottom_toBottomOf="@+id/headerWhatIWillLearn"
-                            app:layout_constraintRight_toRightOf="parent"
-                            app:layout_constraintTop_toTopOf="@+id/headerWhatIWillLearn" />
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/headerWhatIWillLearn"
+                            app:srcCompat="@drawable/ic_down_arrow" />
 
                         <com.ramanbyte.emla.view.CustomWebView
                             android:id="@+id/webViewWhatIWillLearn"
@@ -248,14 +218,7 @@
                     android:id="@+id/cardHowToUse"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_10"
-                    android:layout_marginStart="@dimen/dp_8"
-                    android:layout_marginEnd="@dimen/dp_8"
-                    app:cardBackgroundColor="@color/colorCardBackground"
-                    app:cardCornerRadius="@dimen/dp_5"
-                    app:cardElevation="@dimen/dp_2"
-                    app:cardUseCompatPadding="true"
-                    app:contentPadding="@dimen/dp_8"
+                    style="@style/customCard"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/cardCourseLayout"
                     app:layout_constraintStart_toStartOf="@+id/cardCourseLayout"
@@ -267,16 +230,12 @@
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/headerHowToUse"
-                            style="@style/TextViewMediumNavyBlueOnLightNWhiteOnDark"
+                            style="@style/TextViewTitle"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_margin="@dimen/dp_5"
-                            android:layout_marginTop="4dp"
                             android:onClick="@{coursesDetailViewModel::onHeaderClick}"
                             android:text="@string/how_to_use"
-                            android:textSize="@dimen/sp_16"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.09"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -284,11 +243,10 @@
                             android:id="@+id/imgViewHowToUse"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="@dimen/dp_8"
-                            android:src="@drawable/ic_down_arrow"
                             app:layout_constraintBottom_toBottomOf="@+id/headerHowToUse"
-                            app:layout_constraintRight_toRightOf="parent"
-                            app:layout_constraintTop_toTopOf="@+id/headerHowToUse" />
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/headerHowToUse"
+                            app:srcCompat="@drawable/ic_down_arrow" />
 
                         <com.ramanbyte.emla.view.CustomWebView
                             android:id="@+id/webViewHowToUse"
