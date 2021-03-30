@@ -75,6 +75,7 @@
                     app:layout_constraintTop_toTopOf="@+id/lblCourseName" />
 
                 <LinearLayout
+                    android:visibility="visible"
                     android:id="@+id/layoutSyllabus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -104,6 +105,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:visibility="visible"
                     android:id="@+id/layoutTopics"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -131,6 +133,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:visibility="visible"
                     android:id="@+id/layoutPerformance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -158,6 +161,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:visibility="visible"
                     android:id="@+id/layoutCart"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

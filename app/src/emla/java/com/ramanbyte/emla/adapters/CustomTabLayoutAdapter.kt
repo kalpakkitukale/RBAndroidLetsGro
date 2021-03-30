@@ -1,33 +1,47 @@
 package com.ramanbyte.emla.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ramanbyte.R
 import com.ramanbyte.databinding.CustomTabRecyclerviewLayoutBinding
 import com.ramanbyte.emla.models.CustomTabModel
-import com.ramanbyte.utilities.AppLog
+import com.ramanbyte.emla.view_model.CoursesViewModel
 
 /**
  * @author Akash Inkar <akash.1@ramanbyte.com>
  * @since 25/3/21
  */
 class CustomTabLayoutAdapter(
-    private val customTabModelList: List<CustomTabModel>,
-    private val obj: Any
+    private val customTabModelList: ArrayList<CustomTabModel>,
+    private val obj: Any,
+    var position: Int?,
+    var viewModel: CoursesViewModel?
 ) : RecyclerView.Adapter<CustomTabLayoutAdapter.CustomTabLayoutViewHolder>() {
-
+var positions= position
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomTabLayoutViewHolder {
         val rootView = LayoutInflater.from(parent.context)
             .inflate(R.layout.custom_tab_recyclerview_layout, parent, false)
         return CustomTabLayoutViewHolder(CustomTabRecyclerviewLayoutBinding.bind(rootView))
     }
+
     override fun getItemCount(): Int {
         return customTabModelList.size
     }
+
     override fun onBindViewHolder(holder: CustomTabLayoutViewHolder, position: Int) {
+        val customTabModel = customTabModelList[position]
         holder.bind(customTabModelList[position])
+        holder.binding.apply {
+          root.setOnClickListener {
+                customTabModel.clickListener.invoke(it, obj,positions!!)
+            }
+            /*tablayout.setOnClickListener {
+                customTabModelList.removeAt(position)
+                customTabModel.clickListener.invoke(it, obj,position)
+                notifyItemRemoved(position)
+            }*/
+        }
     }
     inner class CustomTabLayoutViewHolder(var binding: CustomTabRecyclerviewLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -37,5 +51,18 @@ class CustomTabLayoutAdapter(
                 ivTabIcon.setImageDrawable(customTabModel.icon)
             }
         }
+    }
+
+    // remove the list for arrayList and refresh adapter
+    fun removeFromList(positionclick: Int) {
+        try {
+            notifyItemRemoved(position!!)
+            notifyDataSetChanged()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        } catch (e: ConcurrentModificationException) {
+            e.printStackTrace()
+        }
+
     }
 }

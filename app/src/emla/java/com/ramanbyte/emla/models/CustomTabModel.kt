@@ -8,7 +8,8 @@ import android.view.View
  * @since 25/3/21
  */
 class CustomTabModel {
-    var icon:Drawable? = null
-    var title:String = ""
-    var clickListener: (view:View,obj:Any) -> Unit? = {view: View, obj: Any ->  }
+    var id: Int? = null
+    var icon: Drawable? = null
+    var title: String = ""
+    var clickListener: (view: View, obj: Any,position : Int) -> Unit? = { view: View, obj: Any,position : Int -> }
 }

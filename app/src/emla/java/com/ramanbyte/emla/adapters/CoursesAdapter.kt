@@ -6,6 +6,8 @@ import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Observer
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,7 +17,6 @@ import com.ramanbyte.databinding.CardCourseBinding
 import com.ramanbyte.emla.models.CoursesModel
 import com.ramanbyte.emla.models.CustomTabModel
 import com.ramanbyte.emla.view_model.CoursesViewModel
-import com.ramanbyte.utilities.AppLog
 import com.ramanbyte.utilities.BindingUtils
 import com.ramanbyte.utilities.KEY_BLANK
 import com.ramanbyte.utilities.StaticMethodUtilitiesKtx.getS3DynamicURL
@@ -23,12 +24,10 @@ import com.ramanbyte.utilities.StaticMethodUtilitiesKtx.getS3DynamicURL
 
 class CoursesAdapter(private val displayMetrics: DisplayMetrics, var myCourse: Int) :
     PagedListAdapter<CoursesModel, CoursesAdapter.CoursesHolder>(DIFF_CALLBACK) {
-
     var viewModel: CoursesViewModel? = null
     var context: Context? = null
-    private val courseImagesArray = BindingUtils.integerArray(R.array.course_images)
-    private var coursePosition = -1
-
+    var lifecycleOwner: LifecycleOwner? = null
+    var adapter: CustomTabLayoutAdapter? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CoursesHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.card_course, parent, false)
         return CoursesHolder(view)
@@ -36,108 +35,66 @@ class CoursesAdapter(private val displayMetrics: DisplayMetrics, var myCourse: I
 
     override fun onBindViewHolder(holder: CoursesHolder, position: Int) {
         val coursesModel: CoursesModel = getItem(position)!!
-        //holder.setData(coursesModel)
-      holder.bind(coursesModel.apply {
+        holder.setData(coursesModel, position)
+        holder.bind(coursesModel.apply {
 
-          if ((coursesModel.preAssessmentStatus.equals(
-                  "true",
-                  true
-              )) && (coursesModel.summativeAssessmentStatus.equals("true", true))
-          ) {
-              holder.cardCourseBinding.ivStatus.visibility = View.VISIBLE
-              holder.cardCourseBinding.ivStatus.setImageDrawable(BindingUtils.drawable(R.drawable.ic_tick_circle))
-          } else if (coursesModel.preAssessmentStatus.equals(
-                  "true",
-                  true
-              ) && (coursesModel.summativeAssessmentStatus.equals(
-                  "false",
-                  true
-              ) || coursesModel.summativeAssessmentStatus.isNullOrEmpty())
-          ) {
-              holder.cardCourseBinding.ivStatus.visibility = View.VISIBLE
-              holder.cardCourseBinding.ivStatus.setImageDrawable(BindingUtils.drawable(R.drawable.ic_success))
-          } else {
-              holder.cardCourseBinding.ivStatus.visibility = View.GONE
-          }
-
-          courseImageUrl = getS3DynamicURL(courseImage ?: KEY_BLANK, context!!)
+            if ((coursesModel.preAssessmentStatus.equals("true", true)) && (coursesModel.summativeAssessmentStatus.equals("true", true))) {
+                holder.cardCourseBinding.ivStatus.visibility = View.VISIBLE
+                holder.cardCourseBinding.tvcourseCost.visibility = View.GONE
+                holder.cardCourseBinding.ivStatus.setImageDrawable(BindingUtils.drawable(R.drawable.ic_tick_circle))
+            } else if (coursesModel.preAssessmentStatus.equals("true", true) && (coursesModel.summativeAssessmentStatus.equals("false", true) || coursesModel.summativeAssessmentStatus.isNullOrEmpty())) {
+                holder.cardCourseBinding.ivStatus.visibility = View.VISIBLE
+                holder.cardCourseBinding.tvcourseCost.visibility = View.GONE
+                holder.cardCourseBinding.ivStatus.setImageDrawable(BindingUtils.drawable(R.drawable.ic_success))
+            } else {
+                holder.cardCourseBinding.ivStatus.visibility = View.GONE
+                holder.cardCourseBinding.tvcourseCost.visibility = View.VISIBLE
+            }
+            courseImageUrl = getS3DynamicURL(courseImage ?: KEY_BLANK, context!!)
 //                AppS3Client.createInstance(context!!).getFileAccessUrl(courseImage ?: KEY_BLANK)
-
-          if (myCourse == 1) {
-              holder.cardCourseBinding.layoutCart.visibility = View.INVISIBLE
-              holder.cardCourseBinding.layoutPerformance.visibility = View.INVISIBLE
-          } else {
-              // /*|| coursesModel.courseFee==0.0F*/ course are mandatory as discuss with Manish Sir
-              if (coursesModel.isInCart || coursesModel.isPurchase) {
-                  holder.cardCourseBinding.layoutCart.visibility = View.INVISIBLE
-              } else {
-                  holder.cardCourseBinding.layoutCart.visibility = View.VISIBLE
-              }
-          }
-
-          courseImageUrl = getS3DynamicURL(courseImage ?: KEY_BLANK, context!!)
+            if (myCourse == 1) {
+                holder.cardCourseBinding.layoutCart.visibility = View.INVISIBLE
+                holder.cardCourseBinding.layoutPerformance.visibility = View.INVISIBLE
+            } else {
+                // /*|| coursesModel.courseFee==0.0F*/ course are mandatory as discuss with Manish Sir
+                if (coursesModel.isInCart || coursesModel.isPurchase) {
+                    holder.cardCourseBinding.layoutCart.visibility = View.INVISIBLE
+                } else {
+                    holder.cardCourseBinding.layoutCart.visibility = View.VISIBLE
+                }
+            }
+            courseImageUrl = getS3DynamicURL(courseImage ?: KEY_BLANK, context!!)
 //                AppS3Client.createInstance(context!!).getFileAccessUrl(courseImage ?: KEY_BLANK)
-      })
+        })
     }
 
     inner class CoursesHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
         val cardCourseBinding: CardCourseBinding = CardCourseBinding.bind(itemView)
-
         init {
             cardCourseBinding.coursesViewModel = viewModel
-
-           /* val layoutParams = cardCourseBinding.root.layoutParams
-
-            val width = displayMetrics.widthPixels - (BindingUtils.dimen(R.dimen.dp_5) * 2)
-
-            layoutParams.height = (width * 0.6).toInt()
-
-            cardCourseBinding.root.layoutParams = layoutParams
-
-           cardCourseBinding.imageView.layoutParams.apply {
-
-                height = (width * 0.6).toInt()
-            }*/
         }
 
         fun bind(coursesModel: CoursesModel) {
-
             cardCourseBinding.apply {
                 coursesViewModel = viewModel
                 this.coursesModel = coursesModel
                 viewPosition = adapterPosition
             }
         }
-// bind data to custom tab layout recyclerview
-       fun setData(coursesModel: CoursesModel) {
+
+        // bind data to custom tab layout recyclerview
+        fun setData(coursesModel: CoursesModel, position: Int) {
+            val customList = getCustomTabModuleList(coursesModel)
             cardCourseBinding.apply {
-                if (coursesModel.courseImage == null || coursesModel.courseImage?.isEmpty() == true) {
-                    when {
-                        adapterPosition < courseImagesArray.size -> {//size 2 adapterPosition=2
-                            coursePosition = adapterPosition
-                        }
-                        coursePosition < courseImagesArray.size - 1 -> {//coursePosition=1<1
-                            coursePosition++
-                        }
-                        else -> {
-                            coursePosition = 0
-                        }
-                    }
-
-                    AppLog.infoLog("CourseListAdapter coursePosition $coursePosition")
-                } else {
-
-                }
-
                 rvCustomTabList.layoutManager =
-                    LinearLayoutManager(rvCustomTabList.context, RecyclerView.HORIZONTAL, false)
-                rvCustomTabList.adapter = CustomTabLayoutAdapter(getCustomTabModuleList(), coursesModel)
-
+                    LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+                adapter = CustomTabLayoutAdapter(customList, coursesModel, coursesModel.courseId, viewModel)
+                rvCustomTabList.adapter = adapter
             }
         }
-    }
 
+
+    }
 
     companion object {
         private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<CoursesModel>() {
@@ -157,65 +114,35 @@ class CoursesAdapter(private val displayMetrics: DisplayMetrics, var myCourse: I
             }
         }
     }
-
-    fun getCustomTabModuleList(): ArrayList<CustomTabModel> {
+// binding the custom data to the custom recyclerview.
+    fun getCustomTabModuleList(coursesModel: CoursesModel): ArrayList<CustomTabModel> {
         val customTabModelList = ArrayList<CustomTabModel>()
-
         customTabModelList.add(CustomTabModel().apply {
-            icon = BindingUtils.drawable(R.drawable.ic_course_dummy)
+            id = 1
+            icon = BindingUtils.drawable(R.drawable.ic_course_content_new)
             title = BindingUtils.string(R.string.courseware)
             clickListener = viewModel?.onCoursewareclickListener!!
         })
-
         customTabModelList.add(CustomTabModel().apply {
-            icon = BindingUtils.drawable(R.drawable.ic_all_the_best)
-            title = BindingUtils.string(R.string.performance)
+            id = 2
+            icon = BindingUtils.drawable(R.drawable.ic_topic_list)
+            title = BindingUtils.string(R.string.topic_list)
             clickListener = viewModel?.onPerformanceclickListener!!
         })
-
-
-
         customTabModelList.add(CustomTabModel().apply {
-            icon = BindingUtils.drawable(R.drawable.ic_course_dummy)
-            title = BindingUtils.string(R.string.courseware)
-            clickListener = viewModel?.onCoursewareclickListener!!
-        })
-
-        customTabModelList.add(CustomTabModel().apply {
-            icon = BindingUtils.drawable(R.drawable.ic_all_the_best)
+            id = 3
+            icon = BindingUtils.drawable(R.drawable.ic_performance)
             title = BindingUtils.string(R.string.performance)
-            clickListener = viewModel?.onPerformanceclickListener!!
-        })
-
-        customTabModelList.add(CustomTabModel().apply {
-            icon = BindingUtils.drawable(R.drawable.ic_course_dummy)
-            title = BindingUtils.string(R.string.courseware)
             clickListener = viewModel?.onCoursewareclickListener!!
         })
-
-        customTabModelList.add(CustomTabModel().apply {
-            icon = BindingUtils.drawable(R.drawable.ic_all_the_best)
-            title = BindingUtils.string(R.string.performance)
-            clickListener = viewModel?.onPerformanceclickListener!!
-        })
-
-        customTabModelList.add(CustomTabModel().apply {
-            icon = BindingUtils.drawable(R.drawable.ic_course_dummy)
-            title = BindingUtils.string(R.string.courseware)
-            clickListener = viewModel?.onCoursewareclickListener!!
-        })
-
-        customTabModelList.add(CustomTabModel().apply {
-            icon = BindingUtils.drawable(R.drawable.ic_all_the_best)
-            title = BindingUtils.string(R.string.performance)
-            clickListener = viewModel?.onPerformanceclickListener!!
-        })
-
-        customTabModelList.add(CustomTabModel().apply {
-            icon = BindingUtils.drawable(R.drawable.ic_course_dummy)
-            title = BindingUtils.string(R.string.courseware)
-            clickListener = viewModel?.onCoursewareclickListener!!
-        })
+        if (!coursesModel.isInCart && !coursesModel.isPurchase) {
+            customTabModelList.add(CustomTabModel().apply {
+                id = 4
+                icon = BindingUtils.drawable(R.drawable.ic_cart)
+                title = BindingUtils.string(R.string.cart)
+                clickListener = viewModel?.onCartclickListener!!
+            })
+        }
         return customTabModelList
     }
 }
