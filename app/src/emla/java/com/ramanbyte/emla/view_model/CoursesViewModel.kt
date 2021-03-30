@@ -1,7 +1,6 @@
 package com.ramanbyte.emla.view_model
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.databinding.ObservableField
@@ -24,7 +23,6 @@ import com.ramanbyte.emla.models.UserModel
 import com.ramanbyte.emla.models.request.CartRequestModel
 import com.ramanbyte.emla.models.request.CoursesRequest
 import com.ramanbyte.emla.models.response.CommonDropdownModel
-import com.ramanbyte.emla.ui.activities.CertificateViewerActivity
 import com.ramanbyte.utilities.*
 import kotlinx.android.synthetic.emla.card_course.view.*
 import org.kodein.di.generic.instance
@@ -155,9 +153,9 @@ class CoursesViewModel(var mContext: Context) : BaseViewModel(mContext = mContex
                     cartRequestModel = CartRequestModel(),
                     courseId = coursesModel.courseId
                 )
-                runOnUiThread(Runnable {
+               /* runOnUiThread(Runnable {
                     view.layoutCart.visibility = View.INVISIBLE
-                })
+                })*/
                 isLoaderShowingLiveData.postValue(false)
             } catch (e: ApiException) {
                 isLoaderShowingLiveData.postValue(false)
@@ -374,14 +372,23 @@ class CoursesViewModel(var mContext: Context) : BaseViewModel(mContext = mContex
         invokeApiCall(apiCallFunction = apiCallFunction)
     }
 
-    //fun isUserActive(): Boolean = registrationRepository.isUserActive()
-    val onCoursewareclickListener: (view: View, obj: Any) -> Unit = { view, obj ->
-        obj as CoursesModel
-        AppLog.infoLog("Pibm onCoursewareclickListener ")
+    var cartClickMutableLiveData = MutableLiveData<Int>().apply {
+        value = null
     }
 
-    val onPerformanceclickListener: (view: View, obj: Any) -> Unit = { view, obj ->
+
+    val onCoursewareclickListener: (view: View, obj: Any,position:Int) -> Unit = { view, obj, position ->
         obj as CoursesModel
-        AppLog.infoLog("Pibm onPerformanceclickListener")
+    }
+    val onCartclickListener: (view: View, obj: Any,position:Int) -> Unit = { view, obj, position ->
+        obj as CoursesModel
+        cartClickMutableLiveData?.postValue(position)
+        insertCartData(view,obj)
+
+    }
+
+    val onPerformanceclickListener: (view: View, obj: Any,position:Int) -> Unit = { view, obj, position ->
+        obj as CoursesModel
+
     }
 }

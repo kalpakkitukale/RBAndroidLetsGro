@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <LinearLayout
-        android:id="@+id/tab"
+        android:id="@+id/tablayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
@@ -16,7 +16,8 @@
             android:id="@+id/ivTabIcon"
             style="@style/ImageViewOrIconWhereClickIsPerformed"
             android:layout_width="@dimen/dp_40"
-            android:layout_height="@dimen/dp_40" />
+            android:layout_height="@dimen/dp_40"
+            android:src="@drawable/ic_course_dummy" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvTabTitle"
@@ -27,9 +28,10 @@
             android:layout_marginTop="@dimen/dp_5"
             android:ellipsize="end"
             android:gravity="center"
-            android:minWidth="@dimen/dp_43"
             android:maxWidth="@dimen/dp_70"
-            android:singleLine="true" />
+            android:minWidth="@dimen/dp_43"
+            android:singleLine="true"
+            android:text="@string/courseware" />
     </LinearLayout>
 
 </layout>
