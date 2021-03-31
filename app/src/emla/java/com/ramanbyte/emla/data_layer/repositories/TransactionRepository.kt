@@ -78,20 +78,19 @@ class TransactionRepository(val mContext: Context) : BaseRepository(mContext) {
             transactionApiController.insertCart(cartRequestModel)
         }
     }
-
     suspend fun deleteCart(cartItemId: Int): Int? {
         val userId = getCurrentUser()?.userId ?: 0
         return apiRequest {
             transactionApiController.deleteCart(userId, cartItemId)
         }
     }
-
     suspend fun getAllTransactionHistory(): List<TransactionHistoryModel>? {
         val userId = getCurrentUser()?.userId ?: 0
         return apiRequest {
             transactionApiController.getAllTransactionHistory(userId)
         }
     }
+    // get selected item count from server
     suspend fun getCartCount():Int?{
         val userId = getCurrentUser()?.userId?:0
         return  apiRequest {
@@ -99,8 +98,6 @@ class TransactionRepository(val mContext: Context) : BaseRepository(mContext) {
         }
 
     }
-
-
 
     private val pageSize = 10
     private val coursesModelObservable =

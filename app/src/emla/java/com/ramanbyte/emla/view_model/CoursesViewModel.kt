@@ -147,14 +147,11 @@ class CoursesViewModel(var mContext: Context) : BaseViewModel(mContext = mContex
     }
 
     fun insertCartData(view: View, coursesModel: CoursesModel) {
-        selectedCourseCountLiveData.postValue(selectedCourseCountLiveData.value?.plus(1))
         CoroutineUtils.main {
             try {
                 isLoaderShowingLiveData.postValue(true)
-                val response = transactionRepository.insertCart(
-                    cartRequestModel = CartRequestModel(),
-                    courseId = coursesModel.courseId
-                )
+                val response = transactionRepository.insertCart(cartRequestModel = CartRequestModel(), courseId = coursesModel.courseId)
+                selectedCourseCountLiveData.postValue(selectedCourseCountLiveData.value?.plus(1))
                 isLoaderShowingLiveData.postValue(false)
             } catch (e: ApiException) {
                 isLoaderShowingLiveData.postValue(false)
