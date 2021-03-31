@@ -88,7 +88,9 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
             selectedCourseCountLiveData.postValue(0)
             initPaginationResponseHandler()
             coursesPagedList()?.observe(this@CoursesFragment, androidx.lifecycle.Observer {
-                it?.let { coursesAdapter?.apply { submitList(it) } }
+                it?.let { coursesAdapter?.apply { submitList(it) }
+                coursesAdapter!!.lifecycleOwner = viewLifecycleOwner
+                }
             })
 
 

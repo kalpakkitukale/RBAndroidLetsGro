@@ -8,7 +8,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.findNavController
 import androidx.paging.PagedList
-import com.amazonaws.mobile.auth.core.internal.util.ThreadUtils.runOnUiThread
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseViewModel
 import com.ramanbyte.data_layer.CoroutineUtils
@@ -24,7 +23,6 @@ import com.ramanbyte.emla.models.request.CartRequestModel
 import com.ramanbyte.emla.models.request.CoursesRequest
 import com.ramanbyte.emla.models.response.CommonDropdownModel
 import com.ramanbyte.utilities.*
-import kotlinx.android.synthetic.emla.card_course.view.*
 import org.kodein.di.generic.instance
 
 /**
@@ -153,9 +151,6 @@ class CoursesViewModel(var mContext: Context) : BaseViewModel(mContext = mContex
                     cartRequestModel = CartRequestModel(),
                     courseId = coursesModel.courseId
                 )
-                runOnUiThread(Runnable {
-                    view.layoutCart.visibility = View.INVISIBLE
-                })
                 isLoaderShowingLiveData.postValue(false)
             } catch (e: ApiException) {
                 isLoaderShowingLiveData.postValue(false)
@@ -249,7 +244,9 @@ class CoursesViewModel(var mContext: Context) : BaseViewModel(mContext = mContex
 
     // on click on the topic list
     fun showChapterList(view: View, coursesModel: CoursesModel) {
-        view.findNavController().navigate(R.id.chaptersListFragment, Bundle().apply { putParcelable(KEY_COURSE_MODEL, coursesModel) })
+        view.findNavController().navigate(
+            R.id.chaptersListFragment,
+            Bundle().apply { putParcelable(KEY_COURSE_MODEL, coursesModel) })
     }
 
     // on click on performance check 
@@ -377,18 +374,29 @@ class CoursesViewModel(var mContext: Context) : BaseViewModel(mContext = mContex
     }
 
 
-    val onCoursewareclickListener: (view: View, obj: Any,position:Int) -> Unit = { view, obj, position ->
-        obj as CoursesModel
-    }
-    val onCartclickListener: (view: View, obj: Any,position:Int) -> Unit = { view, obj, position ->
-        obj as CoursesModel
-        cartClickMutableLiveData?.postValue(position)
-        insertCartData(view,obj)
+    val onCoursewareclickListener: (view: View, obj: Any) -> Unit = { view, obj ->
+            obj as CoursesModel
+        showCourseSyllabus(view,obj)
+        }
 
-    }
 
-    val onPerformanceclickListener: (view: View, obj: Any,position:Int) -> Unit = { view, obj, position ->
+    val onTopicclickListener: (view: View, obj: Any) -> Unit =
+        { view, obj->
+            obj as CoursesModel
+            showChapterList(view,obj)
+
+        }
+
+    val onPerformanceclickListener: (view: View, obj: Any) -> Unit =
+        { view, obj->
+            obj as CoursesModel
+            checkPerformance(view,obj)
+        }
+
+    val onCartclickListener: (view: View, obj: Any) -> Unit = { view, obj ->
         obj as CoursesModel
+        cartClickMutableLiveData?.postValue(obj.courseId)
+        insertCartData(view, obj)
 
     }
 }

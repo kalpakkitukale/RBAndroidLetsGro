@@ -74,120 +74,6 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/lblCourseName" />
 
-                <LinearLayout
-                    android:visibility="visible"
-                    android:id="@+id/layoutSyllabus"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_10"
-                    android:gravity="center"
-                    android:onClick="@{()->coursesViewModel.showCourseSyllabus(cardContainer, coursesModel)}"
-                    android:orientation="vertical"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/layoutTopics"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/lblCourseName">
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        style="@style/ImageViewOrIconWhereClickIsPerformed"
-                        android:layout_width="@dimen/dp_40"
-                        android:layout_height="@dimen/dp_40"
-                        app:srcCompat="@drawable/ic_course_content_new" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        style="@style/TextViewVerySmall"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_5"
-                        android:text="@string/courseware" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:visibility="visible"
-                    android:id="@+id/layoutTopics"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:onClick="@{()->coursesViewModel.showChapterList(cardContainer, coursesModel)}"
-                    android:orientation="vertical"
-                    app:layout_constraintEnd_toStartOf="@+id/layoutPerformance"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/layoutSyllabus"
-                    app:layout_constraintTop_toTopOf="@id/layoutSyllabus">
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        style="@style/ImageViewOrIconWhereClickIsPerformed"
-                        android:layout_width="@dimen/dp_40"
-                        android:layout_height="@dimen/dp_40"
-                        app:srcCompat="@drawable/ic_topic_list" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        style="@style/TextViewVerySmall"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_5"
-                        android:text="@string/topic_list" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:visibility="visible"
-                    android:id="@+id/layoutPerformance"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:onClick="@{() -> coursesViewModel.checkPerformance(layoutPerformance,coursesModel)}"
-                    android:orientation="vertical"
-                    app:layout_constraintEnd_toStartOf="@+id/layoutCart"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/layoutTopics"
-                    app:layout_constraintTop_toTopOf="@id/layoutSyllabus">
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        style="@style/ImageViewOrIconWhereClickIsPerformed"
-                        android:layout_width="@dimen/dp_40"
-                        android:layout_height="@dimen/dp_40"
-                        app:srcCompat="@drawable/ic_performance" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        style="@style/TextViewVerySmall"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_5"
-                        android:text="@string/performance" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:visibility="visible"
-                    android:id="@+id/layoutCart"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:onClick="@{()->coursesViewModel.insertCartData(cardContainer, coursesModel)}"
-                    android:orientation="vertical"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/layoutPerformance"
-                    app:layout_constraintTop_toTopOf="@id/layoutSyllabus">
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        style="@style/ImageViewOrIconWhereClickIsPerformed"
-                        android:layout_width="@dimen/dp_40"
-                        android:layout_height="@dimen/dp_40"
-                        app:srcCompat="@drawable/ic_cart" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        style="@style/TextViewVerySmall"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_5"
-                        android:text="@string/cart" />
-
-                </LinearLayout>
-
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvCustomTabList"
                     android:layout_width="0dp"
@@ -196,7 +82,7 @@
                     android:layout_marginBottom="@dimen/dp_10"
                     android:background="@null"
                     android:orientation="horizontal"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
