@@ -32,4 +32,5 @@
     <color name="colorTransparent">#00000000</color>
     <color name="colorImageViewBackground">#444444</color>
     <color name="colorMenuItemColor">#ffffff</color>
+    <color name="colorDangerAction">#ed5565</color>
 </resources>

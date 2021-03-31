@@ -4,12 +4,18 @@ import android.os.Parcel
 import android.os.Parcelable
 import androidx.databinding.BaseObservable
 import com.ramanbyte.utilities.KEY_BLANK
+import com.ramanbyte.utilities.skipTrailingZeroes
 
 class CartResponseModel() : Parcelable, BaseObservable() {
     var courseName: String? = KEY_BLANK
     var courseDescription: String? = KEY_BLANK
     var duraton: String? = KEY_BLANK
     var courseFee: String? = KEY_BLANK
+        get() {
+            if (!field.isNullOrEmpty())
+                field = skipTrailingZeroes(field!!.toDouble())
+            return field
+        }
     var courseDetailsId: Int? = 0
     var courseFeeStructureId: Int? = 0
     var courseImageUrl: String? = null

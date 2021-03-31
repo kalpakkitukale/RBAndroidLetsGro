@@ -21,13 +21,54 @@
         android:layout_height="match_parent"
         tools:context=".ui.fragments.CartFragment">
 
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnProceedPay"
+            style="@style/CustomCapsuleButtonFilled"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dp_10"
+            android:minWidth="@dimen/dp_120"
+            android:onClick="@{()->cartViewModel.clickOnProceedToPay(btnProceedPay)}"
+            android:text="@string/proceed"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view7" />
+
+        <View
+            android:id="@+id/view7"
+            style="@style/baseDivider"
+            android:layout_width="wrap_content"
+            android:layout_marginBottom="?attr/actionBarSize"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/lblTotalCartAmount"
+            style="@style/TextViewTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_5"
+            android:text="@string/total_amount_to_pay"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view7" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/TextViewSubTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_rupee_indian"
+            android:text="@{cartViewModel.courseFess}"
+            app:layout_constraintStart_toStartOf="@+id/lblTotalCartAmount"
+            app:layout_constraintTop_toBottomOf="@+id/lblTotalCartAmount" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvCartFragment"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_margin="@dimen/dp_2"
             android:visibility="@{cartViewModel.viewVisibilityLiveData}"
-            app:layout_constraintBottom_toTopOf="@id/lblTotalCartAmount"
+            app:layout_constraintBottom_toTopOf="@+id/view7"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -36,11 +77,19 @@
         <include
             android:id="@+id/noInternet"
             layout="@layout/no_internet"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             android:visibility="gone" />
 
         <include
             android:id="@+id/somethingWentWrong"
             layout="@layout/something_went_wrong"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             android:visibility="gone" />
 
         <include
@@ -51,43 +100,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/lblTotalCartAmount"
-            style="@style/TextViewLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/dp_10"
-            android:text="@string/total_amount_to_pay"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/tvTotalCartAmount"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvTotalCartAmount"
-            style="@style/TextViewLabel"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:gravity="start"
-            android:text="@{String.valueOf(cartViewModel.courseFess)}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/btnProceedPay"
-            app:layout_constraintStart_toStartOf="@id/lblTotalCartAmount"
-            app:layout_constraintTop_toTopOf="@+id/lblTotalCartAmount" />
-
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnProceedPay"
-            style="@style/CustomCapsuleButtonFilled"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/dp_10"
-            android:onClick="@{()->cartViewModel.clickOnProceedToPay(btnProceedPay)}"
-            android:text="@string/proceed"
-            app:layout_constraintBottom_toBottomOf="@id/tvTotalCartAmount"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/tvTotalCartAmount"
-            app:layout_constraintTop_toTopOf="@id/lblTotalCartAmount" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
