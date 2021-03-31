@@ -68,6 +68,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:visibility="@{cartViewModel.viewVisibilityLiveData}"
+            android:layout_marginBottom="@dimen/dp_10"
             app:layout_constraintBottom_toTopOf="@+id/view7"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

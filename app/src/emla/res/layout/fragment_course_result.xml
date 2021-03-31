@@ -173,6 +173,12 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/tvFinalMarks" />
 
+        <androidx.constraintlayout.widget.Group
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="@{coursesViewModel.viewVisibilityLiveData}"
+            app:constraint_referenced_ids="rvResult,labelFinalMarks,tvFinalMarks,view3,cardView"/>
+
         <include
             android:id="@+id/noInternet"
             layout="@layout/no_internet"

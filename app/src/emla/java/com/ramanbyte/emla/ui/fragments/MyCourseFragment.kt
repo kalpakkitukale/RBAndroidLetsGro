@@ -34,7 +34,7 @@ class MyCourseFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>(
             noData.viewModel = viewModel
             somethingWentWrong.viewModel = viewModel
         }
-
+        setToolbarTitle(BindingUtils.string(R.string.my_course))
         setAdapter()
         setViewModelOp()
     }

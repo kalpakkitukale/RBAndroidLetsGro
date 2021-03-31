@@ -59,7 +59,7 @@ class CartAdapter(
             }
 
             if (adapterPosition == cartList.size - 1) {
-                cardCartItemBinding.viewDivider.visibility = View.GONE
+                cardCartItemBinding.viewDivider.visibility = View.INVISIBLE
             } else {
                 cardCartItemBinding.viewDivider.visibility = View.VISIBLE
             }
