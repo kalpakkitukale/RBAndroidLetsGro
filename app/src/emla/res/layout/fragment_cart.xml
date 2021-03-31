@@ -26,6 +26,7 @@
             style="@style/CustomCapsuleButtonFilled"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:visibility="@{cartViewModel.viewVisibilityLiveData}"
             android:layout_marginEnd="@dimen/dp_10"
             android:minWidth="@dimen/dp_120"
             android:onClick="@{()->cartViewModel.clickOnProceedToPay(btnProceedPay)}"

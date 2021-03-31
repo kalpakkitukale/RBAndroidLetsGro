@@ -375,13 +375,11 @@ class CoursesViewModel(var mContext: Context) : BaseViewModel(mContext = mContex
             obj as CoursesModel
         showCourseSyllabus(view,obj)
         }
-    val onTopicclickListener: (view: View, obj: Any) -> Unit =
-        { view, obj->
+    val onTopicclickListener: (view: View, obj: Any) -> Unit = { view, obj->
             obj as CoursesModel
             showChapterList(view,obj)
         }
-    val onPerformanceclickListener: (view: View, obj: Any) -> Unit =
-        { view, obj->
+    val onPerformanceclickListener: (view: View, obj: Any) -> Unit = { view, obj->
             obj as CoursesModel
             checkPerformance(view,obj)
         }
@@ -389,10 +387,7 @@ class CoursesViewModel(var mContext: Context) : BaseViewModel(mContext = mContex
         obj as CoursesModel
         cartClickMutableLiveData.postValue(obj.courseId)
         insertCartData(view, obj)
-
     }
-
-
   // get transaction count from server
     fun getCartCount(){
         CoroutineUtils.main {
