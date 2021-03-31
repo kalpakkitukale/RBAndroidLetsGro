@@ -29,4 +29,7 @@ interface TransactionApiController {
 
     @POST("GetAllMyCourses")
     suspend fun mycourseList(@Body coursesRequest: CoursesRequest): Response<List<CoursesModel>>
+
+    @GET("GetCartcourescount/{UserId}")
+    suspend fun  getCartCount(@Path("UserId")UserId: Int):Response<Int>
 }

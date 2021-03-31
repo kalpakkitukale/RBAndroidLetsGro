@@ -86,10 +86,12 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
     private fun setViewModelOp() {
         viewModel.apply {
             selectedCourseCountLiveData.postValue(0)
+            getCartCount()
             initPaginationResponseHandler()
             coursesPagedList()?.observe(this@CoursesFragment, androidx.lifecycle.Observer {
-                it?.let { coursesAdapter?.apply { submitList(it) }
-                coursesAdapter!!.lifecycleOwner = viewLifecycleOwner
+                it?.let {
+                    coursesAdapter?.apply { submitList(it) }
+                    coursesAdapter!!.lifecycleOwner = viewLifecycleOwner
                 }
             })
 
@@ -126,7 +128,7 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
 
             selectedCourseCountLiveData.observe(this@CoursesFragment, Observer {
                 it?.let {
-                    if (it!= 0){
+                    if (it != 0) {
                         setCountTextView(it)
                     }
                 }
@@ -213,7 +215,8 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
             val item = menu.findItem(R.id.actionCart)
             item.setActionView(R.layout.layout_for_course_menu)
             val notifCount = item.actionView as ConstraintLayout
-            countTextView = notifCount.findViewById<View>(R.id.actionbar_notifcation_textview) as TextView
+            countTextView =
+                notifCount.findViewById<View>(R.id.actionbar_notifcation_textview) as TextView
             countTextView?.visibility = View.GONE
             layout = notifCount.findViewById(R.id.layoutParent) as ConstraintLayout
             layout?.setOnClickListener {
@@ -277,9 +280,9 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
         mContext = context
     }
 
-//count of selected cart item on the option menu
+    //count of selected cart item on the option menu
     fun setCountTextView(no: Int) {
         countTextView?.visibility = View.VISIBLE
         countTextView?.text = no.toString()
-        }
+    }
 }

@@ -92,6 +92,13 @@ class TransactionRepository(val mContext: Context) : BaseRepository(mContext) {
             transactionApiController.getAllTransactionHistory(userId)
         }
     }
+    suspend fun getCartCount():Int?{
+        val userId = getCurrentUser()?.userId?:0
+        return  apiRequest {
+            transactionApiController.getCartCount(userId)
+        }
+
+    }
 
 
 
@@ -151,5 +158,6 @@ class TransactionRepository(val mContext: Context) : BaseRepository(mContext) {
         coursesPagedList?.value?.dataSource?.invalidate()
         paginationResponseHandlerLiveData.postValue(PaginationResponseHandler.INIT_LOADING)
     }
+
 
 }

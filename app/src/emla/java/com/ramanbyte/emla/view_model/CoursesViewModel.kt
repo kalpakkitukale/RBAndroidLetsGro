@@ -13,6 +13,7 @@ import com.ramanbyte.base.BaseViewModel
 import com.ramanbyte.data_layer.CoroutineUtils
 import com.ramanbyte.data_layer.pagination.PaginationMessages
 import com.ramanbyte.emla.data_layer.network.exception.ApiException
+import com.ramanbyte.emla.data_layer.network.exception.NoDataException
 import com.ramanbyte.emla.data_layer.network.exception.NoInternetException
 import com.ramanbyte.emla.data_layer.repositories.CoursesRepository
 import com.ramanbyte.emla.data_layer.repositories.RegistrationRepository
@@ -40,6 +41,9 @@ class CoursesViewModel(var mContext: Context) : BaseViewModel(mContext = mContex
     var isFilterApplied = MutableLiveData<Boolean>(null)
 
     var shareLiveData = MutableLiveData<CoursesModel>().apply {
+        value = null
+    }
+    var cartClickMutableLiveData = MutableLiveData<Int>().apply {
         value = null
     }
 
@@ -369,34 +373,47 @@ class CoursesViewModel(var mContext: Context) : BaseViewModel(mContext = mContex
         invokeApiCall(apiCallFunction = apiCallFunction)
     }
 
-    var cartClickMutableLiveData = MutableLiveData<Int>().apply {
-        value = null
-    }
-
-
+// custom tab layout click listener here
     val onCoursewareclickListener: (view: View, obj: Any) -> Unit = { view, obj ->
             obj as CoursesModel
         showCourseSyllabus(view,obj)
         }
-
-
     val onTopicclickListener: (view: View, obj: Any) -> Unit =
         { view, obj->
             obj as CoursesModel
             showChapterList(view,obj)
-
         }
-
     val onPerformanceclickListener: (view: View, obj: Any) -> Unit =
         { view, obj->
             obj as CoursesModel
             checkPerformance(view,obj)
         }
-
     val onCartclickListener: (view: View, obj: Any) -> Unit = { view, obj ->
         obj as CoursesModel
-        cartClickMutableLiveData?.postValue(obj.courseId)
+        cartClickMutableLiveData.postValue(obj.courseId)
         insertCartData(view, obj)
 
+    }
+
+
+  // get transaction count from server
+    fun getCartCount(){
+        CoroutineUtils.main {
+            try {
+                selectedCourseCountLiveData.postValue(transactionRepository.getCartCount())
+            }catch (e:ApiException){
+                e.printStackTrace()
+                AppLog.infoLog(e.message.toString())
+            } catch (e:NoInternetException){
+                e.printStackTrace()
+                AppLog.infoLog(e.message.toString())
+            } catch (e:NoDataException){
+                e.printStackTrace()
+                AppLog.infoLog(e.message.toString())
+            } catch (e:Exception){
+                e.printStackTrace()
+                AppLog.infoLog(e.message.toString())
+            }
+        }
     }
 }
