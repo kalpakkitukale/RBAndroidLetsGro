@@ -11,5 +11,7 @@ class CustomTabModel {
     var id: Int? = null
     var icon: Drawable? = null
     var title: String = ""
-    var clickListener: (view: View, obj: Any,position : Int) -> Unit? = { view: View, obj: Any,position : Int -> }
+    var clickListener: (view: View, obj: Any) -> Unit? = { view: View, obj: Any ->
+    }
+
 }

@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ramanbyte.R
 import com.ramanbyte.databinding.CustomTabRecyclerviewLayoutBinding
+import com.ramanbyte.emla.models.CoursesModel
 import com.ramanbyte.emla.models.CustomTabModel
 import com.ramanbyte.emla.view_model.CoursesViewModel
 
@@ -15,10 +16,9 @@ import com.ramanbyte.emla.view_model.CoursesViewModel
 class CustomTabLayoutAdapter(
     private val customTabModelList: ArrayList<CustomTabModel>,
     private val obj: Any,
-    var position: Int?,
     var viewModel: CoursesViewModel?
 ) : RecyclerView.Adapter<CustomTabLayoutAdapter.CustomTabLayoutViewHolder>() {
-var positions= position
+var positions= obj
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomTabLayoutViewHolder {
         val rootView = LayoutInflater.from(parent.context)
             .inflate(R.layout.custom_tab_recyclerview_layout, parent, false)
@@ -34,7 +34,7 @@ var positions= position
         holder.bind(customTabModelList[position])
         holder.binding.apply {
           root.setOnClickListener {
-                customTabModel.clickListener.invoke(it, obj,positions!!)
+                customTabModel.clickListener.invoke(it, obj)
             }
             /*tablayout.setOnClickListener {
                 customTabModelList.removeAt(position)
@@ -56,7 +56,7 @@ var positions= position
     // remove the list for arrayList and refresh adapter
     fun removeFromList(positionclick: Int) {
         try {
-            notifyItemRemoved(position!!)
+          //  notifyItemRemoved(position!!)
             notifyDataSetChanged()
         } catch (e: Exception) {
             e.printStackTrace()
