@@ -30,8 +30,8 @@ class CartViewModel(var mContext: Context) : BaseViewModel(mContext = mContext) 
     private val coursesRepository: CoursesRepository by instance()
     val transactionRepository: TransactionRepository by instance()
     val masterRepository: MasterRepository by instance()
-    var courseFess = MutableLiveData<Float>().apply {
-        value = 0.0f
+    var courseFess = MutableLiveData<String>().apply {
+        value = "0.0"
     }
 
     var clickedLiveData = MutableLiveData<Boolean>().apply {
@@ -62,7 +62,8 @@ class CartViewModel(var mContext: Context) : BaseViewModel(mContext = mContext) 
 
     fun getCartList() {
         CoroutineUtils.main {
-            var fee = 0.0f
+            var fee = 0.0
+            var totalFee = "0.0"
             try {
                 // coroutineToggleLoader(BindingUtils.string(R.string.getting_reply_list))
                 isLoaderShowingLiveData.postValue(true)
@@ -71,8 +72,9 @@ class CartViewModel(var mContext: Context) : BaseViewModel(mContext = mContext) 
 
                 for (i in 0 until response!!.size) {
                     fee = response[i].courseFee!!.toFloat().plus(fee)
+                    totalFee = skipTrailingZeroes(fee)
                 }
-                courseFess.postValue(fee)
+                courseFess.postValue(totalFee)
                 cartListLiveData.postValue(response)
                 toggleLayoutVisibility(
                     View.VISIBLE,
@@ -110,8 +112,7 @@ class CartViewModel(var mContext: Context) : BaseViewModel(mContext = mContext) 
                 isLoaderShowingLiveData.postValue(false)
             } catch (e: NoDataException) {
                 e.printStackTrace()
-                fee = 0.0f
-                courseFess.postValue(fee)
+                courseFess.postValue("0.0")
                 AppLog.errorLog(e.message, e)
                 toggleLayoutVisibility(
                     View.GONE,
@@ -178,7 +179,7 @@ class CartViewModel(var mContext: Context) : BaseViewModel(mContext = mContext) 
     fun clickOnProceedToPay(view: View) {
         clickedLiveData.postValue(true)
         if (finalCartList.size > 0) {
-            finalCartList?.forEach {
+            finalCartList.forEach {
                 if (it.courseFee.equals("0", true) || it.courseFee.equals("0.0", true)) {
                     unpaidCourse.add(it)
                 } else {
@@ -187,13 +188,13 @@ class CartViewModel(var mContext: Context) : BaseViewModel(mContext = mContext) 
             }
 
             if (paidCourse.size > 0) {
-                if (courseFess.value!! > 0.0f) {
+                if (courseFess.value!!.toFloat() > 0.0f) {
                     mContext.startActivity(
-                        PaymentSummaryActivity.openPaymentActivity(
-                            mContext,
-                            courseFess.value!!.toString(),
-                            paidCourse
-                        )
+                            PaymentSummaryActivity.openPaymentActivity(
+                                    mContext,
+                                    courseFess.value!!.toString(),
+                                    paidCourse
+                            )
                     )
                     checkCouresePaidUnpaid()
                 }

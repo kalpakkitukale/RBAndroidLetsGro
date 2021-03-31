@@ -2,14 +2,13 @@ package com.ramanbyte.emla.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.ramanbyte.R
-import com.ramanbyte.aws_s3_android.utilities.S3Constant.Companion.mContext
 import com.ramanbyte.databinding.CardCartItemBinding
 import com.ramanbyte.emla.models.response.CartResponseModel
-import com.ramanbyte.emla.ui.fragments.CartFragment
 import com.ramanbyte.emla.view_model.CartViewModel
 import com.ramanbyte.utilities.KEY_BLANK
 import com.ramanbyte.utilities.StaticMethodUtilitiesKtx
@@ -44,7 +43,7 @@ class CartAdapter(
         val cartModel: CartResponseModel = cartList[position]
         holder.bind(cartModel.apply {
             courseImageUrl =
-                StaticMethodUtilitiesKtx.getS3DynamicURL(courseImage ?: KEY_BLANK, context!!)
+                    StaticMethodUtilitiesKtx.getS3DynamicURL(courseImage ?: KEY_BLANK, context)
         })
     }
 
@@ -57,6 +56,12 @@ class CartAdapter(
             cardCartItemBinding.apply {
                 viewModel = cartViewModel
                 this.cartModel = responseModel
+            }
+
+            if (adapterPosition == cartList.size - 1) {
+                cardCartItemBinding.viewDivider.visibility = View.GONE
+            } else {
+                cardCartItemBinding.viewDivider.visibility = View.VISIBLE
             }
         }
 
