@@ -129,8 +129,21 @@ class CoursesViewModel(var mContext: Context) : BaseViewModel(mContext = mContex
                         BindingUtils.string(R.string.please_make_sure_you_are_connected_to_internet),
                         BindingUtils.string(R.string.some_thing_went_wrong)
                     )
+
                 )
                 AppLog.infoLog("Pagination :: ${it.msg} :: ${it.status}")
+            }
+
+            try {
+
+            }catch (e:Exception){
+                e.printStackTrace()
+                AppLog.infoLog(e.message.toString())
+            }
+            if (it != null) {
+                if (it?.msg!!.equals("INIT_NO_DATA", true)) {
+                    isLoaderShowingLiveData.postValue(false)
+                }
             }
         }
 
