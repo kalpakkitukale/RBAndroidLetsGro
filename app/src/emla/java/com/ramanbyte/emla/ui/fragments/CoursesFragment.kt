@@ -217,7 +217,7 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
             val notifCount = item.actionView as ConstraintLayout
             countTextView =
                 notifCount.findViewById<View>(R.id.actionbar_notifcation_textview) as TextView
-          //  countTextView?.visibility = View.GONE
+            countTextView?.visibility = View.GONE
             layout = notifCount.findViewById(R.id.layoutParent) as ConstraintLayout
             layout?.setOnClickListener {
                 findNavController().navigate(R.id.action_coursesFragment_to_cartFragment)
