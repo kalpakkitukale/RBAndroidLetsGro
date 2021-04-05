@@ -118,7 +118,11 @@
     <fragment
         android:id="@+id/cartFragment"
         android:name="com.ramanbyte.emla.ui.fragments.CartFragment"
-        android:label="@string/my_cart" />
+        android:label="@string/my_cart" >
+        <action
+            android:id="@+id/action_cartFragment_to_myCourseFragment"
+            app:destination="@id/myCourseFragment" />
+    </fragment>
     <fragment
         android:id="@+id/myCourseFragment"
         android:name="com.ramanbyte.emla.ui.fragments.MyCourseFragment"

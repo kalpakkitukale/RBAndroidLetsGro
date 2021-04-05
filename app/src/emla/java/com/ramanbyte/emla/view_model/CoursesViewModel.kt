@@ -12,6 +12,7 @@ import com.ramanbyte.R
 import com.ramanbyte.base.BaseViewModel
 import com.ramanbyte.data_layer.CoroutineUtils
 import com.ramanbyte.data_layer.pagination.PaginationMessages
+import com.ramanbyte.data_layer.pagination.Status
 import com.ramanbyte.emla.data_layer.network.exception.ApiException
 import com.ramanbyte.emla.data_layer.network.exception.NoDataException
 import com.ramanbyte.emla.data_layer.network.exception.NoInternetException
@@ -114,40 +115,42 @@ class CoursesViewModel(var mContext: Context) : BaseViewModel(mContext = mContex
             }
 
             coursesRepository.initiatePagination()
+            isLoaderShowingLiveData.postValue(false)
         }
     }
 
     fun myCourseListPagination() {
-        transactionRepository.getPaginationResponseHandler().observeForever {
-            if (it != null) {
-                paginationResponse(
-                    it,
-                    //PaginationMessages("No Data", "No More data", "No Internet", "Something Wrong")
-                    PaginationMessages(
-                        BindingUtils.string(R.string.no_courses),
-                        BindingUtils.string(R.string.no_more_courses),
-                        BindingUtils.string(R.string.please_make_sure_you_are_connected_to_internet),
-                        BindingUtils.string(R.string.some_thing_went_wrong)
+        try {
+            transactionRepository.getPaginationResponseHandler().observeForever {
+                if (it != null) {
+                    paginationResponse(
+                        it,
+                        //PaginationMessages("No Data", "No More data", "No Internet", "Something Wrong")
+                        PaginationMessages(
+                            BindingUtils.string(R.string.no_courses),
+                            BindingUtils.string(R.string.no_more_courses),
+                            BindingUtils.string(R.string.please_make_sure_you_are_connected_to_internet),
+                            BindingUtils.string(R.string.some_thing_went_wrong)
+                        )
+
                     )
+                    AppLog.infoLog("Pagination :: ${it.msg} :: ${it.status}")
+                }
 
-                )
-                AppLog.infoLog("Pagination :: ${it.msg} :: ${it.status}")
-            }
-
-            try {
-
-            }catch (e:Exception){
-                e.printStackTrace()
-                AppLog.infoLog(e.message.toString())
-            }
-            if (it != null) {
-                if (it?.msg!!.equals("INIT_NO_DATA", true)) {
+                if (it?.status == Status.NEXT_SUCCESS){
                     isLoaderShowingLiveData.postValue(false)
                 }
+
             }
+        }catch (e:Exception){
+            e.printStackTrace()
+            isLoaderShowingLiveData.postValue(false)
+            AppLog.infoLog(e.message.toString())
         }
 
+
         transactionRepository.myCourseList()
+        isLoaderShowingLiveData.postValue(false)
 
     }
 

@@ -3,6 +3,7 @@ package com.ramanbyte.emla.view_model
 import android.content.Context
 import android.view.View
 import androidx.lifecycle.MutableLiveData
+import androidx.navigation.findNavController
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseViewModel
 import com.ramanbyte.data_layer.CoroutineUtils
@@ -59,6 +60,7 @@ class CartViewModel(var mContext: Context) : BaseViewModel(mContext = mContext) 
         toggleLayoutVisibility(View.GONE, View.GONE, View.GONE, "", View.GONE)
         userData = coursesRepository.getCurrentUser()
     }
+
 
     fun getCartList() {
         CoroutineUtils.main {
@@ -295,4 +297,8 @@ class CartViewModel(var mContext: Context) : BaseViewModel(mContext = mContext) 
     }
 
 
+    // goto my course
+    fun gotoMyCourse(view: View){
+        view.findNavController().navigate(R.id.action_cartFragment_to_myCourseFragment)
+    }
 }

@@ -1,7 +1,6 @@
 package com.ramanbyte.emla.ui.fragments
 
 import android.content.Context
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ramanbyte.R
@@ -35,7 +34,7 @@ class MyCourseFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>(
             noData.viewModel = viewModel
             somethingWentWrong.viewModel = viewModel
         }
-        setToolbarTitle(BindingUtils.string(R.string.my_course))
+
         setAdapter()
         setViewModelOp()
     }
@@ -58,7 +57,7 @@ class MyCourseFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>(
         viewModel.apply {
 
             myCourseListPagination()
-            myCoursesPagedList()?.observe(this@MyCourseFragment, Observer {
+            myCoursesPagedList()?.observe(this@MyCourseFragment, androidx.lifecycle.Observer {
                 it?.let { coursesAdapter?.apply { submitList(it) } }
             })
         }

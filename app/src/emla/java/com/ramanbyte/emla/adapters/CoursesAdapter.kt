@@ -45,7 +45,7 @@ class CoursesAdapter(private val displayMetrics: DisplayMetrics, var myCourse: I
                 )) && (coursesModel.summativeAssessmentStatus.equals("true", true))
             ) {
                 holder.cardCourseBinding.ivStatus.visibility = View.VISIBLE
-                holder.cardCourseBinding.tvcourseCost.visibility = View.GONE
+                holder.cardCourseBinding.tvcourseCost.visibility = View.INVISIBLE
                 holder.cardCourseBinding.ivStatus.setImageDrawable(BindingUtils.drawable(R.drawable.ic_tick_circle))
             } else if (coursesModel.preAssessmentStatus.equals(
                     "true",
@@ -56,7 +56,7 @@ class CoursesAdapter(private val displayMetrics: DisplayMetrics, var myCourse: I
                 ) || coursesModel.summativeAssessmentStatus.isNullOrEmpty())
             ) {
                 holder.cardCourseBinding.ivStatus.visibility = View.VISIBLE
-                holder.cardCourseBinding.tvcourseCost.visibility = View.GONE
+                holder.cardCourseBinding.tvcourseCost.visibility = View.INVISIBLE
                 holder.cardCourseBinding.ivStatus.setImageDrawable(BindingUtils.drawable(R.drawable.ic_success))
             } else {
                 holder.cardCourseBinding.ivStatus.visibility = View.GONE

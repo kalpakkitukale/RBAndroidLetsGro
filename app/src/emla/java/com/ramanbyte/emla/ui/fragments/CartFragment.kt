@@ -3,6 +3,7 @@ package com.ramanbyte.emla.ui.fragments
 import android.content.Context
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ramanbyte.R
@@ -59,7 +60,8 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>() {
                                 BindingUtils.drawable(R.drawable.ic_all_the_best)!!,
                                 true,
                                 BindingUtils.string(R.string.strOk), {
-                                    view?.findNavController()?.navigate(R.id.myCourseFragment)
+                                    viewModel.gotoMyCourse(this@CartFragment.requireView())
+                                    /*findNavController().navigate(R.id.action_cartFragment_to_myCourseFragment)*/
                                     isAlertDialogShown.postValue(false)
                                     clickedLiveData.postValue(false)
                                     freeCourseAddSucessfullyLiveData.postValue(0)
