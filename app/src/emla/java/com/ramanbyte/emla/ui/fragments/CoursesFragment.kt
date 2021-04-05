@@ -62,7 +62,6 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
             somethingWentWrong.viewModel = viewModel
 
         }
-        viewModel.getCartCount()
         setAdapter()
         setViewModelOp()
     }
@@ -164,7 +163,18 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
             val notifCount = item.actionView as ConstraintLayout
             countTextView =
                 notifCount.findViewById<View>(R.id.actionbar_notifcation_textview) as TextView
-            countTextView?.visibility = View.GONE
+            viewModel.selectedCourseCountLiveData.observe(this, Observer {
+                it?.let {
+                    if (it > 0) {
+                        countTextView?.visibility = View.VISIBLE
+                        countTextView?.text = it.toString()
+                    } else {
+                        countTextView?.visibility = View.GONE
+                    }
+                }
+            })
+
+
             layout = notifCount.findViewById(R.id.layoutParent) as ConstraintLayout
             layout?.setOnClickListener {
                 findNavController().navigate(R.id.action_coursesFragment_to_cartFragment)
@@ -225,7 +235,8 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
     //share Course Details through a link
     private fun setViewModelOp() {
         viewModel.apply {
-          getCartCount()
+            selectedCourseCountLiveData.postValue(0)
+            getCartCount()
             initPaginationResponseHandler()
             coursesPagedList()?.observe(this@CoursesFragment, androidx.lifecycle.Observer {
                 it?.let {
@@ -265,14 +276,6 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
 
             })
 
-            selectedCourseCountLiveData.observe(this@CoursesFragment, Observer {
-                it?.let {
-                    if (it != 0) {
-                        countTextView?.visibility = View.VISIBLE
-                        setCountTextView(it)
-                    }
-                }
-            })
         }
     }
 
@@ -282,18 +285,4 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
         mContext = context
     }
 
-    //count of selected cart item on the option menu
-    fun setCountTextView(no: Int) {
-        AppLog.infoLog("Pibm cart count --> ${no}")
-        if (no > 0) {
-            countTextView?.apply {
-                visibility = View.VISIBLE
-                background = BindingUtils.drawable(R.drawable.ic_yellow_circle)
-                text = no.toString()
-            }
-        } else {
-            countTextView?.visibility = View.GONE
-        }
-
-    }
 }

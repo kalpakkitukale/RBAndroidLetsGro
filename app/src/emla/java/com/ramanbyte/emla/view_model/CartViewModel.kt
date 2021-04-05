@@ -299,6 +299,7 @@ class CartViewModel(var mContext: Context) : BaseViewModel(mContext = mContext) 
 
     // goto my course
     fun gotoMyCourse(view: View){
-        view.findNavController().navigate(R.id.action_cartFragment_to_myCourseFragment)
+       // view.findNavController().navigate(R.id.action_cartFragment_to_myCourseFragment)
+        view.findNavController().navigate(R.id.myCourseFragment)
     }
 }
