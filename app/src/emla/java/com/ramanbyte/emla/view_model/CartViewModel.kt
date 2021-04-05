@@ -1,6 +1,7 @@
 package com.ramanbyte.emla.view_model
 
 import android.content.Context
+import android.content.Intent
 import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.findNavController
@@ -17,6 +18,7 @@ import com.ramanbyte.emla.models.UserModel
 import com.ramanbyte.emla.models.request.CourseFeeRequestModel
 import com.ramanbyte.emla.models.request.InsertTransactionRequestModel
 import com.ramanbyte.emla.models.response.CartResponseModel
+import com.ramanbyte.emla.ui.activities.ContainerActivity
 import com.ramanbyte.emla.ui.activities.PaymentSummaryActivity
 import com.ramanbyte.utilities.*
 import com.ramanbyte.utilities.DateUtils.DATE_TRANSACTION_ID_PATTERN
@@ -34,16 +36,13 @@ class CartViewModel(var mContext: Context) : BaseViewModel(mContext = mContext) 
     var courseFess = MutableLiveData<String>().apply {
         value = "0.0"
     }
-
     var clickedLiveData = MutableLiveData<Boolean>().apply {
         value = false
     }
     var userData: UserModel? = null
-
     var cartListLiveData = MutableLiveData<List<CartResponseModel>>().apply {
         value = arrayListOf()
     }
-
     var insertTransactionModelLiveData = MutableLiveData<InsertTransactionRequestModel>().apply {
         this.value = InsertTransactionRequestModel()
     }
@@ -55,13 +54,10 @@ class CartViewModel(var mContext: Context) : BaseViewModel(mContext = mContext) 
         postValue(0)
     }
     var finalCartList = ArrayList<CartResponseModel>()
-
     init {
         toggleLayoutVisibility(View.GONE, View.GONE, View.GONE, "", View.GONE)
         userData = coursesRepository.getCurrentUser()
     }
-
-
     fun getCartList() {
         CoroutineUtils.main {
             var fee = 0.0
@@ -128,7 +124,6 @@ class CartViewModel(var mContext: Context) : BaseViewModel(mContext = mContext) 
             }
         }
     }
-
     fun deleteCart(view: View, cartResponseModel: CartResponseModel) {
         CoroutineUtils.main {
             try {
@@ -175,8 +170,6 @@ class CartViewModel(var mContext: Context) : BaseViewModel(mContext = mContext) 
         }
 
     }
-
-
     // on proceed button click event
     fun clickOnProceedToPay(view: View) {
         clickedLiveData.postValue(true)
@@ -203,13 +196,8 @@ class CartViewModel(var mContext: Context) : BaseViewModel(mContext = mContext) 
             } else {
                 checkCouresePaidUnpaid()
             }
-
         }
-
-
     }
-
-
     // free course transaction are done here
     fun checkCouresePaidUnpaid() {
         if (unpaidCourse.size > 0) {
@@ -242,8 +230,6 @@ class CartViewModel(var mContext: Context) : BaseViewModel(mContext = mContext) 
         }
 
     }
-
-
     fun insertUnpaidCourseTransaction() {
         try {
             CoroutineUtils.main {
@@ -295,11 +281,10 @@ class CartViewModel(var mContext: Context) : BaseViewModel(mContext = mContext) 
             AppLog.errorLog(e.message, e)
         }
     }
-
-
-    // goto my course
+    // goto my course loading issue is handle
     fun gotoMyCourse(view: View){
-       // view.findNavController().navigate(R.id.action_cartFragment_to_myCourseFragment)
-        view.findNavController().navigate(R.id.myCourseFragment)
+        val intent = Intent(mContext, ContainerActivity::class.java)
+        intent.putExtra(KEY_PAYMENT_STATUS, KEY_SUCCESS)
+        mContext.startActivity(intent)
     }
 }

@@ -93,38 +93,41 @@ class CoursesViewModel(var mContext: Context) : BaseViewModel(mContext = mContex
         userData = coursesRepository.getCurrentUser()
     }
 
-    fun initPaginationResponseHandler() {
+    fun initPaginationResponseHandler(isCall: Boolean) {
+        var call = isCall
         if (getFilterState()) {
             isFilterApplied.postValue(true)
             //filterCourseList(filterRequestModel)
         } else {
-            coursesRepository.getPaginationResponseHandler().observeForever {
-                if (it != null) {
-                    paginationResponse(
-                        it,
-                        //PaginationMessages("No Data", "No More data", "No Internet", "Something Wrong")
-                        PaginationMessages(
-                            BindingUtils.string(R.string.no_courses),
-                            BindingUtils.string(R.string.no_more_courses),
-                            BindingUtils.string(R.string.please_make_sure_you_are_connected_to_internet),
-                            BindingUtils.string(R.string.some_thing_went_wrong)
+            if (call) {
+                coursesRepository.getPaginationResponseHandler().observeForever {
+                    if (it != null) {
+                        paginationResponse(
+                            it,
+                            //PaginationMessages("No Data", "No More data", "No Internet", "Something Wrong")
+                            PaginationMessages(
+                                BindingUtils.string(R.string.no_courses),
+                                BindingUtils.string(R.string.no_more_courses),
+                                BindingUtils.string(R.string.please_make_sure_you_are_connected_to_internet),
+                                BindingUtils.string(R.string.some_thing_went_wrong)
+                            )
                         )
-                    )
-                    AppLog.infoLog("Pagination :: ${it.msg} :: ${it.status}")
+                        AppLog.infoLog("Pagination :: ${it.msg} :: ${it.status}")
+                    }
                 }
+                coursesRepository.initiatePagination()
+                isLoaderShowingLiveData.postValue(false)
+                call = false
             }
 
-            coursesRepository.initiatePagination()
-
-            loaderMessageLiveData.set("Please hide the first page loader")
-            isLoaderShowingLiveData.postValue(false)
         }
     }
 
     fun myCourseListPagination() {
         try {
             isLoaderShowingLiveData.postValue(false)
-            loaderMessageLiveData.set("This is secod loader")
+            isLoaderShowingLiveData.postValue(true)
+            loaderMessageLiveData.set("This is second loader")
             transactionRepository.getPaginationResponseHandler().observeForever {
                 if (it != null) {
                     paginationResponse(
@@ -145,7 +148,7 @@ class CoursesViewModel(var mContext: Context) : BaseViewModel(mContext = mContex
                     isLoaderShowingLiveData.postValue(false)
                     isLoaderShowingLiveData.postValue(false)
                 }
-
+                isLoaderShowingLiveData.postValue(false)
             }
         } catch (e: Exception) {
             e.printStackTrace()
