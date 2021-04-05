@@ -62,7 +62,7 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
             somethingWentWrong.viewModel = viewModel
 
         }
-
+        viewModel.getCartCount()
         setAdapter()
         setViewModelOp()
     }
@@ -82,59 +82,6 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
         }
     }
 
-    //share Course Details through a link
-    private fun setViewModelOp() {
-        viewModel.apply {
-            selectedCourseCountLiveData.postValue(0)
-            getCartCount()
-            initPaginationResponseHandler()
-            coursesPagedList()?.observe(this@CoursesFragment, androidx.lifecycle.Observer {
-                it?.let {
-                    coursesAdapter?.apply { submitList(it) }
-                    coursesAdapter!!.lifecycleOwner = viewLifecycleOwner
-                }
-            })
-
-
-            isFilterApplied.observe(this@CoursesFragment, Observer {
-                it?.let {
-                    AppLog.infoLog("CoursesFragment isFilterApplied ${it}")
-                    setupBadge(it)
-                    isFilterApplied.postValue(null)
-                }
-            })
-            shareLiveData.observe(this@CoursesFragment, Observer {
-                it?.let {
-                    val shareIntent = Intent()
-                    shareIntent.action = Intent.ACTION_SEND
-                    val courseName: String? = it.courseName?.replace(" ".toRegex(), "%20")
-                    val courseDescription: String? =
-                        it.courseDescription?.replace(" ".toRegex(), "%20")
-                    val courseImage: String? = it.courseImage?.replace(" ".toRegex(), "%20")
-                    val data: String? =
-                        courseName + "," + courseDescription + "," + it.courseCode + "," + courseImage + "," + it.totalCount
-                    val link: String =
-                        "details?id=" + BuildConfig.APPLICATION_ID + "&http://www.letsgro.in/course&url=&referrer=" + it.courseId + "," + data + "#Intent;scheme=market;action=android.intent.action.VIEW;package=com.android.vending;end\""
-                    shareIntent.putExtra(
-                        Intent.EXTRA_TEXT,
-                        it.courseName + " " + BindingUtils.string(R.string.share_course) + " " + link
-                    )
-                    shareIntent.type = "text/plain"
-                    startActivity(Intent.createChooser(shareIntent, "send to"))
-                    shareLiveData.value = null
-                }
-
-            })
-
-            selectedCourseCountLiveData.observe(this@CoursesFragment, Observer {
-                it?.let {
-                    if (it != 0) {
-                        setCountTextView(it)
-                    }
-                }
-            })
-        }
-    }
 
     var menu: Menu? = null
     private var mSearchView: SearchView? = null
@@ -217,7 +164,6 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
             val notifCount = item.actionView as ConstraintLayout
             countTextView =
                 notifCount.findViewById<View>(R.id.actionbar_notifcation_textview) as TextView
-            countTextView?.visibility = View.GONE
             layout = notifCount.findViewById(R.id.layoutParent) as ConstraintLayout
             layout?.setOnClickListener {
                 findNavController().navigate(R.id.action_coursesFragment_to_cartFragment)
@@ -275,6 +221,61 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
     }
 
 
+    //share Course Details through a link
+    private fun setViewModelOp() {
+        viewModel.apply {
+          getCartCount()
+            initPaginationResponseHandler()
+            coursesPagedList()?.observe(this@CoursesFragment, androidx.lifecycle.Observer {
+                it?.let {
+                    coursesAdapter?.apply { submitList(it) }
+                    coursesAdapter!!.lifecycleOwner = viewLifecycleOwner
+                }
+            })
+
+
+            isFilterApplied.observe(this@CoursesFragment, Observer {
+                it?.let {
+                    AppLog.infoLog("CoursesFragment isFilterApplied ${it}")
+                    setupBadge(it)
+                    isFilterApplied.postValue(null)
+                }
+            })
+            shareLiveData.observe(this@CoursesFragment, Observer {
+                it?.let {
+                    val shareIntent = Intent()
+                    shareIntent.action = Intent.ACTION_SEND
+                    val courseName: String? = it.courseName?.replace(" ".toRegex(), "%20")
+                    val courseDescription: String? =
+                        it.courseDescription?.replace(" ".toRegex(), "%20")
+                    val courseImage: String? = it.courseImage?.replace(" ".toRegex(), "%20")
+                    val data: String? =
+                        courseName + "," + courseDescription + "," + it.courseCode + "," + courseImage + "," + it.totalCount
+                    val link: String =
+                        "details?id=" + BuildConfig.APPLICATION_ID + "&http://www.letsgro.in/course&url=&referrer=" + it.courseId + "," + data + "#Intent;scheme=market;action=android.intent.action.VIEW;package=com.android.vending;end\""
+                    shareIntent.putExtra(
+                        Intent.EXTRA_TEXT,
+                        it.courseName + " " + BindingUtils.string(R.string.share_course) + " " + link
+                    )
+                    shareIntent.type = "text/plain"
+                    startActivity(Intent.createChooser(shareIntent, "send to"))
+                    shareLiveData.value = null
+                }
+
+            })
+
+            selectedCourseCountLiveData.observe(this@CoursesFragment, Observer {
+                it?.let {
+                    if (it != 0) {
+                        countTextView?.visibility = View.VISIBLE
+                        setCountTextView(it)
+                    }
+                }
+            })
+        }
+    }
+
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mContext = context
@@ -282,10 +283,14 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
 
     //count of selected cart item on the option menu
     fun setCountTextView(no: Int) {
-        if (no>0){
-            countTextView?.visibility = View.VISIBLE
-            countTextView?.text = no.toString()
-        }else{
+        AppLog.infoLog("Pibm cart count --> ${no}")
+        if (no > 0) {
+            countTextView?.apply {
+                visibility = View.VISIBLE
+                background = BindingUtils.drawable(R.drawable.ic_yellow_circle)
+                text = no.toString()
+            }
+        } else {
             countTextView?.visibility = View.GONE
         }
 

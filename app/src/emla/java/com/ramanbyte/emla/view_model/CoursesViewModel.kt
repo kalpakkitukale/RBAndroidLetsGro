@@ -77,7 +77,7 @@ class CoursesViewModel(var mContext: Context) : BaseViewModel(mContext = mContex
         value = KEY_BLANK
     }
     var selectedCourseCountLiveData = MutableLiveData<Int>().apply {
-        postValue(0)
+        postValue(null)
     }
 
 
