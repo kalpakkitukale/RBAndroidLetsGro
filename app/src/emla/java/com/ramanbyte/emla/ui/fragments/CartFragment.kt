@@ -60,9 +60,10 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>() {
                                 BindingUtils.drawable(R.drawable.ic_all_the_best)!!,
                                 true,
                                 BindingUtils.string(R.string.strOk), {
-                                    viewModel.gotoMyCourse(this@CartFragment.requireView())
+                                  gotoMyCourse(this@CartFragment.requireView())
                                     /*findNavController().navigate(R.id.action_cartFragment_to_myCourseFragment)*/
                                     isAlertDialogShown.postValue(false)
+                                    isLoaderShowingLiveData.postValue(false)
                                     clickedLiveData.postValue(false)
                                     freeCourseAddSucessfullyLiveData.postValue(0)
                                 })
