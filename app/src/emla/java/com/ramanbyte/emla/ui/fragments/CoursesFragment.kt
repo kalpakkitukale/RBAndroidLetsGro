@@ -237,7 +237,7 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
         viewModel.apply {
             selectedCourseCountLiveData.postValue(0)
             getCartCount()
-            initPaginationResponseHandler(true)
+            initPaginationResponseHandler()
             coursesPagedList()?.observe(this@CoursesFragment, androidx.lifecycle.Observer {
                 it?.let {
                     coursesAdapter?.apply { submitList(it) }
@@ -275,14 +275,11 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
                 }
 
             })
-
         }
     }
-
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mContext = context
     }
-
 }

@@ -93,41 +93,34 @@ class CoursesViewModel(var mContext: Context) : BaseViewModel(mContext = mContex
         userData = coursesRepository.getCurrentUser()
     }
 
-    fun initPaginationResponseHandler(isCall: Boolean) {
-        var call = isCall
+    fun initPaginationResponseHandler() {
         if (getFilterState()) {
             isFilterApplied.postValue(true)
             //filterCourseList(filterRequestModel)
         } else {
-            if (call) {
-                coursesRepository.getPaginationResponseHandler().observeForever {
-                    if (it != null) {
-                        paginationResponse(
-                            it,
-                            //PaginationMessages("No Data", "No More data", "No Internet", "Something Wrong")
-                            PaginationMessages(
-                                BindingUtils.string(R.string.no_courses),
-                                BindingUtils.string(R.string.no_more_courses),
-                                BindingUtils.string(R.string.please_make_sure_you_are_connected_to_internet),
-                                BindingUtils.string(R.string.some_thing_went_wrong)
-                            )
+            coursesRepository.getPaginationResponseHandler().observeForever {
+                if (it != null) {
+                    paginationResponse(
+                        it,
+                        //PaginationMessages("No Data", "No More data", "No Internet", "Something Wrong")
+                        PaginationMessages(
+                            BindingUtils.string(R.string.no_courses),
+                            BindingUtils.string(R.string.no_more_courses),
+                            BindingUtils.string(R.string.please_make_sure_you_are_connected_to_internet),
+                            BindingUtils.string(R.string.some_thing_went_wrong)
                         )
-                        AppLog.infoLog("Pagination :: ${it.msg} :: ${it.status}")
-                    }
+                    )
+                    AppLog.infoLog("Pagination :: ${it.msg} :: ${it.status}")
                 }
-                coursesRepository.initiatePagination()
-                isLoaderShowingLiveData.postValue(false)
-                call = false
             }
 
+            coursesRepository.initiatePagination()
+            isLoaderShowingLiveData.postValue(false)
         }
     }
 
     fun myCourseListPagination() {
         try {
-            isLoaderShowingLiveData.postValue(false)
-            isLoaderShowingLiveData.postValue(true)
-            loaderMessageLiveData.set("This is second loader")
             transactionRepository.getPaginationResponseHandler().observeForever {
                 if (it != null) {
                     paginationResponse(
@@ -144,13 +137,8 @@ class CoursesViewModel(var mContext: Context) : BaseViewModel(mContext = mContex
                     AppLog.infoLog("Pagination :: ${it.msg} :: ${it.status}")
                 }
 
-                if (it?.status == Status.NEXT_SUCCESS) {
-                    isLoaderShowingLiveData.postValue(false)
-                    isLoaderShowingLiveData.postValue(false)
-                }
-                isLoaderShowingLiveData.postValue(false)
             }
-        } catch (e: Exception) {
+        }catch (e:Exception){
             e.printStackTrace()
             isLoaderShowingLiveData.postValue(false)
             AppLog.infoLog(e.message.toString())
@@ -174,10 +162,7 @@ class CoursesViewModel(var mContext: Context) : BaseViewModel(mContext = mContex
         CoroutineUtils.main {
             try {
                 isLoaderShowingLiveData.postValue(true)
-                val response = transactionRepository.insertCart(
-                    cartRequestModel = CartRequestModel(),
-                    courseId = coursesModel.courseId
-                )
+                val response = transactionRepository.insertCart(cartRequestModel = CartRequestModel(), courseId = coursesModel.courseId)
                 selectedCourseCountLiveData.postValue(selectedCourseCountLiveData.value?.plus(1))
                 isLoaderShowingLiveData.postValue(false)
             } catch (e: ApiException) {
@@ -397,40 +382,39 @@ class CoursesViewModel(var mContext: Context) : BaseViewModel(mContext = mContex
         invokeApiCall(apiCallFunction = apiCallFunction)
     }
 
-    // custom tab layout click listener here
+// custom tab layout click listener here
     val onCoursewareclickListener: (view: View, obj: Any) -> Unit = { view, obj ->
-        obj as CoursesModel
-        showCourseSyllabus(view, obj)
-    }
-    val onTopicclickListener: (view: View, obj: Any) -> Unit = { view, obj ->
-        obj as CoursesModel
-        showChapterList(view, obj)
-    }
-    val onPerformanceclickListener: (view: View, obj: Any) -> Unit = { view, obj ->
-        obj as CoursesModel
-        checkPerformance(view, obj)
-    }
+            obj as CoursesModel
+        showCourseSyllabus(view,obj)
+        }
+    val onTopicclickListener: (view: View, obj: Any) -> Unit = { view, obj->
+            obj as CoursesModel
+            showChapterList(view,obj)
+        }
+    val onPerformanceclickListener: (view: View, obj: Any) -> Unit = { view, obj->
+            obj as CoursesModel
+            checkPerformance(view,obj)
+        }
     val onCartclickListener: (view: View, obj: Any) -> Unit = { view, obj ->
         obj as CoursesModel
         cartClickMutableLiveData.postValue(obj.courseId)
         insertCartData(view, obj)
     }
-
-    // get transaction count from server
-    fun getCartCount() {
+  // get transaction count from server
+    fun getCartCount(){
         CoroutineUtils.main {
             try {
                 selectedCourseCountLiveData.postValue(transactionRepository.getCartCount())
-            } catch (e: ApiException) {
+            }catch (e:ApiException){
                 e.printStackTrace()
                 AppLog.infoLog(e.message.toString())
-            } catch (e: NoInternetException) {
+            } catch (e:NoInternetException){
                 e.printStackTrace()
                 AppLog.infoLog(e.message.toString())
-            } catch (e: NoDataException) {
+            } catch (e:NoDataException){
                 e.printStackTrace()
                 AppLog.infoLog(e.message.toString())
-            } catch (e: Exception) {
+            } catch (e:Exception){
                 e.printStackTrace()
                 AppLog.infoLog(e.message.toString())
             }
