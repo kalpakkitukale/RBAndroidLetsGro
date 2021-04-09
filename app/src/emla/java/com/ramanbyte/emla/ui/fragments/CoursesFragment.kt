@@ -275,14 +275,11 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
                 }
 
             })
-
         }
     }
-
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mContext = context
     }
-
 }

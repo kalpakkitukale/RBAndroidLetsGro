@@ -3,6 +3,7 @@ package com.ramanbyte.emla.view_model
 import android.content.Context
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.findNavController
@@ -20,7 +21,7 @@ import com.ramanbyte.emla.models.*
 import com.ramanbyte.utilities.*
 import org.kodein.di.generic.instance
 
-class ChaptersViewModel(mContext: Context) : BaseViewModel(mContext) {
+class ChaptersViewModel(var mContext: Context) : BaseViewModel(mContext) {
 
     private val chaptersRepository: ChaptersRepository by instance()
     private val contentRepository: ContentRepository by instance()
@@ -60,7 +61,23 @@ class ChaptersViewModel(mContext: Context) : BaseViewModel(mContext) {
     fun getList(): LiveData<PagedList<ChaptersModel>>? = chaptersRepository.getList()
 
     fun onCardClicked(view: View, chaptersModel: ChaptersModel) {
-        selectedChaptersModelLiveData.value = chaptersModel
+        if (courseModel?.isPurchase==true){
+            selectedChaptersModelLiveData.value = chaptersModel
+        }else{
+            setAlertDialogResourceModelMutableLiveData(
+                BindingUtils.string(R.string.before_purches_warring_msg),
+                BindingUtils.drawable(R.drawable.ic_all_the_best)!!,
+                true,
+                BindingUtils.string(R.string.strOk), {
+                    isAlertDialogShown.postValue(false)
+                    isLoaderShowingLiveData.postValue(false)
+
+                })
+            isAlertDialogShown.postValue(true)
+
+        }
+
+
     }
 
     fun onDownloadClicked(view: View, chaptersModel: ChaptersModel) {

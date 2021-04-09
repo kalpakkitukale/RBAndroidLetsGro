@@ -363,4 +363,5 @@ Content
     <string name="courseware">Courseware</string>
     <string name="unpaid_transaction_sucessful">Thank you. Your course(s) has been added successfully.</string>
     <string name="course_Result_Fragment">Course Result Fragment</string>
+    <string name="before_purches_warring_msg">To see more information please purchase the course.</string>
 </resources>

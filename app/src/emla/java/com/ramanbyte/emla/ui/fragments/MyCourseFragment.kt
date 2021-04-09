@@ -23,9 +23,7 @@ class MyCourseFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>(
     override fun layoutId(): Int = R.layout.fragment_courses
 
     override fun initiate() {
-
         layoutBinding.apply {
-            setToolbarTitle(BindingUtils.string(R.string.courses))
             lifecycleOwner = this@MyCourseFragment
             ProgressLoader(mContext, viewModel)
             AlertDialog(mContext, viewModel)
@@ -33,8 +31,8 @@ class MyCourseFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>(
             noInternet.viewModel = viewModel
             noData.viewModel = viewModel
             somethingWentWrong.viewModel = viewModel
+            setToolbarTitle(BindingUtils.string(R.string.my_course))
         }
-
         setAdapter()
         setViewModelOp()
     }

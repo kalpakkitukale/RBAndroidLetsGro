@@ -115,16 +115,12 @@ class CoursesViewModel(var mContext: Context) : BaseViewModel(mContext = mContex
             }
 
             coursesRepository.initiatePagination()
-
-            loaderMessageLiveData.set("Please hide the first page loader")
             isLoaderShowingLiveData.postValue(false)
         }
     }
 
     fun myCourseListPagination() {
         try {
-            isLoaderShowingLiveData.postValue(false)
-            loaderMessageLiveData.set("This is secod loader")
             transactionRepository.getPaginationResponseHandler().observeForever {
                 if (it != null) {
                     paginationResponse(
@@ -141,13 +137,8 @@ class CoursesViewModel(var mContext: Context) : BaseViewModel(mContext = mContex
                     AppLog.infoLog("Pagination :: ${it.msg} :: ${it.status}")
                 }
 
-                if (it?.status == Status.NEXT_SUCCESS) {
-                    isLoaderShowingLiveData.postValue(false)
-                    isLoaderShowingLiveData.postValue(false)
-                }
-
             }
-        } catch (e: Exception) {
+        }catch (e:Exception){
             e.printStackTrace()
             isLoaderShowingLiveData.postValue(false)
             AppLog.infoLog(e.message.toString())
@@ -171,10 +162,7 @@ class CoursesViewModel(var mContext: Context) : BaseViewModel(mContext = mContex
         CoroutineUtils.main {
             try {
                 isLoaderShowingLiveData.postValue(true)
-                val response = transactionRepository.insertCart(
-                    cartRequestModel = CartRequestModel(),
-                    courseId = coursesModel.courseId
-                )
+                val response = transactionRepository.insertCart(cartRequestModel = CartRequestModel(), courseId = coursesModel.courseId)
                 selectedCourseCountLiveData.postValue(selectedCourseCountLiveData.value?.plus(1))
                 isLoaderShowingLiveData.postValue(false)
             } catch (e: ApiException) {
@@ -394,40 +382,39 @@ class CoursesViewModel(var mContext: Context) : BaseViewModel(mContext = mContex
         invokeApiCall(apiCallFunction = apiCallFunction)
     }
 
-    // custom tab layout click listener here
+// custom tab layout click listener here
     val onCoursewareclickListener: (view: View, obj: Any) -> Unit = { view, obj ->
-        obj as CoursesModel
-        showCourseSyllabus(view, obj)
-    }
-    val onTopicclickListener: (view: View, obj: Any) -> Unit = { view, obj ->
-        obj as CoursesModel
-        showChapterList(view, obj)
-    }
-    val onPerformanceclickListener: (view: View, obj: Any) -> Unit = { view, obj ->
-        obj as CoursesModel
-        checkPerformance(view, obj)
-    }
+            obj as CoursesModel
+        showCourseSyllabus(view,obj)
+        }
+    val onTopicclickListener: (view: View, obj: Any) -> Unit = { view, obj->
+            obj as CoursesModel
+            showChapterList(view,obj)
+        }
+    val onPerformanceclickListener: (view: View, obj: Any) -> Unit = { view, obj->
+            obj as CoursesModel
+            checkPerformance(view,obj)
+        }
     val onCartclickListener: (view: View, obj: Any) -> Unit = { view, obj ->
         obj as CoursesModel
         cartClickMutableLiveData.postValue(obj.courseId)
         insertCartData(view, obj)
     }
-
-    // get transaction count from server
-    fun getCartCount() {
+  // get transaction count from server
+    fun getCartCount(){
         CoroutineUtils.main {
             try {
                 selectedCourseCountLiveData.postValue(transactionRepository.getCartCount())
-            } catch (e: ApiException) {
+            }catch (e:ApiException){
                 e.printStackTrace()
                 AppLog.infoLog(e.message.toString())
-            } catch (e: NoInternetException) {
+            } catch (e:NoInternetException){
                 e.printStackTrace()
                 AppLog.infoLog(e.message.toString())
-            } catch (e: NoDataException) {
+            } catch (e:NoDataException){
                 e.printStackTrace()
                 AppLog.infoLog(e.message.toString())
-            } catch (e: Exception) {
+            } catch (e:Exception){
                 e.printStackTrace()
                 AppLog.infoLog(e.message.toString())
             }
