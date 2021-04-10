@@ -203,9 +203,19 @@ class PaymentSummaryActivity : BaseActivity<ActivityPaymentSummaryBinding, Payme
         }
     }
     fun launchAirPayUI(airpayBundle: Bundle) {
-        val intent = Intent(this, AirpayActivity::class.java)
-        intent.putExtras(airpayBundle)
-        startActivityForResult(intent, AIR_PAY_REQUEST_CODE)
+        try {
+            val intent = Intent(this, AirpayActivity::class.java)
+            intent.putExtras(airpayBundle)
+            startActivityForResult(intent, AIR_PAY_REQUEST_CODE)
+        } catch (e:RuntimeException){
+            e.printStackTrace()
+            AppLog.errorLog(e.message, e)
+        } catch (e:Exception){
+            e.printStackTrace()
+            AppLog.errorLog(e.message, e)
+
+        }
+
     }
     fun launchPayUUI(payuGatewayModel: PayuGatewayModel) {
         val intent = Intent(this, PayUBaseActivity::class.java)
