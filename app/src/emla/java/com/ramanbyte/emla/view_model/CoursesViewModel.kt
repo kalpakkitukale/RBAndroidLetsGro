@@ -1,6 +1,7 @@
 package com.ramanbyte.emla.view_model
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.databinding.ObservableField
@@ -24,6 +25,7 @@ import com.ramanbyte.emla.models.UserModel
 import com.ramanbyte.emla.models.request.CartRequestModel
 import com.ramanbyte.emla.models.request.CoursesRequest
 import com.ramanbyte.emla.models.response.CommonDropdownModel
+import com.ramanbyte.emla.ui.activities.CertificateViewerActivity
 import com.ramanbyte.utilities.*
 import org.kodein.di.generic.instance
 
@@ -399,6 +401,12 @@ class CoursesViewModel(var mContext: Context) : BaseViewModel(mContext = mContex
         obj as CoursesModel
         cartClickMutableLiveData.postValue(obj.courseId)
         insertCartData(view, obj)
+
+        /*var intent = Intent(mContext,CertificateViewerActivity::class.java)
+        intent.putExtra("userId", 9211)
+        intent.putExtra("courseId", obj.courseId)
+        mContext.startActivity(intent)*/
+
     }
   // get transaction count from server
     fun getCartCount(){
