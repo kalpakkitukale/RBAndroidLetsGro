@@ -58,6 +58,9 @@ class CoursesViewModel(var mContext: Context) : BaseViewModel(mContext = mContex
     val clearFilter = MutableLiveData<Boolean>().apply {
         value = null
     }
+    var courseInformationLiveData = MutableLiveData<Boolean>().apply {
+        value = false
+    }
 
     var programsListMutableLiveData = MutableLiveData<List<CommonDropdownModel>>()
     var skillsListMutableLiveData = MutableLiveData<List<CommonDropdownModel>>()
@@ -408,6 +411,14 @@ class CoursesViewModel(var mContext: Context) : BaseViewModel(mContext = mContex
         mContext.startActivity(intent)*/
 
     }
+
+    // on click of course of information
+
+    val onClickCourseInformationClick:(view: View, obj: Any) -> Unit = { view, obj ->
+        obj as CoursesModel
+        courseInformationLiveData.postValue(true)
+    }
+
   // get transaction count from server
     fun getCartCount(){
         CoroutineUtils.main {

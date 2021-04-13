@@ -89,7 +89,6 @@ class CoursePerchesDetailsBottomSheet(var isActivityParent: Boolean, useParent: 
 
     override fun onStart() {
         super.onStart()
-
         val window = dialog!!.window
         val windowParams = window!!.attributes
         windowParams.dimAmount = 0.70f

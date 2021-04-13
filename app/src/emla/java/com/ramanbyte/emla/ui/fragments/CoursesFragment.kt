@@ -25,6 +25,7 @@ import com.ramanbyte.R.id.search_src_text
 import com.ramanbyte.base.BaseFragment
 import com.ramanbyte.databinding.FragmentCoursesBinding
 import com.ramanbyte.emla.adapters.CoursesAdapter
+import com.ramanbyte.emla.view.CourseInformationBottomSheet
 import com.ramanbyte.emla.view.RecommendedCourseFilterBottomSheet
 import com.ramanbyte.emla.view_model.CoursesViewModel
 import com.ramanbyte.utilities.*
@@ -275,6 +276,16 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
                 }
 
             })
+
+            var courseinfromationBottomSheets: CourseInformationBottomSheet? = null
+            courseInformationLiveData.observe(this@CoursesFragment, Observer {
+                it?.let {
+                    if (it)
+                    courseinfromationBottomSheets = CourseInformationBottomSheet()
+                    courseinfromationBottomSheets?.show(childFragmentManager,"CourseOfInfromation")
+                }
+            })
+
         }
     }
 
