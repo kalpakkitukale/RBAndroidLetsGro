@@ -281,7 +281,9 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
             courseInformationLiveData.observe(this@CoursesFragment, Observer {
                 it?.let {
                     if (it)
-                    courseinfromationBottomSheets = CourseInformationBottomSheet()
+                    courseinfromationBottomSheets = CourseInformationBottomSheet(false,true
+
+                    )
                     courseinfromationBottomSheets?.show(childFragmentManager,"CourseOfInfromation")
                 }
             })

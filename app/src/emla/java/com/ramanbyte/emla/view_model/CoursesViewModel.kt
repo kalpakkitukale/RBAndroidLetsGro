@@ -20,6 +20,7 @@ import com.ramanbyte.emla.data_layer.network.exception.NoInternetException
 import com.ramanbyte.emla.data_layer.repositories.CoursesRepository
 import com.ramanbyte.emla.data_layer.repositories.RegistrationRepository
 import com.ramanbyte.emla.data_layer.repositories.TransactionRepository
+import com.ramanbyte.emla.models.CourseSyllabusModel
 import com.ramanbyte.emla.models.CoursesModel
 import com.ramanbyte.emla.models.UserModel
 import com.ramanbyte.emla.models.request.CartRequestModel
@@ -42,6 +43,10 @@ class CoursesViewModel(var mContext: Context) : BaseViewModel(mContext = mContex
     private val transactionRepository: TransactionRepository by instance()
 
     var isFilterApplied = MutableLiveData<Boolean>(null)
+    var bottomSheetCloseLiveData = MutableLiveData<Boolean>().apply {
+        value = false
+    }
+
 
     var shareLiveData = MutableLiveData<CoursesModel>().apply {
         value = null
@@ -391,6 +396,7 @@ class CoursesViewModel(var mContext: Context) : BaseViewModel(mContext = mContex
     val onCoursewareclickListener: (view: View, obj: Any) -> Unit = { view, obj ->
             obj as CoursesModel
         showCourseSyllabus(view,obj)
+
         }
     val onTopicclickListener: (view: View, obj: Any) -> Unit = { view, obj->
             obj as CoursesModel
@@ -413,10 +419,15 @@ class CoursesViewModel(var mContext: Context) : BaseViewModel(mContext = mContex
     }
 
     // on click of course of information
+var courseModelLive = MutableLiveData<CoursesModel>().apply {
+        value = CoursesModel()
+    }
 
     val onClickCourseInformationClick:(view: View, obj: Any) -> Unit = { view, obj ->
         obj as CoursesModel
         courseInformationLiveData.postValue(true)
+        getCourseSyllbus(obj.courseId)
+        courseModelLive.postValue(obj)
     }
 
   // get transaction count from server
@@ -424,6 +435,36 @@ class CoursesViewModel(var mContext: Context) : BaseViewModel(mContext = mContex
         CoroutineUtils.main {
             try {
                 selectedCourseCountLiveData.postValue(transactionRepository.getCartCount())
+            }catch (e:ApiException){
+                e.printStackTrace()
+                AppLog.infoLog(e.message.toString())
+            } catch (e:NoInternetException){
+                e.printStackTrace()
+                AppLog.infoLog(e.message.toString())
+            } catch (e:NoDataException){
+                e.printStackTrace()
+                AppLog.infoLog(e.message.toString())
+            } catch (e:Exception){
+                e.printStackTrace()
+                AppLog.infoLog(e.message.toString())
+            }
+        }
+    }
+// Course of Infromation Sheet close click listener
+    fun onCloseClickBottomSheet(view: View){
+        bottomSheetCloseLiveData.postValue(true)
+    }
+
+    var courseSyllabusLiveData = MutableLiveData<CourseSyllabusModel>().apply {
+        value = CourseSyllabusModel()
+    }
+
+    // get transaction count from server
+    fun getCourseSyllbus(courseId:Int){
+        CoroutineUtils.main {
+            try {
+                AppLog.infoLog("Pibm -->${courseId} ")
+                courseSyllabusLiveData.postValue(coursesRepository.getCoursesSyllabus(courseId))
             }catch (e:ApiException){
                 e.printStackTrace()
                 AppLog.infoLog(e.message.toString())

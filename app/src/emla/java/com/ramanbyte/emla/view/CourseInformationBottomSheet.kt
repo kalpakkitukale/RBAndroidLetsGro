@@ -6,19 +6,23 @@ import android.view.View
 import android.view.WindowManager
 import android.widget.FrameLayout
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.Observer
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseBottomSheetFragment
 import com.ramanbyte.databinding.CourseInformationBottomSheetLayoutBinding
 import com.ramanbyte.emla.view_model.CoursesViewModel
+import com.ramanbyte.utilities.AppLog
 import com.ramanbyte.utilities.StaticMethodUtilitiesKtx
 
 /**
  * @author Akash Inkar <akash.1@ramanbyte.com>
  * @since 12/4/21
  */
-class CourseInformationBottomSheet:BaseBottomSheetFragment<CourseInformationBottomSheetLayoutBinding, CoursesViewModel>(){
+class CourseInformationBottomSheet(var isActivityParent: Boolean, useParent: Boolean):BaseBottomSheetFragment<CourseInformationBottomSheetLayoutBinding, CoursesViewModel>
+    (  isActivityParent = isActivityParent,
+    useParent = useParent){
 
 var binding:CourseInformationBottomSheetLayoutBinding? = null
 
@@ -31,6 +35,7 @@ var binding:CourseInformationBottomSheetLayoutBinding? = null
             lifecycleOwner = this@CourseInformationBottomSheet
             dataViewModel = viewModel
             fullBottomSheet()
+            viewModelOperation()
         }
 
     }
@@ -69,6 +74,31 @@ var binding:CourseInformationBottomSheetLayoutBinding? = null
                 screenHeight -= statusBarHeight
                 mBottomSheetBehavior.peekHeight = height
             }
+        }
+    }
+
+    fun viewModelOperation(){
+        viewModel?.apply {
+            bottomSheetCloseLiveData.observe(this@CourseInformationBottomSheet, Observer {
+                it?.let {
+                    if (it)
+                        dismiss()
+                    bottomSheetCloseLiveData.postValue(false)
+                }
+            })
+
+            courseSyllabusLiveData.observe(this@CourseInformationBottomSheet, Observer {
+                it?.let {
+                        layoutBinding?.dataList = it
+                    AppLog.infoLog("Pibm ---> ${it.specialization}")
+                }
+            })
+
+            courseModelLive.observe(this@CourseInformationBottomSheet, Observer {
+                it?.let {
+                    layoutBinding?.courseModel = it
+                }
+            })
         }
     }
 }
