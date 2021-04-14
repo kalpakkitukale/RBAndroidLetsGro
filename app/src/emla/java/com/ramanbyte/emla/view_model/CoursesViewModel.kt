@@ -463,55 +463,22 @@ var courseModelLive = MutableLiveData<CoursesModel>().apply {
     fun getCourseSyllbus(courseId:Int){
         CoroutineUtils.main {
             try {
-                AppLog.infoLog("Pibm -->${courseId} ")
                 courseSyllabusLiveData.postValue(coursesRepository.getCoursesSyllabus(courseId))
-                /*toggleLayoutVisibility(
-                    View.VISIBLE,
-                    View.GONE,
-                    View.GONE,
-                    KEY_BLANK,
-                    View.GONE
-                )*/
             }catch (e:ApiException){
                 e.printStackTrace()
                 AppLog.infoLog(e.message.toString())
-               /* toggleLayoutVisibility(
-                    View.GONE,
-                    View.GONE,
-                    View.GONE,
-                    BindingUtils.string(R.string.some_thing_went_wrong),
-                    View.VISIBLE
-                )*/
             } catch (e:NoInternetException){
                 e.printStackTrace()
                 AppLog.infoLog(e.message.toString())
-               /* toggleLayoutVisibility(
-                    View.GONE,
-                    View.GONE,
-                    View.VISIBLE,
-                    BindingUtils.string(R.string.no_internet_message),
-                    View.GONE
-                )*/
+
             } catch (e:NoDataException){
                 e.printStackTrace()
                 AppLog.infoLog(e.message.toString())
-                /*toggleLayoutVisibility(
-                    View.GONE,
-                    View.VISIBLE,
-                    View.GONE,
-                    BindingUtils.string(R.string.empty_cart),
-                    View.GONE
-                )*/
+
             } catch (e:Exception){
                 e.printStackTrace()
                 AppLog.infoLog(e.message.toString())
-               /* toggleLayoutVisibility(
-                    View.GONE,
-                    View.GONE,
-                    View.GONE,
-                    BindingUtils.string(R.string.some_thing_went_wrong),
-                    View.VISIBLE
-                )*/
+
             }
         }
     }
