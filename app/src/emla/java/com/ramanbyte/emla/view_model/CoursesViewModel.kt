@@ -54,6 +54,12 @@ class CoursesViewModel(var mContext: Context) : BaseViewModel(mContext = mContex
     var cartClickMutableLiveData = MutableLiveData<Int>().apply {
         value = null
     }
+    var courseModelLive = MutableLiveData<CoursesModel>().apply {
+        value = CoursesModel()
+    }
+    var courseSyllabusLiveData = MutableLiveData<CourseSyllabusModel>().apply {
+        value = CourseSyllabusModel()
+    }
 
     var tempFilterModel = CoursesRequest()
     var filterRequestModel = CoursesRequest()
@@ -419,10 +425,6 @@ class CoursesViewModel(var mContext: Context) : BaseViewModel(mContext = mContex
     }
 
     // on click of course of information
-var courseModelLive = MutableLiveData<CoursesModel>().apply {
-        value = CoursesModel()
-    }
-
     val onClickCourseInformationClick:(view: View, obj: Any) -> Unit = { view, obj ->
         obj as CoursesModel
         courseInformationLiveData.postValue(true)
@@ -455,9 +457,6 @@ var courseModelLive = MutableLiveData<CoursesModel>().apply {
         bottomSheetCloseLiveData.postValue(true)
     }
 
-    var courseSyllabusLiveData = MutableLiveData<CourseSyllabusModel>().apply {
-        value = CourseSyllabusModel()
-    }
 
     // get transaction count from server
     fun getCourseSyllbus(courseId:Int){
