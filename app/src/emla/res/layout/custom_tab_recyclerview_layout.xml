@@ -28,8 +28,8 @@
             android:layout_marginTop="@dimen/dp_5"
             android:ellipsize="end"
             android:gravity="center"
-            android:maxWidth="@dimen/dp_70"
-            android:minWidth="@dimen/dp_43"
+            android:maxWidth="@dimen/dp_60"
+            android:minWidth="@dimen/dp_50"
             android:singleLine="true"
             android:text="@string/courseware" />
     </LinearLayout>

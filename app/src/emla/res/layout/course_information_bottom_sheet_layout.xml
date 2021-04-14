@@ -232,7 +232,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_10"
                         android:text="@string/allocated_faculty"
-                        app:layout_constraintEnd_toEndOf="@id/lblLevel"
+                        app:layout_constraintEnd_toEndOf="@id/lblcredits"
                         app:layout_constraintStart_toStartOf="@id/lblLevel"
                         app:layout_constraintTop_toBottomOf="@id/barrierLevel" />
 
