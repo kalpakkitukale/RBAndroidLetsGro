@@ -408,13 +408,13 @@ class CoursesViewModel(var mContext: Context) : BaseViewModel(mContext = mContex
         }
     val onCartclickListener: (view: View, obj: Any) -> Unit = { view, obj ->
         obj as CoursesModel
-     //   cartClickMutableLiveData.postValue(obj.courseId)
-       /* insertCartData(view, obj)*/
+       cartClickMutableLiveData.postValue(obj.courseId)
+        insertCartData(view, obj)
 
-       var intent = Intent(mContext,CertificateViewerActivity::class.java)
+      /* var intent = Intent(mContext,CertificateViewerActivity::class.java)
         intent.putExtra("userId", 9211)
         intent.putExtra("courseId", obj.courseId)
-        mContext.startActivity(intent)
+        mContext.startActivity(intent)*/
 
     }
 
