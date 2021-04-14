@@ -159,21 +159,15 @@ class CoursesViewModel(var mContext: Context) : BaseViewModel(mContext = mContex
             isLoaderShowingLiveData.postValue(false)
             AppLog.infoLog(e.message.toString())
         }
-
-
         transactionRepository.myCourseList()
         isLoaderShowingLiveData.postValue(false)
-
     }
-
     fun coursesPagedList(): LiveData<PagedList<CoursesModel>>? {
         return coursesRepository.coursesPagedList
     }
-
     fun myCoursesPagedList(): LiveData<PagedList<CoursesModel>>? {
         return transactionRepository.coursesPagedList
     }
-
     fun insertCartData(view: View, coursesModel: CoursesModel) {
         CoroutineUtils.main {
             try {
@@ -213,8 +207,6 @@ class CoursesViewModel(var mContext: Context) : BaseViewModel(mContext = mContex
                 isAlertDialogShown.postValue(true)
             }
         }
-
-
     }
 
     /*
@@ -260,9 +252,7 @@ class CoursesViewModel(var mContext: Context) : BaseViewModel(mContext = mContex
             }
         }
     }
-
     fun showCourseSyllabus(view: View, coursesModel: CoursesModel) {
-
         view.findNavController()
             .navigate(
                 R.id.courseSyllabusFragment, /*action_coursesFragment_to_courseSyllabusFragment*/
@@ -270,26 +260,21 @@ class CoursesViewModel(var mContext: Context) : BaseViewModel(mContext = mContex
                     putParcelable(KEY_COURSE_MODEL, coursesModel)
                 })
     }
-
     // on click on the topic list
     fun showChapterList(view: View, coursesModel: CoursesModel) {
         view.findNavController().navigate(
             R.id.chaptersListFragment,
             Bundle().apply { putParcelable(KEY_COURSE_MODEL, coursesModel) })
     }
-
-    // on click on performance check 
+    // on click on performance check
     fun checkPerformance(view: View, coursesModel: CoursesModel) {
         view.findNavController().navigate(R.id.courseResultFragment, Bundle().apply {
             putParcelable(KEY_COURSE_MODEL, coursesModel)
         })
-
     }
-
     fun shareClick(view: View, coursesModel: CoursesModel) {
         shareLiveData.value = coursesModel
     }
-
     fun onCloseBottomSheet(view: View) {
         /*tempFilterModel.apply {
             userType = filterRequestModel.userType
@@ -300,7 +285,6 @@ class CoursesViewModel(var mContext: Context) : BaseViewModel(mContext = mContex
         }*/
         dismissBottomSheet.postValue(true)
     }
-
     /**Filter operations*/
     fun onApplyFilterClick(view: View) {
         try {
@@ -333,7 +317,6 @@ class CoursesViewModel(var mContext: Context) : BaseViewModel(mContext = mContex
             AppLog.errorLog(e.message, e)
         }
     }
-
     private fun hasFilter(): Boolean {
         return (/*tempFilterModel.userType.isNotEmpty() ||*/
                 tempFilterModel.programId != 0 ||
@@ -341,7 +324,6 @@ class CoursesViewModel(var mContext: Context) : BaseViewModel(mContext = mContex
                         tempFilterModel.specializationId != 0 ||
                         tempFilterModel.skillId != 0)
     }
-
     fun getFilterState(): Boolean {
         return (/*filterRequestModel.userType.isNotEmpty() ||*/
                 filterRequestModel.programId != 0 ||
@@ -368,7 +350,6 @@ class CoursesViewModel(var mContext: Context) : BaseViewModel(mContext = mContex
         }
         invokeApiCall(apiCallFunction = apiCallFunction)
     }
-
 
     fun getAllPrograms() {
         val apiCallFunction: suspend () -> Unit = {
@@ -423,7 +404,6 @@ class CoursesViewModel(var mContext: Context) : BaseViewModel(mContext = mContex
         mContext.startActivity(intent)*/
 
     }
-
     // on click of course of information
     val onClickCourseInformationClick:(view: View, obj: Any) -> Unit = { view, obj ->
         obj as CoursesModel
@@ -457,7 +437,6 @@ class CoursesViewModel(var mContext: Context) : BaseViewModel(mContext = mContex
         bottomSheetCloseLiveData.postValue(true)
     }
 
-
     // get transaction count from server
     fun getCourseSyllbus(courseId:Int){
         CoroutineUtils.main {
@@ -469,15 +448,12 @@ class CoursesViewModel(var mContext: Context) : BaseViewModel(mContext = mContex
             } catch (e:NoInternetException){
                 e.printStackTrace()
                 AppLog.infoLog(e.message.toString())
-
             } catch (e:NoDataException){
                 e.printStackTrace()
                 AppLog.infoLog(e.message.toString())
-
             } catch (e:Exception){
                 e.printStackTrace()
                 AppLog.infoLog(e.message.toString())
-
             }
         }
     }
