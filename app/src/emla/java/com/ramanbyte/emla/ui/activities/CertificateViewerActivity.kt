@@ -104,9 +104,10 @@ class CertificateViewerActivity : AppCompatActivity() {
             val userId = getIntExtra("userId", 0)
             courseId = getIntExtra("courseId", 0)
 
-            newUrl = "http://report.ramanbyte.com/test/idbicertificate.aspx?UserId=$userId&CourseId=$courseId"
+            newUrl = "http://webapptest.classroomplus.in/eMarketPlace/test/api/Certificate/CertificatePDF/9211/3049"
+            //"http://report.ramanbyte.com/test/idbicertificate.aspx?UserId=$userId&CourseId=$courseId"
 
-                "http://webapptest.classroomplus.in/eMarketPlace/test/api/Certificate/CertificatePDF/9211/3049"  //   userId &  courseIdthis is new api developed by @Manish Mehra
+                 //   userId &  courseIdthis is new api developed by @Manish Mehra
 
             //http://report.ramanbyte.com/Prod/idbicertificate.aspx?UserId=1&CourseId=1
 
