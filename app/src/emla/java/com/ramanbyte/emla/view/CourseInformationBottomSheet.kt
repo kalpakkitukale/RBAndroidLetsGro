@@ -24,8 +24,6 @@ class CourseInformationBottomSheet(var isActivityParent: Boolean, useParent: Boo
     (  isActivityParent = isActivityParent,
     useParent = useParent){
 
-var binding:CourseInformationBottomSheetLayoutBinding? = null
-
     override val viewModelClass: Class<CoursesViewModel> = CoursesViewModel::class.java
 
     override fun layoutId(): Int = R.layout.course_information_bottom_sheet_layout
