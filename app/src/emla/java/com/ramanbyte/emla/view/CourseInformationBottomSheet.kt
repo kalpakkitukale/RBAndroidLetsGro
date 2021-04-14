@@ -90,7 +90,6 @@ var binding:CourseInformationBottomSheetLayoutBinding? = null
             courseSyllabusLiveData.observe(this@CourseInformationBottomSheet, Observer {
                 it?.let {
                         layoutBinding?.dataList = it
-                    AppLog.infoLog("Pibm ---> ${it.specialization}")
                 }
             })
 

@@ -93,6 +93,7 @@ class CartFragment : BaseFragment<FragmentCartBinding, CartViewModel>() {
 
     override fun onResume() {
         viewModel.clickedLiveData.postValue(false)
+        viewModel. getCartList()
         super.onResume()
     }
 }

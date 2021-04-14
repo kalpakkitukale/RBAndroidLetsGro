@@ -63,7 +63,7 @@ class CartViewModel(var mContext: Context) : BaseViewModel(mContext = mContext) 
             var fee = 0.0
             var totalFee = "0.0"
             try {
-                // coroutineToggleLoader(BindingUtils.string(R.string.getting_reply_list))
+                // coroutineToggleLoader(BindingUtils.string(R.string.getting_reply_list))          2
                 isLoaderShowingLiveData.postValue(true)
                 loaderMessageLiveData.set(BindingUtils.string(R.string.getting_reply_list))
                 val response = transactionRepository.getCart()
