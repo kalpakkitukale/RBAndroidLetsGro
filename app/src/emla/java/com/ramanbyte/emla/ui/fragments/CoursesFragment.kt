@@ -15,6 +15,7 @@ import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.SearchView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -280,9 +281,14 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
             var courseinfromationBottomSheets: CourseInformationBottomSheet? = null
             courseInformationLiveData.observe(this@CoursesFragment, Observer {
                 it?.let {
-                    if (it)
-                    courseinfromationBottomSheets = CourseInformationBottomSheet(false,true)
-                    courseinfromationBottomSheets?.show(childFragmentManager,"CourseOfInfromation")
+                    if (it) {
+                        courseinfromationBottomSheets = CourseInformationBottomSheet(false, true)
+                        courseinfromationBottomSheets?.show(
+                            childFragmentManager,
+                            BindingUtils.string(R.string.course_information)
+                        )
+                        courseInformationLiveData.postValue(false)
+                    }
                 }
             })
 
@@ -293,4 +299,9 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
         super.onAttach(context)
         mContext = context
     }
+
+
+
+
+
 }

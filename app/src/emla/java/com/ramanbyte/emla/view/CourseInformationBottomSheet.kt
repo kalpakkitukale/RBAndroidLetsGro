@@ -23,11 +23,8 @@ import com.ramanbyte.utilities.StaticMethodUtilitiesKtx
 class CourseInformationBottomSheet(var isActivityParent: Boolean, useParent: Boolean):BaseBottomSheetFragment<CourseInformationBottomSheetLayoutBinding, CoursesViewModel>
     (  isActivityParent = isActivityParent,
     useParent = useParent){
-
     override val viewModelClass: Class<CoursesViewModel> = CoursesViewModel::class.java
-
     override fun layoutId(): Int = R.layout.course_information_bottom_sheet_layout
-
     override fun initiate() {
         layoutBinding?.apply {
             lifecycleOwner = this@CourseInformationBottomSheet
@@ -35,14 +32,11 @@ class CourseInformationBottomSheet(var isActivityParent: Boolean, useParent: Boo
             fullBottomSheet()
             viewModelOperation()
         }
-
     }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setStyle(DialogFragment.STYLE_NORMAL, 0)
     }
-
     override fun onStart() {
         super.onStart()
         val window = dialog!!.window
@@ -51,7 +45,6 @@ class CourseInformationBottomSheet(var isActivityParent: Boolean, useParent: Boo
         windowParams.flags = windowParams.flags or WindowManager.LayoutParams.FLAG_DIM_BEHIND
         window.attributes = windowParams
     }
-
     private fun fullBottomSheet() {
         layoutBinding.apply {
             layoutMainContainer.viewTreeObserver.addOnGlobalLayoutListener {
@@ -74,7 +67,6 @@ class CourseInformationBottomSheet(var isActivityParent: Boolean, useParent: Boo
             }
         }
     }
-
     fun viewModelOperation(){
         viewModel?.apply {
             bottomSheetCloseLiveData.observe(this@CourseInformationBottomSheet, Observer {
