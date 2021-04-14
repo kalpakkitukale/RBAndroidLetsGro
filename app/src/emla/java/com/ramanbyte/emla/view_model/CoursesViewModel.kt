@@ -407,9 +407,9 @@ class CoursesViewModel(var mContext: Context) : BaseViewModel(mContext = mContex
     // on click of course of information
     val onClickCourseInformationClick:(view: View, obj: Any) -> Unit = { view, obj ->
         obj as CoursesModel
+        courseModelLive.postValue(obj)
         courseInformationLiveData.postValue(true)
         getCourseSyllbus(obj.courseId)
-        courseModelLive.postValue(obj)
     }
 
   // get transaction count from server

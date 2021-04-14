@@ -40,6 +40,7 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
     private lateinit var mContext: Context
     private var coursesAdapter: CoursesAdapter? = null
     private var courseFilterBottomSheet: RecommendedCourseFilterBottomSheet? = null
+    var courseinfromationBottomSheets: CourseInformationBottomSheet? = null
 
     override val viewModelClass: Class<CoursesViewModel>
         get() = CoursesViewModel::class.java
@@ -278,15 +279,12 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
 
             })
 
-            var courseinfromationBottomSheets: CourseInformationBottomSheet? = null
+
             courseInformationLiveData.observe(this@CoursesFragment, Observer {
                 it?.let {
                     if (it) {
                         courseinfromationBottomSheets = CourseInformationBottomSheet(false, true)
-                        courseinfromationBottomSheets?.show(
-                            childFragmentManager,
-                            BindingUtils.string(R.string.course_information)
-                        )
+                        courseinfromationBottomSheets?.show(childFragmentManager, BindingUtils.string(R.string.course_information))
                         courseInformationLiveData.postValue(false)
                     }
                 }
