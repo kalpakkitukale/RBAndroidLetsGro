@@ -84,7 +84,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/lblPurchaseDetail"
-            style="@style/TextViewDescription"
+            style="@style/TextViewDescriptionwithBold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dp_20"
@@ -92,6 +92,7 @@
             android:onClick="@{trasacationViewModel::purchaesDetailClick}"
             android:text="@string/purchase_details"
             android:textAllCaps="true"
+            android:textColor="@color/colorAccent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/lblTransactionMessage" />
 

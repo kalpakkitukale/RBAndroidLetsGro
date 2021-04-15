@@ -335,6 +335,13 @@ New Style START
         <item name="android:drawablePadding">@dimen/dp_5</item>
     </style>
 
+    <style name="TextViewDescriptionwithBold">
+        <item name="android:textAppearance">@style/AppTheme.Font.Bold</item>
+        <item name="android:textSize">@dimen/sp_12</item>
+        <item name="android:textColor">@color/colorDescription</item>
+        <item name="android:drawablePadding">@dimen/dp_5</item>
+    </style>
+
     <style name="CustomCapsuleButtonFilled">
         <item name="android:background">@drawable/custom_button_filled</item>
         <item name="android:gravity">center</item>
