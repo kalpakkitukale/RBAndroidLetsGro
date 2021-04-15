@@ -144,12 +144,12 @@ class CoursesAdapter(private val displayMetrics: DisplayMetrics, var myCourse: I
     fun getCustomTabModuleList(coursesModel: CoursesModel): ArrayList<CustomTabModel> {
         val customTabModelList = ArrayList<CustomTabModel>()
 
-        customTabModelList.add(CustomTabModel().apply {
+        /*customTabModelList.add(CustomTabModel().apply {
             id = 5
             icon = BindingUtils.drawable(R.drawable.ic_course_information)
             title = BindingUtils.string(R.string.course_information)
             clickListener = viewModel?.onClickCourseInformationClick!!
-        })
+        })*/
 
         customTabModelList.add(CustomTabModel().apply {
             id = 1
