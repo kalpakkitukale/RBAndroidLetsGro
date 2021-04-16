@@ -61,14 +61,10 @@ class CoursePerchesDetailsBottomSheet(var isActivityParent: Boolean, useParent: 
                         cartResponseModeldataList?.let {
                             setAdapter(it)
                         }
-
                     }catch (e:Exception){
                         e.printStackTrace()
                         AppLog.infoLog(e.message.toString())
                     }
-
-
-
                     layoutBinding?.tvTotalAmount.setText(it[0].totalPaid)
                 }
             })
