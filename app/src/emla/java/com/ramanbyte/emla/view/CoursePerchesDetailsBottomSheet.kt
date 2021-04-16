@@ -1,7 +1,6 @@
 package com.ramanbyte.emla.view
 
 import android.content.Context
-import android.content.res.Resources
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.View
@@ -11,7 +10,6 @@ import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_EXPANDED
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseBottomSheetFragment
@@ -19,7 +17,9 @@ import com.ramanbyte.databinding.CoursePerchaesDetailsBottomSheetBinding
 import com.ramanbyte.emla.adapters.PurchaseCourseDetailsAdapter
 import com.ramanbyte.emla.models.response.CartResponseModel
 import com.ramanbyte.emla.view_model.TransactionHistoryViewModel
+import com.ramanbyte.utilities.AppLog
 import com.ramanbyte.utilities.StaticMethodUtilitiesKtx
+import kotlin.Exception
 
 /**
  * @author Akash Inkar <akash.1@ramanbyte.com>
@@ -31,6 +31,7 @@ class CoursePerchesDetailsBottomSheet(var isActivityParent: Boolean, useParent: 
         useParent = useParent
     ) {
     lateinit var mContext: Context
+    var cartResponseModeldataList: ArrayList<CartResponseModel>? = null
     override val viewModelClass: Class<TransactionHistoryViewModel> =
         TransactionHistoryViewModel::class.java
 
@@ -54,7 +55,20 @@ class CoursePerchesDetailsBottomSheet(var isActivityParent: Boolean, useParent: 
         viewModel.apply {
             cartDetailsLiveData.observe(this@CoursePerchesDetailsBottomSheet, Observer {
                 it?.let {
-                    setAdapter(it)
+                    try {
+                        cartResponseModeldataList = it.distinctBy { it.courseName
+                        } as ArrayList<CartResponseModel>
+                        cartResponseModeldataList?.let {
+                            setAdapter(it)
+                        }
+
+                    }catch (e:Exception){
+                        e.printStackTrace()
+                        AppLog.infoLog(e.message.toString())
+                    }
+
+
+
                     layoutBinding?.tvTotalAmount.setText(it[0].totalPaid)
                 }
             })
@@ -79,7 +93,7 @@ class CoursePerchesDetailsBottomSheet(var isActivityParent: Boolean, useParent: 
 
     fun setAdapter(dataList: ArrayList<CartResponseModel>) {
         val layoutManager = LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false)
-        val adapter = PurchaseCourseDetailsAdapter(dataList, mContext)
+            val adapter = PurchaseCourseDetailsAdapter(dataList, mContext)
         layoutBinding.apply {
             rvPerchaesDetails.layoutManager = layoutManager
             rvPerchaesDetails.adapter = adapter
