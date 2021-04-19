@@ -102,6 +102,10 @@ class ViewModelFactory(private val mContext: Context) : BaseViewModelFactory(mCo
                 return CartViewModel(mContext) as T
             }
 
+            modelClass.isAssignableFrom(MyCourseViewModel::class.java) -> {
+                return MyCourseViewModel(mContext) as T
+            }
+
             else -> super.create(modelClass)
         }
 

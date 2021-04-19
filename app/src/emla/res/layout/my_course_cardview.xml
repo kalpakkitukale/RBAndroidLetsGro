@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="coursesModel"
+            type="com.ramanbyte.emla.models.CoursesModel" />
+
+        <variable
+            name="viewPosition"
+            type="Integer" />
+
+
+        <variable
+            name="coursesViewModel"
+            type="com.ramanbyte.emla.view_model.MyCourseViewModel" />
+
+        <import type="com.ramanbyte.utilities.StaticHelpersKt" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardContainer"
+        style="@style/customCardWithoutPadding"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imageView"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_course_dummy"
+                app:imageUrl="@{coursesModel.courseImageUrl}"
+                app:layout_constraintDimensionRatio="H,7:3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorCardBackground"
+                android:padding="@dimen/dp_8"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/lblCourseName"
+                    style="@style/TextViewTitle.CourseName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:layout_marginEnd="@dimen/dp_5"
+                    android:text="@{coursesModel.courseName}"
+                    app:layout_constraintEnd_toStartOf="@+id/tvcourseCost"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvcourseCost"
+                    style="@style/TextViewTitle.CoursePrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_rupee_indian"
+                    android:drawablePadding="@dimen/dp_5"
+                    android:text="@{StaticHelpersKt.skipTrailingZeroes(coursesModel.courseFee)}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/lblCourseName" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvCustomTabList"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:layout_marginBottom="@dimen/dp_10"
+                    android:background="@null"
+                    android:orientation="horizontal"
+                    android:visibility="visible"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/lblCourseName"
+                    tools:listitem="@layout/custom_tab_recyclerview_layout" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivShare"
+                style="@style/ImageViewOnCardWithBackground"
+                android:layout_width="@dimen/dp_35"
+                android:layout_height="@dimen/dp_35"
+
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/imageView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:srcCompat="@drawable/ic_share" />
+<!-- android:onClick="@{()->coursesViewModel.shareClick(ivShare, coursesModel)}"-->
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivStatus"
+                style="@style/ImageViewOnCardWithBackground"
+                android:layout_width="@dimen/dp_35"
+                android:layout_height="@dimen/dp_35"
+                android:layout_marginEnd="@dimen/dp_10"
+                android:visibility="gone"
+                app:layout_constraintEnd_toStartOf="@+id/ivShare"
+                app:layout_constraintTop_toTopOf="@+id/ivShare"
+                app:srcCompat="@drawable/ic_live" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.cardview.widget.CardView>
+</layout>

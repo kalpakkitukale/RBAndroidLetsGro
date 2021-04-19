@@ -2,6 +2,7 @@ package com.ramanbyte.emla.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
 import com.ramanbyte.R
 import com.ramanbyte.databinding.CustomTabRecyclerviewLayoutBinding
@@ -16,7 +17,7 @@ import com.ramanbyte.emla.view_model.CoursesViewModel
 class CustomTabLayoutAdapter(
     private val customTabModelList: ArrayList<CustomTabModel>,
     private val obj: Any,
-    var viewModel: CoursesViewModel?
+    var viewModel: ViewModel?
 ) : RecyclerView.Adapter<CustomTabLayoutAdapter.CustomTabLayoutViewHolder>() {
 var positions= obj
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomTabLayoutViewHolder {

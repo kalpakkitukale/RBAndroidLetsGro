@@ -5,22 +5,21 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseFragment
-import com.ramanbyte.databinding.FragmentCoursesBinding
-import com.ramanbyte.emla.adapters.CoursesAdapter
-import com.ramanbyte.emla.view_model.CoursesViewModel
+import com.ramanbyte.databinding.MyCoursesFragmentBinding
+import com.ramanbyte.emla.adapters.MyCourseAdapter
+import com.ramanbyte.emla.view_model.MyCourseViewModel
 import com.ramanbyte.utilities.AlertDialog
 import com.ramanbyte.utilities.BindingUtils
 import com.ramanbyte.utilities.ProgressLoader
 import com.ramanbyte.utilities.displayMetrics
 
-class MyCourseFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>() {
+class MyCourseFragment : BaseFragment<MyCoursesFragmentBinding, MyCourseViewModel>() {
     private lateinit var mContext: Context
-    private var coursesAdapter: CoursesAdapter? = null
+    private var coursesAdapter: MyCourseAdapter? = null
+    override val viewModelClass: Class<MyCourseViewModel>
+        get() = MyCourseViewModel::class.java
 
-    override val viewModelClass: Class<CoursesViewModel>
-        get() = CoursesViewModel::class.java
-
-    override fun layoutId(): Int = R.layout.fragment_courses
+    override fun layoutId(): Int = R.layout.my_courses_fragment
 
     override fun initiate() {
         layoutBinding.apply {
@@ -40,7 +39,7 @@ class MyCourseFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>(
     private fun setAdapter() {
         layoutBinding.apply {
             rvCoursesFragment.apply {
-                coursesAdapter = CoursesAdapter((activity!!).displayMetrics(), 1)
+                coursesAdapter = MyCourseAdapter((activity!!).displayMetrics(), 1)
                 layoutManager = LinearLayoutManager(mContext, RecyclerView.VERTICAL, false)
                 adapter = coursesAdapter?.apply {
                     this.context = mContext
