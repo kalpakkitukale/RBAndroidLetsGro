@@ -1,10 +1,8 @@
 package com.ramanbyte.emla.ui.fragments
 
 import android.Manifest
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
 import android.content.res.ColorStateList
 import android.net.Uri
@@ -24,15 +22,10 @@ import com.ramanbyte.base.BaseFragment
 import com.ramanbyte.databinding.FragmentFacultyRegistrationBinding
 import com.ramanbyte.emla.adapters.CustomAutocompleteAdapter
 import com.ramanbyte.emla.models.AreaOfExpertiseResponseModel
-import com.ramanbyte.emla.models.UserDetailsModel
 import com.ramanbyte.emla.view_model.CreateAccountViewModel
 import com.ramanbyte.emla.view_model.LoginViewModel
 import com.ramanbyte.models.SpinnerModel
 import com.ramanbyte.utilities.*
-import droidninja.filepicker.FilePickerBuilder
-import droidninja.filepicker.FilePickerConst
-import droidninja.filepicker.models.sort.SortingTypes
-import java.io.File
 
 class FacultyRegistrationFragment :
     BaseFragment<FragmentFacultyRegistrationBinding, CreateAccountViewModel>(false, false) {
@@ -143,7 +136,7 @@ class FacultyRegistrationFragment :
     private fun openDocumentFile() {
         val pdfs = arrayOf(FileUtils.KEY_PDF_DOCUMENT_EXTENSION)
 
-        FilePickerBuilder.instance
+       /* FilePickerBuilder.instance
             .setSelectedFiles(docPaths)
             .setActivityTheme(R.style.FilePickerTheme)
             .setActivityTitle(BindingUtils.string(R.string.please_select_resume))
@@ -153,11 +146,11 @@ class FacultyRegistrationFragment :
             .setMaxCount(1)
             .sortDocumentsBy(SortingTypes.name)
             .withOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
-            .pickFile(this)
+            .pickFile(this)*/
 
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    /*override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         when (requestCode) {
 
             FilePickerConst.REQUEST_CODE_DOC -> if (resultCode == Activity.RESULT_OK && data != null) {
@@ -240,7 +233,7 @@ class FacultyRegistrationFragment :
                 }
             }
         }
-    }
+    }*/
 
     override fun onRequestPermissionsResult(
         requestCode: Int,

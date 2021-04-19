@@ -4,7 +4,6 @@ import android.Manifest
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
@@ -18,6 +17,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import com.fxn.pix.Options
+import com.fxn.pix.Pix
 import com.ramanbyte.BaseAppController
 import com.ramanbyte.BuildConfig
 import com.ramanbyte.R
@@ -27,8 +28,6 @@ import com.ramanbyte.databinding.FragmentStudentRegistrationBinding
 import com.ramanbyte.emla.view_model.CreateAccountViewModel
 import com.ramanbyte.emla.view_model.LoginViewModel
 import com.ramanbyte.utilities.*
-import droidninja.filepicker.FilePickerBuilder
-import droidninja.filepicker.FilePickerConst
 import java.io.File
 
 class StudentRegistrationFragment :
@@ -42,6 +41,9 @@ class StudentRegistrationFragment :
     override val viewModelClass: Class<CreateAccountViewModel> = CreateAccountViewModel::class.java
 
     override fun layoutId(): Int = R.layout.fragment_student_registration
+
+    private lateinit var options: Options
+    private var returnValue = ArrayList<String>()
 
     override fun initiate() {
         layoutBinding.apply {
@@ -61,8 +63,21 @@ class StudentRegistrationFragment :
 
             ivUserImage.setOnClickListener { openPickerDialog() }
         }
+        initImageChooseOptions()
         setViewModelOp()
     }
+
+    private fun initImageChooseOptions() {
+        options = Options.init()
+            .setRequestCode(REQUEST_CODE_GALLERY_PIC)
+            .setCount(1)
+            .setPreSelectedUrls(returnValue)
+            .setMode(Options.Mode.Picture)
+            .setVideoDurationLimitinSeconds(30)
+            .setScreenOrientation(Options.SCREEN_ORIENTATION_PORTRAIT)
+            .setPath("/akshay/new")
+    }
+
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
@@ -201,7 +216,10 @@ class StudentRegistrationFragment :
     /**Vinay k
      * open Gallery**/
     private fun openGallery() {
-        FilePickerBuilder.instance
+        options.preSelectedUrls = returnValue
+        Pix.start(this, options)
+
+        /*FilePickerBuilder.instance
             .setSelectedFiles(ArrayList())
             .setActivityTheme(R.style.FilePickerTheme)
             .setActivityTitle(BindingUtils.string(R.string.please_select_media))
@@ -214,7 +232,7 @@ class StudentRegistrationFragment :
             .enableImagePicker(true)
             .setCameraPlaceholder(R.drawable.ic_camera)
             .withOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
-            .pickPhoto(this, REQUEST_CODE_GALLERY_PIC)
+            .pickPhoto(this, REQUEST_CODE_GALLERY_PIC)*/
     }
 
     /**Vinay k
@@ -224,9 +242,14 @@ class StudentRegistrationFragment :
         super.onActivityResult(requestCode, resultCode, data)
         when (requestCode) {
             REQUEST_CODE_GALLERY_PIC -> if (resultCode == Activity.RESULT_OK && data != null) {
-                val mediaList = data.getStringArrayListExtra(FilePickerConst.KEY_SELECTED_MEDIA)
+                /*val mediaList = data.getStringArrayListExtra(FilePickerConst.KEY_SELECTED_MEDIA)
                 if (mediaList?.size ?: 0 > 0) {
                     imagePath = mediaList.get(0)
+                    performCrop()
+                }*/
+                returnValue = data.getStringArrayListExtra(Pix.IMAGE_RESULTS)!!
+                if (returnValue.size > 0) {
+                    imagePath = returnValue.get(0)
                     performCrop()
                 }
             }

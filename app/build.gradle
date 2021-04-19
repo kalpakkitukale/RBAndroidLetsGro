@@ -84,7 +84,7 @@ ext {
     ext.lifecycle_version = '2.2.0'
     ext.appcompat_version = '1.1.0'
     ext.material_version = '1.2.0-alpha02'
-    ext.glide_version = '4.9.0'
+    ext.glide_version = '4.11.0'
     ext.expadable_constraint = '2.9.2'
 }
 
@@ -93,7 +93,6 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 //    by Vinay
     implementation project(':aws_s3_android')
-    implementation project(':filepicker')
     implementation project(':imagecropper')
 
     implementation 'androidx.appcompat:appcompat:1.1.0'
@@ -134,6 +133,10 @@ dependencies {
     implementation 'android.arch.paging:runtime:1.0.1'
     //Glide
     implementation "com.github.bumptech.glide:glide:$glide_version"
+    annotationProcessor "com.github.bumptech.glide:compiler:$glide_version"
+    implementation ("com.github.bumptech.glide:okhttp3-integration:$glide_version"){
+        exclude group: 'glide-parent'
+    }
     kapt "com.github.bumptech.glide:compiler:$glide_version"
     //Work manager
     implementation 'androidx.work:work-runtime:2.3.0'
@@ -176,4 +179,7 @@ dependencies {
 
     //all in one paytm dependency
    implementation 'com.paytm.appinvokesdk:appinvokesdk:1.2'
+
+    // image chooser
+    implementation  'com.fxn769:pix:1.5.6'
 }

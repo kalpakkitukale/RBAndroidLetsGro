@@ -3,7 +3,6 @@ package com.ramanbyte.emla.ui.fragments
 import android.Manifest
 import android.app.Activity
 import android.content.Intent
-import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
@@ -11,6 +10,8 @@ import android.provider.MediaStore
 import android.provider.Settings
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
+import com.fxn.pix.Options
+import com.fxn.pix.Pix
 import com.ramanbyte.BaseAppController
 import com.ramanbyte.BuildConfig
 import com.ramanbyte.R
@@ -19,8 +20,6 @@ import com.ramanbyte.cropper.ImageCroppingActivity
 import com.ramanbyte.databinding.FragmentPersonalDetailBinding
 import com.ramanbyte.emla.view_model.LearnerProfileViewModel
 import com.ramanbyte.utilities.*
-import droidninja.filepicker.FilePickerBuilder
-import droidninja.filepicker.FilePickerConst
 import java.io.File
 
 
@@ -37,10 +36,11 @@ class PersonalDetailFragment :
 
     override fun layoutId(): Int = R.layout.fragment_personal_detail
 
-
-
     private var imagePath = ""
     private var fileName = ""
+
+    private lateinit var options: Options
+    private var returnValue = ArrayList<String>()
 
     override fun initiate() {
 
@@ -54,8 +54,20 @@ class PersonalDetailFragment :
 
             ivUserImage.setOnClickListener { openPickerDialog() }
         }
-
+        initImageChooseOptions()
     }
+
+    private fun initImageChooseOptions() {
+        options = Options.init()
+            .setRequestCode(REQUEST_CODE_GALLERY_PIC)
+            .setCount(1)
+            .setPreSelectedUrls(returnValue)
+            .setMode(Options.Mode.Picture)
+            .setVideoDurationLimitinSeconds(30)
+            .setScreenOrientation(Options.SCREEN_ORIENTATION_PORTRAIT)
+            .setPath("/akshay/new")
+    }
+
     private fun openPickerDialog() {
         val builder: android.app.AlertDialog.Builder =
             android.app.AlertDialog.Builder(context)
@@ -157,20 +169,9 @@ class PersonalDetailFragment :
 
 
     private fun openGallery() {
-        FilePickerBuilder.instance
-            .setSelectedFiles(ArrayList())
-            .setActivityTheme(R.style.FilePickerTheme)
-            .setActivityTitle(BindingUtils.string(R.string.please_select_media))
-            .enableVideoPicker(false)
-            .enableCameraSupport(false)
-            .showGifs(false)
-            .setMaxCount(1)
-            .showFolderView(true)
-            .enableSelectAll(false)
-            .enableImagePicker(true)
-            .setCameraPlaceholder(R.drawable.ic_camera)
-            .withOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
-            .pickPhoto(this, REQUEST_CODE_GALLERY_PIC)
+
+        options.preSelectedUrls = returnValue
+        Pix.start(this, options)
     }
 
 
@@ -178,9 +179,14 @@ class PersonalDetailFragment :
         super.onActivityResult(requestCode, resultCode, data)
         when (requestCode) {
             REQUEST_CODE_GALLERY_PIC -> if (resultCode == Activity.RESULT_OK && data != null) {
-                val mediaList = data.getStringArrayListExtra(FilePickerConst.KEY_SELECTED_MEDIA)
+                /*val mediaList = data.getStringArrayListExtra(FilePickerConst.KEY_SELECTED_MEDIA)
                 if (mediaList?.size ?: 0 > 0) {
                     imagePath = mediaList.get(0)
+                    performCrop()
+                }*/
+                returnValue = data.getStringArrayListExtra(Pix.IMAGE_RESULTS)!!
+                if (returnValue.size > 0) {
+                    imagePath = returnValue.get(0)
                     performCrop()
                 }
             }
