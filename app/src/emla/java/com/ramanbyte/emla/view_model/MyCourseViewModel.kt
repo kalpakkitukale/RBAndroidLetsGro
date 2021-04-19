@@ -20,10 +20,10 @@ import org.kodein.di.generic.instance
  * @author Akash Inkar <akash.1@ramanbyte.com>
  * @since 17/4/21
  */
-class MyCourseViewModel (var mContext: Context) : BaseViewModel(mContext = mContext) {
+class MyCourseViewModel(mContext: Context) : BaseViewModel(mContext = mContext) {
 
     private val transactionRepository: TransactionRepository by instance()
-    override var noInternetTryAgain: () -> Unit ={
+    override var noInternetTryAgain: () -> Unit = {
 
     }
 
@@ -44,13 +44,10 @@ class MyCourseViewModel (var mContext: Context) : BaseViewModel(mContext = mCont
                             BindingUtils.string(R.string.please_make_sure_you_are_connected_to_internet),
                             BindingUtils.string(R.string.some_thing_went_wrong)
                         )
-
                     )
-                    AppLog.infoLog("Pagination :: ${it.msg} :: ${it.status}")
                 }
-
             }
-        }catch (e:Exception){
+        } catch (e: Exception) {
             e.printStackTrace()
             isLoaderShowingLiveData.postValue(false)
             AppLog.infoLog(e.message.toString())
@@ -59,15 +56,14 @@ class MyCourseViewModel (var mContext: Context) : BaseViewModel(mContext = mCont
         isLoaderShowingLiveData.postValue(false)
     }
 
-
     val onCoursewareclickListener: (view: View, obj: Any) -> Unit = { view, obj ->
         obj as CoursesModel
-    showCourseSyllabus(view,obj)
-
+        showCourseSyllabus(view, obj)
     }
-    val onTopicclickListener: (view: View, obj: Any) -> Unit = { view, obj->
+
+    val onTopicclickListener: (view: View, obj: Any) -> Unit = { view, obj ->
         obj as CoursesModel
-       showChapterList(view,obj)
+        showChapterList(view, obj)
     }
 
     // on click on the topic list

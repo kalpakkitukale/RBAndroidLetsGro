@@ -14,7 +14,6 @@ import com.ramanbyte.utilities.ProgressLoader
 import com.ramanbyte.utilities.displayMetrics
 
 class MyCourseFragment : BaseFragment<MyCoursesFragmentBinding, MyCourseViewModel>() {
-    private lateinit var mContext: Context
     private var coursesAdapter: MyCourseAdapter? = null
     override val viewModelClass: Class<MyCourseViewModel>
         get() = MyCourseViewModel::class.java
@@ -24,8 +23,8 @@ class MyCourseFragment : BaseFragment<MyCoursesFragmentBinding, MyCourseViewMode
     override fun initiate() {
         layoutBinding.apply {
             lifecycleOwner = this@MyCourseFragment
-            ProgressLoader(mContext, viewModel)
-            AlertDialog(mContext, viewModel)
+            ProgressLoader(requireContext(), viewModel)
+            AlertDialog(requireContext(), viewModel)
             coursesViewModel = viewModel
             noInternet.viewModel = viewModel
             noData.viewModel = viewModel
@@ -39,10 +38,10 @@ class MyCourseFragment : BaseFragment<MyCoursesFragmentBinding, MyCourseViewMode
     private fun setAdapter() {
         layoutBinding.apply {
             rvCoursesFragment.apply {
-                coursesAdapter = MyCourseAdapter((activity!!).displayMetrics(), 1)
-                layoutManager = LinearLayoutManager(mContext, RecyclerView.VERTICAL, false)
+                coursesAdapter = MyCourseAdapter()
+                layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
                 adapter = coursesAdapter?.apply {
-                    this.context = mContext
+                    this.context = requireContext()
                     viewModel = this@MyCourseFragment.viewModel
                 }
             }
@@ -55,7 +54,7 @@ class MyCourseFragment : BaseFragment<MyCoursesFragmentBinding, MyCourseViewMode
 
             myCourseListPagination()
             myCoursesPagedList()?.observe(this@MyCourseFragment, androidx.lifecycle.Observer {
-                it?.let { coursesAdapter?.apply { submitList(it) } }
+                it?.let { coursesAdapter?.submitList(it) }
             })
         }
     }
@@ -138,9 +137,5 @@ class MyCourseFragment : BaseFragment<MyCoursesFragmentBinding, MyCourseViewMode
         }
     }*/
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        mContext = context
-    }
 
 }

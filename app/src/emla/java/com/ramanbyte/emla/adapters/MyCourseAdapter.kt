@@ -28,12 +28,13 @@ import com.ramanbyte.utilities.StaticMethodUtilitiesKtx
  */
 
 
-class MyCourseAdapter(private val displayMetrics: DisplayMetrics, var myCourse: Int) :
-    PagedListAdapter<CoursesModel, MyCourseAdapter.CoursesHolder>(DIFF_CALLBACK) {
+class MyCourseAdapter : PagedListAdapter<CoursesModel, MyCourseAdapter.CoursesHolder>(DIFF_CALLBACK) {
+
     var viewModel: MyCourseViewModel? = null
     var context: Context? = null
     var lifecycleOwner: LifecycleOwner? = null
     var adapter: CustomTabLayoutAdapter? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CoursesHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.my_course_cardview, parent, false)
         return CoursesHolder(view)
@@ -44,17 +45,14 @@ class MyCourseAdapter(private val displayMetrics: DisplayMetrics, var myCourse: 
         holder.setData(coursesModel, position)
         holder.bind(coursesModel.apply {
 
-            if ((coursesModel.preAssessmentStatus.equals(
-                    "true",
+            if ((coursesModel.preAssessmentStatus.equals("true",
                     true
                 )) && (coursesModel.summativeAssessmentStatus.equals("true", true))
             ) {
                 holder.cardCourseBinding.ivStatus.visibility = View.VISIBLE
                 holder.cardCourseBinding.tvcourseCost.visibility = View.INVISIBLE
                 holder.cardCourseBinding.ivStatus.setImageDrawable(BindingUtils.drawable(R.drawable.ic_tick_circle))
-            } else if (coursesModel.preAssessmentStatus.equals(
-                    "true",
-                    true
+            } else if (coursesModel.preAssessmentStatus.equals("true", true
                 ) && (coursesModel.summativeAssessmentStatus.equals(
                     "false",
                     true
@@ -67,12 +65,7 @@ class MyCourseAdapter(private val displayMetrics: DisplayMetrics, var myCourse: 
                 holder.cardCourseBinding.ivStatus.visibility = View.GONE
                 holder.cardCourseBinding.tvcourseCost.visibility = View.VISIBLE
             }
-            courseImageUrl =
-                StaticMethodUtilitiesKtx.getS3DynamicURL(courseImage ?: KEY_BLANK, context!!)
-//                AppS3Client.createInstance(context!!).getFileAccessUrl(courseImage ?: KEY_BLANK)
-            courseImageUrl =
-                StaticMethodUtilitiesKtx.getS3DynamicURL(courseImage ?: KEY_BLANK, context!!)
-//                AppS3Client.createInstance(context!!).getFileAccessUrl(courseImage ?: KEY_BLANK)
+            courseImageUrl = StaticMethodUtilitiesKtx.getS3DynamicURL(courseImage ?: KEY_BLANK, context!!)
         })
     }
 
@@ -113,20 +106,7 @@ class MyCourseAdapter(private val displayMetrics: DisplayMetrics, var myCourse: 
                 rvCustomTabList.adapter = adapter
             }
         }
-
     }
-
-    //refresh the adapter
-    fun adapterRefresh(position: Int) {
-        try {
-            notifyItemChanged(position)
-            //notifyDataSetChanged()
-        } catch (e: Exception) {
-            e.printStackTrace()
-            AppLog.infoLog(e.message.toString())
-        }
-    }
-
 
     companion object {
         private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<CoursesModel>() {
