@@ -65,7 +65,7 @@ class PersonalDetailFragment :
             .setMode(Options.Mode.Picture)
             .setVideoDurationLimitinSeconds(30)
             .setScreenOrientation(Options.SCREEN_ORIENTATION_PORTRAIT)
-            .setPath("/akshay/new")
+            .setPath("/" + BindingUtils.string(R.string.app_name))
     }
 
     private fun openPickerDialog() {
@@ -75,20 +75,20 @@ class PersonalDetailFragment :
 
         val dialogMenu = if (viewModel.uploadFilePath.value?.isNotEmpty()!!) arrayOf<CharSequence>(
             BindingUtils.string(R.string.strCamera),
-            BindingUtils.string(R.string.strGallary),
+//            BindingUtils.string(R.string.strGallary),
             BindingUtils.string(R.string.strRemovePhoto)
         ) else
             arrayOf<CharSequence>(
                 BindingUtils.string(R.string.strCamera),
-                BindingUtils.string(R.string.strGallary)
+//                BindingUtils.string(R.string.strGallary)
             )
 
         builder.setItems(dialogMenu) { _, i ->
             when (i) {
+//                CAMERA -> {
+//                    openCamera()
+//                }
                 CAMERA -> {
-                    openCamera()
-                }
-                GALLERY -> {
                     // check permission for read write storage
                     if (PermissionsManager.checkPermission(
                             activity!!,

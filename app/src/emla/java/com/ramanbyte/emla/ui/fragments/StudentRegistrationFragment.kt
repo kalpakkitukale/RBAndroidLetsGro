@@ -75,7 +75,7 @@ class StudentRegistrationFragment :
             .setMode(Options.Mode.Picture)
             .setVideoDurationLimitinSeconds(30)
             .setScreenOrientation(Options.SCREEN_ORIENTATION_PORTRAIT)
-            .setPath("/akshay/new")
+            .setPath("/" + BindingUtils.string(R.string.app_name))
     }
 
 
@@ -120,20 +120,20 @@ class StudentRegistrationFragment :
 
         val dialogMenu = if (viewModel.uploadFilePath.value?.isNotEmpty()!!) arrayOf<CharSequence>(
             BindingUtils.string(R.string.strCamera),
-            BindingUtils.string(R.string.strGallary),
+//            BindingUtils.string(R.string.strGallary),
             BindingUtils.string(R.string.strRemovePhoto)
         ) else
             arrayOf<CharSequence>(
                 BindingUtils.string(R.string.strCamera),
-                BindingUtils.string(R.string.strGallary)
+//                BindingUtils.string(R.string.strGallary)
             )
 
         builder.setItems(dialogMenu) { _, i ->
             when (i) {
-                CAMERA -> {
+                /*CAMERA -> {
                     openCamera()
-                }
-                GALLERY -> {
+                }*/
+                CAMERA -> {
                     // check permission for read write storage
                     if (PermissionsManager.checkPermission(
                             mContext as Activity,
