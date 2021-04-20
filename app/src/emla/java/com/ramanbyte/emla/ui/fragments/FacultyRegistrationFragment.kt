@@ -54,6 +54,8 @@ class FacultyRegistrationFragment :
                 )
             }
 
+
+
             viewModel.apply {
                 /*
                 * call API for the area of expertise
@@ -148,7 +150,9 @@ class FacultyRegistrationFragment :
             .withOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
             .pickFile(this)*/
 
+
     }
+
 
     /*override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         when (requestCode) {
