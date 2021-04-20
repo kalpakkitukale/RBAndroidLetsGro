@@ -17,15 +17,18 @@ import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.chip.Chip
+import com.obsez.android.lib.filechooser.ChooserDialog
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseFragment
 import com.ramanbyte.databinding.FragmentFacultyRegistrationBinding
 import com.ramanbyte.emla.adapters.CustomAutocompleteAdapter
 import com.ramanbyte.emla.models.AreaOfExpertiseResponseModel
+import com.ramanbyte.emla.models.UserDetailsModel
 import com.ramanbyte.emla.view_model.CreateAccountViewModel
 import com.ramanbyte.emla.view_model.LoginViewModel
 import com.ramanbyte.models.SpinnerModel
 import com.ramanbyte.utilities.*
+import java.io.File
 
 class FacultyRegistrationFragment :
     BaseFragment<FragmentFacultyRegistrationBinding, CreateAccountViewModel>(false, false) {
@@ -136,30 +139,20 @@ class FacultyRegistrationFragment :
 
     //Select file from fileManager
     private fun openDocumentFile() {
-        val pdfs = arrayOf(FileUtils.KEY_PDF_DOCUMENT_EXTENSION)
+        val chooserDialog =
+            ChooserDialog(requireActivity(), R.style.FileChooserStyle)
 
-       /* FilePickerBuilder.instance
-            .setSelectedFiles(docPaths)
-            .setActivityTheme(R.style.FilePickerTheme)
-            .setActivityTitle(BindingUtils.string(R.string.please_select_resume))
-            .addFileSupport(BindingUtils.string(R.string.pdf), pdfs, R.drawable.ic_resume)
-            .enableDocSupport(true)
-            .enableSelectAll(true)
-            .setMaxCount(1)
-            .sortDocumentsBy(SortingTypes.name)
-            .withOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
-            .pickFile(this)*/
-
-
-    }
-
-
-    /*override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        when (requestCode) {
-
-            FilePickerConst.REQUEST_CODE_DOC -> if (resultCode == Activity.RESULT_OK && data != null) {
+        chooserDialog.apply {
+            withStringResources(
+                BindingUtils.string(R.string.please_select_resume),
+                BindingUtils.string(R.string.strOk),
+                BindingUtils.string(R.string.strCancel)
+            )
+            withDateFormat("dd MMM yyyy")
+            withOnBackPressedListener { dialog -> chooserDialog.goBack() }
+            withChosenListener { dir: String, dirFile: File ->
                 docPaths = ArrayList()
-                docPaths.addAll(data.getStringArrayListExtra(FilePickerConst.KEY_SELECTED_DOCS))
+                docPaths.add(dir)
                 var extension: String? = KEY_BLANK
                 var thumbnail: Int? = 0
                 for (selectedFilePath in docPaths) {
@@ -232,12 +225,12 @@ class FacultyRegistrationFragment :
                                 isAlertDialogShown.postValue(true)
                             }
                         }
-
                     }
                 }
             }
         }
-    }*/
+        chooserDialog.show()
+    }
 
     override fun onRequestPermissionsResult(
         requestCode: Int,

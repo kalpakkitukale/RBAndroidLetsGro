@@ -218,21 +218,6 @@ class StudentRegistrationFragment :
     private fun openGallery() {
         options.preSelectedUrls = returnValue
         Pix.start(this, options)
-
-        /*FilePickerBuilder.instance
-            .setSelectedFiles(ArrayList())
-            .setActivityTheme(R.style.FilePickerTheme)
-            .setActivityTitle(BindingUtils.string(R.string.please_select_media))
-            .enableVideoPicker(false)
-            .enableCameraSupport(false)
-            .showGifs(false)
-            .setMaxCount(1)
-            .showFolderView(true)
-            .enableSelectAll(false)
-            .enableImagePicker(true)
-            .setCameraPlaceholder(R.drawable.ic_camera)
-            .withOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
-            .pickPhoto(this, REQUEST_CODE_GALLERY_PIC)*/
     }
 
     /**Vinay k

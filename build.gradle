@@ -30,6 +30,7 @@ allprojects {
             url "https://artifactory.paytm.in/libs-release-local"
         }
         maven { url "https://phonepe.bintray.com/PhonePeIntentSDK" }
+        maven { url "https://jitpack.io" }
     }
 }
 
