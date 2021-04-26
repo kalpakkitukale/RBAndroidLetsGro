@@ -1,6 +1,7 @@
 package com.ramanbyte.emla.ui.fragments
 
 import android.Manifest
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -17,7 +18,6 @@ import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.chip.Chip
-import com.obsez.android.lib.filechooser.ChooserDialog
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseFragment
 import com.ramanbyte.databinding.FragmentFacultyRegistrationBinding
@@ -139,97 +139,20 @@ class FacultyRegistrationFragment :
 
     //Select file from fileManager
     private fun openDocumentFile() {
-        val chooserDialog =
-            ChooserDialog(requireActivity(), R.style.FileChooserStyle)
+        val intent = Intent(Intent.ACTION_GET_CONTENT)
+        intent.type = "*/*"
+        intent.addCategory(Intent.CATEGORY_OPENABLE)
+        intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true)
+        startActivityForResult(intent, EXCEL_PICKER_REQUEST)
+    }
 
-        chooserDialog.apply {
-            withStringResources(
-                BindingUtils.string(R.string.please_select_resume),
-                BindingUtils.string(R.string.strOk),
-                BindingUtils.string(R.string.strCancel)
-            )
-            withDateFormat("dd MMM yyyy")
-            withOnBackPressedListener { dialog -> chooserDialog.goBack() }
-            withChosenListener { dir: String, dirFile: File ->
-                docPaths = ArrayList()
-                docPaths.add(dir)
-                var extension: String? = KEY_BLANK
-                var thumbnail: Int? = 0
-                for (selectedFilePath in docPaths) {
-                    val userDetailsModel = UserDetailsModel()
-                    userDetailsModel.apply {
-
-                        val filePath = selectedFilePath
-                        val fileName = FileUtils.getFileNameFromPath(selectedFilePath)
-
-                        val file = File(filePath)
-                        val fileSize = file.length()
-                        val fileSizeKB = fileSize / 1024
-                        val fileSizeMB = fileSizeKB / 1024
-
-                        AppLog.infoLog("fileName size :: $fileSizeKB     $fileSizeMB      $fileSize      $selectedFilePath    ")
-
-                        extension =
-                            selectedFilePath.substring(selectedFilePath.lastIndexOf("."))
-
-                        if (extension.equals(FileUtils.KEY_PDF_DOCUMENT_EXTENSION, true) ||
-                            extension.equals(FileUtils.KEY_DOCUMENT_DOC_EXTENSION, true) ||
-                            extension.equals(FileUtils.KEY_DOCUMENT_DOCX_EXTENSION, true) ||
-                            extension.equals(FileUtils.KEY_TEXT_EXTENSION, true) ||
-                            extension.equals(FileUtils.KEY_RICH_TEXT_EXTENSION, true) ||
-                            extension.equals(FileUtils.KEY_PRESENTATION_PPT_EXTENSION, true)
-                        ) {
-
-                            if (fileSizeMB <= 2) {
-                                layoutBinding.apply {
-                                    lblResumeFileName.text = fileName
-                                    btnUploadResume.visibility = View.GONE
-                                    lblResumeNote.visibility = View.GONE
-                                    lblResumeFileName.visibility = View.VISIBLE
-                                    ivRemoveResume.visibility = View.VISIBLE
-                                }
-                                AppLog.infoLog("fileNamePath  :: $fileName     $filePath")
-
-                                //thumbnail = setThumbNail(extension ?: "")
-
-                                viewModel.apply {
-                                    uploadResumeFileName.value =
-                                        StaticMethodUtilitiesKtx.currentMonthAsS3KeyObject + FileUtils.PATH_SEPARATOR + FileUtils.getFileNameFromPath(
-                                            selectedFilePath
-                                        )
-                                    uploadResumeFilePath.value = selectedFilePath
-                                }
-                            } else {
-                                viewModel.apply {
-                                    setAlertDialogResourceModelMutableLiveData(
-                                        BindingUtils.string(R.string.resume_error),
-                                        BindingUtils.drawable(R.drawable.ic_warning)!!,
-                                        true,
-                                        BindingUtils.string(R.string.strOk), {
-                                            isAlertDialogShown.postValue(false)
-                                        }
-                                    )
-                                    isAlertDialogShown.postValue(true)
-                                }
-                            }
-                        } else {
-                            viewModel.apply {
-                                setAlertDialogResourceModelMutableLiveData(
-                                    BindingUtils.string(R.string.file_type_error),
-                                    BindingUtils.drawable(R.drawable.ic_warning)!!,
-                                    true,
-                                    BindingUtils.string(R.string.strOk), {
-                                        isAlertDialogShown.postValue(false)
-                                    }
-                                )
-                                isAlertDialogShown.postValue(true)
-                            }
-                        }
-                    }
-                }
-            }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode != EXCEL_PICKER_REQUEST || resultCode != Activity.RESULT_OK) {
+            return
         }
-        chooserDialog.show()
+        // import file
+        processFileAfterSelection(FileUtils.copyUriToFilePath(requireContext(), data?.data!!))
     }
 
     override fun onRequestPermissionsResult(
@@ -252,6 +175,100 @@ class FacultyRegistrationFragment :
                         )
                     ) {
                         requestPermissionAlert(BindingUtils.string(R.string.allow_access_phone_storage))
+                    }
+                }
+            }
+        }
+    }
+
+    private fun processFileAfterSelection(strPath: String?) {
+        if (strPath.isNullOrEmpty()) {
+            // Error on file selecgtion
+            viewModel.apply {
+                setAlertDialogResourceModelMutableLiveData(
+                    BindingUtils.string(R.string.error_in_file_selection),
+                    BindingUtils.drawable(R.drawable.ic_warning)!!,
+                    true,
+                    BindingUtils.string(R.string.strOk), {
+                        isAlertDialogShown.postValue(false)
+                    }
+                )
+                isAlertDialogShown.postValue(true)
+            }
+        } else {
+            docPaths = ArrayList()
+            docPaths.add(strPath)
+            var extension: String? = KEY_BLANK
+            var thumbnail: Int? = 0
+            for (selectedFilePath in docPaths) {
+                val userDetailsModel = UserDetailsModel()
+                userDetailsModel.apply {
+
+                    val filePath = selectedFilePath
+                    val fileName = FileUtils.getFileNameFromPath(selectedFilePath)
+
+                    val file = File(filePath)
+                    val fileSize = file.length()
+                    val fileSizeKB = fileSize / 1024
+                    val fileSizeMB = fileSizeKB / 1024
+
+                    AppLog.infoLog("fileName size :: $fileSizeKB     $fileSizeMB      $fileSize      $selectedFilePath    ")
+
+                    extension =
+                        selectedFilePath.substring(selectedFilePath.lastIndexOf("."))
+
+                    if (extension.equals(FileUtils.KEY_PDF_DOCUMENT_EXTENSION, true) ||
+                        extension.equals(FileUtils.KEY_DOCUMENT_DOC_EXTENSION, true) ||
+                        extension.equals(FileUtils.KEY_DOCUMENT_DOCX_EXTENSION, true) ||
+                        extension.equals(FileUtils.KEY_TEXT_EXTENSION, true) ||
+                        extension.equals(FileUtils.KEY_RICH_TEXT_EXTENSION, true) ||
+                        extension.equals(FileUtils.KEY_PRESENTATION_PPT_EXTENSION, true)
+                    ) {
+
+                        if (fileSizeMB <= 2) {
+                            layoutBinding.apply {
+                                lblResumeFileName.text = fileName
+                                btnUploadResume.visibility = View.GONE
+                                lblResumeNote.visibility = View.GONE
+                                lblResumeFileName.visibility = View.VISIBLE
+                                ivRemoveResume.visibility = View.VISIBLE
+                            }
+                            AppLog.infoLog("fileNamePath  :: $fileName     $filePath")
+
+                            //thumbnail = setThumbNail(extension ?: "")
+
+                            viewModel.apply {
+                                uploadResumeFileName.value =
+                                    StaticMethodUtilitiesKtx.currentMonthAsS3KeyObject + FileUtils.PATH_SEPARATOR + FileUtils.getFileNameFromPath(
+                                        selectedFilePath
+                                    )
+                                uploadResumeFilePath.value = selectedFilePath
+                            }
+                        } else {
+                            viewModel.apply {
+                                setAlertDialogResourceModelMutableLiveData(
+                                    BindingUtils.string(R.string.resume_error),
+                                    BindingUtils.drawable(R.drawable.ic_warning)!!,
+                                    true,
+                                    BindingUtils.string(R.string.strOk), {
+                                        isAlertDialogShown.postValue(false)
+                                    }
+                                )
+                                isAlertDialogShown.postValue(true)
+                            }
+                        }
+                    } else {
+                        viewModel.apply {
+                            setAlertDialogResourceModelMutableLiveData(
+                                BindingUtils.string(R.string.file_type_error),
+                                BindingUtils.drawable(R.drawable.ic_warning)!!,
+                                true,
+                                BindingUtils.string(R.string.strOk), {
+                                    isAlertDialogShown.postValue(false)
+                                }
+                            )
+                            isAlertDialogShown.postValue(true)
+                        }
                     }
                 }
             }

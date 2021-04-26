@@ -3,6 +3,7 @@
     <string name="app_name_tag">LetsGroTag</string>
     <string name="app_name_file">Lets Gro</string>
     <string name="tryAgain">Try Again</string>
+    <string name="error_in_file_selection">Something went wrong with file selection, please select file from another location</string>
     <string name="dummyText">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. </string>
     <string name="rs">\u20B9</string>
     <string name="some_thing_went_wrong">Oops! Seems like something went wrong, please try again after sometime.</string>

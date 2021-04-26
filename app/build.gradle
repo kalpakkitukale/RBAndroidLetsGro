@@ -183,7 +183,4 @@ dependencies {
 
     // image chooser
     implementation  'com.fxn769:pix:1.5.6'
-
-    // file choose
-    implementation 'com.github.hedzr:android-file-chooser:v1.2.0-final'
 }

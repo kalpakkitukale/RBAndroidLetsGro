@@ -1,13 +1,16 @@
 package com.ramanbyte.utilities
 
 import android.annotation.SuppressLint
+import android.content.ContentResolver
 import android.content.ContentUris
 import android.content.Context
+import android.database.Cursor
 import android.net.Uri
 import android.os.Build
 import android.os.Environment
 import android.provider.DocumentsContract
 import android.provider.MediaStore
+import android.provider.OpenableColumns
 import android.text.TextUtils
 import android.webkit.MimeTypeMap
 import com.google.android.gms.common.util.IOUtils
@@ -230,22 +233,50 @@ object FileUtils {
         }
     }
 
-    private fun getFileName(uri: Uri?): String? {
+    private fun getFileName(context: Context, uri: Uri?): String? {
         if (uri == null) return null
-        var fileName: String? = null
-        val path = uri.path
-        val cut = path!!.lastIndexOf('/')
-        if (cut != -1) {
-            fileName = path.substring(cut + 1)
+        return when (uri.scheme) {
+            ContentResolver.SCHEME_FILE -> {
+                var fileName: String? = null
+                val path = uri.path
+                val cut = path!!.lastIndexOf('/')
+                if (cut != -1) {
+                    fileName = path.substring(cut + 1)
+                }
+                fileName
+            }
+
+            ContentResolver.SCHEME_CONTENT -> {
+                getURiDisplayName(context, uri)
+            }
+
+            else -> null
+
         }
-        return fileName
+
     }
 
-    private fun copyUriToFilePath(
+    private fun getURiDisplayName(context: Context, uri: Uri): String? {
+        return try {
+            val returnCursor: Cursor = context.contentResolver.query(uri, null, null, null, null)!!
+            val nameIndex: Int = returnCursor.getColumnIndex(OpenableColumns.DISPLAY_NAME)
+            returnCursor.moveToFirst()
+            val name: String = returnCursor.getString(nameIndex)
+            returnCursor.close()
+            name
+        } catch (e: Exception) {
+            AppLog.errorLog(e.message!!)
+            e.printStackTrace()
+            null
+        }
+
+    }
+
+    fun copyUriToFilePath(
         context: Context,
         contentUri: Uri?
     ): String? { //copy file and send new file path
-        val fileName = getFileName(contentUri)
+        val fileName = getFileName(context, contentUri)
         if (!TextUtils.isEmpty(fileName)) {
             val copyFile = File(getNewCreatedFilePath(fileName!!))
             copy(context, contentUri, copyFile)
@@ -410,7 +441,7 @@ object FileUtils {
         context: Context,
         contentUri: Uri?
     ): String? { //copy file and send new file path
-        val fileName = getFileName(contentUri)
+        val fileName = getFileName(context, contentUri)
         if (!TextUtils.isEmpty(fileName)) {
             val copyFile = File(getApplicationFolder() + separator.toString() + fileName)
             copy(context, contentUri, copyFile)
