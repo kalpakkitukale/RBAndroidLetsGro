@@ -44,6 +44,8 @@ object DateUtils {
     const val DATE_TIME_SRVER_PATTERN = "mm/dd/yyyy hh:mm:ss a"
     const val DATE_MONTH_DAY_YEAR_PATTERN = "MMM dd, yyyy"
 
+    const val KEY_DUMMY_DATE = "1900-01-01T00:00:00.00Z"
+
     private var simpleDateFormat: SimpleDateFormat? = null
 
     @JvmStatic

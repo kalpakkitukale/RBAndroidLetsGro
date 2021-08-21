@@ -4,6 +4,7 @@ import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
 import com.google.gson.annotations.SerializedName
 import com.ramanbyte.BR
+import com.ramanbyte.utilities.KEY_N
 
 /**
  * @AddedBy Vinay Kumbhar <vinay.k@ramanbyte.com>
@@ -26,4 +27,7 @@ class LoginRequest : BaseObservable() {
             field = value
             notifyPropertyChanged(BR.password)
         }
+
+
+    var isFromCPPlus: String = KEY_N
 }

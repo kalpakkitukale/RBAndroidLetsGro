@@ -20,7 +20,7 @@ import org.kodein.di.generic.singleton
  * @since 13-04-2020
  */
 
-private const val DOMAIN = "http://webapp.classroomplus.in/"
+private const val DOMAIN = BuildConfig.DOMAIN_URL
 private const val EMLA = "eMarketPlace/"
 private const val API = "/api/"
 private const val LOGIN = "Login/"

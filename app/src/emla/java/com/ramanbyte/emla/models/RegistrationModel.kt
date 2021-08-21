@@ -5,6 +5,7 @@ import androidx.databinding.Bindable
 import com.google.gson.annotations.SerializedName
 import com.ramanbyte.BR
 import com.ramanbyte.utilities.*
+import com.ramanbyte.utilities.DateUtils.KEY_DUMMY_DATE
 
 /**
  * @author Vinay Kumbhar <vinay.pkumbhar@gmail.com>
@@ -93,12 +94,12 @@ class UserDetailsModel : BaseObservable() {
         }
 
     var countryId: Int? = 0
-    var createdOn: String? = ""
+    var createdOn: String? = KEY_DUMMY_DATE
     var createdby: Int? = 0
     var currentAffiliation: String? = ""
 
     @Bindable
-    var dateOfBirth: String? = ""
+    var dateOfBirth: String? = KEY_DUMMY_DATE
         set(value) {
             field = value
             notifyPropertyChanged(BR.dateOfBirth)
@@ -148,7 +149,7 @@ class UserDetailsModel : BaseObservable() {
 
     var mobileContryCode: String? = ""
     var modify_By: Int? = 0
-    var modify_Date: String? = ""
+    var modify_Date: String? = KEY_DUMMY_DATE
 
     @Bindable
     var patternId: Int? = -1
@@ -222,5 +223,7 @@ class UserDetailsModel : BaseObservable() {
     var user_userDelStatus = KEY_N
     var user_userStatus = KEY_APP
     var user_userIsActive = KEY_Y
+    var classroomUserId: Int = 0
+    var jid: String = ""
 }
 

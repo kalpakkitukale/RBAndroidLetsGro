@@ -42,22 +42,26 @@ android {
 
         dev {
             dimension "env"
+            buildConfigField("String", "DOMAIN_URL", "\"http://webapptest.classroomplus.in/\"")
             buildConfigField("String", "S3_OBJECT", "\"dev\"")
             buildConfigField("String", "CLIENT_BASE", "\"dev\"")
         }
 
         qa {
             dimension "env"
+            buildConfigField("String", "DOMAIN_URL", "\"http://webapptest.classroomplus.in/\"")
             buildConfigField("String", "S3_OBJECT", "\"test\"")
             buildConfigField("String", "CLIENT_BASE", "\"test\"")
         }
         uat {
             dimension "env"
+            buildConfigField("String", "DOMAIN_URL", "\"http://webapp.classroomplus.in/\"")
             buildConfigField("String", "S3_OBJECT", "\"uat\"")
             buildConfigField("String", "CLIENT_BASE", "\"uat\"")
         }
         prod {
             dimension "env"
+            buildConfigField("String", "DOMAIN_URL", "\"http://webapp.classroomplus.in/\"")
             buildConfigField("String", "S3_OBJECT", "\"prod\"")
             buildConfigField("String", "CLIENT_BASE", "\"prod\"")
         }
