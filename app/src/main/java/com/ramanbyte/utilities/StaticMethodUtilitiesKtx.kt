@@ -279,7 +279,7 @@ object StaticMethodUtilitiesKtx {
     }
 
     fun getS3DynamicURL(fileName: String, context: Context): String? {
-        return if (fileName.isNotEmpty()) {
+        return if (fileName != null && fileName.isNotEmpty()) {
             if (AppS3Client.createInstance(context).getDefaultObject().isNullOrBlank()) {
                 AppS3Client.createInstance(context).setDefaultObject(BuildConfig.S3_OBJECT)
             }

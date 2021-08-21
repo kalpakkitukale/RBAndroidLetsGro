@@ -2,8 +2,6 @@ package com.ramanbyte.emla.models
 
 import android.os.Parcel
 import android.os.Parcelable
-import androidx.databinding.BaseObservable
-import androidx.databinding.Bindable
 import com.google.gson.annotations.SerializedName
 
 /**
@@ -20,7 +18,7 @@ class CoursesModel() : Parcelable {
 
     var courseCode: String? = null
 
-    var courseImage: String? = null
+    var courseImage: String? = ""
     var courseImageUrl: String? = null
     var totalCount: Int = 0
     var startDateTime: String? = null
