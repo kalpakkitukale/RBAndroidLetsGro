@@ -1,6 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <color name="colorPrimary">#060606</color>
     <color name="colorPrimaryDark">#060606</color>
     <color name="colorIconNavyBlueInLightNGrayInDark">#919191</color>
+
+
+    <!--New Styles Added-->
+    <color name="colorNewPrimary">#121212</color>
+    <color name="colorNewPrimaryDark">#121212</color>
+    <color name="colorAccent">#121212</color>
+    <!--<color name="appBarColor">#121212</color>-->
+    <color name="appBarColor">#333333</color>
+    <color name="colorToolbarDefault">#121212</color>
+    <color name="colorToolbarDefaultText">#ffffff</color>
+    <color name="colorMenuItemTextColor">#ffffff</color>
+    <color name="colorNewTransparent">#00000000</color>
+    <color name="colorTutorial">#06ABA5</color>
+    <color name="colorLargeText">#06ABA5</color>
+    <color name="colorTitleText">#fafafa</color>
+    <color name="colorNormalText">#B5B5C3</color>
+    <color name="colorSubTitle">#fafafa</color>
+    <color name="colorDescription">#B5B5C3</color>
+    <color name="colorLabel">#B5B5C3</color>
+    <color name="colorValueOfLabel">#CBCBCB</color>
+    <color name="colorFilledButton">#06ABA5</color>
+    <color name="colorBorderedButton">#06ABA5</color>
+    <color name="colorNavigationTextView">#fafafa</color>
+    <color name="colorDivider">#3B3B3B</color>
+    <color name="colorIcon">#06ABA5</color>
+    <color name="colorMenuIcon">#fafafa</color>
+    <color name="colorNewApplicationBackground">#121212</color>
+    <color name="colorCardBackground">#212121</color>
+    <color name="colorHamburger">#ffffff</color>
+    <color name="colorTabSelection">#06ABA5</color>
+    <color name="colorTabUnSelection">#ffffff</color>
+    <color name="colorButtonTextForFilledButton">#fafafa</color>
+    <color name="colorButtonTextForBorderButton">#fafafa</color>
+    <color name="colorChipUncheck">#434343</color>
+    <color name="colorChipCheck">#06ABA5</color>
+    <color name="textHintColor">#ACACAC</color>
+    <!--overrid this color for text input layout border color-->
+    <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">
+        @color/textHintColor
+    </color>
+
+    <color name="colorIconBlack">#fafafa</color>
+
+    <color name="colorImageViewBackground">#333333</color>
+    <color name="colorFabBackground">#444444</color>
+    <color name="iconHistory">#F2E26A</color>
+    <color name="iconViewDetails">#F69193</color>
+    <color name="iconEdit">#8AC478</color>
+    <color name="iconMail">#A37FFE</color>
+    <color name="iconWhatsapp">#06ABA5</color>
+    <color name="iconFeedback">#ffffff</color>
+    <color name="iconCall">#ffffff</color>
+
+    <color name="cardBorderColor">#FFF7D6</color>
+
+    <color name="colorSnackBarBackground">#212121</color>
+    <color name="colorSnackBarTextColor">#B5B5C3</color>
 </resources>
