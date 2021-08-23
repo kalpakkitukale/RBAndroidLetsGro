@@ -7,8 +7,6 @@ import android.os.Build
 import android.view.View
 import android.widget.Toast
 import androidx.core.content.FileProvider
-import androidx.lifecycle.MutableLiveData
-import androidx.room.util.FileUtil
 import com.google.android.exoplayer2.offline.Download
 import com.google.android.exoplayer2.offline.DownloadRequest
 import com.google.android.exoplayer2.offline.DownloadService
@@ -255,7 +253,7 @@ class ContentViewer(
 
         mediaInfoModel.apply {
             mediaId = contentModel.id
-            seekPosition = 0
+            seekPosition = "0"
             expirationDate = "2020-03-27"
             this@apply.requestId = requestId
             contentLink = contentModel.content_link
@@ -270,7 +268,7 @@ class ContentViewer(
 
                     mediaType = KEY_MEDIA_TYPE_VIDEO
                     if (isDownload)
-                        mediaStatus = Download.STATE_DOWNLOADING
+                        mediaStatus = Download.STATE_DOWNLOADING.toString()
                     StaticMethodUtilitiesKtx.getS3DynamicURL(contentModel.content_link, context)!!
                     /*AppS3Client.createInstance(context)
                         .getFileAccessUrl(contentModel.content_link)!!*/
@@ -278,7 +276,7 @@ class ContentViewer(
                 }
                 mimeType?.contains(KEY_MEDIA_TYPE_AUDIO) == true -> {
                     if (isDownload)
-                        mediaStatus = Download.STATE_DOWNLOADING
+                        mediaStatus = Download.STATE_DOWNLOADING.toString()
 
                     mediaType = KEY_MEDIA_TYPE_AUDIO
                     StaticMethodUtilitiesKtx.getS3DynamicURL(contentModel.content_link, context)!!
@@ -288,7 +286,7 @@ class ContentViewer(
                 }
                 else -> {
                     if (isDownload)
-                        mediaStatus = Download.STATE_COMPLETED
+                        mediaStatus = Download.STATE_COMPLETED.toString()
 
                     mediaType = KEY_MEDIA_TYPE_FILE
 

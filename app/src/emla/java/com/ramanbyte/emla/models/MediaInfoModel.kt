@@ -26,10 +26,10 @@ class MediaInfoModel : BaseObservable() {
 
     var duration: Long = 0
 
-    var seekPosition: Long = 0
+    var seekPosition: String = "0"
 
     @SerializedName("status")
-    var mediaStatus: Int = -1
+    var mediaStatus: String = "-1"
 
     @SerializedName("content_Type")
     var mediaType: String = ""

@@ -28,6 +28,9 @@ class TestSubmitModel {
     var del_Status = KEY_N
     var app_Status = KEY_APP
     var createdBy = 0
+    var ischaptercompleted: String? = KEY_BLANK
+    var iscoursecompleted: String? = KEY_BLANK
+    var quizpassingpercent = 0
 
     var quizsubmissionEntity = ArrayList<AnswerEntity>()
 

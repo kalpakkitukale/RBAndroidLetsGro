@@ -653,11 +653,11 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
                 viewModel.mediaInfoModel?.apply {
                     player.prepare(
                         mediaSource,
-                        seekPosition == 0.toLong(),
-                        seekPosition == 0.toLong()
+                        seekPosition == 0.toLong().toString(),
+                        seekPosition == 0.toLong().toString()
                     )
 
-                    player.seekTo(seekPosition!!)
+                    player.seekTo(seekPosition!!.toLong())
 
                     player.playWhenReady = true
 
@@ -689,7 +689,7 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
 
                 mediaInfoModel?.apply {
 
-                    seekPosition = currentPosition
+                    seekPosition = currentPosition.toString()
 
                     updateMediaInfo(this)
                 }

@@ -8,8 +8,8 @@ import com.ramanbyte.emla.data_layer.network.api_layer.SectionsController
 import com.ramanbyte.emla.models.AskQuestionModel
 import com.ramanbyte.emla.models.AskQuestionReplyModel
 import com.ramanbyte.emla.models.FavouriteVideosModel
-import com.ramanbyte.emla.models.request.AskQuestionRequestModel
 import com.ramanbyte.emla.models.MediaInfoModel
+import com.ramanbyte.emla.models.request.AskQuestionRequestModel
 import com.ramanbyte.emla.models.request.ConversationCloseRequestModel
 import com.ramanbyte.emla.models.request.QuestionsReplyRequestModel
 import com.ramanbyte.utilities.AppLog
@@ -164,9 +164,9 @@ class QuestionRepository(mContext: Context) : BaseRepository(mContext) {
             chapterId = favouriteVideosModel.chapterId
             sectionId = favouriteVideosModel.sectionId
             mediaType = favouriteVideosModel.contentType
-            mediaStatus = favouriteVideosModel.status.toInt()
+            mediaStatus = favouriteVideosModel.status
             device_Id = favouriteVideosModel.deviceId
-            seekPosition = favouriteVideosModel.seekPosition.toLong()
+            seekPosition = favouriteVideosModel.seekPosition.toLong().toString()
             likeVideo = favouriteVideosModel.isLikeVideo
             favouriteVideo = favouriteVideosModel.isFavouriteVideo
             this.createdBy = userId

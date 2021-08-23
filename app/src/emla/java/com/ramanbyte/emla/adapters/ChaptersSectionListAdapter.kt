@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LifecycleRegistry
@@ -12,7 +11,6 @@ import androidx.lifecycle.Observer
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.ramanbyte.databinding.CardChapterBinding
 import com.ramanbyte.databinding.CardSectionBinding
 import com.ramanbyte.emla.models.SectionsModel
 import com.ramanbyte.emla.view_model.ChaptersSectionViewModel
@@ -69,7 +67,7 @@ class ChaptersSectionListAdapter(private val chaptersSectionViewModel: ChaptersS
                         it?.apply {
 
                             val downloadedList = filter {
-                                it.mediaStatus != -1
+                                it.mediaStatus != "-1"
                             }
 
                             if ((downloadedList.isNotEmpty() && downloadedList.size >= sectionsModel?.contentCount ?: -1) || sectionsModel?.contentCount == 0) {

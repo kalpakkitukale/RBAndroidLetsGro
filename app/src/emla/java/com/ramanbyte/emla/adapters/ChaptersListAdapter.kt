@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ramanbyte.databinding.CardChapterBinding
 import com.ramanbyte.emla.models.ChaptersModel
 import com.ramanbyte.emla.view_model.ChaptersViewModel
-import com.ramanbyte.utilities.AppLog
 
 class ChaptersListAdapter(private val chaptersViewModel: ChaptersViewModel) :
     PagedListAdapter<ChaptersModel, ChaptersListAdapter.ChaptersListViewHolder>(DIFF_CALLBACK) {
@@ -101,7 +100,7 @@ class ChaptersListAdapter(private val chaptersViewModel: ChaptersViewModel) :
                     ?.observe(this@ChaptersListViewHolder, Observer { list ->
 
                         val downloadedList = list.filter {
-                            it.mediaStatus != -1
+                            it.mediaStatus != "-1"
                         }
 
                         val perSectionTotalCount = chapterModel?.sectionlist?.sumBy {
