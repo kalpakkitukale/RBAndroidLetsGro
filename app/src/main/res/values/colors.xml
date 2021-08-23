@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <color name="colorPrimary">#ffffff</color>
-    <color name="colorPrimaryDark">#ffffff</color>
+    <color name="colorPrimary">#f3f3f4</color>
+    <color name="colorPrimaryDark">#f3f3f4</color>
     <color name="colorIconNavyBlueInLightNGrayInDark">#1d396b</color>
     <color name="bg_gray">#9391a4</color>
 
 
     <!--New Styles Added-->
-    <color name="colorNewPrimary">#f3f3f4</color>
-    <color name="colorNewPrimaryDark">#f3f3f4</color>
     <color name="colorNewAccent">#f3f3f4</color>
     <color name="appBarColor">#f3f3f4</color>
     <color name="colorToolbarDefault">#f3f3f4</color>
@@ -33,12 +31,10 @@
     <color name="colorMenuIcon">#1b1b1b</color>
     <color name="colorControlActivated">#06ABA5</color>
     <color name="colorControlPressed">#90FD8B0F</color>
-    <color name="colorNewApplicationBackground">#f3f3f4</color>
     <color name="colorCardBackground">#ffffff</color>
     <color name="colorAppTitleNSubTitle">#ffffff</color>
     <color name="colorRoundImageViewBorder">#06ABA5</color>
     <color name="colorLink">#06ABA5</color>
-    <color name="colorNewWhite">#ffffff</color>
     <color name="colorBlack">#000000</color>
     <color name="colorGray">#959595</color>
     <color name="colorIconGrey">#959595</color>
@@ -48,8 +44,6 @@
     <color name="textHintColor">#9391a4</color>
     <color name="colorTabSelection">#06ABA5</color>
     <color name="colorTabUnSelection">#a3a3a3</color>
-    <color name="colorNewChipUncheck">#f3f3f4</color>
-    <color name="colorNewChipCheck">#06ABA5</color>
     <color name="colorLogoPurple" tools:ignore="MissingDefaultResource">#503863</color>
 
     <!--overrid this color for text input layout border color-->
