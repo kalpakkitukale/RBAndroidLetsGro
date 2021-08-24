@@ -317,4 +317,5 @@ Content
     //login with facebook key
     <string name="facebook_app_id">256607422269546</string>
     <string name="fb_login_protocol_scheme">fb256607422269546</string>
+    <string name="skill_page_title">Select your skill \n to get Relevant job Post</string>
 </resources>

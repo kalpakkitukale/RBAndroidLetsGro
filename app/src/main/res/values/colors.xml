@@ -1,7 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <color name="colorPrimary">#ffffff</color>
-    <color name="colorPrimaryDark">#ffffff</color>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <color name="colorPrimary">#f3f3f4</color>
+    <color name="colorPrimaryDark">#f3f3f4</color>
     <color name="colorIconNavyBlueInLightNGrayInDark">#1d396b</color>
     <color name="bg_gray">#9391a4</color>
+
+
+    <!--New Styles Added-->
+    <color name="colorNewAccent">#f3f3f4</color>
+    <color name="appBarColor">#f3f3f4</color>
+    <color name="colorToolbarDefault">#f3f3f4</color>
+    <color name="colorToolbarDefaultText">#121212</color>
+    <color name="colorMenuItemTextColor">#121212</color>
+    <color name="colorNewTransparent">#00000000</color>
+    <color name="colorTutorial">#121212</color>
+    <color name="colorLargeText">#343434</color>
+    <color name="colorNormalText">#343434</color>
+    <color name="colorTitleText">#1b1b1b</color>
+    <color name="colorSubTitle">#343434</color>
+    <color name="colorDescription">#1b1b1b</color>
+    <color name="colorNavigationTextView">#1b1b1b</color>
+    <color name="colorLabel">#363636</color>
+    <color name="colorValueOfLabel">#1b1b1b</color>
+    <color name="colorFilledButton">#06ABA5</color>
+    <color name="backgroundPrimaryColorWithTransparentEffect">#9906ABA5</color>
+    <color name="colorBorderedButton">#d9e5f5</color>
+    <color name="colorNewDivider">#DEDEDE</color>
+    <color name="colorIcon">#06ABA5</color>
+    <color name="colorIconNormal">#959595</color>
+    <color name="colorMenuIcon">#1b1b1b</color>
+    <color name="colorControlActivated">#06ABA5</color>
+    <color name="colorControlPressed">#90FD8B0F</color>
+    <color name="colorCardBackground">#ffffff</color>
+    <color name="colorAppTitleNSubTitle">#ffffff</color>
+    <color name="colorRoundImageViewBorder">#06ABA5</color>
+    <color name="colorLink">#06ABA5</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorGray">#959595</color>
+    <color name="colorIconGrey">#959595</color>
+    <color name="colorButtonTextForFilledButton">#ffffff</color>
+    <color name="colorButtonTextForBorderButton">#06ABA5</color>
+    <color name="colorHamburger">#343434</color>
+    <color name="textHintColor">#9391a4</color>
+    <color name="colorTabSelection">#06ABA5</color>
+    <color name="colorTabUnSelection">#a3a3a3</color>
+    <color name="colorLogoPurple" tools:ignore="MissingDefaultResource">#503863</color>
+
+    <!--overrid this color for text input layout border color-->
+    <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">
+        @color/textHintColor
+    </color>
+    <color name="colorSummaryPageTitle">#06ABA5</color>
+
+    <color name="colorSelectedCalendarDayTextColor">#06ABA5</color>
+    <color name="colorSelectedCalendarDayBackgroundColor">#D6F7EC</color>
+    <color name="colorLightGreen">#33d69f</color>
+    <color name="lightOrange">#ff8b56</color>
+    <color name="colorPink">#fc5182</color>
+    <color name="colorYellow">#f9ba34</color>
+    <color name="colorRedLoginLogout">#f93e01</color>
+
+    <color name="colorTransparentPositive">#D6F7EC</color>
+    <color name="colorTransparentNegative">#FFDCE6</color>
+
+    <color name="colorImageViewBackground">#E8E6F1</color>
+    <color name="colorFabBackground">#E8E6F1</color>
+    <color name="cardMileStone">#2A2A2A</color>
+
+    <color name="colorIconOrTextAdd">#06ABA5</color>
+    <color name="colorIconOrTextUploadColor">#06ABA5</color>
+    <color name="colorIconOrTextEditColor">#fa6400</color>
+    <color name="colorIconOrTextDisableColor">#c83232</color>
+    <color name="colorIconOrTextDeleteColor">#c83232</color>
+    <color name="colorIconOrTextSaveColor">#0f960f</color>
+    <color name="colorIconOrTextBookmarkColor">#0f960f</color>
+    <color name="colorIconOrTextViewColor">#0f960f</color>
+    <color name="colorIconOrTextDownloadColor">#0f960f</color>
+    <color name="colorIconCancelColor">#555</color>
+    <color name="colorSuccess">#06ABA5</color>
+    <color name="colorInfo">#23c6c8</color>
+    <color name="colorWarning">#fa6400</color>
+    <color name="colorDanger">#c83232</color>
+
+    <color name="colorIconBlack">#1b1b1b</color>
+    <color name="iconHistory">#FFA844</color>
+    <color name="iconViewDetails">#FF6366</color>
+    <color name="iconEdit">#70C955</color>
+    <color name="iconMail">#9064FF</color>
+    <color name="iconWhatsapp">#06ABA5</color>
+    <color name="iconFeedback">#ffffff</color>
+    <color name="iconCall">#ffffff</color>
+    <color name="iconCallMade">#0f960f</color>
+    <color name="iconCallReceived">#06ABA5</color>
+    <color name="iconCallMissed">#c83232</color>
+    <color name="colorForAllElement">#06ABA5</color>
+    <color name="cardBorderColor">#9064FF</color>
+
+    <color name="colorSnackBarBackground">#ffffff</color>
+    <color name="colorSnackBarTextColor">#343434</color>
 </resources>

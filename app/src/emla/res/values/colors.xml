@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <color name="colorAccent">#3d9df9</color>
     <color name="colorTransparent">#00000000</color>
-    <color name="colorApplicationBackground">#fcfcfc</color>
+    <color name="colorApplicationBackground">#f3f3f4</color>
     <color name="cardBackgroundColor">#ffffff</color>
     <color name="colorIconNavyBlueInLightNGrayInDark">#1d396b</color>
     <color name="colorTextNavyBlueInLightNWhiteInDark">#1d396b</color>
@@ -11,14 +11,14 @@
     <color name="colorButtonLightBlue">#e6f1fe</color>
     <color name="colorTextHint">#9391a4</color>
     <color name="colorTextGrayOnLightNDark">#9391a4</color>
-    <color name="colorSelectedTab">#1d396b</color>
+    <color name="colorSelectedTab">#06ABA5</color>
     <color name="colorNotSelectedTab">#9391a4</color>
     <color name="colorCourseCardWithOpacity">#E6ffffff</color>
 
     <!--Taken From previous theme-->
     <color name="transparent">#00000000</color>
-    <color name="colorChipUncheck">#F2F2F2</color>
-    <color name="colorChipCheck">#1d396b</color>
+    <color name="colorChipUncheck">#f3f3f4</color>
+    <color name="colorChipCheck">#06ABA5</color>
     <color name="exoTransparentBlack">#66000000</color>
     <color name="colorLightGray">#d1d1d1</color>
     <color name="colorWhite">#ffffff</color>
@@ -29,5 +29,6 @@
     <color name="colorRed">#950913</color>
     <color name="labelColorBig">#e9e9e9</color>
     <color name="colorExoControl">#E6FFFFFF</color>
+
 
 </resources>
