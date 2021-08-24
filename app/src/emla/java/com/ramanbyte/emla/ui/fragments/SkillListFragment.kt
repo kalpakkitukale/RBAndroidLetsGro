@@ -1,60 +1,72 @@
 package com.ramanbyte.emla.ui.fragments
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.content.Context
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.GridLayoutManager
 import com.ramanbyte.R
+import com.ramanbyte.base.BaseFragment
+import com.ramanbyte.databinding.FragmentSkillListBinding
+import com.ramanbyte.emla.adapters.SkillsListAdapter
+import com.ramanbyte.emla.view_model.JobSkillsViewModel
+import com.ramanbyte.utilities.AlertDialog
+import com.ramanbyte.utilities.KEY_BLANK
+import com.ramanbyte.utilities.ProgressLoader
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class SkillListFragment :
+    BaseFragment<FragmentSkillListBinding, JobSkillsViewModel>(hasOptionsMenu = true) {
+    override val viewModelClass: Class<JobSkillsViewModel> = JobSkillsViewModel::class.java
 
-/**
- * A simple [Fragment] subclass.
- * Use the [SkillListFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class SkillListFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private var skillsListAdapter: SkillsListAdapter? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    var mContext: Context? = null
+
+    override fun layoutId(): Int =
+        R.layout.fragment_skill_list
+
+
+    override fun initiate() {
+        ProgressLoader(context!!, viewModel)
+        AlertDialog(context!!, viewModel)
+
+        layoutBinding.apply {
+            setToolbarTitle("")
+            lifecycleOwner = this@SkillListFragment
+            skillsViewModel = viewModel
+            noData.viewModel = viewModel
+            noInternet.viewModel = viewModel
+            somethingWentWrong.viewModel = viewModel
+        }
+
+        setAdapter()
+        viewModelOps()
+    }
+
+    private fun setAdapter() {
+        layoutBinding.apply {
+
+            rvSkill.apply {
+                layoutManager = GridLayoutManager(mContext, 2)
+                skillsListAdapter = SkillsListAdapter()
+                adapter = skillsListAdapter.apply {
+                    this!!.context = mContext
+                    this.jobSkillsViewModel = viewModel
+                }
+            }
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_skill_list, container, false)
+    private fun viewModelOps() {
+        viewModel.apply {
+            getSkillsList(KEY_BLANK)
+
+            getSkillsList()!!.observe(this@SkillListFragment, Observer {
+                skillsListAdapter?.submitList(it)
+            })
+        }
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment SkillListFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            SkillListFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        mContext = context
     }
 }
