@@ -706,5 +706,12 @@
         <item name="android:layout_marginStart">@dimen/text_view_toolbar_title_start</item>
     </style>
 
+    <style name="TextViewFilterText">
+        <item name="android:textAppearance">@style/AppTheme.Font.Regular</item>
+        <item name="android:textSize">@dimen/sp_12</item>
+        <item name="android:textColor">@color/colorLabel</item>
+        <item name="android:drawablePadding">@dimen/dp_8</item>
+        <item name="android:padding">@dimen/dp_8</item>
+    </style>
 
 </resources>

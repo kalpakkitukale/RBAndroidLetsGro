@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/cardBackgroundColor">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.4" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintEnd_toStartOf="@id/guideline6"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginBottom="@dimen/custom_capsule_button_filled_bottom"
+        app:layout_constraintBottom_toTopOf="@id/linearLayoutCompat"
+        android:background="@color/colorApplicationBackground">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvPostedBetween"
+            style="@style/TextViewFilterText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/text_view_label_start"
+            android:text="@string/posted_between"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/viewPostedBetween"
+            style="@style/baseDivider"
+            android:layout_width="@dimen/dp_0"
+            app:layout_constraintEnd_toEndOf="@id/tvPostedBetween"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvPostedBetween" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvSalaryRange"
+            style="@style/TextViewFilterText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/salary_range"
+            app:layout_constraintEnd_toEndOf="@id/tvPostedBetween"
+            app:layout_constraintStart_toStartOf="@+id/tvPostedBetween"
+            app:layout_constraintTop_toBottomOf="@+id/viewPostedBetween" />
+
+        <View
+            android:id="@+id/viewSalaryRange"
+            style="@style/baseDivider"
+            android:layout_width="@dimen/dp_0"
+            app:layout_constraintEnd_toEndOf="@id/tvSalaryRange"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvSalaryRange" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvLocation"
+            style="@style/TextViewFilterText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/location"
+            app:layout_constraintEnd_toEndOf="@id/viewSalaryRange"
+            app:layout_constraintStart_toStartOf="@+id/tvPostedBetween"
+            app:layout_constraintTop_toBottomOf="@+id/viewSalaryRange" />
+
+        <View
+            android:id="@+id/viewLocation"
+            style="@style/baseDivider"
+            android:layout_width="@dimen/dp_0"
+            app:layout_constraintEnd_toEndOf="@id/tvLocation"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvLocation" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvExperience"
+            style="@style/TextViewFilterText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/experience"
+            app:layout_constraintEnd_toEndOf="@id/viewLocation"
+            app:layout_constraintStart_toStartOf="@+id/tvPostedBetween"
+            app:layout_constraintTop_toBottomOf="@+id/viewLocation" />
+
+        <View
+            android:id="@+id/viewExperience"
+            style="@style/baseDivider"
+            android:layout_width="@dimen/dp_0"
+            app:layout_constraintEnd_toEndOf="@id/tvExperience"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvExperience" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvSkill"
+            style="@style/TextViewFilterText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/skill"
+            app:layout_constraintEnd_toEndOf="@id/viewExperience"
+            app:layout_constraintStart_toStartOf="@+id/tvPostedBetween"
+            app:layout_constraintTop_toBottomOf="@+id/viewExperience" />
+
+        <View
+            android:id="@+id/viewSkill"
+            style="@style/baseDivider"
+            android:layout_width="@dimen/dp_0"
+            app:layout_constraintEnd_toEndOf="@id/tvSkill"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvSkill" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvCompanyType"
+            style="@style/TextViewFilterText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/company_type"
+            app:layout_constraintEnd_toEndOf="@id/viewSkill"
+            app:layout_constraintStart_toStartOf="@+id/tvPostedBetween"
+            app:layout_constraintTop_toBottomOf="@+id/viewSkill" />
+
+        <View
+            android:id="@+id/viewCompanyType"
+            style="@style/baseDivider"
+            android:layout_width="@dimen/dp_0"
+            app:layout_constraintEnd_toEndOf="@id/tvCompanyType"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvCompanyType" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:background="@color/cardBackgroundColor"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayoutCompat"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@id/guideline6"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/linearLayoutCompat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnCancel"
+            style="@style/CustomCapsuleButtonWithOnlyBorder"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/custom_capsule_button_with_only_border_start"
+            android:layout_marginEnd="@dimen/custom_capsule_button_with_only_border_end"
+            android:layout_marginBottom="@dimen/custom_capsule_button_with_only_border_bottom"
+            android:layout_weight="1"
+            android:text="@string/cancel" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnApply"
+            style="@style/CustomCapsuleButtonFilled"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/custom_capsule_button_filled_end"
+            android:layout_marginBottom="12dp"
+            android:layout_weight="1"
+            android:text="@string/apply" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

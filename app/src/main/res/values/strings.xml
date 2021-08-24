@@ -49,6 +49,12 @@
     <string name="unable_to_fetch_dependencie">Unable to fetch some dependencies. Kindly contact support!</string>
     <string name="no_profile_data_found">No profile data found</string>
     <string name="invalid_city_selected">Invalid city selected</string>
+    <string name="posted_between">Posted Between</string>
+    <string name="company_type">Company Type</string>
+    <string name="skill">Skill</string>
+    <string name="experience">Experience</string>
+    <string name="location">Location</string>
+    <string name="salary_range">Salary Range</string>
 
 
 </resources>
