@@ -1,33 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".emla.ui.fragments.SkillListFragment">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tvTitleSkillPage"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        style="@style/TextViewTitleLarge"
-        android:text="@string/skill_page_title"
-        android:layout_marginStart="@dimen/text_view_title_large_start"
-        android:layout_marginEnd="@dimen/text_view_title_large_end"
-        android:layout_marginTop="@dimen/text_view_title_large_top"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".emla.ui.fragments.SkillListFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvSkill"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        android:layout_marginTop="@dimen/recycler_view_top"
-        app:layout_constraintTop_toBottomOf="@id/tvTitleSkillPage"
-        app:layout_constraintStart_toStartOf="@id/tvTitleSkillPage"
-        app:layout_constraintEnd_toEndOf="@id/tvTitleSkillPage"
-        tools:listitem="@layout/card_skill"/>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvTitleSkillPage"
+            style="@style/TextViewTitleLarge"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/text_view_title_large_start"
+            android:layout_marginTop="@dimen/text_view_title_large_top"
+            android:layout_marginEnd="@dimen/text_view_title_large_end"
+            android:text="@string/skill_page_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvSkill"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:visibility="@{skillsViewModel.viewVisibilityLiveData}"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintEnd_toEndOf="@id/tvTitleSkillPage"
+            app:layout_constraintStart_toStartOf="@id/tvTitleSkillPage"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitleSkillPage"
+            tools:listitem="@layout/card_skill" />
+
+        <include
+            android:id="@+id/noInternet"
+            layout="@layout/no_internet"
+            android:visibility="gone" />
+
+        <include
+            android:id="@+id/somethingWentWrong"
+            layout="@layout/something_went_wrong"
+            android:visibility="gone" />
+
+        <include
+            android:id="@+id/noData"
+            layout="@layout/no_data"
+            android:visibility="gone" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <data>
+
+        <variable
+            name="skillsViewModel"
+            type="com.ramanbyte.emla.view_model.JobSkillsViewModel" />
+    </data>
+</layout>

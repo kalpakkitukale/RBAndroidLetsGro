@@ -14,7 +14,6 @@ import android.widget.ImageView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ramanbyte.BuildConfig

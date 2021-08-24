@@ -26,6 +26,10 @@
         android:name="com.ramanbyte.emla.ui.fragments.MyDownloadsFragment"
         android:label="@string/downloads" />
     <fragment
+        android:id="@+id/skillListFragment"
+        android:name="com.ramanbyte.emla.ui.fragments.SkillListFragment"
+        android:label="@string/placement" />
+    <fragment
         android:id="@+id/settingFragment"
         android:name="com.ramanbyte.emla.ui.fragments.SettingFragment"
         android:label="@string/action_settings">
@@ -41,7 +45,7 @@
         android:id="@+id/preAssessmentTestFragment"
         android:name="com.ramanbyte.emla.ui.fragments.PreAssessmentTestFragment"
         android:label="@string/test"
-        app:launchSingleTop="true"/>
+        app:launchSingleTop="true" />
     <fragment
         android:id="@+id/changePasswordFragment"
         android:name="com.ramanbyte.emla.ui.fragments.ChangePasswordFragment"
@@ -75,7 +79,7 @@
     <fragment
         android:id="@+id/learnerProfileFragment"
         android:name="com.ramanbyte.emla.ui.fragments.LearnerProfileFragment"
-        android:label="LearnerProfileFragment" >
+        android:label="LearnerProfileFragment">
         <action
             android:id="@+id/action_learnerProfileFragment_to_coursesFragment"
             app:destination="@id/coursesFragment" />

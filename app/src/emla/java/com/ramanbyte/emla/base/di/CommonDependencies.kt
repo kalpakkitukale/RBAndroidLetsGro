@@ -60,8 +60,13 @@ val repositoryDependencies = Kodein.Module("", true) {
     bind<FacultyCoursesRepository>() with singleton {
         FacultyCoursesRepository(instance())
     }
+
     bind<FacultyQuestionRepository>() with provider {
         FacultyQuestionRepository(instance())
+    }
+
+    bind<JobSkillsRepository>() with provider {
+        JobSkillsRepository(instance())
     }
 
 }
@@ -111,6 +116,14 @@ private val controllersDependencies = Kodein.Module("controllers_dependencies", 
         RetrofitInitializer.invoke(
             instance(),//db
             QuestionController::class.java,
+            DOMAIN + EMLA + CLIENT_BASE + API + QUESTION
+        )
+    }
+
+    bind<JobSkillsController>() with singleton {
+        RetrofitInitializer.invoke(
+            instance(),//db
+            JobSkillsController::class.java,
             DOMAIN + EMLA + CLIENT_BASE + API + QUESTION
         )
     }

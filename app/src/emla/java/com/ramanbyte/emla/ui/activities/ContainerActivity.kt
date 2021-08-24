@@ -159,6 +159,7 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding, ContainerViewMo
                 R.id.coursesFragment,
                 R.id.myDownloadsFragment,
                 R.id.myFavouriteVideoFragment,
+                R.id.skillListFragment,
                 R.id.settingFragment
             ), layoutBinding.drawerLayout
         )
@@ -168,7 +169,8 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding, ContainerViewMo
         private val NAV_COURSES = 0x1
         private val NAV_DOWNLOADS = 0x2
         private val NAV_MY_FAVOURATE = 0x3
-        private val NAV_SETTINGS = 0x4
+        private val NAV_PLACEMENT = 0x4
+        private val NAV_SETTINGS = 0x5
 
         fun intent(activity: Activity): Intent {
             return Intent(activity, ContainerActivity::class.java)
@@ -286,6 +288,16 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding, ContainerViewMo
 
 
             menuPojo = MenuPojo(
+                NAV_PLACEMENT,
+                R.drawable.ic_heart,
+                BindingUtils.string(R.string.my_favourite),
+                false,
+                0
+            )
+            headerList.add(menuPojo)
+
+
+            menuPojo = MenuPojo(
                 NAV_SETTINGS,
                 R.drawable.ic_settings,
                 BindingUtils.string(R.string.action_settings),
@@ -315,6 +327,10 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding, ContainerViewMo
                 NAV_MY_FAVOURATE -> {
                     if (navController.currentDestination?.id != R.id.myFavouriteVideoFragment)
                         navController.navigate(R.id.myFavouriteVideoFragment, null, navOption)
+                }
+                NAV_PLACEMENT -> {
+                    if (navController.currentDestination?.id != R.id.skillListFragment)
+                        navController.navigate(R.id.skillListFragment, null, navOption)
                 }
                 NAV_SETTINGS -> {
                     if (navController.currentDestination?.id != R.id.settingFragment)

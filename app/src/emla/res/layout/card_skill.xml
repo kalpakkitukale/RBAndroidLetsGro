@@ -1,37 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="@dimen/dp_150"
-    android:layout_height="@dimen/dp_120"
-    style="@style/customCard"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        style="@style/customCard"
+        android:layout_width="@dimen/dp_150"
+        android:layout_height="@dimen/dp_120">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tvTitleSkillPage"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        style="@style/TextViewTitle"
-        android:text="@string/skill_page_title"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvJobOpenings"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            style="@style/TextViewValeOfLabel"
-            android:gravity="center"
-            android:layout_marginTop="@dimen/text_view_vale_of_label_top"
-            app:layout_constraintEnd_toEndOf="@+id/tvTitleSkillPage"
-            app:layout_constraintStart_toStartOf="@+id/tvTitleSkillPage"
-            app:layout_constraintTop_toBottomOf="@+id/tvTitleSkillPage"
-            tools:text="50 Jobs"/>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvTitleSkillPage"
+                style="@style/TextViewTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:maxLines="3"
+                android:text="@{skillsModel.skillName}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@string/skill_page_title" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvJobOpenings"
+                style="@style/TextViewValeOfLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/text_view_vale_of_label_top"
+                android:gravity="center"
+                android:text="@{skillsModel.totalNumberOfJobs}"
+                app:layout_constraintEnd_toEndOf="@+id/tvTitleSkillPage"
+                app:layout_constraintStart_toStartOf="@+id/tvTitleSkillPage"
+                app:layout_constraintTop_toBottomOf="@+id/tvTitleSkillPage"
+                tools:text="50 Jobs" />
 
-</androidx.cardview.widget.CardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <data>
+
+        <variable
+            name="skillsModel"
+            type="com.ramanbyte.emla.models.response.SkillsModel" />
+
+        <variable
+            name="viewPosition"
+            type="Integer" />
+
+        <variable
+            name="jobSkillsViewModel"
+            type="com.ramanbyte.emla.view_model.JobSkillsViewModel" />
+    </data>
+
+</layout>
