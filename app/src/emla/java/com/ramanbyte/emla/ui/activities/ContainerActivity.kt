@@ -17,7 +17,6 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.webkit.WebViewCompat
 import com.google.android.material.internal.NavigationMenuView
-import com.ramanbyte.BaseAppController
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseActivity
 import com.ramanbyte.databinding.ActivityContainerBinding
@@ -290,7 +289,7 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding, ContainerViewMo
             menuPojo = MenuPojo(
                 NAV_PLACEMENT,
                 R.drawable.ic_heart,
-                BindingUtils.string(R.string.my_favourite),
+                BindingUtils.string(R.string.placement),
                 false,
                 0
             )

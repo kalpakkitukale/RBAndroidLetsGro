@@ -31,7 +31,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/text_view_vale_of_label_top"
                 android:gravity="center"
-                android:text="@{skillsModel.totalNumberOfJobs}"
+                android:text='@{skillsModel.totalNumberOfJobs + "  " + @string/jobs}'
                 app:layout_constraintEnd_toEndOf="@+id/tvTitleSkillPage"
                 app:layout_constraintStart_toStartOf="@+id/tvTitleSkillPage"
                 app:layout_constraintTop_toBottomOf="@+id/tvTitleSkillPage"

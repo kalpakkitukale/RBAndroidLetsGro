@@ -2,6 +2,7 @@ package com.ramanbyte.emla.ui.fragments
 
 import android.content.Context
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.GridLayoutManager
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseFragment
 import com.ramanbyte.databinding.FragmentSkillListBinding
@@ -44,6 +45,7 @@ class SkillListFragment :
         layoutBinding.apply {
 
             rvSkill.apply {
+                layoutManager = GridLayoutManager(mContext, 2)
                 skillsListAdapter = SkillsListAdapter()
                 adapter = skillsListAdapter.apply {
                     this!!.context = mContext

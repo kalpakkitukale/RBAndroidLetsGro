@@ -11,9 +11,7 @@ import com.ramanbyte.data_layer.pagination.PaginationResponseHandler
 import com.ramanbyte.emla.data_layer.network.api_layer.JobSkillsController
 import com.ramanbyte.emla.data_layer.pagination.PaginationDataSourceFactory
 import com.ramanbyte.emla.data_layer.room.entities.UserEntity
-import com.ramanbyte.emla.models.ChaptersModel
 import com.ramanbyte.emla.models.UserModel
-import com.ramanbyte.emla.models.request.ChapterRequest
 import com.ramanbyte.emla.models.request.SkillsRequestModel
 import com.ramanbyte.emla.models.response.SkillsModel
 import com.ramanbyte.utilities.replicate
@@ -25,7 +23,7 @@ class JobSkillsRepository(mContext: Context) : BaseRepository(mContext) {
 
     private var paginationResponseHandlerLiveData: MutableLiveData<PaginationResponseHandler?> =
         MutableLiveData(null)
-    private val pageSize = 100
+    private val myPageSize = 100
     private var skillsRequestModel = ObservableField<SkillsRequestModel>()
     private var pagedList: LiveData<PagedList<SkillsModel>>? = null
 
@@ -50,6 +48,7 @@ class JobSkillsRepository(mContext: Context) : BaseRepository(mContext) {
                 set(SkillsRequestModel().apply {
                     this.userId = userModel?.userId ?: 0
                     this.searchKey = searchStr
+                    this.pageSize = myPageSize
                 })
             },
             paginationResponseHandlerLiveData
@@ -61,7 +60,7 @@ class JobSkillsRepository(mContext: Context) : BaseRepository(mContext) {
 
         pagedList = LivePagedListBuilder(
             pagedDataSourceFactory,
-            PagedList.Config.Builder().setEnablePlaceholders(false).setPageSize(pageSize).build()
+            PagedList.Config.Builder().setEnablePlaceholders(false).setPageSize(myPageSize).build()
         ).build()
 
         paginationResponseHandlerLiveData.postValue(PaginationResponseHandler.INIT_LOADING)

@@ -124,7 +124,7 @@ private val controllersDependencies = Kodein.Module("controllers_dependencies", 
         RetrofitInitializer.invoke(
             instance(),//db
             JobSkillsController::class.java,
-            DOMAIN + EMLA + CLIENT_BASE + API + QUESTION
+            DOMAIN + EMLA + CLIENT_BASE + API + CHAPTER
         )
     }
 
