@@ -49,7 +49,7 @@ class SkillListFragment :
         layoutBinding.apply {
 
             rvSkill.apply {
-                layoutManager = GridLayoutManager(mContext, 2)
+                layoutManager = GridLayoutManager(mContext, 3)
                 skillsListAdapter = SkillsListAdapter()
                 adapter = skillsListAdapter.apply {
                     this!!.context = mContext

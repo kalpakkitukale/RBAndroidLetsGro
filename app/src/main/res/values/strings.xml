@@ -55,6 +55,8 @@
     <string name="experience">Experience</string>
     <string name="location">Location</string>
     <string name="salary_range">Salary Range</string>
+    <string name="salary">Salary</string>
+    <string name="posted_on">Posted On</string>
 
 
 </resources>

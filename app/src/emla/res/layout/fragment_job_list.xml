@@ -6,17 +6,17 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".emla.ui.fragments.SkillListFragment">
+        tools:context=".emla.ui.fragments.JobListFragment">
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/edtSkillSearch"
             style="@style/searchEditText"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/text_view_title_large_top"
-            app:layout_constraintEnd_toEndOf="@id/tvTitleSkillPage"
-            app:layout_constraintStart_toStartOf="@id/tvTitleSkillPage"
-            app:layout_constraintTop_toBottomOf="@+id/tvTitleSkillPage" />
+            app:layout_constraintBottom_toBottomOf="@+id/imageViewFilter"
+            app:layout_constraintEnd_toStartOf="@+id/imageViewFilter"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/imageViewFilter" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imageViewSearchClear"
@@ -27,30 +27,25 @@
             app:layout_constraintTop_toTopOf="@id/edtSkillSearch"
             app:srcCompat="@drawable/ic_close_black" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvTitleSkillPage"
-            style="@style/TextViewTitleLarge"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/text_view_title_large_start"
-            android:layout_marginTop="@dimen/text_view_title_large_top"
-            android:layout_marginEnd="@dimen/text_view_title_large_end"
-            android:background="@color/colorFilledButton"
-            android:text="@string/skill_page_title"
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imageViewFilter"
+            style="@style/imageViewAsImageButtonWithBackgroundGreen"
+            android:layout_marginTop="@dimen/image_view_top"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_filter" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvSkill"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:visibility="@{skillsViewModel.viewVisibilityLiveData}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/tvTitleSkillPage"
-            app:layout_constraintStart_toStartOf="@id/tvTitleSkillPage"
+            app:layout_constraintEnd_toEndOf="@+id/imageViewFilter"
+            app:layout_constraintStart_toStartOf="@+id/edtSkillSearch"
             app:layout_constraintTop_toBottomOf="@+id/edtSkillSearch"
-            tools:listitem="@layout/card_skill" />
+            tools:listitem="@layout/card_job_list" />
 
         <include
             android:id="@+id/noInternet"

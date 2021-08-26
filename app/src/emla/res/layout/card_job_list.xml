@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardContainer"
+        style="@style/customCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:contentPadding="@dimen/dp_0">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <View
+                android:id="@+id/viewDivider"
+                style="@style/baseDivider"
+                android:layout_width="0dp"
+                android:layout_marginTop="@dimen/dp_12"
+                app:layout_constraintEnd_toEndOf="@id/tvJobTitle"
+                app:layout_constraintStart_toStartOf="@id/imageViewCompanyImage"
+                app:layout_constraintTop_toBottomOf="@id/tvCompanyName" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="2.5dp"
+                android:layout_marginTop="@dimen/divider_top"
+                android:background="@color/colorFilledButton"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvApplied" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvLocationLabel"
+                style="@style/TextViewLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_12"
+                android:text="@string/location"
+                app:layout_constraintStart_toStartOf="@id/imageViewCompanyImage"
+                app:layout_constraintTop_toBottomOf="@id/viewDivider" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvLocationValue"
+                style="@style/TextViewValeOfLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/text_view_label_top"
+                android:layout_marginEnd="@dimen/text_view_label_end"
+                android:text="@string/location"
+                app:layout_constraintEnd_toEndOf="@id/guideline"
+                app:layout_constraintStart_toStartOf="@id/tvLocationLabel"
+                app:layout_constraintTop_toBottomOf="@id/tvLocationLabel"
+                tools:text="Nodia, Pune, Mumbai, Delhi, Kolkata" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvSalaryLabel"
+                style="@style/TextViewLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/text_view_label_start"
+                android:text="@string/salary"
+                app:layout_constraintEnd_toEndOf="@id/tvJobTitle"
+                app:layout_constraintStart_toStartOf="@id/guideline"
+                app:layout_constraintTop_toBottomOf="@id/viewDivider"
+                app:layout_constraintTop_toTopOf="@id/tvLocationLabel" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvSalaryValue"
+                style="@style/TextViewValeOfLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/text_view_label_top"
+                android:text="@string/location"
+                app:layout_constraintEnd_toEndOf="@id/tvSalaryLabel"
+                app:layout_constraintStart_toStartOf="@id/tvSalaryLabel"
+                app:layout_constraintTop_toBottomOf="@id/tvSalaryLabel"
+                tools:text="8K - 16K" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvSkillLabel"
+                style="@style/TextViewLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/text_view_label_top"
+                android:text="@string/skill"
+                app:layout_constraintStart_toStartOf="@id/tvLocationLabel"
+                app:layout_constraintTop_toBottomOf="@id/tvLocationValue" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvSkillValue"
+                style="@style/TextViewValeOfLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/text_view_label_top"
+                app:layout_constraintEnd_toEndOf="@id/tvSalaryLabel"
+                app:layout_constraintStart_toStartOf="@id/tvSkillLabel"
+                app:layout_constraintTop_toBottomOf="@id/tvSkillLabel"
+                tools:text="Interface Design, Adobe XD, Figma, Prototype, Typography, Visual Design, Color Therapy" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvPostedOn"
+                style="@style/TextViewLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/text_view_label_top"
+                android:text='@{@string/posted_on + ":  26 Aug 2021" }'
+                app:layout_constraintStart_toStartOf="@id/tvSkillValue"
+                app:layout_constraintTop_toBottomOf="@id/tvSkillValue" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvApplied"
+                style="@style/TextViewLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/text_view_label_end"
+                android:drawableStart="@drawable/ic_tick_checked"
+                android:text="@string/applied"
+                android:textColor="@color/colorFilledButton"
+                app:layout_constraintEnd_toEndOf="@id/tvSalaryLabel"
+                app:layout_constraintTop_toTopOf="@id/tvPostedOn" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvCompanyName"
+                style="@style/TextViewSubTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/text_view_sub_title_top"
+                app:layout_constraintEnd_toEndOf="@id/tvJobTitle"
+                app:layout_constraintStart_toStartOf="@id/tvJobTitle"
+                app:layout_constraintTop_toBottomOf="@id/tvJobTitle"
+                tools:text="Genpact India Pvt. Ltd." />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvJobTitle"
+                style="@style/TextViewTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_20"
+                android:layout_marginEnd="@dimen/dp_10"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/imageViewCompanyImage"
+                app:layout_constraintTop_toTopOf="@id/imageViewCompanyImage"
+                tools:text="Sr. UI / UX Developer" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5" />
+
+            <com.ramanbyte.views.RoundedImageView
+                android:id="@+id/imageViewCompanyImage"
+                style="@style/roundedImageView"
+                android:layout_width="@dimen/dp_50"
+                android:layout_height="@dimen/dp_50"
+                android:layout_marginStart="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_10"
+                android:layout_marginEnd="@dimen/image_view_end"
+                android:background="@drawable/circle_transparent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

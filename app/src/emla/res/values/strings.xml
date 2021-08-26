@@ -320,4 +320,5 @@ Content
     <string name="fb_login_protocol_scheme">fb256607422269546</string>
     <string name="skill_page_title">Select your skill \nto get Relevant job Post</string>
     <string name="jobs">Job(s)</string>
+    <string name="applied">Applied</string>
 </resources>

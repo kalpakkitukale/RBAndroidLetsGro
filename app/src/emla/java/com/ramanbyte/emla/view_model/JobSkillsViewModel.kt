@@ -1,17 +1,20 @@
 package com.ramanbyte.emla.view_model
 
 import android.content.Context
+import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.navigation.findNavController
 import androidx.paging.PagedList
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseViewModel
 import com.ramanbyte.data_layer.pagination.PaginationMessages
 import com.ramanbyte.emla.data_layer.repositories.JobSkillsRepository
+import com.ramanbyte.emla.models.CoursesModel
 import com.ramanbyte.emla.models.response.SkillsModel
-import com.ramanbyte.utilities.BindingUtils
-import com.ramanbyte.utilities.KEY_BLANK
+import com.ramanbyte.utilities.*
+import com.ramanbyte.utilities.KEY_COURSE_MODEL
 import org.kodein.di.generic.instance
 
 class JobSkillsViewModel(mContext: Context) : BaseViewModel(mContext) {
@@ -49,5 +52,47 @@ class JobSkillsViewModel(mContext: Context) : BaseViewModel(mContext) {
     }
 
     fun getSkillsList(): LiveData<PagedList<SkillsModel>>? = jobSkillsRepository.getList()
+
+    fun onSkillClick(view: View, skillsModel: SkillsModel) {
+        skillsModel.let { model ->
+            if (NetworkConnectivity.isConnectedToInternet()) {
+                if (model.totalNumberOfJobs!! > 0) {
+                    view.findNavController()
+                        .navigate(
+                            R.id.action_skillFragment_to_jobFragment,
+                            Bundle().apply {
+                                putInt(KEY_SKILL_ID, model.skillId ?: 0)
+                            })
+
+                } else {
+                    setAlertDialogResourceModelMutableLiveData(
+                        BindingUtils.string(R.string.no_data),
+                        BindingUtils.drawable(R.drawable.ic_no_data)!!,
+                        true,
+                        BindingUtils.string(R.string.yes), {
+                            isAlertDialogShown.postValue(false)
+                        },
+                        BindingUtils.string(R.string.no), {
+                            isAlertDialogShown.postValue(false)
+                        }
+                    )
+                    isAlertDialogShown.postValue(true)
+                }
+            } else {
+                setAlertDialogResourceModelMutableLiveData(
+                    BindingUtils.string(R.string.no_internet_message),
+                    BindingUtils.drawable(R.drawable.ic_no_internet)!!,
+                    true,
+                    BindingUtils.string(R.string.yes), {
+                        isAlertDialogShown.postValue(false)
+                    },
+                    BindingUtils.string(R.string.no), {
+                        isAlertDialogShown.postValue(false)
+                    }
+                )
+                isAlertDialogShown.postValue(true)
+            }
+        }
+    }
 
 }

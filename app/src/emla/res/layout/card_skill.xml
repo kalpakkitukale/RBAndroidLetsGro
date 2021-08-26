@@ -3,9 +3,11 @@
 
     <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/cardContainer"
         style="@style/customCard"
-        android:layout_width="@dimen/dp_150"
-        android:layout_height="@dimen/dp_120">
+        android:layout_width="@dimen/dp_100"
+        android:layout_height="@dimen/dp_100"
+        android:onClick="@{()->jobSkillsViewModel.onSkillClick(cardContainer, skillsModel)}">
 
         <androidx.constraintlayout.widget.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
@@ -17,7 +19,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:maxLines="3"
+                android:maxLines="2"
+                android:lines="2"
                 android:text="@{skillsModel.skillName}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
