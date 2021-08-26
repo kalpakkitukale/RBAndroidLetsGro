@@ -1,9 +1,11 @@
 package com.ramanbyte.emla.models.response
 
+import android.view.View
 import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
 import com.google.gson.annotations.SerializedName
 import com.ramanbyte.BR
+import com.ramanbyte.utilities.DateUtils
 import com.ramanbyte.utilities.KEY_BLANK
 
 class JobModel : BaseObservable() {
@@ -51,5 +53,35 @@ class JobModel : BaseObservable() {
         set(value) {
             field = value
             notifyPropertyChanged(BR.jobSkills)
+        }
+
+    @Bindable
+    var jobPostedOn: String? = "2021-08-27T17:35:58.620Z"
+        //KEY_BLANK
+        set(value) {
+            field = value
+            notifyPropertyChanged(BR.jobPostedOn)
+        }
+        get() = DateUtils.getDisplayDateFromDate(
+            field!!,
+            DateUtils.DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS,
+            DateUtils.DATE_DISPLAY_PATTERN
+        )
+
+    @Bindable
+    var isJobApplied: Boolean? = false
+        set(value) {
+            field = value
+            notifyPropertyChanged(BR.isJobApplied)
+        }
+
+    @Bindable
+    var jobAppliedVisibility: Int? = View.GONE
+        get() {
+            return if (isJobApplied!!) {
+                View.VISIBLE
+            } else {
+                View.GONE
+            }
         }
 }

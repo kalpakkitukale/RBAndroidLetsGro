@@ -106,8 +106,8 @@
                 style="@style/TextViewLabel"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/text_view_label_top"
-                android:text='@{@string/posted_on + ":  26 Aug 2021" }'
+                android:layout_marginTop="@dimen/dp_12"
+                android:text='@{@string/posted_on + ": " + jobModel.jobPostedOn}'
                 app:layout_constraintStart_toStartOf="@id/tvSkillValue"
                 app:layout_constraintTop_toBottomOf="@id/tvSkillValue" />
 
@@ -120,6 +120,7 @@
                 android:drawableStart="@drawable/ic_tick_checked"
                 android:text="@string/applied"
                 android:textColor="@color/colorFilledButton"
+                android:visibility="@{jobModel.jobAppliedVisibility}"
                 app:layout_constraintEnd_toEndOf="@id/tvSalaryLabel"
                 app:layout_constraintTop_toTopOf="@id/tvPostedOn" />
 
