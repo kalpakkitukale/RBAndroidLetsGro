@@ -33,16 +33,16 @@
         <item name="android:textCursorDrawable">@color/colorTextNavyBlueInLightNWhiteInDark</item>
     </style>
 
-<!--
-    <style name="EditTextStyleIntoTilRegular">
-        <item name="android:textViewStyle">@style/AppTheme.Font</item>
-        <item name="button_style">@style/AppTheme.Font</item>
-        <item name="android:textAppearance">@style/AppTheme.Font</item>
-        <item name="android:padding">@dimen/dp_10</item>
-        <item name="android:textSize">@dimen/sp_14</item>
-        &lt;!&ndash;<item name="android:textColor">@color/colorAccent</item>&ndash;&gt;
-    </style>
--->
+    <!--
+        <style name="EditTextStyleIntoTilRegular">
+            <item name="android:textViewStyle">@style/AppTheme.Font</item>
+            <item name="button_style">@style/AppTheme.Font</item>
+            <item name="android:textAppearance">@style/AppTheme.Font</item>
+            <item name="android:padding">@dimen/dp_10</item>
+            <item name="android:textSize">@dimen/sp_14</item>
+            &lt;!&ndash;<item name="android:textColor">@color/colorAccent</item>&ndash;&gt;
+        </style>
+    -->
 
     <style name="EditTextRegularGrayHint">
         <item name="android:textColorHint">@color/colorTextNavyBlueInLightNWhiteInDark</item>
@@ -64,9 +64,9 @@
 
     <!--Text view  whenever we use TextView, give proper size -->
     <style name="TextViewRegularNavyBlueOnLightNWhiteOnDark">
-    <item name="android:textAppearance">@style/AppTheme.Font</item>
-    <item name="android:textColor">@color/colorTextNavyBlueInLightNWhiteInDark</item>
-</style>
+        <item name="android:textAppearance">@style/AppTheme.Font</item>
+        <item name="android:textColor">@color/colorTextNavyBlueInLightNWhiteInDark</item>
+    </style>
 
     <style name="TextViewMediumNavyBlueOnLightNWhiteOnDark">
         <item name="android:textAppearance">@style/AppTheme.Font.Medium</item>
@@ -512,6 +512,28 @@
     <style name="imageViewDefaultHeight">
         <item name="android:layout_width">@dimen/dp_35</item>
         <item name="android:layout_height">@dimen/dp_35</item>
+    </style>
+
+
+    <style name="searchEditText" parent="Widget.AppCompat.EditText">
+        <item name="android:background">@drawable/rounded_background</item>
+        <item name="drawableStartCompat">@drawable/ic_baseline_search</item>
+        <item name="android:drawablePadding">@dimen/dp_8</item>
+        <item name="android:layout_marginTop">@dimen/dp_8</item>
+        <item name="android:layout_marginStart">@dimen/dp_8</item>
+        <item name="android:layout_marginEnd">@dimen/dp_8</item>
+        <item name="android:textSize">@dimen/sp_14</item>
+        <item name="android:textAppearance">@style/AppTheme.Font</item>
+        <item name="android:paddingTop">@dimen/dp_10</item>
+        <item name="android:paddingStart">@dimen/dp_10</item>
+        <item name="android:paddingBottom">@dimen/dp_10</item>
+        <item name="android:paddingEnd">@dimen/dp_50</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:scrollHorizontally">true</item>
+        <item name="android:hint">@string/search</item>
+        <item name="android:inputType">text</item>
+        <item name="android:imeOptions">actionSearch</item>
+        <item name="android:textColor">@color/colorValueOfLabel</item>
     </style>
 
 

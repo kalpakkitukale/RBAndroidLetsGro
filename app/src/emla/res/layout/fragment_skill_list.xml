@@ -8,6 +8,25 @@
         android:layout_height="match_parent"
         tools:context=".emla.ui.fragments.SkillListFragment">
 
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edtSkillSearch"
+            style="@style/searchEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/text_view_title_large_top"
+            app:layout_constraintEnd_toEndOf="@id/tvTitleSkillPage"
+            app:layout_constraintStart_toStartOf="@id/tvTitleSkillPage"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitleSkillPage" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imageViewSearchClear"
+            style="@style/imageViewAsImageButtonWithBackgroundGrey"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@id/edtSkillSearch"
+            app:layout_constraintEnd_toEndOf="@id/edtSkillSearch"
+            app:layout_constraintTop_toTopOf="@id/edtSkillSearch"
+            app:srcCompat="@drawable/ic_close_black" />
+
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvTitleSkillPage"
             style="@style/TextViewTitleLarge"
@@ -23,13 +42,13 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvSkill"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:visibility="@{skillsViewModel.viewVisibilityLiveData}"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/tvTitleSkillPage"
             app:layout_constraintStart_toStartOf="@id/tvTitleSkillPage"
-            app:layout_constraintTop_toBottomOf="@+id/tvTitleSkillPage"
+            app:layout_constraintTop_toBottomOf="@+id/edtSkillSearch"
             tools:listitem="@layout/card_skill" />
 
         <include
@@ -50,6 +69,8 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <data>
+
+        <import type="com.ramanbyte.utilities.StaticHelpersKt" />
 
         <variable
             name="skillsViewModel"

@@ -7,9 +7,7 @@ import retrofit2.http.Body
 import retrofit2.http.POST
 
 interface JobSkillsController {
-    /*
-    * POST getChapterLists
-    * */
+
     @POST("getChapterLists")
     suspend fun getSkillsList(@Body request: SkillsRequestModel): Response<List<SkillsModel>>
 }

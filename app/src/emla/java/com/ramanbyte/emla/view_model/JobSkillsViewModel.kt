@@ -1,21 +1,34 @@
 package com.ramanbyte.emla.view_model
 
 import android.content.Context
+import android.view.View
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.paging.PagedList
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseViewModel
 import com.ramanbyte.data_layer.pagination.PaginationMessages
 import com.ramanbyte.emla.data_layer.repositories.JobSkillsRepository
-import com.ramanbyte.emla.models.ChaptersModel
 import com.ramanbyte.emla.models.response.SkillsModel
 import com.ramanbyte.utilities.BindingUtils
+import com.ramanbyte.utilities.KEY_BLANK
 import org.kodein.di.generic.instance
 
 class JobSkillsViewModel(mContext: Context) : BaseViewModel(mContext) {
     override var noInternetTryAgain: () -> Unit = { jobSkillsRepository.tryAgain() }
 
     private val jobSkillsRepository: JobSkillsRepository by instance()
+
+    var searchQuery = MutableLiveData<String>().apply {
+        value = KEY_BLANK
+    }
+
+    init {
+        toggleLayoutVisibility(View.GONE, View.GONE, View.GONE, "", View.GONE)
+        searchQuery.observeForever {
+            jobSkillsRepository.searchSkills(it)
+        }
+    }
 
     fun getSkillsList(searchStr: String) = run {
 
@@ -36,4 +49,5 @@ class JobSkillsViewModel(mContext: Context) : BaseViewModel(mContext) {
     }
 
     fun getSkillsList(): LiveData<PagedList<SkillsModel>>? = jobSkillsRepository.getList()
+
 }
