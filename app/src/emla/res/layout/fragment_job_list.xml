@@ -39,7 +39,7 @@
             android:id="@+id/rvSkill"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:visibility="@{skillsViewModel.viewVisibilityLiveData}"
+            android:visibility="@{jobsViewModel.viewVisibilityLiveData}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/imageViewFilter"

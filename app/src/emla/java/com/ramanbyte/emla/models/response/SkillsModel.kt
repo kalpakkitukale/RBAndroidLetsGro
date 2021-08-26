@@ -8,10 +8,10 @@ import com.ramanbyte.utilities.KEY_BLANK
 
 class SkillsModel : BaseObservable() {
 
-    @SerializedName("id")
+    @SerializedName("chapterId")
     var skillId: Int? = 0
 
-    @SerializedName("title")
+    @SerializedName("chapterName")
     @Bindable
     var skillName: String? = KEY_BLANK
         set(value) {
@@ -19,7 +19,7 @@ class SkillsModel : BaseObservable() {
             notifyPropertyChanged(BR.skillName)
         }
 
-    @SerializedName("noofJobs")
+    @SerializedName("totalSectionCount")
     @Bindable
     var totalNumberOfJobs: Int? = 0
         set(value) {

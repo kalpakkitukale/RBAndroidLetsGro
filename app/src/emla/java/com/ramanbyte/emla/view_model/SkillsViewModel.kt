@@ -57,7 +57,7 @@ class SkillsViewModel(mContext: Context) : BaseViewModel(mContext) {
     fun onSkillClick(view: View, skillsModel: SkillsModel) {
         skillsModel.let { model ->
             if (NetworkConnectivity.isConnectedToInternet()) {
-                if (model.totalNumberOfJobs!! > 0) {
+                /*if (model.totalNumberOfJobs!! > 0) {*/
                     view.findNavController()
                         .navigate(
                             R.id.action_skillFragment_to_jobFragment,
@@ -65,7 +65,7 @@ class SkillsViewModel(mContext: Context) : BaseViewModel(mContext) {
                                 putInt(KEY_SKILL_ID, model.skillId ?: 0)
                             })
 
-                } else {
+                /*} else {
                     setAlertDialogResourceModelMutableLiveData(
                         BindingUtils.string(R.string.no_data),
                         BindingUtils.drawable(R.drawable.ic_no_data)!!,
@@ -78,7 +78,7 @@ class SkillsViewModel(mContext: Context) : BaseViewModel(mContext) {
                         }
                     )
                     isAlertDialogShown.postValue(true)
-                }
+                }*/
             } else {
                 setAlertDialogResourceModelMutableLiveData(
                     BindingUtils.string(R.string.no_internet_message),
