@@ -10,19 +10,19 @@ import androidx.lifecycle.LifecycleRegistry
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.ramanbyte.databinding.CardSkillBinding
-import com.ramanbyte.emla.models.response.SkillsModel
-import com.ramanbyte.emla.view_model.SkillsViewModel
+import com.ramanbyte.databinding.CardJobListBinding
+import com.ramanbyte.emla.models.response.JobModel
+import com.ramanbyte.emla.view_model.JobsViewModel
 
-class SkillsListAdapter :
-    PagedListAdapter<SkillsModel, SkillsListAdapter.SkillsListViewHolder>(DIFF_CALLBACK) {
+class JobListAdapter :
+    PagedListAdapter<JobModel, JobListAdapter.JobsListViewHolder>(DIFF_CALLBACK) {
 
-    var skillsViewModel: SkillsViewModel? = null
+    var jobsViewModel: JobsViewModel? = null
     var context: Context? = null
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SkillsListViewHolder {
-        return SkillsListViewHolder(
-            CardSkillBinding.inflate(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): JobsListViewHolder {
+        return JobsListViewHolder(
+            CardJobListBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -30,12 +30,12 @@ class SkillsListAdapter :
         )
     }
 
-    override fun onBindViewHolder(holder: SkillsListViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: JobsListViewHolder, position: Int) {
         holder.bindData()
     }
 
-    inner class SkillsListViewHolder(private val cardSkillBinding: CardSkillBinding) :
-        RecyclerView.ViewHolder(cardSkillBinding.root), LifecycleOwner {
+    inner class JobsListViewHolder(private val cardJobListBinding: CardJobListBinding) :
+        RecyclerView.ViewHolder(cardJobListBinding.root), LifecycleOwner {
 
         private var lifecycleRegistry: LifecycleRegistry = LifecycleRegistry(this)
 
@@ -51,27 +51,27 @@ class SkillsListAdapter :
 
             lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_START)
 
-            cardSkillBinding.apply {
-                val skillsModel = getItem(adapterPosition)
-                this.skillsModel = skillsModel
-                this.jobSkillsViewModel = this@SkillsListAdapter.skillsViewModel
+            cardJobListBinding.apply {
+                val model = getItem(adapterPosition)
+                this.jobModel = model
+                this.jobsViewModel = this@JobListAdapter.jobsViewModel
             }
         }
     }
 
     companion object {
-        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<SkillsModel>() {
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<JobModel>() {
             override fun areItemsTheSame(
-                oldItem: SkillsModel,
-                newItem: SkillsModel
+                oldItem: JobModel,
+                newItem: JobModel
             ): Boolean {
-                return oldItem.skillId == newItem.skillId
+                return oldItem.jobId == newItem.jobId
             }
 
             @SuppressLint("DiffUtilEquals")
             override fun areContentsTheSame(
-                oldItem: SkillsModel,
-                newItem: SkillsModel
+                oldItem: JobModel,
+                newItem: JobModel
             ): Boolean {
                 return oldItem == newItem
             }

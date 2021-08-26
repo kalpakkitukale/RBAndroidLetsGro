@@ -10,34 +10,35 @@ import androidx.paging.PagedList
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseViewModel
 import com.ramanbyte.data_layer.pagination.PaginationMessages
-import com.ramanbyte.emla.data_layer.repositories.JobSkillsRepository
-import com.ramanbyte.emla.models.CoursesModel
+import com.ramanbyte.emla.data_layer.repositories.SkillsRepository
 import com.ramanbyte.emla.models.response.SkillsModel
-import com.ramanbyte.utilities.*
-import com.ramanbyte.utilities.KEY_COURSE_MODEL
+import com.ramanbyte.utilities.BindingUtils
+import com.ramanbyte.utilities.KEY_BLANK
+import com.ramanbyte.utilities.KEY_SKILL_ID
+import com.ramanbyte.utilities.NetworkConnectivity
 import org.kodein.di.generic.instance
 
-class JobSkillsViewModel(mContext: Context) : BaseViewModel(mContext) {
-    override var noInternetTryAgain: () -> Unit = { jobSkillsRepository.tryAgain() }
+class SkillsViewModel(mContext: Context) : BaseViewModel(mContext) {
+    override var noInternetTryAgain: () -> Unit = { skillsRepository.tryAgain() }
 
-    private val jobSkillsRepository: JobSkillsRepository by instance()
+    private val skillsRepository: SkillsRepository by instance()
 
-    var searchQuery = MutableLiveData<String>().apply {
+    var searchSkillQuery = MutableLiveData<String>().apply {
         value = KEY_BLANK
     }
 
     init {
         toggleLayoutVisibility(View.GONE, View.GONE, View.GONE, "", View.GONE)
-        searchQuery.observeForever {
-            jobSkillsRepository.searchSkills(it)
+        searchSkillQuery.observeForever {
+            skillsRepository.searchSkills(it)
         }
     }
 
     fun getSkillsList(searchStr: String) = run {
 
-        jobSkillsRepository.getSkillsList(searchStr)
+        skillsRepository.getSkillsList(searchStr)
 
-        jobSkillsRepository.getPaginationResponseHandler().observeForever {
+        skillsRepository.getPaginationResponseHandler().observeForever {
             if (it != null) {
                 paginationResponse(
                     it, PaginationMessages(
@@ -51,7 +52,7 @@ class JobSkillsViewModel(mContext: Context) : BaseViewModel(mContext) {
         }
     }
 
-    fun getSkillsList(): LiveData<PagedList<SkillsModel>>? = jobSkillsRepository.getList()
+    fun getSkillsList(): LiveData<PagedList<SkillsModel>>? = skillsRepository.getSkillPagedList()
 
     fun onSkillClick(view: View, skillsModel: SkillsModel) {
         skillsModel.let { model ->

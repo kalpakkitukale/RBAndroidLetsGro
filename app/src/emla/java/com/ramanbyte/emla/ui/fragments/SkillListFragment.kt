@@ -11,14 +11,14 @@ import com.ramanbyte.R
 import com.ramanbyte.base.BaseFragment
 import com.ramanbyte.databinding.FragmentSkillListBinding
 import com.ramanbyte.emla.adapters.SkillsListAdapter
-import com.ramanbyte.emla.view_model.JobSkillsViewModel
+import com.ramanbyte.emla.view_model.SkillsViewModel
 import com.ramanbyte.utilities.AlertDialog
 import com.ramanbyte.utilities.KEY_BLANK
 import com.ramanbyte.utilities.ProgressLoader
 
 class SkillListFragment :
-    BaseFragment<FragmentSkillListBinding, JobSkillsViewModel>(hasOptionsMenu = true) {
-    override val viewModelClass: Class<JobSkillsViewModel> = JobSkillsViewModel::class.java
+    BaseFragment<FragmentSkillListBinding, SkillsViewModel>(hasOptionsMenu = false) {
+    override val viewModelClass: Class<SkillsViewModel> = SkillsViewModel::class.java
 
     private var skillsListAdapter: SkillsListAdapter? = null
 
@@ -53,7 +53,7 @@ class SkillListFragment :
                 skillsListAdapter = SkillsListAdapter()
                 adapter = skillsListAdapter.apply {
                     this!!.context = mContext
-                    this.jobSkillsViewModel = viewModel
+                    this.skillsViewModel = viewModel
                 }
             }
         }
@@ -95,7 +95,7 @@ class SkillListFragment :
                         val searchStr = edtSkillSearch.text.toString()
                         if (searchStr.isNotEmpty()) {
                             viewModel.apply {
-                                viewModel.searchQuery.postValue(searchStr)
+                                viewModel.searchSkillQuery.postValue(searchStr)
                             }
                         }
                         true
@@ -108,7 +108,7 @@ class SkillListFragment :
                 setOnClickListener(View.OnClickListener {
                     edtSkillSearch.setText(KEY_BLANK)
                     viewModel.apply {
-                        searchQuery.postValue(KEY_BLANK)
+                        searchSkillQuery.postValue(KEY_BLANK)
                     }
                 })
 

@@ -67,7 +67,7 @@
     <data>
 
         <variable
-            name="skillsViewModel"
-            type="com.ramanbyte.emla.view_model.JobSkillsViewModel" />
+            name="jobsViewModel"
+            type="com.ramanbyte.emla.view_model.JobsViewModel" />
     </data>
 </layout>

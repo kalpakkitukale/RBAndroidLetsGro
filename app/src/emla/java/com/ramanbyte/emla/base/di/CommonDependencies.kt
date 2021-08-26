@@ -65,8 +65,8 @@ val repositoryDependencies = Kodein.Module("", true) {
         FacultyQuestionRepository(instance())
     }
 
-    bind<JobSkillsRepository>() with provider {
-        JobSkillsRepository(instance())
+    bind<SkillsRepository>() with provider {
+        SkillsRepository(instance())
     }
 
 }

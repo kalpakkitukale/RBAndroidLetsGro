@@ -533,6 +533,7 @@
         <item name="android:inputType">text</item>
         <item name="android:imeOptions">actionSearch</item>
         <item name="android:textColor">@color/colorValueOfLabel</item>
+        <item name="android:minHeight">48dp</item>
     </style>
 
 

@@ -166,4 +166,19 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
+
+    <data>
+
+        <variable
+            name="jobModel"
+            type="com.ramanbyte.emla.models.response.JobModel" />
+
+        <variable
+            name="viewPosition"
+            type="Integer" />
+
+        <variable
+            name="jobsViewModel"
+            type="com.ramanbyte.emla.view_model.JobsViewModel" />
+    </data>
 </layout>

@@ -89,8 +89,8 @@ class ViewModelFactory(private val mContext: Context) : BaseViewModelFactory(mCo
             modelClass.isAssignableFrom(FacultyQuestionAnswerViewModel::class.java) -> {
                 return FacultyQuestionAnswerViewModel(mContext) as T
             }
-            modelClass.isAssignableFrom(JobSkillsViewModel::class.java) -> {
-                return JobSkillsViewModel(mContext) as T
+            modelClass.isAssignableFrom(SkillsViewModel::class.java) -> {
+                return SkillsViewModel(mContext) as T
             }
 
             else -> super.create(modelClass)

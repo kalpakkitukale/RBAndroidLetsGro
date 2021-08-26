@@ -17,7 +17,7 @@ import com.ramanbyte.emla.models.response.SkillsModel
 import com.ramanbyte.utilities.replicate
 import org.kodein.di.generic.instance
 
-class JobSkillsRepository(mContext: Context) : BaseRepository(mContext) {
+class SkillsRepository(mContext: Context) : BaseRepository(mContext) {
 
     private val jobSkillsController: JobSkillsController by instance()
 
@@ -37,7 +37,7 @@ class JobSkillsRepository(mContext: Context) : BaseRepository(mContext) {
     private val skillsModelObservable =
         ObservableField<SkillsRequestModel>().apply { set(SkillsRequestModel()) }
 
-    fun getList(): LiveData<PagedList<SkillsModel>>? = skillsPagedList
+    fun getSkillPagedList(): LiveData<PagedList<SkillsModel>>? = skillsPagedList
 
     fun getSkillsList(searchStr: String) {
 
