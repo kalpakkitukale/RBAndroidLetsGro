@@ -14,6 +14,7 @@ import com.ramanbyte.emla.data_layer.room.entities.UserEntity
 import com.ramanbyte.emla.models.UserModel
 import com.ramanbyte.emla.models.request.SkillsRequestModel
 import com.ramanbyte.emla.models.response.SkillsModel
+import com.ramanbyte.utilities.KEY_BLANK
 import com.ramanbyte.utilities.replicate
 import org.kodein.di.generic.instance
 
@@ -37,7 +38,7 @@ class JobSkillsRepository(mContext: Context) : BaseRepository(mContext) {
 
     fun getList(): LiveData<PagedList<SkillsModel>>? = pagedList
 
-    fun getSkillsList(searchStr: String) {
+    fun getSkillsList(searchStr: String = KEY_BLANK) {
 
         val userModel =
             applicationDatabase.getUserDao().getCurrentUser()?.replicate<UserEntity, UserModel>()

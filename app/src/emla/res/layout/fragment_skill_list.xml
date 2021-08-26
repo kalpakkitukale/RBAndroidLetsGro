@@ -21,7 +21,6 @@
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imageViewSearchClear"
             style="@style/imageViewAsImageButtonWithBackgroundGrey"
-            android:onClick="@{()->skillsViewModel.getSkillsList(StaticHelpersKt.KEY_BLANK)}"
             android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="@id/edtSkillSearch"
             app:layout_constraintEnd_toEndOf="@id/edtSkillSearch"
