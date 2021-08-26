@@ -69,6 +69,10 @@ val repositoryDependencies = Kodein.Module("", true) {
         SkillsRepository(instance())
     }
 
+    bind<JobsRepository>() with provider {
+        JobsRepository(instance())
+    }
+
 }
 
 private val controllersDependencies = Kodein.Module("controllers_dependencies", true) {
