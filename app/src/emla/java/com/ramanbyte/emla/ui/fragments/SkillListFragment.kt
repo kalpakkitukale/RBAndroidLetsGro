@@ -60,13 +60,6 @@ class SkillListFragment :
     }
 
     private fun viewModelOps() {
-        viewModel.apply {
-            getSkillsList(KEY_BLANK)
-
-            getSkillsList()!!.observe(this@SkillListFragment, Observer {
-                skillsListAdapter?.submitList(it)
-            })
-        }
 
         layoutBinding.apply {
             edtSkillSearch.apply {
@@ -96,19 +89,30 @@ class SkillListFragment :
                         val searchStr = edtSkillSearch.text.toString()
                         if (searchStr.isNotEmpty()) {
                             viewModel.apply {
-                                getSkillsList(searchStr)
-                                getSkillsList()!!.observe(this@SkillListFragment, Observer {
-                                    skillsListAdapter?.submitList(it)
-                                })
+                                loadSkillFromServer(searchStr)
                             }
                         }
                         true
                     } else false
                 }
 
-
             }
 
+            imageViewSearchClear.apply {
+                edtSkillSearch.setText(KEY_BLANK)
+                viewModel.apply {
+                    loadSkillFromServer()
+                }
+            }
+
+        }
+
+        viewModel.apply {
+            loadSkillFromServer()
+
+            getSkillList()!!.observe(this@SkillListFragment, Observer {
+                skillsListAdapter?.submitList(it)
+            })
         }
     }
 

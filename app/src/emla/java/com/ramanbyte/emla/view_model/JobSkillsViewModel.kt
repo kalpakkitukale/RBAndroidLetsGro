@@ -2,7 +2,6 @@ package com.ramanbyte.emla.view_model
 
 import android.content.Context
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.paging.PagedList
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseViewModel
@@ -19,7 +18,7 @@ class JobSkillsViewModel(mContext: Context) : BaseViewModel(mContext) {
 
     private val jobSkillsRepository: JobSkillsRepository by instance()
 
-    fun getSkillsList(searchStr: String) = run {
+    fun loadSkillFromServer(searchStr: String = KEY_BLANK) = run {
 
         jobSkillsRepository.getSkillsList(searchStr)
 
@@ -37,5 +36,5 @@ class JobSkillsViewModel(mContext: Context) : BaseViewModel(mContext) {
         }
     }
 
-    fun getSkillsList(): LiveData<PagedList<SkillsModel>>? = jobSkillsRepository.getList()
+    fun getSkillList(): LiveData<PagedList<SkillsModel>>? = jobSkillsRepository.getList()
 }
