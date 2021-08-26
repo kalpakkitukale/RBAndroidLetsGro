@@ -524,7 +524,7 @@
         <item name="android:layout_marginEnd">@dimen/dp_8</item>
         <item name="android:textSize">@dimen/sp_14</item>
         <item name="android:textAppearance">@style/AppTheme.Font</item>
-        <item name="android:padding">@dimen/dp_8</item>
+        <item name="android:padding">@dimen/dp_10</item>
         <item name="android:hint">@string/search</item>
         <item name="android:textColor">@color/colorValueOfLabel</item>
     </style>
