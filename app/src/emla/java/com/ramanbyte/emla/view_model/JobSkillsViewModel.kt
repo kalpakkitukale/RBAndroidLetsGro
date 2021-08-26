@@ -2,6 +2,7 @@ package com.ramanbyte.emla.view_model
 
 import android.content.Context
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.paging.PagedList
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseViewModel
@@ -10,6 +11,7 @@ import com.ramanbyte.emla.data_layer.repositories.JobSkillsRepository
 import com.ramanbyte.emla.models.ChaptersModel
 import com.ramanbyte.emla.models.response.SkillsModel
 import com.ramanbyte.utilities.BindingUtils
+import com.ramanbyte.utilities.KEY_BLANK
 import org.kodein.di.generic.instance
 
 class JobSkillsViewModel(mContext: Context) : BaseViewModel(mContext) {
