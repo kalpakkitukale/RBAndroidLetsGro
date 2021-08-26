@@ -3,10 +3,8 @@ package com.ramanbyte.emla.ui.fragments
 import android.content.Context
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
-import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.ramanbyte.R
@@ -16,7 +14,6 @@ import com.ramanbyte.emla.adapters.SkillsListAdapter
 import com.ramanbyte.emla.view_model.JobSkillsViewModel
 import com.ramanbyte.utilities.AlertDialog
 import com.ramanbyte.utilities.KEY_BLANK
-import com.ramanbyte.utilities.KEY_BLANK_TEXT
 import com.ramanbyte.utilities.ProgressLoader
 
 class SkillListFragment :
@@ -96,10 +93,13 @@ class SkillListFragment :
 
                 setOnEditorActionListener { _, actionId, _ ->
                     if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                        viewModel.apply {
-                            val searchStr = edtSkillSearch.text.toString()
-                            if (searchStr.isNotEmpty()) {
+                        val searchStr = edtSkillSearch.text.toString()
+                        if (searchStr.isNotEmpty()) {
+                            viewModel.apply {
                                 getSkillsList(searchStr)
+                                getSkillsList()!!.observe(this@SkillListFragment, Observer {
+                                    skillsListAdapter?.submitList(it)
+                                })
                             }
                         }
                         true
