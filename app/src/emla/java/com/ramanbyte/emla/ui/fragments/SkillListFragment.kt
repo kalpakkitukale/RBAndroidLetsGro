@@ -60,7 +60,13 @@ class SkillListFragment :
     }
 
     private fun viewModelOps() {
+        viewModel.apply {
+            getSkillsList(KEY_BLANK)
 
+            getSkillsList()!!.observe(this@SkillListFragment, Observer {
+                skillsListAdapter?.submitList(it)
+            })
+        }
         layoutBinding.apply {
             edtSkillSearch.apply {
                 addTextChangedListener(object : TextWatcher {
@@ -89,7 +95,7 @@ class SkillListFragment :
                         val searchStr = edtSkillSearch.text.toString()
                         if (searchStr.isNotEmpty()) {
                             viewModel.apply {
-                                loadSkillFromServer(searchStr)
+                                viewModel.searchQuery.postValue(searchStr)
                             }
                         }
                         true
@@ -99,20 +105,15 @@ class SkillListFragment :
             }
 
             imageViewSearchClear.apply {
-                edtSkillSearch.setText(KEY_BLANK)
-                viewModel.apply {
-                    loadSkillFromServer()
-                }
+                setOnClickListener(View.OnClickListener {
+                    edtSkillSearch.setText(KEY_BLANK)
+                    viewModel.apply {
+                        searchQuery.postValue(KEY_BLANK)
+                    }
+                })
+
             }
 
-        }
-
-        viewModel.apply {
-            loadSkillFromServer()
-
-            getSkillList()!!.observe(this@SkillListFragment, Observer {
-                skillsListAdapter?.submitList(it)
-            })
         }
     }
 

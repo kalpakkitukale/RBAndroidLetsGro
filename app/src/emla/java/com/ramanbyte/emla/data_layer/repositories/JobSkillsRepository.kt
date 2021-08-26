@@ -14,7 +14,6 @@ import com.ramanbyte.emla.data_layer.room.entities.UserEntity
 import com.ramanbyte.emla.models.UserModel
 import com.ramanbyte.emla.models.request.SkillsRequestModel
 import com.ramanbyte.emla.models.response.SkillsModel
-import com.ramanbyte.utilities.KEY_BLANK
 import com.ramanbyte.utilities.replicate
 import org.kodein.di.generic.instance
 
@@ -25,26 +24,28 @@ class JobSkillsRepository(mContext: Context) : BaseRepository(mContext) {
     private var paginationResponseHandlerLiveData: MutableLiveData<PaginationResponseHandler?> =
         MutableLiveData(null)
     private val myPageSize = 100
-    private var skillsRequestModel = ObservableField<SkillsRequestModel>()
-    private var pagedList: LiveData<PagedList<SkillsModel>>? = null
+    private var skillsPagedList: LiveData<PagedList<SkillsModel>>? = null
 
     fun tryAgain() {
         paginationResponseHandlerLiveData.postValue(PaginationResponseHandler.INIT_LOADING)
-        pagedList?.value?.dataSource?.invalidate()
+        skillsPagedList?.value?.dataSource?.invalidate()
     }
 
     fun getPaginationResponseHandler(): MutableLiveData<PaginationResponseHandler?> =
         paginationResponseHandlerLiveData
 
-    fun getList(): LiveData<PagedList<SkillsModel>>? = pagedList
+    private val skillsModelObservable =
+        ObservableField<SkillsRequestModel>().apply { set(SkillsRequestModel()) }
 
-    fun getSkillsList(searchStr: String = KEY_BLANK) {
+    fun getList(): LiveData<PagedList<SkillsModel>>? = skillsPagedList
+
+    fun getSkillsList(searchStr: String) {
 
         val userModel =
             applicationDatabase.getUserDao().getCurrentUser()?.replicate<UserEntity, UserModel>()
 
         val pagedDataSourceFactory = PaginationDataSourceFactory(
-            skillsRequestModel.apply {
+            skillsModelObservable.apply {
 
                 set(SkillsRequestModel().apply {
                     this.userId = userModel?.userId ?: 0
@@ -59,11 +60,19 @@ class JobSkillsRepository(mContext: Context) : BaseRepository(mContext) {
             } ?: arrayListOf()
         }
 
-        pagedList = LivePagedListBuilder(
+        skillsPagedList = LivePagedListBuilder(
             pagedDataSourceFactory,
             PagedList.Config.Builder().setEnablePlaceholders(false).setPageSize(myPageSize).build()
         ).build()
 
+        paginationResponseHandlerLiveData.postValue(PaginationResponseHandler.INIT_LOADING)
+    }
+
+    fun searchSkills(searchString: String) {
+        skillsModelObservable.get().apply {
+            this?.searchKey = searchString
+        }
+        skillsPagedList?.value?.dataSource?.invalidate()
         paginationResponseHandlerLiveData.postValue(PaginationResponseHandler.INIT_LOADING)
     }
 
