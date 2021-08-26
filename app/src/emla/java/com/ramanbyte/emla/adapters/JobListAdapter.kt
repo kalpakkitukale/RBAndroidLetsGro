@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ramanbyte.databinding.CardJobListBinding
 import com.ramanbyte.emla.models.response.JobModel
 import com.ramanbyte.emla.view_model.JobsViewModel
+import com.ramanbyte.utilities.KEY_BLANK
+import com.ramanbyte.utilities.StaticMethodUtilitiesKtx
 
 class JobListAdapter :
     PagedListAdapter<JobModel, JobListAdapter.JobsListViewHolder>(DIFF_CALLBACK) {
@@ -31,7 +33,11 @@ class JobListAdapter :
     }
 
     override fun onBindViewHolder(holder: JobsListViewHolder, position: Int) {
-        holder.bindData()
+        val jobModel: JobModel = getItem(position)!!
+        holder.bindData(jobModel.apply {
+            companyImageURL =
+                StaticMethodUtilitiesKtx.getS3DynamicURL(companyLogo ?: KEY_BLANK, context!!)
+        })
     }
 
     inner class JobsListViewHolder(private val cardJobListBinding: CardJobListBinding) :
@@ -47,7 +53,7 @@ class JobListAdapter :
             return lifecycleRegistry
         }
 
-        fun bindData() {
+        fun bindData(jobModel: JobModel) {
 
             lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_START)
 

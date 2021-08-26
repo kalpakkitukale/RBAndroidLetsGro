@@ -30,7 +30,7 @@
                 android:background="@color/colorFilledButton"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvApplied" />
+                app:layout_constraintTop_toBottomOf="@id/tvPostedOn" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvLocationLabel"
@@ -165,6 +165,8 @@
                 android:layout_marginTop="@dimen/dp_10"
                 android:layout_marginEnd="@dimen/image_view_end"
                 android:background="@drawable/circle_transparent"
+                android:src="@drawable/ic_default_profile"
+                app:imageUrl="@{jobModel.companyImageURL}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 

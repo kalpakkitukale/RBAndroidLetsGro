@@ -69,7 +69,7 @@ class JobModel : BaseObservable() {
         )
 
     @Bindable
-    var isJobApplied: Boolean? = false
+    var isJobApplied: Boolean? = true
         set(value) {
             field = value
             notifyPropertyChanged(BR.isJobApplied)
@@ -84,4 +84,16 @@ class JobModel : BaseObservable() {
                 View.GONE
             }
         }
+
+    @Bindable
+    var companyLogo: String? = "Apr2020/download (1)_5_6_920200514140000.jpg"
+        //KEY_BLANK
+        set(value) {
+            field = value
+            notifyPropertyChanged(BR.companyLogo)
+        }
+
+    @Bindable
+    var companyImageURL: String? = KEY_BLANK
+
 }
