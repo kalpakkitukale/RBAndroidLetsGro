@@ -59,9 +59,6 @@
     <string name="posted_on">Posted On</string>
     <string name="website">Website</string>
     <string name="job_description">Job Description</string>
-    <string name="salary">Salary</string>
-    <string name="location">Location</string>
-    <string name="skill">Skill</string>
 
 
 </resources>
