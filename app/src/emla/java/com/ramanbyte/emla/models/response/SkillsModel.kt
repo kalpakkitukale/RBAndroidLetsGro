@@ -19,7 +19,7 @@ class SkillsModel : BaseObservable() {
         }
 
     @Bindable
-    var totalNumberOfJobs: Int? = 150
+    var totalNumberOfJobs: Int = 150
         set(value) {
             field = value
             notifyPropertyChanged(BR.totalNumberOfJobs)
