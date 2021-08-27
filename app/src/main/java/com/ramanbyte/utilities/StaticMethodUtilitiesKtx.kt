@@ -25,7 +25,8 @@ import com.ramanbyte.aws_s3_android.accessor.AppS3Client
 import com.ramanbyte.data_layer.SharedPreferencesDatabase
 import com.ramanbyte.views.RoundedTextDrawable
 import java.util.*
-import kotlin.math.abs
+import kotlin.math.ln
+import kotlin.math.pow
 
 
 /**
@@ -305,16 +306,12 @@ object StaticMethodUtilitiesKtx {
     }
 
     fun convertAmountToDisplay(amount: Long): String {
-        return when {
-            abs(amount / 1000000) > 1 -> {
-                (amount / 1000000).toString() + "M"
-            }
-            abs(amount / 1000) > 1 -> {
-                (amount / 1000).toString() + "K"
-            }
-            else -> {
-                amount.toString()
-            }
-        }
+        if (amount < 1000) return "" + amount
+        val exp = (ln(amount.toDouble()) / ln(1000.0)).toInt()
+        return java.lang.String.format(
+            "%.1f%c",
+            amount / 1000.0.pow(exp.toDouble()),
+            "kMGTPE"[exp - 1]
+        )
     }
 }

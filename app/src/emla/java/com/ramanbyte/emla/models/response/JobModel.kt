@@ -88,6 +88,7 @@ class JobModel : BaseObservable() {
             DateUtils.DATE_DISPLAY_PATTERN
         )
 
+    @SerializedName("isApplied")
     @Bindable
     var isJobApplied: Int? = 0
         set(value) {
