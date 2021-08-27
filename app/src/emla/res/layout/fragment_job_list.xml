@@ -9,7 +9,7 @@
         tools:context=".emla.ui.fragments.JobListFragment">
 
         <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/edtSkillSearch"
+            android:id="@+id/edtJobSearch"
             style="@style/searchEditText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
