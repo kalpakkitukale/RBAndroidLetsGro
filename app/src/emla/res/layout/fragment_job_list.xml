@@ -11,27 +11,28 @@
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/edtJobSearch"
             style="@style/searchEditText"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@+id/imageViewFilter"
-            app:layout_constraintEnd_toStartOf="@+id/imageViewFilter"
+            android:layout_marginTop="@dimen/text_input_layout_top"
+            app:layout_constraintEnd_toStartOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/imageViewFilter" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imageViewSearchClear"
             style="@style/imageViewAsImageButtonWithBackgroundGrey"
             android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="@id/edtSkillSearch"
-            app:layout_constraintEnd_toEndOf="@id/edtSkillSearch"
-            app:layout_constraintTop_toTopOf="@id/edtSkillSearch"
-            app:srcCompat="@drawable/ic_close_black" />
+            app:layout_constraintBottom_toBottomOf="@id/edtJobSearch"
+            app:layout_constraintEnd_toEndOf="@id/edtJobSearch"
+            app:layout_constraintTop_toTopOf="@id/edtJobSearch"
+            app:srcCompat="@drawable/ic_close" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imageViewFilter"
             style="@style/imageViewAsImageButtonWithBackgroundGreen"
             android:layout_marginTop="@dimen/image_view_top"
             app:layout_constraintEnd_toEndOf="parent"
+            android:visibility="gone"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_filter_white" />
 
@@ -42,9 +43,9 @@
             android:visibility="@{jobsViewModel.viewVisibilityLiveData}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/imageViewFilter"
-            app:layout_constraintStart_toStartOf="@+id/edtSkillSearch"
-            app:layout_constraintTop_toBottomOf="@+id/edtSkillSearch"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/edtJobSearch"
+            app:layout_constraintTop_toBottomOf="@+id/edtJobSearch"
             tools:listitem="@layout/card_job_list" />
 
         <include
