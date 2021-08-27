@@ -1,11 +1,12 @@
 package com.ramanbyte.emla.models.request
 
 import com.ramanbyte.emla.models.BaseRequestModel
+import com.ramanbyte.utilities.KEY_DOMAIN
 
 class JobRequestModel : BaseRequestModel() {
 
-    var searchKey: String = ""
+    var searchkey: String = ""
     var userId: Int = 0
-    var SkillId: Int = 0
-    var courseId = 1
+    var skillId: Int = 0
+    var domain = KEY_DOMAIN
 }

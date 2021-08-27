@@ -48,9 +48,9 @@ class JobsRepository(mContext: Context) : BaseRepository(mContext) {
             jobsModelObservable.apply {
 
                 set(JobRequestModel().apply {
-                    this.userId = userModel?.userId ?: 0
+                    this.userId = 1//userModel?.userId ?: 0
                     this.pageSize = myPageSize
-                    this.SkillId = skillId
+                    this.skillId = 0//skillId
                 })
             },
             paginationResponseHandlerLiveData
@@ -70,7 +70,7 @@ class JobsRepository(mContext: Context) : BaseRepository(mContext) {
 
     fun searchJobs(searchString: String) {
         jobsModelObservable.get().apply {
-            this?.searchKey = searchString
+            this?.searchkey = searchString
         }
         jobsPagedList?.value?.dataSource?.invalidate()
         paginationResponseHandlerLiveData.postValue(PaginationResponseHandler.INIT_LOADING)

@@ -7,15 +7,16 @@ import com.google.gson.annotations.SerializedName
 import com.ramanbyte.BR
 import com.ramanbyte.utilities.DateUtils
 import com.ramanbyte.utilities.KEY_BLANK
+import com.ramanbyte.utilities.KEY_HYPHEN
+import com.ramanbyte.utilities.StaticMethodUtilitiesKtx
 
 class JobModel : BaseObservable() {
 
-    @SerializedName("chapterId")
+    @SerializedName("id")
     var jobId: Int? = 0
 
-    @SerializedName("chapterName")
-
     /*Role*/
+    @SerializedName("title")
     @Bindable
     var jobTitle: String? = KEY_BLANK
         set(value) {
@@ -23,43 +24,60 @@ class JobModel : BaseObservable() {
             notifyPropertyChanged(BR.jobTitle)
         }
 
-    @SerializedName("description")
     @Bindable
-    var companyName: String? = KEY_BLANK
+    var companyName: String? = KEY_HYPHEN
         set(value) {
             field = value
             notifyPropertyChanged(BR.companyName)
         }
 
 
+    @SerializedName("locations")
     @Bindable
-    var jobLocation: String? = "Nodia, Pune, Mumbai, Delhi, Kolkata"
-        //KEY_BLANK
+    var jobLocation: String? = KEY_BLANK
+        //"Nodia, Pune, Mumbai, Delhi, Kolkata"
         set(value) {
             field = value
             notifyPropertyChanged(BR.jobLocation)
         }
 
     @Bindable
-    var jobSalaryRange: String? = "8K - 16K"
-        //KEY_BLANK
+    var minSalaryOffered: Long? = 0
+        set(value) {
+            field = value
+            notifyPropertyChanged(BR.minSalaryOffered)
+        }
+
+    @Bindable
+    var maxSalaryOffered: Long? = 0
+        set(value) {
+            field = value
+            notifyPropertyChanged(BR.maxSalaryOffered)
+        }
+
+    @Bindable
+    var jobSalaryRange: String? = KEY_BLANK
         set(value) {
             field = value
             notifyPropertyChanged(BR.jobSalaryRange)
         }
+        get() {
+            var minSalary = StaticMethodUtilitiesKtx.convertAmountToDisplay(minSalaryOffered!!)
+            var maxSalary = StaticMethodUtilitiesKtx.convertAmountToDisplay(maxSalaryOffered!!)
+            return "$minSalary - $maxSalary"
+        }
 
+    @SerializedName("skills")
     @Bindable
-    var jobSkills: String? =
-        "Interface Design, Adobe XD, Figma, Prototype, Typography, Visual Design, Color Therapy"
-        //KEY_BLANK
+    var jobSkills: String? = KEY_BLANK
         set(value) {
             field = value
             notifyPropertyChanged(BR.jobSkills)
         }
 
+    @SerializedName("postedOn")
     @Bindable
-    var jobPostedOn: String? = "2021-08-27T17:35:58.620Z"
-        //KEY_BLANK
+    var jobPostedOn: String? = KEY_HYPHEN
         set(value) {
             field = value
             notifyPropertyChanged(BR.jobPostedOn)
@@ -71,7 +89,7 @@ class JobModel : BaseObservable() {
         )
 
     @Bindable
-    var isJobApplied: Boolean? = true
+    var isJobApplied: Int? = 0
         set(value) {
             field = value
             notifyPropertyChanged(BR.isJobApplied)
@@ -80,7 +98,7 @@ class JobModel : BaseObservable() {
     @Bindable
     var jobAppliedVisibility: Int? = View.GONE
         get() {
-            return if (isJobApplied!!) {
+            return if (isJobApplied!! == 1) {
                 View.VISIBLE
             } else {
                 View.GONE
