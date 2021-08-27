@@ -11,12 +11,8 @@ import com.ramanbyte.R
 import com.ramanbyte.base.BaseViewModel
 import com.ramanbyte.data_layer.pagination.PaginationMessages
 import com.ramanbyte.emla.data_layer.repositories.JobsRepository
-import com.ramanbyte.emla.models.CourseResultModel
 import com.ramanbyte.emla.models.response.JobModel
-import com.ramanbyte.utilities.BindingUtils
-import com.ramanbyte.utilities.KEY_BLANK
-import com.ramanbyte.utilities.KEY_JOB_ID
-import com.ramanbyte.utilities.NetworkConnectivity
+import com.ramanbyte.utilities.*
 import org.kodein.di.generic.instance
 
 class JobsViewModel(mContext: Context) : BaseViewModel(mContext) {
@@ -66,6 +62,7 @@ class JobsViewModel(mContext: Context) : BaseViewModel(mContext) {
                         R.id.action_jobListFragment_to_JobDetailFragment,
                         Bundle().apply {
                             putInt(KEY_JOB_ID, model.jobId ?: 0)
+                            putInt(KEY_IS_JOB_APPLIED, model.isJobApplied ?: 0)
                         })
             } else {
                 setAlertDialogResourceModelMutableLiveData(

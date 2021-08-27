@@ -72,8 +72,8 @@
             android:layout_height="0dp"
             android:visibility="@{skillsViewModel.viewVisibilityLiveData}"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/layoutTitle"
-            app:layout_constraintStart_toStartOf="@id/layoutTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edtSkillSearch"
             tools:listitem="@layout/card_skill" />
 

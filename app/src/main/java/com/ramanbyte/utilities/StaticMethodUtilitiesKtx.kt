@@ -24,8 +24,10 @@ import com.ramanbyte.R
 import com.ramanbyte.aws_s3_android.accessor.AppS3Client
 import com.ramanbyte.data_layer.SharedPreferencesDatabase
 import com.ramanbyte.views.RoundedTextDrawable
+import java.text.DecimalFormat
 import java.util.*
-import kotlin.math.ln
+import kotlin.math.floor
+import kotlin.math.log10
 import kotlin.math.pow
 
 
@@ -306,12 +308,16 @@ object StaticMethodUtilitiesKtx {
     }
 
     fun convertAmountToDisplay(amount: Long): String {
-        if (amount < 1000) return "" + amount
-        val exp = (ln(amount.toDouble()) / ln(1000.0)).toInt()
-        return java.lang.String.format(
-            "%.1f%c",
-            amount / 1000.0.pow(exp.toDouble()),
-            "kMGTPE"[exp - 1]
-        )
+        val suffix = charArrayOf(' ', 'K', 'M', 'B', 'T', 'P', 'E')
+        val numValue: Long = amount
+        val value = floor(log10(numValue.toDouble())).toInt()
+        val base = value / 3
+        return if (value >= 3 && base < suffix.size) {
+            DecimalFormat("#0.0").format(
+                numValue / 10.0.pow((base * 3).toDouble())
+            ) + suffix[base]
+        } else {
+            DecimalFormat("#,##0").format(numValue)
+        }
     }
 }

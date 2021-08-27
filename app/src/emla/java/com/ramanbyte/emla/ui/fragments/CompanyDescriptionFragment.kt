@@ -7,13 +7,15 @@ import com.ramanbyte.base.BaseFragment
 import com.ramanbyte.databinding.FragmentCompanyDescriptionBinding
 import com.ramanbyte.emla.adapters.ViewPagerAdapter
 import com.ramanbyte.emla.view_model.JobsViewModel
-import com.ramanbyte.utilities.ProgressLoader
+import com.ramanbyte.utilities.*
 import kotlinx.android.synthetic.emla.fragment_company_description.*
 
-class CompanyDescriptionFragment: BaseFragment<FragmentCompanyDescriptionBinding, JobsViewModel>(useParent = true) {
-
+class CompanyDescriptionFragment :
+    BaseFragment<FragmentCompanyDescriptionBinding, JobsViewModel>() {
 
     var mContext: Context? = null
+    var jobId: Int? = 0
+    var isJobApplied: Int? = 0
 
     private var viewPagerAdapter: ViewPagerAdapter? = null
 
@@ -23,8 +25,9 @@ class CompanyDescriptionFragment: BaseFragment<FragmentCompanyDescriptionBinding
 
     override fun initiate() {
         ProgressLoader(context!!, viewModel)
-
-       layoutBinding.apply{
+        jobId = arguments?.getInt(KEY_JOB_ID) ?: 0
+        isJobApplied = arguments?.getInt(KEY_IS_JOB_APPLIED) ?: 0
+        layoutBinding.apply {
             lifecycleOwner = this@CompanyDescriptionFragment
             jobsViewModel = viewModel
         }

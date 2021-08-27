@@ -107,8 +107,7 @@ class JobModel : BaseObservable() {
         }
 
     @Bindable
-    var companyLogo: String? = "Apr2020/download (1)_5_6_920200514140000.jpg"
-        //KEY_BLANK
+    var companyLogo: String? = KEY_BLANK
         set(value) {
             field = value
             notifyPropertyChanged(BR.companyLogo)
