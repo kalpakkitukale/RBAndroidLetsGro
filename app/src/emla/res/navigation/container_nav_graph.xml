@@ -97,6 +97,15 @@
         android:id="@+id/jobListFragment"
         android:name="com.ramanbyte.emla.ui.fragments.JobListFragment"
         android:label="@string/jobs"
-        tools:layout="@layout/fragment_job_list" />
+        tools:layout="@layout/fragment_job_list">
+        <action
+            android:id="@+id/action_jobListFragment_to_JobDetailFragment"
+            app:destination="@id/jobDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/jobDetailFragment"
+        android:name="com.ramanbyte.emla.ui.fragments.CompanyDescriptionFragment"
+        android:label="@string/job_detail"
+        tools:layout="@layout/fragment_company_description" />
 
 </navigation>

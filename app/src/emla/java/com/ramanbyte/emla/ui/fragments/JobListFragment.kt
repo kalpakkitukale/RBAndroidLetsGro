@@ -8,6 +8,7 @@ import com.ramanbyte.databinding.FragmentJobListBinding
 import com.ramanbyte.emla.adapters.JobListAdapter
 import com.ramanbyte.emla.view_model.JobsViewModel
 import com.ramanbyte.utilities.AlertDialog
+import com.ramanbyte.utilities.KEY_SKILL_ID
 import com.ramanbyte.utilities.ProgressLoader
 
 class JobListFragment :
@@ -21,7 +22,11 @@ class JobListFragment :
     override fun layoutId(): Int =
         R.layout.fragment_job_list
 
+    var skillId: Int = 0
+
     override fun initiate() {
+        skillId = arguments?.getInt(KEY_SKILL_ID) ?: 0
+
         ProgressLoader(context!!, viewModel)
         AlertDialog(context!!, viewModel)
 
@@ -58,7 +63,7 @@ class JobListFragment :
 
     private fun viewModelOps() {
         viewModel.apply {
-            loadJobsList()
+            loadJobsList(skillId)
 
             getJobsList()!!.observe(this@JobListFragment, Observer {
                 jobListAdapter?.submitList(it)

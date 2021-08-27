@@ -1,9 +1,11 @@
 package com.ramanbyte.emla.view_model
 
 import android.content.Context
+import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.navigation.findNavController
 import androidx.paging.PagedList
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseViewModel
@@ -12,6 +14,7 @@ import com.ramanbyte.emla.data_layer.repositories.JobsRepository
 import com.ramanbyte.emla.models.response.JobModel
 import com.ramanbyte.utilities.BindingUtils
 import com.ramanbyte.utilities.KEY_BLANK
+import com.ramanbyte.utilities.KEY_JOB_ID
 import com.ramanbyte.utilities.NetworkConnectivity
 import org.kodein.di.generic.instance
 
@@ -31,9 +34,9 @@ class JobsViewModel(mContext: Context) : BaseViewModel(mContext) {
         }
     }
 
-    fun loadJobsList() = run {
+    fun loadJobsList(skillId: Int) = run {
 
-        jobsRepository.getJobList()
+        jobsRepository.getJobList(skillId)
 
         jobsRepository.getPaginationResponseHandler().observeForever {
             if (it != null) {
@@ -54,7 +57,12 @@ class JobsViewModel(mContext: Context) : BaseViewModel(mContext) {
     fun onJobClick(view: View, jobModel: JobModel) {
         jobModel.let { model ->
             if (NetworkConnectivity.isConnectedToInternet()) {
-
+                view.findNavController()
+                    .navigate(
+                        R.id.action_jobListFragment_to_JobDetailFragment,
+                        Bundle().apply {
+                            putInt(KEY_JOB_ID, model.jobId ?: 0)
+                        })
             } else {
                 setAlertDialogResourceModelMutableLiveData(
                     BindingUtils.string(R.string.no_internet_message),

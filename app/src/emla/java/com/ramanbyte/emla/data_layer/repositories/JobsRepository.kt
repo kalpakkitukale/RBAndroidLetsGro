@@ -39,7 +39,7 @@ class JobsRepository(mContext: Context) : BaseRepository(mContext) {
 
     fun getJobsPagedList(): LiveData<PagedList<JobModel>>? = jobsPagedList
 
-    fun getJobList() {
+    fun getJobList(skillId: Int) {
 
         val userModel =
             applicationDatabase.getUserDao().getCurrentUser()?.replicate<UserEntity, UserModel>()
@@ -50,6 +50,7 @@ class JobsRepository(mContext: Context) : BaseRepository(mContext) {
                 set(JobRequestModel().apply {
                     this.userId = userModel?.userId ?: 0
                     this.pageSize = myPageSize
+                    this.SkillId = skillId
                 })
             },
             paginationResponseHandlerLiveData
