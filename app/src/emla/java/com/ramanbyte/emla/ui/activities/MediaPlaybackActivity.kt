@@ -438,6 +438,10 @@ class MediaPlaybackActivity : BaseActivity<ActivityMediaPlaybackBinding, MediaPl
                 }
             })
 
+            ivBack.setOnClickListener(View.OnClickListener {
+                finish()
+            })
+
 
             /*
             * Click event for the Unlike

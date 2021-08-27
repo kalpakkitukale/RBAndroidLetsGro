@@ -94,6 +94,7 @@
         android:id="@+id/barrier"
         android:layout_width="0dp"
         android:layout_height="1dp"
+        android:visibility="invisible"
         android:layout_marginBottom="@dimen/dp_16"
         app:layout_constraintBottom_toTopOf="@+id/likeLayout"
         android:background="@color/colorExoControl"
@@ -107,6 +108,7 @@
         android:orientation="horizontal"
         android:gravity="center"
         android:padding="@dimen/dp_5"
+        android:layout_marginBottom="@dimen/dp_12"
         app:layout_constraintEnd_toStartOf="@+id/disLikeLayout"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -140,7 +142,7 @@
         app:layout_constraintEnd_toStartOf="@+id/wishListLayout"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/likeLayout"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintBottom_toBottomOf="@id/likeLayout">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/exoBtnDislike"
@@ -170,7 +172,7 @@
         app:layout_constraintEnd_toStartOf="@+id/userCommentLayout"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/disLikeLayout"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintBottom_toBottomOf="@id/disLikeLayout">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/exoBtnWishlist"
@@ -201,7 +203,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/wishListLayout"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintBottom_toBottomOf="@id/wishListLayout">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/exoBtnComment"
@@ -220,5 +222,14 @@
             android:textSize="@dimen/sp_10" />
 
     </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivBack"
+        style="@style/ImageViewOrIconWhereClickIsPerformed"
+        android:layout_width="@dimen/dp_35"
+        android:layout_height="?attr/actionBarSize"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_baseline_arrow_white" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
