@@ -132,7 +132,7 @@ private val controllersDependencies = Kodein.Module("controllers_dependencies", 
         RetrofitInitializer.invoke(
             instance(),//db
             SkillsController::class.java,
-            DOMAIN + PLACEMENT + PLACEMENT_CLIENT_BASE + API + CHAPTER
+            DOMAIN + PLACEMENT + PLACEMENT_CLIENT_BASE + API + SKILLS
         )
     }
 

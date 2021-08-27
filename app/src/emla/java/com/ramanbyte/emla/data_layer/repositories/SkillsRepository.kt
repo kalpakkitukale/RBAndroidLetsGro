@@ -23,7 +23,7 @@ class SkillsRepository(mContext: Context) : BaseRepository(mContext) {
 
     private var paginationResponseHandlerLiveData: MutableLiveData<PaginationResponseHandler?> =
         MutableLiveData(null)
-    private val myPageSize = 100
+    private val pageSize = 10
     private var skillsPagedList: LiveData<PagedList<SkillsModel>>? = null
 
     fun tryAgain() {
@@ -50,7 +50,6 @@ class SkillsRepository(mContext: Context) : BaseRepository(mContext) {
                 set(SkillsRequestModel().apply {
                     this.userId = 1//userModel?.userId ?: 0
                     this.searchKey = searchStr
-                    this.pageSize = myPageSize
                 })
             },
             paginationResponseHandlerLiveData
@@ -62,7 +61,7 @@ class SkillsRepository(mContext: Context) : BaseRepository(mContext) {
 
         skillsPagedList = LivePagedListBuilder(
             pagedDataSourceFactory,
-            PagedList.Config.Builder().setEnablePlaceholders(false).setPageSize(myPageSize).build()
+            PagedList.Config.Builder().setEnablePlaceholders(false).setPageSize(pageSize).build()
         ).build()
 
         paginationResponseHandlerLiveData.postValue(PaginationResponseHandler.INIT_LOADING)
