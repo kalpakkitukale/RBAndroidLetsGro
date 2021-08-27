@@ -116,8 +116,9 @@ class JobModel : BaseObservable() {
     @Bindable
     var companyImageURL: String? = KEY_BLANK
 
+    @SerializedName("noofPositions")
     @Bindable
-    var vacancy: String? = KEY_BLANK
+    var vacancy: Int? = 0
 
     @Bindable
     var experience: String? = KEY_BLANK

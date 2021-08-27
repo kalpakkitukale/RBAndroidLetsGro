@@ -76,7 +76,7 @@ class JobsRepository(mContext: Context) : BaseRepository(mContext) {
         paginationResponseHandlerLiveData.postValue(PaginationResponseHandler.INIT_LOADING)
     }
 
-    suspend fun getJobDetails(jobsId: Int): JobModel? {
+    suspend fun getJobDetails(jobsId: Int): List<JobModel>? {
 
         val jobRequestModel = JobRequestModel().apply {
             this.jobId = jobsId

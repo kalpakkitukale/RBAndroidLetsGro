@@ -7,7 +7,8 @@ import com.ramanbyte.databinding.FragmentAboutCompanyBinding
 import com.ramanbyte.emla.view_model.JobsViewModel
 import com.ramanbyte.utilities.ProgressLoader
 
-class AboutCompanyFragment : BaseFragment<FragmentAboutCompanyBinding, JobsViewModel>(useParent = true) {
+class AboutCompanyFragment :
+    BaseFragment<FragmentAboutCompanyBinding, JobsViewModel>(hasOptionsMenu = false) {
 
 
     var mContext: Context? = null

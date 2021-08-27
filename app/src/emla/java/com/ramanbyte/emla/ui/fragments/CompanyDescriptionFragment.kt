@@ -38,11 +38,15 @@ class CompanyDescriptionFragment :
     }
 
     private fun viewModelOps() {
-        viewModel.companyDescriptionLiveData.observe(this@CompanyDescriptionFragment, Observer {
-            if (it != null)
-                setUpViewPager(it)
-
-        })
+        viewModel.apply {
+            getJobDetails(jobId!!)
+            companyDescriptionLiveData.observe(this@CompanyDescriptionFragment, Observer {
+                if (it != null) {
+                    layoutBinding.jobModel = it
+                    setUpViewPager(it)
+                }
+            })
+        }
     }
 
     private fun setUpViewPager(it: JobModel) {

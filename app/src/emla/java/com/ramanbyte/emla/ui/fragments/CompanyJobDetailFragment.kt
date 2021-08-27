@@ -3,12 +3,13 @@ package com.ramanbyte.emla.ui.fragments
 import android.content.Context
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseFragment
-import com.ramanbyte.emla.view_model.JobsViewModel
-import com.ramanbyte.utilities.ProgressLoader
 import com.ramanbyte.databinding.FragmentCompanyJobDetailBinding
+import com.ramanbyte.emla.view_model.JobsViewModel
 import com.ramanbyte.utilities.KEY_JOB_ID
+import com.ramanbyte.utilities.ProgressLoader
 
-class CompanyJobDetailFragment :BaseFragment<FragmentCompanyJobDetailBinding, JobsViewModel>(useParent = true) {
+class CompanyJobDetailFragment :
+    BaseFragment<FragmentCompanyJobDetailBinding, JobsViewModel>(hasOptionsMenu = false) {
 
     var mContext: Context? = null
 
