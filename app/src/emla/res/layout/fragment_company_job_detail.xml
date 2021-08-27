@@ -1,46 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    style="@style/customCard"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".emla.ui.fragments.CompanyJobDetailFragment">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <data>
+
+        <variable
+            name="jobModel"
+            type="com.ramanbyte.emla.models.response.JobModel" />
+
+        <variable
+            name="jobsViewModel"
+            type="com.ramanbyte.emla.view_model.JobsViewModel" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        style="@style/customCard"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:context=".emla.ui.fragments.CompanyJobDetailFragment">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvLabelJobDescription"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            style="@style/TextViewLabel"
-            android:text="Job Description"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvJobDescription"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            style="@style/TextViewValeOfLabel"
-            android:layout_marginTop="@dimen/text_view_vale_of_label_top"
-            app:layout_constraintTop_toBottomOf="@id/tvLabelJobDescription"
-            app:layout_constraintStart_toStartOf="@id/tvLabelJobDescription"
-            app:layout_constraintEnd_toEndOf="@id/tvLabelJobDescription"
-            tools:text="@string/dummyText"/>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvLabelJobDescription"
+                style="@style/TextViewLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/job_description"
+                app:layout_constraintTop_toTopOf="@id/ivDownload"
+                app:layout_constraintBottom_toBottomOf="@id/ivDownload"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/ivDownload"/>
 
-        <com.ramanbyte.emla.view.CustomWebView
-            android:id="@+id/webViewJobDescription"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="@+id/tvJobDescription"
-            app:layout_constraintTop_toBottomOf="@+id/tvJobDescription"
-            app:layout_constraintEnd_toEndOf="@+id/tvJobDescription"/>
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivDownload"
+                style="@style/imageViewDefaultHeight"
+                app:srcCompat="@drawable/ic_download"
+                android:onClick="@{()->jobsViewModel.onDownloadClick()}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvJobDescription"
+                style="@style/TextViewValeOfLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/text_view_vale_of_label_top"
+                android:text="@{jobModel.companyDescription}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/tvLabelJobDescription"
+                app:layout_constraintTop_toBottomOf="@id/ivDownload"
+                tools:text="@string/dummyText" />
+
+            <com.ramanbyte.emla.view.CustomWebView
+                android:id="@+id/webViewJobDescription"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="@+id/tvJobDescription"
+                app:layout_constraintStart_toStartOf="@+id/tvJobDescription"
+                app:layout_constraintTop_toBottomOf="@+id/tvJobDescription" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-</androidx.cardview.widget.CardView>
+    </androidx.cardview.widget.CardView>
+</layout>

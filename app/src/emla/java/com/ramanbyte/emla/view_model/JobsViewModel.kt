@@ -11,6 +11,7 @@ import com.ramanbyte.R
 import com.ramanbyte.base.BaseViewModel
 import com.ramanbyte.data_layer.pagination.PaginationMessages
 import com.ramanbyte.emla.data_layer.repositories.JobsRepository
+import com.ramanbyte.emla.models.CourseResultModel
 import com.ramanbyte.emla.models.response.JobModel
 import com.ramanbyte.utilities.BindingUtils
 import com.ramanbyte.utilities.KEY_BLANK
@@ -19,6 +20,9 @@ import com.ramanbyte.utilities.NetworkConnectivity
 import org.kodein.di.generic.instance
 
 class JobsViewModel(mContext: Context) : BaseViewModel(mContext) {
+
+    var companyDescriptionLiveData = MutableLiveData<JobModel>()
+
     override var noInternetTryAgain: () -> Unit = { jobsRepository.tryAgain() }
 
     private val jobsRepository: JobsRepository by instance()
@@ -78,6 +82,10 @@ class JobsViewModel(mContext: Context) : BaseViewModel(mContext) {
                 isAlertDialogShown.postValue(true)
             }
         }
+    }
+
+    fun onDownloadClick(){
+
     }
 
 }
