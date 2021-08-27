@@ -12,7 +12,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvTitleSkillPage"
@@ -35,13 +35,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/text_view_vale_of_label_top"
                 android:drawableStart="@drawable/ic_job"
-                android:gravity="center"
                 android:drawablePadding="@dimen/dp_5"
+                android:gravity="center"
                 android:text='@{skillsModel.totalNumberOfJobs + " " + @string/jobs}'
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/tvTitleSkillPage"
                 app:layout_constraintStart_toStartOf="@+id/tvTitleSkillPage"
                 app:layout_constraintTop_toBottomOf="@+id/tvTitleSkillPage"
-                tools:text="50 Jobs" />
+                tools:text="1500 Jobs" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

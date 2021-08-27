@@ -50,6 +50,8 @@
     <dimen name="dp_500">444.38dp</dimen>
     <dimen name="dp_180">180.00dp</dimen>
     <dimen name="dp_178">178.00dp</dimen>
+    <dimen name="dp_110">110.00dp</dimen>
+    <dimen name="dp_115">115.00dp</dimen>
 
     <dimen name="dp_37">37.00dp</dimen>
 
