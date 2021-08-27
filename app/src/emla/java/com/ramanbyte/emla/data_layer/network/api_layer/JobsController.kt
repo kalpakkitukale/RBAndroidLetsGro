@@ -8,6 +8,9 @@ import retrofit2.http.POST
 
 interface JobsController {
 
-    @POST("getChapterLists")
+    @POST("GetJobs")
     suspend fun getJobsList(@Body request: JobRequestModel): Response<List<JobModel>>
+
+    @POST("GetFilterJobs")
+    suspend fun getFilterJobs(@Body request: JobRequestModel): Response<List<JobModel>>
 }
