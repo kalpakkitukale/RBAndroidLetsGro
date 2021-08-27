@@ -45,6 +45,8 @@
     <dimen name="dp_118">472.00dp</dimen>
     <dimen name="dp_110">440.00dp</dimen>
     <dimen name="dp_115">460.00dp</dimen>
+    <dimen name="dp_112">448.00dp</dimen>
+    <dimen name="dp_113">452.00dp</dimen>
 
 
     <dimen name="sp_1">4.00sp</dimen>

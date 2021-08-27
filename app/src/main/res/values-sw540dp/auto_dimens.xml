@@ -41,6 +41,8 @@
     <dimen name="dp_118">177.00dp</dimen>
     <dimen name="dp_110">165.00dp</dimen>
     <dimen name="dp_115">172.50dp</dimen>
+    <dimen name="dp_112">168.00dp</dimen>
+    <dimen name="dp_113">169.50dp</dimen>
 
     <dimen name="nav_header_height">255.00dp</dimen>
     <dimen name="dp_400">600.00dp</dimen>
