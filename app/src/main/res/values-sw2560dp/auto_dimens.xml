@@ -42,8 +42,11 @@
     <dimen name="dp_37">263.12dp</dimen>
     <dimen name="dp_180">1280.03dp</dimen>
     <dimen name="dp_178">1265dp</dimen>
-
-
+    <dimen name="dp_118">839.13dp</dimen>
+    <dimen name="dp_110">782.24dp</dimen>
+    <dimen name="dp_115">817.79dp</dimen>
+    <dimen name="dp_112">796.46dp</dimen>
+    <dimen name="dp_113">803.57dp</dimen>
 
 
     <dimen name="sp_1">7.11sp</dimen>
