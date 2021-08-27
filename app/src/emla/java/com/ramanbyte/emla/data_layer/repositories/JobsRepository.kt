@@ -8,7 +8,7 @@ import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.ramanbyte.data_layer.base.BaseRepository
 import com.ramanbyte.data_layer.pagination.PaginationResponseHandler
-import com.ramanbyte.emla.data_layer.network.api_layer.JobSkillsController
+import com.ramanbyte.emla.data_layer.network.api_layer.JobsController
 import com.ramanbyte.emla.data_layer.pagination.PaginationDataSourceFactory
 import com.ramanbyte.emla.data_layer.room.entities.UserEntity
 import com.ramanbyte.emla.models.UserModel
@@ -19,7 +19,7 @@ import org.kodein.di.generic.instance
 
 class JobsRepository(mContext: Context) : BaseRepository(mContext) {
 
-    private val jobSkillsController: JobSkillsController by instance()
+    private val jobsController: JobsController by instance()
 
     private var paginationResponseHandlerLiveData: MutableLiveData<PaginationResponseHandler?> =
         MutableLiveData(null)
@@ -56,7 +56,7 @@ class JobsRepository(mContext: Context) : BaseRepository(mContext) {
             paginationResponseHandlerLiveData
         ) {
             apiRequest {
-                jobSkillsController.getJobsList(it)
+                jobsController.getJobsList(it)
             } ?: arrayListOf()
         }
 

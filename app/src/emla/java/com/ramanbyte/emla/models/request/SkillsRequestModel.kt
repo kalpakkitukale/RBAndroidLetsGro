@@ -1,10 +1,11 @@
 package com.ramanbyte.emla.models.request
 
 import com.ramanbyte.emla.models.BaseRequestModel
+import com.ramanbyte.utilities.KEY_DOMAIN
 
 class SkillsRequestModel : BaseRequestModel() {
 
     var searchKey: String = ""
     var userId: Int = 0
-    var courseId = 1
+    var domain: String = KEY_DOMAIN
 }

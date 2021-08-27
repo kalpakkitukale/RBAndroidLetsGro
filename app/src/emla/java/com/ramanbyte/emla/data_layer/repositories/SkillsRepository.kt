@@ -8,7 +8,7 @@ import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.ramanbyte.data_layer.base.BaseRepository
 import com.ramanbyte.data_layer.pagination.PaginationResponseHandler
-import com.ramanbyte.emla.data_layer.network.api_layer.JobSkillsController
+import com.ramanbyte.emla.data_layer.network.api_layer.SkillsController
 import com.ramanbyte.emla.data_layer.pagination.PaginationDataSourceFactory
 import com.ramanbyte.emla.data_layer.room.entities.UserEntity
 import com.ramanbyte.emla.models.UserModel
@@ -19,7 +19,7 @@ import org.kodein.di.generic.instance
 
 class SkillsRepository(mContext: Context) : BaseRepository(mContext) {
 
-    private val jobSkillsController: JobSkillsController by instance()
+    private val skillsController: SkillsController by instance()
 
     private var paginationResponseHandlerLiveData: MutableLiveData<PaginationResponseHandler?> =
         MutableLiveData(null)
@@ -48,7 +48,7 @@ class SkillsRepository(mContext: Context) : BaseRepository(mContext) {
             skillsModelObservable.apply {
 
                 set(SkillsRequestModel().apply {
-                    this.userId = userModel?.userId ?: 0
+                    this.userId = 1//userModel?.userId ?: 0
                     this.searchKey = searchStr
                     this.pageSize = myPageSize
                 })
@@ -56,7 +56,7 @@ class SkillsRepository(mContext: Context) : BaseRepository(mContext) {
             paginationResponseHandlerLiveData
         ) {
             apiRequest {
-                jobSkillsController.getSkillsList(it)
+                skillsController.getSkillsList(it)
             } ?: arrayListOf()
         }
 
