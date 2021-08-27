@@ -5,8 +5,8 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/cardContainer"
         style="@style/customCard"
-        android:layout_width="@dimen/dp_100"
-        android:layout_height="@dimen/dp_100"
+        android:layout_width="@dimen/dp_118"
+        android:layout_height="@dimen/dp_118"
         android:onClick="@{()->jobSkillsViewModel.onSkillClick(cardContainer, skillsModel)}">
 
         <androidx.constraintlayout.widget.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
@@ -19,8 +19,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:maxLines="2"
                 android:lines="2"
+                android:maxLines="2"
                 android:text="@{skillsModel.skillName}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -29,12 +29,14 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvJobOpenings"
-                style="@style/TextViewValeOfLabel"
+                style="@style/TextViewSubTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/text_view_vale_of_label_top"
+                android:drawableStart="@drawable/ic_job"
                 android:gravity="center"
                 android:text='@{skillsModel.totalNumberOfJobs + "  " + @string/jobs}'
+                android:textColor="@color/colorButtonTextForFilledButton"
                 app:layout_constraintEnd_toEndOf="@+id/tvTitleSkillPage"
                 app:layout_constraintStart_toStartOf="@+id/tvTitleSkillPage"
                 app:layout_constraintTop_toBottomOf="@+id/tvTitleSkillPage"

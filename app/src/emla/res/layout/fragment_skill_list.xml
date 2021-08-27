@@ -14,9 +14,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/text_view_title_large_top"
-            app:layout_constraintEnd_toEndOf="@id/tvTitleSkillPage"
-            app:layout_constraintStart_toStartOf="@id/tvTitleSkillPage"
-            app:layout_constraintTop_toBottomOf="@+id/tvTitleSkillPage" />
+            app:layout_constraintEnd_toEndOf="@id/layoutTitle"
+            app:layout_constraintStart_toStartOf="@id/layoutTitle"
+            app:layout_constraintTop_toBottomOf="@+id/layoutTitle" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imageViewSearchClear"
@@ -27,19 +27,44 @@
             app:layout_constraintTop_toTopOf="@id/edtSkillSearch"
             app:srcCompat="@drawable/ic_close_black" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvTitleSkillPage"
-            style="@style/TextViewTitleLarge"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layoutTitle"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/dp_80"
+            android:paddingHorizontal="@dimen/dp_12"
             android:layout_marginStart="@dimen/text_view_title_large_start"
             android:layout_marginTop="@dimen/text_view_title_large_top"
             android:layout_marginEnd="@dimen/text_view_title_large_end"
             android:background="@color/colorFilledButton"
-            android:text="@string/skill_page_title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/appCompatImageView"
+                android:layout_width="@dimen/dp_80"
+                android:layout_height="0dp"
+                android:paddingVertical="@dimen/image_view_top"
+                android:scaleType="fitCenter"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_element_skill" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvTitleSkillPage"
+                style="@style/TextViewTitleLarge"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/skill_page_title"
+                android:textColor="@color/colorButtonTextForFilledButton"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/appCompatImageView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvSkill"
@@ -47,8 +72,8 @@
             android:layout_height="0dp"
             android:visibility="@{skillsViewModel.viewVisibilityLiveData}"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/tvTitleSkillPage"
-            app:layout_constraintStart_toStartOf="@id/tvTitleSkillPage"
+            app:layout_constraintEnd_toEndOf="@id/layoutTitle"
+            app:layout_constraintStart_toStartOf="@id/layoutTitle"
             app:layout_constraintTop_toBottomOf="@+id/edtSkillSearch"
             tools:listitem="@layout/card_skill" />
 
