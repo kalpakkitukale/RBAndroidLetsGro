@@ -6,8 +6,10 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardContainer"
         style="@style/customCard"
-        android:layout_width="@dimen/dp_110"
-        android:layout_height="@dimen/dp_110"
+        android:layout_width="@dimen/dp_112"
+        android:layout_height="@dimen/dp_112"
+        android:layout_marginStart="@dimen/dp_5"
+        android:layout_marginEnd="@dimen/dp_5"
         android:onClick="@{()->jobSkillsViewModel.onSkillClick(cardContainer, skillsModel)}">
 
         <androidx.constraintlayout.widget.ConstraintLayout
