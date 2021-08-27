@@ -1,80 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    style="@style/customCard"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".emla.ui.fragments.AboutCompanyFragment">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <data>
+
+        <variable
+            name="jobModel"
+            type="com.ramanbyte.emla.models.response.JobModel" />
+
+        <variable
+            name="jobsViewModel"
+            type="com.ramanbyte.emla.view_model.JobsViewModel" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        style="@style/customCard"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:context=".emla.ui.fragments.AboutCompanyFragment">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvLabelCompanyName"
-            style="@style/TextViewValeOfLabel"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Job Description"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvCompanyDescription"
-            style="@style/TextViewValeOfLabel"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/text_view_vale_of_label_top"
-            app:layout_constraintEnd_toEndOf="@id/tvLabelCompanyName"
-            app:layout_constraintStart_toStartOf="@id/tvLabelCompanyName"
-            app:layout_constraintTop_toBottomOf="@id/tvLabelCompanyName"
-            tools:text="@string/dummyText" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvLabelCompanyName"
+                style="@style/TextViewValeOfLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/job_description"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvLabelWebsite"
-            style="@style/TextViewLabel"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/text_view_label_top"
-            android:text="Website"
-            app:layout_constraintEnd_toEndOf="@+id/tvCompanyDescription"
-            app:layout_constraintStart_toStartOf="@+id/tvCompanyDescription"
-            app:layout_constraintTop_toBottomOf="@+id/tvCompanyDescription" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvCompanyDescription"
+                style="@style/TextViewValeOfLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/text_view_vale_of_label_top"
+                android:text="@{jobModel.companyDescription}"
+                app:layout_constraintEnd_toEndOf="@id/tvLabelCompanyName"
+                app:layout_constraintStart_toStartOf="@id/tvLabelCompanyName"
+                app:layout_constraintTop_toBottomOf="@id/tvLabelCompanyName"
+                tools:text="@string/dummyText" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvWebsite"
-            style="@style/TextViewLabel"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/text_view_vale_of_label_top"
-            android:text="www.abc.com"
-            app:layout_constraintEnd_toEndOf="@+id/tvLabelWebsite"
-            app:layout_constraintStart_toStartOf="@+id/tvLabelWebsite"
-            app:layout_constraintTop_toBottomOf="@+id/tvLabelWebsite" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvLabelWebsite"
+                style="@style/TextViewLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/text_view_label_top"
+                android:text="@string/website"
+                app:layout_constraintEnd_toEndOf="@+id/tvCompanyDescription"
+                app:layout_constraintStart_toStartOf="@+id/tvCompanyDescription"
+                app:layout_constraintTop_toBottomOf="@+id/tvCompanyDescription" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvLabelEmail"
-            style="@style/TextViewLabel"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/text_view_label_top"
-            android:text="@string/emailId"
-            app:layout_constraintEnd_toEndOf="@+id/tvWebsite"
-            app:layout_constraintStart_toStartOf="@+id/tvWebsite"
-            app:layout_constraintTop_toBottomOf="@+id/tvWebsite" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvWebsite"
+                style="@style/TextViewLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/text_view_vale_of_label_top"
+                android:text="@{jobModel.companyWebsite}"
+                app:layout_constraintEnd_toEndOf="@+id/tvLabelWebsite"
+                app:layout_constraintStart_toStartOf="@+id/tvLabelWebsite"
+                app:layout_constraintTop_toBottomOf="@+id/tvLabelWebsite" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvEmail"
-            style="@style/TextViewLabel"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/text_view_vale_of_label_top"
-            android:text="www.abc.com"
-            app:layout_constraintEnd_toEndOf="@+id/tvLabelEmail"
-            app:layout_constraintStart_toStartOf="@+id/tvLabelEmail"
-            app:layout_constraintTop_toBottomOf="@+id/tvLabelEmail" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvLabelEmail"
+                style="@style/TextViewLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/text_view_label_top"
+                android:text="@string/emailId"
+                app:layout_constraintEnd_toEndOf="@+id/tvWebsite"
+                app:layout_constraintStart_toStartOf="@+id/tvWebsite"
+                app:layout_constraintTop_toBottomOf="@+id/tvWebsite" />
 
-</androidx.cardview.widget.CardView>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvEmail"
+                style="@style/TextViewLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/text_view_vale_of_label_top"
+                android:text="@{jobModel.companyEmailId}"
+                app:layout_constraintEnd_toEndOf="@+id/tvLabelEmail"
+                app:layout_constraintStart_toStartOf="@+id/tvLabelEmail"
+                app:layout_constraintTop_toBottomOf="@+id/tvLabelEmail" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>

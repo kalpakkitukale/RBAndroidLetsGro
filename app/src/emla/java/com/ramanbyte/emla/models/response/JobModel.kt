@@ -14,6 +14,8 @@ class JobModel : BaseObservable() {
     var jobId: Int? = 0
 
     @SerializedName("chapterName")
+
+    /*Role*/
     @Bindable
     var jobTitle: String? = KEY_BLANK
         set(value) {
@@ -95,5 +97,20 @@ class JobModel : BaseObservable() {
 
     @Bindable
     var companyImageURL: String? = KEY_BLANK
+
+    @Bindable
+    var vacancy: String? = KEY_BLANK
+
+    @Bindable
+    var experience: String? = KEY_BLANK
+
+    @Bindable
+    var companyDescription: String? = KEY_BLANK
+
+    @Bindable
+    var companyWebsite: String? = KEY_BLANK
+
+    @Bindable
+    var companyEmailId: String? = KEY_BLANK
 
 }
