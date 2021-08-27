@@ -33,6 +33,7 @@ const val KEY_LOGIN_STATUS_NO = "N"
 const val KEY_DEVICE_ID = "deviceId"
 
 const val KEY_NA = "N/A"
+const val KEY_DOMAIN = "v0"
 const val KEY_NA_WITHOUT_SPACE = "NA"
 const val KEY_BLANK = ""
 const val KEY_BLANK_TEXT = "Blank"
