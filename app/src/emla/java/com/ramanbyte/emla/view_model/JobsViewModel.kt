@@ -9,7 +9,11 @@ import androidx.navigation.findNavController
 import androidx.paging.PagedList
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseViewModel
+import com.ramanbyte.data_layer.CoroutineUtils
 import com.ramanbyte.data_layer.pagination.PaginationMessages
+import com.ramanbyte.emla.data_layer.network.exception.ApiException
+import com.ramanbyte.emla.data_layer.network.exception.NoDataException
+import com.ramanbyte.emla.data_layer.network.exception.NoInternetException
 import com.ramanbyte.emla.data_layer.repositories.JobsRepository
 import com.ramanbyte.emla.models.response.JobModel
 import com.ramanbyte.utilities.*
@@ -17,7 +21,7 @@ import org.kodein.di.generic.instance
 
 class JobsViewModel(mContext: Context) : BaseViewModel(mContext) {
 
-    var companyDescriptionLiveData = MutableLiveData<JobModel>()
+    var companyDescriptionLiveData = MutableLiveData<JobModel?>(null)
 
     override var noInternetTryAgain: () -> Unit = { jobsRepository.tryAgain() }
 
@@ -81,8 +85,67 @@ class JobsViewModel(mContext: Context) : BaseViewModel(mContext) {
         }
     }
 
-    fun onDownloadClick(){
+    fun onDownloadClick() {
 
+    }
+
+    fun getJobDetails(jobId: Int) {
+        CoroutineUtils.main {
+
+            try {
+
+                coroutineToggleLoader(BindingUtils.string(R.string.getting_job_details))
+
+                companyDescriptionLiveData.postValue(jobsRepository.getJobDetails(jobId))
+
+                toggleLayoutVisibility(
+                    View.VISIBLE,
+                    View.GONE,
+                    View.GONE,
+                    "",
+                    View.GONE
+                )
+
+                coroutineToggleLoader()
+
+            } catch (e: ApiException) {
+                e.printStackTrace()
+                AppLog.errorLog(e.message, e)
+
+                toggleLayoutVisibility(
+                    View.GONE,
+                    View.GONE,
+                    View.GONE,
+                    BindingUtils.string(R.string.some_thing_went_wrong),
+                    View.VISIBLE
+                )
+
+                coroutineToggleLoader()
+
+            } catch (e: NoInternetException) {
+                e.printStackTrace()
+                AppLog.errorLog(e.message, e)
+                toggleLayoutVisibility(
+                    View.GONE,
+                    View.GONE,
+                    View.VISIBLE,
+                    BindingUtils.string(R.string.no_internet_message),
+                    View.GONE
+                )
+                coroutineToggleLoader()
+            } catch (e: NoDataException) {
+                e.printStackTrace()
+                AppLog.errorLog(e.message, e)
+                toggleLayoutVisibility(
+                    View.GONE,
+                    View.VISIBLE,
+                    View.GONE,
+                    BindingUtils.string(R.string.course_details_unavailable),
+                    View.GONE
+                )
+                coroutineToggleLoader()
+            }
+        }
     }
 
 }

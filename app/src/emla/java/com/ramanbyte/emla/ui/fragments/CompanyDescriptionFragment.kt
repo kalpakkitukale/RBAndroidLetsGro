@@ -2,10 +2,12 @@ package com.ramanbyte.emla.ui.fragments
 
 import android.content.Context
 import androidx.fragment.app.FragmentStatePagerAdapter
+import androidx.lifecycle.Observer
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseFragment
 import com.ramanbyte.databinding.FragmentCompanyDescriptionBinding
 import com.ramanbyte.emla.adapters.ViewPagerAdapter
+import com.ramanbyte.emla.models.response.JobModel
 import com.ramanbyte.emla.view_model.JobsViewModel
 import com.ramanbyte.utilities.*
 import kotlinx.android.synthetic.emla.fragment_company_description.*
@@ -31,9 +33,19 @@ class CompanyDescriptionFragment :
             lifecycleOwner = this@CompanyDescriptionFragment
             jobsViewModel = viewModel
         }
+
+        viewModelOps()
     }
 
-    private fun setUpViewPager(it: JobsViewModel){
+    private fun viewModelOps() {
+        viewModel.companyDescriptionLiveData.observe(this@CompanyDescriptionFragment, Observer {
+            if (it != null)
+                setUpViewPager(it)
+
+        })
+    }
+
+    private fun setUpViewPager(it: JobModel) {
         viewPagerAdapter = ViewPagerAdapter(
             childFragmentManager,
             FragmentStatePagerAdapter.POSITION_UNCHANGED
