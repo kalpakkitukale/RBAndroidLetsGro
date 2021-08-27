@@ -38,28 +38,41 @@ abstract class BaseFragment<LayoutBinding : ViewDataBinding, VM : ViewModel>(
 
     private val viewModelFactory: ViewModelProvider.Factory by instance()
 
+
+    private var isViewRecreated: Boolean = false
+
+    private var rootView: View? = null
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        if (!(::layoutBinding.isInitialized))
-            layoutBinding = DataBindingUtil.inflate(inflater, layoutId(), container, false)
-        else
-            container?.removeView(layoutBinding.root)
+        if (rootView == null) {
 
-        //bindContentView(inflater, layoutId(), container)
+            isViewRecreated = false
+            // Inflate the layout for this fragment
+            layoutBinding =
+                DataBindingUtil.inflate(inflater, layoutId(), container, false)
 
-        //  context ?: return layoutBinding.root
+            rootView = layoutBinding?.root
 
-        setHasOptionsMenu(hasOptionsMenu)
+            setHasOptionsMenu(hasOptionsMenu)
 
-        subscribeUi()
+            subscribeUi()
 
-        initiate()
+            initiate()
 
-        return layoutBinding.root
+        } else {
+
+            isViewRecreated = true
+
+            (rootView?.parent as? ViewGroup)?.removeView(rootView)
+
+        }
+
+        return rootView
     }
 
     private fun subscribeUi() {
