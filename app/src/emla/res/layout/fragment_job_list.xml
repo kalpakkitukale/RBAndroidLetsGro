@@ -33,7 +33,7 @@
             android:layout_marginTop="@dimen/image_view_top"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_filter" />
+            app:srcCompat="@drawable/ic_filter_white" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvSkill"
