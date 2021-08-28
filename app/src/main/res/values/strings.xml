@@ -60,6 +60,7 @@
     <string name="job_description">Job Description</string>
     <string name="salary">Salary</string>
     <string name="getting_job_details">Getting job details…</string>
+    <string name="apply">Apply</string>
 
 
 </resources>

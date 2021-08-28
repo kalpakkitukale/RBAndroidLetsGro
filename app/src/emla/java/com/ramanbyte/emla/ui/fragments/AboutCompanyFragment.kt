@@ -8,7 +8,7 @@ import com.ramanbyte.emla.view_model.JobsViewModel
 import com.ramanbyte.utilities.ProgressLoader
 
 class AboutCompanyFragment :
-    BaseFragment<FragmentAboutCompanyBinding, JobsViewModel>(hasOptionsMenu = false) {
+    BaseFragment<FragmentAboutCompanyBinding, JobsViewModel>(hasOptionsMenu = false, useParent = true) {
 
     override val viewModelClass: Class<JobsViewModel> = JobsViewModel::class.java
 

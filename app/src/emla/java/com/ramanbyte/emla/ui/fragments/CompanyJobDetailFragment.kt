@@ -9,7 +9,7 @@ import com.ramanbyte.utilities.KEY_JOB_ID
 import com.ramanbyte.utilities.ProgressLoader
 
 class CompanyJobDetailFragment :
-    BaseFragment<FragmentCompanyJobDetailBinding, JobsViewModel>(hasOptionsMenu = false) {
+    BaseFragment<FragmentCompanyJobDetailBinding, JobsViewModel>(hasOptionsMenu = false, useParent = true) {
 
     override val viewModelClass: Class<JobsViewModel> = JobsViewModel::class.java
 

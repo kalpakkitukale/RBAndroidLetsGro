@@ -1,17 +1,19 @@
 package com.ramanbyte.emla.ui.fragments
 
-import android.content.Context
 import androidx.fragment.app.FragmentStatePagerAdapter
+import androidx.lifecycle.Observer
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseFragment
 import com.ramanbyte.databinding.FragmentCompanyDescriptionBinding
 import com.ramanbyte.emla.adapters.ViewPagerAdapter
 import com.ramanbyte.emla.view_model.JobsViewModel
+import com.ramanbyte.utilities.KEY_IS_JOB_APPLIED
 import com.ramanbyte.utilities.KEY_JOB_ID
 import com.ramanbyte.utilities.ProgressLoader
 import kotlinx.android.synthetic.emla.fragment_company_description.*
 
-class CompanyDescriptionFragment: BaseFragment<FragmentCompanyDescriptionBinding, JobsViewModel>() {
+class CompanyDescriptionFragment :
+    BaseFragment<FragmentCompanyDescriptionBinding, JobsViewModel>() {
 
     var jobId: Int? = null
 
@@ -32,12 +34,12 @@ class CompanyDescriptionFragment: BaseFragment<FragmentCompanyDescriptionBinding
 
         }
 
-       layoutBinding.apply{
+        layoutBinding.apply {
             lifecycleOwner = this@CompanyDescriptionFragment
             jobsViewModel = viewModel
         }
 
-        setUpViewPager()
+        viewModelOps()
 
         jobId?.let { safeId ->
             viewModel.getJobDetails(safeId)
@@ -45,7 +47,16 @@ class CompanyDescriptionFragment: BaseFragment<FragmentCompanyDescriptionBinding
 
     }
 
-    private fun setUpViewPager(){
+    private fun viewModelOps() {
+        viewModel.companyDescriptionLiveData.observe(viewLifecycleOwner, Observer { jobModel ->
+
+            jobModel?.apply {
+                setUpViewPager()
+            }
+        })
+    }
+
+    private fun setUpViewPager() {
         viewPagerAdapter = ViewPagerAdapter(
             childFragmentManager,
             FragmentStatePagerAdapter.POSITION_UNCHANGED
@@ -53,11 +64,11 @@ class CompanyDescriptionFragment: BaseFragment<FragmentCompanyDescriptionBinding
 
         viewPagerAdapter?.addFragmentView(CompanyJobDetailFragment.getInstance(), "Job Details")
         viewPagerAdapter?.addFragmentView(AboutCompanyFragment(), "About Company")
-        companyViewPager.apply {
+        layoutBinding.companyViewPager.apply {
             //set View pager here
             adapter = viewPagerAdapter
 
-            tabCompanyDescription.setupWithViewPager(this)
+            layoutBinding.tabCompanyDescription.setupWithViewPager(this)
         }
     }
 

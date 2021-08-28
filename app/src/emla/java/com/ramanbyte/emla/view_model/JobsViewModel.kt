@@ -94,8 +94,8 @@ class JobsViewModel(mContext: Context) : BaseViewModel(mContext) {
         CoroutineUtils.main {
             try {
                 coroutineToggleLoader(BindingUtils.string(R.string.getting_job_details))
-                val apiResponse = jobsRepository.getJobDetails(jobId)
-                companyDescriptionLiveData.postValue(apiResponse?.get(0))
+                _companyDescriptionLiveData.postValue(jobsRepository.getJobDetails(jobId) )
+
                 toggleLayoutVisibility(
                     View.VISIBLE,
                     View.GONE,
@@ -143,12 +143,6 @@ class JobsViewModel(mContext: Context) : BaseViewModel(mContext) {
                 )
                 coroutineToggleLoader()
             }
-        }
-    }
-
-    fun getJobDetails(jobId:Int){
-        invokeApiCall {
-        _companyDescriptionLiveData.postValue(jobsRepository.getJobDetails(jobId) )
         }
     }
 

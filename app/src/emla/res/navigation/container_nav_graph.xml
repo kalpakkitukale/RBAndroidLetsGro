@@ -103,7 +103,6 @@
     <fragment
         android:id="@+id/companyDescriptionFragment"
         android:name="com.ramanbyte.emla.ui.fragments.CompanyDescriptionFragment"
-        android:label="CompanyDescriptionFragment" />
         tools:layout="@layout/fragment_company_description" />
 
 </navigation>
