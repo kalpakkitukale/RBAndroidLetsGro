@@ -4,10 +4,8 @@ import android.content.Context
 import android.graphics.drawable.Drawable
 import android.view.View
 import android.widget.CompoundButton
-import androidx.core.text.isDigitsOnly
 import androidx.databinding.library.baseAdapters.BR
 import androidx.lifecycle.MutableLiveData
-import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import com.ramanbyte.R
 import com.ramanbyte.aws_s3_android.accessor.AppS3Client
@@ -19,7 +17,6 @@ import com.ramanbyte.emla.data_layer.network.exception.NoInternetException
 import com.ramanbyte.emla.data_layer.repositories.MasterRepository
 import com.ramanbyte.emla.data_layer.repositories.RegistrationRepository
 import com.ramanbyte.emla.models.CityModel
-import com.ramanbyte.emla.models.RegistrationModel
 import com.ramanbyte.emla.models.StateModel
 import com.ramanbyte.emla.models.UserDetailsModel
 import com.ramanbyte.emla.models.request.PledgeStatusRequest
@@ -599,6 +596,7 @@ class LearnerProfileViewModel(private val mContext: Context) : BaseViewModel(mCo
                 val res =
                     registrationRepository.updateLearnerProfile(registrationModelLiveData?.value?.apply {
 
+                        resumeFileName = uploadResumeFileName.value
                         userImageFilename =
                             if (uploadFileName.value?.isNotEmpty()!! && uploadFilePath.value?.isNotEmpty()!!) {
                                 /*AppS3Client.createInstance(mContext)
@@ -626,6 +624,17 @@ class LearnerProfileViewModel(private val mContext: Context) : BaseViewModel(mCo
                                 "Uploading profile...",
                                 AppS3Client.TAG_UPLOAD,
                                 0X100
+                            )
+                    }
+
+                    if (uploadResumeFileName.value?.isNotEmpty()!!) {
+                        AppS3Client.createInstance(mContext)
+                            .upload(
+                                uploadResumeFileName.value!!,
+                                uploadResumeFilePath.value!!,
+                                BindingUtils.string(R.string.uploading_resume),
+                                AppS3Client.TAG_UPLOAD,
+                                0X101
                             )
                     }
 
@@ -697,5 +706,30 @@ class LearnerProfileViewModel(private val mContext: Context) : BaseViewModel(mCo
 
     override var noInternetTryAgain: () -> Unit = {
         getStates()
+    }
+
+    var onClickUploadResumeLiveData = MutableLiveData<Boolean>().apply { value = null }
+    var onClickRemoveResumeLiveData = MutableLiveData<Boolean>().apply { value = null }
+    var uploadResumeFileName = MutableLiveData<String>().apply { value = KEY_BLANK }
+    var uploadResumeFilePath = MutableLiveData<String>().apply { value = KEY_BLANK }
+
+    fun onClickUploadResume(view: View) {
+        onClickUploadResumeLiveData.value = true
+    }
+
+    fun onClickRemoveResume(view: View) {
+        setAlertDialogResourceModelMutableLiveData(
+            BindingUtils.string(R.string.remove_resume_alert),
+            BindingUtils.drawable(R.drawable.ic_warning)!!,
+            false,
+            BindingUtils.string(R.string.yes), {
+                onClickRemoveResumeLiveData.value = true
+                isAlertDialogShown.postValue(false)
+            },
+            BindingUtils.string(R.string.no), {
+                isAlertDialogShown.postValue(false)
+            }
+        )
+        isAlertDialogShown.postValue(true)
     }
 }
