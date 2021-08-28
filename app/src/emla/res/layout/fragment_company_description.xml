@@ -7,7 +7,7 @@
 
         <variable
             name="isJobApplied"
-            type="Integer" />
+            type="androidx.databinding.ObservableInt" />
 
         <variable
             name="jobsViewModel"
@@ -206,15 +206,13 @@
                 android:layout_height="wrap_content"
                 android:background='@{isJobApplied != 1 ? @drawable/custom_button_filled : @drawable/custom_capsule_button_with_border}'
                 android:clickable='@{isJobApplied != 1}'
+                android:onClick="@{()->jobsViewModel.applyJob()}"
                 android:text='@{isJobApplied !=1 ? @string/apply : @string/applied}'
                 android:textColor='@{isJobApplied !=1 ? @color/colorButtonTextForFilledButton : @color/colorButtonTextForBorderButton}'
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/companyViewPager"
                 app:layout_constraintStart_toStartOf="@id/companyViewPager"
                 app:layout_constraintTop_toBottomOf="@id/companyViewPager" />
-
-            <!--
-                android:onClick="@{jobsViewModel.applyJob()}"-->
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

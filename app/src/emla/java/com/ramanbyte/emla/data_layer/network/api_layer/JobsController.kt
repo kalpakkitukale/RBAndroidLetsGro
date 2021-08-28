@@ -22,6 +22,6 @@ interface JobsController {
     suspend fun getJobDetails(@Body request: JobRequestModel): Response<List<JobModel>>
 
     @POST("ApplyJob")
-    suspend fun applyJob(@Body request: ApplyJobRequestModel): Response<List<ApplyJobResponseModel>>
+    suspend fun applyJob(@Body request: ApplyJobRequestModel): Response<ApplyJobResponseModel>
 
 }

@@ -1,5 +1,6 @@
 package com.ramanbyte.emla.ui.fragments
 
+import androidx.databinding.ObservableInt
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.lifecycle.Observer
 import com.ramanbyte.R
@@ -7,9 +8,7 @@ import com.ramanbyte.base.BaseFragment
 import com.ramanbyte.databinding.FragmentCompanyDescriptionBinding
 import com.ramanbyte.emla.adapters.ViewPagerAdapter
 import com.ramanbyte.emla.view_model.JobsViewModel
-import com.ramanbyte.utilities.KEY_IS_JOB_APPLIED
-import com.ramanbyte.utilities.KEY_JOB_ID
-import com.ramanbyte.utilities.ProgressLoader
+import com.ramanbyte.utilities.*
 import kotlinx.android.synthetic.emla.fragment_company_description.*
 
 class CompanyDescriptionFragment :
@@ -17,7 +16,7 @@ class CompanyDescriptionFragment :
 
     var jobId: Int? = null
 
-    var isJobApplied: Int? = 0
+    var isJobApplied: ObservableInt = ObservableInt(0)
 
     private var viewPagerAdapter: ViewPagerAdapter? = null
 
@@ -27,10 +26,11 @@ class CompanyDescriptionFragment :
 
     override fun initiate() {
         ProgressLoader(requireContext(), viewModel)
+        AlertDialog(requireContext(), viewModel)
 
         if (arguments != null) {
             jobId = arguments?.getInt(KEY_JOB_ID)
-            isJobApplied = arguments?.getInt(KEY_IS_JOB_APPLIED) ?: 0
+            isJobApplied.set(arguments?.getInt(KEY_IS_JOB_APPLIED) ?: 0)
 
         }
 
@@ -44,19 +44,56 @@ class CompanyDescriptionFragment :
 
         jobId?.let { safeId ->
             viewModel.getJobDetails(safeId)
-            viewModel.applyJob(safeId)
         }
 
     }
 
     private fun viewModelOps() {
-        viewModel.companyDescriptionLiveData.observe(viewLifecycleOwner, Observer { jobModel ->
+        viewModel.apply {
 
-            jobModel?.apply {
-                jobModel.isJobApplied = isJobApplied
-                setUpViewPager()
-            }
-        })
+            companyDescriptionLiveData.observe(viewLifecycleOwner, Observer { jobModel ->
+
+                jobModel?.apply {
+                    jobModel.isJobApplied = isJobApplied
+                    setUpViewPager()
+                }
+            })
+
+            applyJobResponseModelLiveData.observe(
+                viewLifecycleOwner,
+                Observer { applyJobResponseModel ->
+
+                    if (applyJobResponseModel != null) {
+
+                        val applyJobFlag = applyJobResponseModel.flag
+
+                        setAlertDialogResourceModelMutableLiveData(
+                            message = applyJobResponseModel.message,
+                            alertDrawableResource = BindingUtils.drawable(R.drawable.ic_success),
+                            isInfoAlert = true,
+                            positiveButtonText = BindingUtils.string(R.string.strOk),
+                            positiveButtonClickFunctionality = {
+                                isAlertDialogShown.postValue(false)
+                                isJobApplied.set(applyJobFlag)
+                            })
+                        isAlertDialogShown.postValue(true)
+
+                    } else {
+                        setAlertDialogResourceModelMutableLiveData(
+                            message = BindingUtils.string(R.string.some_thing_went_wrong),
+                            alertDrawableResource = BindingUtils.drawable(R.drawable.ic_fail),
+                            isInfoAlert = true,
+                            positiveButtonText = BindingUtils.string(R.string.strOk),
+                            positiveButtonClickFunctionality = {
+                                isAlertDialogShown.postValue(false)
+                            })
+                        isAlertDialogShown.postValue(true)
+                    }
+
+                })
+
+        }
+
     }
 
     private fun setUpViewPager() {

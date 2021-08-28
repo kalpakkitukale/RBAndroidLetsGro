@@ -16,14 +16,12 @@ import com.ramanbyte.emla.models.request.ApplyJobRequestModel
 import com.ramanbyte.emla.models.request.JobRequestModel
 import com.ramanbyte.emla.models.response.ApplyJobResponseModel
 import com.ramanbyte.emla.models.response.JobModel
-import com.ramanbyte.emla.view_model.JobsViewModel
 import com.ramanbyte.utilities.replicate
 import org.kodein.di.generic.instance
 
 class JobsRepository(mContext: Context) : BaseRepository(mContext) {
 
     private val jobsController: JobsController by instance()
-    val userId = applicationDatabase.getUserDao().getCurrentUser()?.userId!!
 
     private var paginationResponseHandlerLiveData: MutableLiveData<PaginationResponseHandler?> =
         MutableLiveData(null)
@@ -52,9 +50,9 @@ class JobsRepository(mContext: Context) : BaseRepository(mContext) {
             jobsModelObservable.apply {
 
                 set(JobRequestModel().apply {
-                    this.userId = 1//userModel?.userId ?: 0
+                    this.userId = userModel?.userId ?: 0
                     this.pageSize = myPageSize
-                    this.skillId = 0//skillId
+                    this.skillId = skillId
                 })
             },
             paginationResponseHandlerLiveData
@@ -86,7 +84,7 @@ class JobsRepository(mContext: Context) : BaseRepository(mContext) {
                 this.jobId = jobId
             })
         }
-        return if(jobModel?.isNotEmpty() == true) jobModel?.get(0) else null
+        return if (jobModel?.isNotEmpty() == true) jobModel?.get(0) else null
 
         /*return JobModel().apply {
             companyDescription = "ebdeufbrfjhrbgfhrjgbrjktngbjrnf"
@@ -96,11 +94,14 @@ class JobsRepository(mContext: Context) : BaseRepository(mContext) {
 
     suspend fun applyJob(jobId: Int): ApplyJobResponseModel? {
 
+        val userId: Int =
+            applicationDatabase.getUserDao().getCurrentUser()?.userId ?: 0
+
         val applyJobResponseModel = apiRequest {
             jobsController.applyJob(ApplyJobRequestModel(userId, jobId).apply {
                 this.jobId = jobId
             })
         }
-        return if(applyJobResponseModel?.isNotEmpty() == true) applyJobResponseModel?.get(0) else null
+        return applyJobResponseModel
     }
 }

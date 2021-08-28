@@ -22,7 +22,7 @@ import org.kodein.di.generic.instance
 
 class JobsViewModel(mContext: Context) : BaseViewModel(mContext) {
 
-
+    private var jobId: Int = 0
 
     private val _companyDescriptionLiveData = MutableLiveData<JobModel?>()
     val companyDescriptionLiveData = _companyDescriptionLiveData
@@ -92,15 +92,16 @@ class JobsViewModel(mContext: Context) : BaseViewModel(mContext) {
         }
     }
 
-    fun onDownloadClick(){
+    fun onDownloadClick() {
 
     }
 
     fun getJobDetails(jobId: Int) {
+        this.jobId = jobId
         CoroutineUtils.main {
             try {
                 coroutineToggleLoader(BindingUtils.string(R.string.getting_job_details))
-                _companyDescriptionLiveData.postValue(jobsRepository.getJobDetails(jobId) )
+                _companyDescriptionLiveData.postValue(jobsRepository.getJobDetails(jobId))
 
                 toggleLayoutVisibility(
                     View.VISIBLE,
@@ -152,60 +153,42 @@ class JobsViewModel(mContext: Context) : BaseViewModel(mContext) {
         }
     }
 
-    fun applyJob(jobId: Int) {
+    fun applyJob() {
         CoroutineUtils.main {
             try {
-                coroutineToggleLoader(BindingUtils.string(R.string.getting_job_details))
-                _applyJobResponseModelLiveData.postValue(jobsRepository.applyJob(jobId) )
-
-                toggleLayoutVisibility(
-                    View.VISIBLE,
-                    View.GONE,
-                    View.GONE,
-                    "",
-                    View.GONE
-                )
+                coroutineToggleLoader(BindingUtils.string(R.string.apply))
+                _applyJobResponseModelLiveData.postValue(jobsRepository.applyJob(jobId))
 
                 coroutineToggleLoader()
 
             } catch (e: ApiException) {
                 e.printStackTrace()
                 AppLog.errorLog(e.message, e)
-
-                toggleLayoutVisibility(
-                    View.GONE,
-                    View.GONE,
-                    View.GONE,
-                    BindingUtils.string(R.string.some_thing_went_wrong),
-                    View.VISIBLE
-                )
-
                 coroutineToggleLoader()
-
+                showApplyJobError()
             } catch (e: NoInternetException) {
                 e.printStackTrace()
                 AppLog.errorLog(e.message, e)
-                toggleLayoutVisibility(
-                    View.GONE,
-                    View.GONE,
-                    View.VISIBLE,
-                    BindingUtils.string(R.string.no_internet_message),
-                    View.GONE
-                )
                 coroutineToggleLoader()
+                showApplyJobError()
             } catch (e: NoDataException) {
                 e.printStackTrace()
                 AppLog.errorLog(e.message, e)
-                toggleLayoutVisibility(
-                    View.GONE,
-                    View.VISIBLE,
-                    View.GONE,
-                    BindingUtils.string(R.string.course_details_unavailable),
-                    View.GONE
-                )
                 coroutineToggleLoader()
+                showApplyJobError()
             }
         }
     }
 
+    private fun showApplyJobError() {
+        setAlertDialogResourceModelMutableLiveData(
+            message = BindingUtils.string(R.string.some_thing_went_wrong),
+            alertDrawableResource = BindingUtils.drawable(R.drawable.ic_fail),
+            isInfoAlert = true,
+            positiveButtonText = BindingUtils.string(R.string.strOk),
+            positiveButtonClickFunctionality = {
+                isAlertDialogShown.postValue(false)
+            })
+        isAlertDialogShown.postValue(true)
+    }
 }
