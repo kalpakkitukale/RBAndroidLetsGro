@@ -322,4 +322,5 @@ Content
     <string name="jobs">Job(s)</string>
     <string name="job_detail">Job Details</string>
     <string name="applied">Applied</string>
+    <string name="vacancy">Vacancy</string>
 </resources>

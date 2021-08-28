@@ -15,6 +15,8 @@ class CompanyDescriptionFragment: BaseFragment<FragmentCompanyDescriptionBinding
 
     var jobId: Int? = null
 
+    var isJobApplied: Int? = 0
+
     private var viewPagerAdapter: ViewPagerAdapter? = null
 
     override val viewModelClass: Class<JobsViewModel> = JobsViewModel::class.java
@@ -26,6 +28,8 @@ class CompanyDescriptionFragment: BaseFragment<FragmentCompanyDescriptionBinding
 
         if (arguments != null) {
             jobId = arguments?.getInt(KEY_JOB_ID)
+            isJobApplied = arguments?.getInt(KEY_IS_JOB_APPLIED) ?: 0
+
         }
 
        layoutBinding.apply{

@@ -8,7 +8,7 @@ import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.ramanbyte.data_layer.base.BaseRepository
 import com.ramanbyte.data_layer.pagination.PaginationResponseHandler
-import com.ramanbyte.emla.data_layer.network.api_layer.JobSkillsController
+import com.ramanbyte.emla.data_layer.network.api_layer.JobsController
 import com.ramanbyte.emla.data_layer.pagination.PaginationDataSourceFactory
 import com.ramanbyte.emla.data_layer.room.entities.UserEntity
 import com.ramanbyte.emla.models.UserModel
@@ -19,7 +19,7 @@ import org.kodein.di.generic.instance
 
 class JobsRepository(mContext: Context) : BaseRepository(mContext) {
 
-    private val jobSkillsController: JobSkillsController by instance()
+    private val jobsController: JobsController by instance()
 
     private var paginationResponseHandlerLiveData: MutableLiveData<PaginationResponseHandler?> =
         MutableLiveData(null)
@@ -48,15 +48,15 @@ class JobsRepository(mContext: Context) : BaseRepository(mContext) {
             jobsModelObservable.apply {
 
                 set(JobRequestModel().apply {
-                    this.userId = userModel?.userId ?: 0
+                    this.userId = 1//userModel?.userId ?: 0
                     this.pageSize = myPageSize
-                    this.SkillId = skillId
+                    this.skillId = 0//skillId
                 })
             },
             paginationResponseHandlerLiveData
         ) {
             apiRequest {
-                jobSkillsController.getJobsList(it)
+                jobsController.getJobsList(it)
             } ?: arrayListOf()
         }
 
@@ -70,7 +70,7 @@ class JobsRepository(mContext: Context) : BaseRepository(mContext) {
 
     fun searchJobs(searchString: String) {
         jobsModelObservable.get().apply {
-            this?.searchKey = searchString
+            this?.searchkey = searchString
         }
         jobsPagedList?.value?.dataSource?.invalidate()
         paginationResponseHandlerLiveData.postValue(PaginationResponseHandler.INIT_LOADING)

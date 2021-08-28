@@ -19,6 +19,7 @@
             android:id="@+id/ivCompanyPhoto"
             style="@style/roundedImageViewMainPhoto"
             android:layout_marginTop="@dimen/dp_15"
+            android:src="@drawable/ic_default_profile"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -57,7 +58,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/text_view_vale_of_label_top"
             android:gravity="center"
-            android:text="@{jobsViewModel.companyDescriptionLiveData.vacancy}"
+            android:text='@{@string/vacancy + ": " + jobsViewModel.companyDescriptionLiveData.vacancy}'
             app:layout_constraintEnd_toEndOf="@+id/tvCompanyName"
             app:layout_constraintStart_toStartOf="@+id/tvCompanyName"
             app:layout_constraintTop_toBottomOf="@+id/tvCompanyName"

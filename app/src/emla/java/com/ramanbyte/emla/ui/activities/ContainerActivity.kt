@@ -288,7 +288,7 @@ class ContainerActivity : BaseActivity<ActivityContainerBinding, ContainerViewMo
 
             menuPojo = MenuPojo(
                 NAV_PLACEMENT,
-                R.drawable.ic_heart,
+                R.drawable.ic_job,
                 BindingUtils.string(R.string.placement),
                 false,
                 0

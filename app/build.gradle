@@ -43,8 +43,8 @@ android {
         dev {
             dimension "env"
             buildConfigField("String", "DOMAIN_URL", "\"http://webapptest.classroomplus.in/\"")
-            buildConfigField("String", "S3_OBJECT", "\"dev\"")
-            buildConfigField("String", "CLIENT_BASE", "\"dev\"")
+            buildConfigField("String", "S3_OBJECT", "\"test\"")
+            buildConfigField("String", "CLIENT_BASE", "\"test\"")
             buildConfigField("String", "JOB_CLIENT_BASE", "\"dev\"")
         }
 
@@ -53,7 +53,7 @@ android {
             buildConfigField("String", "DOMAIN_URL", "\"http://webapptest.classroomplus.in/\"")
             buildConfigField("String", "S3_OBJECT", "\"test\"")
             buildConfigField("String", "CLIENT_BASE", "\"test\"")
-            buildConfigField("String", "JOB_CLIENT_BASE", "\"dev\"")
+            buildConfigField("String", "JOB_CLIENT_BASE", "\"test\"")
         }
         uat {
             dimension "env"

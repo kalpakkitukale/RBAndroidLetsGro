@@ -22,6 +22,7 @@ import org.kodein.di.generic.singleton
 
 private const val DOMAIN = BuildConfig.DOMAIN_URL
 private const val EMLA = "eMarketPlace/"
+private const val PLACEMENT = "letsgrojob/"
 private const val API = "/api/"
 private const val LOGIN = "Login/"
 private const val REGISTRATION = "Registration/"
@@ -30,8 +31,11 @@ private const val CHAPTER = "Chapter/"
 private const val SECTION = "Section/"
 private const val QUESTION = "Question/"
 private const val MASTER = "Master/"
+private const val SKILLS = "Skills/"
+private const val JOB = "Job/"
 
 var CLIENT_BASE = BuildConfig.CLIENT_BASE
+var PLACEMENT_CLIENT_BASE = BuildConfig.JOB_CLIENT_BASE
 
 val repositoryDependencies = Kodein.Module("", true) {
 
@@ -124,11 +128,19 @@ private val controllersDependencies = Kodein.Module("controllers_dependencies", 
         )
     }
 
-    bind<JobSkillsController>() with singleton {
+    bind<SkillsController>() with singleton {
         RetrofitInitializer.invoke(
             instance(),//db
-            JobSkillsController::class.java,
-            DOMAIN + EMLA + CLIENT_BASE + API + CHAPTER
+            SkillsController::class.java,
+            DOMAIN + PLACEMENT + PLACEMENT_CLIENT_BASE + API + SKILLS
+        )
+    }
+
+    bind<JobsController>() with singleton {
+        RetrofitInitializer.invoke(
+            instance(),//db
+            JobsController::class.java,
+            DOMAIN + PLACEMENT + PLACEMENT_CLIENT_BASE + API + JOB
         )
     }
 

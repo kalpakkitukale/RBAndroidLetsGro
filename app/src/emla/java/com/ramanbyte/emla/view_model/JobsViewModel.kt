@@ -9,14 +9,14 @@ import androidx.navigation.findNavController
 import androidx.paging.PagedList
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseViewModel
+import com.ramanbyte.data_layer.CoroutineUtils
 import com.ramanbyte.data_layer.pagination.PaginationMessages
+import com.ramanbyte.emla.data_layer.network.exception.ApiException
+import com.ramanbyte.emla.data_layer.network.exception.NoDataException
+import com.ramanbyte.emla.data_layer.network.exception.NoInternetException
 import com.ramanbyte.emla.data_layer.repositories.JobsRepository
-import com.ramanbyte.emla.models.CourseResultModel
 import com.ramanbyte.emla.models.response.JobModel
-import com.ramanbyte.utilities.BindingUtils
-import com.ramanbyte.utilities.KEY_BLANK
-import com.ramanbyte.utilities.KEY_JOB_ID
-import com.ramanbyte.utilities.NetworkConnectivity
+import com.ramanbyte.utilities.*
 import org.kodein.di.generic.instance
 
 class JobsViewModel(mContext: Context) : BaseViewModel(mContext) {
@@ -67,6 +67,7 @@ class JobsViewModel(mContext: Context) : BaseViewModel(mContext) {
                         R.id.action_jobListFragment_to_companyDescriptionFragment,
                         Bundle().apply {
                             putInt(KEY_JOB_ID, model.jobId ?: 0)
+                            putInt(KEY_IS_JOB_APPLIED, model.isJobApplied ?: 0)
                         })
             } else {
                 setAlertDialogResourceModelMutableLiveData(
@@ -87,6 +88,62 @@ class JobsViewModel(mContext: Context) : BaseViewModel(mContext) {
 
     fun onDownloadClick(){
 
+    }
+
+    fun getJobDetails(jobId: Int) {
+        CoroutineUtils.main {
+            try {
+                coroutineToggleLoader(BindingUtils.string(R.string.getting_job_details))
+                val apiResponse = jobsRepository.getJobDetails(jobId)
+                companyDescriptionLiveData.postValue(apiResponse?.get(0))
+                toggleLayoutVisibility(
+                    View.VISIBLE,
+                    View.GONE,
+                    View.GONE,
+                    "",
+                    View.GONE
+                )
+
+                coroutineToggleLoader()
+
+            } catch (e: ApiException) {
+                e.printStackTrace()
+                AppLog.errorLog(e.message, e)
+
+                toggleLayoutVisibility(
+                    View.GONE,
+                    View.GONE,
+                    View.GONE,
+                    BindingUtils.string(R.string.some_thing_went_wrong),
+                    View.VISIBLE
+                )
+
+                coroutineToggleLoader()
+
+            } catch (e: NoInternetException) {
+                e.printStackTrace()
+                AppLog.errorLog(e.message, e)
+                toggleLayoutVisibility(
+                    View.GONE,
+                    View.GONE,
+                    View.VISIBLE,
+                    BindingUtils.string(R.string.no_internet_message),
+                    View.GONE
+                )
+                coroutineToggleLoader()
+            } catch (e: NoDataException) {
+                e.printStackTrace()
+                AppLog.errorLog(e.message, e)
+                toggleLayoutVisibility(
+                    View.GONE,
+                    View.VISIBLE,
+                    View.GONE,
+                    BindingUtils.string(R.string.course_details_unavailable),
+                    View.GONE
+                )
+                coroutineToggleLoader()
+            }
+        }
     }
 
     fun getJobDetails(jobId:Int){
