@@ -7,13 +7,13 @@ import com.ramanbyte.base.BaseFragment
 import com.ramanbyte.databinding.FragmentCompanyDescriptionBinding
 import com.ramanbyte.emla.adapters.ViewPagerAdapter
 import com.ramanbyte.emla.view_model.JobsViewModel
+import com.ramanbyte.utilities.KEY_JOB_ID
 import com.ramanbyte.utilities.ProgressLoader
 import kotlinx.android.synthetic.emla.fragment_company_description.*
 
-class CompanyDescriptionFragment: BaseFragment<FragmentCompanyDescriptionBinding, JobsViewModel>(useParent = true) {
+class CompanyDescriptionFragment: BaseFragment<FragmentCompanyDescriptionBinding, JobsViewModel>() {
 
-
-    var mContext: Context? = null
+    var jobId: Int? = null
 
     private var viewPagerAdapter: ViewPagerAdapter? = null
 
@@ -22,29 +22,39 @@ class CompanyDescriptionFragment: BaseFragment<FragmentCompanyDescriptionBinding
     override fun layoutId(): Int = R.layout.fragment_company_description
 
     override fun initiate() {
-        ProgressLoader(context!!, viewModel)
+        ProgressLoader(requireContext(), viewModel)
+
+        if (arguments != null) {
+            jobId = arguments?.getInt(KEY_JOB_ID)
+        }
 
        layoutBinding.apply{
             lifecycleOwner = this@CompanyDescriptionFragment
             jobsViewModel = viewModel
         }
+
+        setUpViewPager()
+
+        jobId?.let { safeId ->
+            viewModel.getJobDetails(safeId)
+        }
+
     }
 
-    private fun setUpViewPager(it: JobsViewModel){
+    private fun setUpViewPager(){
         viewPagerAdapter = ViewPagerAdapter(
             childFragmentManager,
             FragmentStatePagerAdapter.POSITION_UNCHANGED
         )
 
-        viewPagerAdapter?.addFragmentView(CompanyJobDetailFragment.getInstance(), "")
-        viewPagerAdapter?.addFragmentView(AboutCompanyFragment(), "")
+        viewPagerAdapter?.addFragmentView(CompanyJobDetailFragment.getInstance(), "Job Details")
+        viewPagerAdapter?.addFragmentView(AboutCompanyFragment(), "About Company")
         companyViewPager.apply {
             //set View pager here
+            adapter = viewPagerAdapter
+
+            tabCompanyDescription.setupWithViewPager(this)
         }
     }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        mContext = context
-    }
 }

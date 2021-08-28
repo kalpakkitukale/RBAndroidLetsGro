@@ -21,7 +21,8 @@ import org.kodein.di.generic.instance
 
 class JobsViewModel(mContext: Context) : BaseViewModel(mContext) {
 
-    var companyDescriptionLiveData = MutableLiveData<JobModel>()
+    private val _companyDescriptionLiveData = MutableLiveData<JobModel?>()
+    val companyDescriptionLiveData = _companyDescriptionLiveData
 
     override var noInternetTryAgain: () -> Unit = { jobsRepository.tryAgain() }
 
@@ -63,7 +64,7 @@ class JobsViewModel(mContext: Context) : BaseViewModel(mContext) {
             if (NetworkConnectivity.isConnectedToInternet()) {
                 view.findNavController()
                     .navigate(
-                        R.id.action_jobListFragment_to_JobDetailFragment,
+                        R.id.action_jobListFragment_to_companyDescriptionFragment,
                         Bundle().apply {
                             putInt(KEY_JOB_ID, model.jobId ?: 0)
                         })
@@ -86,6 +87,12 @@ class JobsViewModel(mContext: Context) : BaseViewModel(mContext) {
 
     fun onDownloadClick(){
 
+    }
+
+    fun getJobDetails(jobId:Int){
+        invokeApiCall {
+        _companyDescriptionLiveData.postValue(jobsRepository.getJobDetails(jobId) )
+        }
     }
 
 }

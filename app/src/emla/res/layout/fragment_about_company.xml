@@ -6,10 +6,6 @@
     <data>
 
         <variable
-            name="jobModel"
-            type="com.ramanbyte.emla.models.response.JobModel" />
-
-        <variable
             name="jobsViewModel"
             type="com.ramanbyte.emla.view_model.JobsViewModel" />
     </data>
@@ -40,7 +36,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/text_view_vale_of_label_top"
-                android:text="@{jobModel.companyDescription}"
+                android:text="@{jobsViewModel.companyDescriptionLiveData.companyDescription}"
                 app:layout_constraintEnd_toEndOf="@id/tvLabelCompanyName"
                 app:layout_constraintStart_toStartOf="@id/tvLabelCompanyName"
                 app:layout_constraintTop_toBottomOf="@id/tvLabelCompanyName"
@@ -63,7 +59,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/text_view_vale_of_label_top"
-                android:text="@{jobModel.companyWebsite}"
+                android:text="@{jobsViewModel.companyDescriptionLiveData.companyWebsite}"
                 app:layout_constraintEnd_toEndOf="@+id/tvLabelWebsite"
                 app:layout_constraintStart_toStartOf="@+id/tvLabelWebsite"
                 app:layout_constraintTop_toBottomOf="@+id/tvLabelWebsite" />
@@ -85,7 +81,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/text_view_vale_of_label_top"
-                android:text="@{jobModel.companyEmailId}"
+                android:text="@{jobsViewModel.companyDescriptionLiveData.companyEmailId}"
                 app:layout_constraintEnd_toEndOf="@+id/tvLabelEmail"
                 app:layout_constraintStart_toStartOf="@+id/tvLabelEmail"
                 app:layout_constraintTop_toBottomOf="@+id/tvLabelEmail" />

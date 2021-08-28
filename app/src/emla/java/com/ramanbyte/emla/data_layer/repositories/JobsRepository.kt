@@ -76,4 +76,14 @@ class JobsRepository(mContext: Context) : BaseRepository(mContext) {
         paginationResponseHandlerLiveData.postValue(PaginationResponseHandler.INIT_LOADING)
     }
 
+    suspend fun getJobDetails(jobId: Int): JobModel {
+        /*val jobModel = apiRequest {
+            jobSkillsController.getJobDetails(jobId)
+        }
+        return jobModel*/
+        return JobModel().apply {
+            companyDescription = "ebdeufbrfjhrbgfhrjgbrjktngbjrnf"
+            companyWebsite = "www.j.com"
+        }
+    }
 }

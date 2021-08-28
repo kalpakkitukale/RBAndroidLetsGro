@@ -10,20 +10,12 @@ import com.ramanbyte.utilities.KEY_JOB_ID
 
 class CompanyJobDetailFragment :BaseFragment<FragmentCompanyJobDetailBinding, JobsViewModel>(useParent = true) {
 
-    var mContext: Context? = null
-
-    var jobId: Int? = null
-
     override val viewModelClass: Class<JobsViewModel> = JobsViewModel::class.java
 
     override fun layoutId(): Int = R.layout.fragment_company_job_detail
 
     override fun initiate() {
-        ProgressLoader(context!!, viewModel)
-
-        if (arguments != null) {
-            jobId = arguments?.getInt(KEY_JOB_ID)
-        }
+        ProgressLoader(requireContext(), viewModel)
 
         layoutBinding.apply{
             lifecycleOwner = this@CompanyJobDetailFragment
@@ -35,8 +27,4 @@ class CompanyJobDetailFragment :BaseFragment<FragmentCompanyJobDetailBinding, Jo
         fun getInstance() = CompanyJobDetailFragment()
     }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        mContext = context
-    }
 }

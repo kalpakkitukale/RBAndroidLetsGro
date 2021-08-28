@@ -97,13 +97,12 @@
         android:name="com.ramanbyte.emla.ui.fragments.JobListFragment"
         tools:layout="@layout/fragment_job_list">
         <action
-            android:id="@+id/action_jobListFragment_to_JobDetailFragment"
-            app:destination="@id/jobDetailFragment" />
+            android:id="@+id/action_jobListFragment_to_companyDescriptionFragment"
+            app:destination="@id/companyDescriptionFragment" />
     </fragment>
     <fragment
-        android:id="@+id/jobDetailFragment"
+        android:id="@+id/companyDescriptionFragment"
         android:name="com.ramanbyte.emla.ui.fragments.CompanyDescriptionFragment"
-        android:label="@string/job_detail"
-        tools:layout="@layout/fragment_company_description" />
+        android:label="CompanyDescriptionFragment" />
 
 </navigation>

@@ -6,7 +6,9 @@ import com.ramanbyte.emla.models.response.JobModel
 import com.ramanbyte.emla.models.response.SkillsModel
 import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Path
 
 interface JobSkillsController {
 
@@ -15,4 +17,7 @@ interface JobSkillsController {
 
     @POST("getChapterLists")
     suspend fun getJobsList(@Body request: JobRequestModel): Response<List<JobModel>>
+
+    @GET("getJobDetails/{jobId}")
+    suspend fun getJobDetails(@Path("jobId") jobId: Int): Response<JobModel>
 }

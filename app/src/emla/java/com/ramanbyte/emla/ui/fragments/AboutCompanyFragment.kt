@@ -9,15 +9,12 @@ import com.ramanbyte.utilities.ProgressLoader
 
 class AboutCompanyFragment : BaseFragment<FragmentAboutCompanyBinding, JobsViewModel>(useParent = true) {
 
-
-    var mContext: Context? = null
-
     override val viewModelClass: Class<JobsViewModel> = JobsViewModel::class.java
 
     override fun layoutId(): Int = R.layout.fragment_about_company
 
     override fun initiate() {
-        ProgressLoader(context!!, viewModel)
+        ProgressLoader(requireContext(), viewModel)
 
         layoutBinding.apply{
             lifecycleOwner = this@AboutCompanyFragment
@@ -27,10 +24,5 @@ class AboutCompanyFragment : BaseFragment<FragmentAboutCompanyBinding, JobsViewM
 
     companion object {
         fun getInstance() = AboutCompanyFragment()
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        mContext = context
     }
 }
