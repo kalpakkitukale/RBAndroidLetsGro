@@ -12,14 +12,18 @@ import com.ramanbyte.emla.data_layer.network.api_layer.JobsController
 import com.ramanbyte.emla.data_layer.pagination.PaginationDataSourceFactory
 import com.ramanbyte.emla.data_layer.room.entities.UserEntity
 import com.ramanbyte.emla.models.UserModel
+import com.ramanbyte.emla.models.request.ApplyJobRequestModel
 import com.ramanbyte.emla.models.request.JobRequestModel
+import com.ramanbyte.emla.models.response.ApplyJobResponseModel
 import com.ramanbyte.emla.models.response.JobModel
+import com.ramanbyte.emla.view_model.JobsViewModel
 import com.ramanbyte.utilities.replicate
 import org.kodein.di.generic.instance
 
 class JobsRepository(mContext: Context) : BaseRepository(mContext) {
 
     private val jobsController: JobsController by instance()
+    val userId = applicationDatabase.getUserDao().getCurrentUser()?.userId!!
 
     private var paginationResponseHandlerLiveData: MutableLiveData<PaginationResponseHandler?> =
         MutableLiveData(null)
@@ -77,20 +81,26 @@ class JobsRepository(mContext: Context) : BaseRepository(mContext) {
     }
 
     suspend fun getJobDetails(jobId: Int): JobModel? {
-       /* val jobModel = apiRequest {
+        val jobModel = apiRequest {
             jobsController.getJobDetails(JobRequestModel().apply {
                 this.jobId = jobId
             })
         }
-        return if(jobModel?.isNotEmpty() == true) jobModel?.get(0) else null*/
+        return if(jobModel?.isNotEmpty() == true) jobModel?.get(0) else null
 
-        return JobModel().apply {
+        /*return JobModel().apply {
             companyDescription = "ebdeufbrfjhrbgfhrjgbrjktngbjrnf"
             companyWebsite = "www.j.com"
-        }
+        }*/
     }
 
-    suspend fun applyJob(jobId: Int){
+    suspend fun applyJob(jobId: Int): ApplyJobResponseModel? {
 
+        val applyJobResponseModel = apiRequest {
+            jobsController.applyJob(ApplyJobRequestModel(userId, jobId).apply {
+                this.jobId = jobId
+            })
+        }
+        return if(applyJobResponseModel?.isNotEmpty() == true) applyJobResponseModel?.get(0) else null
     }
 }

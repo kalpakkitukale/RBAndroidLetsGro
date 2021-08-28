@@ -15,14 +15,20 @@ import com.ramanbyte.emla.data_layer.network.exception.ApiException
 import com.ramanbyte.emla.data_layer.network.exception.NoDataException
 import com.ramanbyte.emla.data_layer.network.exception.NoInternetException
 import com.ramanbyte.emla.data_layer.repositories.JobsRepository
+import com.ramanbyte.emla.models.response.ApplyJobResponseModel
 import com.ramanbyte.emla.models.response.JobModel
 import com.ramanbyte.utilities.*
 import org.kodein.di.generic.instance
 
 class JobsViewModel(mContext: Context) : BaseViewModel(mContext) {
 
+
+
     private val _companyDescriptionLiveData = MutableLiveData<JobModel?>()
     val companyDescriptionLiveData = _companyDescriptionLiveData
+
+    private val _applyJobResponseModelLiveData = MutableLiveData<ApplyJobResponseModel?>()
+    val applyJobResponseModelLiveData = _applyJobResponseModelLiveData
 
     override var noInternetTryAgain: () -> Unit = { jobsRepository.tryAgain() }
 
@@ -95,6 +101,62 @@ class JobsViewModel(mContext: Context) : BaseViewModel(mContext) {
             try {
                 coroutineToggleLoader(BindingUtils.string(R.string.getting_job_details))
                 _companyDescriptionLiveData.postValue(jobsRepository.getJobDetails(jobId) )
+
+                toggleLayoutVisibility(
+                    View.VISIBLE,
+                    View.GONE,
+                    View.GONE,
+                    "",
+                    View.GONE
+                )
+
+                coroutineToggleLoader()
+
+            } catch (e: ApiException) {
+                e.printStackTrace()
+                AppLog.errorLog(e.message, e)
+
+                toggleLayoutVisibility(
+                    View.GONE,
+                    View.GONE,
+                    View.GONE,
+                    BindingUtils.string(R.string.some_thing_went_wrong),
+                    View.VISIBLE
+                )
+
+                coroutineToggleLoader()
+
+            } catch (e: NoInternetException) {
+                e.printStackTrace()
+                AppLog.errorLog(e.message, e)
+                toggleLayoutVisibility(
+                    View.GONE,
+                    View.GONE,
+                    View.VISIBLE,
+                    BindingUtils.string(R.string.no_internet_message),
+                    View.GONE
+                )
+                coroutineToggleLoader()
+            } catch (e: NoDataException) {
+                e.printStackTrace()
+                AppLog.errorLog(e.message, e)
+                toggleLayoutVisibility(
+                    View.GONE,
+                    View.VISIBLE,
+                    View.GONE,
+                    BindingUtils.string(R.string.course_details_unavailable),
+                    View.GONE
+                )
+                coroutineToggleLoader()
+            }
+        }
+    }
+
+    fun applyJob(jobId: Int) {
+        CoroutineUtils.main {
+            try {
+                coroutineToggleLoader(BindingUtils.string(R.string.getting_job_details))
+                _applyJobResponseModelLiveData.postValue(jobsRepository.applyJob(jobId) )
 
                 toggleLayoutVisibility(
                     View.VISIBLE,

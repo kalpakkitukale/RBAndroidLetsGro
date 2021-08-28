@@ -37,12 +37,14 @@ class CompanyDescriptionFragment :
         layoutBinding.apply {
             lifecycleOwner = this@CompanyDescriptionFragment
             jobsViewModel = viewModel
+            isJobApplied = this@CompanyDescriptionFragment.isJobApplied
         }
 
         viewModelOps()
 
         jobId?.let { safeId ->
             viewModel.getJobDetails(safeId)
+            viewModel.applyJob(safeId)
         }
 
     }
@@ -51,6 +53,7 @@ class CompanyDescriptionFragment :
         viewModel.companyDescriptionLiveData.observe(viewLifecycleOwner, Observer { jobModel ->
 
             jobModel?.apply {
+                jobModel.isJobApplied = isJobApplied
                 setUpViewPager()
             }
         })
