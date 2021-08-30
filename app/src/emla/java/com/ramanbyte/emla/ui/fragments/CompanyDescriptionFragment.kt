@@ -1,5 +1,6 @@
 package com.ramanbyte.emla.ui.fragments
 
+import android.content.Intent
 import androidx.databinding.ObservableInt
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.lifecycle.Observer
@@ -15,6 +16,7 @@ class CompanyDescriptionFragment :
     BaseFragment<FragmentCompanyDescriptionBinding, JobsViewModel>() {
 
     var jobId: Int? = null
+    var position: Int? = null
 
     var isJobApplied: ObservableInt = ObservableInt(0)
 
@@ -30,6 +32,7 @@ class CompanyDescriptionFragment :
 
         if (arguments != null) {
             jobId = arguments?.getInt(KEY_JOB_ID)
+            position = arguments?.getInt(KEY_UPDATE_POSITION)
             isJobApplied.set(arguments?.getInt(KEY_IS_JOB_APPLIED) ?: 0)
 
         }
@@ -54,7 +57,12 @@ class CompanyDescriptionFragment :
             companyDescriptionLiveData.observe(viewLifecycleOwner, Observer { jobModel ->
 
                 jobModel?.apply {
-                    jobModel.isJobApplied = isJobApplied
+                    isJobApplied = isJobApplied
+                    companyImageURL =
+                        StaticMethodUtilitiesKtx.getS3DynamicURL(
+                            companyLogo ?: KEY_BLANK,
+                            context!!
+                        )
                     setUpViewPager()
                 }
             })
@@ -75,6 +83,12 @@ class CompanyDescriptionFragment :
                             positiveButtonClickFunctionality = {
                                 isAlertDialogShown.postValue(false)
                                 isJobApplied.set(applyJobFlag)
+                                val intent = Intent(KEY_ACTION_UPDATE_CARD)
+                                intent.putExtra(KEY_UPDATE_POSITION, position)
+                                activity!!.sendBroadcast(intent)
+                                /*setFragmentResult("requestKey", Bundle().apply {
+                                    putString("bundleKey", "sucesss")
+                                })*/
                             })
                         isAlertDialogShown.postValue(true)
 
@@ -110,6 +124,26 @@ class CompanyDescriptionFragment :
 
             layoutBinding.tabCompanyDescription.setupWithViewPager(this)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        AppLog.infoLog("CompanyDescriptionFragment onResume")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        AppLog.infoLog("CompanyDescriptionFragment onStop")
+    }
+
+    override fun onStart() {
+        super.onStart()
+        AppLog.infoLog("CompanyDescriptionFragment onStart")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        AppLog.infoLog("CompanyDescriptionFragment onDestroy")
     }
 
 }

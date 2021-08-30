@@ -3,6 +3,8 @@ package com.ramanbyte.emla.adapters
 import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
@@ -13,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ramanbyte.databinding.CardJobListBinding
 import com.ramanbyte.emla.models.response.JobModel
 import com.ramanbyte.emla.view_model.JobsViewModel
+import com.ramanbyte.utilities.AppLog
 import com.ramanbyte.utilities.KEY_BLANK
 import com.ramanbyte.utilities.StaticMethodUtilitiesKtx
 
@@ -30,6 +33,19 @@ class JobListAdapter :
                 false
             )
         )
+    }
+
+    fun updateCardOnPosition(position: Int, jobModel1: JobModel) {
+        AppLog.infoLog("Position ---$position")
+        getItem(position).apply {
+            this!!.isJobApplied = jobModel1.isJobApplied
+            val visibility = if (jobModel1.isJobApplied == 1) {
+                VISIBLE
+            } else {
+                GONE
+            }
+            this.jobAppliedVisibility = visibility
+        }
     }
 
     override fun onBindViewHolder(holder: JobsListViewHolder, position: Int) {
@@ -61,6 +77,7 @@ class JobListAdapter :
                 val model = getItem(adapterPosition)
                 this.jobModel = model
                 this.jobsViewModel = this@JobListAdapter.jobsViewModel
+                this.position = adapterPosition
             }
         }
     }

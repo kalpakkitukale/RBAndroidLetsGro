@@ -1,6 +1,9 @@
 package com.ramanbyte.emla.ui.fragments
 
+import android.content.BroadcastReceiver
 import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
@@ -11,10 +14,7 @@ import com.ramanbyte.base.BaseFragment
 import com.ramanbyte.databinding.FragmentJobListBinding
 import com.ramanbyte.emla.adapters.JobListAdapter
 import com.ramanbyte.emla.view_model.JobsViewModel
-import com.ramanbyte.utilities.AlertDialog
-import com.ramanbyte.utilities.KEY_BLANK
-import com.ramanbyte.utilities.KEY_SKILL_ID
-import com.ramanbyte.utilities.ProgressLoader
+import com.ramanbyte.utilities.*
 
 class JobListFragment :
     BaseFragment<FragmentJobListBinding, JobsViewModel>(hasOptionsMenu = false) {
@@ -46,6 +46,13 @@ class JobListFragment :
 
         setAdapter()
         viewModelOps()
+
+        /*setFragmentResultListener("requestKey") { key, bundle ->
+            // We use a String here, but any type that can be put in a Bundle is supported
+            val result = bundle.getString("bundleKey")
+            // Do something with the result...
+            AppLog.infoLog("result")
+        }*/
     }
 
     override fun onAttach(context: Context) {
@@ -125,4 +132,45 @@ class JobListFragment :
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        AppLog.infoLog("JobListFragment onResume")
+        activity!!.registerReceiver(
+            cardUpdateReceiver,
+            IntentFilter().apply { addAction(KEY_ACTION_UPDATE_CARD) })
+    }
+
+    override fun onStop() {
+        super.onStop()
+        AppLog.infoLog("JobListFragment onStop")
+    }
+
+    override fun onStart() {
+        super.onStart()
+        AppLog.infoLog("JobListFragment onStart")
+    }
+
+    override fun onDestroy() {
+        try {
+            if (cardUpdateReceiver != null)
+                activity!!.unregisterReceiver(cardUpdateReceiver)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            AppLog.errorLog(e.message, e)
+        }
+        super.onDestroy()
+        AppLog.infoLog("JobListFragment onDestroy")
+    }
+
+    private var cardUpdateReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            if (intent?.action == KEY_ACTION_UPDATE_CARD) {
+                val position = intent.getIntExtra(KEY_UPDATE_POSITION, 0)
+                jobListAdapter!!.updateCardOnPosition(
+                    position,
+                    viewModel.updateCardLiveData.value?.apply { isJobApplied = 1 }!!
+                )
+            }
+        }
+    }
 }

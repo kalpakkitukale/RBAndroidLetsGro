@@ -56,7 +56,7 @@ class JobModel : BaseObservable() {
         }
 
     @Bindable
-    var jobSalaryRange: String? = KEY_BLANK
+    var jobSalaryRange: String? = KEY_HYPHEN
         set(value) {
             field = value
             notifyPropertyChanged(BR.jobSalaryRange)
@@ -69,7 +69,7 @@ class JobModel : BaseObservable() {
 
     @SerializedName("skills")
     @Bindable
-    var jobSkills: String? = KEY_BLANK
+    var jobSkills: String? = KEY_HYPHEN
         set(value) {
             field = value
             notifyPropertyChanged(BR.jobSkills)
@@ -121,15 +121,15 @@ class JobModel : BaseObservable() {
     var vacancy: Int? = 0
 
     @Bindable
-    var experience: String? = KEY_BLANK
+    var experience: String? = KEY_HYPHEN
 
     @Bindable
-    var companyDescription: String? = KEY_BLANK
+    var companyDescription: String? = KEY_HYPHEN
 
     @Bindable
-    var companyWebsite: String? = KEY_BLANK
+    var companyWebsite: String? = KEY_HYPHEN
 
     @Bindable
-    var companyEmailId: String? = KEY_BLANK
+    var companyEmailId: String? = KEY_HYPHEN
 
 }
