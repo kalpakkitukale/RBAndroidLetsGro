@@ -48,7 +48,7 @@ class SkillsRepository(mContext: Context) : BaseRepository(mContext) {
             skillsModelObservable.apply {
 
                 set(SkillsRequestModel().apply {
-                    this.userId = 1//userModel?.userId ?: 0
+                    this.userId = userModel?.userId ?: 0
                     this.searchKey = searchStr
                 })
             },

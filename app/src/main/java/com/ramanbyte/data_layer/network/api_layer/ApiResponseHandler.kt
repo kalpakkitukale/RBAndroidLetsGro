@@ -1,17 +1,15 @@
 package com.ramanbyte.data_layer.network.api_layer
 
 import com.google.gson.JsonSyntaxException
-import com.ramanbyte.BaseAppController
 import com.ramanbyte.R
 import com.ramanbyte.emla.data_layer.network.exception.ApiException
 import com.ramanbyte.emla.data_layer.network.exception.NoDataException
 import com.ramanbyte.emla.data_layer.network.exception.NoInternetException
 import com.ramanbyte.utilities.BindingUtils
-import com.ramanbyte.utilities.KEY_NO_INTERNET_ERROR
-import com.ramanbyte.utilities.KEY_SOMETHING_WENT_WRONG_ERROR
 import org.json.JSONException
 import retrofit2.Response
 import java.net.SocketTimeoutException
+
 /**
  * @author Vinay Kumbhar <vinay.pkumbhar@gmail.com>
  * @since 13-04-2020
@@ -35,6 +33,11 @@ abstract class ApiResponseHandler {
                 val responseData = response.body()
 
                 if (responseData != null) {
+
+                    if (responseData is String && responseData.toString()
+                            .isEmpty() || (responseData is ArrayList<*> && responseData.isEmpty())
+                    )
+                        throw NoDataException("", response.code())
 
                     if (responseData is String && responseData.toString().contains("<html>", true))
                         throw NoInternetException(BindingUtils.string(R.string.please_make_sure_you_are_connected_to_internet))
