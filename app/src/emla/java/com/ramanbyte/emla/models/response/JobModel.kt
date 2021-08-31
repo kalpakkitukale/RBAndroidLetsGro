@@ -5,10 +5,7 @@ import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
 import com.google.gson.annotations.SerializedName
 import com.ramanbyte.BR
-import com.ramanbyte.utilities.DateUtils
-import com.ramanbyte.utilities.KEY_BLANK
-import com.ramanbyte.utilities.KEY_HYPHEN
-import com.ramanbyte.utilities.StaticMethodUtilitiesKtx
+import com.ramanbyte.utilities.*
 
 class JobModel : BaseObservable() {
 
@@ -56,7 +53,7 @@ class JobModel : BaseObservable() {
         }
 
     @Bindable
-    var jobSalaryRange: String? = KEY_BLANK
+    var jobSalaryRange: String? = KEY_HYPHEN
         set(value) {
             field = value
             notifyPropertyChanged(BR.jobSalaryRange)
@@ -69,7 +66,7 @@ class JobModel : BaseObservable() {
 
     @SerializedName("skills")
     @Bindable
-    var jobSkills: String? = KEY_BLANK
+    var jobSkills: String? = KEY_HYPHEN
         set(value) {
             field = value
             notifyPropertyChanged(BR.jobSkills)
@@ -99,6 +96,7 @@ class JobModel : BaseObservable() {
     @Bindable
     var jobAppliedVisibility: Int? = View.GONE
         get() {
+            AppLog.infoLog("Model Job Applied ----- $isJobApplied")
             return if (isJobApplied!! == 1) {
                 View.VISIBLE
             } else {
@@ -121,15 +119,15 @@ class JobModel : BaseObservable() {
     var vacancy: Int? = 0
 
     @Bindable
-    var experience: String? = KEY_BLANK
+    var experience: String? = KEY_HYPHEN
 
     @Bindable
-    var companyDescription: String? = KEY_BLANK
+    var companyDescription: String? = KEY_HYPHEN
 
     @Bindable
-    var companyWebsite: String? = KEY_BLANK
+    var companyWebsite: String? = KEY_HYPHEN
 
     @Bindable
-    var companyEmailId: String? = KEY_BLANK
+    var companyEmailId: String? = KEY_HYPHEN
 
 }

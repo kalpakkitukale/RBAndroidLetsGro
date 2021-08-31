@@ -12,7 +12,9 @@ import com.ramanbyte.emla.data_layer.network.api_layer.JobsController
 import com.ramanbyte.emla.data_layer.pagination.PaginationDataSourceFactory
 import com.ramanbyte.emla.data_layer.room.entities.UserEntity
 import com.ramanbyte.emla.models.UserModel
+import com.ramanbyte.emla.models.request.ApplyJobRequestModel
 import com.ramanbyte.emla.models.request.JobRequestModel
+import com.ramanbyte.emla.models.response.ApplyJobResponseModel
 import com.ramanbyte.emla.models.response.JobModel
 import com.ramanbyte.utilities.replicate
 import org.kodein.di.generic.instance
@@ -48,9 +50,9 @@ class JobsRepository(mContext: Context) : BaseRepository(mContext) {
             jobsModelObservable.apply {
 
                 set(JobRequestModel().apply {
-                    this.userId = 1//userModel?.userId ?: 0
+                    this.userId = userModel?.userId ?: 0
                     this.pageSize = myPageSize
-                    this.skillId = 0//skillId
+                    this.skillId = skillId
                 })
             },
             paginationResponseHandlerLiveData
@@ -77,20 +79,29 @@ class JobsRepository(mContext: Context) : BaseRepository(mContext) {
     }
 
     suspend fun getJobDetails(jobId: Int): JobModel? {
-       /* val jobModel = apiRequest {
+        val jobModel = apiRequest {
             jobsController.getJobDetails(JobRequestModel().apply {
                 this.jobId = jobId
             })
         }
-        return if(jobModel?.isNotEmpty() == true) jobModel?.get(0) else null*/
+        return if (jobModel?.isNotEmpty() == true) jobModel?.get(0) else null
 
-        return JobModel().apply {
+        /*return JobModel().apply {
             companyDescription = "ebdeufbrfjhrbgfhrjgbrjktngbjrnf"
             companyWebsite = "www.j.com"
-        }
+        }*/
     }
 
-    suspend fun applyJob(jobId: Int){
+    suspend fun applyJob(jobId: Int): ApplyJobResponseModel? {
 
+        val userId: Int =
+            applicationDatabase.getUserDao().getCurrentUser()?.userId ?: 0
+
+        val applyJobResponseModel = apiRequest {
+            jobsController.applyJob(ApplyJobRequestModel(userId, jobId).apply {
+                this.jobId = jobId
+            })
+        }
+        return applyJobResponseModel
     }
 }

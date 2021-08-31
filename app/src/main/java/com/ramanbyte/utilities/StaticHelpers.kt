@@ -195,6 +195,8 @@ const val keyContentUrl = "contentUrl"
 const val KEY_QUIZ_TYPE_ASSESSMENT = 1
 const val KEY_QUIZ_TYPE_FORMATIVE = 3
 const val KEY_QUIZ_TYPE_SUMMATIVE = 2
+const val KEY_ACTION_UPDATE_CARD = "actionUpdateCard"
+const val KEY_UPDATE_POSITION = "keyUpdatePosition"
 const val keyTestSubmittedSuccess = "Created."
 const val REQUEST_CODE_APPLICATION_UPDATE = 0X503
 
