@@ -39,11 +39,13 @@ class JobListAdapter :
         AppLog.infoLog("Position ---$position")
         getItem(position).apply {
             this!!.isJobApplied = jobModel1.isJobApplied
+            AppLog.infoLog("isJobApplied ------------ $isJobApplied")
             val visibility = if (jobModel1.isJobApplied == 1) {
                 VISIBLE
             } else {
                 GONE
             }
+            AppLog.infoLog("visibility ------------ $visibility")
             this.jobAppliedVisibility = visibility
         }
     }
