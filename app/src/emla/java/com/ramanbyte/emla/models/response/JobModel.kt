@@ -5,10 +5,7 @@ import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
 import com.google.gson.annotations.SerializedName
 import com.ramanbyte.BR
-import com.ramanbyte.utilities.DateUtils
-import com.ramanbyte.utilities.KEY_BLANK
-import com.ramanbyte.utilities.KEY_HYPHEN
-import com.ramanbyte.utilities.StaticMethodUtilitiesKtx
+import com.ramanbyte.utilities.*
 
 class JobModel : BaseObservable() {
 
@@ -99,6 +96,7 @@ class JobModel : BaseObservable() {
     @Bindable
     var jobAppliedVisibility: Int? = View.GONE
         get() {
+            AppLog.infoLog("Model Job Applied ----- $isJobApplied")
             return if (isJobApplied!! == 1) {
                 View.VISIBLE
             } else {

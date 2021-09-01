@@ -31,6 +31,8 @@ class JobsViewModel(mContext: Context) : BaseViewModel(mContext) {
     private val _applyJobResponseModelLiveData = MutableLiveData<ApplyJobResponseModel?>()
     val applyJobResponseModelLiveData = _applyJobResponseModelLiveData
 
+    val updateCardLiveData = MutableLiveData<JobModel?>(null)
+
     override var noInternetTryAgain: () -> Unit = { jobsRepository.tryAgain() }
 
     private val jobsRepository: JobsRepository by instance()
@@ -66,15 +68,17 @@ class JobsViewModel(mContext: Context) : BaseViewModel(mContext) {
 
     fun getJobsList(): LiveData<PagedList<JobModel>>? = jobsRepository.getJobsPagedList()
 
-    fun onJobClick(view: View, jobModel: JobModel) {
+    fun onJobClick(position: Int, view: View, jobModel: JobModel) {
         jobModel.let { model ->
             if (NetworkConnectivity.isConnectedToInternet()) {
+                updateCardLiveData.value = jobModel
                 view.findNavController()
                     .navigate(
                         R.id.action_jobListFragment_to_companyDescriptionFragment,
                         Bundle().apply {
                             putInt(KEY_JOB_ID, model.jobId ?: 0)
                             putInt(KEY_IS_JOB_APPLIED, model.isJobApplied ?: 0)
+                            putInt(KEY_UPDATE_POSITION, position)
                         })
             } else {
                 setAlertDialogResourceModelMutableLiveData(

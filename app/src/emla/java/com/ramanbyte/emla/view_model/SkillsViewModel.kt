@@ -12,10 +12,7 @@ import com.ramanbyte.base.BaseViewModel
 import com.ramanbyte.data_layer.pagination.PaginationMessages
 import com.ramanbyte.emla.data_layer.repositories.SkillsRepository
 import com.ramanbyte.emla.models.response.SkillsModel
-import com.ramanbyte.utilities.BindingUtils
-import com.ramanbyte.utilities.KEY_BLANK
-import com.ramanbyte.utilities.KEY_SKILL_ID
-import com.ramanbyte.utilities.NetworkConnectivity
+import com.ramanbyte.utilities.*
 import org.kodein.di.generic.instance
 
 class SkillsViewModel(mContext: Context) : BaseViewModel(mContext) {
@@ -42,12 +39,13 @@ class SkillsViewModel(mContext: Context) : BaseViewModel(mContext) {
             if (it != null) {
                 paginationResponse(
                     it, PaginationMessages(
-                        BindingUtils.string(R.string.no_chapter),
-                        BindingUtils.string(R.string.no_more_chapter),
+                        BindingUtils.string(R.string.no_skills),
+                        BindingUtils.string(R.string.no_more_skill),
                         BindingUtils.string(R.string.no_internet_message),
                         BindingUtils.string(R.string.some_thing_went_wrong)
                     )
                 )
+                AppLog.infoLog("Skill Pagination :: ${it.msg} :: ${it.status}")
             }
         }
     }

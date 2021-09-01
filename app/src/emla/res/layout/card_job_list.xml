@@ -8,7 +8,7 @@
         style="@style/customCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="@{()->jobsViewModel.onJobClick(cardContainer, jobModel)}"
+        android:onClick="@{()->jobsViewModel.onJobClick(position, cardContainer, jobModel)}"
         app:contentPadding="@dimen/dp_0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -187,5 +187,9 @@
         <variable
             name="jobsViewModel"
             type="com.ramanbyte.emla.view_model.JobsViewModel" />
+
+        <variable
+            name="position"
+            type="Integer" />
     </data>
 </layout>
