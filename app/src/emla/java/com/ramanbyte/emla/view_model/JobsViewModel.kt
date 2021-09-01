@@ -18,6 +18,7 @@ import com.ramanbyte.emla.data_layer.repositories.JobsRepository
 import com.ramanbyte.emla.models.response.ApplyJobResponseModel
 import com.ramanbyte.emla.models.response.JobModel
 import com.ramanbyte.utilities.*
+import org.json.JSONObject
 import org.kodein.di.generic.instance
 
 class JobsViewModel(mContext: Context) : BaseViewModel(mContext) {
@@ -169,24 +170,37 @@ class JobsViewModel(mContext: Context) : BaseViewModel(mContext) {
                 e.printStackTrace()
                 AppLog.errorLog(e.message, e)
                 coroutineToggleLoader()
-                showApplyJobError()
+
+                if (e.message != null) {
+                    val errorResponse = JSONObject(e.message)
+
+                    showApplyJobError(
+                        if (errorResponse.has("message"))
+                            errorResponse["message"].toString()
+                        else
+                            BindingUtils.string(R.string.some_thing_went_wrong)
+                    )
+                } else {
+                    showApplyJobError(BindingUtils.string(R.string.some_thing_went_wrong))
+                }
+
             } catch (e: NoInternetException) {
                 e.printStackTrace()
                 AppLog.errorLog(e.message, e)
                 coroutineToggleLoader()
-                showApplyJobError()
+                showApplyJobError(e.message)
             } catch (e: NoDataException) {
                 e.printStackTrace()
                 AppLog.errorLog(e.message, e)
                 coroutineToggleLoader()
-                showApplyJobError()
+                showApplyJobError(e.message)
             }
         }
     }
 
-    private fun showApplyJobError() {
+    private fun showApplyJobError(message: String?) {
         setAlertDialogResourceModelMutableLiveData(
-            message = BindingUtils.string(R.string.some_thing_went_wrong),
+            message = message ?: BindingUtils.string(R.string.some_thing_went_wrong),
             alertDrawableResource = BindingUtils.drawable(R.drawable.ic_fail),
             isInfoAlert = true,
             positiveButtonText = BindingUtils.string(R.string.strOk),

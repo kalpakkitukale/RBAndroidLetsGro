@@ -1,5 +1,6 @@
 package com.ramanbyte.emla.ui.fragments
 
+import android.view.View
 import android.content.Intent
 import androidx.databinding.ObservableInt
 import androidx.fragment.app.FragmentStatePagerAdapter
@@ -44,6 +45,8 @@ class CompanyDescriptionFragment :
         }
 
         viewModelOps()
+
+        viewModel.toggleLayoutVisibility(View.GONE, View.GONE, View.GONE, "", View.GONE)
 
         jobId?.let { safeId ->
             viewModel.getJobDetails(safeId)
@@ -111,6 +114,7 @@ class CompanyDescriptionFragment :
     }
 
     private fun setUpViewPager() {
+
         viewPagerAdapter = ViewPagerAdapter(
             childFragmentManager,
             FragmentStatePagerAdapter.POSITION_UNCHANGED

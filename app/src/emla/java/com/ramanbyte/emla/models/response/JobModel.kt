@@ -15,7 +15,7 @@ class JobModel : BaseObservable() {
     /*Role*/
     @SerializedName("title")
     @Bindable
-    var jobTitle: String? = KEY_BLANK
+    var jobTitle: String? = KEY_HYPHEN
         set(value) {
             field = value
             notifyPropertyChanged(BR.jobTitle)
@@ -129,5 +129,14 @@ class JobModel : BaseObservable() {
 
     @Bindable
     var companyEmailId: String? = KEY_HYPHEN
+
+    @Bindable
+    var minExperiance: String? = KEY_HYPHEN
+
+    @Bindable
+    var maxExperiance: String? = KEY_HYPHEN
+
+    @Bindable
+    var jobDetails: String? = KEY_HYPHEN
 
 }
