@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 class MasterDataResponseModel {
 
-    @SerializedName("valueField")
+    @SerializedName("valuField")
     var id = 0
 
     @SerializedName("textField")
