@@ -119,6 +119,14 @@ class UserDetailsModel : BaseObservable() {
 
             notifyPropertyChanged(BR.dateofBirthstring)
         }
+        get() {
+            field = DateUtils.getDisplayDateFromDate(
+                dateOfBirth!!,
+                DateUtils.DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS,
+                DateUtils.DATE_DISPLAY_PATTERN_SEP
+            )
+            return field
+        }
 
     var department: Int? = 0
     var deptname: String? = ""
