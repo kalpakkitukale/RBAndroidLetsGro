@@ -93,8 +93,14 @@ class JobModel : BaseObservable() {
             notifyPropertyChanged(BR.isJobApplied)
         }
 
+    var jobAppliedText: String? = KEY_BLANK
+
     @Bindable
     var jobAppliedVisibility: Int? = View.GONE
+        set(value) {
+            field = value
+            notifyPropertyChanged(BR.jobAppliedVisibility)
+        }
         get() {
             AppLog.infoLog("Model Job Applied ----- $isJobApplied")
             return if (isJobApplied!! == 1) {
