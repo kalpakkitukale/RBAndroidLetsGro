@@ -18,7 +18,7 @@ class ChaptersModel() : Parcelable, BaseObservable() {
     var sectionListDropdown: String? = ""
     var sectionlist = ArrayList<SectionsModel>()
     var totalSectionCount: Int = 0
-    var formativeAssessmentStaus: String? = null
+    var formativeAssessmentStaus: Boolean? = false
 
     @Bindable
     var downloadVisibility = View.GONE
@@ -35,7 +35,7 @@ class ChaptersModel() : Parcelable, BaseObservable() {
         description = parcel.readString()
         index = parcel.readString()
         totalSectionCount = parcel.readInt()
-        formativeAssessmentStaus = parcel.readString()
+        formativeAssessmentStaus = parcel.readValue(Int::class.java.classLoader) as? Boolean
     }
 
     override fun writeToParcel(parcel: Parcel?, p1: Int) {
@@ -44,7 +44,7 @@ class ChaptersModel() : Parcelable, BaseObservable() {
         parcel?.writeString(description)
         parcel?.writeString(index)
         parcel?.writeInt(totalSectionCount)
-        parcel?.writeString(formativeAssessmentStaus)
+        parcel?.writeValue(formativeAssessmentStaus)
     }
 
     override fun describeContents(): Int {

@@ -55,7 +55,7 @@ class ChaptersListAdapter(private val chaptersViewModel: ChaptersViewModel) :
                 val chaptersModel = getItem(adapterPosition)
 
                 ivStatus.visibility =
-                    if (chaptersModel?.formativeAssessmentStaus.equals("true", true)) {
+                    if (chaptersModel?.formativeAssessmentStaus == true) {
                         View.VISIBLE
                     } else {
                         View.GONE
@@ -89,10 +89,8 @@ class ChaptersListAdapter(private val chaptersViewModel: ChaptersViewModel) :
                 }
 
                 this@ChaptersListAdapter.chaptersViewModel.isAllCourseSessionCompleted.value =
-                    ((this@ChaptersListAdapter.chaptersViewModel.isAllCourseSessionCompleted.value == true) && (chaptersModel?.formativeAssessmentStaus.equals(
-                        "true",
-                        true
-                    )))
+                    ((this@ChaptersListAdapter.chaptersViewModel.isAllCourseSessionCompleted.value == true) &&
+                            (chaptersModel?.formativeAssessmentStaus == true))
 
                 this@ChaptersListAdapter.chaptersViewModel?.getMediaInfoByChapterId(
                     chaptersModel?.chapterId ?: 0

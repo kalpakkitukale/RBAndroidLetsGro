@@ -97,7 +97,7 @@ class ChaptersSectionViewModel(mContext: Context) : BaseViewModel(mContext) {
 
     fun takeFormativeTest(buttonView: View) {
 
-        if (!chaptersModel?.formativeAssessmentStaus.equals("true", true)) {
+        if (chaptersModel?.formativeAssessmentStaus == false) {
             buttonView.findNavController()
                 .navigate(
                     R.id.action_chaptersSectionListFragment_to_preAssessmentTestFragment,
