@@ -34,8 +34,6 @@ class ChaptersSectionListFragment :
         arguments?.apply {
             viewModel.coursesModel = getParcelable(KEY_COURSE_MODEL)
             viewModel.chaptersModel = getParcelable(KEY_CHAPTER_MODEL)
-
-            setToolbarTitle(viewModel.chaptersModel?.chapterName!!)
         }
 
         layoutBinding?.apply {
@@ -124,5 +122,10 @@ class ChaptersSectionListFragment :
 
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        setToolbarTitle(viewModel.chaptersModel?.chapterName!!)
     }
 }

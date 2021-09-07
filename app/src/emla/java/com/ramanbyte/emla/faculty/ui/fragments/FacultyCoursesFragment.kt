@@ -27,8 +27,6 @@ class FacultyCoursesFragment : BaseFragment<FragmentFacultyCoursesBinding,Facult
 
     override fun initiate() {
 
-        setToolbarTitle(BindingUtils.string(R.string.courses))
-
         ProgressLoader(mContext!!, viewModel)
         AlertDialog(mContext!!, viewModel)
 
@@ -69,6 +67,11 @@ class FacultyCoursesFragment : BaseFragment<FragmentFacultyCoursesBinding,Facult
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mContext = context
+    }
+
+    override fun onResume() {
+        super.onResume()
+        setToolbarTitle(BindingUtils.string(R.string.courses))
     }
 
 }

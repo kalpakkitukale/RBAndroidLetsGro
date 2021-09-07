@@ -88,9 +88,9 @@ class ChaptersListAdapter(private val chaptersViewModel: ChaptersViewModel) :
                     viewDisable.visibility = View.GONE
                 }
 
-                this@ChaptersListAdapter.chaptersViewModel.isAllCourseSessionCompleted.value =
+                /*this@ChaptersListAdapter.chaptersViewModel.isAllCourseSessionCompleted.value =
                     ((this@ChaptersListAdapter.chaptersViewModel.isAllCourseSessionCompleted.value == true) &&
-                            (chaptersModel?.formativeAssessmentStaus == true))
+                            (chaptersModel?.formativeAssessmentStaus == true))*/
 
                 this@ChaptersListAdapter.chaptersViewModel?.getMediaInfoByChapterId(
                     chaptersModel?.chapterId ?: 0

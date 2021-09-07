@@ -48,7 +48,6 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
         }*/
 
         layoutBinding.apply {
-            setToolbarTitle(BindingUtils.string(R.string.courses))
             lifecycleOwner = this@CoursesFragment
             ProgressLoader(mContext, viewModel)
             AlertDialog(mContext, viewModel)
@@ -246,6 +245,11 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mContext = context
+    }
+
+    override fun onResume() {
+        super.onResume()
+        setToolbarTitle(BindingUtils.string(R.string.courses))
     }
 
 }

@@ -1,6 +1,5 @@
 package com.ramanbyte.emla.ui.fragments
 
-import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.ramanbyte.R
@@ -99,13 +98,18 @@ class ChaptersListFragment :
 
                 })
 
-            isAllCourseSessionCompleted.observe(this@ChaptersListFragment, Observer {
+            /**
+             * @since 7th Sep 2021
+             * @author Mansi
+             * @suppress - Change request by Raman Sir, User can take summative test directly
+             */
+            /*isAllCourseSessionCompleted.observe(this@ChaptersListFragment, Observer {
                 if (it == true) {
                     layoutBinding.btnAppearSummativeTest.visibility = View.VISIBLE
                 } else {
                     layoutBinding.btnAppearSummativeTest.visibility = View.GONE
                 }
-            })
+            })*/
 
             showValidationMessage.observe(this@ChaptersListFragment, Observer {
                 if (it != null) {

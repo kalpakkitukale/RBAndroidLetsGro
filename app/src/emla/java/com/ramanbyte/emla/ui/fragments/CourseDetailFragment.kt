@@ -2,7 +2,6 @@ package com.ramanbyte.emla.ui.fragments
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -11,7 +10,6 @@ import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.ramanbyte.R
-import com.ramanbyte.aws_s3_android.accessor.AppS3Client
 import com.ramanbyte.base.BaseFragment
 import com.ramanbyte.databinding.FragmentCourseDetailBinding
 import com.ramanbyte.emla.adapters.ViewPagerAdapter
@@ -43,8 +41,6 @@ class CourseDetailFragment : BaseFragment<FragmentCourseDetailBinding, CoursesDe
             courseModel = getParcelable<CoursesModel>(KEY_COURSE_MODEL)!!
         }
 
-        setToolbarTitle(courseModel?.courseName!!)
-
         /*courseModel?.courseImageUrl =
             AppS3Client.createInstance(context!!).getFileAccessUrl(
                 courseModel?.courseImage ?: KEY_BLANK
@@ -63,6 +59,11 @@ class CourseDetailFragment : BaseFragment<FragmentCourseDetailBinding, CoursesDe
         }
 
         viewModelOps()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        setToolbarTitle(courseModel?.courseName!!)
     }
 
     private fun viewModelOps() {

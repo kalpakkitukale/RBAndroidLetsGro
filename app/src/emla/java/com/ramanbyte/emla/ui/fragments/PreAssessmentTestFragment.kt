@@ -31,6 +31,7 @@ class PreAssessmentTestFragment :
     private var courseModel: CoursesModel? = null
     private var chapterModel: ChaptersModel? = null
     private lateinit var navController: NavController
+    private var _pageTitle = ""
 
     override val viewModelClass: Class<ShowQuestionsViewModel> = ShowQuestionsViewModel::class.java
 
@@ -48,9 +49,7 @@ class PreAssessmentTestFragment :
         viewModel.apply {
             coursesModelLiveData.value = courseModel
             chapterModelLiveData.value = chapterModel
-
-            setToolbarTitle(coursesModelLiveData?.value?.courseName!!)
-
+            _pageTitle = coursesModelLiveData?.value?.courseName!!
             isBackPressLiveData.observe(this@PreAssessmentTestFragment, Observer {
                 if (it != null){
                     if (it == true){
@@ -146,5 +145,10 @@ class PreAssessmentTestFragment :
     override fun onAttach(context: Context) {
         mContext = context
         super.onAttach(context)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        setToolbarTitle(_pageTitle)
     }
 }
