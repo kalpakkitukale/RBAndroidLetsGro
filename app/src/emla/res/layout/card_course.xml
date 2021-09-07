@@ -53,14 +53,13 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvTopicDescription"
-                    style="@style/TextViewBoldNavyBlueOnLightNWhiteOnDark"
+                    style="@style/TextViewTitleLarge"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dp_8"
                     android:layout_marginTop="@dimen/dp_2"
                     android:layout_marginEnd="@dimen/dp_5"
                     android:text="@{coursesModel.courseName}"
-                    android:textSize="@dimen/sp_18"
                     app:layout_constraintEnd_toStartOf="@+id/ivStatus"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -92,18 +91,13 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvTopicDetail"
-                    style="@style/TextViewRegularNavyBlueOnLightNWhiteOnDark"
+                    style="@style/TextViewSubTitle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_2"
-                    android:layout_marginBottom="@dimen/dp_16"
                     android:ellipsize="end"
                     android:lines="1"
                     android:maxLines="1"
-                    android:paddingBottom="@dimen/dp_10"
-                    android:paddingEnd="@dimen/dp_5"
                     android:text="@{coursesModel.courseDescription}"
-                    android:textSize="@dimen/sp_12"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/ivStatus"
                     app:layout_constraintStart_toStartOf="@+id/tvTopicDescription"
