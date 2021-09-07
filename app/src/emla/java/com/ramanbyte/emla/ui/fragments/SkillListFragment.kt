@@ -33,7 +33,6 @@ class SkillListFragment :
         AlertDialog(context!!, viewModel)
 
         layoutBinding.apply {
-            setToolbarTitle("")
             lifecycleOwner = this@SkillListFragment
             skillsViewModel = viewModel
             noData.viewModel = viewModel
@@ -120,5 +119,10 @@ class SkillListFragment :
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mContext = context
+    }
+
+    override fun onResume() {
+        super.onResume()
+        setToolbarTitle("")
     }
 }

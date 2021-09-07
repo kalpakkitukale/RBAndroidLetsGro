@@ -23,6 +23,8 @@ class ContentListFragment : BaseFragment<FragmentContentListBinding, ContentView
 
     override fun layoutId(): Int = R.layout.fragment_content_list
 
+    private var _pageTitle = ""
+
     override fun initiate() {
 
         ProgressLoader(context!!, viewModel!!)
@@ -56,13 +58,13 @@ class ContentListFragment : BaseFragment<FragmentContentListBinding, ContentView
 
                 sectionId = getInt(keySectionId, 0)!!
                 sectionName = getString(keySectionName)
-
+                _pageTitle = sectionName!!
                 courseId = getInt(keyCourseId, 0)
                 chapterId = getInt(keyChapterId, 0)
                 courseName = getString(keyCourseName)
                 chapterName = getString(keyChapterName)
 
-                setToolbarTitle(sectionName!!)
+
             }
 
             getContentList()
@@ -157,5 +159,10 @@ class ContentListFragment : BaseFragment<FragmentContentListBinding, ContentView
     override fun onStart() {
         super.onStart()
         viewModel.getContentList()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        setToolbarTitle(_pageTitle)
     }
 }

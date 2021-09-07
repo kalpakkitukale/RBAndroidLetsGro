@@ -36,7 +36,6 @@ class JobListFragment :
         AlertDialog(context!!, viewModel)
 
         layoutBinding.apply {
-            setToolbarTitle("")
             lifecycleOwner = this@JobListFragment
             jobsViewModel = viewModel
             noData.viewModel = viewModel
@@ -135,6 +134,7 @@ class JobListFragment :
     override fun onResume() {
         super.onResume()
         AppLog.infoLog("JobListFragment onResume")
+        setToolbarTitle("")
         activity!!.registerReceiver(
             cardUpdateReceiver,
             IntentFilter().apply { addAction(KEY_ACTION_UPDATE_CARD) })

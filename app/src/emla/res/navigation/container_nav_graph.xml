@@ -7,8 +7,7 @@
 
     <fragment
         android:id="@+id/coursesFragment"
-        android:name="com.ramanbyte.emla.ui.fragments.CoursesFragment"
-        android:label="@string/courses">
+        android:name="com.ramanbyte.emla.ui.fragments.CoursesFragment">
         <action
             android:id="@+id/action_coursesFragment_to_courseDetailFragment"
             app:destination="@id/courseDetailFragment" />
@@ -23,8 +22,7 @@
     </fragment>
     <fragment
         android:id="@+id/myDownloadsFragment"
-        android:name="com.ramanbyte.emla.ui.fragments.MyDownloadsFragment"
-        android:label="@string/downloads" />
+        android:name="com.ramanbyte.emla.ui.fragments.MyDownloadsFragment" />
     <fragment
         android:id="@+id/skillListFragment"
         android:name="com.ramanbyte.emla.ui.fragments.SkillListFragment">
@@ -34,8 +32,7 @@
     </fragment>
     <fragment
         android:id="@+id/settingFragment"
-        android:name="com.ramanbyte.emla.ui.fragments.SettingFragment"
-        android:label="@string/action_settings">
+        android:name="com.ramanbyte.emla.ui.fragments.SettingFragment">
         <action
             android:id="@+id/action_settingFragment_to_changePasswordFragment"
             app:destination="@id/changePasswordFragment" />
@@ -47,16 +44,13 @@
     <fragment
         android:id="@+id/preAssessmentTestFragment"
         android:name="com.ramanbyte.emla.ui.fragments.PreAssessmentTestFragment"
-        android:label="@string/test"
         app:launchSingleTop="true" />
     <fragment
         android:id="@+id/changePasswordFragment"
-        android:name="com.ramanbyte.emla.ui.fragments.ChangePasswordFragment"
-        android:label="@string/change_password" />
+        android:name="com.ramanbyte.emla.ui.fragments.ChangePasswordFragment" />
     <fragment
         android:id="@+id/chaptersSectionListFragment"
-        android:name="com.ramanbyte.emla.ui.fragments.ChaptersSectionListFragment"
-        android:label="ChaptersSectionListFragment">
+        android:name="com.ramanbyte.emla.ui.fragments.ChaptersSectionListFragment">
         <action
             android:id="@+id/action_chaptersSectionListFragment_to_contentListFragment"
             app:destination="@id/contentListFragment" />
@@ -66,8 +60,7 @@
     </fragment>
     <fragment
         android:id="@+id/courseDetailFragment"
-        android:name="com.ramanbyte.emla.ui.fragments.CourseDetailFragment"
-        android:label="CourseDetailFragment">
+        android:name="com.ramanbyte.emla.ui.fragments.CourseDetailFragment">
         <action
             android:id="@+id/action_courseDetailFragment_to_chaptersSectionListFragment"
             app:destination="@id/chaptersSectionListFragment" />
@@ -77,12 +70,10 @@
     </fragment>
     <fragment
         android:id="@+id/contentListFragment"
-        android:name="com.ramanbyte.emla.ui.fragments.ContentListFragment"
-        android:label="ContentListFragment" />
+        android:name="com.ramanbyte.emla.ui.fragments.ContentListFragment" />
     <fragment
         android:id="@+id/learnerProfileFragment"
-        android:name="com.ramanbyte.emla.ui.fragments.LearnerProfileFragment"
-        android:label="LearnerProfileFragment">
+        android:name="com.ramanbyte.emla.ui.fragments.LearnerProfileFragment">
         <action
             android:id="@+id/action_learnerProfileFragment_to_coursesFragment"
             app:destination="@id/coursesFragment" />
@@ -90,7 +81,6 @@
     <fragment
         android:id="@+id/myFavouriteVideoFragment"
         android:name="com.ramanbyte.emla.ui.fragments.MyFavouriteVideoFragment"
-        android:label="@string/my_favourite"
         tools:layout="@layout/fragment_my_favourite_video" />
     <fragment
         android:id="@+id/jobListFragment"

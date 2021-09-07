@@ -32,8 +32,6 @@ class FacultyQuestionAnswerFragment :
     override fun layoutId(): Int = R.layout.fragment_faculty_question_answer
 
     override fun initiate() {
-        setToolbarTitle(BindingUtils.string(R.string.questions_and_answer))
-
         //activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
         //activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN or WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
 
@@ -149,6 +147,11 @@ class FacultyQuestionAnswerFragment :
                 //adapter?.itemCount!!-1
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        setToolbarTitle(BindingUtils.string(R.string.questions_and_answer))
     }
 
 }

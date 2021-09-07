@@ -46,6 +46,7 @@
                 android:id="@+id/llDetails"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:padding="@dimen/dp_5"
                 android:background="@color/colorCourseCardWithOpacity"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -53,13 +54,13 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvTopicDescription"
-                    style="@style/TextViewTitleLarge"
+                    style="@style/TextViewTitle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/dp_8"
-                    android:layout_marginTop="@dimen/dp_2"
-                    android:layout_marginEnd="@dimen/dp_5"
                     android:text="@{coursesModel.courseName}"
+                    android:layout_marginStart="@dimen/text_view_title_start"
+                    android:layout_marginEnd="@dimen/text_view_title_end"
+                    android:textSize="@dimen/sp_20"
                     app:layout_constraintEnd_toStartOf="@+id/ivStatus"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -91,14 +92,15 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvTopicDetail"
-                    style="@style/TextViewSubTitle"
+                    style="@style/TextViewDescription"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
                     android:lines="1"
+                    android:layout_marginTop="@dimen/text_view_description_top"
+                    android:paddingBottom="@dimen/text_view_description_bottom"
                     android:maxLines="1"
                     android:text="@{coursesModel.courseDescription}"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/ivStatus"
                     app:layout_constraintStart_toStartOf="@+id/tvTopicDescription"
                     app:layout_constraintTop_toBottomOf="@+id/tvTopicDescription" />

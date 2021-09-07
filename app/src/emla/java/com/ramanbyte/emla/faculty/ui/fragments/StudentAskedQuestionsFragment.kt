@@ -47,8 +47,6 @@ class StudentAskedQuestionsFragment :
             AppLog.infoLog("courseModel ${courseModel?.courseId}")
         }
 
-        setToolbarTitle(courseModel?.courseName!!)
-
         ProgressLoader(mContext!!, viewModel)
         AlertDialog(mContext!!, viewModel)
 
@@ -245,6 +243,11 @@ class StudentAskedQuestionsFragment :
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mContext = context
+    }
+
+    override fun onResume() {
+        super.onResume()
+        setToolbarTitle(courseModel?.courseName!!)
     }
 
 }
