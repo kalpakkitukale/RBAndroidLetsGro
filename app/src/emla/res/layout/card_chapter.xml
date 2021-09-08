@@ -33,65 +33,58 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvIndex"
-                style="@style/TextViewBoldNavyBlueOnLightNWhiteOnDark"
+                style="@style/TextViewTitleLarge"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dp_5"
-                android:layout_marginTop="@dimen/dp_5"
+                android:layout_height="0dp"
                 android:text="@{chapterModel.index}"
-                android:textSize="@dimen/sp_14"
+                android:paddingEnd="@dimen/text_view_title_large_end"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvTopicName"
-                style="@style/TextViewBoldNavyBlueOnLightNWhiteOnDark"
+                style="@style/TextViewTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dp_10"
-                android:layout_marginEnd="@dimen/dp_10"
+                android:layout_marginStart="@dimen/text_view_title_start"
+                android:layout_marginEnd="@dimen/text_view_title_end"
                 android:text="@{chapterModel.chapterName}"
-                android:textSize="@dimen/sp_14"
                 app:layout_constraintEnd_toStartOf="@+id/tvSectionCount"
                 app:layout_constraintStart_toEndOf="@id/tvIndex"
                 app:layout_constraintTop_toTopOf="@+id/tvIndex" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvSectionCount"
-                style="@style/TextViewRegularNavyBlueOnLightNWhiteOnDark"
+                style="@style/TextViewSubTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dp_5"
-                android:layout_marginEnd="@dimen/dp_10"
+                android:layout_marginEnd="@dimen/text_view_sub_title_end"
                 android:text="@{String.valueOf(chapterModel.totalSectionCount)}"
-                android:textSize="@dimen/sp_12"
                 app:layout_constraintBottom_toBottomOf="@+id/IvDownload"
                 app:layout_constraintEnd_toStartOf="@+id/IvDownload"
-                app:layout_constraintTop_toTopOf="@+id/IvDownload" />
+                app:layout_constraintTop_toTopOf="@+id/tvTopicName" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/IvDownload"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/dp_10"
                 android:onClick="@{()->chaptersViewModel.onDownloadClicked(IvDownload, chapterModel)}"
-                android:padding="@dimen/dp_8"
                 android:src="@drawable/ic_download"
+                style="@style/ImageViewOrIconWhereClickIsPerformed"
                 android:visibility="@{chapterModel.downloadVisibility}"
-                app:layout_constraintBottom_toBottomOf="@+id/tvIndex"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/tvIndex" />
+                app:layout_constraintTop_toTopOf="@+id/tvTopicName" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvCourseDescription"
-                style="@style/TextViewRegularNavyBlueOnLightNWhiteOnDark"
+                style="@style/TextViewDescription"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_5"
                 android:maxLines="4"
+                android:layout_marginTop="@dimen/text_view_description_top"
                 android:text="@{chapterModel.description}"
-                android:textSize="@dimen/sp_12"
-                app:layout_constraintEnd_toEndOf="@id/IvDownload"
+                app:layout_constraintEnd_toEndOf="@id/tvTopicName"
                 app:layout_constraintStart_toStartOf="@+id/tvTopicName"
                 app:layout_constraintTop_toBottomOf="@+id/tvTopicName" />
 
@@ -99,7 +92,7 @@
                 android:id="@+id/ivStatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/dp_8"
+                style="@style/ImageViewOrIconWhereClickIsPerformed"
                 android:src="@drawable/ic_tick_checked"
                 app:layout_constraintEnd_toEndOf="@id/IvDownload"
                 app:layout_constraintTop_toTopOf="@+id/tvCourseDescription" />
