@@ -56,8 +56,8 @@ class JobsViewModel(mContext: Context) : BaseViewModel(mContext) {
             if (it != null) {
                 paginationResponse(
                     it, PaginationMessages(
-                        BindingUtils.string(R.string.no_chapter),
-                        BindingUtils.string(R.string.no_more_chapter),
+                        BindingUtils.string(R.string.no_job),
+                        BindingUtils.string(R.string.no_more_job),
                         BindingUtils.string(R.string.no_internet_message),
                         BindingUtils.string(R.string.some_thing_went_wrong)
                     )

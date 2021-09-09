@@ -1,7 +1,7 @@
 package com.ramanbyte.emla.ui.fragments
 
-import android.view.View
 import android.content.Intent
+import android.view.View
 import androidx.databinding.ObservableInt
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.lifecycle.Observer
@@ -9,6 +9,7 @@ import com.ramanbyte.R
 import com.ramanbyte.base.BaseFragment
 import com.ramanbyte.databinding.FragmentCompanyDescriptionBinding
 import com.ramanbyte.emla.adapters.ViewPagerAdapter
+import com.ramanbyte.emla.models.response.JobModel
 import com.ramanbyte.emla.view_model.JobsViewModel
 import com.ramanbyte.utilities.*
 import kotlinx.android.synthetic.emla.fragment_company_description.*
@@ -66,7 +67,7 @@ class CompanyDescriptionFragment :
                             companyLogo ?: KEY_BLANK,
                             context!!
                         )
-                    setUpViewPager()
+                    setUpViewPager(jobModel)
                 }
             })
 
@@ -113,15 +114,23 @@ class CompanyDescriptionFragment :
 
     }
 
-    private fun setUpViewPager() {
+    private fun setUpViewPager(jobModel: JobModel) {
 
         viewPagerAdapter = ViewPagerAdapter(
             childFragmentManager,
             FragmentStatePagerAdapter.POSITION_UNCHANGED
         )
 
-        viewPagerAdapter?.addFragmentView(CompanyJobDetailFragment.getInstance(), "Job Details")
-        viewPagerAdapter?.addFragmentView(AboutCompanyFragment(), "About Company")
+        viewPagerAdapter?.addFragmentView(
+            CompanyJobDetailFragment.getInstance(
+                jobModel.jobDetails ?: KEY_HYPHEN
+            ), "Job Details"
+        )
+        viewPagerAdapter?.addFragmentView(
+            AboutCompanyFragment.getInstance(
+                jobModel.companyDescription ?: KEY_HYPHEN
+            ), "About Company"
+        )
         layoutBinding.companyViewPager.apply {
             //set View pager here
             adapter = viewPagerAdapter
