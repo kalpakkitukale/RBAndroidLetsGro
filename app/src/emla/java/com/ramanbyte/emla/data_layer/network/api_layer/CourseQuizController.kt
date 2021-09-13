@@ -7,7 +7,7 @@ import retrofit2.http.Query
 
 interface CourseQuizController {
 
-    @POST("GetQuizListForCourse/{UserId}/{CourseId}/{PageNo}/{PageSize}")
+    @POST("GetQuizListForCourse")
     suspend fun getQuizListForCourse(
         @Query("UserId") userId: Int,
         @Query("CourseId") courseId: Int,
