@@ -19,7 +19,6 @@
         style="@style/customCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="@dimen/dp_300"
         tools:context=".emla.ui.fragments.CompanyJobDetailFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
