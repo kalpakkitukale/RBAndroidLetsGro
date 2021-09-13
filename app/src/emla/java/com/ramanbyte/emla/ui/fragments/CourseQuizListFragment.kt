@@ -1,8 +1,11 @@
 package com.ramanbyte.emla.ui.fragments
 
+import android.content.Context
+import androidx.lifecycle.Observer
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseParentFragment
 import com.ramanbyte.databinding.CourseQuizListFragmentBinding
+import com.ramanbyte.emla.adapters.CourseQuizListAdapter
 import com.ramanbyte.emla.view_model.CourseQuizListViewModel
 import com.ramanbyte.emla.view_model.CoursesDetailViewModel
 import com.ramanbyte.utilities.AlertDialog
@@ -16,6 +19,10 @@ class CourseQuizListFragment :
     companion object {
         fun newInstance() = CourseQuizListFragment()
     }
+
+    var mContext: Context? = null
+
+    private var courseQuizListAdapter: CourseQuizListAdapter? = null
 
     override val viewModelClass: Class<CourseQuizListViewModel> =
         CourseQuizListViewModel::class.java
@@ -43,8 +50,44 @@ class CourseQuizListFragment :
 
         }
 
-//        setAdapter()
-//        viewModelOps()
+        setAdapter()
+        viewModelOps()
     }
+
+    private fun setAdapter() {
+        layoutBinding.apply {
+
+            rvCourseQuiz.apply {
+                courseQuizListAdapter = CourseQuizListAdapter()
+                adapter = courseQuizListAdapter.apply {
+                    this!!.context = mContext
+                    this.courseQuizListViewModel = viewModel
+                }
+            }
+        }
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        mContext = context
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.apply {
+            setToolbarTitle(courseModel?.courseName!!)
+        }
+    }
+
+    private fun viewModelOps() {
+        viewModel.apply {
+            getCourseQuizList()
+
+            quizListForCoursePagedList()!!.observe(this@CourseQuizListFragment, Observer {
+                courseQuizListAdapter?.submitList(it)
+            })
+        }
+    }
+
 
 }

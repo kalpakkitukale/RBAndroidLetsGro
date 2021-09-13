@@ -9,7 +9,7 @@
         android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvSkill"
+            android:id="@+id/rvCourseQuiz"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:visibility="@{courseQuizViewModel.viewVisibilityLiveData}"
