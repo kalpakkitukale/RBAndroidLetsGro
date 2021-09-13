@@ -22,6 +22,31 @@
                 app:layout_constraintStart_toStartOf="@id/tvQuizTitle"
                 app:layout_constraintTop_toBottomOf="@id/tvQuizDescription" />
 
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnStartQuiz"
+                style="@style/CustomCapsuleButtonFilled"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/custom_capsule_button_filled_end"
+                android:text="@string/take_quiz"
+                android:visibility="@{courseQuizModel.quizButtonVisibility}"
+                app:layout_constraintBottom_toBottomOf="@id/tvTotalMarkValue"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tvTotalMarks"
+                tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnShowResult"
+                style="@style/CustomCapsuleButtonFilled"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/custom_capsule_button_filled_end"
+                android:text="@string/show_result"
+                android:visibility="@{courseQuizModel.resultButtonVisibility}"
+                app:layout_constraintBottom_toBottomOf="@id/tvTotalMarkValue"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tvTotalMarks"
+                tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvQuizDescription"
@@ -43,6 +68,27 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="Course Quiz Title" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvTotalMarks"
+                style="@style/TextViewLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/text_view_label_top"
+                android:text="@string/total_marks"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvQuizStartDateTimeValue" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvTotalMarkValue"
+                style="@style/TextViewValeOfLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/text_view_vale_of_label_top"
+                android:text="@{courseQuizModel.quizTotalMarks}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvTotalMarks"
+                tools:text="100" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvQuizStartDateTime"

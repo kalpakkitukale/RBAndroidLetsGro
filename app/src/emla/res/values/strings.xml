@@ -134,6 +134,7 @@
     <string name="welcome">Welcome</string>
     <string name="instruction">Instruction</string>
     <string name="total_number_of_questions">Total Number of Questions</string>
+    <string name="total_marks">Total Marks</string>
 
     <string name="no_section">No Section</string>
     <string name="no_more_section">No more Section</string>
@@ -331,4 +332,6 @@ Content
 
     <string name="start_date_time">Start DateTime</string>
     <string name="end_date_time">End DateTime</string>
+    <string name="take_quiz">Take Quiz</string>
+    <string name="show_result">Show Result</string>
 </resources>

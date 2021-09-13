@@ -12,6 +12,8 @@ import com.ramanbyte.emla.data_layer.network.api_layer.CourseQuizController
 import com.ramanbyte.emla.data_layer.pagination.PaginationDataSourceFactory
 import com.ramanbyte.emla.models.request.CourseQuizRequestModel
 import com.ramanbyte.emla.models.response.CourseQuizModel
+import com.ramanbyte.emla.models.response.CourseQuizResultModel
+import com.ramanbyte.utilities.KEY_BLANK
 import org.kodein.di.generic.instance
 
 class CourseQuizRepository(val mContext: Context) : BaseRepository(mContext) {
@@ -80,5 +82,19 @@ class CourseQuizRepository(val mContext: Context) : BaseRepository(mContext) {
 
         quizListForCoursePagedList?.value?.dataSource?.invalidate()
         paginationResponseHandlerLiveData.postValue(PaginationResponseHandler.INIT_LOADING)
+    }
+
+    suspend fun getServerDateTime(): String {
+        return apiRequest {
+            courseQuizController.getServerDateTime()
+        } ?: KEY_BLANK
+    }
+
+    suspend fun getQuizResult(quizId: Int): ArrayList<CourseQuizResultModel> {
+        val userID = applicationDatabase.getUserDao().getCurrentUser()?.userId ?: 0
+
+        return apiRequest {
+            courseQuizController.getQuizResult(userID, quizId)
+        } ?: arrayListOf()
     }
 }
