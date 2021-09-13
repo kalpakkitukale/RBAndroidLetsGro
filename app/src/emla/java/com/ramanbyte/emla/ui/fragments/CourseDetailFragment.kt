@@ -46,7 +46,8 @@ class CourseDetailFragment : BaseFragment<FragmentCourseDetailBinding, CoursesDe
                 courseModel?.courseImage ?: KEY_BLANK
             ) ?: ""*/
 
-        courseModel?.courseImageUrl = StaticMethodUtilitiesKtx.getS3DynamicURL(courseModel?.courseImage!!, context!!)
+        courseModel?.courseImageUrl =
+            StaticMethodUtilitiesKtx.getS3DynamicURL(courseModel?.courseImage!!, context!!)
 
         layoutBinding.apply {
 
@@ -176,14 +177,16 @@ class CourseDetailFragment : BaseFragment<FragmentCourseDetailBinding, CoursesDe
         AppLog.debugLog("summativeAssessmentStatus ------------------ ${it.summativeAssessmentStatus}")
         if (!it.summativeAssessmentStatus.isNullOrEmpty())
             viewPagerAdapter?.addFragmentView(CourseResultFragment(), "")
+        viewPagerAdapter?.addFragmentView(CourseQuizListFragment.newInstance(), "")
 
-        viewPagerCourse.offscreenPageLimit = 3
+        viewPagerCourse.offscreenPageLimit = 4
         viewPagerCourse.adapter = viewPagerAdapter
         tabLayoutCourse.apply {
             setupWithViewPager(viewPagerCourse)
             getTabAt(0)?.icon = BindingUtils.drawable(R.drawable.ic_open_book)
             getTabAt(1)?.icon = BindingUtils.drawable(R.drawable.ic_education)
             getTabAt(2)?.icon = BindingUtils.drawable(R.drawable.ic_timeline)
+            getTabAt(3)?.icon = BindingUtils.drawable(R.drawable.ic_timeline)
         }
 
     }

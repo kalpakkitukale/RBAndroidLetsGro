@@ -327,4 +327,8 @@ Content
     <string name="job_detail">Job Details</string>
     <string name="applied">Applied</string>
     <string name="vacancy">Vacancy</string>
+
+
+    <string name="start_date_time">Start DateTime</string>
+    <string name="end_date_time">End DateTime</string>
 </resources>

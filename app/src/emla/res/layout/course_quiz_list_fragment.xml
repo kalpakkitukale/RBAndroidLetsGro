@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".emla.ui.fragments.CourseQuizListFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvSkill"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="@{courseQuizViewModel.viewVisibilityLiveData}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:listitem="@layout/card_course_quiz_list" />
+
+        <include
+            android:id="@+id/noInternet"
+            layout="@layout/no_internet"
+            android:visibility="gone" />
+
+        <include
+            android:id="@+id/somethingWentWrong"
+            layout="@layout/something_went_wrong"
+            android:visibility="gone" />
+
+        <include
+            android:id="@+id/noData"
+            layout="@layout/no_data"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <data>
+
+        <variable
+            name="courseQuizViewModel"
+            type="com.ramanbyte.emla.view_model.CourseQuizListViewModel" />
+
+        <variable
+            name="courseDetailViewModel"
+            type="com.ramanbyte.emla.view_model.CoursesDetailViewModel" />
+
+    </data>
+
+</layout>
