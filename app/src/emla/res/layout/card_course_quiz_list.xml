@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <com.google.android.material.card.MaterialCardView
+    <androidx.cardview.widget.CardView
         android:id="@+id/cardContainer"
         style="@style/customCard"
         android:layout_width="match_parent"
@@ -13,8 +13,29 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <View
+                android:id="@+id/viewDivider"
+                style="@style/baseDivider"
+                android:layout_width="0dp"
+                android:layout_marginTop="@dimen/dp_12"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/tvQuizTitle"
+                app:layout_constraintTop_toBottomOf="@id/tvQuizDescription" />
+
+
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tvJobTitle"
+                android:id="@+id/tvQuizDescription"
+                style="@style/TextViewDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/text_view_description_top"
+                android:text="@{courseQuizModel.quizDescription}"
+                app:layout_constraintStart_toStartOf="@id/tvQuizTitle"
+                app:layout_constraintTop_toBottomOf="@id/tvQuizTitle"
+                tools:text="Course Quiz Description" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvQuizTitle"
                 style="@style/TextViewTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -23,8 +44,61 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="Course Quiz Title" />
 
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvQuizStartDateTime"
+                style="@style/TextViewLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_12"
+                android:text="@string/start_date_time"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/viewDivider" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvQuizStartDateTimeValue"
+                style="@style/TextViewValeOfLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/text_view_vale_of_label_top"
+                android:layout_marginEnd="@dimen/text_view_vale_of_label_end"
+                android:text="@{courseQuizModel.quizStartDateTime}"
+                app:layout_constraintEnd_toEndOf="@id/guideline"
+                app:layout_constraintStart_toStartOf="@id/tvQuizStartDateTime"
+                app:layout_constraintTop_toBottomOf="@id/tvQuizStartDateTime"
+                tools:text="13 Sep 2021, 12:50 PM" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvQuizEndDateTime"
+                style="@style/TextViewLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/text_view_label_start"
+                android:text="@string/end_date_time"
+                app:layout_constraintStart_toStartOf="@id/guideline"
+                app:layout_constraintTop_toTopOf="@id/tvQuizStartDateTime" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvQuizEndDateTimeValue"
+                style="@style/TextViewValeOfLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/text_view_vale_of_label_top"
+                android:layout_marginEnd="@dimen/text_view_vale_of_label_end"
+                android:text="@{courseQuizModel.quizEndDateTime}"
+                app:layout_constraintStart_toStartOf="@id/tvQuizEndDateTime"
+                app:layout_constraintTop_toBottomOf="@id/tvQuizEndDateTime"
+                tools:text="13 Sep 2021, 02:50 PM" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5" />
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </com.google.android.material.card.MaterialCardView>
+    </androidx.cardview.widget.CardView>
 
     <data>
 
