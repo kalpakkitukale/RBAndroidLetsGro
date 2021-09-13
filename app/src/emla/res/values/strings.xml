@@ -125,8 +125,10 @@
     <string name="pay_video_alert">Please check your internet connection to play video…!</string>
 
     <string name="no_chapter">No Chapter</string>
+    <string name="no_job">No Job(s) found for selected skill</string>
     <string name="no_more_chapter">No more Chapter</string>
     <string name="no_more_skill">No more skills</string>
+    <string name="no_more_job">No more jobs</string>
     <string name="welcome_to_e_learning">Welcome to E-Learning</string>
     <string name="take_pledge">Take pledge</string>
     <string name="welcome">Welcome</string>

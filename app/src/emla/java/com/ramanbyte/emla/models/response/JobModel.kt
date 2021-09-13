@@ -59,8 +59,8 @@ class JobModel : BaseObservable() {
             notifyPropertyChanged(BR.jobSalaryRange)
         }
         get() {
-            var minSalary = StaticMethodUtilitiesKtx.convertAmountToDisplay(minSalaryOffered!!)
-            var maxSalary = StaticMethodUtilitiesKtx.convertAmountToDisplay(maxSalaryOffered!!)
+            val minSalary = StaticMethodUtilitiesKtx.convertAmountToDisplay(minSalaryOffered!!)
+            val maxSalary = StaticMethodUtilitiesKtx.convertAmountToDisplay(maxSalaryOffered!!)
             return "$minSalary - $maxSalary"
         }
 
@@ -127,6 +127,7 @@ class JobModel : BaseObservable() {
     @Bindable
     var experience: String? = KEY_HYPHEN
 
+    @SerializedName("aboutCompany")
     @Bindable
     var companyDescription: String? = KEY_HYPHEN
 

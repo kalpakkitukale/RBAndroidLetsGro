@@ -25,7 +25,7 @@ class JobsRepository(mContext: Context) : BaseRepository(mContext) {
 
     private var paginationResponseHandlerLiveData: MutableLiveData<PaginationResponseHandler?> =
         MutableLiveData(null)
-    private val myPageSize = 100
+    private val myPageSize = 10
     private var jobsPagedList: LiveData<PagedList<JobModel>>? = null
 
     fun tryAgain() {
