@@ -33,6 +33,7 @@ private const val QUESTION = "Question/"
 private const val MASTER = "Master/"
 private const val SKILLS = "Skills/"
 private const val JOB = "Job/"
+private const val QUIZ = "Quiz/"
 
 var CLIENT_BASE = BuildConfig.CLIENT_BASE
 var PLACEMENT_CLIENT_BASE = BuildConfig.JOB_CLIENT_BASE
@@ -59,6 +60,14 @@ val repositoryDependencies = Kodein.Module("", true) {
 
     bind<QuestionRepository>() with singleton {
         QuestionRepository(instance())
+    }
+
+    bind<QuizRepository>() with singleton {
+        QuizRepository(instance())
+    }
+
+    bind<CourseQuizRepository>() with singleton {
+        CourseQuizRepository(instance())
     }
 
     bind<FacultyCoursesRepository>() with singleton {
@@ -125,6 +134,14 @@ private val controllersDependencies = Kodein.Module("controllers_dependencies", 
             instance(),//db
             QuestionController::class.java,
             DOMAIN + EMLA + CLIENT_BASE + API + QUESTION
+        )
+    }
+
+    bind<CourseQuizController>() with singleton {
+        RetrofitInitializer.invoke(
+            instance(),//db
+            CourseQuizController::class.java,
+            DOMAIN + EMLA + CLIENT_BASE + API + QUIZ
         )
     }
 
