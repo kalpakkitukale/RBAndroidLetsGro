@@ -107,7 +107,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/text_view_vale_of_label_top"
                 android:layout_marginEnd="@dimen/text_view_vale_of_label_end"
-                android:text="@{courseQuizModel.quizStartDateTime}"
+                android:text="@{DateUtils.getDisplayDateFromDate(courseQuizModel.quizStartDateTime, DateUtils.DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS, DateUtils.DATE_TIME_DISPLAY_PATTERN)}"
                 app:layout_constraintEnd_toEndOf="@id/guideline"
                 app:layout_constraintStart_toStartOf="@id/tvQuizStartDateTime"
                 app:layout_constraintTop_toBottomOf="@id/tvQuizStartDateTime"
@@ -130,7 +130,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/text_view_vale_of_label_top"
                 android:layout_marginEnd="@dimen/text_view_vale_of_label_end"
-                android:text="@{courseQuizModel.quizEndDateTime}"
+                android:text="@{DateUtils.getDisplayDateFromDate(courseQuizModel.quizEndDateTime, DateUtils.DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS, DateUtils.DATE_TIME_DISPLAY_PATTERN)}"
                 app:layout_constraintStart_toStartOf="@id/tvQuizEndDateTime"
                 app:layout_constraintTop_toBottomOf="@id/tvQuizEndDateTime"
                 tools:text="13 Sep 2021, 02:50 PM" />
@@ -147,6 +147,8 @@
     </androidx.cardview.widget.CardView>
 
     <data>
+
+        <import type="com.ramanbyte.utilities.DateUtils" />
 
         <variable
             name="courseQuizModel"

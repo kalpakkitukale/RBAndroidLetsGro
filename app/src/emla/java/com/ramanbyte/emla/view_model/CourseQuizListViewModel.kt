@@ -1,6 +1,7 @@
 package com.ramanbyte.emla.view_model
 
 import android.content.Context
+import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.paging.PagedList
 import com.ramanbyte.R
@@ -11,6 +12,7 @@ import com.ramanbyte.emla.models.CoursesModel
 import com.ramanbyte.emla.models.response.CourseQuizModel
 import com.ramanbyte.utilities.AppLog
 import com.ramanbyte.utilities.BindingUtils
+import com.ramanbyte.utilities.NetworkConnectivity
 import org.kodein.di.generic.instance
 
 class CourseQuizListViewModel(mContext: Context) : BaseViewModel(mContext) {
@@ -46,5 +48,26 @@ class CourseQuizListViewModel(mContext: Context) : BaseViewModel(mContext) {
 
     fun quizListForCoursePagedList(): LiveData<PagedList<CourseQuizModel>>? {
         return courseQuizRepository.quizListForCoursePagedList
+    }
+
+    fun onTakeQuizClick(view: View, modelObj: CourseQuizModel) {
+        modelObj.let { model ->
+            if (NetworkConnectivity.isConnectedToInternet()) {
+
+            } else {
+                setAlertDialogResourceModelMutableLiveData(
+                    BindingUtils.string(R.string.no_internet_message),
+                    BindingUtils.drawable(R.drawable.ic_no_internet)!!,
+                    true,
+                    BindingUtils.string(R.string.yes), {
+                        isAlertDialogShown.postValue(false)
+                    },
+                    BindingUtils.string(R.string.no), {
+                        isAlertDialogShown.postValue(false)
+                    }
+                )
+                isAlertDialogShown.postValue(true)
+            }
+        }
     }
 }

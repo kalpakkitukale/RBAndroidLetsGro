@@ -1,5 +1,6 @@
 package com.ramanbyte.utilities
 
+import android.annotation.SuppressLint
 import com.ramanbyte.R
 import com.ramanbyte.utilities.AppLog.errorLog
 import org.joda.time.DateTime
@@ -15,7 +16,7 @@ import java.util.*
  */
 object DateUtils {
     const val TIME_WITH_SECONDS = "HH:mm:ss"
-    const val TIME_SERVER_PATTERN = "hh:mma"
+    const val TIME_SERVER_PATTERN = "hh:mm a"
     const val TIME_24_HR_PATTERN = "HH:mm"
     const val DATE_DISPLAY_PATTERN = "dd MMM yyyy"
     const val DATE_DISPLAY_PATTERN_SEP = "dd-MMM-yyyy"
@@ -45,6 +46,7 @@ object DateUtils {
     const val DATE_MONTH_DAY_YEAR_PATTERN = "MMM dd, yyyy"
 
     const val KEY_DUMMY_DATE = "1900-01-01T00:00:00.00Z"
+    const val DATE_TIME_DISPLAY_PATTERN = "$DATE_DISPLAY_PATTERN $TIME_DISPLAY_PATTERN"
 
     private var simpleDateFormat: SimpleDateFormat? = null
 
@@ -318,7 +320,8 @@ object DateUtils {
     fun getCurDate(): String? {
         try {
             val calendar = getCurrentCalender()
-            val simpleDateFormat = SimpleDateFormat(DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS, Locale.US)
+            val simpleDateFormat =
+                SimpleDateFormat(DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS, Locale.US)
             return simpleDateFormat.format(Date(calendar!!.getTimeInMillis()))
         } catch (e: Exception) {
             e.printStackTrace()
@@ -358,25 +361,74 @@ object DateUtils {
             if (neededTime[Calendar.MONTH] == nowTime[Calendar.MONTH]) {
                 if (neededTime[Calendar.DATE] - nowTime[Calendar.DATE] == 1) {
                     //here return like "Tomorrow, 12:00PM"
-                    "${BindingUtils.string(R.string.tomorrow)}, " + getTimeFormat(neededTime[Calendar.HOUR],neededTime[Calendar.MINUTE])
+                    "${BindingUtils.string(R.string.tomorrow)}, " + getTimeFormat(
+                        neededTime[Calendar.HOUR],
+                        neededTime[Calendar.MINUTE]
+                    )
                 } else if (nowTime[Calendar.DATE] == neededTime[Calendar.DATE]) {
                     //here return like "Today, at 12:00PM"
-                    "${BindingUtils.string(R.string.today)}, " + getDisplayDateFromCalender(neededTime,TIME_DISPLAY_PATTERN)
+                    "${BindingUtils.string(R.string.today)}, " + getDisplayDateFromCalender(
+                        neededTime,
+                        TIME_DISPLAY_PATTERN
+                    )
                 } else if (nowTime[Calendar.DATE] - neededTime[Calendar.DATE] == 1) {
                     //here return like "Yesterday, 12:00PM"
-                    "${BindingUtils.string(R.string.yesterday)}, " + getDisplayDateFromCalender(neededTime,TIME_DISPLAY_PATTERN)
+                    "${BindingUtils.string(R.string.yesterday)}, " + getDisplayDateFromCalender(
+                        neededTime,
+                        TIME_DISPLAY_PATTERN
+                    )
                 } else {
                     //here return like "31 May, 12:00PM"
-                    getDisplayDateFromCalender(neededTime,"dd MMM, ") + getDisplayDateFromCalender(neededTime,TIME_DISPLAY_PATTERN)
+                    getDisplayDateFromCalender(neededTime, "dd MMM, ") + getDisplayDateFromCalender(
+                        neededTime,
+                        TIME_DISPLAY_PATTERN
+                    )
                 }
             } else {
                 //here return like "31 May, 12:00PM"
-                getDisplayDateFromCalender(neededTime,"dd MMM, ") + getDisplayDateFromCalender(neededTime,TIME_DISPLAY_PATTERN)
+                getDisplayDateFromCalender(neededTime, "dd MMM, ") + getDisplayDateFromCalender(
+                    neededTime,
+                    TIME_DISPLAY_PATTERN
+                )
             }
         } else { // dd MMM, yyyy | hh:mm a
             //here return like "31 May 2010, 12:00PM" - it's a different year we need to show it
-            getDisplayDateFromCalender(neededTime,"$DATE_DISPLAY_PATTERN, ") + getDisplayDateFromCalender(neededTime,TIME_DISPLAY_PATTERN)
+            getDisplayDateFromCalender(
+                neededTime,
+                "$DATE_DISPLAY_PATTERN, "
+            ) + getDisplayDateFromCalender(neededTime, TIME_DISPLAY_PATTERN)
         }
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    fun checkDateWithInRange(
+        startDateTime: String,
+        startDateFormat: String,
+        endDateTime: String,
+        endDateFormat: String,
+        checkDateTime: String,
+        checkDateFormat: String
+    ): Boolean {
+        try {
+            val startDateSDF = SimpleDateFormat(startDateFormat)
+            val endDateSDF = SimpleDateFormat(endDateFormat)
+            val checkDateSDF = SimpleDateFormat(checkDateFormat)
+
+            val startDate: Date = startDateSDF.parse(startDateTime)
+            startDateSDF.format(startDate)
+            val endDate: Date = endDateSDF.parse(endDateTime)
+            endDateSDF.format(endDate)
+            val checkDate: Date = checkDateSDF.parse(checkDateTime)
+            checkDateSDF.format(checkDate)
+
+            return checkDate.time >= startDate.time &&
+                    checkDate.time <= endDate.time;
+        } catch (e: Exception) {
+            e.printStackTrace()
+            AppLog.errorLog(e.message!!)
+            return false
+        }
+
     }
 
 }
