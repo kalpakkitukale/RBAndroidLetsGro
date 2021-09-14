@@ -17,6 +17,7 @@ import com.ramanbyte.emla.data_layer.network.exception.NoInternetException
 import com.ramanbyte.emla.data_layer.repositories.ChaptersRepository
 import com.ramanbyte.emla.data_layer.repositories.ContentRepository
 import com.ramanbyte.emla.models.*
+import com.ramanbyte.emla.models.response.CourseQuizModel
 import com.ramanbyte.utilities.*
 import org.kodein.di.generic.instance
 
@@ -109,6 +110,7 @@ class ChaptersViewModel(mContext: Context) : BaseViewModel(mContext) {
                         putInt(keyTestType, KEY_QUIZ_TYPE_SUMMATIVE)
                         putParcelable(KEY_CHAPTER_MODEL, ChaptersModel())
                         putParcelable(KEY_COURSE_MODEL, courseModel)
+                        putParcelable(KEY_COURSE_QUIZ_MODEL, CourseQuizModel())
                     })
 
             /*if (courseModel?.summativeaAtemptCount!! < courseSyllabusModel?.totalSummativeCount!!) {

@@ -334,4 +334,5 @@ Content
     <string name="end_date_time">End DateTime</string>
     <string name="take_quiz">Take Quiz</string>
     <string name="show_result">Show Result</string>
+    <string name="quiz_expired_message">Quiz is Expire, you can not start it</string>
 </resources>

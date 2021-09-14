@@ -28,6 +28,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/custom_capsule_button_filled_end"
+                android:onClick="@{()->courseQuizViewModel.onTakeQuizClick(btnStartQuiz, courseQuizModel)}"
                 android:text="@string/take_quiz"
                 android:visibility="@{courseQuizModel.quizButtonVisibility}"
                 app:layout_constraintBottom_toBottomOf="@id/tvTotalMarkValue"

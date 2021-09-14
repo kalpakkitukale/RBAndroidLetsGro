@@ -1,5 +1,7 @@
 package com.ramanbyte.emla.models.response
 
+import android.os.Parcel
+import android.os.Parcelable
 import android.view.View
 import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
@@ -7,7 +9,7 @@ import com.ramanbyte.BR
 import com.ramanbyte.utilities.AppLog
 import com.ramanbyte.utilities.KEY_HYPHEN
 
-class CourseQuizModel : BaseObservable() {
+class CourseQuizModel() : BaseObservable(), Parcelable {
 
     var quizId: Int? = 0
 
@@ -83,4 +85,38 @@ class CourseQuizModel : BaseObservable() {
                 View.GONE
             }
         }
+
+    constructor(parcel: Parcel) : this() {
+        quizId = parcel.readValue(Int::class.java.classLoader) as? Int
+        quizTitle = parcel.readValue(String::class.java.classLoader) as? String
+        quizDescription = parcel.readValue(String::class.java.classLoader) as? String
+        quizStartDateTime = parcel.readValue(String::class.java.classLoader) as? String
+        quizEndDateTime = parcel.readValue(String::class.java.classLoader) as? String
+        quizTotalMarks = parcel.readValue(String::class.java.classLoader) as? String
+        isAttempted = parcel.readValue(Int::class.java.classLoader) as? Int
+    }
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeValue(quizId)
+        parcel.writeValue(quizTitle)
+        parcel.writeValue(quizDescription)
+        parcel.writeValue(quizStartDateTime)
+        parcel.writeValue(quizEndDateTime)
+        parcel.writeValue(quizTotalMarks)
+        parcel.writeValue(isAttempted)
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<CourseQuizModel> {
+        override fun createFromParcel(parcel: Parcel): CourseQuizModel {
+            return CourseQuizModel(parcel)
+        }
+
+        override fun newArray(size: Int): Array<CourseQuizModel?> {
+            return arrayOfNulls(size)
+        }
+    }
 }
