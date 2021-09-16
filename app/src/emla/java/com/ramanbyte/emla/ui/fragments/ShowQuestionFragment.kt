@@ -84,6 +84,8 @@ class ShowQuestionFragment :
                         )
 
                     AppLog.infoLog("courseImageUrl :: Show Que Page ${coursesModelLiveData.value?.courseImageUrl}")
+                    AppLog.infoLog("Quiz Start Time :: Show Que Page ${courseQuizModelModelLiveData.value?.quizStartDate}")
+                    AppLog.infoLog("Quiz End Time :: Show Que Page ${courseQuizModelModelLiveData.value?.quizEndDate}")
 
                     val width =
                         (activity!!).displayMetrics().widthPixels - (BindingUtils.dimen(R.dimen.dp_5) * 2)
@@ -100,6 +102,26 @@ class ShowQuestionFragment :
 
                 }
 
+                parentViewModel.currentDateTimeLiveData.observe(
+                    this@ShowQuestionFragment,
+                    Observer {
+                        it?.apply {
+                            AppLog.infoLog("ServerDate Time ----- $it")
+                            val quizEndDate = DateUtils.getDisplayDateFromDate(
+                                parentViewModel.courseQuizModelModelLiveData.value?.quizEndDate!!,
+                                DateUtils.DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS,
+                                DateUtils.DATE_DISPLAY_PATTERN
+                            )
+                            val quizEndTime = DateUtils.getDisplayDateFromDate(
+                                parentViewModel.courseQuizModelModelLiveData.value?.quizEndTime!!,
+                                DateUtils.TIME_WITH_SECONDS,
+                                DateUtils.TIME_DISPLAY_PATTERN
+                            )
+                            quizTimer("$quizEndDate $quizEndTime", it)
+                            countDownQuizTimer!!.start()
+                        }
+                    })
+
                 parentViewModel.questionAndAnswerListLiveData.observe(
                     this@ShowQuestionFragment,
                     Observer {
@@ -110,7 +132,7 @@ class ShowQuestionFragment :
 
                 questionAndAnswerModelLiveData.observe(this@ShowQuestionFragment, Observer {
                     if (it != null) {
-                        AppLog.infoLog("questionAndAnswerModelLiveData")
+//                        AppLog.infoLog("questionAndAnswerModelLiveData")
                     }
                 })
 

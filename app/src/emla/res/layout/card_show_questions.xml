@@ -57,6 +57,21 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvQuizDuration"
+                        style="@style/TextViewTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:drawablePadding="@dimen/dp_5"
+                        android:gravity="center"
+                        android:paddingBottom="@dimen/dp_8"
+                        android:text="@{cardShowQuestionsViewModel.quizTimeLiveData}"
+                        app:drawableStartCompat="@drawable/ic_watch"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
                     <!--<ImageView
                         android:chapterId="@+chapterId/ivFeedback"
                         android:layout_width="wrap_content"

@@ -16,6 +16,7 @@ import com.ramanbyte.base.BaseFragment
 import com.ramanbyte.databinding.FragmentPreAssessmentTestBinding
 import com.ramanbyte.emla.models.ChaptersModel
 import com.ramanbyte.emla.models.CoursesModel
+import com.ramanbyte.emla.models.response.CourseQuizModel
 import com.ramanbyte.emla.view_model.ShowQuestionsViewModel
 import com.ramanbyte.utilities.*
 
@@ -30,6 +31,7 @@ class PreAssessmentTestFragment :
     private var mContext: Context? = null
     private var courseModel: CoursesModel? = null
     private var chapterModel: ChaptersModel? = null
+    private var courseQuizModel: CourseQuizModel? = null
     private lateinit var navController: NavController
     private var _pageTitle = ""
 
@@ -43,12 +45,14 @@ class PreAssessmentTestFragment :
         arguments?.apply {
             courseModel = getParcelable(KEY_COURSE_MODEL)!!
             chapterModel = getParcelable(KEY_CHAPTER_MODEL)
+            courseQuizModel = getParcelable(KEY_COURSE_QUIZ_MODEL)
             viewModel.testType = getInt(keyTestType, 0)
         }
 
         viewModel.apply {
             coursesModelLiveData.value = courseModel
             chapterModelLiveData.value = chapterModel
+            courseQuizModelModelLiveData.value = courseQuizModel
             _pageTitle = coursesModelLiveData?.value?.courseName!!
             isBackPressLiveData.observe(this@PreAssessmentTestFragment, Observer {
                 if (it != null){
@@ -119,6 +123,7 @@ class PreAssessmentTestFragment :
                             if (testType == 1){
                                 findNavController().navigateUp()
                             }else{
+                                countDownQuizTimer!!.cancel()
                                 val bundle = Bundle()
                                 bundle.putParcelable(
                                     KEY_COURSE_MODEL,

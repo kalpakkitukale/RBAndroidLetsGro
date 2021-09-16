@@ -19,6 +19,7 @@ import com.ramanbyte.emla.models.CoursesModel
 import com.ramanbyte.emla.models.response.CourseQuizModel
 import com.ramanbyte.utilities.*
 import com.ramanbyte.utilities.DateUtils.DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS
+import com.ramanbyte.utilities.DateUtils.TIME_WITH_SECONDS
 import org.kodein.di.generic.instance
 
 class CourseQuizListViewModel(mContext: Context) : BaseViewModel(mContext) {
@@ -65,10 +66,10 @@ class CourseQuizListViewModel(mContext: Context) : BaseViewModel(mContext) {
 
                         val serverDateTime = courseQuizRepository.getServerDateTime()
                         val isDateInRange = DateUtils.checkDateWithInRange(
-                            model.quizStartDateTime!!,
-                            DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS,
-                            model.quizEndDateTime!!,
-                            DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS,
+                            model.quizStartDate!! + model.quizStartTime,
+                            DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS + TIME_WITH_SECONDS,
+                            model.quizEndDate!! + model.quizEndTime,
+                            DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS + TIME_WITH_SECONDS,
                             serverDateTime,
                             DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS
                         )
@@ -89,7 +90,7 @@ class CourseQuizListViewModel(mContext: Context) : BaseViewModel(mContext) {
                                 BindingUtils.string(R.string.quiz_expired_message),
                                 BindingUtils.drawable(R.drawable.ic_no_internet)!!,
                                 true,
-                                BindingUtils.string(R.string.yes), {
+                                BindingUtils.string(R.string.strOk), {
                                     isAlertDialogShown.postValue(false)
                                 },
                                 BindingUtils.string(R.string.no), {

@@ -39,6 +39,7 @@ object DateUtils {
     const val DATE_ONLY_MONTH_YEAR_PATTERN = "MMM yyyy"
     const val DATE_WEB_API_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
     const val DATE_ONLY_MONTH_YEAR_PATTERN_NO_SPACE = "MMMyyyy"
+    const val DISPLAY_TIMER_HH_mm_ss_PATTERN = "%02d:%02d:%02d"
 
     const val DATE_TIME_SESSION_PATTERN = "$TIME_WITH_SECONDS $DATE_SQLITE_PATTERN"
     const val DATE_TIME_SESSION_STATUS_PATTERN = "MMM dd yyyy $TIME_SERVER_PATTERN"
@@ -47,6 +48,7 @@ object DateUtils {
 
     const val KEY_DUMMY_DATE = "1900-01-01T00:00:00.00Z"
     const val DATE_TIME_DISPLAY_PATTERN = "$DATE_DISPLAY_PATTERN $TIME_DISPLAY_PATTERN"
+    const val DEFAULT_TIMER_VALUE = "00:00:00"
 
     private var simpleDateFormat: SimpleDateFormat? = null
 
@@ -429,6 +431,15 @@ object DateUtils {
             return false
         }
 
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    fun convertDateToMilliSeconds(dateFormat: String, givenDate: String): Long {
+        // Create a DateFormatter object for displaying date in specified format.
+        val formatter = SimpleDateFormat(dateFormat)
+
+        val date = formatter.parse(givenDate)
+        return date!!.time
     }
 
 }

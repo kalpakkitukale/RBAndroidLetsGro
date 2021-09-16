@@ -135,6 +135,7 @@
     <string name="instruction">Instruction</string>
     <string name="total_number_of_questions">Total Number of Questions</string>
     <string name="total_marks">Total Marks</string>
+    <string name="duration">Duration</string>
 
     <string name="no_section">No Section</string>
     <string name="no_more_section">No more Section</string>
@@ -335,4 +336,5 @@ Content
     <string name="take_quiz">Take Quiz</string>
     <string name="show_result">Show Result</string>
     <string name="quiz_expired_message">Quiz is Expire, you can not start it</string>
+    <string name="minutes">Minutes</string>
 </resources>

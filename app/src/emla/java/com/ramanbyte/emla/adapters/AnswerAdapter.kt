@@ -59,7 +59,7 @@ class AnswerAdapter(
     }
 
     override fun getItemCount(): Int {
-        AppLog.infoLog("optionList_size ${optionList.size}")
+//        AppLog.infoLog("optionList_size ${optionList.size}")
         return optionList.size
     }
 
@@ -78,7 +78,7 @@ class AnswerAdapter(
             (holder as MyAnswerHolderRadio).cardCustomRadioBinding?.apply {
                 this.showQuestionsViewModel = this@AnswerAdapter.showQuestionsViewModel
 
-                AppLog.infoLog("question_idww ${optionList[currentPosition].question_Id}, $currentPosition")
+//                AppLog.infoLog("question_idww ${optionList[currentPosition].question_Id}, $currentPosition")
 
                 rbAnswer.isChecked =
                     optionList[position].isChecked && (lastSelectedPosition == position)

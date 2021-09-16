@@ -76,7 +76,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/text_view_label_top"
-                android:text="@string/total_marks"
+                android:text="@string/duration"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvQuizStartDateTimeValue" />
 
@@ -86,7 +86,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/text_view_vale_of_label_top"
-                android:text="@{courseQuizModel.quizTotalMarks}"
+                android:text='@{courseQuizModel.quizduration + " " + @string/minutes}'
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvTotalMarks"
                 tools:text="100" />
@@ -108,7 +108,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/text_view_vale_of_label_top"
                 android:layout_marginEnd="@dimen/text_view_vale_of_label_end"
-                android:text="@{DateUtils.getDisplayDateFromDate(courseQuizModel.quizStartDateTime, DateUtils.DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS, DateUtils.DATE_TIME_DISPLAY_PATTERN)}"
+                android:text='@{DateUtils.getDisplayDateFromDate(courseQuizModel.quizStartDate, DateUtils.DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS, DateUtils.DATE_DISPLAY_PATTERN) + " " + DateUtils.getDisplayDateFromDate(courseQuizModel.quizStartTime, DateUtils.TIME_WITH_SECONDS, DateUtils.TIME_DISPLAY_PATTERN)}'
                 app:layout_constraintEnd_toEndOf="@id/guideline"
                 app:layout_constraintStart_toStartOf="@id/tvQuizStartDateTime"
                 app:layout_constraintTop_toBottomOf="@id/tvQuizStartDateTime"
@@ -131,7 +131,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/text_view_vale_of_label_top"
                 android:layout_marginEnd="@dimen/text_view_vale_of_label_end"
-                android:text="@{DateUtils.getDisplayDateFromDate(courseQuizModel.quizEndDateTime, DateUtils.DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS, DateUtils.DATE_TIME_DISPLAY_PATTERN)}"
+                android:text='@{DateUtils.getDisplayDateFromDate(courseQuizModel.quizEndDate, DateUtils.DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS, DateUtils.DATE_DISPLAY_PATTERN) + " " + DateUtils.getDisplayDateFromDate(courseQuizModel.quizEndTime, DateUtils.TIME_WITH_SECONDS, DateUtils.TIME_DISPLAY_PATTERN)}'
                 app:layout_constraintStart_toStartOf="@id/tvQuizEndDateTime"
                 app:layout_constraintTop_toBottomOf="@id/tvQuizEndDateTime"
                 tools:text="13 Sep 2021, 02:50 PM" />

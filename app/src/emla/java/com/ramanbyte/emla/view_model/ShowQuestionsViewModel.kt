@@ -1,26 +1,28 @@
 package com.ramanbyte.emla.view_model
 
 import android.content.Context
+import android.os.CountDownTimer
 import android.view.View
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.paging.PagedList
 import com.ramanbyte.R
 import com.ramanbyte.base.BaseViewModel
 import com.ramanbyte.data_layer.CoroutineUtils
-import com.ramanbyte.data_layer.SharedPreferencesDatabase
 import com.ramanbyte.data_layer.pagination.PaginationMessages
 import com.ramanbyte.emla.data_layer.network.exception.NoDataException
 import com.ramanbyte.emla.data_layer.network.init.NetworkConnectionInterceptor
+import com.ramanbyte.emla.data_layer.repositories.CourseQuizRepository
 import com.ramanbyte.emla.data_layer.repositories.QuizRepository
 import com.ramanbyte.emla.data_layer.room.entities.AnswerEntity
 import com.ramanbyte.emla.models.*
-import com.ramanbyte.emla.ui.activities.ContainerActivity
+import com.ramanbyte.emla.models.response.CourseQuizModel
 import com.ramanbyte.utilities.*
+import com.ramanbyte.utilities.DateUtils.DATE_TIME_DISPLAY_PATTERN
 import com.ramanbyte.utilities.DateUtils.DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS
+import com.ramanbyte.utilities.DateUtils.DEFAULT_TIMER_VALUE
+import com.ramanbyte.utilities.DateUtils.DISPLAY_TIMER_HH_mm_ss_PATTERN
+import com.ramanbyte.utilities.DateUtils.convertDateToMilliSeconds
 import kotlinx.coroutines.delay
 import org.kodein.di.generic.instance
 
@@ -31,10 +33,15 @@ import org.kodein.di.generic.instance
 class ShowQuestionsViewModel(var mContext: Context) : BaseViewModel(mContext) {
 
     val quizRepository: QuizRepository by instance()
+    private val courseQuizRepository: CourseQuizRepository by instance()
 
     var coursesModelLiveData: MutableLiveData<CoursesModel> = MutableLiveData()
     var chapterModelLiveData: MutableLiveData<ChaptersModel> = MutableLiveData()
+    var courseQuizModelModelLiveData: MutableLiveData<CourseQuizModel> = MutableLiveData()
     var testType = 0
+    val currentDateTimeLiveData = MutableLiveData<String>().apply {
+        value = DateUtils.getCurrentDateTime(DateUtils.DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS)
+    }
 
     // ------- Instruction Page ----------
     val onClickStartQuizLiveData = MutableLiveData<Boolean>().apply {
@@ -233,6 +240,8 @@ class ShowQuestionsViewModel(var mContext: Context) : BaseViewModel(mContext) {
             val questionAndAnswerModel = quizRepository.getAllQuestion()
             questionAndAnswerModel?.apply {
                 if (this != null && this.size > 0) {
+                    val serverDateTime = courseQuizRepository.getServerDateTime()
+                    currentDateTimeLiveData.postValue(serverDateTime)
                     questionAndAnswerListLiveData.postValue(this)
                 } else
                     AppLog.infoLog("no_question_available")
@@ -405,6 +414,64 @@ class ShowQuestionsViewModel(var mContext: Context) : BaseViewModel(mContext) {
     fun onClickDialogOk(view: View, questionStatus: String) {
         onClickDialogOkLiveData.value = questionStatus
     }
+
+    var quizTimeLiveData = MutableLiveData<String>().apply {
+        value = DEFAULT_TIMER_VALUE
+    }
+
+    fun quizTimer(quizEndDateTime: String, currentDateTime: String) {
+        val endDateTime = DateUtils.getDisplayDateFromDate(
+            quizEndDateTime,
+            DATE_TIME_DISPLAY_PATTERN,
+            DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS
+        )
+        var diff = convertDateToMilliSeconds(
+            DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS,
+            endDateTime
+        ) - convertDateToMilliSeconds(
+            DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS,
+            currentDateTime
+        )
+
+        countDownQuizTimer = object : CountDownTimer(diff, 1000) {
+
+            override fun onTick(millisUntilFinished: Long) {
+                diff = millisUntilFinished
+                val secondsInMilli: Long = 1000
+                val minutesInMilli = secondsInMilli * 60
+                val hoursInMilli = minutesInMilli * 60
+                val daysInMilli = hoursInMilli * 24
+
+                diff %= daysInMilli
+
+                val elapsedHours = diff / hoursInMilli
+                diff %= hoursInMilli
+
+                val elapsedMinutes = diff / minutesInMilli
+                diff %= minutesInMilli
+
+                val elapsedSeconds = diff / secondsInMilli
+
+                quizTimeLiveData.value = String.format(
+                    DISPLAY_TIMER_HH_mm_ss_PATTERN,
+                    elapsedHours,
+                    elapsedMinutes,
+                    elapsedSeconds
+                )
+            }
+
+            override fun onFinish() {
+                /**Vinay K
+                 * added alert false to remove the previous submission alert to show the timer finish alert.
+                 * issue no 64
+                 * @since 31-08-2020*/
+                isAlertDialogShown.value = false
+                countDownQuizTimer?.cancel()
+            }
+        }
+    }
+
+    var countDownQuizTimer: CountDownTimer? = null
 
     /*
     * question review ------------- End ---------------------

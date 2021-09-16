@@ -13,7 +13,7 @@ import com.ramanbyte.emla.data_layer.pagination.PaginationDataSourceFactory
 import com.ramanbyte.emla.models.request.CourseQuizRequestModel
 import com.ramanbyte.emla.models.response.CourseQuizModel
 import com.ramanbyte.emla.models.response.CourseQuizResultModel
-import com.ramanbyte.utilities.KEY_BLANK
+import com.ramanbyte.utilities.DateUtils
 import org.kodein.di.generic.instance
 
 class CourseQuizRepository(val mContext: Context) : BaseRepository(mContext) {
@@ -87,7 +87,7 @@ class CourseQuizRepository(val mContext: Context) : BaseRepository(mContext) {
     suspend fun getServerDateTime(): String {
         return apiRequest {
             courseQuizController.getServerDateTime()
-        } ?: KEY_BLANK
+        } ?: DateUtils.getCurrentDateTime(DateUtils.DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS)
     }
 
     suspend fun getQuizResult(quizId: Int): ArrayList<CourseQuizResultModel> {
