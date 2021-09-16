@@ -28,9 +28,14 @@ class QuizRepository(val mContext: Context) : BaseRepository(mContext) {
 
     private val courseQuizController: CourseQuizController by instance()
 
-    suspend fun getInstructions(topicId: Int, courseid: Int, QuiztypeId: Int): InstructionsModel? {
+    suspend fun getInstructions(
+        topicId: Int,
+        courseid: Int,
+        QuiztypeId: Int,
+        quizId: Int
+    ): InstructionsModel? {
         return apiRequest {
-            questionController.getInstructions(topicId, courseid, QuiztypeId)
+            questionController.getInstructions(topicId, courseid, QuiztypeId, quizId)
         }
     }
 
@@ -150,7 +155,12 @@ class QuizRepository(val mContext: Context) : BaseRepository(mContext) {
         return questionAndAnswerModel
     }
 
-    suspend fun submitTest(courseId: Int, chapterId: Int, testType: Int): QuizResultModel? {
+    suspend fun submitTest(
+        courseId: Int,
+        chapterId: Int,
+        testType: Int,
+        courseQuizId: Int
+    ): QuizResultModel? {
 
         //var resultModel = QuizResultModel()
         val quizModel = QuizmarksModel()
@@ -185,7 +195,11 @@ class QuizRepository(val mContext: Context) : BaseRepository(mContext) {
                 course_Id = courseId
                 quiz_Type = testType
                 chapter_Id = chapterId
-                quiz_Id = quiz.quizid
+                if (testType == KEY_QUIZ_TYPE_COURSE_QUIZ) {
+                    quiz_Id = courseQuizId
+                } else {
+                    quiz_Id = quiz.quizid
+                }
                 start_Time =
                     SharedPreferencesDatabase.getStringPref(SharedPreferencesDatabase.KEY_START_QUIZ_DATE_TIME)
                 modifiedBy = applicationDatabase.getUserDao().getCurrentUser()?.userId!!

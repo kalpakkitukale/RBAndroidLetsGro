@@ -67,7 +67,7 @@ class CourseQuizModel() : BaseObservable(), Parcelable {
         }
 
     @Bindable
-    var isAttempted: Int? = 0
+    var isAttempted: Int? = 10
         set(value) {
             field = value
             notifyPropertyChanged(BR.isAttempted)

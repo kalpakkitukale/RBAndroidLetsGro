@@ -19,11 +19,12 @@ interface QuestionController {
    * summative test topicId = 0, courseid= something, QuiztypeId = 2
    * Formative test topicId = something, courseid= something, QuiztypeId = 3
    * */
-    @GET("GetInstructions/{topicId}/{courseid}/{QuiztypeId}")
+    @GET("GetInstructions/{topicId}/{courseid}/{QuiztypeId}/{QuizId}")
     suspend fun getInstructions(
-        @Path("topicId") topicId: Int, @Path("courseid") courseid: Int, @Path(
-            "QuiztypeId"
-        ) QuiztypeId: Int
+        @Path("topicId") topicId: Int,
+        @Path("courseid") courseid: Int,
+        @Path("QuiztypeId") QuiztypeId: Int,
+        @Path("QuizId") QuizId: Int
     ): Response<InstructionsModel>
 
     /*

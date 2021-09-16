@@ -167,7 +167,8 @@ class ShowQuestionsViewModel(var mContext: Context) : BaseViewModel(mContext) {
                     quizRepository.getInstructions(
                         chapterModelLiveData.value?.chapterId ?: 0,
                         coursesModelLiveData.value?.courseId!!,
-                        testType
+                        testType,
+                        courseQuizModelModelLiveData.value?.quizId ?: 0
                     )!!
                 )
             } catch (e: NoDataException) {
@@ -318,7 +319,8 @@ class ShowQuestionsViewModel(var mContext: Context) : BaseViewModel(mContext) {
                     coursesModelLiveData?.value?.courseId ?: 0,
                     chapterId = if (KEY_QUIZ_TYPE_FORMATIVE == testType) chapterModelLiveData?.value?.chapterId
                         ?: 0 else 0,
-                    testType = testType
+                    testType = testType,
+                    courseQuizId = courseQuizModelModelLiveData.value!!.quizId ?: 0
                 )
             )
         }
