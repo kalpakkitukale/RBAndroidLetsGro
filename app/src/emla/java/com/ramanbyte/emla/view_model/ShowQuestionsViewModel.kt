@@ -67,6 +67,10 @@ class ShowQuestionsViewModel(var mContext: Context) : BaseViewModel(mContext) {
         value = false
     }
 
+    val onTimeFinishLiveData = MutableLiveData<Boolean>().apply {
+        value = false
+    }
+
     val questionAndAnswerListLiveData: MutableLiveData<ArrayList<QuestionAndAnswerModel>?> =
         MutableLiveData(null)
 
@@ -467,6 +471,8 @@ class ShowQuestionsViewModel(var mContext: Context) : BaseViewModel(mContext) {
                  * @since 31-08-2020*/
                 isAlertDialogShown.value = false
                 countDownQuizTimer?.cancel()
+                onTimeFinishLiveData.value = true
+
             }
         }
     }

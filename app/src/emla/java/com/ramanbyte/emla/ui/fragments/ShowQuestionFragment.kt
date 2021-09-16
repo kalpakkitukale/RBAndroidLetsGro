@@ -161,6 +161,26 @@ class ShowQuestionFragment :
                     }
                 })
 
+                onTimeFinishLiveData.observe(this@ShowQuestionFragment, Observer {
+                    if (it != null) {
+                        if (it == true) {
+                            setAlertDialogResourceModelMutableLiveData(
+                                BindingUtils.string(R.string.test_time_finish),
+                                BindingUtils.drawable(R.drawable.ic_submit_confirmation)!!,
+                                true,
+                                BindingUtils.string(R.string.strOk), {
+                                    isAlertDialogShown.postValue(false)
+                                    parentViewModel.submitTest()
+                                },
+                                BindingUtils.string(R.string.no), {
+                                    isAlertDialogShown.postValue(false)
+                                }
+                            )
+                            isAlertDialogShown.postValue(true)
+                        }
+                    }
+                })
+
                 onClickNextLiveData.observe(this@ShowQuestionFragment, Observer {
                     if (it != null) {
                         if (it == true) {
@@ -243,23 +263,30 @@ class ShowQuestionFragment :
                                         handler.postDelayed(Runnable {
                                             isLoaderShowingLiveData.postValue(false)
 
-                                            if (it.ispass == KEY_Y) {
-                                                if (testType == KEY_QUIZ_TYPE_FORMATIVE) {
-                                                    showCustomDialogQuizReview(it)
-                                                } else {
-                                                    quizResultAlertDialog(
-                                                        it.passMessage!!,
-                                                        R.drawable.ic_pass
-                                                    )
-                                                }
+                                            if (testType == KEY_QUIZ_TYPE_COURSE_QUIZ) {
+                                                quizResultAlertDialog(
+                                                    it.message!!,
+                                                    R.drawable.ic_pass
+                                                )
                                             } else {
-                                                if (testType == KEY_QUIZ_TYPE_FORMATIVE) {
-                                                    showCustomDialogQuizReview(it)
+                                                if (it.ispass == KEY_Y) {
+                                                    if (testType == KEY_QUIZ_TYPE_FORMATIVE) {
+                                                        showCustomDialogQuizReview(it)
+                                                    } else {
+                                                        quizResultAlertDialog(
+                                                            it.passMessage!!,
+                                                            R.drawable.ic_pass
+                                                        )
+                                                    }
                                                 } else {
-                                                    quizResultAlertDialog(
-                                                        it.failMessage!!,
-                                                        R.drawable.ic_fail
-                                                    )
+                                                    if (testType == KEY_QUIZ_TYPE_FORMATIVE) {
+                                                        showCustomDialogQuizReview(it)
+                                                    } else {
+                                                        quizResultAlertDialog(
+                                                            it.failMessage!!,
+                                                            R.drawable.ic_fail
+                                                        )
+                                                    }
                                                 }
                                             }
 

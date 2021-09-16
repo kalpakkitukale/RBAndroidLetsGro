@@ -19,6 +19,7 @@ class QuizResultModel() : Parcelable {
     var ispass: String = KEY_BLANK
     var passMessage: String? = KEY_BLANK
     var failMessage: String? = KEY_BLANK
+    var message: String? = KEY_BLANK
     var attempted: Int = 0
     var correct: Int = 0
     var incorrect: Int = 0
@@ -30,6 +31,7 @@ class QuizResultModel() : Parcelable {
         ispass = parcel.readString()!!
         passMessage = parcel.readString() ?: KEY_BLANK
         failMessage = parcel.readString() ?: KEY_BLANK
+        message = parcel.readString() ?: KEY_BLANK
         attempted = parcel.readInt()
         correct = parcel.readInt()
         incorrect = parcel.readInt()
@@ -41,6 +43,7 @@ class QuizResultModel() : Parcelable {
         parcel.writeString(ispass)
         parcel.writeString(passMessage)
         parcel.writeString(failMessage)
+        parcel.writeString(message)
         parcel.writeInt(attempted)
         parcel.writeInt(correct)
         parcel.writeInt(incorrect)

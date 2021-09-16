@@ -96,6 +96,7 @@
     <string name="submit_test_message">Are you sure, you want to submit the test?</string>
     <string name="leave_test_message">Are you sure, you want to leave the test?</string>
     <string name="test_completed">Your test has been completed successfully.</string>
+    <string name="test_time_finish">Time is up, your test will submitted automatically.</string>
     <string name="title_activity_pre_assessment_test">PreAssessmentTestActivity</string>
     <string name="log_out_description">This is the logout button</string>
     <string name="forget_password">Forgot Password</string>

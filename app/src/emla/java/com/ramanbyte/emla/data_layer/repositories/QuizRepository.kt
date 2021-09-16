@@ -9,6 +9,7 @@ import androidx.paging.PagedList
 import com.ramanbyte.data_layer.SharedPreferencesDatabase
 import com.ramanbyte.data_layer.base.BaseRepository
 import com.ramanbyte.data_layer.pagination.PaginationResponseHandler
+import com.ramanbyte.emla.data_layer.network.api_layer.CourseQuizController
 import com.ramanbyte.emla.data_layer.network.api_layer.QuestionController
 import com.ramanbyte.emla.data_layer.pagination.PaginationDataSourceFactory
 import com.ramanbyte.emla.data_layer.room.entities.AnswerEntity
@@ -24,6 +25,8 @@ import java.text.DecimalFormat
 class QuizRepository(val mContext: Context) : BaseRepository(mContext) {
 
     private val questionController: QuestionController by instance()
+
+    private val courseQuizController: CourseQuizController by instance()
 
     suspend fun getInstructions(topicId: Int, courseid: Int, QuiztypeId: Int): InstructionsModel? {
         return apiRequest {
@@ -202,11 +205,21 @@ class QuizRepository(val mContext: Context) : BaseRepository(mContext) {
 
         quizModel.quizmarks = testSubmitModel
 
+        return if (testType == KEY_QUIZ_TYPE_COURSE_QUIZ) {
+            quizModel.quizsubmissionEntity = testSubmitModel.quizsubmissionEntity
+            apiRequest {
+                courseQuizController.submitTest(quizModel)
+            }
+        } else {
+            apiRequest {
+                questionController.submitTest(quizModel)
+            }
+        }
+
+
         //return QuizResultModel()
 
-        return apiRequest {
-            questionController.submitTest(quizModel)
-        }
+
     }
 
 
