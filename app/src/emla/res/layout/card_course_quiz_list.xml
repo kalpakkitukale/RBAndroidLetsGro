@@ -43,6 +43,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/custom_capsule_button_filled_end"
                 android:text="@string/show_result"
+                android:onClick="@{()->courseQuizViewModel.onShowResultClick(btnShowResult, courseQuizModel)}"
                 android:visibility="@{courseQuizModel.resultButtonVisibility}"
                 app:layout_constraintBottom_toBottomOf="@id/tvTotalMarkValue"
                 app:layout_constraintEnd_toEndOf="parent"

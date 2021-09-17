@@ -86,6 +86,7 @@ class CoursesRepository(mContext: Context) : BaseRepository(mContext) {
             programId = coursesRequest.programId
             specializationId = coursesRequest.specializationId
             patternId = coursesRequest.patternId
+            skillId = coursesRequest.skillId
         }
         coursesPagedList?.value?.dataSource?.invalidate()
         paginationResponseHandlerLiveData.postValue(PaginationResponseHandler.INIT_LOADING)

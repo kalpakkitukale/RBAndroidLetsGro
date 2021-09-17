@@ -57,6 +57,46 @@ class CourseQuizListViewModel(mContext: Context) : BaseViewModel(mContext) {
         return courseQuizRepository.quizListForCoursePagedList
     }
 
+    fun onShowResultClick(buttonView: View, modelObj: CourseQuizModel) {
+        modelObj.let { model ->
+            if (NetworkConnectivity.isConnectedToInternet()) {
+                CoroutineUtils.main {
+                    val response = model.quizId?.let { courseQuizRepository.getQuizResult(it) }
+                    val message = if (response!![0].isPass == 1) {
+                        "Congratulations, You have successfully passed the test"
+                    } else {
+                        "Sorry, You failed the test"
+                    }
+                    setAlertDialogResourceModelMutableLiveData(
+                        message,
+                        BindingUtils.drawable(R.drawable.ic_element_news)!!,
+                        true,
+                        BindingUtils.string(R.string.strOk), {
+                            isAlertDialogShown.postValue(false)
+                        },
+                        BindingUtils.string(R.string.no), {
+                            isAlertDialogShown.postValue(false)
+                        }
+                    )
+                    isAlertDialogShown.postValue(true)
+                }
+            } else {
+                setAlertDialogResourceModelMutableLiveData(
+                    BindingUtils.string(R.string.no_internet_message),
+                    BindingUtils.drawable(R.drawable.ic_no_internet)!!,
+                    true,
+                    BindingUtils.string(R.string.yes), {
+                        isAlertDialogShown.postValue(false)
+                    },
+                    BindingUtils.string(R.string.no), {
+                        isAlertDialogShown.postValue(false)
+                    }
+                )
+                isAlertDialogShown.postValue(true)
+            }
+        }
+    }
+
     fun onTakeQuizClick(buttonView: View, modelObj: CourseQuizModel) {
         modelObj.let { model ->
             if (NetworkConnectivity.isConnectedToInternet()) {
@@ -88,7 +128,7 @@ class CourseQuizListViewModel(mContext: Context) : BaseViewModel(mContext) {
                         } else {
                             setAlertDialogResourceModelMutableLiveData(
                                 BindingUtils.string(R.string.quiz_expired_message),
-                                BindingUtils.drawable(R.drawable.ic_no_internet)!!,
+                                BindingUtils.drawable(R.drawable.ic_element_news)!!,
                                 true,
                                 BindingUtils.string(R.string.strOk), {
                                     isAlertDialogShown.postValue(false)

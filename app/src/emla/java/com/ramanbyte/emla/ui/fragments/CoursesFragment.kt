@@ -131,6 +131,7 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
         badgeView = actionView.findViewById(R.id.filter_badge) as View
         AppLog.infoLog("CoursesFragment onCreateOptionsMenu ${false}")
         AppLog.infoLog("CoursesFragment value ${viewModel.isFilterApplied.value}}")
+        AppLog.infoLog("CoursesFragment value ${viewModel.searchQuery.value}}")
         //setupBadge()
 
         setupBadge(viewModel.getFilterState())
@@ -157,6 +158,10 @@ class CoursesFragment : BaseFragment<FragmentCoursesBinding, CoursesViewModel>()
         searchEditText.setHintTextColor(BindingUtils.color(R.color.colorTextHint))
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             //searchEditText.setTextCursorDrawable(BindingUtils.color(R.color.colorTextNavyBlueInLightNWhiteInDark))
+        }
+
+        if (!viewModel.searchQuery.value.isNullOrEmpty()) {
+            searchEditText.setText(viewModel.searchQuery.value)
         }
 
         val searchClose = mSearchView?.findViewById(R.id.search_close_btn) as ImageView

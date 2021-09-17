@@ -139,7 +139,7 @@ class RecommendedCourseFilterBottomSheet :
 
                             SpinnerModel().apply {
 
-                                id = programsModel.valueField
+                                id = programsModel.valuField
                                 itemName = programsModel.textField
 
                                 onNameSelected = {
@@ -164,7 +164,7 @@ class RecommendedCourseFilterBottomSheet :
 
                             SpinnerModel().apply {
 
-                                id = patternModel.valueField
+                                id = patternModel.valuField
                                 itemName = patternModel.textField
 
                                 onNameSelected = {
@@ -189,7 +189,7 @@ class RecommendedCourseFilterBottomSheet :
                         specializationSpinnerUtil?.spinnerItemListLiveData?.value =
                             it.mapIndexed { index, specializationModel ->
                                 SpinnerModel().apply {
-                                    id = specializationModel.valueField
+                                    id = specializationModel.valuField
                                     itemName = specializationModel.textField
 
                                     onNameSelected = {
@@ -216,11 +216,13 @@ class RecommendedCourseFilterBottomSheet :
 
                             SpinnerModel().apply {
 
-                                id = programsModel.valueField
+                                id = programsModel.valuField
                                 itemName = programsModel.textField
 
                                 onNameSelected = {
                                     tempFilterModel.skillId = id
+                                    AppLog.infoLog("ID ------- $id")
+                                    AppLog.infoLog("ID >> ------- ${tempFilterModel.skillId}")
                                     skillName.set(programsModel.textField)
                                     StaticMethodUtilitiesKtx.hideSpinnerDropDown(layoutBinding.spinnerSkill)
                                     skillsSpinnerUtil?.apply {
