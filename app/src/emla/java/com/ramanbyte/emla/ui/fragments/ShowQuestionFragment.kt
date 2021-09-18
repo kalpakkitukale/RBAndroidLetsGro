@@ -86,6 +86,7 @@ class ShowQuestionFragment :
                     AppLog.infoLog("courseImageUrl :: Show Que Page ${coursesModelLiveData.value?.courseImageUrl}")
                     AppLog.infoLog("Quiz Start Time :: Show Que Page ${courseQuizModelModelLiveData.value?.quizStartDate}")
                     AppLog.infoLog("Quiz End Time :: Show Que Page ${courseQuizModelModelLiveData.value?.quizEndDate}")
+                    AppLog.infoLog("highNumberOfMarks Question :: Show Que Page ${instructionsModelLiveData.value?.highNumberOfMarks}")
 
                     val width =
                         (activity!!).displayMetrics().widthPixels - (BindingUtils.dimen(R.dimen.dp_5) * 2)

@@ -5,10 +5,7 @@ import com.ramanbyte.emla.models.request.AskQuestionRequestModel
 import com.ramanbyte.emla.models.request.ConversationCloseRequestModel
 import com.ramanbyte.emla.models.request.QuestionsReplyRequestModel
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface QuestionController {
 
@@ -31,8 +28,18 @@ interface QuestionController {
     * Pre-assessment test courseid= something, QuiztypeId = 1
     * summative test courseid= something, QuiztypeId = 2
     * */
-    @GET("GetQuestionListBycourse/{CourseId}/{QuiztypeId}")
-    suspend fun getQuestionsByCourse(@Path("CourseId") CourseId: Int, @Path("QuiztypeId") QuiztypeId: Int): Response<ArrayList<QuestionAndAnswerModel>>
+    @POST("GetQuestionListBycourse")
+    suspend fun getQuestionsByCourse(
+        @Query("CourseId") CourseId: Int,
+        @Query("QuizId") QuizId: Int,
+        @Query("HighNumberOfQuestions") HighNumberOfQuestions: Int,
+        @Query("MiddleNumberOfQuestions") MiddleNumberOfQuestions: Int,
+        @Query("LowNumberOfQuestions") LowNumberOfQuestions: Int,
+        @Query("PassingPercent") PassingPercent: Int,
+        @Query("HighNumberOfMarks") HighNumberOfMarks: Int,
+        @Query("MiddleNumberOfMarks") MiddleNumberOfMarks: Int,
+        @Query("LowNumberOfMarks") LowNumberOfMarks: Int
+    ): Response<ArrayList<QuestionAndAnswerModel>>
 
     /*
     * Formative test topicId = something, QuiztypeId = 3

@@ -144,7 +144,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/dp_15"
-            android:onClick="@{() -> instructionShowQuestionsViewModel.onClickStartQuiz(btnStartQuiz)}"
+            android:onClick="@{() -> instructionShowQuestionsViewModel.onClickStartQuiz(btnStartQuiz, instructionsModel)}"
             android:text="@string/next"
             android:textColor="@color/colorWhite"
             android:textSize="@dimen/sp_12"

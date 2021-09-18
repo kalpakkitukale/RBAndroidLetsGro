@@ -41,10 +41,21 @@ class QuizRepository(val mContext: Context) : BaseRepository(mContext) {
 
     suspend fun getQuestionsByCourse(
         courseId: Int,
-        quizTypeId: Int
+        quizId: Int,
+        highNumberOfQuestions: Int,
+        middleNumberOfQuestions: Int,
+        lowNumberOfQuestions: Int,
+        passingPercent: Int,
+        highNumberOfMarks: Int,
+        middleNumberOfMarks: Int,
+        lowNumberOfMarks: Int
     ): ArrayList<QuestionAndAnswerModel>? {
         val questionAndAnswerModel = apiRequest {
-            questionController.getQuestionsByCourse(courseId, quizTypeId)
+            questionController.getQuestionsByCourse(
+                courseId, quizId, highNumberOfQuestions,
+                middleNumberOfQuestions, lowNumberOfQuestions, passingPercent,
+                highNumberOfMarks, middleNumberOfMarks, lowNumberOfMarks
+            )
         }
 
         /*val questionAndAnswerModel = QuestionAndAnswerModel().apply {

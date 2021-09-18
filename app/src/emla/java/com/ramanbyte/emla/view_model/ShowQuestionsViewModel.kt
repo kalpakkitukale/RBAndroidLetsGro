@@ -38,6 +38,7 @@ class ShowQuestionsViewModel(var mContext: Context) : BaseViewModel(mContext) {
     var coursesModelLiveData: MutableLiveData<CoursesModel> = MutableLiveData()
     var chapterModelLiveData: MutableLiveData<ChaptersModel> = MutableLiveData()
     var courseQuizModelModelLiveData: MutableLiveData<CourseQuizModel> = MutableLiveData()
+    var cInstructionsModelLiveData: MutableLiveData<InstructionsModel> = MutableLiveData()
     var testType = 0
     val currentDateTimeLiveData = MutableLiveData<String>().apply {
         value = DateUtils.getCurrentDateTime(DateUtils.DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS)
@@ -151,8 +152,9 @@ class ShowQuestionsViewModel(var mContext: Context) : BaseViewModel(mContext) {
     * Instruction Page ------------- Start ---------------------
     * */
 
-    fun onClickStartQuiz(view: View) {
+    fun onClickStartQuiz(view: View, instructionsModel: InstructionsModel) {
         if (NetworkConnectionInterceptor(mContext).isInternetAvailable()) {
+            cInstructionsModelLiveData.value = instructionsModel
             onClickStartQuizLiveData.value = true
         } else {
             noInternetDialog(BindingUtils.string(R.string.next), view)
@@ -234,7 +236,14 @@ class ShowQuestionsViewModel(var mContext: Context) : BaseViewModel(mContext) {
             questionAndAnswerModelLiveData.postValue(
                 quizRepository.getQuestionsByCourse(
                     coursesModelLiveData.value?.courseId!!,
-                    testType
+                    courseQuizModelModelLiveData.value?.quizId!!,
+                    instructionsModelLiveData.value?.highNumberOfQuestions!!,
+                    instructionsModelLiveData.value?.middleNumberOfQuestions!!,
+                    instructionsModelLiveData.value?.lowNumberOfQuestions!!,
+                    instructionsModelLiveData.value?.passingPercent!!,
+                    instructionsModelLiveData.value?.highNumberOfMarks!!,
+                    instructionsModelLiveData.value?.middleNumberOfMarks!!,
+                    instructionsModelLiveData.value?.lowNumberOfMarks!!
                 )
                 /*quizRepository.getQuestionsByCourse(
                     3028,
