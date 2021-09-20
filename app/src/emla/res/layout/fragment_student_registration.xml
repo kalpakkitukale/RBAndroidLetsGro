@@ -115,6 +115,31 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilMobileNo"
+                style="@style/TextInputLayoutWithoutBorder"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_22"
+                android:hint="@string/mobileNumber"
+                app:errorText="@{createAccountViewModel.registrationValidator.getValidation(StaticHelpersKt.keyContactNo)}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tilUserEmailId">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etMobileNo"
+                    style="@style/EditTextRegularGrayHint"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:imeOptions="actionNext"
+                    android:inputType="phone"
+                    android:lines="1"
+                    android:maxLength="10"
+                    android:singleLine="true"
+                    android:text="@={createAccountViewModel.registrationMutableLiveData.userDetails.contactNo}" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilNewPassword"
                 style="@style/TextInputLayoutWithoutBorder"
                 android:layout_width="0dp"
@@ -123,9 +148,9 @@
                 android:hint="@string/password"
                 app:endIconMode="password_toggle"
                 app:errorText="@{createAccountViewModel.registrationValidator.getValidation(StaticHelpersKt.keyPassword)}"
-                app:layout_constraintEnd_toEndOf="@+id/tilUserEmailId"
-                app:layout_constraintStart_toStartOf="@+id/tilUserEmailId"
-                app:layout_constraintTop_toBottomOf="@+id/tilUserEmailId">
+                app:layout_constraintEnd_toEndOf="@+id/tilMobileNo"
+                app:layout_constraintStart_toStartOf="@+id/tilMobileNo"
+                app:layout_constraintTop_toBottomOf="@+id/tilMobileNo">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etNewPassword"

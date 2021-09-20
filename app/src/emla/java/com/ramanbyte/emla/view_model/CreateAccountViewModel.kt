@@ -20,7 +20,9 @@ import com.ramanbyte.utilities.*
 import com.ramanbyte.validation.ObservableValidator
 import com.ramanbyte.validation.ValidationFlags
 import org.kodein.di.generic.instance
-import java.util.HashSet
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.forEach
 
 /**
  * @author Vinay Kumbhar <vinay.pkumbhar@gmail.com>
@@ -108,6 +110,13 @@ class CreateAccountViewModel(var mContext: Context) : BaseViewModel(mContext = m
             )
             addRule(
                 keyEmailUsername,
+                ValidationFlags.FIELD_REQUIRED,
+                BindingUtils.string(
+                    R.string.required
+                )
+            )
+            addRule(
+                keyContactNo,
                 ValidationFlags.FIELD_REQUIRED,
                 BindingUtils.string(
                     R.string.required
