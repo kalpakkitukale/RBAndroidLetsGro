@@ -236,6 +236,18 @@ class AddressDetailsFragment :
                     }
                 }
             })
+
+            oldResumeFileName.observe(this@AddressDetailsFragment, Observer {
+                if (!it.isNullOrEmpty()) {
+                    layoutBinding.apply {
+                        lblResumeFileName.text = it
+                        btnUploadResume.visibility = View.GONE
+                        lblResumeNote.visibility = View.GONE
+                        lblResumeFileName.visibility = View.VISIBLE
+                        ivRemoveResume.visibility = View.VISIBLE
+                    }
+                }
+            })
         }
     }
 

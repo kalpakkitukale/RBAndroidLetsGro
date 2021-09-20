@@ -80,6 +80,9 @@ class LearnerProfileFragment :
                             context!!
                         )
 
+                    oldProfilePicName.value = userImageFilename
+                    oldResumeFileName.value = resumeFileName
+
                     setValidation()
                     setupViewPager()
                 }

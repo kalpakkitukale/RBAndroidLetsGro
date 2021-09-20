@@ -58,6 +58,8 @@ class LearnerProfileViewModel(private val mContext: Context) : BaseViewModel(mCo
     var showDatePickerDailogLiveData = MutableLiveData<Boolean>(false)
 
     var profileImageUrl = MutableLiveData<String>().apply { value = "" }
+    var oldProfilePicName = MutableLiveData<String>().apply { value = "" }
+    var oldResumeFileName = MutableLiveData<String>().apply { value = "" }
     var uploadFileName = MutableLiveData<String>().apply { value = "" }
     var uploadFilePath = MutableLiveData<String>().apply { value = "" }
     var profileErrorDrawable =
@@ -598,7 +600,7 @@ class LearnerProfileViewModel(private val mContext: Context) : BaseViewModel(mCo
 
                         resumeFileName = uploadResumeFileName.value
                         userImageFilename =
-                            if (uploadFileName.value?.isNotEmpty()!! && uploadFilePath.value?.isNotEmpty()!!) {
+                            if (uploadFileName.value?.isNotEmpty()!! /*&& uploadFilePath.value?.isNotEmpty()!!*/) {
                                 /*AppS3Client.createInstance(mContext)
                                     .upload(
                                         uploadFileName.value!!,
@@ -610,7 +612,7 @@ class LearnerProfileViewModel(private val mContext: Context) : BaseViewModel(mCo
 
                                 uploadFileName.value
                             } else {
-                                ""
+                                oldProfilePicName.value
                             }
                     }!!)
 

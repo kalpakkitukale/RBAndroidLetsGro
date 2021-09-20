@@ -203,6 +203,10 @@ class UserDetailsModel : BaseObservable() {
         }
 
     var userImageFilename: String? = ""
+        set(value) {
+            field = value
+            notifyPropertyChanged(BR.universityName)
+        }
     var userImageString: String? = ""
     var userTitle: String? = ""
     var user_Reff_Id: Int? = 0

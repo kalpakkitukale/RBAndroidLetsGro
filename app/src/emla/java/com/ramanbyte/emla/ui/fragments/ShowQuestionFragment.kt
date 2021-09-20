@@ -107,19 +107,24 @@ class ShowQuestionFragment :
                     this@ShowQuestionFragment,
                     Observer {
                         it?.apply {
-                            AppLog.infoLog("ServerDate Time ----- $it")
-                            val quizEndDate = DateUtils.getDisplayDateFromDate(
-                                parentViewModel.courseQuizModelModelLiveData.value?.quizEndDate!!,
-                                DateUtils.DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS,
-                                DateUtils.DATE_DISPLAY_PATTERN
-                            )
-                            val quizEndTime = DateUtils.getDisplayDateFromDate(
-                                parentViewModel.courseQuizModelModelLiveData.value?.quizEndTime!!,
-                                DateUtils.TIME_WITH_SECONDS,
-                                DateUtils.TIME_DISPLAY_PATTERN
-                            )
-                            quizTimer("$quizEndDate $quizEndTime", it)
-                            countDownQuizTimer!!.start()
+                            if (testType == KEY_QUIZ_TYPE_COURSE_QUIZ) {
+                                AppLog.infoLog("ServerDate Time ----- $it")
+                                val quizEndDate = DateUtils.getDisplayDateFromDate(
+                                    parentViewModel.courseQuizModelModelLiveData.value?.quizEndDate!!,
+                                    DateUtils.DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS,
+                                    DateUtils.DATE_DISPLAY_PATTERN
+                                )
+                                val quizEndTime = DateUtils.getDisplayDateFromDate(
+                                    parentViewModel.courseQuizModelModelLiveData.value?.quizEndTime!!,
+                                    DateUtils.TIME_WITH_SECONDS,
+                                    DateUtils.TIME_DISPLAY_PATTERN
+                                )
+                                layoutBinding.tvQuizDuration.visibility = View.VISIBLE
+                                quizTimer("$quizEndDate $quizEndTime", it)
+                                countDownQuizTimer!!.start()
+                            } else {
+                                layoutBinding.tvQuizDuration.visibility = View.GONE
+                            }
                         }
                     })
 
