@@ -123,14 +123,22 @@ class PreAssessmentTestFragment :
                             if (testType == 1){
                                 findNavController().navigateUp()
                             }else{
-                                countDownQuizTimer!!.cancel()
+                                if (countDownQuizTimer != null)
+                                    countDownQuizTimer!!.cancel()
                                 val bundle = Bundle()
                                 bundle.putParcelable(
                                     KEY_COURSE_MODEL,
                                     courseModel
                                 )
-                                val navOption = NavOptions.Builder().setPopUpTo(R.id.coursesFragment, false).build()
-                                activity?.let { Navigation.findNavController(it,R.id.containerNavHost).navigate(R.id.courseDetailFragment, bundle, navOption) }
+                                val navOption =
+                                    NavOptions.Builder().setPopUpTo(R.id.coursesFragment, false)
+                                        .build()
+                                activity?.let {
+                                    Navigation.findNavController(
+                                        it,
+                                        R.id.containerNavHost
+                                    ).navigate(R.id.courseDetailFragment, bundle, navOption)
+                                }
                             }
                         },
                         BindingUtils.string(R.string.no), {

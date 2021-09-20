@@ -113,7 +113,22 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:visibility="gone"/>
+            android:visibility="gone" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvQuizDuration"
+            style="@style/TextViewTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/card_end"
+            android:background="@color/cardBackgroundColor"
+            android:drawablePadding="@dimen/dp_5"
+            android:gravity="center"
+            android:padding="@dimen/dp_8"
+            android:text="@{showQuestionsViewModel.quizTimeLiveData}"
+            app:drawableStartCompat="@drawable/ic_watch"
+            app:layout_constraintBottom_toTopOf="@id/guideline"
+            app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

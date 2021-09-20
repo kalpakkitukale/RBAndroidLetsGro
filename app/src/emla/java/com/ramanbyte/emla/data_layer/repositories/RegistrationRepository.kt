@@ -4,8 +4,8 @@ import android.content.Context
 import com.ramanbyte.data_layer.base.BaseRepository
 import com.ramanbyte.emla.data_layer.network.api_layer.RegistrationController
 import com.ramanbyte.emla.models.*
-import com.ramanbyte.emla.models.response.MasterDataResponseModel
 import com.ramanbyte.emla.models.response.CommonDropdownModel
+import com.ramanbyte.emla.models.response.MasterDataResponseModel
 import com.ramanbyte.utilities.KEY_Y
 import org.kodein.di.generic.instance
 
@@ -31,7 +31,7 @@ class RegistrationRepository(val mContext: Context) : BaseRepository(mContext) {
 
     suspend fun getProfile(): UserDetailsModel? {
 
-        val userReffId = applicationDatabase.getUserDao().getCurrentUser()?.user_Reff_Id ?: 0
+        val userReffId = applicationDatabase.getUserDao().getCurrentUser()?.userId ?: 0
 
         return apiRequest {
 
