@@ -47,6 +47,7 @@ class PreAssessmentTestFragment :
             chapterModel = getParcelable(KEY_CHAPTER_MODEL)
             courseQuizModel = getParcelable(KEY_COURSE_QUIZ_MODEL)
             viewModel.testType = getInt(keyTestType, 0)
+            AppLog.infoLog("Test Type ---- ${getInt(keyTestType, 0)}")
         }
 
         viewModel.apply {

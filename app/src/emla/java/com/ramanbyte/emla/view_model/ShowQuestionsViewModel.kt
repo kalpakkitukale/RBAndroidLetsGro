@@ -231,7 +231,7 @@ class ShowQuestionsViewModel(var mContext: Context) : BaseViewModel(mContext) {
         }
     }
 
-    fun getQuestionsByCourse() {
+    fun getQuestionsByCourse(testType: Int) {
         invokeApiCall(false) {
             questionAndAnswerModelLiveData.postValue(
                 quizRepository.getQuestionsByCourse(
@@ -254,8 +254,10 @@ class ShowQuestionsViewModel(var mContext: Context) : BaseViewModel(mContext) {
             val questionAndAnswerModel = quizRepository.getAllQuestion()
             questionAndAnswerModel?.apply {
                 if (this != null && this.size > 0) {
-                    val serverDateTime = courseQuizRepository.getServerDateTime()
-                    currentDateTimeLiveData.postValue(serverDateTime)
+                    if (testType == KEY_QUIZ_TYPE_COURSE_QUIZ) {
+                        val serverDateTime = courseQuizRepository.getServerDateTime()
+                        currentDateTimeLiveData.postValue(serverDateTime)
+                    }
                     questionAndAnswerListLiveData.postValue(this)
                 } else
                     AppLog.infoLog("no_question_available")

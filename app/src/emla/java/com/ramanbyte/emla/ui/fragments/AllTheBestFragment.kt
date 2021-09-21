@@ -40,7 +40,7 @@ class AllTheBestFragment : BaseFragment<FragmentAllTheBestBinding, ShowQuestions
             if (testType == KEY_QUIZ_TYPE_FORMATIVE)
                 getQuestionsByByTopic()
             else
-                getQuestionsByCourse()
+                getQuestionsByCourse(testType)
 
             questionAndAnswerListLiveData.observe(this@AllTheBestFragment, Observer {
                 if (it != null) {

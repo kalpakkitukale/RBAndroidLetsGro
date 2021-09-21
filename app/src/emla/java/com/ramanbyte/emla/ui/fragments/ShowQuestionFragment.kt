@@ -107,8 +107,10 @@ class ShowQuestionFragment :
                     this@ShowQuestionFragment,
                     Observer {
                         it?.apply {
-                            if (testType == KEY_QUIZ_TYPE_COURSE_QUIZ) {
                                 AppLog.infoLog("ServerDate Time ----- $it")
+                            if (!parentViewModel.courseQuizModelModelLiveData.value?.quizEndDate.isNullOrEmpty() &&
+                                parentViewModel.courseQuizModelModelLiveData.value?.quizEndDate!! != KEY_HYPHEN
+                            ) {
                                 val quizEndDate = DateUtils.getDisplayDateFromDate(
                                     parentViewModel.courseQuizModelModelLiveData.value?.quizEndDate!!,
                                     DateUtils.DATE_WEB_API_RESPONSE_PATTERN_WITHOUT_MS,
@@ -122,8 +124,6 @@ class ShowQuestionFragment :
                                 layoutBinding.tvQuizDuration.visibility = View.VISIBLE
                                 quizTimer("$quizEndDate $quizEndTime", it)
                                 countDownQuizTimer!!.start()
-                            } else {
-                                layoutBinding.tvQuizDuration.visibility = View.GONE
                             }
                         }
                     })

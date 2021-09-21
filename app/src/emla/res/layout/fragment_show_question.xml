@@ -121,6 +121,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/card_end"
+            android:visibility="gone"
             android:background="@color/cardBackgroundColor"
             android:drawablePadding="@dimen/dp_5"
             android:gravity="center"
