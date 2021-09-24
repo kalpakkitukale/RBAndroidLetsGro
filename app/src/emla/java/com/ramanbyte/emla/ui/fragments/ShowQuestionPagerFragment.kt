@@ -46,7 +46,7 @@ class ShowQuestionPagerFragment : BaseFragment<CardShowQuestionsBinding, ShowQue
 
     override fun initiate() {
         setData()
-//        AppLog.infoLog("Initiate::Page::$queCount")
+        AppLog.infoLog("Initiate::Page::$queCount")
         layoutBinding.apply {
             lifecycleOwner = this@ShowQuestionPagerFragment
             cardShowQuestionsViewModel = viewModel
@@ -232,23 +232,15 @@ class ShowQuestionPagerFragment : BaseFragment<CardShowQuestionsBinding, ShowQue
                 }
             })
 
-            isJumpToQuestionBS.observe(this@ShowQuestionPagerFragment, Observer {
+            /*isJumpToQuestionBS.observe(this@ShowQuestionPagerFragment, Observer {
                 if (it != null) {
                     if (it == true) {
                         // open bottom sheet
-                        if (jumpToQuestionBottomSheetFragment == null)
-                            jumpToQuestionBottomSheetFragment =
-                                JumpToQuestionBottomSheetFragment.get(questionAndAnswerModelData.id)
 
-                        jumpToQuestionBottomSheetFragment?.show(
-                            childFragmentManager,
-                            getString(R.string.jump_to_question)
-                        )
-                        isJumpToQuestionBS.value = null
                     }
                     isJumpToQuestionBS.value = null
                 }
-            })
+            })*/
         }
     }
 
@@ -260,7 +252,19 @@ class ShowQuestionPagerFragment : BaseFragment<CardShowQuestionsBinding, ShowQue
 
     override fun onDetach() {
         super.onDetach()
-//        AppLog.infoLog("OnDetach::Page::$queCount")
+    }
+
+    fun onJumpToQuestionCalled() {
+        AppLog.infoLog("onJumpToQuestionCalled called")
+        if (jumpToQuestionBottomSheetFragment == null)
+            jumpToQuestionBottomSheetFragment =
+                JumpToQuestionBottomSheetFragment.get(questionAndAnswerModelData.id)
+
+        jumpToQuestionBottomSheetFragment?.show(
+            childFragmentManager,
+            getString(R.string.jump_to_question)
+        )
+        viewModel.isJumpToQuestionBS.value = null
     }
 
 }

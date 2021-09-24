@@ -142,6 +142,19 @@ class ShowQuestionFragment :
                     }
                 })
 
+                isJumpToQuestionBS.observe(this@ShowQuestionFragment, Observer {
+                    if (it != null) {
+//                        AppLog.infoLog("isJumpToQuestionBS ----- ShowQuestionFragment ")
+                        if (it == true) {
+//                            AppLog.infoLog("isJumpToQuestionBS ----- ShowQuestionFragment 1")
+                            val pos = vpShowQuestions.currentItem
+                            val selectedFragment = viewPagerAdapter!!.getItem(pos)
+                            (selectedFragment as ShowQuestionPagerFragment).onJumpToQuestionCalled()
+                        }
+                        isJumpToQuestionBS.value = null
+                    }
+                })
+
                 onClickPreviousLiveData.observe(this@ShowQuestionFragment, Observer {
                     if (it != null) {
                         if (it == true) {

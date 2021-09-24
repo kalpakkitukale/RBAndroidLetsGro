@@ -217,7 +217,6 @@ class ShowQuestionsViewModel(var mContext: Context) : BaseViewModel(mContext) {
     fun onClickPrevious(view: View) {
         if (NetworkConnectionInterceptor(mContext).isInternetAvailable()) {
             onClickPreviousLiveData.value = true
-
         } else {
             noInternetDialog(BindingUtils.string(R.string.previous), view)
         }
