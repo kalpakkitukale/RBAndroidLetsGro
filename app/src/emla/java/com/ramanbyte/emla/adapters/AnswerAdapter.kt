@@ -126,7 +126,7 @@ class AnswerAdapter(
             // https://www.zoftino.com/android-recyclerview-radiobutton
             cardCustomRadioBinding?.apply {
                 rbAnswer?.setOnClickListener(View.OnClickListener {
-                    AppLog.infoLog("rbAnswer $adapterPosition ${rbAnswer.text}")
+//                    AppLog.infoLog("rbAnswer $adapterPosition ${rbAnswer.text}")
 
                     currentPosition = adapterPosition
 

@@ -540,7 +540,7 @@ class ShowQuestionFragment :
         override fun onPageSelected(position: Int) {
             try {
 
-                AppLog.infoLog("onPageSelected $position")
+//                AppLog.infoLog("onPageSelected $position")
 
                 layoutBinding.btnNext.apply {
                     if (position == totalQueCount - 1) {

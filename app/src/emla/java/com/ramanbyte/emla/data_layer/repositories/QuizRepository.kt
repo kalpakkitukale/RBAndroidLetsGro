@@ -274,7 +274,7 @@ class QuizRepository(val mContext: Context) : BaseRepository(mContext) {
 
         applicationDatabase.getAnswerDao().apply {
 
-            AppLog.infoLog("Quiz Id :: ${answerEntity.question_Id} Options Size:: ${getAllQuestionRelatedOption().size}")
+//            AppLog.infoLog("Quiz Id :: ${answerEntity.question_Id} Options Size:: ${getAllQuestionRelatedOption().size}")
 
             deleteQuestionRelatedOption(answerEntity.question_Id)
             insert(answerEntity)

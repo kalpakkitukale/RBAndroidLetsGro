@@ -46,7 +46,7 @@ class ShowQuestionPagerFragment : BaseFragment<CardShowQuestionsBinding, ShowQue
 
     override fun initiate() {
         setData()
-        AppLog.infoLog("Initiate::Page::$queCount")
+//        AppLog.infoLog("Initiate::Page::$queCount")
         layoutBinding.apply {
             lifecycleOwner = this@ShowQuestionPagerFragment
             cardShowQuestionsViewModel = viewModel
@@ -260,7 +260,7 @@ class ShowQuestionPagerFragment : BaseFragment<CardShowQuestionsBinding, ShowQue
 
     override fun onDetach() {
         super.onDetach()
-        AppLog.infoLog("OnDetach::Page::$queCount")
+//        AppLog.infoLog("OnDetach::Page::$queCount")
     }
 
 }

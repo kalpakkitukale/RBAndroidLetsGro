@@ -81,7 +81,7 @@ class PreAssessmentTestFragment :
             requestFocus()
             setOnKeyListener(object : View.OnKeyListener {
                 override fun onKey(v: View?, keyCode: Int, event: KeyEvent): Boolean {
-                    AppLog.infoLog("keyCode: $keyCode")
+//                    AppLog.infoLog("keyCode: $keyCode")
                     if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() === KeyEvent.ACTION_UP) {
 
                             viewModel.apply {
