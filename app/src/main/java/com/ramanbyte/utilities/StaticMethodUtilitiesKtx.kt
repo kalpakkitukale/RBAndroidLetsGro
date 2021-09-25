@@ -304,7 +304,7 @@ object StaticMethodUtilitiesKtx {
         builder.toString()
     }
 
-    fun convertAmountToDisplay(amount: Long): String {
+    fun convertAmountToDisplay(amount: Double): String {
         return if (amount > 0) {
             /* val suffix = charArrayOf(' ', 'K', 'M', 'B', 'T', 'P', 'E')
              val numValue: Long = amount
@@ -318,8 +318,8 @@ object StaticMethodUtilitiesKtx {
                  DecimalFormat("#,##0").format(numValue)
              }*/
 //            NumberFormat.getNumberInstance(Locale.US).format(amount)
-            val decimalFormat = DecimalFormat("#,##,###")
-            val format: String = decimalFormat.format(amount.toDouble())
+            val decimalFormat = DecimalFormat("#,##,###.##")
+            val format: String = decimalFormat.format(amount)
             String.format("%s", format)
         } else {
             "0"

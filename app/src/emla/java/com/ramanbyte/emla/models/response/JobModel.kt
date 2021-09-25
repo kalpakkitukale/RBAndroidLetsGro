@@ -39,14 +39,14 @@ class JobModel : BaseObservable() {
         }
 
     @Bindable
-    var minSalaryOffered: Long? = 0
+    var minSalaryOffered: Double? = 0.0
         set(value) {
             field = value
             notifyPropertyChanged(BR.minSalaryOffered)
         }
 
     @Bindable
-    var maxSalaryOffered: Long? = 0
+    var maxSalaryOffered: Double? = 0.0
         set(value) {
             field = value
             notifyPropertyChanged(BR.maxSalaryOffered)

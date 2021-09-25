@@ -36,6 +36,7 @@
                 app:layout_constraintTop_toTopOf="@+id/tvTotalMarks"
                 tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
 
+            <!--android:visibility="@{courseQuizModel.resultButtonVisibility}"-->
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnShowResult"
                 style="@style/CustomCapsuleButtonFilled"
@@ -44,7 +45,7 @@
                 android:layout_marginEnd="@dimen/custom_capsule_button_filled_end"
                 android:text="@string/show_result"
                 android:onClick="@{()->courseQuizViewModel.onShowResultClick(btnShowResult, courseQuizModel)}"
-                android:visibility="@{courseQuizModel.resultButtonVisibility}"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="@id/tvTotalMarkValue"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/tvTotalMarks"
