@@ -51,6 +51,18 @@
                 app:layout_constraintTop_toTopOf="@+id/tvTotalMarks"
                 tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
 
+            <androidx.appcompat.widget.AppCompatButton
+                style="@style/CustomCapsuleButtonWithOnlyBorder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/custom_capsule_button_filled_end"
+                android:text="@string/submitted"
+                android:visibility="@{courseQuizModel.resultButtonVisibility}"
+                app:layout_constraintBottom_toBottomOf="@id/tvTotalMarkValue"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tvTotalMarks"
+                tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
+
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvQuizDescription"
                 style="@style/TextViewDescription"

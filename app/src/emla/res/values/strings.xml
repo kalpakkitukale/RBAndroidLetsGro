@@ -336,6 +336,7 @@ Content
     <string name="end_date_time">End DateTime</string>
     <string name="take_quiz">Take Quiz</string>
     <string name="show_result">Show Result</string>
+    <string name="submitted">Submitted</string>
     <string name="quiz_expired_message">You can start quiz in between start or end quiz time</string>
     <string name="minutes">Minutes</string>
 </resources>
