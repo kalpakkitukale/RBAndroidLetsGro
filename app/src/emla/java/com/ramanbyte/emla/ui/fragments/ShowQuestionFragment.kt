@@ -535,6 +535,12 @@ class ShowQuestionFragment :
                 addOnPageChangeListener(onPageChangeListener)
                 currentItem = 0
             }
+
+            if (totalQueCount == 1) {
+                btnNext.apply {
+                    text = BindingUtils.string(R.string.submit_test)
+                }
+            }
         }
 
     }
@@ -553,7 +559,7 @@ class ShowQuestionFragment :
         override fun onPageSelected(position: Int) {
             try {
 
-//                AppLog.infoLog("onPageSelected $position")
+                AppLog.infoLog("onPageSelected $position")
 
                 layoutBinding.btnNext.apply {
                     if (position == totalQueCount - 1) {
