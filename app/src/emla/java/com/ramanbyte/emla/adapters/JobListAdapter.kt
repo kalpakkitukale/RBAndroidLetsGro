@@ -55,6 +55,8 @@ class JobListAdapter :
         holder.bindData(jobModel.apply {
             companyImageURL =
                 StaticMethodUtilitiesKtx.getS3DynamicURL(companyLogo ?: KEY_BLANK, context!!)
+
+            AppLog.infoLog("companyImageURL ------ $companyImageURL")
         })
     }
 

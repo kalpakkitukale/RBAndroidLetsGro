@@ -65,7 +65,7 @@
     <string name="pass_message">Congratulations you passed!</string>
     <string name="fail_message">Sorry, you failed!</string>
     <!--<string name="loader_result_message">Please stick with us, while we are calculating your result…!</string>-->
-    <string name="loader_result_message">Please stick with us, while we are submitting your quiz…!</string>
+    <string name="loader_result_message">Please stick with us…!</string>
     <string name="alpha_digit_format">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz</string>
     <string name="view_certificate">View Certificate</string>
     <string name="share_certificate">Share Certificate</string>

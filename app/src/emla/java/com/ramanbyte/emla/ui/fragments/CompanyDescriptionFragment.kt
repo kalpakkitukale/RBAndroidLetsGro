@@ -62,11 +62,12 @@ class CompanyDescriptionFragment :
 
                 jobModel?.apply {
                     isJobApplied = isJobApplied
-                    companyImageURL =
-                        StaticMethodUtilitiesKtx.getS3DynamicURL(
-                            companyLogo ?: KEY_BLANK,
-                            context!!
-                        )
+                    companyImageURL = StaticMethodUtilitiesKtx.getS3DynamicURL(
+                        companyLogo ?: KEY_BLANK,
+                        context!!
+                    )
+
+                    AppLog.infoLog("companyImageURL ----- $companyImageURL")
                     setUpViewPager(jobModel)
                 }
             })

@@ -110,6 +110,7 @@ class JobModel : BaseObservable() {
             }
         }
 
+    @SerializedName("companylogo")
     @Bindable
     var companyLogo: String? = KEY_BLANK
         set(value) {
